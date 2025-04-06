@@ -145,7 +145,6 @@ myenv/*
 !Dockerfile*
 
 my_env/
-# experiments/*
 *.fvecs
 *.tsv
 *.csv

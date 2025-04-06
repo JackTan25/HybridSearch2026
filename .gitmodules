@@ -1,3 +1,0 @@
-[submodule "experiments/load_experiments"]
-	path = experiments/load_experiments
-	url = https://github.com/JackTan25/load_experiments.git

@@ -183,6 +183,7 @@ void PhysicalMatchTensorScan::PlanWithIndex(QueryContext *query_context) {
     Map<u32, SharedPtr<SegmentIndexEntry>> index_entry_map;
 
     // if not ignoring index
+    src_match_tensor_expr_->ignore_index_ = true;
     if (!src_match_tensor_expr_->ignore_index_) {
         auto map_guard = table_entry->IndexMetaMap();
         // if index is specified

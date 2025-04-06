@@ -380,8 +380,8 @@ export void monitorMemoryUsage(int &status,string file_path){
         std::this_thread::sleep_for(std::chrono::milliseconds(1));  // 每1秒记录一次
         if(status == 1) break;
     }
-    std::ofstream outFile(file_path);
-    outFile<<peak_memory<<" MB."<<endl;
+    std::ofstream outFile(file_path, std::ios::app); // 追加模式
+    outFile << peak_memory<< std::endl;
     outFile.close();
 }
 
