@@ -177,7 +177,8 @@ void EMVBIndex::BuildEMVBIndex(const RowID base_rowid,
             LOG_INFO(std::move(oss).str());
         }
         // call train
-        Train(centroid_count, training_data.get(), training_embedding_num, 20);
+        // centroid_count = 8192;
+        Train(8192, training_data.get(), training_embedding_num, 20);
         const auto time_3 = std::chrono::high_resolution_clock::now();
         {
             std::ostringstream oss;

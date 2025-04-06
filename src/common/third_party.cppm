@@ -71,6 +71,18 @@ module;
 #include <miniocpp/client.h>
 #pragma clang diagnostic pop
 
+#include <memory>
+#include <fcntl.h>
+#include <algorithm>
+#include <sys/resource.h>
+#include <fstream>
+#include <iostream>
+#include <unistd.h>
+#include <chrono>
+#include <cstring>
+#include <thread>
+#include <algorithm>
+
 export module third_party;
 
 namespace minio {
@@ -334,5 +346,43 @@ export using HTTPStatus = oatpp::web::protocol::http::Status;
 
 // Python
 export using PyObject = PyObject;
+
+using namespace std;
+
+export int monitor_status = 0;
+export int query_mointor_status = 0;
+export inline size_t getProcessPeakRSS() {
+    struct rusage rusage;
+    getrusage(RUSAGE_SELF, &rusage);
+    return (size_t) rusage.ru_maxrss / 1024L;
+}
+
+export inline size_t getCurrentRSS() {
+    long rss = 0L;
+    FILE *fp = NULL;
+    if ((fp = fopen("/proc/self/statm", "r")) == NULL)
+        return (size_t) 0L;      /* Can't open? */
+    if (fscanf(fp, "%*s%ld", &rss) != 1) {
+        fclose(fp);
+        return (size_t) 0L;      /* Can't read? */
+    }
+    fclose(fp);
+    return (size_t) (rss * (size_t) sysconf(_SC_PAGESIZE))/1024/1024L;
+}
+
+export void monitorMemoryUsage(int &status,string file_path){
+    size_t peak_memory = 0;
+    while (true) {
+        size_t peak_rss = getProcessPeakRSS();
+        peak_memory = max(peak_rss,peak_memory);
+        // size_t current_rss = getCurrentRSS();
+        // std::cout << "Peak RSS: " << peak_rss << " KB, Current RSS: " << current_rss << " KB" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));  // 每1秒记录一次
+        if(status == 1) break;
+    }
+    std::ofstream outFile(file_path);
+    outFile<<peak_memory<<" MB."<<endl;
+    outFile.close();
+}
 
 } // namespace infinity

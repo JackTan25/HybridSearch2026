@@ -86,7 +86,6 @@ def powerset_above_2(s: list):
 single_query_func_params = {'colbert': ('_score', 'SCORE'), 'bm25': ('_score', 'SCORE'),
                             'dense': ('_similarity', 'SIMILARITY'), 'sparse': ('_similarity', 'SIMILARITY')}
 
-
 class InfinityClientForSearch:
     def __init__(self, with_colbert: bool):
         self.test_db_name = "default_db"

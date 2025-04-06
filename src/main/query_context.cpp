@@ -17,6 +17,7 @@ module;
 #include <csignal>
 #include <cstdio>
 #include <sstream>
+#include <thread>
 // #include "gperftools/profiler.h"
 
 module query_context;
@@ -101,7 +102,9 @@ void QueryContext::Init(Config *global_config_ptr,
 
 QueryResult QueryContext::Query(const String &query) {
     CreateQueryProfiler();
-
+    fmt::print("Query Is %s.\n",query.c_str());
+    query_mointor_status = 0;
+    std::thread(monitorMemoryUsage,std::ref(query_mointor_status),"/home/ubuntu/infinity/experiments/query_memory_file").detach();
     StartProfile(QueryPhase::kParser);
     UniquePtr<ParserResult> parsed_result = MakeUnique<ParserResult>();
     parser_->Parse(query, parsed_result.get());
@@ -123,12 +126,15 @@ QueryResult QueryContext::Query(const String &query) {
     BaseStatement *base_statement = parsed_result->statements_ptr_->at(0);
 
     QueryResult query_result = QueryStatement(base_statement);
+    query_mointor_status = 1;
     return query_result;
 }
 
 QueryResult QueryContext::QueryStatement(const BaseStatement *base_statement) {
     QueryResult query_result;
-
+    // fmt::print("QueryStatement\n");
+    query_mointor_status = 0;
+    std::thread(monitorMemoryUsage,std::ref(query_mointor_status),"/home/ubuntu/infinity/experiments/query_memory_file").detach();
     if (base_statement->Type() == StatementType::kAdmin) {
         if (InfinityContext::instance().IsAdminRole()) {
             const AdminStatement *admin_statement = static_cast<const AdminStatement *>(base_statement);
@@ -315,6 +321,7 @@ QueryResult QueryContext::QueryStatement(const BaseStatement *base_statement) {
     }
     //    profiler.End();
     //    LOG_WARN(fmt::format("Query cost: {}", profiler.ElapsedToString()));
+    query_mointor_status = 1;
     return query_result;
 }
 

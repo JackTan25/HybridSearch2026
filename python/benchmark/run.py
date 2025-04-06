@@ -67,7 +67,6 @@ def parse_args() -> argparse.Namespace:
     )
     return parser.parse_args()
 
-
 def get_client(engine: str, conf_path: str):
     if engine == "qdrant":
         return QdrantClient(conf_path)

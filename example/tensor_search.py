@@ -16,6 +16,9 @@
 # import infinity_embedded as infinity
 import infinity
 import sys
+import infinity.index as index
+from infinity.common import ConflictType, LOCAL_HOST, SparseVector
+from infinity.errors import ErrorCode
 
 try:
     # Use infinity_embedded module to open a local directory
@@ -62,6 +65,13 @@ try:
             },
         ]
     )
+    res = table_instance.create_index("tensor_index", index.IndexInfo("vec", index.IndexType.EMVB,
+                                {
+                                    "pq_subspace_num":"1",
+                                    "pq_subspace_bits":"8",
+                                }
+                            ),
+                        ConflictType.Error)
     result, extra_result = table_instance.output(["num", "vec", "_score"]).match_tensor("vec",
                                                                                         [[0.9, 0.0, 0.0, 0.0],
                                                                                          [1.1, 0.0, 0.0, 0.0]],

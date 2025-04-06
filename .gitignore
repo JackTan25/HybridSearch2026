@@ -140,7 +140,16 @@ dist/
 python/infinity_sdk/infinity_sdk.egg-info/
 minio/
 
+myenv/*
 # not ignore Dockerfile
 !Dockerfile*
 
 my_env/
+# experiments/*
+*.fvecs
+*.tsv
+*.csv
+*.txt
+*.time
+core.*
+*.jsonl

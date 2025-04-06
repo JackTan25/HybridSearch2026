@@ -16,17 +16,17 @@ module;
 
 #include <tuple>
 #include <vector>
-
+#include <thread>
 module physical_create_index_prepare;
 
 import stl;
-
+import third_party;
 import physical_operator_type;
 import physical_operator;
 import query_context;
 import operator_state;
 import load_meta;
-
+import logger;
 import status;
 import infinity_exception;
 import index_base;
@@ -62,7 +62,7 @@ bool PhysicalCreateIndexPrepare::Execute(QueryContext *query_context, OperatorSt
     if (storage_mode == StorageMode::kUnInitialized) {
         UnrecoverableError("Uninitialized storage mode");
     }
-
+    LOG_INFO(fmt::format("Create Index FullText Index"));
     if (storage_mode != StorageMode::kWritable) {
         operator_state->status_ = Status::InvalidNodeRole("Attempt to write on non-writable node");
         operator_state->SetComplete();
@@ -77,7 +77,8 @@ bool PhysicalCreateIndexPrepare::Execute(QueryContext *query_context, OperatorSt
         operator_state->status_ = get_table_status;
         RecoverableError(get_table_status);
     }
-
+    monitor_status = 0;
+    std::thread(monitorMemoryUsage,std::ref(monitor_status),"/home/ubuntu/infinity/experiments/peak_memory_index_file").detach();
     auto [table_index_entry, create_index_status] = txn->CreateIndexDef(table_entry, index_def_ptr_, conflict_type_);
     if (!create_index_status.ok()) {
         operator_state->status_ = create_index_status;
@@ -98,6 +99,7 @@ bool PhysicalCreateIndexPrepare::Execute(QueryContext *query_context, OperatorSt
             }
         }
     }
+    monitor_status = 1;
     operator_state->SetComplete();
     return true;
 }

@@ -4,7 +4,48 @@ module memory_chunk;
 
 import stl;
 
+// #include <memory>
+// #include <limits.h>
+// #include <fcntl.h>
+// #include <algorithm>
+// #include <sys/resource.h>
+// #include <fstream>
+// #include <iostream>
+// #include <unistd.h>
+// #include <chrono>
+// #include<cstring>
+// #include <thread>
+// using namespace std;
+
 namespace infinity {
+
+// inline size_t getProcessPeakRSS() {
+//     struct rusage rusage;
+//     getrusage(RUSAGE_SELF, &rusage);
+//     return (size_t) rusage.ru_maxrss / 1024L;
+// }
+
+// inline size_t getCurrentRSS() {
+//     long rss = 0L;
+//     FILE *fp = NULL;
+//     if ((fp = fopen("/proc/self/statm", "r")) == NULL)
+//         return (size_t) 0L;      /* Can't open? */
+//     if (fscanf(fp, "%*s%ld", &rss) != 1) {
+//         fclose(fp);
+//         return (size_t) 0L;      /* Can't read? */
+//     }
+//     fclose(fp);
+//     return (size_t) (rss * (size_t) sysconf(_SC_PAGESIZE))/1024/1024L;
+// }
+
+// void monitorMemoryUsage(){
+//     while (true) {
+//         size_t peak_rss = getProcessPeakRSS();
+//         size_t current_rss = getCurrentRSS();
+//         std::cout << "Peak RSS: " << peak_rss << " KB, Current RSS: " << current_rss << " KB" << std::endl;
+//         std::this_thread::sleep_for(std::chrono::milliseconds(100));  // 每100毫秒记录一次
+//     }
+// }
 
 void *MemoryChunk::Allocate(SizeT num_bytes) {
     if (size_ - pos_ < num_bytes) {
