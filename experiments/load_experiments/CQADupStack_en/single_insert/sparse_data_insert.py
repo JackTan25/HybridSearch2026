@@ -1,0 +1,133 @@
+# Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import re
+import time
+import os
+from tqdm import tqdm
+import infinity
+from infinity.common import ConflictType, LOCAL_HOST, SparseVector
+import infinity.index as index
+from infinity.errors import ErrorCode
+from vec_read import load_dense
+from vec_read import load_sparse
+from colbert_read import load_colbert_list
+from datasets import Dataset
+## float 184601.74298286438
+## float32 187938.66729736328
+
+def extract_number(filename):
+    match = re.search(r'(\d+)\.', filename)
+    if match:
+        return int(match.group(1))
+    return 0
+
+class InfinityClientForInsert:
+    def __init__(self):
+        self.test_db_name = "default_db"
+        self.test_table_name_prefix = "CQADupStack_en_Table_sparse"
+        self.test_table_schema = {"docid_col": {"type": "varchar"}, 
+                                  "sparse_col": {"type": "sparse,250002,float,int"},
+                                }
+        self.infinity_obj = infinity.connect(LOCAL_HOST)
+        self.infinity_db = self.infinity_obj.create_database(self.test_db_name, ConflictType.Ignore)
+        self.infinity_table = None
+
+    def create_test_table(self):
+        table_name = self.test_table_name_prefix
+        self.infinity_db.drop_table(table_name, ConflictType.Ignore)
+        self.infinity_table = self.infinity_db.create_table(table_name, self.test_table_schema)
+        print("Create table successfully.")
+
+    def main(self):
+        lang = 'en'
+        self.create_test_table()
+        corpus = Dataset.from_csv('/home/ubuntu/infinity/experiments/small_embedding/CQADupStack_en/english/CQADupStack_en_combine_corpus.csv')
+        total_num = corpus.num_rows
+        docid_list = corpus["_id"]
+        corpus_text_list = corpus["combine_text_and_title"]
+        del corpus
+        print(f"Expect total number of rows: {total_num}")
+
+        dense_embedding_dir = '/home/ubuntu/infinity/experiments/small_embedding/CQADupStack_en/dense_embeddings/vectors'
+
+        sparse_embedding_dir = '/home/ubuntu/infinity/experiments/small_embedding/CQADupStack_en/sparse_embeddings/vectors'
+        tensor_embedding_dir = '/home/ubuntu/infinity/experiments/small_embedding/CQADupStack_en/tensor_embeddings/vectors'
+        dense_names = [f for f in os.listdir(dense_embedding_dir) if os.path.isfile(os.path.join(dense_embedding_dir, f))]
+        sparse_names = [f for f in os.listdir(sparse_embedding_dir) if os.path.isfile(os.path.join(sparse_embedding_dir, f))]
+        tensor_names = [f for f in os.listdir(tensor_embedding_dir) if os.path.isfile(os.path.join(tensor_embedding_dir, f))]
+        dense_names = sorted(dense_names, key=extract_number)
+        sparse_names = sorted(sparse_names, key=extract_number)
+        tensor_names = sorted(tensor_names, key=extract_number)
+        print("Start inserting data...")
+        dense_data = None
+
+        sparse_data = None
+
+        dense_file_idx = 0
+        sparse_file_idx = 0
+        tensor_file_idx = 0
+        doc_id_idx = 0
+        dense_idx = 0
+        sparse_idx = 0
+        tensor_idx = 0
+
+        sparse_nums = 0
+        tensor_nums = 0
+        dense_nums = 0
+        begin_insert_time = time.time()
+        buffer = []
+        while sparse_file_idx < len(sparse_names) :
+            sparse_path = os.path.join(sparse_embedding_dir,sparse_names[sparse_file_idx])
+            sparse_vectors = load_sparse(sparse_path)
+            while sparse_idx < len(sparse_vectors) :
+                indices = []
+                values = []
+
+                sparse_nums += 1
+                tensor_nums += 1
+                dense_nums += 1
+                for key, value in sparse_vectors[sparse_idx].items():
+                    indices.append(int(key))
+                    values.append(value)
+                insert_dict = {
+                                "docid_col": docid_list[doc_id_idx], 
+                                "sparse_col": SparseVector(indices,values),
+                            }
+                doc_id_idx += 1
+                dense_idx += 1
+                sparse_idx += 1
+                tensor_idx += 1
+                buffer.append(insert_dict)
+            while len(buffer) >= 8192:
+                self.infinity_table.insert(buffer[:8192])
+                buffer = buffer[8192:]
+            if sparse_idx >= len(sparse_vectors):
+                sparse_idx = 0
+                sparse_file_idx += 1
+        if len(buffer) > 0:
+            self.infinity_table.insert(buffer)
+        end_insert_time = time.time()
+        print("insert time: ",(end_insert_time - begin_insert_time)*1000,'ms')
+        with open('/home/ubuntu/infinity/experiments/load_experiments/CQADupStack_en/single_insert/sparse_insert_time.txt', 'w') as f:
+            f.write(f"insert time: {(end_insert_time - begin_insert_time)*1000} ms\n")  
+        print(f"Finish inserting data. tensor_nums: {tensor_nums+1}, sparse_nums: {sparse_nums+1}, dense_nums: {dense_nums+1}, text_nums: {doc_id_idx+1}")
+        del dense_data
+        del sparse_data
+        del docid_list
+        del corpus_text_list
+
+if __name__ == "__main__":
+    infinity_client = InfinityClientForInsert()
+    infinity_client.main()

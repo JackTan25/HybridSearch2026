@@ -1,0 +1,10 @@
+*.csv
+*.json
+*.jsonl
+*.pyc
+*.fvecs
+*.tsv
+*.txt
+*.time
+core.*
+*.memory
