@@ -177,6 +177,7 @@ def GetQuestions():
     return questions
 
 def single_search(questions):
+
     try:
         #  Use infinity module to connect a remote server
         infinity_instance = infinity.connect(LOCAL_HOST)

@@ -8,3 +8,4 @@
 *.time
 core.*
 *.memory
+MLDR_en_old/*

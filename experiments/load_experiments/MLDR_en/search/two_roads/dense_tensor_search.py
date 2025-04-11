@@ -103,6 +103,7 @@ def dense_tensor_search(infinity_table, question):
      if use_multi_client == True:
          return None,None
      cost_time += (end_time-begin_time)*1000
+     print("time cost: ",(end_time-begin_time)*1000)
      qb_result, extra_result = res.to_pl()
      return qb_result, extra_result
 
@@ -174,6 +175,7 @@ def GetQuestions():
     return questions
 
 def single_search(questions):
+
     try:
         #  Use infinity module to connect a remote server
         infinity_instance = infinity.connect(LOCAL_HOST)

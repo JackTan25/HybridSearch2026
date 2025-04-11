@@ -21,7 +21,7 @@ infinity_instance = infinity.connect(LOCAL_HOST)
 # 'default_db' is the default database
 db_instance = infinity_instance.get_database("default_db")
 table = db_instance.get_table('TREC_COVID_en_Table')
-table.drop_index('TREC_COVID_en_ft_index')
+# table.drop_index('TREC_COVID_en_ft_index')
 print(db_instance.show_table('TREC_COVID_en_Table'))
 # print(db_instance.drop_table('TREC_COVID_en_Table6'))
 # corpus = pd.read_csv('/home/ubuntu/data_download_data/embedding_reserve/TREC-COVID_en/english/TREC_COVID_en_combine_corpus.csv')
