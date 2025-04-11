@@ -45,23 +45,23 @@ If you wish to embed hybridsearch into your Python application without the need 
 
 ## Deploy hybridsearch in client-server mode
 
-If you wish to deploy hybridsearch with the server and client as separate processes, see the [Deploy hybridsearch server](https://infiniflow.org/docs/dev/deploy_hybridsearch_server) guide.
+If you wish to deploy hybridsearch with the server and client as separate processes, see the [Deploy hybridsearch server](https://hybridsearchflow.org/docs/dev/deploy_hybridsearch_server) guide.
 
 ## Build from Source
 
-If you wish to build hybridsearch from source, see the [Build from Source](https://infiniflow.org/docs/dev/build_from_source) guide.
+If you wish to build hybridsearch from source, see the [Build from Source](https://hybridsearchflow.org/docs/dev/build_from_source) guide.
 
 ### Try our Python examples
 
 Try the following links to explore practical examples of using hybridsearch in Python:
 
-- [Create table, insert data, and search](https://github.com/infiniflow/hybridsearch/blob/main/example/simple_example.py)
-- [Import file and export data](https://github.com/infiniflow/hybridsearch/blob/main/example/import_data.py)
-- [Delete or update data](https://github.com/infiniflow/hybridsearch/blob/main/example/delete_update_data.py)
-- [Conduct a vector search](https://github.com/infiniflow/hybridsearch/blob/main/example/vector_search.py)
-- [Conduct a full-text search](https://github.com/infiniflow/hybridsearch/blob/main/example/fulltext_search.py)
-- [Conduct a hybrid search](https://github.com/infiniflow/hybridsearch/blob/main/example/hybrid_search.py)
+- [Create table, insert data, and search](https://github.com/hybridsearchflow/hybridsearch/blob/main/example/simple_example.py)
+- [Import file and export data](https://github.com/hybridsearchflow/hybridsearch/blob/main/example/import_data.py)
+- [Delete or update data](https://github.com/hybridsearchflow/hybridsearch/blob/main/example/delete_update_data.py)
+- [Conduct a vector search](https://github.com/hybridsearchflow/hybridsearch/blob/main/example/vector_search.py)
+- [Conduct a full-text search](https://github.com/hybridsearchflow/hybridsearch/blob/main/example/fulltext_search.py)
+- [Conduct a hybrid search](https://github.com/hybridsearchflow/hybridsearch/blob/main/example/hybrid_search.py)
 
 ## Python API reference
 
-For detailed information about the capabilities and usage of hybridsearch's Python API, see the [Python API Reference](https://infiniflow.org/docs/dev/pysdk_api_reference).
+For detailed information about the capabilities and usage of hybridsearch's Python API, see the [Python API Reference](https://hybridsearchflow.org/docs/dev/pysdk_api_reference).

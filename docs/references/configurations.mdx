@@ -32,7 +32,7 @@ To load a configuration file when you start up hybridsearch using Docker:
 2. When running Docker, specify the configuration file path using the `-f` option. For example: 
 
    ```bash
-   docker run -d --name hybridsearch -v /var/hybridsearch/:/var/hybridsearch --ulimit nofile=500000:500000 --network=host infiniflow/hybridsearch:nightly -f /var/hybridsearch/hybridsearch_conf.toml
+   docker run -d --name hybridsearch -v /var/hybridsearch/:/var/hybridsearch --ulimit nofile=500000:500000 --network=host hybridsearchflow/hybridsearch:nightly -f /var/hybridsearch/hybridsearch_conf.toml
    ```
 
 </TabItem>

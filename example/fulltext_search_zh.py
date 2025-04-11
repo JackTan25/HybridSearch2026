@@ -5,7 +5,7 @@ This example is to connect local hybridsearch instance, create table, insert dat
 """
 
 """
-Checkout https://github.com/infiniflow/resource.git under /var/hybridsearch (defined by 'resource_dir' of config file). The jieba dict is
+Checkout https://github.com/hybridsearchflow/resource.git under /var/hybridsearch (defined by 'resource_dir' of config file). The jieba dict is
 /var/hybridsearch/resource/jieba/dict/jieba.dict.utf8
 """
 # import hybridsearch_embedded as hybridsearch

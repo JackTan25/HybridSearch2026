@@ -1,6 +1,6 @@
 // Bison variant of [Lucene syntax](https://github.com/apache/lucene/blob/main/lucene/queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/parser/StandardSyntaxParser.jj)
 // ElasticSearch query string examples: https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html
-// hybridsearch query string examples: https://github.com/infiniflow/hybridsearch/blob/main/src/unit_test/parser/search_driver.cpp
+// hybridsearch query string examples: https://github.com/hybridsearchflow/hybridsearch/blob/main/src/unit_test/parser/search_driver.cpp
 
 %language "c++"
 %skeleton "lalr1.cc"

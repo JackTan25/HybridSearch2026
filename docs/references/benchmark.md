@@ -65,7 +65,7 @@ mkdir -p $HOME/quickwit
 docker run -d --name quickwit --network=host -v $HOME/quickwit/qwdata:/quickwit/qwdata quickwit/quickwit:0.8.1 run
 
 mkdir -p $HOME/hybridsearch
-docker run -d --name hybridsearch --network=host -v $HOME/hybridsearch:/var/hybridsearch --ulimit nofile=500000:500000 infiniflow/hybridsearch:nightly
+docker run -d --name hybridsearch --network=host -v $HOME/hybridsearch:/var/hybridsearch --ulimit nofile=500000:500000 hybridsearchflow/hybridsearch:nightly
 ```
 
 4. Run Benchmark:
@@ -168,7 +168,7 @@ hybridsearch provides a Python script for benchmarking the SIFT1M and GIST1M dat
 
 You have two options for building hybridsearch. Choose the option that best fits your needs:
 
-- [Build hybridsearch using Docker](https://github.com/infiniflow/hybridsearch/blob/main/README.md)
+- [Build hybridsearch using Docker](https://github.com/hybridsearchflow/hybridsearch/blob/main/README.md)
 - [Build from source](../getstarted/build_from_source.mdx)
 
 ### Download the Benchmark datasets

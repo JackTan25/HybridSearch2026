@@ -76,8 +76,8 @@ This section provides instructions on deploying the hybridsearch using Docker on
 
 ```bash
 sudo mkdir -p /var/hybridsearch && sudo chown -R $USER /var/hybridsearch
-docker pull infiniflow/hybridsearch:nightly
-docker run -d --name hybridsearch -v /var/hybridsearch/:/var/hybridsearch --ulimit nofile=500000:500000 --network=host infiniflow/hybridsearch:nightly
+docker pull hybridsearchflow/hybridsearch:nightly
+docker run -d --name hybridsearch -v /var/hybridsearch/:/var/hybridsearch --ulimit nofile=500000:500000 --network=host hybridsearchflow/hybridsearch:nightly
 ```
   </TabItem>
   <TabItem value="windows">
@@ -91,8 +91,8 @@ If you are on Windows 10+, you must enable WSL or WSL2 to deploy hybridsearch us
 
    ```bash
    sudo mkdir -p /var/hybridsearch && sudo chown -R $USER /var/hybridsearch
-   docker pull infiniflow/hybridsearch:nightly
-   docker run -d --name hybridsearch -v /var/hybridsearch/:/var/hybridsearch --ulimit nofile=500000:500000 --network=host infiniflow/hybridsearch:nightly
+   docker pull hybridsearchflow/hybridsearch:nightly
+   docker run -d --name hybridsearch -v /var/hybridsearch/:/var/hybridsearch --ulimit nofile=500000:500000 --network=host hybridsearchflow/hybridsearch:nightly
    ```
 
   </TabItem>
@@ -138,7 +138,7 @@ To deploy hybridsearch with the client and server as separate processes, conside
 
 ### Install hybridsearch server
 
-This section provides instructions on deploying hybridsearch using binary package on Linux x86_64. You can download the binary package (deb, rpm, or tgz) for your Linux system from https://github.com/infiniflow/hybridsearch/releases. The prebuilt packages are compatible with Linux distributions based on glibc 2.17 or later, for example, RHEL 7, Debian 8, Ubuntu 14.04.
+This section provides instructions on deploying hybridsearch using binary package on Linux x86_64. You can download the binary package (deb, rpm, or tgz) for your Linux system from https://github.com/hybridsearchflow/hybridsearch/releases. The prebuilt packages are compatible with Linux distributions based on glibc 2.17 or later, for example, RHEL 7, Debian 8, Ubuntu 14.04.
 
 
 <Tabs

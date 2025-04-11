@@ -10,7 +10,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/bin/compilation_config.cppm.in ${CMAK
 
 add_subdirectory(parser)
 
-### Infinity
+### hybridsearch
 
 ### WARNING: DONT MOVE FOLLOWING COMMAND TO OTHER PLACE.
 
@@ -70,7 +70,7 @@ endif()
 file(GLOB_RECURSE
         main_cpp
         CONFIGURE_DEPENDS
-        bin/infinity_main.cpp
+        bin/hybridsearch_main.cpp
 )
 
 file(GLOB_RECURSE
@@ -80,13 +80,13 @@ file(GLOB_RECURSE
 )
 
 file(GLOB_RECURSE
-        infinity_cpp
+        hybridsearch_cpp
         CONFIGURE_DEPENDS
         main/*.cpp
 )
 
 file(GLOB_RECURSE
-        infinity_cppm
+        hybridsearch_cppm
         CONFIGURE_DEPENDS
         main/*.cppm
 )
@@ -217,8 +217,8 @@ file(GLOB_RECURSE
         admin/*.cppm
 )
 
-add_library(infinity_core
-        ${infinity_cpp}
+add_library(hybridsearch_core
+        ${hybridsearch_cpp}
         ${planner_cpp}
         ${scheduler_cpp}
         ${storage_cpp}
@@ -231,11 +231,11 @@ add_library(infinity_core
         ${network_cpp}
 )
 
-target_sources(infinity_core
+target_sources(hybridsearch_core
         PUBLIC
         FILE_SET core_cxx_modules TYPE CXX_MODULES FILES
         ${main_cppm}
-        ${infinity_cppm}
+        ${hybridsearch_cppm}
         ${common_cppm}
         ${planner_cppm}
         ${scheduler_cppm}
@@ -249,43 +249,43 @@ target_sources(infinity_core
         ${network_cppm}
 )
 
-add_dependencies(infinity_core thrift thriftnb parquet_static snappy re2 pcre2-8-static)
-target_include_directories(infinity_core PUBLIC ${Python3_INCLUDE_DIRS})
-target_include_directories(infinity_core PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
-target_include_directories(infinity_core PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/parser")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/spdlog/include")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/cli11")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/ctpl")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/tomlplusplus")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/magic_enum/include")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/croaring")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/nlohmann")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/concurrentqueue")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/zsv/include")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/newpfor")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/fastpfor/headers")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/cppjieba/include")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/cppjieba/deps/limonp/include")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/ijma/include")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/parallel-hashmap")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/pgm/include")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/mlas")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/xor_singleheader/include")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/base64/include")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/oatpp/src")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/eigen-3.4.0")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/opencc")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/arrow/src")
-target_include_directories(infinity_core PUBLIC "${CMAKE_BINARY_DIR}/third_party/snappy/")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/thrift/lib/cpp/src")
-target_include_directories(infinity_core PUBLIC "${CMAKE_BINARY_DIR}/third_party/thrift/")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/minio-cpp/include")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/curlpp/include")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/curl/include")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/darts/")
-target_include_directories(infinity_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/re2")
-target_include_directories(infinity_core PUBLIC "${CMAKE_BINARY_DIR}/third_party/pcre2")
+add_dependencies(hybridsearch_core thrift thriftnb parquet_static snappy re2 pcre2-8-static)
+target_include_directories(hybridsearch_core PUBLIC ${Python3_INCLUDE_DIRS})
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/parser")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/spdlog/include")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/cli11")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/ctpl")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/tomlplusplus")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/magic_enum/include")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/croaring")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/nlohmann")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/concurrentqueue")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/zsv/include")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/newpfor")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/fastpfor/headers")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/cppjieba/include")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/cppjieba/deps/limonp/include")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/ijma/include")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/parallel-hashmap")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/pgm/include")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/mlas")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/xor_singleheader/include")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/base64/include")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/oatpp/src")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/eigen-3.4.0")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/opencc")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/arrow/src")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_BINARY_DIR}/third_party/snappy/")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/thrift/lib/cpp/src")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_BINARY_DIR}/third_party/thrift/")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/minio-cpp/include")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/curlpp/include")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/curl/include")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/darts/")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_SOURCE_DIR}/third_party/re2")
+target_include_directories(hybridsearch_core PUBLIC "${CMAKE_BINARY_DIR}/third_party/pcre2")
 
 
 if(X86_64)
@@ -300,35 +300,35 @@ if(X86_64)
     if (SUPPORT_AVX2 EQUAL 0 OR SUPPORT_AVX512 EQUAL 0)
         message("Compiled by AVX2 or AVX512")
         add_definitions(-march=native)
-        target_compile_options(infinity_core PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-march=native>)
+        target_compile_options(hybridsearch_core PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-march=native>)
     else ()
         message("Compiled by SSE")
         add_definitions(-msse4.2 -mfma)
-        target_compile_options(infinity_core PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-msse4.2 -mfma>)
+        target_compile_options(hybridsearch_core PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-msse4.2 -mfma>)
     endif ()
 endif ()
 
-add_executable(infinity
+add_executable(hybridsearch
         ${main_cpp}
 
 #        network/http_server.cppm
 #        network/http_server.cpp
 #        network/http/http_search.cppm
 #        network/http/http_search.cpp
-#        network/infinity_thrift_service.cpp
-#        network/infinity_thrift_service.cppm
+#        network/hybridsearch_thrift_service.cpp
+#        network/hybridsearch_thrift_service.cppm
 )
 
-#target_sources(infinity
+#target_sources(hybridsearch
 #        PUBLIC
 #        FILE_SET core_cxx_modules TYPE CXX_MODULES FILES
 #        ${network_cppm}
 #)
 
-add_dependencies(infinity oatpp miniocpp pugixml-static curlpp_static inih libcurl_static)
+add_dependencies(hybridsearch oatpp miniocpp pugixml-static curlpp_static inih libcurl_static)
 
-target_link_libraries(infinity
-        infinity_core
+target_link_libraries(hybridsearch
+        hybridsearch_core
         sql_parser
         onnxruntime_mlas
         zsv_parser
@@ -360,46 +360,46 @@ target_link_libraries(infinity
         re2.a
         pcre2-8-static
 )
-target_link_directories(infinity PUBLIC "${CMAKE_BINARY_DIR}/lib")
-target_link_directories(infinity PUBLIC "${CMAKE_BINARY_DIR}/third_party/oatpp/src/")
-target_link_directories(infinity PUBLIC "${CMAKE_BINARY_DIR}/third_party/arrow/")
-target_link_directories(infinity PUBLIC "${CMAKE_BINARY_DIR}/third_party/snappy/")
-target_link_directories(infinity PUBLIC "${CMAKE_BINARY_DIR}/third_party/minio-cpp/")
-target_link_directories(infinity PUBLIC "${CMAKE_BINARY_DIR}/third_party/pugixml/")
-target_link_directories(infinity PUBLIC "${CMAKE_BINARY_DIR}/third_party/curlpp/")
-target_link_directories(infinity PUBLIC "${CMAKE_BINARY_DIR}/third_party/curl/")
-target_link_directories(infinity PUBLIC "${CMAKE_BINARY_DIR}/third_party/")
-target_link_directories(infinity PUBLIC "${CMAKE_BINARY_DIR}/third_party/re2/")
-target_link_directories(infinity PUBLIC "${CMAKE_BINARY_DIR}/third_party/pcre2/")
-target_link_directories(infinity PUBLIC "/usr/local/openssl30/lib64")
+target_link_directories(hybridsearch PUBLIC "${CMAKE_BINARY_DIR}/lib")
+target_link_directories(hybridsearch PUBLIC "${CMAKE_BINARY_DIR}/third_party/oatpp/src/")
+target_link_directories(hybridsearch PUBLIC "${CMAKE_BINARY_DIR}/third_party/arrow/")
+target_link_directories(hybridsearch PUBLIC "${CMAKE_BINARY_DIR}/third_party/snappy/")
+target_link_directories(hybridsearch PUBLIC "${CMAKE_BINARY_DIR}/third_party/minio-cpp/")
+target_link_directories(hybridsearch PUBLIC "${CMAKE_BINARY_DIR}/third_party/pugixml/")
+target_link_directories(hybridsearch PUBLIC "${CMAKE_BINARY_DIR}/third_party/curlpp/")
+target_link_directories(hybridsearch PUBLIC "${CMAKE_BINARY_DIR}/third_party/curl/")
+target_link_directories(hybridsearch PUBLIC "${CMAKE_BINARY_DIR}/third_party/")
+target_link_directories(hybridsearch PUBLIC "${CMAKE_BINARY_DIR}/third_party/re2/")
+target_link_directories(hybridsearch PUBLIC "${CMAKE_BINARY_DIR}/third_party/pcre2/")
+target_link_directories(hybridsearch PUBLIC "/usr/local/openssl30/lib64")
 
-target_include_directories(infinity PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
-target_include_directories(infinity PUBLIC "${CMAKE_SOURCE_DIR}/third_party/thrift/lib/cpp/src")
-target_include_directories(infinity PUBLIC "${CMAKE_BINARY_DIR}/third_party/thrift/")
+target_include_directories(hybridsearch PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
+target_include_directories(hybridsearch PUBLIC "${CMAKE_SOURCE_DIR}/third_party/thrift/lib/cpp/src")
+target_include_directories(hybridsearch PUBLIC "${CMAKE_BINARY_DIR}/third_party/thrift/")
 
 if (SKBUILD)
-    add_library(embedded_infinity_ext MODULE
-            embedded_infinity_ext.cpp
-            embedded_infinity/wrap_infinity.cpp
+    add_library(embedded_hybridsearch_ext MODULE
+            embedded_hybridsearch_ext.cpp
+            embedded_hybridsearch/wrap_hybridsearch.cpp
     )
 
-    target_sources(embedded_infinity_ext
+    target_sources(embedded_hybridsearch_ext
             PRIVATE
             FILE_SET core_cxx_modules TYPE CXX_MODULES FILES
-            embedded_infinity/wrap_infinity.cppm
+            embedded_hybridsearch/wrap_hybridsearch.cppm
     )
 
-    nanobind_compile_options(embedded_infinity_ext)
-    nanobind_link_options(embedded_infinity_ext)
-    set_target_properties(embedded_infinity_ext PROPERTIES LINKER_LANGUAGE CXX)
+    nanobind_compile_options(embedded_hybridsearch_ext)
+    nanobind_link_options(embedded_hybridsearch_ext)
+    set_target_properties(embedded_hybridsearch_ext PROPERTIES LINKER_LANGUAGE CXX)
     set(libname "nanobind-static-abi3")
     nanobind_build_library(${libname})
-    nanobind_extension_abi3(embedded_infinity_ext)
-    add_dependencies(embedded_infinity_ext oatpp miniocpp pugixml-static curlpp_static inih libcurl_static re2 pcre2-8-static)
+    nanobind_extension_abi3(embedded_hybridsearch_ext)
+    add_dependencies(embedded_hybridsearch_ext oatpp miniocpp pugixml-static curlpp_static inih libcurl_static re2 pcre2-8-static)
 
-    target_link_libraries(embedded_infinity_ext PRIVATE
+    target_link_libraries(embedded_hybridsearch_ext PRIVATE
             ${libname}
-            infinity_core
+            hybridsearch_core
             sql_parser
             onnxruntime_mlas
             zsv_parser
@@ -432,26 +432,26 @@ if (SKBUILD)
     )
 
     # WARN: python modules shall not link to static libstdc++!!!
-    target_link_options(embedded_infinity_ext PRIVATE -static-libgcc)
-    set_target_properties(embedded_infinity_ext PROPERTIES CXX_VISIBILITY_PRESET hidden)
+    target_link_options(embedded_hybridsearch_ext PRIVATE -static-libgcc)
+    set_target_properties(embedded_hybridsearch_ext PROPERTIES CXX_VISIBILITY_PRESET hidden)
 
-    target_link_directories(embedded_infinity_ext PUBLIC "${CMAKE_BINARY_DIR}/lib")
-    target_link_directories(embedded_infinity_ext PUBLIC "${CMAKE_BINARY_DIR}/third_party/oatpp/src/")
-    target_link_directories(embedded_infinity_ext PUBLIC "${CMAKE_BINARY_DIR}/third_party/arrow/")
-    target_link_directories(embedded_infinity_ext PUBLIC "${CMAKE_BINARY_DIR}/third_party/snappy/")
-    target_link_directories(embedded_infinity_ext PUBLIC "${CMAKE_BINARY_DIR}/third_party/minio-cpp/")
-    target_link_directories(embedded_infinity_ext PUBLIC "${CMAKE_BINARY_DIR}/third_party/pugixml/")
-    target_link_directories(embedded_infinity_ext PUBLIC "${CMAKE_BINARY_DIR}/third_party/curlpp/")
-    target_link_directories(embedded_infinity_ext PUBLIC "${CMAKE_BINARY_DIR}/third_party/curl/")
-    target_link_directories(embedded_infinity_ext PUBLIC "${CMAKE_BINARY_DIR}/third_party/re2/")
-    target_link_directories(embedded_infinity_ext PUBLIC "${CMAKE_BINARY_DIR}/third_party/pcre2/")
-    target_link_directories(embedded_infinity_ext PUBLIC "${CMAKE_BINARY_DIR}/third_party/")
-    target_link_directories(embedded_infinity_ext PUBLIC "/usr/local/openssl30/lib64")
-    nanobind_disable_stack_protector(embedded_infinity_ext)
-    nanobind_opt_size(embedded_infinity_ext)
-    nanobind_strip(embedded_infinity_ext)
+    target_link_directories(embedded_hybridsearch_ext PUBLIC "${CMAKE_BINARY_DIR}/lib")
+    target_link_directories(embedded_hybridsearch_ext PUBLIC "${CMAKE_BINARY_DIR}/third_party/oatpp/src/")
+    target_link_directories(embedded_hybridsearch_ext PUBLIC "${CMAKE_BINARY_DIR}/third_party/arrow/")
+    target_link_directories(embedded_hybridsearch_ext PUBLIC "${CMAKE_BINARY_DIR}/third_party/snappy/")
+    target_link_directories(embedded_hybridsearch_ext PUBLIC "${CMAKE_BINARY_DIR}/third_party/minio-cpp/")
+    target_link_directories(embedded_hybridsearch_ext PUBLIC "${CMAKE_BINARY_DIR}/third_party/pugixml/")
+    target_link_directories(embedded_hybridsearch_ext PUBLIC "${CMAKE_BINARY_DIR}/third_party/curlpp/")
+    target_link_directories(embedded_hybridsearch_ext PUBLIC "${CMAKE_BINARY_DIR}/third_party/curl/")
+    target_link_directories(embedded_hybridsearch_ext PUBLIC "${CMAKE_BINARY_DIR}/third_party/re2/")
+    target_link_directories(embedded_hybridsearch_ext PUBLIC "${CMAKE_BINARY_DIR}/third_party/pcre2/")
+    target_link_directories(embedded_hybridsearch_ext PUBLIC "${CMAKE_BINARY_DIR}/third_party/")
+    target_link_directories(embedded_hybridsearch_ext PUBLIC "/usr/local/openssl30/lib64")
+    nanobind_disable_stack_protector(embedded_hybridsearch_ext)
+    nanobind_opt_size(embedded_hybridsearch_ext)
+    nanobind_strip(embedded_hybridsearch_ext)
 
-    install(TARGETS embedded_infinity_ext LIBRARY DESTINATION infinity_embedded)
+    install(TARGETS embedded_hybridsearch_ext LIBRARY DESTINATION hybridsearch_embedded)
 endif ()
 
 ### unit test
@@ -537,7 +537,7 @@ add_executable(unit_test
         ${ut_planner_cpp}
         ${ut_function_cpp}
 
-        ${infinity_cpp}
+        ${hybridsearch_cpp}
         ${planner_cpp}
         ${scheduler_cpp}
         ${storage_cpp}
@@ -556,7 +556,7 @@ target_link_libraries(unit_test
         gtest
         gtest_main
         sql_parser
-        infinity_core
+        hybridsearch_core
         onnxruntime_mlas
         zsv_parser
         newpfor

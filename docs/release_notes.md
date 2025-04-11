@@ -30,5 +30,5 @@ Released on December 18, 2024.
 
 #### Added documents
 
-- [Conduct a search](https://infiniflow.org/docs/dev/search_guide)
-- [Set up an hybridsearch cluster](https://infiniflow.org/docs/dev/set_up_cluster)
+- [Conduct a search](https://hybridsearchflow.org/docs/dev/search_guide)
+- [Set up an hybridsearch cluster](https://hybridsearchflow.org/docs/dev/set_up_cluster)

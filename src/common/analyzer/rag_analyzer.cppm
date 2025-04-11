@@ -18,7 +18,7 @@ class OpenCC;
 namespace hybridsearch {
 
 // C++ reimplementation of
-// https://github.com/infiniflow/ragflow/blob/main/rag/nlp/rag_tokenizer.py
+// https://github.com/hybridsearchflow/ragflow/blob/main/rag/nlp/rag_tokenizer.py
 
 class NLTKWordTokenizer;
 export class RAGAnalyzer : public Analyzer {

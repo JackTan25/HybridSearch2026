@@ -71,7 +71,7 @@ jobs:
         BUILDER_CONTAINER=hybridsearch_build_$(od -An -N4 -t u8 < /dev/urandom | tr -d ' ')
         echo "BUILDER_CONTAINER=${BUILDER_CONTAINER}" >> $GITHUB_ENV
         TZ=$(readlink -f /etc/localtime | awk -F '/zoneinfo/' '{print $2}')
-        sudo docker rm -f ${BUILDER_CONTAINER} && sudo docker run -d --name ${BUILDER_CONTAINER} -e TZ=$TZ -v $PWD:/hybridsearch infiniflow/hybridsearch_builder:centos7_clang18
+        sudo docker rm -f ${BUILDER_CONTAINER} && sudo docker run -d --name ${BUILDER_CONTAINER} -e TZ=$TZ -v $PWD:/hybridsearch hybridsearchflow/hybridsearch_builder:centos7_clang18
 
     - name: Build release version
       run: |
@@ -105,7 +105,7 @@ jobs:
     - name: Login to Docker Hub
       uses: docker/login-action@v3
       with:
-        username: infiniflow
+        username: hybridsearchflow
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     # https://github.com/marketplace/actions/build-and-push-docker-images
@@ -114,7 +114,7 @@ jobs:
       with:
         context: .
         push: true
-        tags: infiniflow/hybridsearch:${{ env.RELEASE_TAG }}
+        tags: hybridsearchflow/hybridsearch:${{ env.RELEASE_TAG }}
         file: scripts/Dockerfile_hybridsearch
 
     - name: Build hybridsearch-sdk

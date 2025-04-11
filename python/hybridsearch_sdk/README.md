@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="187" src="https://github.com/infiniflow/hybridsearch/assets/7248/015e1f02-1f7f-4b09-a0c2-9d261cd4858b"/>
+  <img width="187" src="https://github.com/hybridsearchflow/hybridsearch/assets/7248/015e1f02-1f7f-4b09-a0c2-9d261cd4858b"/>
 </div>
 
 
@@ -8,9 +8,9 @@
 </p>
 
 <h4 align="center">
-  <a href="https://infiniflow.org/docs/dev/category/get-started">Document</a> |
-  <a href="https://infiniflow.org/docs/dev/benchmark">Benchmark</a> |
-  <a href="https://twitter.com/infiniflowai">Twitter</a> |
+  <a href="https://hybridsearchflow.org/docs/dev/category/get-started">Document</a> |
+  <a href="https://hybridsearchflow.org/docs/dev/benchmark">Benchmark</a> |
+  <a href="https://twitter.com/hybridsearchflowai">Twitter</a> |
   <a href="https://discord.gg/jEfRUwEYEV">Discord</a>
 </h4>
 
@@ -38,7 +38,7 @@ hybridsearch comes with high performance, flexibility, ease-of-use, and many fea
 - Achieves 0.1 milliseconds query latency and 15K+ QPS on million-scale vector datasets.
 - Achieves 1 millisecond latency and 12K+ QPS in full-text search on 33M documents.
 
-> See the [Benchmark report](https://infiniflow.org/docs/dev/benchmark) for more information.
+> See the [Benchmark report](https://hybridsearchflow.org/docs/dev/benchmark) for more information.
 
 ### 🔮 Powerful search
 
@@ -51,7 +51,7 @@ Supports a wide range of data types including strings, numerics, vectors, and mo
 
 ### 🎁 Ease-of-use
 
-- Intuitive Python API. See the [Python API](https://infiniflow.org/docs/dev/pysdk_api_reference)
+- Intuitive Python API. See the [Python API](https://hybridsearchflow.org/docs/dev/pysdk_api_reference)
 - A single-binary architecture with no dependencies, making deployment a breeze.
 - Embedded in Python as a module and friendly to AI developers.  
 
@@ -59,7 +59,7 @@ Supports a wide range of data types including strings, numerics, vectors, and mo
 
 hybridsearch supports two working modes, embedded mode and client-server mode. The following shows how to operate in client-server mode:
 
-1. Deploy hybridsearch in client-server mode. check the [Deploy hybridsearch server](https://infiniflow.org/docs/dev/deploy_hybridsearch_server) guide.
+1. Deploy hybridsearch in client-server mode. check the [Deploy hybridsearch server](https://hybridsearchflow.org/docs/dev/deploy_hybridsearch_server) guide.
 
 2. Install the `hybridsearch-sdk` package:
    ```bash
@@ -87,23 +87,23 @@ hybridsearch supports two working modes, embedded mode and client-server mode. T
    print(res)
    ```
 
-> 💡 For more information about hybridsearch's Python API, see the [Python API Reference](https://infiniflow.org/docs/dev/pysdk_api_reference).
+> 💡 For more information about hybridsearch's Python API, see the [Python API Reference](https://hybridsearchflow.org/docs/dev/pysdk_api_reference).
 
 ## 📚 Document
 
-- [Quickstart](https://infiniflow.org/docs/dev/)
-- [Python API](https://infiniflow.org/docs/dev/pysdk_api_reference)
-- [HTTP API](https://infiniflow.org/docs/dev/http_api_reference)
-- [References](https://infiniflow.org/docs/dev/category/references)
-- [FAQ](https://infiniflow.org/docs/dev/FAQ)
+- [Quickstart](https://hybridsearchflow.org/docs/dev/)
+- [Python API](https://hybridsearchflow.org/docs/dev/pysdk_api_reference)
+- [HTTP API](https://hybridsearchflow.org/docs/dev/http_api_reference)
+- [References](https://hybridsearchflow.org/docs/dev/category/references)
+- [FAQ](https://hybridsearchflow.org/docs/dev/FAQ)
 
 ## 📜 Roadmap
 
-See the [hybridsearch Roadmap 2024](https://github.com/infiniflow/hybridsearch/issues/338)
+See the [hybridsearch Roadmap 2024](https://github.com/hybridsearchflow/hybridsearch/issues/338)
 
 ## 🙌 Community
 
 - [Discord](https://discord.gg/jEfRUwEYEV)
-- [Twitter](https://twitter.com/infiniflowai)
-- [GitHub Discussions](https://github.com/infiniflow/hybridsearch/discussions)
+- [Twitter](https://twitter.com/hybridsearchflowai)
+- [GitHub Discussions](https://github.com/hybridsearchflow/hybridsearch/discussions)
 

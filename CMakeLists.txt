@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.28.1)
 
-project(infinity VERSION 0.6.0)
+project(hybridsearch VERSION 0.6.0)
 
 if(NOT CMAKE_GENERATOR STREQUAL "Ninja")
     message(FATAL_ERROR "This project requires the Ninja generator. Refers to https://cmake.org/cmake/help/latest/manual/cmake-cxxmodules.7.html#generator-support")
@@ -156,14 +156,14 @@ elseif ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
         if (NOT ENABLE_SANITIZER_THREAD)
             add_compile_options(-fsanitize=address -fsanitize=leak)
             add_link_options(-fsanitize=address -fsanitize=leak)
-            message(STATUS "Enable Address Sanitizer in target: infinity")
+            message(STATUS "Enable Address Sanitizer in target: hybridsearch")
         else()
             add_compile_options(-fsanitize=thread)
             add_link_options(-fsanitize=thread)
-            message(STATUS "Enable Thread Sanitizer in target: infinity")
+            message(STATUS "Enable Thread Sanitizer in target: hybridsearch")
         endif()
 
-        message(STATUS "Enable Sanitizer in target: infinity")
+        message(STATUS "Enable Sanitizer in target: hybridsearch")
 
         set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -fno-stack-protector -fno-var-tracking ")
         add_compile_options(-fsanitize-recover=all)
@@ -221,7 +221,7 @@ if("${HAVE_EFFICIENT_UNALIGNED_ACCESS}" STREQUAL "CONFIG_HAVE_EFFICIENT_UNALIGNE
 endif()
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-ADD_DEFINITIONS(-D INFINITY_DEBUG)
+ADD_DEFINITIONS(-D hybridsearch_DEBUG)
 endif()
 
 # find_package(Boost REQUIRED)
@@ -257,13 +257,13 @@ add_subdirectory(client)
 
 # quit early for scikit-build-core
 # does not need CPack settings
-# does not need to install the infinity target, config files and resources
+# does not need to install the hybridsearch target, config files and resources
 if (SKBUILD)
     return()
 endif ()
 
 # CPack settings
-set(CPACK_PACKAGE_NAME "infinity")
+set(CPACK_PACKAGE_NAME "hybridsearch")
 # dpkg requires version to be starting with number
 if(DEFINED CPACK_PACKAGE_VERSION)
     string(REGEX REPLACE "^[^0-9]+" "" CPACK_PACKAGE_VERSION "${CPACK_PACKAGE_VERSION}")
@@ -275,7 +275,7 @@ endif()
 set(CPACK_PACKAGE_RELEASE 1)
 set(CPACK_PACKAGE_CONTACT "Zhichang Yu <yuzhichang@gmail.com>")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "The AI-native database built for LLM applications, offering incredibly fast vector and full-text search.")
-set(CPACK_PACKAGE_VENDOR "infiniflow")
+set(CPACK_PACKAGE_VENDOR "hybridsearchflow")
 set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-${CMAKE_HOST_SYSTEM_PROCESSOR}")
 
 # https://cmake.org/cmake/help/latest/command/install.html
@@ -284,9 +284,9 @@ set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-${CM
 # If an relative path (interpreted relative to the value of the CMAKE_INSTALL_PREFIX variable) is given, cpack include specific files in the package without actually installing them on the host system.
 # CMAKE_INSTALL_PREFIX defaults to "/usr/local"
 set(CMAKE_INSTALL_PREFIX /usr)
-install(TARGETS infinity DESTINATION bin)
-install(FILES conf/infinity.service DESTINATION lib/systemd/system)
-install(FILES conf/infinity_conf.toml DESTINATION etc)
+install(TARGETS hybridsearch DESTINATION bin)
+install(FILES conf/hybridsearch.service DESTINATION lib/systemd/system)
+install(FILES conf/hybridsearch_conf.toml DESTINATION etc)
 
 # https://cmake.org/cmake/help/latest/cpack_gen/rpm.html
 # Specify the post-install script for RPM

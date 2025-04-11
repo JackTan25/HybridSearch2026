@@ -61,7 +61,7 @@ For *each* cluster node, you are required to prepare a customized configuration 
 5. Save your changes and start up hybridsearch using the customized configuration file.  
    *When a cluster node starts, it automatically operates in `ADMIN` mode.*
 
-For further instructions on specifying a configuration file or setting parameters, see the [Configurations](https://infiniflow.org/docs/dev/configurations).
+For further instructions on specifying a configuration file or setting parameters, see the [Configurations](https://hybridsearchflow.org/docs/dev/configurations).
 
 ### Set the leader node
 
@@ -182,11 +182,11 @@ curl --request DELETE \
 
 ## Distributed APIs
 
-- [ADMIN SET NODE ROLE](https://infiniflow.org/docs/dev/http_api_reference#admin-set-node-role)
-- [ADMIN SHOW NODE VARIABLES](https://infiniflow.org/docs/dev/http_api_reference#admin-show-node-variables)
-- [ADMIN SHOW NODE CONFIGS](https://infiniflow.org/docs/dev/http_api_reference#admin-show-node-configs)
-- [ADMIN SHOW NODE VARIABLE](https://infiniflow.org/docs/dev/http_api_reference#admin-show-node-variable)
-- [ADMIN SHOW CURRENT NODE](https://infiniflow.org/docs/dev/http_api_reference#admin-show-current-node)
-- [ADMIN SHOW NODE](https://infiniflow.org/docs/dev/http_api_reference#admin-show-node)
-- [ADMIN LIST NODES](https://infiniflow.org/docs/dev/http_api_reference#admin-list-nodes)
-- [ADMIN REMOVE NODE](https://infiniflow.org/docs/dev/http_api_reference#admin-remove-node)
+- [ADMIN SET NODE ROLE](https://hybridsearchflow.org/docs/dev/http_api_reference#admin-set-node-role)
+- [ADMIN SHOW NODE VARIABLES](https://hybridsearchflow.org/docs/dev/http_api_reference#admin-show-node-variables)
+- [ADMIN SHOW NODE CONFIGS](https://hybridsearchflow.org/docs/dev/http_api_reference#admin-show-node-configs)
+- [ADMIN SHOW NODE VARIABLE](https://hybridsearchflow.org/docs/dev/http_api_reference#admin-show-node-variable)
+- [ADMIN SHOW CURRENT NODE](https://hybridsearchflow.org/docs/dev/http_api_reference#admin-show-current-node)
+- [ADMIN SHOW NODE](https://hybridsearchflow.org/docs/dev/http_api_reference#admin-show-node)
+- [ADMIN LIST NODES](https://hybridsearchflow.org/docs/dev/http_api_reference#admin-list-nodes)
+- [ADMIN REMOVE NODE](https://hybridsearchflow.org/docs/dev/http_api_reference#admin-remove-node)

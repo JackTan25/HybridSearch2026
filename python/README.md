@@ -7,7 +7,7 @@
 - upload to pypi.org
 - install new python SDK
 
-Please see [releases.yml](https://github.com/infiniflow/hybridsearch/blob/main/.github/workflows/release.yml) for details.
+Please see [releases.yml](https://github.com/hybridsearchflow/hybridsearch/blob/main/.github/workflows/release.yml) for details.
 
 # using
 

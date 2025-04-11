@@ -599,7 +599,7 @@ class table_http:
         self.net.raise_exception(r)
         return database_result()
 
-    def import_data(self, data_path="/home/infiniflow/Documents/development/hybridsearch/test/data/csv/pysdk_test.csv",
+    def import_data(self, data_path="/home/hybridsearchflow/Documents/development/hybridsearch/test/data/csv/pysdk_test.csv",
                     import_options={}):
         data = {}
         data["file_path"] = data_path

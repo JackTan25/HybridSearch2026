@@ -23,7 +23,7 @@ A full-text index must be built to perform a full-text search, and this index op
 
 ### Tokenizer
 
-When creating a full-text index, you are required to specify a tokenizer/analyzer, which will be used for future full-text searches on the same column(s). hybridsearch has many built-in tokenizers. Except for the Ngram analyzer and the default standard analyzer, all other analyzers require dedicated resource files. Please download the appropriate files for your chosen analyzer from [this link](https://github.com/infiniflow/resource) and save it to the directory specified by `resource_dir` in the configuration file.
+When creating a full-text index, you are required to specify a tokenizer/analyzer, which will be used for future full-text searches on the same column(s). hybridsearch has many built-in tokenizers. Except for the Ngram analyzer and the default standard analyzer, all other analyzers require dedicated resource files. Please download the appropriate files for your chosen analyzer from [this link](https://github.com/hybridsearchflow/resource) and save it to the directory specified by `resource_dir` in the configuration file.
 
 ```yaml
 [resource]
@@ -61,7 +61,7 @@ Use `"korean"` to select the Korean tokenizer, which is a wrapper of [mecab](htt
 
 #### RAG analyzer
 
-The RAG analyzer is a bilingual tokenizer that supports Chinese (simplified and traditional) and English. It is a C++ adaptation of [RAGFlow's tokenizer](https://github.com/infiniflow/ragflow/blob/main/rag/nlp/rag_tokenizer.py), and its tokenization of Latin characters derives from [NLTK](https://www.nltk.org/api/nltk.tokenize.punkt.html).
+The RAG analyzer is a bilingual tokenizer that supports Chinese (simplified and traditional) and English. It is a C++ adaptation of [RAGFlow's tokenizer](https://github.com/hybridsearchflow/ragflow/blob/main/rag/nlp/rag_tokenizer.py), and its tokenization of Latin characters derives from [NLTK](https://www.nltk.org/api/nltk.tokenize.punkt.html).
 
 This analyzer offers better recall for Chinese than the [Jieba](https://github.com/yanyiwu/cppjieba) analyzer, but lower tokenization throughput due to higher computational costs. Its English language processing involves an additional lemmatization step before stemming, different from that of the standard analyzer.
 
