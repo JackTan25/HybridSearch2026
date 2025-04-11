@@ -20,7 +20,7 @@ table_obj.insert(
     [{"c1": 'a', "c2": 'a'}, {"c1": 'b', "c2": 'b'}, {"c1": 'c', "c2": 'c'}, {"c1": 'd', "c2": 'd'},
         {"c1": 'abc', "c2": 'abc'}, {"c1": 'bbc', "c2": 'bbc'}, {"c1": 'cbc', "c2": 'cbc'}, {"c1": 'dbc', "c2": 'dbc'},
         {"c1": 'abcd', "c2": 'abc'}, 
-        {"c1": 'test@gmail.com', "c2": 'email'}, {"c1": 'test@hotmail.com', "c2": 'email'},
+        {"c1": '', "c2": 'email'}, {"c1": 'test@hotmail.com', "c2": 'email'},
         {"c1": ' abc', "c2": 'abc'}, {"c1": 'abc ', "c2": 'abc'}, {"c1": ' abc ', "c2": 'abc'}])
 
 # varchar functions
@@ -69,8 +69,6 @@ if extra_result is not None:
     print(extra_result)
 
 #function upper and lower
-res, extra_result = table_obj.output(["*", "upper(c1)"]).filter("upper(c1) = 'TEST@GMAIL.COM'").to_df()
-print(res)
 if extra_result is not None:
     print(extra_result)
 
