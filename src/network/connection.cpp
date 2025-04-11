@@ -22,12 +22,12 @@ import pg_protocol_handler;
 import boost;
 import stl;
 import session;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import pg_message;
 import logger;
 import query_context;
-import infinity_context;
+import hybridsearch_context;
 import third_party;
 import data_table;
 
@@ -41,7 +41,7 @@ import sparse_info;
 import data_type;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 Connection::Connection(boost::asio::io_service &io_service)
     : socket_(MakeShared<boost::asio::ip::tcp::socket>(io_service)), pg_handler_(MakeShared<PGProtocolHandler>(socket())) {}
@@ -51,7 +51,7 @@ Connection::~Connection() {
         // To avoid null ptr access
         return;
     }
-    SessionManager *session_mgr = InfinityContext::instance().session_manager();
+    SessionManager *session_mgr = hybridsearchContext::instance().session_manager();
     session_mgr->RemoveSessionByID(session_->session_id());
 }
 
@@ -67,10 +67,10 @@ void Connection::Run() {
     // Disable Nagle's algorithm to reduce TCP latency, but will reduce the throughput.
     socket_->set_option(boost::asio::ip::tcp::no_delay(true));
 
-    SessionManager *session_manager = InfinityContext::instance().session_manager();
+    SessionManager *session_manager = hybridsearchContext::instance().session_manager();
     SharedPtr<RemoteSession> remote_session = session_manager->CreateRemoteSession();
     if (remote_session == nullptr) {
-        HandleError("Infinity is running under maintenance mode, only one connection is allowed.");
+        HandleError("hybridsearch is running under maintenance mode, only one connection is allowed.");
         return;
     }
 
@@ -83,10 +83,10 @@ void Connection::Run() {
     while (!terminate_connection_) {
         try {
             HandleRequest();
-        } catch (const infinity::RecoverableException &e) {
+        } catch (const hybridsearch::RecoverableException &e) {
             LOG_TRACE(fmt::format("Recoverable exception: {}", e.what()));
             return;
-        } catch (const infinity::UnrecoverableException &e) {
+        } catch (const hybridsearch::UnrecoverableException &e) {
             HandleError(e.what());
         } catch (const std::exception &e) {
             HandleError(e.what());
@@ -111,12 +111,12 @@ void Connection::HandleRequest() {
 
     // FIXME
     UniquePtr<QueryContext> query_context_ptr = MakeUnique<QueryContext>(session_.get());
-    query_context_ptr->Init(InfinityContext::instance().config(),
-                            InfinityContext::instance().task_scheduler(),
-                            InfinityContext::instance().storage(),
-                            InfinityContext::instance().resource_manager(),
-                            InfinityContext::instance().session_manager(),
-                            InfinityContext::instance().persistence_manager());
+    query_context_ptr->Init(hybridsearchContext::instance().config(),
+                            hybridsearchContext::instance().task_scheduler(),
+                            hybridsearchContext::instance().storage(),
+                            hybridsearchContext::instance().resource_manager(),
+                            hybridsearchContext::instance().session_manager(),
+                            hybridsearchContext::instance().persistence_manager());
 
     switch (cmd_type) {
         case PGMessageType::kBindCommand: {
@@ -431,4 +431,4 @@ void Connection::SendQueryResponse(const QueryResult &query_result) {
     pg_handler_->SendComplete(message);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

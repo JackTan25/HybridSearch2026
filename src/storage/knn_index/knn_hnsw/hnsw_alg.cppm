@@ -21,7 +21,7 @@ export module hnsw_alg;
 
 import stl;
 import local_file_handle;
-import infinity_exception;
+import hybridsearch_exception;
 import knn_result_handler;
 import multivector_result_handler;
 import logical_type;
@@ -38,7 +38,7 @@ import dist_func_lsg_wrapper;
 // Todo: make more embedding type.
 // Todo: make module partition.
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct KnnSearchOption {
     SizeT ef_ = 0;
@@ -555,4 +555,4 @@ public:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

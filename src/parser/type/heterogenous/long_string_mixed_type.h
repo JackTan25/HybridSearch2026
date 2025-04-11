@@ -17,7 +17,7 @@
 #include "base_mixed_type.h"
 #include <cstdint>
 
-namespace infinity {
+namespace hybridsearch {
 
 struct __attribute__((packed)) LongStrMixedType : public BaseMixedType {
 public:
@@ -57,4 +57,4 @@ public:
     char *ptr{nullptr};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

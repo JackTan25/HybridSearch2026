@@ -8,7 +8,7 @@ import status;
 import third_party;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class S3ClientMinio final : public S3Client {
 public:
@@ -16,13 +16,13 @@ public:
         : S3Client(_url, _https, _access_key, _secret_key), base_url(_url, _https), provider(_access_key, _secret_key) {
         client_ = MakeUnique<minio::s3::Client>(base_url, &provider);
 
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("S3ClientMinio");
 #endif
     }
 
     ~S3ClientMinio() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("S3ClientMinio");
 #endif
     }
@@ -43,4 +43,4 @@ private:
     minio::creds::StaticProvider provider;
     UniquePtr<minio::s3::Client> client_{};
 };
-} // namespace infinity
+} // namespace hybridsearch

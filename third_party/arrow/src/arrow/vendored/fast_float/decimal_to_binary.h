@@ -101,7 +101,7 @@ adjusted_mantissa compute_float(int64_t q, uint64_t w)  noexcept  {
     return answer;
   }
   if (q > binary::largest_power_of_ten()) {
-    // we want to get infinity:
+    // we want to get hybridsearch:
     answer.power2 = binary::infinite_power();
     answer.mantissa = 0;
     return answer;
@@ -178,7 +178,7 @@ adjusted_mantissa compute_float(int64_t q, uint64_t w)  noexcept  {
   }
 
   answer.mantissa &= ~(uint64_t(1) << binary::mantissa_explicit_bits());
-  if (answer.power2 >= binary::infinite_power()) { // infinity
+  if (answer.power2 >= binary::infinite_power()) { // hybridsearch
     answer.power2 = binary::infinite_power();
     answer.mantissa = 0;
   }

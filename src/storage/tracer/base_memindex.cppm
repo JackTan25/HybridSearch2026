@@ -19,7 +19,7 @@ export module base_memindex;
 import stl;
 import memindex_tracer;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct TableIndexEntry;
 
@@ -36,4 +36,4 @@ protected:
     void DecreaseMemoryUsageBase(SizeT mem);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

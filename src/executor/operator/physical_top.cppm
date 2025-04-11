@@ -30,13 +30,13 @@ import data_table;
 import data_block;
 import column_vector;
 import load_meta;
-import infinity_exception;
+import hybridsearch_exception;
 import physical_limit;
 import internal_types;
 import select_statement;
 import data_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class CompareTwoRowAndPreferLeft {
 public:
@@ -127,4 +127,4 @@ private:
     // TODO: save a common threshold value for all tasks
 };
 
-} // namespace infinity
+} // namespace hybridsearch

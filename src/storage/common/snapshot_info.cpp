@@ -27,8 +27,8 @@ import constant_expr;
 import logger;
 import virtual_store;
 import local_file_handle;
-import infinity_exception;
-import infinity_context;
+import hybridsearch_exception;
+import hybridsearch_context;
 import config;
 import persistence_manager;
 import persist_result_handler;
@@ -39,7 +39,7 @@ import data_type;
 import parsed_expr;
 import segment_entry;
 
-namespace infinity {
+namespace hybridsearch {
 
 nlohmann::json BlockColumnSnapshotInfo::Serialize() {
     nlohmann::json json_res;
@@ -173,8 +173,8 @@ SharedPtr<TableIndexSnapshotInfo> TableIndexSnapshotInfo::Deserialize(const nloh
 
 void TableSnapshotInfo::Serialize(const String &save_dir) {
 
-    Config *config = InfinityContext::instance().config();
-    PersistenceManager *persistence_manager = InfinityContext::instance().persistence_manager();
+    Config *config = hybridsearchContext::instance().config();
+    PersistenceManager *persistence_manager = hybridsearchContext::instance().persistence_manager();
 
     // Create compressed file
     //    String compressed_filename = fmt::format("{}/{}.lz4", save_dir, snapshot_name_);
@@ -466,4 +466,4 @@ String TableSnapshotInfo::ToString() const {
                        version_);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

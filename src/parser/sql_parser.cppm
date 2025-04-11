@@ -17,8 +17,8 @@ module;
 
 export module sql_parser;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::SQLParser;
+export using hybridsearch::SQLParser;
 
 }

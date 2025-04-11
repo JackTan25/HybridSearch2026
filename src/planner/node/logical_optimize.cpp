@@ -23,7 +23,7 @@ import stl;
 import column_binding;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<ColumnBinding> LogicalOptimize::GetColumnBindings() const { return {}; }
 
@@ -45,4 +45,4 @@ String LogicalOptimize::ToString(i64 &space) const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -19,7 +19,7 @@ export module timestamp_cast;
 import stl;
 import column_vector_cast;
 import logical_type;
-import infinity_exception;
+import hybridsearch_exception;
 import bound_cast_func;
 import column_vector;
 import third_party;
@@ -27,7 +27,7 @@ import internal_types;
 import data_type;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct TimestampTryCastToFixlen;
 export struct TimestampTryCastToVarlen;
@@ -102,4 +102,4 @@ inline bool TimestampTryCastToVarlen::Run(TimestampT, VarcharT &, ColumnVector *
     return false;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

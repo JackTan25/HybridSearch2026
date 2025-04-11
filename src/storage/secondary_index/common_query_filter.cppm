@@ -20,7 +20,7 @@ import internal_types;
 import default_values;
 import filter_expression_push_down;
 
-namespace infinity {
+namespace hybridsearch {
 class FastRoughFilterEvaluator;
 class BaseTableRef;
 class BaseExpression;
@@ -113,4 +113,4 @@ private:
     bool always_true_ = false;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

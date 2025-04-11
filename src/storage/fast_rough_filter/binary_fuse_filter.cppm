@@ -17,11 +17,11 @@ module;
 export module binary_fuse_filter;
 import stl;
 import default_values;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 // two visible states for query:
 // 1. finished_build_filter_ is true, filter is ready, have valid build_time and filter
@@ -144,4 +144,4 @@ public:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

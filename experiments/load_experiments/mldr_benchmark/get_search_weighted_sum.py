@@ -19,11 +19,11 @@ from mldr_common_tools import QueryArgs, check_languages
 from mldr_common_tools import FakeJScoredDoc, get_queries_and_qids, save_result
 from mldr_common_tools import query_yields, apply_funcs
 from transformers import HfArgumentParser
-import infinity
-from infinity.common import LOCAL_HOST
+import hybridsearch
+from hybridsearch.common import LOCAL_HOST
 
 
-class InfinityClientForSearch:
+class hybridsearchClientForSearch:
     def __init__(self, with_colbert: bool):
         self.test_db_name = "default_db"
         self.test_table_name_prefix = "mldr_test_table_text_dense_sparse_"
@@ -34,17 +34,17 @@ class InfinityClientForSearch:
             self.test_table_name_prefix += "colbert_"
             self.test_table_schema["colbert_col"] = {"type": "tensor,128,float"}
             self.test_table_schema["colbert_bit_col"] = {"type": "tensor,128,bit"}
-        self.infinity_obj = infinity.connect(LOCAL_HOST)
-        self.infinity_db = self.infinity_obj.get_database(self.test_db_name)
-        self.infinity_table = None
+        self.hybridsearch_obj = hybridsearch.connect(LOCAL_HOST)
+        self.hybridsearch_db = self.hybridsearch_obj.get_database(self.test_db_name)
+        self.hybridsearch_table = None
 
     def get_test_table(self, language_suffix: str):
         table_name = self.test_table_name_prefix + language_suffix
-        self.infinity_table = self.infinity_db.get_table(table_name)
+        self.hybridsearch_table = self.hybridsearch_db.get_table(table_name)
         print(f"Get table {table_name} successfully.")
 
     def weighted_sum_query(self, query_targets_list: list, apply_funcs_list: list, max_hits: int, weights_str: str):
-        result_table = self.infinity_table.output(["docid_col", "_score"])
+        result_table = self.hybridsearch_table.output(["docid_col", "_score"])
         for query_target, apply_func in zip(query_targets_list, apply_funcs_list):
             result_table = apply_func(result_table, query_target, max_hits)
         result_table = result_table.fusion(method='weighted_sum', topn=max_hits, fusion_params={"weights": weights_str})
@@ -95,5 +95,5 @@ if __name__ == "__main__":
     parser = HfArgumentParser([QueryArgs])
     query_args: QueryArgs = parser.parse_args_into_dataclasses()[0]
     languages = check_languages(query_args.languages)
-    infinity_client = InfinityClientForSearch(query_args.with_colbert)
-    infinity_client.main(languages=languages, save_dir=query_args.query_result_dave_dir)
+    hybridsearch_client = hybridsearchClientForSearch(query_args.with_colbert)
+    hybridsearch_client.main(languages=languages, save_dir=query_args.query_result_dave_dir)

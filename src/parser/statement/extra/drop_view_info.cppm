@@ -18,8 +18,8 @@ module;
 
 export module drop_view_info;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::DropViewInfo;
+export using hybridsearch::DropViewInfo;
 
 }

@@ -25,16 +25,16 @@ import block_index;
 import status;
 import base_table_ref;
 import wal_manager;
-import infinity_context;
-import infinity_exception;
+import hybridsearch_context;
+import hybridsearch_exception;
 import table_entry;
 import segment_index_entry;
 import meta_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 bool PhysicalCompactIndexDo::Execute(QueryContext *query_context, OperatorState *operator_state) {
-    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
     if (storage_mode == StorageMode::kUnInitialized) {
         UnrecoverableError("Uninitialized storage mode");
     }
@@ -83,4 +83,4 @@ bool PhysicalCompactIndexDo::Execute(QueryContext *query_context, OperatorState 
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -17,7 +17,7 @@ module;
 #include <vector>
 module logical_node;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<ColumnBinding> LogicalCommonFunctionUsingLoadMeta::GetColumnBindings(const LogicalNode &op) {
     auto bindings = op.left_node()->GetColumnBindings();
@@ -49,4 +49,4 @@ SharedPtr<Vector<SharedPtr<DataType>>> LogicalCommonFunctionUsingLoadMeta::GetOu
     return output_types;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

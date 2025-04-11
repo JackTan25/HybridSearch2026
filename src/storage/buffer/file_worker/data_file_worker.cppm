@@ -21,7 +21,7 @@ import file_worker;
 import file_worker_type;
 import persistence_manager;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class DataFileWorker : public FileWorker {
 public:
@@ -55,4 +55,4 @@ protected:
 private:
     const SizeT buffer_size_;
 };
-} // namespace infinity
+} // namespace hybridsearch

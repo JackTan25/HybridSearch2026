@@ -24,11 +24,11 @@ import logger;
 import index_base;
 import index_secondary;
 import secondary_index_data;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import persistence_manager;
 
-namespace infinity {
+namespace hybridsearch {
 
 SecondaryIndexFileWorker::~SecondaryIndexFileWorker() {
     if (data_ != nullptr) {
@@ -82,4 +82,4 @@ void SecondaryIndexFileWorker::ReadFromFileImpl(SizeT file_size, bool from_spill
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

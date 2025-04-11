@@ -23,7 +23,7 @@ import column_binding;
 import logical_node;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<ColumnBinding> LogicalUnnestAggregate::GetColumnBindings() const { return LogicalCommonFunctionUsingLoadMeta::GetColumnBindings(*this); }
 
@@ -76,4 +76,4 @@ String LogicalUnnestAggregate::ToString(i64 &space) const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

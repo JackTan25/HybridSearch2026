@@ -14,21 +14,21 @@
 
 # import importlib.metadata
 #
-# __version__ = importlib.metadata.version("infinity_sdk")
+# __version__ = importlib.metadata.version("hybridsearch_sdk")
 
 import logging
 import os
 # import pkg_resources
-# __version__ = pkg_resources.get_distribution("infinity_sdk").version
+# __version__ = pkg_resources.get_distribution("hybridsearch_sdk").version
 
-from infinity.common import URI, NetworkAddress, LOCAL_HOST, LOCAL_INFINITY_PATH, InfinityException
-from infinity.infinity import InfinityConnection
-from infinity.remote_thrift.infinity import RemoteThriftInfinityConnection
-from infinity.errors import ErrorCode
+from hybridsearch.common import URI, NetworkAddress, LOCAL_HOST, LOCAL_hybridsearch_PATH, hybridsearchException
+from hybridsearch.hybridsearch import hybridsearchConnection
+from hybridsearch.remote_thrift.hybridsearch import RemoteThrifthybridsearchConnection
+from hybridsearch.errors import ErrorCode
 
 
-def connect(uri=LOCAL_HOST, logger: logging.Logger = None) -> InfinityConnection:
+def connect(uri=LOCAL_HOST, logger: logging.Logger = None) -> hybridsearchConnection:
     if isinstance(uri, NetworkAddress):
-        return RemoteThriftInfinityConnection(uri, logger)
+        return RemoteThrifthybridsearchConnection(uri, logger)
     else:
-        raise InfinityException(ErrorCode.INVALID_SERVER_ADDRESS, f"Unknown uri: {uri}")
+        raise hybridsearchException(ErrorCode.INVALID_SERVER_ADDRESS, f"Unknown uri: {uri}")

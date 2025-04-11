@@ -13,13 +13,13 @@
 # limitations under the License.
 
 from typing import Union
-# NOTICE: please check which infinity you are using, local or remote
-# this statement is for local infinity
-# enable the following import statement to use remote infinity
-# from infinity.common import LOCAL_HOST
+# NOTICE: please check which hybridsearch you are using, local or remote
+# this statement is for local hybridsearch
+# enable the following import statement to use remote hybridsearch
+# from hybridsearch.common import LOCAL_HOST
 
 
-class InfinityHelperForColBERT:
+class hybridsearchHelperForColBERT:
     def __init__(self):
         from colbert.modeling.checkpoint import Checkpoint
         from colbert.infra import ColBERTConfig
@@ -32,7 +32,7 @@ class InfinityHelperForColBERT:
         self.inner_col_txt = None
         self.inner_col_float = None
         self.inner_col_bit = None
-        self.infinity_obj = None
+        self.hybridsearch_obj = None
         self.colbert_test_db = None
         self.colbert_test_table = None
 
@@ -54,29 +54,29 @@ class InfinityHelperForColBERT:
         schema[self.inner_col_txt] = {"type": "varchar"}
         schema[self.inner_col_float] = {"type": "tensorarray,128,float"}
         schema[self.inner_col_bit] = {"type": "tensorarray,128,bit"}
-        # NOTICE: the following statement is for local infinity
-        import infinity_embedded as infinity
-        # enable the following statement to use remote infinity
-        #import infinity
-        self.infinity_obj = infinity.connect()
-        self.infinity_obj.drop_database(self.test_db_name, infinity.common.ConflictType.Ignore)
-        self.colbert_test_db = self.infinity_obj.create_database(self.test_db_name)
-        self.colbert_test_table = self.colbert_test_db.create_table(self.test_table_name, schema, infinity.common.ConflictType.Error)
+        # NOTICE: the following statement is for local hybridsearch
+        import hybridsearch_embedded as hybridsearch
+        # enable the following statement to use remote hybridsearch
+        #import hybridsearch
+        self.hybridsearch_obj = hybridsearch.connect()
+        self.hybridsearch_obj.drop_database(self.test_db_name, hybridsearch.common.ConflictType.Ignore)
+        self.colbert_test_db = self.hybridsearch_obj.create_database(self.test_db_name)
+        self.colbert_test_table = self.colbert_test_db.create_table(self.test_table_name, schema, hybridsearch.common.ConflictType.Error)
         # NOTICE: the following statement is for english text
         self.colbert_test_table.create_index("test_ft_index",
-                                             infinity.index.IndexInfo(self.inner_col_txt, infinity.index.IndexType.FullText),
-                                             infinity.common.ConflictType.Error)
+                                             hybridsearch.index.IndexInfo(self.inner_col_txt, hybridsearch.index.IndexType.FullText),
+                                             hybridsearch.common.ConflictType.Error)
         # please enable the following statement to use chinese text
         # self.colbert_test_table.create_index("test_ft_index",
         #                                      index.IndexInfo(self.inner_col_txt, index.IndexType.FullText,
-        #                                                      infinity.index.InitParameter("ANALYZER", "chinese")),
+        #                                                      hybridsearch.index.InitParameter("ANALYZER", "chinese")),
         #                                      ConflictType.Error)
 
     # clear the test environment for ColBERT
     def clear_test_env(self):
         self.colbert_test_db.drop_table(self.test_table_name)
-        self.infinity_obj.drop_database(self.test_db_name)
-        self.infinity_obj.disconnect()
+        self.hybridsearch_obj.drop_database(self.test_db_name)
+        self.hybridsearch_obj.disconnect()
 
     # insert data into the test table
     # insert_data: data to insert for a row, excluding the text for ColBERT

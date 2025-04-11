@@ -17,10 +17,10 @@ module;
 export module file_worker_type;
 
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class FileWorkerType {
     kDataFile,
@@ -78,4 +78,4 @@ export String FileWorkerType2Str(FileWorkerType type) {
     return error_message;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

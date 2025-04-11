@@ -15,7 +15,7 @@
 #include "subquery_expr.h"
 #include <sstream>
 
-namespace infinity {
+namespace hybridsearch {
 
 SubqueryExpr::~SubqueryExpr() {
     if (left_ != nullptr) {
@@ -61,4 +61,4 @@ std::string SubqueryExpr::ToString() const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

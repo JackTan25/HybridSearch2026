@@ -28,7 +28,7 @@ import local_file_handle;
 import hnsw_common;
 import sparse_util;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename DataType, typename IdxType>
 class SparseVecStoreMeta {
@@ -170,4 +170,4 @@ public:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

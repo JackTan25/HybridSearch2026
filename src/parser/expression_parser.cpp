@@ -82,7 +82,7 @@
 #include "expression_lexer.h"
 #include "parser_helper.h"
 
-void expressionerror(YYLTYPE * llocp, void* lexer, infinity::ExpressionParserResult* result, const char* msg);
+void expressionerror(YYLTYPE * llocp, void* lexer, hybridsearch::ExpressionParserResult* result, const char* msg);
 
 #line 88 "expression_parser.cpp"
 
@@ -1148,7 +1148,7 @@ do {                                                                      \
 
 static void
 yy_symbol_value_print (FILE *yyo,
-                       yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, void *scanner, infinity::ExpressionParserResult* result)
+                       yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, void *scanner, hybridsearch::ExpressionParserResult* result)
 {
   FILE *yyoutput = yyo;
   YY_USE (yyoutput);
@@ -1169,7 +1169,7 @@ yy_symbol_value_print (FILE *yyo,
 
 static void
 yy_symbol_print (FILE *yyo,
-                 yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, void *scanner, infinity::ExpressionParserResult* result)
+                 yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, void *scanner, hybridsearch::ExpressionParserResult* result)
 {
   YYFPRINTF (yyo, "%s %s (",
              yykind < YYNTOKENS ? "token" : "nterm", yysymbol_name (yykind));
@@ -1210,7 +1210,7 @@ do {                                                            \
 
 static void
 yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp, YYLTYPE *yylsp,
-                 int yyrule, void *scanner, infinity::ExpressionParserResult* result)
+                 int yyrule, void *scanner, hybridsearch::ExpressionParserResult* result)
 {
   int yylno = yyrline[yyrule];
   int yynrhs = yyr2[yyrule];
@@ -1541,7 +1541,7 @@ yysyntax_error (YYPTRDIFF_T *yymsg_alloc, char **yymsg,
 
 static void
 yydestruct (const char *yymsg,
-            yysymbol_kind_t yykind, YYSTYPE *yyvaluep, YYLTYPE *yylocationp, void *scanner, infinity::ExpressionParserResult* result)
+            yysymbol_kind_t yykind, YYSTYPE *yyvaluep, YYLTYPE *yylocationp, void *scanner, hybridsearch::ExpressionParserResult* result)
 {
   YY_USE (yyvaluep);
   YY_USE (yylocationp);
@@ -1720,7 +1720,7 @@ yydestruct (const char *yymsg,
 `----------*/
 
 int
-yyparse (void *scanner, infinity::ExpressionParserResult* result)
+yyparse (void *scanner, hybridsearch::ExpressionParserResult* result)
 {
 /* Lookahead token kind.  */
 int yychar;
@@ -2030,7 +2030,7 @@ yyreduce:
   case 3: /* expr_array: expr_alias  */
 #line 175 "expression_parser.y"
                         {
-    (yyval.expr_array_t) = new std::vector<infinity::ParsedExpr*>();
+    (yyval.expr_array_t) = new std::vector<hybridsearch::ParsedExpr*>();
     (yyval.expr_array_t)->emplace_back((yyvsp[0].expr_t));
 }
 #line 2037 "expression_parser.cpp"
@@ -2083,7 +2083,7 @@ yyreduce:
   case 18: /* match_expr: MATCH '(' STRING ',' STRING ')'  */
 #line 211 "expression_parser.y"
                                              {
-    infinity::MatchExpr* match_expr = new infinity::MatchExpr();
+    hybridsearch::MatchExpr* match_expr = new hybridsearch::MatchExpr();
     match_expr->fields_ = std::string((yyvsp[-3].str_value));
     match_expr->matching_text_ = std::string((yyvsp[-1].str_value));
     free((yyvsp[-3].str_value));
@@ -2096,7 +2096,7 @@ yyreduce:
   case 19: /* match_expr: MATCH '(' STRING ',' STRING ',' STRING ')'  */
 #line 219 "expression_parser.y"
                                              {
-    infinity::MatchExpr* match_expr = new infinity::MatchExpr();
+    hybridsearch::MatchExpr* match_expr = new hybridsearch::MatchExpr();
     match_expr->fields_ = std::string((yyvsp[-5].str_value));
     match_expr->matching_text_ = std::string((yyvsp[-3].str_value));
     match_expr->options_text_ = std::string((yyvsp[-1].str_value));
@@ -2111,7 +2111,7 @@ yyreduce:
   case 20: /* query_expr: QUERY '(' STRING ')'  */
 #line 230 "expression_parser.y"
                                   {
-    infinity::MatchExpr* match_expr = new infinity::MatchExpr();
+    hybridsearch::MatchExpr* match_expr = new hybridsearch::MatchExpr();
     match_expr->matching_text_ = std::string((yyvsp[-1].str_value));
     free((yyvsp[-1].str_value));
     (yyval.expr_t) = match_expr;
@@ -2122,7 +2122,7 @@ yyreduce:
   case 21: /* query_expr: QUERY '(' STRING ',' STRING ')'  */
 #line 236 "expression_parser.y"
                                   {
-    infinity::MatchExpr* match_expr = new infinity::MatchExpr();
+    hybridsearch::MatchExpr* match_expr = new hybridsearch::MatchExpr();
     match_expr->matching_text_ = std::string((yyvsp[-3].str_value));
     match_expr->options_text_ = std::string((yyvsp[-1].str_value));
     free((yyvsp[-3].str_value));
@@ -2135,7 +2135,7 @@ yyreduce:
   case 22: /* fusion_expr: FUSION '(' STRING ')'  */
 #line 245 "expression_parser.y"
                                     {
-    infinity::FusionExpr* fusion_expr = new infinity::FusionExpr();
+    hybridsearch::FusionExpr* fusion_expr = new hybridsearch::FusionExpr();
     fusion_expr->method_ = std::string((yyvsp[-1].str_value));
     free((yyvsp[-1].str_value));
     (yyval.expr_t) = fusion_expr;
@@ -2146,7 +2146,7 @@ yyreduce:
   case 23: /* fusion_expr: FUSION '(' STRING ',' STRING ')'  */
 #line 251 "expression_parser.y"
                                    {
-    infinity::FusionExpr* fusion_expr = new infinity::FusionExpr();
+    hybridsearch::FusionExpr* fusion_expr = new hybridsearch::FusionExpr();
     fusion_expr->method_ = std::string((yyvsp[-3].str_value));
     free((yyvsp[-3].str_value));
     fusion_expr->SetOptions((yyvsp[-1].str_value));
@@ -2159,7 +2159,7 @@ yyreduce:
   case 24: /* function_expr: IDENTIFIER '(' ')'  */
 #line 260 "expression_parser.y"
                                    {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     ParserHelper::ToLower((yyvsp[-2].str_value));
     func_expr->func_name_ = (yyvsp[-2].str_value);
     free((yyvsp[-2].str_value));
@@ -2172,7 +2172,7 @@ yyreduce:
   case 25: /* function_expr: IDENTIFIER '(' expr_array ')'  */
 #line 268 "expression_parser.y"
                                 {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     ParserHelper::ToLower((yyvsp[-3].str_value));
     func_expr->func_name_ = (yyvsp[-3].str_value);
     free((yyvsp[-3].str_value));
@@ -2185,7 +2185,7 @@ yyreduce:
   case 26: /* function_expr: IDENTIFIER '(' DISTINCT expr_array ')'  */
 #line 276 "expression_parser.y"
                                          {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     ParserHelper::ToLower((yyvsp[-4].str_value));
     func_expr->func_name_ = (yyvsp[-4].str_value);
     free((yyvsp[-4].str_value));
@@ -2199,9 +2199,9 @@ yyreduce:
   case 27: /* function_expr: operand IS NOT NULLABLE  */
 #line 285 "expression_parser.y"
                           {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "is_not_null";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-3].expr_t));
     (yyval.expr_t) = func_expr;
 }
@@ -2211,9 +2211,9 @@ yyreduce:
   case 28: /* function_expr: operand IS NULLABLE  */
 #line 292 "expression_parser.y"
                       {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "is_null";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     (yyval.expr_t) = func_expr;
 }
@@ -2223,9 +2223,9 @@ yyreduce:
   case 29: /* function_expr: NOT operand  */
 #line 299 "expression_parser.y"
               {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "not";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
 }
@@ -2235,9 +2235,9 @@ yyreduce:
   case 30: /* function_expr: '-' operand  */
 #line 306 "expression_parser.y"
               {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "-";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
 }
@@ -2247,9 +2247,9 @@ yyreduce:
   case 31: /* function_expr: '+' operand  */
 #line 313 "expression_parser.y"
               {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "+";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
 }
@@ -2259,9 +2259,9 @@ yyreduce:
   case 32: /* function_expr: operand '-' operand  */
 #line 320 "expression_parser.y"
                       {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "-";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -2272,9 +2272,9 @@ yyreduce:
   case 33: /* function_expr: operand '+' operand  */
 #line 328 "expression_parser.y"
                       {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "+";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -2285,9 +2285,9 @@ yyreduce:
   case 34: /* function_expr: operand '*' operand  */
 #line 336 "expression_parser.y"
                       {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "*";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -2298,9 +2298,9 @@ yyreduce:
   case 35: /* function_expr: operand '/' operand  */
 #line 344 "expression_parser.y"
                       {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "/";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -2311,9 +2311,9 @@ yyreduce:
   case 36: /* function_expr: operand '%' operand  */
 #line 352 "expression_parser.y"
                       {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "%";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -2324,9 +2324,9 @@ yyreduce:
   case 37: /* function_expr: operand '=' operand  */
 #line 360 "expression_parser.y"
                       {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "=";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -2337,9 +2337,9 @@ yyreduce:
   case 38: /* function_expr: operand EQUAL operand  */
 #line 368 "expression_parser.y"
                         {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "=";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -2350,9 +2350,9 @@ yyreduce:
   case 39: /* function_expr: operand NOT_EQ operand  */
 #line 376 "expression_parser.y"
                          {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "<>";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -2363,9 +2363,9 @@ yyreduce:
   case 40: /* function_expr: operand '<' operand  */
 #line 384 "expression_parser.y"
                       {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "<";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -2376,9 +2376,9 @@ yyreduce:
   case 41: /* function_expr: operand '>' operand  */
 #line 392 "expression_parser.y"
                       {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = ">";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -2389,9 +2389,9 @@ yyreduce:
   case 42: /* function_expr: operand LESS_EQ operand  */
 #line 400 "expression_parser.y"
                           {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "<=";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -2402,9 +2402,9 @@ yyreduce:
   case 43: /* function_expr: operand GREATER_EQ operand  */
 #line 408 "expression_parser.y"
                              {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = ">=";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -2415,26 +2415,26 @@ yyreduce:
   case 44: /* function_expr: EXTRACT '(' STRING FROM operand ')'  */
 #line 416 "expression_parser.y"
                                       {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     ParserHelper::ToLower((yyvsp[-3].str_value));
     if(strcmp((yyvsp[-3].str_value), "year") == 0) {
         func_expr->func_name_ = "extract_year";
-        func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+        func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     } else if(strcmp((yyvsp[-3].str_value), "month") == 0) {
         func_expr->func_name_ = "extract_month";
-        func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+        func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     } else if(strcmp((yyvsp[-3].str_value), "day") == 0) {
         func_expr->func_name_ = "extract_day";
-        func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+        func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     } else if(strcmp((yyvsp[-3].str_value), "hour") == 0) {
         func_expr->func_name_ = "extract_hour";
-        func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+        func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     } else if(strcmp((yyvsp[-3].str_value), "minute") == 0) {
         func_expr->func_name_ = "extract_minute";
-        func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+        func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     } else if(strcmp((yyvsp[-3].str_value), "second") == 0) {
         func_expr->func_name_ = "extract_second";
-        func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+        func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     } else {
         delete func_expr;
         expressionerror(&yyloc, scanner, result, "Invalid column expression format");
@@ -2450,9 +2450,9 @@ yyreduce:
   case 45: /* function_expr: operand LIKE operand  */
 #line 446 "expression_parser.y"
                        {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "like";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -2463,9 +2463,9 @@ yyreduce:
   case 46: /* function_expr: operand NOT LIKE operand  */
 #line 454 "expression_parser.y"
                            {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "not_like";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-3].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -2476,9 +2476,9 @@ yyreduce:
   case 47: /* conjunction_expr: expr AND expr  */
 #line 463 "expression_parser.y"
                                 {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "and";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -2489,9 +2489,9 @@ yyreduce:
   case 48: /* conjunction_expr: expr OR expr  */
 #line 471 "expression_parser.y"
                {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "or";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -2502,7 +2502,7 @@ yyreduce:
   case 49: /* between_expr: operand BETWEEN operand AND operand  */
 #line 480 "expression_parser.y"
                                                   {
-    infinity::BetweenExpr* between_expr = new infinity::BetweenExpr();
+    hybridsearch::BetweenExpr* between_expr = new hybridsearch::BetweenExpr();
     between_expr->value_ = (yyvsp[-4].expr_t);
     between_expr->lower_bound_ = (yyvsp[-2].expr_t);
     between_expr->upper_bound_ = (yyvsp[0].expr_t);
@@ -2514,7 +2514,7 @@ yyreduce:
   case 50: /* in_expr: operand IN '(' expr_array ')'  */
 #line 488 "expression_parser.y"
                                        {
-    infinity::InExpr* in_expr = new infinity::InExpr(true);
+    hybridsearch::InExpr* in_expr = new hybridsearch::InExpr(true);
     in_expr->left_ = (yyvsp[-4].expr_t);
     in_expr->arguments_ = (yyvsp[-1].expr_array_t);
     (yyval.expr_t) = in_expr;
@@ -2525,7 +2525,7 @@ yyreduce:
   case 51: /* in_expr: operand NOT IN '(' expr_array ')'  */
 #line 494 "expression_parser.y"
                                     {
-    infinity::InExpr* in_expr = new infinity::InExpr(false);
+    hybridsearch::InExpr* in_expr = new hybridsearch::InExpr(false);
     in_expr->left_ = (yyvsp[-5].expr_t);
     in_expr->arguments_ = (yyvsp[-1].expr_array_t);
     (yyval.expr_t) = in_expr;
@@ -2536,7 +2536,7 @@ yyreduce:
   case 52: /* column_expr: IDENTIFIER  */
 #line 501 "expression_parser.y"
                          {
-    infinity::ColumnExpr* column_expr = new infinity::ColumnExpr();
+    hybridsearch::ColumnExpr* column_expr = new hybridsearch::ColumnExpr();
     ParserHelper::ToLower((yyvsp[0].str_value));
     column_expr->names_.emplace_back((yyvsp[0].str_value));
     free((yyvsp[0].str_value));
@@ -2548,7 +2548,7 @@ yyreduce:
   case 53: /* column_expr: column_expr '.' IDENTIFIER  */
 #line 508 "expression_parser.y"
                              {
-    infinity::ColumnExpr* column_expr = (infinity::ColumnExpr*)(yyvsp[-2].expr_t);
+    hybridsearch::ColumnExpr* column_expr = (hybridsearch::ColumnExpr*)(yyvsp[-2].expr_t);
     ParserHelper::ToLower((yyvsp[0].str_value));
     column_expr->names_.emplace_back((yyvsp[0].str_value));
     free((yyvsp[0].str_value));
@@ -2560,7 +2560,7 @@ yyreduce:
   case 54: /* column_expr: '*'  */
 #line 515 "expression_parser.y"
       {
-    infinity::ColumnExpr* column_expr = new infinity::ColumnExpr();
+    hybridsearch::ColumnExpr* column_expr = new hybridsearch::ColumnExpr();
     column_expr->star_ = true;
     (yyval.expr_t) = column_expr;
 }
@@ -2570,7 +2570,7 @@ yyreduce:
   case 55: /* column_expr: column_expr '.' '*'  */
 #line 520 "expression_parser.y"
                       {
-    infinity::ColumnExpr* column_expr = (infinity::ColumnExpr*)(yyvsp[-2].expr_t);
+    hybridsearch::ColumnExpr* column_expr = (hybridsearch::ColumnExpr*)(yyvsp[-2].expr_t);
     if(column_expr->star_) {
         expressionerror(&yyloc, scanner, result, "Invalid column expression format");
         YYERROR;
@@ -2584,7 +2584,7 @@ yyreduce:
   case 56: /* constant_expr: STRING  */
 #line 530 "expression_parser.y"
                       {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kString);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kString);
     const_expr->str_value_ = (yyvsp[0].str_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -2594,7 +2594,7 @@ yyreduce:
   case 57: /* constant_expr: TRUE  */
 #line 535 "expression_parser.y"
        {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kBoolean);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kBoolean);
     const_expr->bool_value_ = true;
     (yyval.const_expr_t) = const_expr;
 }
@@ -2604,7 +2604,7 @@ yyreduce:
   case 58: /* constant_expr: FALSE  */
 #line 540 "expression_parser.y"
         {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kBoolean);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kBoolean);
     const_expr->bool_value_ = false;
     (yyval.const_expr_t) = const_expr;
 }
@@ -2614,7 +2614,7 @@ yyreduce:
   case 59: /* constant_expr: DOUBLE_VALUE  */
 #line 545 "expression_parser.y"
                {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kDouble);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kDouble);
     const_expr->double_value_ = (yyvsp[0].double_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -2624,7 +2624,7 @@ yyreduce:
   case 60: /* constant_expr: LONG_VALUE  */
 #line 550 "expression_parser.y"
              {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInteger);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInteger);
     const_expr->integer_value_ = (yyvsp[0].long_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -2634,7 +2634,7 @@ yyreduce:
   case 61: /* constant_expr: DATE STRING  */
 #line 555 "expression_parser.y"
               {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kDate);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kDate);
     const_expr->date_value_ = (yyvsp[0].str_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -2644,7 +2644,7 @@ yyreduce:
   case 62: /* constant_expr: TIME STRING  */
 #line 560 "expression_parser.y"
               {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kTime);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kTime);
     const_expr->date_value_ = (yyvsp[0].str_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -2654,7 +2654,7 @@ yyreduce:
   case 63: /* constant_expr: DATETIME STRING  */
 #line 565 "expression_parser.y"
                   {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kDateTime);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kDateTime);
     const_expr->date_value_ = (yyvsp[0].str_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -2664,7 +2664,7 @@ yyreduce:
   case 64: /* constant_expr: TIMESTAMP STRING  */
 #line 570 "expression_parser.y"
                    {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kTimestamp);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kTimestamp);
     const_expr->date_value_ = (yyvsp[0].str_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -2714,7 +2714,7 @@ yyreduce:
   case 70: /* unclosed_long_array_expr: '[' LONG_VALUE  */
 #line 592 "expression_parser.y"
                                          {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kIntegerArray);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kIntegerArray);
     const_expr->long_array_.emplace_back((yyvsp[0].long_value));
     (yyval.const_expr_t) = const_expr;
 }
@@ -2741,7 +2741,7 @@ yyreduce:
   case 73: /* unclosed_double_array_expr: '[' DOUBLE_VALUE  */
 #line 606 "expression_parser.y"
                                              {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kDoubleArray);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kDoubleArray);
     const_expr->double_array_.emplace_back((yyvsp[0].double_value));
     (yyval.const_expr_t) = const_expr;
 }
@@ -2760,8 +2760,8 @@ yyreduce:
   case 75: /* interval_expr: LONG_VALUE SECONDS  */
 #line 616 "expression_parser.y"
                                   {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kSecond;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kSecond;
     const_expr->integer_value_ = (yyvsp[-1].long_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -2771,8 +2771,8 @@ yyreduce:
   case 76: /* interval_expr: LONG_VALUE SECOND  */
 #line 622 "expression_parser.y"
                     {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kSecond;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kSecond;
     const_expr->integer_value_ = (yyvsp[-1].long_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -2782,8 +2782,8 @@ yyreduce:
   case 77: /* interval_expr: LONG_VALUE MINUTES  */
 #line 628 "expression_parser.y"
                      {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kMinute;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kMinute;
     const_expr->integer_value_ = (yyvsp[-1].long_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -2793,8 +2793,8 @@ yyreduce:
   case 78: /* interval_expr: LONG_VALUE MINUTE  */
 #line 634 "expression_parser.y"
                     {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kMinute;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kMinute;
     const_expr->integer_value_ = (yyvsp[-1].long_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -2804,8 +2804,8 @@ yyreduce:
   case 79: /* interval_expr: LONG_VALUE HOURS  */
 #line 640 "expression_parser.y"
                    {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kHour;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kHour;
     const_expr->integer_value_ = (yyvsp[-1].long_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -2815,8 +2815,8 @@ yyreduce:
   case 80: /* interval_expr: LONG_VALUE HOUR  */
 #line 646 "expression_parser.y"
                   {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kHour;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kHour;
     const_expr->integer_value_ = (yyvsp[-1].long_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -2826,8 +2826,8 @@ yyreduce:
   case 81: /* interval_expr: LONG_VALUE DAYS  */
 #line 652 "expression_parser.y"
                   {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kDay;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kDay;
     const_expr->integer_value_ = (yyvsp[-1].long_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -2837,8 +2837,8 @@ yyreduce:
   case 82: /* interval_expr: LONG_VALUE DAY  */
 #line 658 "expression_parser.y"
                  {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kDay;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kDay;
     const_expr->integer_value_ = (yyvsp[-1].long_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -2848,8 +2848,8 @@ yyreduce:
   case 83: /* interval_expr: LONG_VALUE MONTHS  */
 #line 664 "expression_parser.y"
                     {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kMonth;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kMonth;
     const_expr->integer_value_ = (yyvsp[-1].long_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -2859,8 +2859,8 @@ yyreduce:
   case 84: /* interval_expr: LONG_VALUE MONTH  */
 #line 670 "expression_parser.y"
                    {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kMonth;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kMonth;
     const_expr->integer_value_ = (yyvsp[-1].long_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -2870,8 +2870,8 @@ yyreduce:
   case 85: /* interval_expr: LONG_VALUE YEARS  */
 #line 676 "expression_parser.y"
                    {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kYear;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kYear;
     const_expr->integer_value_ = (yyvsp[-1].long_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -2881,8 +2881,8 @@ yyreduce:
   case 86: /* interval_expr: LONG_VALUE YEAR  */
 #line 682 "expression_parser.y"
                   {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kYear;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kYear;
     const_expr->integer_value_ = (yyvsp[-1].long_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -3123,7 +3123,7 @@ yyreturnlab:
 
 
 void
-expressionerror(YYLTYPE * llocp, void* lexer, infinity::ExpressionParserResult* result, const char* msg) {
+expressionerror(YYLTYPE * llocp, void* lexer, hybridsearch::ExpressionParserResult* result, const char* msg) {
     if(result->IsError()) return ;
 
     result->error_message_ = std::string(msg) + ", " + std::to_string(llocp->first_column);

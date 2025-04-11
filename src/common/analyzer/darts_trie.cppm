@@ -20,7 +20,7 @@ import stl;
 import darts;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class POSTable {
 public:
@@ -71,4 +71,4 @@ public:
     int Get(std::string_view key) const;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

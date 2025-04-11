@@ -22,11 +22,11 @@ export module unary_operator;
 import stl;
 import column_vector;
 import logger;
-import infinity_exception;
+import hybridsearch_exception;
 import roaring_bitmap;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct ColumnVectorCastData;
 
@@ -267,4 +267,4 @@ private:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

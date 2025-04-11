@@ -1,0 +1,18 @@
+[Unit]
+Description=hybridsearch db
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+WorkingDirectory=/var/hybridsearch
+Environment="HOME=/var/hybridsearch"
+Type=simple
+User=hybridsearch
+Restart=on-failure
+RestartSec=30
+ExecStart=/usr/bin/hybridsearch -f /usr/etc/hybridsearch_conf.toml
+LimitCORE=1G
+LimitNOFILE=500000
+
+[Install]
+WantedBy=multi-user.target

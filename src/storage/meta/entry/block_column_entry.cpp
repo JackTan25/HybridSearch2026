@@ -28,7 +28,7 @@ import default_values;
 import third_party;
 import vector_buffer;
 import virtual_store;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 import data_file_worker;
 import var_file_worker;
@@ -36,10 +36,10 @@ import catalog_delta_entry;
 import internal_types;
 import data_type;
 import logical_type;
-import infinity_context;
+import hybridsearch_context;
 import meta_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<std::string_view> BlockColumnEntry::DecodeIndex(std::string_view encode) {
     SizeT delimiter_i = encode.rfind('#');
@@ -100,8 +100,8 @@ UniquePtr<BlockColumnEntry> BlockColumnEntry::NewBlockColumnEntry(const BlockEnt
     }
 
     auto *buffer_mgr = txn->buffer_mgr();
-    auto file_worker = MakeUnique<DataFileWorker>(MakeShared<String>(InfinityContext::instance().config()->DataDir()),
-                                                  MakeShared<String>(InfinityContext::instance().config()->TempDir()),
+    auto file_worker = MakeUnique<DataFileWorker>(MakeShared<String>(hybridsearchContext::instance().config()->DataDir()),
+                                                  MakeShared<String>(hybridsearchContext::instance().config()->TempDir()),
                                                   block_entry->block_dir(),
                                                   block_column_entry->filename_,
                                                   total_data_size,
@@ -128,8 +128,8 @@ UniquePtr<BlockColumnEntry> BlockColumnEntry::NewReplayBlockColumnEntry(const Bl
     const SizeT row_capacity = block_entry->row_capacity();
     const SizeT total_data_size =
         (column_data_logical_type == LogicalType::kBoolean) ? ((row_capacity + 7) / 8) : (row_capacity * column_type->Size());
-    auto file_worker = MakeUnique<DataFileWorker>(MakeShared<String>(InfinityContext::instance().config()->DataDir()),
-                                                  MakeShared<String>(InfinityContext::instance().config()->TempDir()),
+    auto file_worker = MakeUnique<DataFileWorker>(MakeShared<String>(hybridsearchContext::instance().config()->DataDir()),
+                                                  MakeShared<String>(hybridsearchContext::instance().config()->TempDir()),
                                                   block_entry->block_dir(),
                                                   column_entry->filename_,
                                                   total_data_size,
@@ -140,8 +140,8 @@ UniquePtr<BlockColumnEntry> BlockColumnEntry::NewReplayBlockColumnEntry(const Bl
 
     if (next_outline_idx > 0) {
         SizeT buffer_size = last_chunk_offset;
-        auto outline_buffer_file_worker = MakeUnique<VarFileWorker>(MakeShared<String>(InfinityContext::instance().config()->DataDir()),
-                                                                    MakeShared<String>(InfinityContext::instance().config()->TempDir()),
+        auto outline_buffer_file_worker = MakeUnique<VarFileWorker>(MakeShared<String>(hybridsearchContext::instance().config()->DataDir()),
+                                                                    MakeShared<String>(hybridsearchContext::instance().config()->TempDir()),
                                                                     block_entry->block_dir(),
                                                                     column_entry->OutlineFilename(0),
                                                                     buffer_size,
@@ -228,8 +228,8 @@ ColumnVector BlockColumnEntry::GetConstColumnVector(BufferManager *buffer_mgr, S
 ColumnVector BlockColumnEntry::GetColumnVectorInner(BufferManager *buffer_mgr, const ColumnVectorTipe tipe, SizeT row_count) {
     if (this->buffer_ == nullptr) {
         // Get buffer handle from buffer manager
-        auto file_worker = MakeUnique<DataFileWorker>(MakeShared<String>(InfinityContext::instance().config()->DataDir()),
-                                                      MakeShared<String>(InfinityContext::instance().config()->TempDir()),
+        auto file_worker = MakeUnique<DataFileWorker>(MakeShared<String>(hybridsearchContext::instance().config()->DataDir()),
+                                                      MakeShared<String>(hybridsearchContext::instance().config()->TempDir()),
                                                       block_entry_->block_dir(),
                                                       this->filename_,
                                                       0,
@@ -444,4 +444,4 @@ void BlockColumnEntry::ToMmap() {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

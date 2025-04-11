@@ -22,7 +22,7 @@ import selection;
 
 export module expression_selector;
 
-namespace infinity {
+namespace hybridsearch {
 class ColumnVector;
 
 export class ExpressionSelector {
@@ -48,4 +48,4 @@ private:
     const DataBlock *input_data_{nullptr};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

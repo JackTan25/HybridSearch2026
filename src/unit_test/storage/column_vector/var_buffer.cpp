@@ -17,9 +17,9 @@ import base_test;
 
 import stl;
 import var_buffer;
-import infinity_exception;
+import hybridsearch_exception;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class VarBufferTest : public BaseTest {};
 

@@ -25,7 +25,7 @@ import stl;
 import logger;
 import index_base;
 import local_file_handle;
-import infinity_exception;
+import hybridsearch_exception;
 import knn_result_handler;
 import logical_type;
 import third_party;
@@ -35,7 +35,7 @@ import diskann_dist_func;
 import diskann_utils;
 import default_values;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename VectorDataType, typename LabelType, MetricType metric>
 class MemVamana {
@@ -533,4 +533,4 @@ private:
     // bool filtered_index = false;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -54,8 +54,8 @@ static const std::string kJSONEscapePrefix("\\u00");
 static const uint32_t kThriftVersion1 = 1;
 
 static const std::string kThriftNan("NaN");
-static const std::string kThriftInfinity("Infinity");
-static const std::string kThriftNegativeInfinity("-Infinity");
+static const std::string kThrifthybridsearch("hybridsearch");
+static const std::string kThriftNegativehybridsearch("-hybridsearch");
 
 static const std::string kTypeNameBool("tf");
 static const std::string kTypeNameByte("i8");
@@ -529,7 +529,7 @@ std::string doubleToString(double d) {
 }
 
 // Convert the given double to a JSON string, which is either the number,
-// "NaN" or "Infinity" or "-Infinity".
+// "NaN" or "hybridsearch" or "-hybridsearch".
 uint32_t TJSONProtocol::writeJSONDouble(double num) {
   uint32_t result = context_->write(*trans_);
   std::string val;
@@ -538,9 +538,9 @@ uint32_t TJSONProtocol::writeJSONDouble(double num) {
   switch (std::fpclassify(num)) {
   case FP_INFINITE:
     if (std::signbit(num)) {
-      val = kThriftNegativeInfinity;
+      val = kThriftNegativehybridsearch;
     } else {
-      val = kThriftInfinity;
+      val = kThrifthybridsearch;
     }
     special = true;
     break;
@@ -880,12 +880,12 @@ uint32_t TJSONProtocol::readJSONDouble(double& num) {
   std::string str;
   if (reader_.peek() == kJSONStringDelimiter) {
     result += readJSONString(str, true);
-    // Check for NaN, Infinity and -Infinity
+    // Check for NaN, hybridsearch and -hybridsearch
     if (str == kThriftNan) {
       num = HUGE_VAL / HUGE_VAL; // generates NaN
-    } else if (str == kThriftInfinity) {
+    } else if (str == kThrifthybridsearch) {
       num = HUGE_VAL;
-    } else if (str == kThriftNegativeInfinity) {
+    } else if (str == kThriftNegativehybridsearch) {
       num = -HUGE_VAL;
     } else {
       if (!context_->escapeNum()) {

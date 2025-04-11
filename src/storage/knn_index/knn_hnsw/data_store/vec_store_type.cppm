@@ -27,7 +27,7 @@ import dist_func_sparse_ip;
 import sparse_util;
 import dist_func_lsg_wrapper;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename DataT, typename CompressT>
 class LVQCosVecStoreType;
@@ -195,4 +195,4 @@ public:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

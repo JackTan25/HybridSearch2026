@@ -17,7 +17,7 @@
 #include "base_mixed_type.h"
 #include "mixed_type.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 struct MixedArrayValue {
 public:
@@ -33,4 +33,4 @@ public:
     //     Get(int32_t index);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

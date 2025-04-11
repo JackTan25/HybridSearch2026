@@ -19,7 +19,7 @@ import jieba;
 
 export module term;
 
-namespace infinity {
+namespace hybridsearch {
 export class Term {
 public:
     Term() : word_offset_(0), payload_(0) {}
@@ -77,4 +77,4 @@ private:
 
 export extern String PLACE_HOLDER;
 
-} // namespace infinity
+} // namespace hybridsearch

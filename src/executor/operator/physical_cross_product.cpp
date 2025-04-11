@@ -24,13 +24,13 @@ import data_table;
 import physical_operator_type;
 import operator_state;
 
-import infinity_exception;
+import hybridsearch_exception;
 import data_block;
 import column_vector;
 
 module physical_cross_product;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalCrossProduct::Init(QueryContext* query_context) {}
 
@@ -154,4 +154,4 @@ SharedPtr<Vector<SharedPtr<DataType>>> PhysicalCrossProduct::GetOutputTypes() co
     return result;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

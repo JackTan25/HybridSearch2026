@@ -19,9 +19,9 @@ module;
 module cluster_manager;
 
 import stl;
-import infinity_context;
+import hybridsearch_context;
 import logger;
-import infinity_exception;
+import hybridsearch_exception;
 import peer_server_thrift_types;
 import wal_manager;
 import wal_entry;
@@ -30,10 +30,10 @@ import global_resource_usage;
 import node_info;
 import config;
 
-namespace infinity {
+namespace hybridsearch {
 
 ClusterManager::ClusterManager() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::IncrObjectCount("ClusterManager");
 #endif
 }
@@ -45,7 +45,7 @@ ClusterManager::~ClusterManager() {
         client_to_leader_->UnInit(true);
     }
     client_to_leader_.reset();
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::DecrObjectCount("ClusterManager");
 #endif
 }
@@ -162,4 +162,4 @@ SharedPtr<NodeInfo> ClusterManager::ThisNode() const {
     return this_node_;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

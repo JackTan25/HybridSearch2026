@@ -15,7 +15,7 @@
 #include "admin_statement.h"
 #include <sstream>
 
-namespace infinity {
+namespace hybridsearch {
 
 std::string AdminStatement::ToString() const {
     std::stringstream ss;
@@ -181,4 +181,4 @@ std::string ToString(NodeRole role) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

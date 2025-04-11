@@ -7,11 +7,11 @@ import default_values;
 import file_writer;
 import file_reader;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 export module byte_slice_writer;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class ByteSliceWriter {
 public:
@@ -168,4 +168,4 @@ inline void ByteSliceWriter::DeAllocateByteSliceList(ByteSliceList *&byte_slice_
     byte_slice_list = nullptr;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

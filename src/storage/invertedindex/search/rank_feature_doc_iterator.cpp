@@ -22,7 +22,7 @@ import stl;
 import logger;
 import smallfloat;
 
-namespace infinity {
+namespace hybridsearch {
 
 RankFeatureDocIterator::RankFeatureDocIterator(UniquePtr<PostingIterator> &&iter, const u64 column_id, float boost)
     : column_id_(column_id), boost_(boost), iter_(std::move(iter)) {}
@@ -66,4 +66,4 @@ void RankFeatureDocIterator::BatchDecodeTo(const RowID buffer_start_doc_id, cons
     doc_id_ = iter_doc_id;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

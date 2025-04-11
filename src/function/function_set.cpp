@@ -22,7 +22,7 @@ import stl;
 import catalog;
 import base_expression;
 
-namespace infinity {
+namespace hybridsearch {
 
 SharedPtr<FunctionSet> FunctionSet::GetFunctionSet(Catalog *catalog, const FunctionExpr &expr) {
     String function_name = expr.func_name_;
@@ -52,4 +52,4 @@ String FunctionSet::ToString(const String &name, const Vector<SharedPtr<BaseExpr
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

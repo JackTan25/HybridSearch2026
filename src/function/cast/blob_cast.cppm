@@ -21,12 +21,12 @@ import bound_cast_func;
 
 import column_vector_cast;
 
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 
 export module blob_cast;
 #if 0
-namespace infinity {
+namespace hybridsearch {
 
 export struct BlobTryCastToVarlen;
 
@@ -80,5 +80,5 @@ inline bool BlobTryCastToVarlen::Run(const BlobT &source, VarcharT &target, cons
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch
 #endif

@@ -30,7 +30,7 @@ import segment_entry;
 import block_entry;
 import zsv;
 import load_meta;
-import infinity_exception;
+import hybridsearch_exception;
 import column_vector;
 import internal_types;
 import statement_common;
@@ -39,7 +39,7 @@ import logger;
 import sparse_info;
 import meta_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 class ZxvParserCtx {
 public:
@@ -137,4 +137,4 @@ private:
 export SharedPtr<ConstantExpr> BuildConstantExprFromJson(const nlohmann::json &json_object);
 export SharedPtr<ConstantExpr> BuildConstantSparseExprFromJson(const nlohmann::json &json_object, const SparseInfo *sparse_info);
 
-} // namespace infinity
+} // namespace hybridsearch

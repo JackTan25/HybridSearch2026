@@ -29,7 +29,7 @@ import meta_info;
 import entry_list;
 import cleanup_scanner;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct Catalog;
 
@@ -104,4 +104,4 @@ private:
     EntryList<DBEntry> db_entry_list_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

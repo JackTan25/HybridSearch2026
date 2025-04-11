@@ -13,18 +13,18 @@ import index_defines;
 import term_meta;
 import dict_reader;
 import third_party;
-import infinity_context;
+import hybridsearch_context;
 import persistence_manager;
 import persist_result_handler;
 
-namespace infinity {
+namespace hybridsearch {
 
 ColumnIndexIterator::ColumnIndexIterator(const String &index_dir, const String &base_name, optionflag_t flag) {
     PostingFormatOption format_option(flag);
-    PersistenceManager *pm = InfinityContext::instance().persistence_manager();
+    PersistenceManager *pm = hybridsearchContext::instance().persistence_manager();
     bool use_object_cache = pm != nullptr;
 
-    Path path = Path(InfinityContext::instance().config()->DataDir()) / index_dir / base_name;
+    Path path = Path(hybridsearchContext::instance().config()->DataDir()) / index_dir / base_name;
     String dict_file = path.string();
     dict_file.append(DICT_SUFFIX);
     String posting_file = path.string();
@@ -60,7 +60,7 @@ ColumnIndexIterator::~ColumnIndexIterator() {
         ByteSlice::DestroySlice(pos_list_slice_);
     }
 
-    PersistenceManager *pm = InfinityContext::instance().persistence_manager();
+    PersistenceManager *pm = hybridsearchContext::instance().persistence_manager();
     bool use_object_cache = pm != nullptr;
     if (use_object_cache) {
         PersistResultHandler handler(pm);
@@ -116,4 +116,4 @@ void ColumnIndexIterator::DecodePosList() {
     pos_list_reader_->Open(pos_list_slice_);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

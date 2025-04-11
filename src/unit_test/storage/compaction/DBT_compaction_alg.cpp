@@ -19,7 +19,7 @@ import stl;
 import segment_entry;
 import DBT_compaction_alg;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class MockSegmentEntry : public SegmentEntry {
     static SegmentID cur_segment_id_;

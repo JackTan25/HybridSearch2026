@@ -18,7 +18,7 @@
 #include "common/types/value.h"
 #include "executor/physical_planner.h"
 #include "legacy_sched/operator_pipeline.h"
-#include "main/infinity.h"
+#include "main/hybridsearch.h"
 #include "main/logger.h"
 #include "main/profiler/show_logical_plan.h"
 #include "main/session.h"
@@ -31,11 +31,11 @@
 import base_test;
 
 
-using namespace infinity;
+using namespace hybridsearch;
 class LogicalPlannerTpchTest : public BaseTest {};
 
 TEST_F(LogicalPlannerTpchTest, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     // Create tables;
     {

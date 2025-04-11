@@ -29,11 +29,11 @@ import internal_types;
 import third_party;
 import explain_logical_plan;
 import search_options;
-import infinity_exception;
+import hybridsearch_exception;
 import status;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 LogicalMatchScanBase::LogicalMatchScanBase(u64 node_id,
                                            LogicalNodeType node_type,
@@ -162,4 +162,4 @@ String LogicalMatchScanBase::ToString(i64 &space) const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

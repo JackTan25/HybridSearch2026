@@ -22,7 +22,7 @@ import term;
 import common_analyzer;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class JapaneseAnalyzer : public CommonLanguageAnalyzer {
 public:
@@ -113,4 +113,4 @@ private:
 
     String segment_;
 };
-} // namespace infinity
+} // namespace hybridsearch

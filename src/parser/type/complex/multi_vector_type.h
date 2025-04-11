@@ -16,7 +16,7 @@
 
 #include "tensor_type.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 #pragma pack(1)
 
@@ -34,4 +34,4 @@ static_assert(sizeof(MultiVectorType) == sizeof(uint64_t));
 
 #pragma pack()
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -19,7 +19,7 @@
 #include "point_type.h"
 #include <cstdint>
 
-namespace infinity {
+namespace hybridsearch {
 
 // Path type is a variable length type
 struct PathType {
@@ -112,5 +112,5 @@ public:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch
 #endif

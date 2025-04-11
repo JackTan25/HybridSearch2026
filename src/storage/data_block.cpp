@@ -21,7 +21,7 @@ module data_block;
 import stl;
 import selection;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import column_vector;
 
 import value;
@@ -31,7 +31,7 @@ import serialize;
 import logical_type;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 bool DataBlock::AppendColumns(const DataBlock &other, const Vector<SizeT> &column_idxes) {
     if (!initialized || !other.initialized) {
@@ -431,4 +431,4 @@ SharedPtr<DataBlock> DataBlock::ReadAdv(const char *&ptr, i32 maxbytes) {
     return block;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

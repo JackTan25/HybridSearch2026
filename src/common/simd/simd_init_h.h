@@ -15,7 +15,7 @@
 #pragma once
 #include <vector>
 
-namespace infinity {
+namespace hybridsearch {
 
 const std::vector<char const *> &GetSupportedSimdTypesList();
 bool IsF16CSupported();
@@ -24,4 +24,4 @@ bool IsAVX2Supported();
 bool IsAVX512Supported();
 bool IsAVX512BWSupported();
 
-} // namespace infinity
+} // namespace hybridsearch

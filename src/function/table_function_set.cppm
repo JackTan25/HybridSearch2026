@@ -21,7 +21,7 @@ import function;
 
 export module table_function_set;
 
-namespace infinity {
+namespace hybridsearch {
 
 class TableFunctionSet final : public FunctionSet {
 public:
@@ -35,4 +35,4 @@ private:
     Vector<TableFunction> functions_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

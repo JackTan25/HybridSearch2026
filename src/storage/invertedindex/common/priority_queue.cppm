@@ -18,7 +18,7 @@ export module priority_queue;
 
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <class Type>
 class PriorityQueue {
@@ -121,4 +121,4 @@ public:
     Type At(u32 pos) { return heap_[pos + 1]; }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

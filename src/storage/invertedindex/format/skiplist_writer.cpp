@@ -12,7 +12,7 @@ import posting_field;
 import posting_byte_slice;
 import short_list_optimize_util;
 
-namespace infinity {
+namespace hybridsearch {
 
 SkipListWriter::SkipListWriter() : PostingByteSlice(), last_key_(-1), last_value1_(-1) {}
 
@@ -95,4 +95,4 @@ void SkipListWriter::Load(const SharedPtr<FileReader> &file) {
     posting_writer_.Load(file, size);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

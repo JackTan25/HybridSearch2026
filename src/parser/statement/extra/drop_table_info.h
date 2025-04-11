@@ -17,7 +17,7 @@
 #include "extra_ddl_info.h"
 #include "statement/statement_common.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 class DropTableInfo : public ExtraDDLInfo {
 public:
@@ -28,4 +28,4 @@ public:
     std::string table_name_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

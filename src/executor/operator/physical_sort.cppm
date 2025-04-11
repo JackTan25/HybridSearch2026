@@ -27,13 +27,13 @@ import base_expression;
 import data_table;
 import data_block;
 import load_meta;
-import infinity_exception;
+import hybridsearch_exception;
 import physical_top;
 import internal_types;
 import select_statement;
 import data_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PhysicalSort : public PhysicalOperator {
 public:
@@ -68,4 +68,4 @@ private:
     CompareTwoRowAndPreferLeft prefer_left_function_; // compare function
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -23,7 +23,7 @@ import status;
 import logger;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 nlohmann::json ObjStat::Serialize() const {
     nlohmann::json obj;
@@ -65,26 +65,26 @@ SizeT ObjStat::GetSizeInBytes() const {
 }
 
 void ObjStat::WriteBufAdv(char *&buf) const {
-    ::infinity::WriteBufAdv(buf, obj_size_);
-    ::infinity::WriteBufAdv(buf, parts_);
-    ::infinity::WriteBufAdv(buf, deleted_ranges_.size());
+    ::hybridsearch::WriteBufAdv(buf, obj_size_);
+    ::hybridsearch::WriteBufAdv(buf, parts_);
+    ::hybridsearch::WriteBufAdv(buf, deleted_ranges_.size());
     for (auto &range : deleted_ranges_) {
-        ::infinity::WriteBufAdv(buf, range.start_);
-        ::infinity::WriteBufAdv(buf, range.end_);
+        ::hybridsearch::WriteBufAdv(buf, range.start_);
+        ::hybridsearch::WriteBufAdv(buf, range.end_);
     }
 }
 
 ObjStat ObjStat::ReadBufAdv(const char *&buf) {
     ObjStat ret;
-    ret.obj_size_ = ::infinity::ReadBufAdv<SizeT>(buf);
-    ret.parts_ = ::infinity::ReadBufAdv<SizeT>(buf);
+    ret.obj_size_ = ::hybridsearch::ReadBufAdv<SizeT>(buf);
+    ret.parts_ = ::hybridsearch::ReadBufAdv<SizeT>(buf);
     ret.ref_count_ = 0;
 
     SizeT start, end;
-    SizeT len = ::infinity::ReadBufAdv<SizeT>(buf);
+    SizeT len = ::hybridsearch::ReadBufAdv<SizeT>(buf);
     for (SizeT i = 0; i < len; ++i) {
-        start = ::infinity::ReadBufAdv<SizeT>(buf);
-        end = ::infinity::ReadBufAdv<SizeT>(buf);
+        start = ::hybridsearch::ReadBufAdv<SizeT>(buf);
+        end = ::hybridsearch::ReadBufAdv<SizeT>(buf);
         ret.deleted_ranges_.emplace(Range{.start_ = start, .end_ = end});
     }
     return ret;
@@ -117,4 +117,4 @@ void ObjStat::CheckValid(const String &obj_key, SizeT current_object_size) const
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

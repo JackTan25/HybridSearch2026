@@ -18,7 +18,7 @@ export module simd_functions;
 import stl;
 import simd_init;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct SIMD_FUNCTIONS {
     // F32 distance functions
@@ -77,4 +77,4 @@ export const SIMD_FUNCTIONS &GetSIMD_FUNCTIONS() {
     return simd_functions;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

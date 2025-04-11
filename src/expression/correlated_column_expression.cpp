@@ -23,11 +23,11 @@ import expression_type;
 import data_type;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 CorrelatedColumnExpression::CorrelatedColumnExpression(DataType data_type, String column_name)
     : BaseExpression(ExpressionType::kCorrelatedColumn, {}), data_type_(std::move(data_type)), column_name_(std::move(column_name)) {}
 
 String CorrelatedColumnExpression::ToString() const { return {}; }
 
-} // namespace infinity
+} // namespace hybridsearch

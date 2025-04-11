@@ -16,7 +16,7 @@ module;
 export module fst:registry;
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 /**
 A registry is fixed-capacity hash table that can be used to store the pairs of (Key, Val).
@@ -67,4 +67,4 @@ public:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

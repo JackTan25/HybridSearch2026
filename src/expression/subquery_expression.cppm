@@ -25,7 +25,7 @@ import internal_types;
 import subquery_expr;
 import data_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class SubqueryExpression : public BaseExpression {
 public:
@@ -47,4 +47,4 @@ public:
 private:
 };
 
-} // namespace infinity
+} // namespace hybridsearch

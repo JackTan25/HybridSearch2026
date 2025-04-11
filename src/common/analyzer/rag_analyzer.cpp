@@ -42,7 +42,7 @@ import term;
 
 namespace fs = std::filesystem;
 
-namespace infinity {
+namespace hybridsearch {
 
 static const String DICT_PATH = "rag/huqie.txt";
 static const String POS_DEF_PATH = "rag/pos-id.def";
@@ -983,11 +983,11 @@ Vector<Pair<Vector<std::string_view>, double>> RAGAnalyzer::GetBestTokensTopN(co
 }
 
 // TODO: for test
-// #ifndef INFINITY_DEBUG
-// #define INFINITY_DEBUG 1
+// #ifndef hybridsearch_DEBUG
+// #define hybridsearch_DEBUG 1
 // #endif
 
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
 namespace dp_debug {
 template <typename T>
 String TestPrintTokens(const Vector<T> &tokens) {
@@ -1145,11 +1145,11 @@ void RAGAnalyzer::TokenizeInner(Vector<String> &res, const String &L) const {
         Vector<String> best_tokens;
         double max_score = std::numeric_limits<double>::lowest();
         const auto str_for_dfs = Join(tks, _j, j, "");
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         const auto t0 = std::chrono::high_resolution_clock::now();
 #endif
         DFS(str_for_dfs, 0, pre_tokens, token_list, best_tokens, max_score, false);
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         const auto t1 = std::chrono::high_resolution_clock::now();
         dp_debug::CheckDP(this, str_for_dfs, best_tokens, max_score, t0, t1);
 #endif
@@ -1170,11 +1170,11 @@ void RAGAnalyzer::TokenizeInner(Vector<String> &res, const String &L) const {
         Vector<String> best_tokens;
         double max_score = std::numeric_limits<double>::lowest();
         const auto str_for_dfs = Join(tks, _j, tks.size(), "");
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         const auto t0 = std::chrono::high_resolution_clock::now();
 #endif
         DFS(str_for_dfs, 0, pre_tokens, token_list, best_tokens, max_score, false);
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         const auto t1 = std::chrono::high_resolution_clock::now();
         dp_debug::CheckDP(this, str_for_dfs, best_tokens, max_score, t0, t1);
 #endif
@@ -1217,11 +1217,11 @@ void RAGAnalyzer::TokenizeInner(Vector<String> &res, const String &L) const {
         Vector<String> best_tokens;
         double max_score = std::numeric_limits<double>::lowest();
         const auto str_for_dfs = Join(tks, s, e < tks.size() ? e + 1 : e, "");
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         const auto t0 = std::chrono::high_resolution_clock::now();
 #endif
         DFS(str_for_dfs, 0, pre_tokens, token_list, best_tokens, max_score, false);
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         const auto t1 = std::chrono::high_resolution_clock::now();
         dp_debug::CheckDP(this, str_for_dfs, best_tokens, max_score, t0, t1);
 #endif
@@ -1381,11 +1381,11 @@ void RAGAnalyzer::FineGrainedTokenize(const String &tokens, Vector<String> &resu
             Vector<Pair<String, int>> pre_tokens;
             Vector<String> best_tokens;
             double max_score = 0.0F;
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
             const auto t0 = std::chrono::high_resolution_clock::now();
 #endif
             DFS(token, 0, pre_tokens, token_list, best_tokens, max_score, true);
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
             const auto t1 = std::chrono::high_resolution_clock::now();
             auto get_dfs_sorted_tokens = [&]() {
                 Vector<Pair<Vector<String>, double>> sorted_tokens;
@@ -1443,4 +1443,4 @@ int RAGAnalyzer::AnalyzeImpl(const Term &input, void *data, HookType func) {
     return 0;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

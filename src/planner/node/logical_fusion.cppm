@@ -28,7 +28,7 @@ import base_table_ref;
 import internal_types;
 import data_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalFusion : public LogicalNode {
 public:
@@ -49,4 +49,4 @@ public:
     SharedPtr<FusionExpression> fusion_expr_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

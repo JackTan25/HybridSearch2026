@@ -22,7 +22,7 @@ import simd_common_tools;
 
 export module hnsw_simd_func;
 
-namespace infinity {
+namespace hybridsearch {
 
 // for debug
 template <typename T>
@@ -1216,4 +1216,4 @@ export float F32IPSSEResidual(const float *pVect1, const float *pVect2, SizeT qt
 
 #endif
 
-} // namespace infinity
+} // namespace hybridsearch

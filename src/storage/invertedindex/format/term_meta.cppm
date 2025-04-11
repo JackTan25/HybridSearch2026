@@ -8,7 +8,7 @@ import posting_list_format;
 import index_defines;
 export module term_meta;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct TermMeta {
     TermMeta() : doc_freq_(0), total_tf_(0), payload_(0) {}
@@ -77,4 +77,4 @@ private:
     PostingFormatOption option_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -32,7 +32,7 @@ import knn_expression;
 import conjunction_expression;
 import unnest_expression;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalNodeVisitor {
 public:
@@ -73,4 +73,4 @@ public:
     virtual SharedPtr<BaseExpression> VisitReplace(const SharedPtr<UnnestExpression> &expression);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

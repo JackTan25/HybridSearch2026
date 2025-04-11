@@ -25,7 +25,7 @@ import darts_trie;
 import darts;
 import lemmatizer;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 namespace fs = std::filesystem;
 

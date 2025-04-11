@@ -16,9 +16,9 @@ module;
 
 export module emvb_result_handler;
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 // EMVB needs move-only ID support
 // EMVB only use min heap
@@ -250,4 +250,4 @@ public:
 export template <typename DistType, typename ID>
 using EMVBReservoirResultHandler = EMVBReservoirResultHandlerT<EMVBCompareMin<DistType, ID>>;
 
-} // namespace infinity
+} // namespace hybridsearch

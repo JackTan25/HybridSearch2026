@@ -24,11 +24,11 @@ export module external_sort_merger;
 
 import stl;
 import loser_tree;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import blocking_queue;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct DirectIO {
     DirectIO(FILE *fd, const String &mode = "r") : fd_(fd), length_(0) {
@@ -440,4 +440,4 @@ public:
     void UnInitRunFile();
 };
 
-} // namespace infinity
+} // namespace hybridsearch

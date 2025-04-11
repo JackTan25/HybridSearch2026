@@ -16,14 +16,14 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 import default_values;
 import data_table;
 import table_def;
@@ -32,11 +32,11 @@ import data_block;
 import physical_sort;
 //import sql_runner;
 
-using namespace infinity;
+using namespace hybridsearch;
 class PhysicalSortTest : public BaseTest {};
 
 TEST_F(PhysicalSortTest, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SizeT column_count = 2;
     SizeT block_count = 3;

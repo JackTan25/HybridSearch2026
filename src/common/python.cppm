@@ -15,7 +15,7 @@
 export module python_instance;
 #if 0
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PythonInstance {
 public:

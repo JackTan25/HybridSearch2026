@@ -23,7 +23,7 @@ import special_function;
 import stl;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class ColumnExpression final : public BaseExpression {
 public:
@@ -98,4 +98,4 @@ private:
     Optional<SpecialType> special_{None};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

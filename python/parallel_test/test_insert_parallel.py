@@ -1,21 +1,21 @@
 import time
 
-import infinity.index as index
+import hybridsearch.index as index
 import pytest
 import random
 from threading import Thread, Lock
-from infinity.common import ConflictType
-from infinity.errors import ErrorCode
-from infinity.connection_pool import ConnectionPool
+from hybridsearch.common import ConflictType
+from hybridsearch.errors import ErrorCode
+from hybridsearch.connection_pool import ConnectionPool
 
 
 class TestInsertParallel:
-    def test_insert_parallel(self, get_infinity_connection_pool):
+    def test_insert_parallel(self, get_hybridsearch_connection_pool):
         total_row_count = 500 * 40
         insert_thread_count = 8
-        connection_pool = get_infinity_connection_pool
-        infinity_obj = connection_pool.get_conn()
-        db_obj = infinity_obj.get_database("default_db")
+        connection_pool = get_hybridsearch_connection_pool
+        hybridsearch_obj = connection_pool.get_conn()
+        db_obj = hybridsearch_obj.get_database("default_db")
         res = db_obj.drop_table("parallel_insert_test", ConflictType.Ignore)
         assert res.error_code == ErrorCode.OK
         table_obj = db_obj.create_table("parallel_insert_test", {
@@ -29,7 +29,7 @@ class TestInsertParallel:
             "c_vector": {"type": "vector, 4, float"}
         }, ConflictType.Error)
         table_obj.create_index("text_index", index.IndexInfo("text", index.IndexType.FullText))
-        connection_pool.release_conn(infinity_obj)
+        connection_pool.release_conn(hybridsearch_obj)
 
         threads = []
         for i in range(insert_thread_count):
@@ -43,8 +43,8 @@ class TestInsertParallel:
             threads[i].join()
         print(f"test_insert_parallel: cost {time.time() - start_ts} s")
 
-        infinity_obj = connection_pool.get_conn()
-        db_obj = infinity_obj.get_database("default_db")
+        hybridsearch_obj = connection_pool.get_conn()
+        db_obj = hybridsearch_obj.get_database("default_db")
         table_obj = db_obj.get_table("parallel_insert_test")
 
         res, extra_result = table_obj.output(['*']).to_df()
@@ -54,12 +54,12 @@ class TestInsertParallel:
         res = db_obj.drop_table("parallel_insert_test", ConflictType.Error)
         assert res.error_code == ErrorCode.OK
 
-    def test_insert_one_thread(self, get_infinity_connection_pool):
+    def test_insert_one_thread(self, get_hybridsearch_connection_pool):
 
         total_row_count = 500 * 40
-        connection_pool = get_infinity_connection_pool
-        infinity_obj = connection_pool.get_conn()
-        db_obj = infinity_obj.get_database("default_db")
+        connection_pool = get_hybridsearch_connection_pool
+        hybridsearch_obj = connection_pool.get_conn()
+        db_obj = hybridsearch_obj.get_database("default_db")
         res = db_obj.drop_table("parallel_insert_test", ConflictType.Ignore)
         assert res.error_code == ErrorCode.OK
         table_obj = db_obj.create_table("parallel_insert_test", {
@@ -74,7 +74,7 @@ class TestInsertParallel:
         }, ConflictType.Error)
         table_obj.create_index("text_index", index.IndexInfo("text", index.IndexType.FullText))
 
-        db_obj = infinity_obj.get_database("default_db")
+        db_obj = hybridsearch_obj.get_database("default_db")
         table_obj = db_obj.get_table("parallel_insert_test")
 
         start_ts = time.time()
@@ -98,16 +98,16 @@ class TestInsertParallel:
         res = db_obj.drop_table("parallel_insert_test", ConflictType.Error)
         assert res.error_code == ErrorCode.OK
 
-        connection_pool.release_conn(infinity_obj)
+        connection_pool.release_conn(hybridsearch_obj)
 
-    def test_insert_and_count_star_parallel(self, get_infinity_connection_pool):
+    def test_insert_and_count_star_parallel(self, get_hybridsearch_connection_pool):
         total_row_count = 500 * 40
         count_star_count = 100
         insert_thread_count = 8
         count_star_thread_count = 4
-        connection_pool = get_infinity_connection_pool
-        infinity_obj = connection_pool.get_conn()
-        db_obj = infinity_obj.get_database("default_db")
+        connection_pool = get_hybridsearch_connection_pool
+        hybridsearch_obj = connection_pool.get_conn()
+        db_obj = hybridsearch_obj.get_database("default_db")
         res = db_obj.drop_table("parallel_insert_test", ConflictType.Ignore)
         assert res.error_code == ErrorCode.OK
         table_obj = db_obj.create_table("parallel_insert_test", {
@@ -121,7 +121,7 @@ class TestInsertParallel:
             "c_vector": {"type": "vector, 4, float"}
         }, ConflictType.Error)
         table_obj.create_index("text_index", index.IndexInfo("text", index.IndexType.FullText))
-        connection_pool.release_conn(infinity_obj)
+        connection_pool.release_conn(hybridsearch_obj)
 
         threads = []
         for i in range(insert_thread_count):
@@ -137,8 +137,8 @@ class TestInsertParallel:
         for i in range(len(threads)):
             threads[i].join()
 
-        infinity_obj = connection_pool.get_conn()
-        db_obj = infinity_obj.get_database("default_db")
+        hybridsearch_obj = connection_pool.get_conn()
+        db_obj = hybridsearch_obj.get_database("default_db")
         table_obj = db_obj.get_table("parallel_insert_test")
 
         res, extra_result = table_obj.output(['*']).to_df()
@@ -150,8 +150,8 @@ class TestInsertParallel:
 
 
 def insert_thread(connection_pool: ConnectionPool, count_num, thread_id):
-    infinity_obj = connection_pool.get_conn()
-    db_obj = infinity_obj.get_database("default_db")
+    hybridsearch_obj = connection_pool.get_conn()
+    db_obj = hybridsearch_obj.get_database("default_db")
     table_obj = db_obj.get_table("parallel_insert_test")
 
     value = []
@@ -167,15 +167,15 @@ def insert_thread(connection_pool: ConnectionPool, count_num, thread_id):
         table_obj.insert(value)
         value.clear()
 
-    connection_pool.release_conn(infinity_obj)
+    connection_pool.release_conn(hybridsearch_obj)
 
 
 def count_star_thread(connection_pool: ConnectionPool, loop_count, thread_id):
-    infinity_obj = connection_pool.get_conn()
-    db_obj = infinity_obj.get_database("default_db")
+    hybridsearch_obj = connection_pool.get_conn()
+    db_obj = hybridsearch_obj.get_database("default_db")
     table_obj = db_obj.get_table("parallel_insert_test")
 
     for i in range(loop_count):
         table_obj.filter().output(["count(*)"]).to_pl()
 
-    connection_pool.release_conn(infinity_obj)
+    connection_pool.release_conn(hybridsearch_obj)

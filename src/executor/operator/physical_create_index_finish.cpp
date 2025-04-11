@@ -24,14 +24,14 @@ import query_context;
 import operator_state;
 import load_meta;
 import index_base;
-import infinity_exception;
+import hybridsearch_exception;
 import wal_manager;
-import infinity_context;
+import hybridsearch_context;
 import status;
 
 module physical_create_index_finish;
 
-namespace infinity {
+namespace hybridsearch {
 PhysicalCreateIndexFinish::PhysicalCreateIndexFinish(u64 id,
                                                      UniquePtr<PhysicalOperator> left,
                                                      SharedPtr<String> db_name,
@@ -46,7 +46,7 @@ PhysicalCreateIndexFinish::PhysicalCreateIndexFinish(u64 id,
 void PhysicalCreateIndexFinish::Init(QueryContext* query_context) {}
 
 bool PhysicalCreateIndexFinish::Execute(QueryContext *query_context, OperatorState *operator_state) {
-    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
     if (storage_mode == StorageMode::kUnInitialized) {
         UnrecoverableError("Uninitialized storage mode");
     }
@@ -66,4 +66,4 @@ bool PhysicalCreateIndexFinish::Execute(QueryContext *query_context, OperatorSta
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

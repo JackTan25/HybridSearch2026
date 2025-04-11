@@ -18,9 +18,9 @@ module;
 
 export module explain_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::ExplainStatement;
-export using infinity::ExplainType;
+export using hybridsearch::ExplainStatement;
+export using hybridsearch::ExplainType;
 
-} // namespace infinity
+} // namespace hybridsearch

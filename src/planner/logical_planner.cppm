@@ -45,20 +45,20 @@ import data_type;
 import extra_ddl_info;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalPlanner {
 public:
     explicit LogicalPlanner(QueryContext *query_context_ptr) : query_context_ptr_(query_context_ptr) {
         names_ptr_ = MakeShared<Vector<String>>();
         types_ptr_ = MakeShared<Vector<DataType>>();
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("LogicalPlanner");
 #endif
     }
 
     ~LogicalPlanner() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("LogicalPlanner");
 #endif
     }
@@ -167,4 +167,4 @@ private:
     Vector<SharedPtr<LogicalNode>> logical_plans_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

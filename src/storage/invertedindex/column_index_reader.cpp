@@ -33,7 +33,7 @@ import dict_reader;
 import posting_list_format;
 import internal_types;
 import segment_index_entry;
-import infinity_exception;
+import hybridsearch_exception;
 import table_entry;
 import create_index_info;
 import index_base;
@@ -43,7 +43,7 @@ import term_doc_iterator;
 import default_values;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 void ColumnIndexReader::Open(optionflag_t flag, String &&index_dir, Map<SegmentID, SharedPtr<SegmentIndexEntry>> &&index_by_segment, Txn *txn) {
     flag_ = flag;
     index_dir_ = std::move(index_dir);
@@ -279,4 +279,4 @@ void TableIndexReaderCache::InvalidateChunkColumn(u64 column_id, SegmentID segme
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

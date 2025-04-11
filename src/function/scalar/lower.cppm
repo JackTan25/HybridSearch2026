@@ -4,10 +4,10 @@ import stl;
 
 export module lower;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 
 export void RegisterLowerFunction(const UniquePtr<Catalog> &catalog_ptr);
 
-} // namespace infinity
+} // namespace hybridsearch

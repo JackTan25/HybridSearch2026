@@ -21,7 +21,7 @@ import data_type;
 
 export module correlated_column_expression;
 
-namespace infinity {
+namespace hybridsearch {
 
 class CorrelatedColumnExpression : public BaseExpression {
 public:
@@ -36,4 +36,4 @@ private:
     String column_name_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -20,7 +20,7 @@ module data_table;
 
 import stl;
 import logical_type;
-import infinity_exception;
+import hybridsearch_exception;
 
 import third_party;
 import data_block;
@@ -29,7 +29,7 @@ import table_entry_type;
 import value;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 static String TableTypeToString(TableType type) {
     switch (type) {
@@ -187,4 +187,4 @@ void DataTable::ShrinkBlocks(SizeT block_capacity) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

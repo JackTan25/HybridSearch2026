@@ -5,7 +5,7 @@ statement ok
 CREATE TABLE cached_sparse_scan(col1 INT, col2 SPARSE(FLOAT,100));
 
 statement ok
-COPY cached_sparse_scan FROM '/var/infinity/test_data/sparse_knn.csv' WITH (FORMAT CSV);
+COPY cached_sparse_scan FROM '/var/hybridsearch/test_data/sparse_knn.csv' WITH (FORMAT CSV);
 
 query I
 EXPLAIN SELECT col1 FROM cached_sparse_scan SEARCH MATCH SPARSE (col2, [0:1.0,20:2.0,80:3.0], 'ip', 3);
@@ -52,7 +52,7 @@ EXPLAIN SELECT col1 FROM cached_sparse_scan SEARCH MATCH SPARSE (col2, [0:1.0,20
     - output columns: [col1, __score, __rowid]
 
 statement ok
-COPY cached_sparse_scan FROM '/var/infinity/test_data/sparse_knn.csv' WITH (FORMAT CSV);
+COPY cached_sparse_scan FROM '/var/hybridsearch/test_data/sparse_knn.csv' WITH (FORMAT CSV);
 
 query I
 EXPLAIN SELECT col1 FROM cached_sparse_scan SEARCH MATCH SPARSE (col2, [0:1.0,20:2.0,80:3.0], 'ip', 3);

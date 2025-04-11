@@ -16,7 +16,7 @@ export module skiplist;
 
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 constexpr i32 MAX_NUM = 2147483647;
 constexpr i32 MAX_LEVEL = 20;
 std::random_device rd;
@@ -526,4 +526,4 @@ private:
     Atomic<u32> n_;
     Vector<char> buf_;
 };
-} // namespace infinity
+} // namespace hybridsearch

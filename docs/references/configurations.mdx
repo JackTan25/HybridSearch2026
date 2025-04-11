@@ -7,11 +7,11 @@ slug: /configurations
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-How to set and load configuration file when starting Infinity.
+How to set and load configuration file when starting hybridsearch.
 
 ---
 
-This document provides instructions for loading configuration file for Infinity and descriptions of each configuration entry.
+This document provides instructions for loading configuration file for hybridsearch and descriptions of each configuration entry.
 
 
 ## Load configuration file
@@ -22,31 +22,31 @@ This document provides instructions for loading configuration file for Infinity 
   values={[
     {label: 'Docker', value: 'docker'},
     {label: 'DEB/RPM', value: 'binary'},
-    {label: 'Embedded Infinity', value: 'embedded'},
+    {label: 'Embedded hybridsearch', value: 'embedded'},
   ]}>
   <TabItem value="docker">
 
-To load a configuration file when you start up Infinity using Docker:
+To load a configuration file when you start up hybridsearch using Docker:
 
 1. Mount the directory for the configuration file to inside the Docker container.
 2. When running Docker, specify the configuration file path using the `-f` option. For example: 
 
    ```bash
-   docker run -d --name infinity -v /var/infinity/:/var/infinity --ulimit nofile=500000:500000 --network=host infiniflow/infinity:nightly -f /var/infinity/infinity_conf.toml
+   docker run -d --name hybridsearch -v /var/hybridsearch/:/var/hybridsearch --ulimit nofile=500000:500000 --network=host infiniflow/hybridsearch:nightly -f /var/hybridsearch/hybridsearch_conf.toml
    ```
 
 </TabItem>
   <TabItem value="binary">
 
-If you start up Infinity from DEB or RPM, the configuration file will be in the `/usr/etc` directory. When the Infinity service starts, it will load this configuration file.
+If you start up hybridsearch from DEB or RPM, the configuration file will be in the `/usr/etc` directory. When the hybridsearch service starts, it will load this configuration file.
 
 </TabItem>
   <TabItem value="embedded">
 
-Infinity embedded does not have an *explicit* configuration file. Its configuration file should meet the following requirements:
+hybridsearch embedded does not have an *explicit* configuration file. Its configuration file should meet the following requirements:
 
-- It is in the local folder where Infinity embedded is opened (the path that you specify when calling `connect()`), for example `/var/infinity/`:
-- Its name must exactly match **infinity_conf.toml**.
+- It is in the local folder where hybridsearch embedded is opened (the path that you specify when calling `connect()`), for example `/var/hybridsearch/`:
+- Its name must exactly match **hybridsearch_conf.toml**.
 
 </TabItem>
 </Tabs>
@@ -56,7 +56,7 @@ Infinity embedded does not have an *explicit* configuration file. Its configurat
 
 ```toml
 [general]
-# Infinity server version, the minor version of this parameter should match server minor version.
+# hybridsearch server version, the minor version of this parameter should match server minor version.
 version                  = "0.6.0"
 # Timezone
 time_zone                = "utc-8"
@@ -64,15 +64,15 @@ time_zone                = "utc-8"
 # Range: [1, 16384]
 cpu_limit                = 8
 # The mode in which the server starts. Available options:
-# - `"standalone"`: Start Infinity as a standalone server.
+# - `"standalone"`: Start hybridsearch as a standalone server.
 # - `"admin"`:
-#   - Start Infinity either as a standalone server in `ADMIN` mode (when `storage_type` is set to `"local"`)
-#   - Start Infinity as a cluster node in `ADMIN` mode (when `storage_type` is set to `"minio"`)
+#   - Start hybridsearch either as a standalone server in `ADMIN` mode (when `storage_type` is set to `"local"`)
+#   - Start hybridsearch as a cluster node in `ADMIN` mode (when `storage_type` is set to `"minio"`)
 server_mode              = "standalone"
 
 # Network configuration
 [network]
-# IP address of the Infinity server
+# IP address of the hybridsearch server
 server_address           = "0.0.0.0"
 
 # Port of the Postgres server
@@ -89,23 +89,23 @@ peer_ip                  = "0.0.0.0"
 # The port number on which the current node listens. Used for registration and inter-node communication
 peer_port                = 23850
 
-# The delay time for reconnecting to the Infinity peer server after a failed connection
+# The delay time for reconnecting to the hybridsearch peer server after a failed connection
 peer_retry_delay         = 0
-# The maximum number of reconnection attempts to the Infinity peer server after a failed connection
+# The maximum number of reconnection attempts to the hybridsearch peer server after a failed connection
 peer_retry_count           = 0
-# Timeout for connecting to the Infinity peer server
+# Timeout for connecting to the hybridsearch peer server
 peer_connect_timeout     = 2000
-# Timeout for the Infinity peer server to receive data
+# Timeout for the hybridsearch peer server to receive data
 peer_recv_timeout        = 0
-# Timeout for the Infinity peer server to send data
+# Timeout for the hybridsearch peer server to send data
 peer_send_timeout        = 0
 
 # Log configuration
 [log]
 # Filename of the log files.
-log_filename             = "infinity.log"
+log_filename             = "hybridsearch.log"
 # Directory for the log files.
-log_dir                  = "/var/infinity/log"
+log_dir                  = "/var/hybridsearch/log"
 # Controls whether to print the log to the standard output. Defaults to true
 # Range: {true|false} 
 log_to_stdout            = true
@@ -122,9 +122,9 @@ log_level               = "info"
 # Storage configuration
 [storage]
 # The working directory of the persistence manager:
-# - Holds the data that Infinity saves when using the local disk for storage.
+# - Holds the data that hybridsearch saves when using the local disk for storage.
 # - Caches the accessed object files when using MinIO/S3 for object storage.
-persistence_dir          = "/var/infinity/persistence"
+persistence_dir          = "/var/hybridsearch/persistence"
 
 # Garbage collection period
 # Defined as "number + unit of time":
@@ -170,7 +170,7 @@ fulltext_index_building_worker = 2
 # URL of the object storage server
 url                      = "127.0.0.1:9000"
 # The name of bucket where the data is stored
-bucket_name              = "infinity"
+bucket_name              = "hybridsearch"
 # Access key of object storage server
 access_key               = "minioadmin"
 # Secret key of object storage server
@@ -188,14 +188,14 @@ lru_num                  = 7
 # When the required memory size exceeds the free memory in the buffer manager,
 # the buffer manager dumps some of the its in-use memory to a temporary storage.
 # `temp_dir` specifies the path to this temporary storage. 
-temp_dir                 = "/var/infinity/tmp"
+temp_dir                 = "/var/hybridsearch/tmp"
 # The global memory index threshold for triggering a flush to disk
 # When the memory used by all existing in-memory indices in the system exceeds this threshold,
 # the system will perform a flush operation on all in-memory indices.
 memindex_memory_quota   = "1GB"
 
 # If cache the query result.
-# If same query is sent to Infinity, Infinity will check and return the cached result.
+# If same query is sent to hybridsearch, hybridsearch will check and return the cached result.
 result_cache            = "on"
 
 # Cache query capacity
@@ -204,7 +204,7 @@ cache_result_capacity        = 100
 # WAL configuration
 [wal]
 # The directory containing the WAL files
-wal_dir                       = "/var/infinity/wal"
+wal_dir                       = "/var/hybridsearch/wal"
 # Interval between full checkpoints
 # Range: ["0s", "720h"]
 full_checkpoint_interval      = "86400s"
@@ -224,6 +224,6 @@ wal_compact_threshold         = "1GB"
 wal_flush                     = "only_write"
 
 [resource]
-# Directory for Infinity's resource files, including the dictionary files used by the analyzer
-resource_dir                  = "/var/infinity/resource"
+# Directory for hybridsearch's resource files, including the dictionary files used by the analyzer
+resource_dir                  = "/var/hybridsearch/resource"
 ```

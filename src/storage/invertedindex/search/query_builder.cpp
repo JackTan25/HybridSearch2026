@@ -29,7 +29,7 @@ import table_entry;
 import segment_index_entry;
 import internal_types;
 import index_base;
-import infinity_exception;
+import hybridsearch_exception;
 import query_node;
 import base_table_ref;
 import segment_entry;
@@ -38,7 +38,7 @@ import logger;
 import third_party;
 import parse_fulltext_options;
 
-namespace infinity {
+namespace hybridsearch {
 
 void QueryBuilder::Init(SharedPtr<IndexReader> index_reader) { index_reader_ = std::move(index_reader); }
 
@@ -77,7 +77,7 @@ UniquePtr<DocIterator> QueryBuilder::CreateSearch(FullTextQueryContext &context)
         context.optimized_query_tree_ = std::move(query_tree);
     }
     auto result = context.optimized_query_tree_->CreateSearch(params);
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     {
         OStringStream oss;
         oss << "DocIterator:\n";
@@ -92,4 +92,4 @@ UniquePtr<DocIterator> QueryBuilder::CreateSearch(FullTextQueryContext &context)
     return result;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -18,13 +18,13 @@ module;
 
 export module alter_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::AlterStatementType;
+export using hybridsearch::AlterStatementType;
 
-export using infinity::AlterStatement;
-export using infinity::RenameTableStatement;
-export using infinity::AddColumnsStatement;
-export using infinity::DropColumnsStatement;
+export using hybridsearch::AlterStatement;
+export using hybridsearch::RenameTableStatement;
+export using hybridsearch::AddColumnsStatement;
+export using hybridsearch::DropColumnsStatement;
 
-} // namespace infinity
+} // namespace hybridsearch

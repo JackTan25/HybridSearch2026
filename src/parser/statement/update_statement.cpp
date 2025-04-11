@@ -14,7 +14,7 @@
 
 #include "update_statement.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 UpdateStatement::~UpdateStatement() {
     if (where_expr_ != nullptr) {
@@ -32,4 +32,4 @@ UpdateStatement::~UpdateStatement() {
 
 std::string UpdateStatement::ToString() const { return "Update statement"; }
 
-} // namespace infinity
+} // namespace hybridsearch

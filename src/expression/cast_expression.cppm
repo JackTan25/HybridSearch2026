@@ -25,7 +25,7 @@ import base_expression;
 import internal_types;
 import data_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class CastExpression : public BaseExpression {
 public:
@@ -50,4 +50,4 @@ private:
     DataType target_type_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

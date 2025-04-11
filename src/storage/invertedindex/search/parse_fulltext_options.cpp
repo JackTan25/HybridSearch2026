@@ -19,11 +19,11 @@ module;
 module parse_fulltext_options;
 
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 import status;
 import filter_value_type_classification;
 
-namespace infinity {
+namespace hybridsearch {
 
 // parse minimum_should_match
 SingleMinimumShouldMatchOption ParseSingleMinimumShouldMatchOption(const std::string_view input_str) {
@@ -200,4 +200,4 @@ RankFeaturesOption ParseRankFeaturesOption(std::string_view input_str) {
     return result;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

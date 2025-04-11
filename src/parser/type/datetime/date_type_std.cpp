@@ -6,7 +6,7 @@ constexpr static int32_t DAY_HOUR = 24;
 constexpr static int32_t DAY_MINUTE = DAY_HOUR * 60;
 constexpr static int32_t DAY_SECOND = DAY_MINUTE * 60;
 
-namespace infinity {
+namespace hybridsearch {
 
 void DateTypeStd::FromString(const char *date_ptr, size_t length) {
     size_t end_length_unused;
@@ -224,4 +224,4 @@ int64_t DateTypeStd::GetEpochTime() const {
     constexpr int64_t TotalSecondsInDay = 24 * 60 * 60;
     return GetValue() * TotalSecondsInDay;
 }
-} // namespace infinity
+} // namespace hybridsearch

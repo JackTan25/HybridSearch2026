@@ -18,9 +18,9 @@ module;
 
 export module flush_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::FlushStatement;
-export using infinity::FlushType;
+export using hybridsearch::FlushStatement;
+export using hybridsearch::FlushType;
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -17,7 +17,7 @@ module;
 module cast_function;
 
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 import bound_cast_func;
 import bool_cast;
 import integer_cast;
@@ -35,7 +35,7 @@ import sparse_cast;
 import third_party;
 import logical_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 BoundCastFunc CastFunction::GetBoundFunc(const DataType &source, const DataType &target) {
     if (source == target) {
@@ -122,4 +122,4 @@ BoundCastFunc CastFunction::GetBoundFunc(const DataType &source, const DataType 
     return BoundCastFunc(nullptr);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -20,11 +20,11 @@ import data_block;
 import stl;
 import physical_operator_type;
 import fragment_data;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 void QueueSourceState::MarkCompletedTask(u64 fragment_id) {
     auto it = num_tasks_.find(fragment_id);
@@ -196,4 +196,4 @@ bool QueueSourceState::GetData() {
     return completed;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

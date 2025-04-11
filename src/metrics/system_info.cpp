@@ -47,10 +47,10 @@ import defer_op;
 import status;
 import third_party;
 import logger;
-import infinity_exception;
+import hybridsearch_exception;
 import default_values;
 
-namespace infinity {
+namespace hybridsearch {
 
 namespace {
 
@@ -386,4 +386,4 @@ i64 SystemInfo::OpenFileCount() {
     return count;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

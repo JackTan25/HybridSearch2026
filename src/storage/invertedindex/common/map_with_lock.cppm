@@ -17,7 +17,7 @@ module;
 export module map_with_lock;
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename KeyType, typename ValueType>
 class MapWithLock {
@@ -79,4 +79,4 @@ public:
     // WARN: Caller shall ensure there's no concurrent write access
     Map<KeyType, ValueType>::iterator UnsafeEnd() { return map_.end(); }
 };
-} // namespace infinity
+} // namespace hybridsearch

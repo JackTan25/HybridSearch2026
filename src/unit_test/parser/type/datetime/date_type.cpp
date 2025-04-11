@@ -2,27 +2,27 @@
 
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 import internal_types;
 import parser_assert;
 
-using namespace infinity;
+using namespace hybridsearch;
 class DateTypeTest : public BaseTest {};
 
 TEST_F(DateTypeTest, TestSameSize) {
-    using namespace infinity;
+    using namespace hybridsearch;
     EXPECT_EQ(sizeof(DateTOld), sizeof(DateT));
 }
 
 TEST_F(DateTypeTest, TestFromString) {
-    using namespace infinity;
+    using namespace hybridsearch;
     DateT date_std;
     EXPECT_NO_THROW(date_std.FromString("2020-01-30"));
     EXPECT_NO_THROW(date_std.FromString("4535-02-11"));
@@ -41,7 +41,7 @@ TEST_F(DateTypeTest, TestFromString) {
 }
 
 TEST_F(DateTypeTest, TestAddSubstract) {
-    using namespace infinity;
+    using namespace hybridsearch;
     DateT date_std_input;
     DateT date_std_output;
     IntervalT interval;
@@ -74,11 +74,11 @@ TEST_F(DateTypeTest, TestAddSubstract) {
 }
 
 // TEST_F(DateTypeTest, TestLeapYear) {
-//     using namespace infinity;
+//     using namespace hybridsearch;
 // }
 
 TEST_F(DateTypeTest, TestNegativeYears) {
-    using namespace infinity;
+    using namespace hybridsearch;
     DateT date;
     DateT date_shift;
     EXPECT_NO_THROW(date.FromString("-1/5/4"));
@@ -100,7 +100,7 @@ TEST_F(DateTypeTest, TestNegativeYears) {
 }
 
 // TEST_F(DateTypeTest, TestComparator) {
-//     using namespace infinity;
+//     using namespace hybridsearch;
 //     DateT d1;
 //     DateT d2;
 

@@ -18,10 +18,10 @@ module;
 
 export module match_tensor_expr;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::MatchTensorSearchMethod;
+export using hybridsearch::MatchTensorSearchMethod;
 
-export using infinity::MatchTensorExpr;
+export using hybridsearch::MatchTensorExpr;
 
-} // namespace infinity
+} // namespace hybridsearch

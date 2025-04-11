@@ -33,16 +33,16 @@ import column_vector;
 import internal_types;
 import third_party;
 import wal_manager;
-import infinity_context;
+import hybridsearch_context;
 import status;
 import txn;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalDelete::Init(QueryContext* query_context) {}
 
 bool PhysicalDelete::Execute(QueryContext *query_context, OperatorState *operator_state) {
-    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
     if (storage_mode == StorageMode::kUnInitialized) {
         UnrecoverableError("Uninitialized storage mode");
     }
@@ -90,4 +90,4 @@ bool PhysicalDelete::Execute(QueryContext *query_context, OperatorState *operato
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

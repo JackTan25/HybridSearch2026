@@ -22,7 +22,7 @@ import function_set;
 
 export module scalar_function_set;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class ScalarFunctionSet final : public FunctionSet {
 public:
@@ -42,4 +42,4 @@ private:
     Vector<ScalarFunction> functions_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

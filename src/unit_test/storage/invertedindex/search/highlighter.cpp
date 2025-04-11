@@ -24,7 +24,7 @@ import standard_analyzer;
 import highlighter;
 import term;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class HighlighterTest : public BaseTest {};
 

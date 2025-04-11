@@ -90,7 +90,7 @@ import data_type;
 import trunc;
 import logical_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 BuiltinFunctions::BuiltinFunctions(UniquePtr<Catalog> &catalog_ptr) : catalog_ptr_(catalog_ptr) {}
 
@@ -234,4 +234,4 @@ void BuiltinFunctions::RegisterSpecialFunction() {
                                 MakeShared<SpecialFunction>("FILTER_TEXT", DataType(LogicalType::kBoolean), 0, SpecialType::kFilterFullText));
 }
 
-} // namespace infinity
+} // namespace hybridsearch

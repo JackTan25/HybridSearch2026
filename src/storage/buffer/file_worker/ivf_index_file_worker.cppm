@@ -24,7 +24,7 @@ import column_def;
 import file_worker_type;
 import persistence_manager;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class IVFIndexFileWorker final : public IndexFileWorker {
 public:
@@ -57,4 +57,4 @@ protected:
     void ReadFromFileImpl(SizeT file_size, bool from_spill) override;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

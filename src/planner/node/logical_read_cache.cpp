@@ -21,9 +21,9 @@ module logical_read_cache;
 import default_values;
 import logical_type;
 import result_cache_manager;
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 LogicalReadCache::LogicalReadCache(u64 node_id,
                                    LogicalNodeType origin_type,
@@ -70,4 +70,4 @@ SharedPtr<Vector<SharedPtr<DataType>>> LogicalReadCache::GetOutputTypes() const 
 
 String LogicalReadCache::ToString(i64 &space) const { return ""; }
 
-} // namespace infinity
+} // namespace hybridsearch

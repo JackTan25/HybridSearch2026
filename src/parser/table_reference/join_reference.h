@@ -16,7 +16,7 @@
 
 #include "base_table_reference.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class JoinType {
     kInner,
@@ -50,4 +50,4 @@ public:
     std::vector<char *> *using_columns_{nullptr};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -20,7 +20,7 @@ import stl;
 import third_party;
 import external_sort_merger;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 template <class T>
 Vector<char> RandStr(T key) {

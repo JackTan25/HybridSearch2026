@@ -18,9 +18,9 @@ module;
 
 export module join_reference;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::JoinReference;
-export using infinity::JoinType;
+export using hybridsearch::JoinReference;
+export using hybridsearch::JoinType;
 
-} // namespace infinity
+} // namespace hybridsearch

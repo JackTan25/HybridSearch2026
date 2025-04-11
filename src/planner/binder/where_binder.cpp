@@ -22,7 +22,7 @@ import base_expression;
 import function;
 import bind_context;
 
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import bind_alias_proxy;
 import parsed_expr;
@@ -30,7 +30,7 @@ import column_expr;
 import status;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 SharedPtr<BaseExpression> WhereBinder::BuildExpression(const ParsedExpr &expr, BindContext *bind_context_ptr, i64 depth, bool root) {
     SharedPtr<BaseExpression> result = ExpressionBinder::BuildExpression(expr, bind_context_ptr, depth, root);
@@ -69,4 +69,4 @@ void WhereBinder::CheckFuncType(FunctionType func_type) const {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

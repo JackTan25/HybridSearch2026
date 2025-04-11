@@ -19,7 +19,7 @@ export module secondary_index_data;
 import stl;
 import default_values;
 import local_file_handle;
-import infinity_exception;
+import hybridsearch_exception;
 import column_vector;
 import third_party;
 import secondary_index_pgm;
@@ -30,7 +30,7 @@ import segment_entry;
 import buffer_handle;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 struct ChunkIndexEntry;
 
 template <typename T>
@@ -172,4 +172,4 @@ public:
 
 export SecondaryIndexData *GetSecondaryIndexData(const SharedPtr<DataType> &data_type, u32 chunk_row_count, bool allocate);
 
-} // namespace infinity
+} // namespace hybridsearch

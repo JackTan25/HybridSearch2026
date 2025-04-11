@@ -27,7 +27,7 @@ import logical_type;
 import internal_types;
 import data_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class SearchExpression final : public BaseExpression {
 public:
@@ -44,4 +44,4 @@ public:
     bool have_filter_in_subsearch_{false};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

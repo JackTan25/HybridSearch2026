@@ -23,7 +23,7 @@ import analyzer;
 import tokenizer;
 module ngram_analyzer;
 
-namespace infinity {
+namespace hybridsearch {
 
 bool NGramAnalyzer::NextInString(const char *data,
                                  SizeT length,
@@ -66,4 +66,4 @@ int NGramAnalyzer::AnalyzeImpl(const Term &input, void *data, HookType func) {
     return offset;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -12,7 +12,7 @@ import lexeme;
 import lexeme_path;
 import ik_dict;
 
-namespace infinity {
+namespace hybridsearch {
 AnalyzeContext::AnalyzeContext(Dictionary *dict, bool ik_smart) : dict_(dict), ik_smart_(ik_smart) {
     buff_offset_ = 0;
     cursor_ = 0;
@@ -157,4 +157,4 @@ void AnalyzeContext::Compound(Lexeme *result) {
         }
     }
 }
-} // namespace infinity
+} // namespace hybridsearch

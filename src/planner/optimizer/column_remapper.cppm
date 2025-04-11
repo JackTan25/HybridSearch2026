@@ -29,7 +29,7 @@ import data_type;
 import optimizer_rule;
 import logical_node_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 class BindingRemapper : public LogicalNodeVisitor {
 public:
@@ -53,4 +53,4 @@ private:
     BindingRemapper remapper_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

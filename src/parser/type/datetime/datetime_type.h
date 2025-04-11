@@ -20,7 +20,7 @@
 #include <string>
 #include <chrono>
 
-namespace infinity {
+namespace hybridsearch {
 
 struct DateTimeType {
     DateTimeType() = default;
@@ -93,4 +93,4 @@ public:
     TimeType time{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

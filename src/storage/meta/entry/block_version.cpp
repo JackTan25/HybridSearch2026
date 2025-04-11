@@ -19,7 +19,7 @@ module;
 module block_version;
 
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 import third_party;
 import default_values;
@@ -28,7 +28,7 @@ import serialize;
 import local_file_handle;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 void CreateField::SaveToFile(LocalFileHandle *file_handle) const {
     Status status = file_handle->Append((char *)(&create_ts_), sizeof(create_ts_));
@@ -192,4 +192,4 @@ bool BlockVersion::CheckDelete(i32 offset, TxnTimeStamp check_ts) const {
     return deleted_[offset] != 0 && deleted_[offset] <= check_ts;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

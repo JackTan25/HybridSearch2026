@@ -16,7 +16,7 @@
 
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class ParsedExprType {
     kConstant,
@@ -60,4 +60,4 @@ public:
     std::string alias_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -30,7 +30,7 @@ import txn;
 import buffer_obj;
 import snapshot_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct SegmentIndexEntry;
 struct BlockEntry;
@@ -160,4 +160,4 @@ private:
     BufferObj *buffer_obj_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

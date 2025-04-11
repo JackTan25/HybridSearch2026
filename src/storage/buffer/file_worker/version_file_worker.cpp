@@ -19,12 +19,12 @@ module version_file_worker;
 import stl;
 import file_worker;
 import block_version;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 import third_party;
 import persistence_manager;
 
-namespace infinity {
+namespace hybridsearch {
 
 VersionFileWorker::VersionFileWorker(SharedPtr<String> data_dir,
                                      SharedPtr<String> temp_dir,
@@ -94,4 +94,4 @@ void VersionFileWorker::ReadFromFileImpl(SizeT file_size, bool from_spill) {
     data_ = static_cast<void *>(data);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

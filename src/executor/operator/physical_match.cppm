@@ -27,7 +27,7 @@ import base_expression;
 import match_expression;
 import base_table_ref;
 import load_meta;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import data_type;
 import common_query_filter;
@@ -37,7 +37,7 @@ import query_node;
 import doc_iterator;
 import parse_fulltext_options;
 
-namespace infinity {
+namespace hybridsearch {
 
 class ResultCacheManager;
 class DataBlock;
@@ -122,4 +122,4 @@ private:
     bool ExecuteInner(QueryContext *query_context, OperatorState *operator_state);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

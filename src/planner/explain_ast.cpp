@@ -21,7 +21,7 @@ module explain_ast;
 import stl;
 import third_party;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import base_statement;
 import select_statement;
 import copy_statement;
@@ -49,7 +49,7 @@ import table_reference;
 import statement_common;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 Status ExplainAST::Explain(const BaseStatement *statement, SharedPtr<Vector<SharedPtr<String>>> &stmt_string, i64 intent_size) {
     switch (statement->Type()) {
@@ -903,4 +903,4 @@ Status ExplainAST::BuildCopy(const CopyStatement *copy_statement, SharedPtr<Vect
     }
     return Status::OK();
 }
-} // namespace infinity
+} // namespace hybridsearch

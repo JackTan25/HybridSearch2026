@@ -16,7 +16,7 @@
 
 #include "base_mixed_type.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 struct __attribute__((packed)) ShortStrMixedType : public BaseMixedType {
 public:
@@ -37,4 +37,4 @@ public:
     bool Equal(const std::string &input);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

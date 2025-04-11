@@ -18,8 +18,8 @@ module;
 
 export module drop_schema_info;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::DropSchemaInfo;
+export using hybridsearch::DropSchemaInfo;
 
 }

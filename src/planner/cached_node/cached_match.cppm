@@ -21,7 +21,7 @@ import cached_node_base;
 import cached_scan_base;
 import logical_node_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 class BaseTableRef;
 class MatchExpression;
@@ -45,4 +45,4 @@ private:
     u32 topn_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

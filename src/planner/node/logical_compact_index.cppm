@@ -23,7 +23,7 @@ import column_binding;
 import data_type;
 import base_table_ref;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalCompactIndex : public LogicalNode {
 public:
@@ -44,4 +44,4 @@ public:
     SharedPtr<BaseTableRef> base_table_ref_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

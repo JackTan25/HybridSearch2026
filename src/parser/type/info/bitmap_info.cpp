@@ -17,7 +17,7 @@
 #include "parser_assert.h"
 #include <memory>
 
-namespace infinity {
+namespace hybridsearch {
 
 std::shared_ptr<BitmapInfo> BitmapInfo::Make(int64_t limit) {
     ParserAssert(limit % 8 == 0, "Bitmap size should be the times of eight.");
@@ -43,4 +43,4 @@ nlohmann::json BitmapInfo::Serialize() const {
     return res;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

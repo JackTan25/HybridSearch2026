@@ -21,7 +21,7 @@ import analyzer;
 import tokenizer;
 export module ngram_analyzer;
 
-namespace infinity {
+namespace hybridsearch {
 export class NGramAnalyzer : public Analyzer {
 public:
     NGramAnalyzer(u32 ngram) : ngram_(ngram) {}
@@ -36,4 +36,4 @@ protected:
 private:
     u32 ngram_;
 };
-} // namespace infinity
+} // namespace hybridsearch

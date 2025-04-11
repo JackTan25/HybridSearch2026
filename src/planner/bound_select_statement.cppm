@@ -30,7 +30,7 @@ import highlighter;
 
 export module bound_select_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct BoundSelectStatement final : public BoundStatement {
 public:
@@ -141,4 +141,4 @@ public:
     bool building_subquery_{false};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

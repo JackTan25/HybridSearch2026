@@ -15,17 +15,17 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import stl;
 import global_resource_usage;
-import infinity_context;
+import hybridsearch_context;
 
-using namespace infinity;
+using namespace hybridsearch;
 class TrimTest : public BaseTest {};
 
 TEST_F(TrimTest, test1) {
     std::string path = "/usr/src/storage/db";
-    std::string trimed_path = infinity::TrimPath(path);
+    std::string trimed_path = hybridsearch::TrimPath(path);
     ASSERT_EQ(trimed_path, "src/storage/db");
 }

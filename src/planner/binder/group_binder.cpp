@@ -24,7 +24,7 @@ import bind_context;
 import function;
 import expression_binder;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 import third_party;
 import function_set;
@@ -36,7 +36,7 @@ import function_expr;
 import subquery_expr;
 import knn_expr;
 
-namespace infinity {
+namespace hybridsearch {
 
 SharedPtr<BaseExpression> GroupBinder::BuildExpression(const ParsedExpr &expr, BindContext *bind_context_ptr, i64 depth, bool root) {
     SharedPtr<BaseExpression> result = nullptr;
@@ -175,4 +175,4 @@ SharedPtr<BaseExpression> GroupBinder::BuildKnnExpr(const KnnExpr &, BindContext
     return nullptr;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

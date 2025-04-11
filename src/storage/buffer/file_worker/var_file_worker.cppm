@@ -22,7 +22,7 @@ import file_worker_type;
 import buffer_obj;
 import persistence_manager;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class VarFileWorker : public FileWorker {
 public:
@@ -64,4 +64,4 @@ private:
     BufferObj *buffer_obj_ = nullptr;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

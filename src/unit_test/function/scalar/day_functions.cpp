@@ -14,8 +14,8 @@
 #include "gtest/gtest.h"
 import stl;
 import base_test;
-import infinity_exception;
-import infinity_context;
+import hybridsearch_exception;
+import hybridsearch_context;
 
 import catalog;
 import logger;
@@ -43,14 +43,14 @@ import scalar_function_set;
 import day;
 import third_party;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class DayFunctionsTest : public BaseTestParamStr {};
 
 INSTANTIATE_TEST_SUITE_P(TestWithDifferentParams, DayFunctionsTest, ::testing::Values(BaseTestParamStr::NULL_CONFIG_PATH));
 
 TEST_P(DayFunctionsTest, day_func) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     UniquePtr<Catalog> catalog_ptr = MakeUnique<Catalog>();
 

@@ -19,13 +19,13 @@ module;
 module result_cache_manager;
 
 import cached_scan_base;
-import infinity_exception;
+import hybridsearch_exception;
 import logical_match;
 import physical_match;
 import logical_node_type;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 UniquePtr<CacheContent> CacheContent::AppendColumns(const CacheContent &other, const Vector<SizeT> &column_idxes) const {
     if (data_blocks_.size() != other.data_blocks_.size()) {
@@ -191,4 +191,4 @@ SizeT ResultCacheManager::DropTable(const String &schema_name, const String &tab
     return cache_map_.DropIF(pred);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

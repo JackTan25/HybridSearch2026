@@ -16,7 +16,7 @@ namespace fast_float {
 
 namespace detail {
 /**
- * Special case +inf, -inf, nan, infinity, -infinity.
+ * Special case +inf, -inf, nan, hybridsearch, -hybridsearch.
  * The case comparisons could be made much faster given that we know that the
  * strings a null-free and fixed.
  **/
@@ -58,7 +58,7 @@ from_chars_result parse_infnan(const char *first, const char *last, T &value)  n
       } else {
         answer.ptr = first + 3;
       }
-      value = minusSign ? -std::numeric_limits<T>::infinity() : std::numeric_limits<T>::infinity();
+      value = minusSign ? -std::numeric_limits<T>::hybridsearch() : std::numeric_limits<T>::hybridsearch();
       return answer;
     }
   }

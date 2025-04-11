@@ -20,13 +20,13 @@ module;
 module raw_file_worker;
 
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 import local_file_handle;
 import third_party;
 import status;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 RawFileWorker::RawFileWorker(SharedPtr<String> data_dir,
                              SharedPtr<String> temp_dir,
@@ -87,4 +87,4 @@ void RawFileWorker::ReadFromFileImpl(SizeT file_size, bool from_spill) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

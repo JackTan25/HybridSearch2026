@@ -31,14 +31,14 @@ import logical_project;
 import logical_fusion;
 import query_context;
 import logical_node_visitor;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 import third_party;
 import filter_expression_push_down;
 import base_table_ref;
 import lazy_load;
 
-namespace infinity {
+namespace hybridsearch {
 
 // Different from LogicalNodeVisitor, this visitor accepts shared_ptr<LogicalNode> as input.
 class BuildIndexScan {
@@ -137,4 +137,4 @@ void IndexScanBuilder::ApplyToPlan(QueryContext *query_context_ptr, SharedPtr<Lo
     visitor.VisitNode(logical_plan);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

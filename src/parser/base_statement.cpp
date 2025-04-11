@@ -15,7 +15,7 @@
 #include "base_statement.h"
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 std::string StatementType2Str(StatementType statement_type) {
     switch (statement_type) {
@@ -79,4 +79,4 @@ std::string StatementType2Str(StatementType statement_type) {
     return "Error";
 }
 
-} // namespace infinity
+} // namespace hybridsearch

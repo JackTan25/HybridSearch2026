@@ -21,7 +21,7 @@ import buffer_writer;
 
 export module pg_protocol_handler;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PGProtocolHandler {
 public:
@@ -66,4 +66,4 @@ private:
     BufferWriter buffer_writer_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

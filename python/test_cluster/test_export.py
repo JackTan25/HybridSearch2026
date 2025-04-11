@@ -3,10 +3,10 @@ import os
 from numpy import dtype
 import pandas as pd
 import pytest
-from infinity_cluster import InfinityCluster
-from infinity.common import ConflictType
-from infinity.common import InfinityException
-from infinity.errors import ErrorCode
+from hybridsearch_cluster import hybridsearchCluster
+from hybridsearch.common import ConflictType
+from hybridsearch.common import hybridsearchException
+from hybridsearch.errors import ErrorCode
 import common_values
 
 def count_lines(file_path: str):
@@ -19,7 +19,7 @@ def delete_file(file_path: str):
         os.remove(file_path)
 
 class TestExport:
-    def test_export_csv(self, cluster: InfinityCluster):
+    def test_export_csv(self, cluster: hybridsearchCluster):
         with cluster:
             cluster.add_node("node1", "conf/leader.toml")
             cluster.add_node("node2", "conf/follower.toml")
@@ -29,10 +29,10 @@ class TestExport:
             cluster.set_follower("node2")
             time.sleep(1)
 
-            infinity1 = cluster.client("node1")
-            infinity2 = cluster.client("node2")
+            hybridsearch1 = cluster.client("node1")
+            hybridsearch2 = cluster.client("node2")
 
-            db_obj = infinity1.get_database("default_db")
+            db_obj = hybridsearch1.get_database("default_db")
 
             test_csv_dir = common_values.TEST_DATA_DIR + "csv/enwiki_embedding_9999.csv"
             print(f"import file: {test_csv_dir}")
@@ -51,7 +51,7 @@ class TestExport:
             delete_file(test_export_csv_file_path)
 
             time.sleep(1)
-            db_obj_2 = infinity2.get_database("default_db")
+            db_obj_2 = hybridsearch2.get_database("default_db")
             table_obj_2 = db_obj_2.get_table("test_export_csv")
             test_export_csv_file_path = common_values.TEST_TMP_DIR + "follower_" +"test_export_csv.csv"
             res = table_obj_2.export_data(test_export_csv_file_path, {"file_type": "csv", "delimiter" : "\t"})

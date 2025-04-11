@@ -14,7 +14,7 @@
 
 #include "global_resource_usage.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 std::atomic_bool GlobalResourceUsage::initialized_ = false;
 
@@ -28,4 +28,4 @@ std::mutex GlobalResourceUsage::object_mutex_{};
 
 std::mutex GlobalResourceUsage::raw_memory_mutex_{};
 
-} // namespace infinity
+} // namespace hybridsearch

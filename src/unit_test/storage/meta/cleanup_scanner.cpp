@@ -1,9 +1,9 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity;
-import infinity_context;
-import infinity_exception;
+import hybridsearch;
+import hybridsearch_context;
+import hybridsearch_exception;
 
 import stl;
 import global_resource_usage;
@@ -15,7 +15,7 @@ import logger;
 import third_party;
 import cleanup_scanner;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class CleanUpScannerTest : public BaseTestParamStr {};
 

@@ -21,7 +21,7 @@ import logger;
 import third_party;
 import global_resource_usage;
 import storage;
-import infinity_context;
+import hybridsearch_context;
 import txn_manager;
 import txn;
 import extra_ddl_info;
@@ -37,7 +37,7 @@ import statement_common;
 import embedding_info;
 import knn_expr;
 import catalog;
-import infinity_exception;
+import hybridsearch_exception;
 import bg_task;
 import txn_store;
 import wal_manager;
@@ -46,7 +46,7 @@ import internal_types;
 import background_process;
 import txn_state;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class OptimizeKnnTest : public BaseTestParamStr {
 protected:
@@ -71,7 +71,7 @@ INSTANTIATE_TEST_SUITE_P(TestWithDifferentParams,
                                            (std::string(test_data_path()) + "/config/test_optimize_vfs_off.toml").c_str()));
 
 TEST_P(OptimizeKnnTest, test1) {
-    Storage *storage = InfinityContext::instance().storage();
+    Storage *storage = hybridsearchContext::instance().storage();
     TxnManager *txn_mgr = storage->txn_manager();
 
     auto db_name = std::make_shared<std::string>("default_db");
@@ -201,7 +201,7 @@ TEST_P(OptimizeKnnTest, test1) {
 }
 
 TEST_P(OptimizeKnnTest, test_secondary_index_optimize) {
-    Storage *storage = InfinityContext::instance().storage();
+    Storage *storage = hybridsearchContext::instance().storage();
     TxnManager *txn_mgr = storage->txn_manager();
 
     auto db_name = std::make_shared<std::string>("default_db");

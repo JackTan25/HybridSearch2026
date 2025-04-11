@@ -18,8 +18,8 @@ module;
 
 export module cast_expr;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::CastExpr;
+export using hybridsearch::CastExpr;
 
 }

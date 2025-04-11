@@ -17,7 +17,7 @@
 #include "type/type_info.h"
 #include <memory>
 
-namespace infinity {
+namespace hybridsearch {
 
 class BitmapInfo : public TypeInfo {
 public:
@@ -43,4 +43,4 @@ private:
     size_t length_limit_{0};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

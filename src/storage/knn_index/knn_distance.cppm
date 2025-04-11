@@ -21,7 +21,7 @@ import knn_expr;
 import internal_types;
 import roaring_bitmap;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class KnnDistanceAlgoType {
     kInvalid,
@@ -90,4 +90,4 @@ public:
     virtual RowID *GetIDByIdx(u64 idx) const = 0;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

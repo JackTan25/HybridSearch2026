@@ -4,21 +4,21 @@ import os
 import pytest
 import polars as pl
 from common import common_values
-from infinity.common import ConflictType
-from infinity.errors import ErrorCode
-import infinity
-import infinity_embedded
+from hybridsearch.common import ConflictType
+from hybridsearch.errors import ErrorCode
+import hybridsearch
+import hybridsearch_embedded
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
-from infinity_http import infinity_http
+from hybridsearch_http import hybridsearch_http
 
 
 @pytest.fixture(scope="class")
-def local_infinity(request):
-    return request.config.getoption("--local-infinity")
+def local_hybridsearch(request):
+    return request.config.getoption("--local-hybridsearch")
 
 
 @pytest.fixture(scope="class")
@@ -27,29 +27,29 @@ def http(request):
 
 
 @pytest.fixture(scope="class")
-def setup_class(request, local_infinity, http):
-    if local_infinity:
-        module = importlib.import_module("infinity_embedded.common")
+def setup_class(request, local_hybridsearch, http):
+    if local_hybridsearch:
+        module = importlib.import_module("hybridsearch_embedded.common")
         func = getattr(module, 'ConflictType')
         globals()['ConflictType'] = func
         uri = common_values.TEST_LOCAL_PATH
-        request.cls.infinity_obj = infinity_embedded.connect(uri)
+        request.cls.hybridsearch_obj = hybridsearch_embedded.connect(uri)
     elif http:
         uri = common_values.TEST_LOCAL_HOST
-        request.cls.infinity_obj = infinity_http()
+        request.cls.hybridsearch_obj = hybridsearch_http()
     else:
         uri = common_values.TEST_LOCAL_HOST
-        request.cls.infinity_obj = infinity_http()
+        request.cls.hybridsearch_obj = hybridsearch_http()
     request.cls.uri = uri
     yield
-    request.cls.infinity_obj.disconnect()
+    request.cls.hybridsearch_obj.disconnect()
 
 
 @pytest.mark.usefixtures("setup_class")
 @pytest.mark.usefixtures("suffix")
-class TestInfinity:
+class Testhybridsearch:
     def _test_show_table(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_show_table" + suffix, ConflictType.Ignore)
         db_obj.create_table(
             "test_show_table" + suffix,
@@ -63,9 +63,9 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     # @pytest.mark.usefixtures("skip_if_http")
-    # @pytest.mark.usefixtures("skip_if_local_infinity")
+    # @pytest.mark.usefixtures("skip_if_local_hybridsearch")
     def _test_show_columns(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_show_columns" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table(
             "test_show_columns" + suffix,
@@ -81,9 +81,9 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     # @pytest.mark.usefixtures("skip_if_http")
-    # @pytest.mark.usefixtures("skip_if_local_infinity")
+    # @pytest.mark.usefixtures("skip_if_local_hybridsearch")
     def test_show_columns_with_comment(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_show_columns" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table(
             "test_show_columns" + suffix,
@@ -126,19 +126,19 @@ class TestInfinity:
 
     def _test_show_big_databases(self, suffix):
         for i in range(8193):
-            self.infinity_obj.drop_database(f"test_show_big_databases_{i}" + suffix, ConflictType.Ignore)
+            self.hybridsearch_obj.drop_database(f"test_show_big_databases_{i}" + suffix, ConflictType.Ignore)
 
         for i in range(8193):
-            self.infinity_obj.create_database(f"test_show_big_databases_{i}" + suffix, ConflictType.Ignore)
+            self.hybridsearch_obj.create_database(f"test_show_big_databases_{i}" + suffix, ConflictType.Ignore)
 
-        res = self.infinity_obj.list_databases()
+        res = self.hybridsearch_obj.list_databases()
         assert res.error_code == ErrorCode.OK
 
         for i in range(8193):
-            self.infinity_obj.drop_database(f"test_show_big_databases_{i}" + suffix, ConflictType.Ignore)
+            self.hybridsearch_obj.drop_database(f"test_show_big_databases_{i}" + suffix, ConflictType.Ignore)
 
     def _test_show_current_node(self, suffix):
-        res = self.infinity_obj.show_current_node()
+        res = self.hybridsearch_obj.show_current_node()
         assert res.error_code == ErrorCode.OK
         print(res)
 
@@ -148,46 +148,46 @@ class TestInfinity:
         self._test_show_big_databases(suffix)
         self._test_show_current_node(suffix)
 
-    @pytest.mark.usefixtures("skip_if_local_infinity")
-    @pytest.mark.usefixtures("skip_if_remote_infinity")
+    @pytest.mark.usefixtures("skip_if_local_hybridsearch")
+    @pytest.mark.usefixtures("skip_if_remote_hybridsearch")
     # @pytest.mark.skip(reason="Cannot show follower number")
     def test_show_global_variables(self, suffix):
-        vars = self.infinity_obj.show_global_variables()
+        vars = self.hybridsearch_obj.show_global_variables()
         print(vars)
 
-    @pytest.mark.usefixtures("skip_if_local_infinity")
-    @pytest.mark.usefixtures("skip_if_remote_infinity")
+    @pytest.mark.usefixtures("skip_if_local_hybridsearch")
+    @pytest.mark.usefixtures("skip_if_remote_hybridsearch")
     def test_show_global_variable(self, suffix):
-        var: dict = self.infinity_obj.show_global_variable("cache_result_capacity")
+        var: dict = self.hybridsearch_obj.show_global_variable("cache_result_capacity")
         assert var["error_code"] == ErrorCode.OK
         assert "cache_result_capacity" in var
 
-        var = self.infinity_obj.show_global_variable("cache_result_num")
+        var = self.hybridsearch_obj.show_global_variable("cache_result_num")
         assert var["error_code"] == ErrorCode.OK
         assert "cache_result_num" in var
 
-        var = self.infinity_obj.show_global_variable("result_cache")
+        var = self.hybridsearch_obj.show_global_variable("result_cache")
         assert var["error_code"] == ErrorCode.OK
         assert "result_cache" in var
 
         try:
-            var = self.infinity_obj.show_global_variable("invalid_variable")
+            var = self.hybridsearch_obj.show_global_variable("invalid_variable")
         except Exception as e:
             assert e.error_code == ErrorCode.NO_SUCH_SYSTEM_VAR
         else:
             raise Exception("Should raise exception")
 
-    @pytest.mark.usefixtures("skip_if_local_infinity")
-    @pytest.mark.usefixtures("skip_if_remote_infinity")
+    @pytest.mark.usefixtures("skip_if_local_hybridsearch")
+    @pytest.mark.usefixtures("skip_if_remote_hybridsearch")
     def test_set_config(self, suffix):
-        res = self.infinity_obj.set_config({"cache_result_capacity": 100})
+        res = self.hybridsearch_obj.set_config({"cache_result_capacity": 100})
         assert res.error_code == ErrorCode.OK
 
-        res = self.infinity_obj.set_config({"result_cache": "clear"})
+        res = self.hybridsearch_obj.set_config({"result_cache": "clear"})
         assert res.error_code == ErrorCode.OK
 
         try:
-            res = self.infinity_obj.set_config({"invalid_variable": "value"})
+            res = self.hybridsearch_obj.set_config({"invalid_variable": "value"})
         except Exception as e:
             assert e.error_code == ErrorCode.INVALID_COMMAND
         else:

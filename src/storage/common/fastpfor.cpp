@@ -33,7 +33,7 @@ import stl;
 
 module fastpfor;
 
-namespace infinity {
+namespace hybridsearch {
 
 template <>
 struct FastPForWrapper<FastPForCodec::SIMDFastPFor>::Impl {
@@ -92,4 +92,4 @@ void FastPForWrapper<Codec>::RevertDelta(u32 *src, SizeT count) {
 // template struct FastPForWrapper<FastPForCodec::FastPFor>;
 template struct FastPForWrapper<FastPForCodec::SIMDBitPacking>;
 
-} // namespace infinity
+} // namespace hybridsearch

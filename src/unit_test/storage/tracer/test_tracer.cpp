@@ -24,7 +24,7 @@ import logger;
 import txn;
 import table_index_entry;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class TestMemIndexTracer;
 

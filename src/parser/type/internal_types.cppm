@@ -18,86 +18,86 @@ module;
 
 export module internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::BooleanT;
+export using hybridsearch::BooleanT;
 
-export using infinity::TinyIntT;
-export using infinity::SmallIntT;
-export using infinity::IntegerT;
-export using infinity::BigIntT;
-export using infinity::HugeIntT;
+export using hybridsearch::TinyIntT;
+export using hybridsearch::SmallIntT;
+export using hybridsearch::IntegerT;
+export using hybridsearch::BigIntT;
+export using hybridsearch::HugeIntT;
 
-export using infinity::DoubleT;
-export using infinity::FloatT;
+export using hybridsearch::DoubleT;
+export using hybridsearch::FloatT;
 
-export using infinity::DecimalT;
+export using hybridsearch::DecimalT;
 
-export using infinity::VarcharT;
-export using infinity::DateT;
+export using hybridsearch::VarcharT;
+export using hybridsearch::DateT;
 
-export using infinity::TimeT;
-export using infinity::DateTimeT;
-export using infinity::DateTOld;
-export using infinity::TimestampT;
-export using infinity::IntervalT;
+export using hybridsearch::TimeT;
+export using hybridsearch::DateTimeT;
+export using hybridsearch::DateTOld;
+export using hybridsearch::TimestampT;
+export using hybridsearch::IntervalT;
 
 // Nest types
-export using infinity::ArrayT;
-export using infinity::TupleT;
+export using hybridsearch::ArrayT;
+export using hybridsearch::TupleT;
 
 // Geography
-export using infinity::PointT;
-export using infinity::LineT;
-export using infinity::LineSegT;
-export using infinity::BoxT;
-export using infinity::CircleT;
+export using hybridsearch::PointT;
+export using hybridsearch::LineT;
+export using hybridsearch::LineSegT;
+export using hybridsearch::BoxT;
+export using hybridsearch::CircleT;
 
 // Other
-export using infinity::UuidT;
-export using infinity::EmbeddingT;
+export using hybridsearch::UuidT;
+export using hybridsearch::EmbeddingT;
 
 // Heterogeneous
-export using infinity::MixedT;
+export using hybridsearch::MixedT;
 
 // tensor
-export using infinity::TensorT;
+export using hybridsearch::TensorT;
 // tensor-array
-export using infinity::TensorArrayT;
+export using hybridsearch::TensorArrayT;
 
 // sparse
-export using infinity::SparseT;
+export using hybridsearch::SparseT;
 
-export using infinity::EmptyArrayT;
+export using hybridsearch::EmptyArrayT;
 
 // FP16
-export using infinity::Float16T;
+export using hybridsearch::Float16T;
 // BF16
-export using infinity::BFloat16T;
+export using hybridsearch::BFloat16T;
 
 // MultiVector
-export using infinity::MultiVectorT;
+export using hybridsearch::MultiVectorT;
 
-export using infinity::RowID;
-export using infinity::TimeUnit;
+export using hybridsearch::RowID;
+export using hybridsearch::TimeUnit;
 
-export using infinity::IntegerMixedType;
-export using infinity::FloatMixedType;
-export using infinity::ArrayMixedType;
-export using infinity::BaseMixedType;
-export using infinity::LongStrMixedType;
-export using infinity::MissingMixedType;
-export using infinity::ShortStrMixedType;
-export using infinity::MixedType;
-export using infinity::MixedValueType;
-export using infinity::TupleMixedType;
+export using hybridsearch::IntegerMixedType;
+export using hybridsearch::FloatMixedType;
+export using hybridsearch::ArrayMixedType;
+export using hybridsearch::BaseMixedType;
+export using hybridsearch::LongStrMixedType;
+export using hybridsearch::MissingMixedType;
+export using hybridsearch::ShortStrMixedType;
+export using hybridsearch::MixedType;
+export using hybridsearch::MixedValueType;
+export using hybridsearch::TupleMixedType;
 
-export using infinity::EmbeddingType;
-export using infinity::ToEmbeddingDataType;
-export using infinity::EmbeddingDataType;
+export using hybridsearch::EmbeddingType;
+export using hybridsearch::ToEmbeddingDataType;
+export using hybridsearch::EmbeddingDataType;
 
 export constexpr uint64_t VARCHAR_PREFIX_LEN = VARCHAR_PREFIX_LENGTH;
 export constexpr uint64_t VARCHAR_INLINE_LEN = VARCHAR_INLINE_LENGTH;
 export constexpr uint64_t VARCHAR_LEN_LIMIT = VARCHAR_LENGTH_LIMIT;
 
-} // namespace infinity
+} // namespace hybridsearch

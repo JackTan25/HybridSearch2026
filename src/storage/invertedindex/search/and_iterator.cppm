@@ -22,7 +22,7 @@ import doc_iterator;
 import multi_doc_iterator;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class AndIterator : public MultiDocIterator {
 public:
@@ -50,4 +50,4 @@ private:
     Vector<u32> dyn_match_ids_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

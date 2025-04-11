@@ -21,7 +21,7 @@ import column_expr;
 
 export module column_identifer;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct ColumnIdentifier {
 public:
@@ -45,4 +45,4 @@ public:
     SharedPtr<String> alias_name_ptr_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

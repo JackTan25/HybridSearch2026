@@ -28,7 +28,7 @@ import third_party;
 
 namespace fs = std::filesystem;
 
-namespace infinity {
+namespace hybridsearch {
 
 static const String ADJ = "a";
 static const String ADJ_SAT = "s";
@@ -220,4 +220,4 @@ String Lemmatizer::Lemmatize(const String &form, const String &pos) {
     return form;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

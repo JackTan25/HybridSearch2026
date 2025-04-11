@@ -22,7 +22,7 @@ import stl;
 import file_worker;
 import buffer_handle;
 import buffer_manager;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 import third_party;
 import logger;
@@ -30,7 +30,7 @@ import file_worker_type;
 import var_file_worker;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 BufferObj::BufferObj(BufferManager *buffer_mgr, bool is_ephemeral, UniquePtr<FileWorker> file_worker, u32 id)
     : buffer_mgr_(buffer_mgr), file_worker_(std::move(file_worker)), id_(id) {
@@ -41,13 +41,13 @@ BufferObj::BufferObj(BufferManager *buffer_mgr, bool is_ephemeral, UniquePtr<Fil
         type_ = BufferType::kPersistent;
         status_ = BufferStatus::kFreed;
     }
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::IncrObjectCount("BufferObj");
 #endif
 }
 
 BufferObj::~BufferObj() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::DecrObjectCount("BufferObj");
 #endif
 }
@@ -426,4 +426,4 @@ void BufferObj::CheckState() const {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

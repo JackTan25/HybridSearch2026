@@ -19,7 +19,7 @@ module segment_iter;
 import stl;
 import catalog;
 
-namespace infinity {
+namespace hybridsearch {
 
 BlockEntry *BlockEntryIter::Next() {
     std::shared_lock lock(segment_->rw_locker_);
@@ -29,4 +29,4 @@ BlockEntry *BlockEntryIter::Next() {
     return segment_->block_entries_[cur_block_idx_++].get();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

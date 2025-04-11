@@ -32,7 +32,7 @@ import cast_expression;
 import column_expression;
 import logical_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 LogicalIndexScan::LogicalIndexScan(u64 node_id,
                                    SharedPtr<BaseTableRef> &&base_table_ref,
@@ -90,4 +90,4 @@ String LogicalIndexScan::ToString(i64 &space) const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

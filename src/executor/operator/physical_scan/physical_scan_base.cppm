@@ -28,7 +28,7 @@ import operator_state;
 import query_context;
 import meta_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 class ResultCacheManager;
 class DataBlock;
@@ -77,4 +77,4 @@ public:
     SharedPtr<BaseTableRef> base_table_ref_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

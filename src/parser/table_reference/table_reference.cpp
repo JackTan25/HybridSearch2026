@@ -14,7 +14,7 @@
 
 #include "table_reference.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 std::string TableReference::ToString() { return "TableReference"; }
 
@@ -25,4 +25,4 @@ std::string TableReference::GetTableName() const {
     return table_name_;
 }
 
-}; // namespace infinity
+}; // namespace hybridsearch

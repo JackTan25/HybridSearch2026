@@ -17,7 +17,7 @@
 #include "parser_assert.h"
 #include "point_type.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 // A circle is specified by a center point and radius
 struct CircleType {
@@ -46,4 +46,4 @@ struct CircleType {
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

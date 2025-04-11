@@ -21,9 +21,9 @@ module meta_info;
 import stl;
 import status;
 import column_def;
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 u64 TableInfo::GetColumnIdByName(const String &column_name) const {
     auto iter = std::find_if(column_defs_.begin(), column_defs_.end(), [column_name](const SharedPtr<ColumnDef> &column_def) {
@@ -73,4 +73,4 @@ SizeT TableInfo::GetColumnIdxByID(ColumnID column_id) const {
     return std::distance(column_defs_.begin(), iter);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

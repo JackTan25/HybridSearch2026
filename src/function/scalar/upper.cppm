@@ -4,10 +4,10 @@ import stl;
 
 export module upper;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 
 export void RegisterUpperFunction(const UniquePtr<Catalog> &catalog_ptr);
 
-} // namespace infinity
+} // namespace hybridsearch

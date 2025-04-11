@@ -22,7 +22,7 @@ import sparse_util;
 import third_party;
 import sparse_test_util;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class LinScanAlgTest : public BaseTest {};
 

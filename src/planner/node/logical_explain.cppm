@@ -24,7 +24,7 @@ import data_type;
 import internal_types;
 import explain_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalExplain : public LogicalNode {
 public:
@@ -51,4 +51,4 @@ private:
     SharedPtr<Vector<SharedPtr<String>>> texts_{nullptr};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

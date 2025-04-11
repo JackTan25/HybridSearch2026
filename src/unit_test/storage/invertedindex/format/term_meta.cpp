@@ -13,25 +13,25 @@ import index_defines;
 import posting_list_format;
 import virtual_store;
 import global_resource_usage;
-import infinity_context;
+import hybridsearch_context;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class TermMetaTest : public BaseTest {
 public:
     void SetUp() override {
         BaseTest::SetUp();
-#ifdef INFINITY_DEBUG
-        infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+        hybridsearch::GlobalResourceUsage::Init();
 #endif
 
         file_name_ = String(GetFullTmpDir()) + "/term_meta";
     }
     void TearDown() override {
-#ifdef INFINITY_DEBUG
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetObjectCount(), 0);
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetRawMemoryCount(), 0);
-        infinity::GlobalResourceUsage::UnInit();
+#ifdef hybridsearch_DEBUG
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetObjectCount(), 0);
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetRawMemoryCount(), 0);
+        hybridsearch::GlobalResourceUsage::UnInit();
 #endif
         BaseTest::TearDown();
     }

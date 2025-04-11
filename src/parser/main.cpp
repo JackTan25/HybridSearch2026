@@ -22,7 +22,7 @@ public:
 };
 
 auto main() -> int {
-    using namespace infinity;
+    using namespace hybridsearch;
     std::vector<std::string> inputs;
     inputs.emplace_back("create collection c1;");
     inputs.emplace_back("create schema s1;");

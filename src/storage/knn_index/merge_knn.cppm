@@ -20,13 +20,13 @@ import stl;
 
 import knn_result_handler;
 
-import infinity_exception;
+import hybridsearch_exception;
 import roaring_bitmap;
 import default_values;
 import internal_types;
 import statement_common;
 
-namespace infinity {
+namespace hybridsearch {
 
 class KnnScanSharedData;
 
@@ -309,4 +309,4 @@ RowID *MergeKnn<QueryElemType, C, DistType>::GetIDsByIdx(u64 idx) const {
     return idx_array_.get() + idx * this->topk_;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

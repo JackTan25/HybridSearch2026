@@ -14,7 +14,7 @@
 
 #include "uuid_type.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 UuidType::UuidType(const UuidType &other) { memcpy(this->body, other.body, UuidType::LENGTH); }
 
@@ -45,4 +45,4 @@ bool UuidType::operator==(const UuidType &other) const {
     return (memcmp(this->body, other.body, UuidType::LENGTH) == 0);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

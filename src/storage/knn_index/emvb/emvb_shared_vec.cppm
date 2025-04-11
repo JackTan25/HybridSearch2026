@@ -17,7 +17,7 @@ module;
 export module emvb_shared_vec;
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 // append only
 // reallocation will not affect the existing shared pointers for reading old data
@@ -82,4 +82,4 @@ public:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

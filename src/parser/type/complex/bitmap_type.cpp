@@ -17,7 +17,7 @@
 
 #include <cstring>
 
-namespace infinity {
+namespace hybridsearch {
 
 BitmapType::BitmapType(const BitmapType &other) : count(other.count) {
     uint64_t unit_count = UnitCount(count);
@@ -116,5 +116,5 @@ void BitmapType::SetBit(uint64_t row_index, bool value) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch
 #endif

@@ -31,7 +31,7 @@ import hnsw_common;
 import serialize;
 import data_store_util;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename DataType, typename LocalCacheType, typename CompressType>
 struct LVQData {
@@ -428,4 +428,4 @@ public:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

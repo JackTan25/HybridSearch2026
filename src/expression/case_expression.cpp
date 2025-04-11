@@ -20,10 +20,10 @@ module case_expression;
 
 import stl;
 import expression_type;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 CaseExpression::CaseExpression() : BaseExpression(ExpressionType::kCase, {}) {}
 
@@ -52,4 +52,4 @@ String CaseExpression::ToString() const {
 
 DataType CaseExpression::Type() const { return return_type_; }
 
-} // namespace infinity
+} // namespace hybridsearch

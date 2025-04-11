@@ -15,7 +15,7 @@ import vbyte_compressor;
 import logger;
 import doc_list_format_option;
 
-namespace infinity {
+namespace hybridsearch {
 
 DocListEncoder::DocListEncoder(const DocListFormat *doc_list_format)
     : doc_list_buffer_(), doc_list_format_(doc_list_format), last_doc_id_(0), current_tf_(0), total_tf_(0), df_(0), doc_skiplist_writer_(nullptr) {
@@ -165,4 +165,4 @@ InMemDocListDecoder *DocListEncoder::GetInMemDocListDecoder() const {
 
     return decoder;
 }
-} // namespace infinity
+} // namespace hybridsearch

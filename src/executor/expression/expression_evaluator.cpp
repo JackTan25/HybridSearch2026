@@ -32,7 +32,7 @@ import column_vector;
 import expression_state;
 import status;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 import expression_type;
 import bound_cast_func;
 import logger;
@@ -40,7 +40,7 @@ import logical_type;
 import internal_types;
 import roaring_bitmap;
 
-namespace infinity {
+namespace hybridsearch {
 
 void ExpressionEvaluator::Init(const DataBlock *input_data_block) { input_data_block_ = input_data_block; }
 
@@ -270,4 +270,4 @@ void ExpressionEvaluator::Execute(const SharedPtr<FilterFulltextExpression> &exp
     output_column_vector->Finalize(input_data_block_->row_count());
 }
 
-} // namespace infinity
+} // namespace hybridsearch

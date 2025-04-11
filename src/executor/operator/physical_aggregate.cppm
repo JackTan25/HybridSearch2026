@@ -26,13 +26,13 @@ import data_table;
 import hash_table;
 import base_expression;
 import load_meta;
-import infinity_exception;
+import hybridsearch_exception;
 import data_block;
 import internal_types;
 import data_type;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct HashRange {
     i64 start_{};
@@ -86,4 +86,4 @@ private:
     u64 aggregate_index_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

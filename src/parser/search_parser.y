@@ -1,13 +1,13 @@
 // Bison variant of [Lucene syntax](https://github.com/apache/lucene/blob/main/lucene/queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/parser/StandardSyntaxParser.jj)
 // ElasticSearch query string examples: https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html
-// Infinity query string examples: https://github.com/infiniflow/infinity/blob/main/src/unit_test/parser/search_driver.cpp
+// hybridsearch query string examples: https://github.com/infiniflow/hybridsearch/blob/main/src/unit_test/parser/search_driver.cpp
 
 %language "c++"
 %skeleton "lalr1.cc"
 %require "3.8"
 %debug
 %defines
-%define api.namespace {infinity}
+%define api.namespace {hybridsearch}
 %define api.parser.class {SearchParser}
 %define api.value.type variant
 %define api.token.raw
@@ -21,7 +21,7 @@
     #include "query_node.h"
     #endif
 
-    namespace infinity {
+    namespace hybridsearch {
         class SearchDriver;
         class SearchScanner;
 
@@ -89,7 +89,7 @@ topLevelQuery
 query
 : clause { $$ = std::move($1); }
 | query clause {
-    assert(driver.operator_option_ == FulltextQueryOperatorOption::kInfinitySyntax);
+    assert(driver.operator_option_ == FulltextQueryOperatorOption::khybridsearchSyntax);
     if (!($1)) {
         $$ = std::move($2);
     } else if (!($2)) {
@@ -191,8 +191,8 @@ basic_filter
 
 %%
 
-namespace infinity{
+namespace hybridsearch{
 void SearchParser::error(const location_type &l, const std::string &err_message) {
     std::cerr << "Error: " << err_message << " at " << l << "\n";
 }
-} //namespace infinity
+} //namespace hybridsearch

@@ -23,7 +23,7 @@ import parsed_expr;
 
 export module bind_alias_proxy;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class BindAliasProxy {
 public:
@@ -34,4 +34,4 @@ private:
     bool binding_alias_{false};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

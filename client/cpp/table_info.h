@@ -14,7 +14,7 @@
 
 #include <string>
 
-namespace infinity::client {
+namespace hybridsearch::client {
 
 enum class ExtraColumnType {
     kEmbedding,
@@ -81,4 +81,4 @@ private:
     std::map<std::string, std::string> properties_;
 };
 
-} // namespace infinity::client
+} // namespace hybridsearch::client

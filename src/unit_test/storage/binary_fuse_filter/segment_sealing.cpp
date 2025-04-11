@@ -20,7 +20,7 @@ import base_test;
 import stl;
 import storage;
 import global_resource_usage;
-import infinity_context;
+import hybridsearch_context;
 import status;
 import catalog;
 import txn;
@@ -32,7 +32,7 @@ import table_def;
 import value;
 import physical_import;
 import default_values;
-import infinity_exception;
+import hybridsearch_exception;
 import base_table_ref;
 import logical_type;
 import internal_types;
@@ -45,7 +45,7 @@ import block_entry;
 import logger;
 import txn_state;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class SealingTaskTest : public BaseTestParamStr {
 protected:
@@ -82,7 +82,7 @@ TEST_P(SealingTaskTest, append_unsealed_segment_sealed) {
     GTEST_SKIP() << "Skipping slow test.";
     {
         String table_name = "tbl1";
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         BufferManager *buffer_manager = storage->buffer_manager();
         TxnManager *txn_mgr = storage->txn_manager();
 
@@ -142,12 +142,12 @@ TEST_P(SealingTaskTest, append_unsealed_segment_sealed) {
     {
         // test wal
         String table_name = "tbl1";
-        infinity::GlobalResourceUsage::Init();
+        hybridsearch::GlobalResourceUsage::Init();
         std::shared_ptr<std::string> config_path = nullptr;
         RemoveDbDirs();
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         // BufferManager *buffer_manager = storage->buffer_manager();
         TxnManager *txn_mgr = storage->txn_manager();
         {
@@ -173,10 +173,10 @@ TEST_P(SealingTaskTest, append_unsealed_segment_sealed) {
             EXPECT_EQ(sealed_cnt, 3);
             txn_mgr->CommitTxn(txn);
         }
-        infinity::InfinityContext::instance().UnInit();
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetObjectCount(), 0);
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetRawMemoryCount(), 0);
-        infinity::GlobalResourceUsage::UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetObjectCount(), 0);
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetRawMemoryCount(), 0);
+        hybridsearch::GlobalResourceUsage::UnInit();
     }
     */
 }

@@ -16,21 +16,21 @@ import functools
 import inspect
 from typing import Optional, Union, List, Any
 
-from infinity_embedded.embedded_infinity_ext import ConflictType as LocalConflictType
-from infinity_embedded.embedded_infinity_ext import ImportOptions, CopyFileType, WrapParsedExpr, \
+from hybridsearch_embedded.embedded_hybridsearch_ext import ConflictType as LocalConflictType
+from hybridsearch_embedded.embedded_hybridsearch_ext import ImportOptions, CopyFileType, WrapParsedExpr, \
     ParsedExprType, WrapUpdateExpr, ExportOptions, WrapOptimizeOptions, WrapOrderByExpr, WrapInsertRowExpr
-from infinity_embedded.common import ConflictType, DEFAULT_MATCH_VECTOR_TOPN, SortType
-from infinity_embedded.common import INSERT_DATA, VEC, SparseVector, InfinityException
-from infinity_embedded.errors import ErrorCode
-from infinity_embedded.index import IndexInfo
-from infinity_embedded.local_infinity.query_builder import Query, InfinityLocalQueryBuilder, ExplainQuery
-from infinity_embedded.local_infinity.types import build_result
-from infinity_embedded.local_infinity.utils import traverse_conditions, select_res_to_polars
-from infinity_embedded.local_infinity.utils import get_local_constant_expr_from_python_value
-from infinity_embedded.local_infinity.utils import name_validity_check, check_valid_name, get_ordinary_info
-from infinity_embedded.table import ExplainType
-from infinity_embedded.index import InitParameter
-from infinity_embedded.utils import deprecated_api
+from hybridsearch_embedded.common import ConflictType, DEFAULT_MATCH_VECTOR_TOPN, SortType
+from hybridsearch_embedded.common import INSERT_DATA, VEC, SparseVector, hybridsearchException
+from hybridsearch_embedded.errors import ErrorCode
+from hybridsearch_embedded.index import IndexInfo
+from hybridsearch_embedded.local_hybridsearch.query_builder import Query, hybridsearchLocalQueryBuilder, ExplainQuery
+from hybridsearch_embedded.local_hybridsearch.types import build_result
+from hybridsearch_embedded.local_hybridsearch.utils import traverse_conditions, select_res_to_polars
+from hybridsearch_embedded.local_hybridsearch.utils import get_local_constant_expr_from_python_value
+from hybridsearch_embedded.local_hybridsearch.utils import name_validity_check, check_valid_name, get_ordinary_info
+from hybridsearch_embedded.table import ExplainType
+from hybridsearch_embedded.index import InitParameter
+from hybridsearch_embedded.utils import deprecated_api
 from sqlglot import condition
 
 
@@ -40,7 +40,7 @@ class LocalTable():
         self._conn = conn
         self._db_name = db_name
         self._table_name = table_name
-        self.query_builder = InfinityLocalQueryBuilder(table=self)
+        self.query_builder = hybridsearchLocalQueryBuilder(table=self)
 
     def params_type_check(func):
         @functools.wraps(func)
@@ -71,7 +71,7 @@ class LocalTable():
         elif conflict_type == ConflictType.Replace:
             create_index_conflict = LocalConflictType.kReplace
         else:
-            raise InfinityException(ErrorCode.INVALID_CONFLICT_TYPE, "Invalid conflict type")
+            raise hybridsearchException(ErrorCode.INVALID_CONFLICT_TYPE, "Invalid conflict type")
 
         index_info_to_use = index_info.to_local_type()
 
@@ -85,7 +85,7 @@ class LocalTable():
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     @name_validity_check("index_name", "Index")
     def drop_index(self, index_name: str, conflict_type: ConflictType = ConflictType.Error):
@@ -95,21 +95,21 @@ class LocalTable():
         elif conflict_type == ConflictType.Ignore:
             drop_index_conflict = LocalConflictType.kIgnore
         else:
-            raise InfinityException(ErrorCode.INVALID_CONFLICT_TYPE, "Invalid conflict type")
+            raise hybridsearchException(ErrorCode.INVALID_CONFLICT_TYPE, "Invalid conflict type")
 
         res = self._conn.drop_index(db_name=self._db_name, table_name=self._table_name,
                                     index_name=index_name, conflict_type=drop_index_conflict)
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def show_columns(self):
         res = self._conn.show_columns(db_name=self._db_name, table_name=self._table_name)
         if res.error_code == ErrorCode.OK:
             return select_res_to_polars(res)
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     @name_validity_check("index_name", "Index")
     def show_index(self, index_name: str):
@@ -118,21 +118,21 @@ class LocalTable():
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def list_indexes(self):
         res = self._conn.list_indexes(db_name=self._db_name, table_name=self._table_name)
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def show_segment(self, segment_id: int):
         res = self._conn.show_segment(db_name=self._db_name, table_name=self._table_name, segment_id=segment_id)
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def show_block(self, segment_id: int, block_id: int):
         res = self._conn.show_block(db_name=self._db_name, table_name=self._table_name, segment_id=segment_id,
@@ -140,7 +140,7 @@ class LocalTable():
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def show_block_column(self, segment_id: int, block_id: int, column_id: int):
         res = self._conn.show_block_column(db_name=self._db_name, table_name=self._table_name, segment_id=segment_id,
@@ -148,7 +148,7 @@ class LocalTable():
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def insert(self, data: Union[INSERT_DATA, list[INSERT_DATA]]):
         # [{"c1": 1, "c2": 1.1}, {"c1": 2, "c2": 2.2}]
@@ -175,7 +175,7 @@ class LocalTable():
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def import_data(self, file_path: str, import_options: {} = None):
         options = ImportOptions()
@@ -200,22 +200,22 @@ class LocalTable():
                     elif file_type == 'bvecs':
                         options.copy_file_type = CopyFileType.kBVECS
                     else:
-                        raise InfinityException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
+                        raise hybridsearchException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
                                                 f"Unrecognized export file type: {file_type}")
                 elif key == 'delimiter':
                     delimiter = v.lower()
                     if len(delimiter) != 1:
-                        raise InfinityException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
+                        raise hybridsearchException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
                                                 f"Unrecognized export file delimiter: {delimiter}")
                     options.delimiter = delimiter[0]
                 elif key == 'header':
                     if isinstance(v, bool):
                         options.header = v
                     else:
-                        raise InfinityException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
+                        raise hybridsearchException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
                                                 "Boolean value is expected in header field")
                 else:
-                    raise InfinityException(ErrorCode.IMPORT_FILE_FORMAT_ERROR, f"Unknown export parameter: {k}")
+                    raise hybridsearchException(ErrorCode.IMPORT_FILE_FORMAT_ERROR, f"Unknown export parameter: {k}")
 
         res = self._conn.import_data(db_name=self._db_name,
                                      table_name=self._table_name,
@@ -224,7 +224,7 @@ class LocalTable():
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def export_data(self, file_path: str, export_options: {} = None, columns: [str] = None):
         options = ExportOptions()
@@ -243,40 +243,40 @@ class LocalTable():
                     elif file_type == 'fvecs':
                         options.copy_file_type = CopyFileType.kFVECS
                     else:
-                        raise InfinityException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
+                        raise hybridsearchException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
                                                 f"Unrecognized export file type: {file_type}")
                 elif key == 'delimiter':
                     delimiter = v.lower()
                     if len(delimiter) != 1:
-                        raise InfinityException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
+                        raise hybridsearchException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
                                                 f"Unrecognized export file delimiter: {delimiter}")
                     options.delimiter = delimiter[0]
                 elif key == 'header':
                     if isinstance(v, bool):
                         options.header = v
                     else:
-                        raise InfinityException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
+                        raise hybridsearchException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
                                                 "Boolean value is expected in header field")
                 elif key == 'offset':
                     if isinstance(v, int):
                         options.offset = v
                     else:
-                        raise InfinityException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
+                        raise hybridsearchException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
                                                 "Integer value is expected in 'offset' field")
                 elif key == 'limit':
                     if isinstance(v, int):
                         options.limit = v
                     else:
-                        raise InfinityException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
+                        raise hybridsearchException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
                                                 "Integer value is expected in 'limit' field")
                 elif key == 'row_limit':
                     if isinstance(v, int):
                         options.row_limit = v
                     else:
-                        raise InfinityException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
+                        raise hybridsearchException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
                                                 "Integer value is expected in 'row_limit' field")
                 else:
-                    raise InfinityException(ErrorCode.IMPORT_FILE_FORMAT_ERROR, f"Unknown export parameter: {k}")
+                    raise hybridsearchException(ErrorCode.IMPORT_FILE_FORMAT_ERROR, f"Unknown export parameter: {k}")
         if not columns:
             columns = []
         res = self._conn.export_data(db_name=self._db_name,
@@ -287,7 +287,7 @@ class LocalTable():
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def delete(self, cond: Optional[str] = None):
         match cond:
@@ -300,7 +300,7 @@ class LocalTable():
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def update(self, cond: str, data: dict[str, Any]):
         # {"c1": 1, "c2": 1.1}
@@ -319,7 +319,7 @@ class LocalTable():
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def match_dense(self, vector_column_name: str, embedding_data: VEC, embedding_data_type: str, distance_type: str,
                     topn: int = DEFAULT_MATCH_VECTOR_TOPN, knn_params: {} = None):
@@ -392,10 +392,10 @@ class LocalTable():
     def sort(self, order_by_expr_list: Optional[List[list[str, SortType]]]):
         for order_by_expr in order_by_expr_list:
             if len(order_by_expr) != 2:
-                raise InfinityException(ErrorCode.INVALID_PARAMETER_VALUE,
+                raise hybridsearchException(ErrorCode.INVALID_PARAMETER_VALUE,
                                         "order_by_expr_list must be a list of [column_name, sort_type]")
             if order_by_expr[1] not in [SortType.Asc, SortType.Desc]:
-                raise InfinityException(ErrorCode.INVALID_PARAMETER_VALUE,
+                raise hybridsearchException(ErrorCode.INVALID_PARAMETER_VALUE,
                                         "sort_type must be SortType.Asc or SortType.Desc")
         self.query_builder.sort(order_by_expr_list)
         return self
@@ -481,7 +481,7 @@ class LocalTable():
         if res.error_code == ErrorCode.OK:
             return build_result(res)
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def _explain_query(self, query: ExplainQuery) -> Any:
         highlight = []
@@ -511,4 +511,4 @@ class LocalTable():
         if res.error_code == ErrorCode.OK:
             return select_res_to_polars(res)
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)

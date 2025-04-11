@@ -29,11 +29,11 @@ import data_block;
 import default_values;
 import value;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import logical_type;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalExplain::AlignParagraphs(Vector<SharedPtr<String>> &array1, Vector<SharedPtr<String>> &array2) {
     SizeT size1 = array1.size();
@@ -172,4 +172,4 @@ bool PhysicalExplain::Execute(QueryContext *, OperatorState *operator_state) {
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

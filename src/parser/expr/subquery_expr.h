@@ -17,7 +17,7 @@
 #include "parsed_expr.h"
 #include "statement/select_statement.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class SubqueryType {
     kExists,
@@ -43,4 +43,4 @@ public:
     SelectStatement *select_{nullptr};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

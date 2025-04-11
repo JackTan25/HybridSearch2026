@@ -21,7 +21,7 @@ import third_party;
 
 module reference_expression;
 
-namespace infinity {
+namespace hybridsearch {
 
 String ReferenceExpression::ToString() const {
     if (alias_.empty()) {
@@ -63,4 +63,4 @@ bool ReferenceExpression::Eq(const BaseExpression &other) const {
            column_index_ == other_ref.column_index_;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

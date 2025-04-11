@@ -20,7 +20,7 @@ import expression_type;
 
 module conjunction_expression;
 
-namespace infinity {
+namespace hybridsearch {
 
 ConjunctionExpression::ConjunctionExpression(ConjunctionType type,
                                              const SharedPtr<BaseExpression> &left_operand,
@@ -29,4 +29,4 @@ ConjunctionExpression::ConjunctionExpression(ConjunctionType type,
 
 String ConjunctionExpression::ToString() const { return {}; }
 
-} // namespace infinity
+} // namespace hybridsearch

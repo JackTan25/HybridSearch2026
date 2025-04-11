@@ -15,14 +15,14 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 import catalog;
 import scalar_function;
 import add;
@@ -47,13 +47,13 @@ import internal_types;
 import column_def;
 import data_type;
 
-using namespace infinity;
+using namespace hybridsearch;
 class ExpressionEvaluatorTest : public BaseTestParamStr {};
 
 INSTANTIATE_TEST_SUITE_P(TestWithDifferentParams, ExpressionEvaluatorTest, ::testing::Values(BaseTestParamStr::NULL_CONFIG_PATH));
 
 TEST_P(ExpressionEvaluatorTest, add_bigint_constant_1) {
-    using namespace infinity;
+    using namespace hybridsearch;
     UniquePtr<Catalog> catalog_ptr = MakeUnique<Catalog>();
     RegisterAddFunction(catalog_ptr);
 
@@ -153,7 +153,7 @@ TEST_P(ExpressionEvaluatorTest, add_bigint_constant_1) {
 }
 
 TEST_P(ExpressionEvaluatorTest, subtract_constant_8192_bigint) {
-    using namespace infinity;
+    using namespace hybridsearch;
     UniquePtr<Catalog> catalog_ptr = MakeUnique<Catalog>();
     RegisterSubtractFunction(catalog_ptr);
 

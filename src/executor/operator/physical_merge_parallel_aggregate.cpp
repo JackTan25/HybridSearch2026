@@ -19,10 +19,10 @@ import operator_state;
 
 module physical_merge_parallel_aggregate;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalMergeParallelAggregate::Init(QueryContext* query_context) {}
 
 bool PhysicalMergeParallelAggregate::Execute(QueryContext *, OperatorState *) { return true; }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -24,7 +24,7 @@ import logical_node_type;
 
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 LogicalCrossProduct::LogicalCrossProduct(u64 node_id, String alias, const SharedPtr<LogicalNode> &left, const SharedPtr<LogicalNode> &right)
     : LogicalNode(node_id, LogicalNodeType::kCrossProduct), alias_(std::move(alias)) {
@@ -95,4 +95,4 @@ String LogicalCrossProduct::ToString(i64 &space) const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -24,7 +24,7 @@ import bound_cast_func;
 import column_vector_cast;
 import float_cast;
 import integer_cast;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import logger;
 import status;
@@ -37,7 +37,7 @@ import data_type;
 import default_values;
 import sparse_util;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct EmbeddingTryCastToFixlen;
 struct EmbeddingTryCastToVarlen;
@@ -518,4 +518,4 @@ inline bool EmbeddingTryCastToVarlen::Run(const EmbeddingT &source,
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

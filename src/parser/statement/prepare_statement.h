@@ -16,8 +16,8 @@
 
 #include "base_statement.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 class PrepareStatement : public BaseStatement {};
 
-} // namespace infinity
+} // namespace hybridsearch

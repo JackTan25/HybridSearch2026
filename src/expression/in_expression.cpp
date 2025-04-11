@@ -16,14 +16,14 @@ module;
 
 #include <sstream>
 
-import infinity_exception;
+import hybridsearch_exception;
 import stl;
 import expression_type;
 import logger;
 
 module in_expression;
 
-namespace infinity {
+namespace hybridsearch {
 
 InExpression::InExpression(InType in_type, SharedPtr<BaseExpression> left_operand, Vector<SharedPtr<BaseExpression>> arguments)
     : BaseExpression(ExpressionType::kIn, arguments), left_operand_ptr_(std::move(left_operand)), in_type_(in_type),
@@ -95,4 +95,4 @@ bool InExpression::Eq(const BaseExpression &other_base) const {
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -19,8 +19,8 @@ peer_recv_timeout        = 0
 peer_send_timeout        = 0
 
 [log]
-log_filename             = "infinity.log"
-log_dir                  = "/var/infinity/follower/log"
+log_filename             = "hybridsearch.log"
+log_dir                  = "/var/hybridsearch/follower/log"
 log_to_stdout            = false
 log_file_max_size        = "10GB"
 log_file_rotate_count    = 10
@@ -29,8 +29,8 @@ log_file_rotate_count    = 10
 log_level               = "trace"
 
 [storage]
-persistence_dir         = "/var/infinity/follower/persistence"
-data_dir                = "/var/infinity/follower/data"
+persistence_dir         = "/var/hybridsearch/follower/persistence"
+data_dir                = "/var/hybridsearch/follower/data"
 # periodically activates garbage collection:
 # 0 means real-time,
 # s means seconds, for example "60s", 60 seconds
@@ -47,7 +47,7 @@ storage_type             = "minio"
 
 [storage.object_storage]
 url                      = "127.0.0.1:9005"
-bucket_name              = "infinity"
+bucket_name              = "hybridsearch"
 access_key               = "minioadmin"
 secret_key               = "minioadmin"
 enable_https             = false
@@ -55,12 +55,12 @@ enable_https             = false
 [buffer]
 buffer_manager_size      = "4GB"
 lru_num                  = 7
-temp_dir                 = "/var/infinity/follower/tmp"
+temp_dir                 = "/var/hybridsearch/follower/tmp"
 
 memindex_memory_quota   = "1GB"
 
 [wal]
-wal_dir                       = "/var/infinity/follower/wal"
+wal_dir                       = "/var/hybridsearch/follower/wal"
 full_checkpoint_interval      = "86400s"
 delta_checkpoint_interval     = "60s"
 # delta_checkpoint_threshold  = 1000000000
@@ -72,4 +72,4 @@ wal_compact_threshold         = "1GB"
 wal_flush                     = "only_write"
 
 [resource]
-resource_dir                  = "/var/infinity/follower/resource"
+resource_dir                  = "/var/hybridsearch/follower/resource"

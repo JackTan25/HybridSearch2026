@@ -22,7 +22,7 @@
 #include <memory>
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 class SQLParser {
 
@@ -37,4 +37,4 @@ public:
     YY_BUFFER_STATE state_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

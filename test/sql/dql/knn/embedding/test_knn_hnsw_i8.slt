@@ -9,7 +9,7 @@ CREATE TABLE test_knn_hnsw_i8(c1 INT, c2 EMBEDDING(TINYINT, 3));
 # 5,"[6,7,8]"
 # 9,"[10,11,12]"
 statement ok
-COPY test_knn_hnsw_i8 FROM '/var/infinity/test_data/embedding_int_dim3.csv' WITH (DELIMITER ',', FORMAT CSV);
+COPY test_knn_hnsw_i8 FROM '/var/hybridsearch/test_data/embedding_int_dim3.csv' WITH (DELIMITER ',', FORMAT CSV);
 
 statement ok
 INSERT INTO test_knn_hnsw_i8 VALUES (11, [-3, -2, -1]), (111, [-126, -127, -128]), (1111, [125, 126, 127]);
@@ -78,7 +78,7 @@ SELECT c1, SIMILARITY() FROM test_knn_hnsw_i8 SEARCH MATCH VECTOR (c2, [-30, -20
 1111 -0.923351
 
 statement ok
-COPY test_knn_hnsw_i8 FROM '/var/infinity/test_data/embedding_int_dim3.csv' WITH (DELIMITER ',', FORMAT CSV);
+COPY test_knn_hnsw_i8 FROM '/var/hybridsearch/test_data/embedding_int_dim3.csv' WITH (DELIMITER ',', FORMAT CSV);
 
 query I
 SELECT c1, DISTANCE() FROM test_knn_hnsw_i8 SEARCH MATCH VECTOR (c2, [0, 0, 0], 'TINYINT', 'l2', 10);
@@ -155,7 +155,7 @@ SELECT c1, SIMILARITY() FROM test_knn_hnsw_i8 SEARCH MATCH VECTOR (c2, [-30, -20
 
 # copy to create another new block with no index
 statement ok
-COPY test_knn_hnsw_i8 FROM '/var/infinity/test_data/embedding_int_dim3.csv' WITH (DELIMITER ',', FORMAT CSV);
+COPY test_knn_hnsw_i8 FROM '/var/hybridsearch/test_data/embedding_int_dim3.csv' WITH (DELIMITER ',', FORMAT CSV);
 
 query I
 SELECT c1, SIMILARITY() FROM test_knn_hnsw_i8 SEARCH MATCH VECTOR (c2, [-30, -20, -10], 'TINYINT', 'cosine', 20);

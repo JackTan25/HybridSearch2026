@@ -1,9 +1,9 @@
 from enum import Enum
 
-import infinity.remote_thrift.infinity_thrift_rpc.ttypes as ttypes
+import hybridsearch.remote_thrift.hybridsearch_thrift_rpc.ttypes as ttypes
 
 
-from infinity.errors import ErrorCode
+from hybridsearch.errors import ErrorCode
 
 
 class IndexType(Enum):
@@ -16,7 +16,7 @@ class IndexType(Enum):
     DiskAnn = 7
 
     def to_ttype(self):
-        from infinity.common import InfinityException
+        from hybridsearch.common import hybridsearchException
         match self:
             case IndexType.IVF:
                 return ttypes.IndexType.IVF
@@ -33,11 +33,11 @@ class IndexType(Enum):
             case IndexType.DiskAnn:
                 return ttypes.IndexType.DiskAnn
             case _:
-                raise InfinityException(ErrorCode.INVALID_INDEX_TYPE, "Unknown index type")
+                raise hybridsearchException(ErrorCode.INVALID_INDEX_TYPE, "Unknown index type")
 
     def to_local_type(self):
-        from infinity_embedded.embedded_infinity_ext import IndexType as LocalIndexType
-        from infinity_embedded.common import InfinityException
+        from hybridsearch_embedded.embedded_hybridsearch_ext import IndexType as LocalIndexType
+        from hybridsearch_embedded.common import hybridsearchException
         match self:
             case IndexType.IVF:
                 return LocalIndexType.kIVF
@@ -54,7 +54,7 @@ class IndexType(Enum):
             case IndexType.DiskAnn:
                 return LocalIndexType.kDiskAnn
             case _:
-                raise InfinityException(ErrorCode.INVALID_INDEX_TYPE, "Unknown index type")
+                raise hybridsearchException(ErrorCode.INVALID_INDEX_TYPE, "Unknown index type")
 
 
 class InitParameter:
@@ -72,7 +72,7 @@ class InitParameter:
         return ttypes.InitParameter(self.param_name, self.param_value)
 
     def to_local_type(self):
-        from infinity_embedded.embedded_infinity_ext import InitParameter as LocalInitParameter
+        from hybridsearch_embedded.embedded_hybridsearch_ext import InitParameter as LocalInitParameter
 
         local_init_parameter = LocalInitParameter()
         local_init_parameter.param_name = self.param_name

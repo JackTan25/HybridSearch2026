@@ -25,7 +25,7 @@ import stl;
 import darts;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 POSTable::POSTable(const String &file_name) : file_(file_name) {}
 
@@ -113,4 +113,4 @@ int DartsTrie::Get(std::string_view key) const {
     return darts_->exactMatchSearch<DartsCore::value_type>(key.data(), key.size());
 }
 
-} // namespace infinity
+} // namespace hybridsearch

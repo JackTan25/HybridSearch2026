@@ -18,8 +18,8 @@ module;
 
 export module array_info;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::ArrayInfo;
+export using hybridsearch::ArrayInfo;
 
 }

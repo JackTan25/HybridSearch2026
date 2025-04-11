@@ -10,7 +10,7 @@ import doc_list_format_option;
 import position_list_format_option;
 export module posting_decoder;
 
-namespace infinity {
+namespace hybridsearch {
 export class PostingDecoder {
 public:
     PostingDecoder(const PostingFormatOption &option);
@@ -47,4 +47,4 @@ private:
     SizeT posting_data_length_;
     PostingFormatOption posting_format_option_;
 };
-} // namespace infinity
+} // namespace hybridsearch

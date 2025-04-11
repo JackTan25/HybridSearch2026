@@ -22,11 +22,11 @@ import sparse_test_util;
 import bmp_fwd;
 import compilation_config;
 import virtual_store;
-import infinity_exception;
+import hybridsearch_exception;
 import local_file_handle;
 import third_party;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class BMPFwdTest : public BaseTest {
 protected:

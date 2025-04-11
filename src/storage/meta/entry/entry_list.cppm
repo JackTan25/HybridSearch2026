@@ -20,7 +20,7 @@ export module entry_list;
 
 import stl;
 import base_entry;
-import infinity_exception;
+import hybridsearch_exception;
 import cleanup_scanner;
 import status;
 import txn;
@@ -31,7 +31,7 @@ import txn_manager;
 import txn_state;
 import txn;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct DBEntry;
 struct TableEntry;
@@ -622,4 +622,4 @@ void EntryList<Entry>::Iterate(std::function<void(Entry *)> func, TxnTimeStamp v
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -15,7 +15,7 @@
 export module database_detail;
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct DatabaseDetail {
     SharedPtr<String> db_name_{};
@@ -23,4 +23,4 @@ export struct DatabaseDetail {
     SharedPtr<String> db_comment_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

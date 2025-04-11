@@ -18,7 +18,7 @@
 
 #include <vector>
 
-namespace infinity {
+namespace hybridsearch {
 
 class ExpressionParserResult {
 public:
@@ -49,4 +49,4 @@ public:
     size_t error_position_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

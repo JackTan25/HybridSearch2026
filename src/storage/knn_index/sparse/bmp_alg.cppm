@@ -27,9 +27,9 @@ import bmp_fwd;
 import bp_reordering;
 import serialize;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename DataType, typename IdxType, BMPCompressType CompressType, BMPOwnMem OwnMem>
 class BMPAlgBase {
@@ -478,4 +478,4 @@ public:
 private:
 };
 
-} // namespace infinity
+} // namespace hybridsearch

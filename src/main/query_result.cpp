@@ -22,7 +22,7 @@ import data_block;
 
 module query_result;
 
-namespace infinity {
+namespace hybridsearch {
 
 String QueryResult::ToString() const {
     std::stringstream ss;
@@ -65,4 +65,4 @@ String QueryResult::ToString() const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

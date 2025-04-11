@@ -19,9 +19,9 @@
 import stl;
 import virtual_store;
 import local_file_handle;
-import infinity_exception;
+import hybridsearch_exception;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 namespace benchmark {
 

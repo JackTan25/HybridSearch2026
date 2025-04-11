@@ -19,10 +19,10 @@ export module base_table;
 import stl;
 import table_entry_type;
 import logger;
-import infinity_exception;
+import hybridsearch_exception;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class BaseTableType {
     kInvalid,
@@ -51,7 +51,7 @@ export class BaseTable {
 public:
     explicit BaseTable(TableEntryType kind, SharedPtr<String> schema_name, SharedPtr<String> table_name)
         : kind_(kind), schema_name_(std::move(schema_name)), table_name_(std::move(table_name)) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("BaseTable");
 #endif
     }
@@ -60,7 +60,7 @@ public:
     BaseTable(BaseTable &&other) = delete;
 
     virtual ~BaseTable() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("BaseTable");
 #endif
     }
@@ -77,4 +77,4 @@ public:
     const SharedPtr<String> table_name_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

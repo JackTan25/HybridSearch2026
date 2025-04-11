@@ -14,8 +14,8 @@
 
 #include "flush_statement.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 std::string FlushStatement::ToString() const { return "flush statement"; }
 
-} // namespace infinity
+} // namespace hybridsearch

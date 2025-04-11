@@ -18,7 +18,7 @@ export module fulltext_score_result_heap;
 import stl;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 template <typename ScoreType, typename ID>
 struct HeapCompare {
@@ -103,4 +103,4 @@ public:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

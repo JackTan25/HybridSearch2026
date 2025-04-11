@@ -23,7 +23,7 @@ import physical_operator_type;
 import operator_state;
 import logger;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import buffer_manager;
 import third_party;
 import default_values;
@@ -40,7 +40,7 @@ import merge_knn;
 import match_sparse_scan_function_data;
 import result_cache_manager;
 
-namespace infinity {
+namespace hybridsearch {
 
 PhysicalMergeMatchSparse::PhysicalMergeMatchSparse(u64 id,
                                                    UniquePtr<PhysicalOperator> left,
@@ -161,4 +161,4 @@ void PhysicalMergeMatchSparse::ExecuteInner(QueryContext *query_context, MergeMa
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -23,7 +23,7 @@ import roaring_bitmap;
 import txn;
 import block_index;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class FilterFulltextExpression final : public BaseExpression {
 public:
@@ -51,4 +51,4 @@ public:
     std::shared_mutex rw_mutex_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

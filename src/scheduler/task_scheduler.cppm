@@ -22,7 +22,7 @@ import fragment_task;
 import blocking_queue;
 import base_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
 class QueryContext;
 class PlanFragment;
@@ -72,4 +72,4 @@ private:
     u64 worker_count_{0};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -26,7 +26,7 @@ import base_table_ref;
 import internal_types;
 import data_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalAggregate : public LogicalNode {
 public:
@@ -58,4 +58,4 @@ public:
     SharedPtr<BaseTableRef> base_table_ref_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

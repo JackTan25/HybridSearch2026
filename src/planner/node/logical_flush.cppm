@@ -24,7 +24,7 @@ import data_type;
 import internal_types;
 import flush_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalFlush : public LogicalNode {
 public:
@@ -46,4 +46,4 @@ private:
     FlushType flush_type_{FlushType::kData};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

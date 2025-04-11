@@ -22,7 +22,7 @@ import doc_iterator;
 import internal_types;
 import index_defines;
 
-namespace infinity {
+namespace hybridsearch {
 
 bool ScoreThresholdIterator::Next(RowID doc_id) {
     while (true) {
@@ -48,4 +48,4 @@ void ScoreThresholdIterator::PrintTree(std::ostream &os, const String &prefix, c
     query_iterator_->PrintTree(os, next_prefix, true);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

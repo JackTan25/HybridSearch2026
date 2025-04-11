@@ -14,7 +14,7 @@
 
 #include "delete_statement.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 DeleteStatement::~DeleteStatement() {
     if (where_expr_ != nullptr) {
@@ -25,4 +25,4 @@ DeleteStatement::~DeleteStatement() {
 
 std::string DeleteStatement::ToString() const { return "Delete statement"; }
 
-} // namespace infinity
+} // namespace hybridsearch

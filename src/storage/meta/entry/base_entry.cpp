@@ -18,14 +18,14 @@ module base_entry;
 
 import txn_manager;
 
-namespace infinity {
+namespace hybridsearch {
 
 BaseEntry::BaseEntry(const BaseEntry &other) : deleted_(other.deleted_), entry_type_(other.entry_type_), encode_(other.encode_) {
     txn_id_ = other.txn_id_;
     begin_ts_ = other.begin_ts_;
     commit_ts_ = other.commit_ts_.load();
 
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::IncrObjectCount("BaseEntry");
 #endif
 }
@@ -53,4 +53,4 @@ bool BaseEntry::CheckVisible(Txn *txn) const {
     return txn_mgr->CheckIfCommitting(txn_id_, begin_ts);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

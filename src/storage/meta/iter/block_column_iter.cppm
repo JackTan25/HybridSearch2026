@@ -31,7 +31,7 @@ import internal_types;
 import column_vector;
 import fix_heap;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <bool CheckTS = true>
 class BlockColumnIter {
@@ -192,4 +192,4 @@ private:
     SizeT end_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

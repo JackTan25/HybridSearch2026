@@ -20,9 +20,9 @@ module heap_chunk;
 
 import logger;
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 ptr_t StringHeapMgr::Allocate(SizeT nbytes) {
     if (nbytes == 0) {
@@ -77,4 +77,4 @@ String StringHeapMgr::Stats() const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

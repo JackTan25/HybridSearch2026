@@ -4,11 +4,11 @@ import os
 import pytest
 from common import common_values
 from common import common_index
-import infinity
-import infinity_embedded
-import infinity.index as index
-from infinity.errors import ErrorCode
-from infinity.common import ConflictType, InfinityException, SparseVector
+import hybridsearch
+import hybridsearch_embedded
+import hybridsearch.index as index
+from hybridsearch.errors import ErrorCode
+from hybridsearch.common import ConflictType, hybridsearchException, SparseVector
 from common.utils import copy_data, generate_commas_enwiki
 import pandas as pd
 from polars.testing import assert_frame_equal as pl_assert_frame_equal
@@ -19,12 +19,12 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
-from infinity_http import infinity_http
+from hybridsearch_http import hybridsearch_http
 
 
 @pytest.fixture(scope="class")
-def local_infinity(request):
-    return request.config.getoption("--local-infinity")
+def local_hybridsearch(request):
+    return request.config.getoption("--local-hybridsearch")
 
 
 @pytest.fixture(scope="class")
@@ -33,43 +33,43 @@ def http(request):
 
 
 @pytest.fixture(scope="class")
-def setup_class(request, local_infinity, http):
-    if local_infinity:
-        module = importlib.import_module("infinity_embedded.index")
+def setup_class(request, local_hybridsearch, http):
+    if local_hybridsearch:
+        module = importlib.import_module("hybridsearch_embedded.index")
         globals()["index"] = module
-        module = importlib.import_module("infinity_embedded.common")
+        module = importlib.import_module("hybridsearch_embedded.common")
         func = getattr(module, 'ConflictType')
         globals()['ConflictType'] = func
-        func = getattr(module, 'InfinityException')
-        globals()['InfinityException'] = func
+        func = getattr(module, 'hybridsearchException')
+        globals()['hybridsearchException'] = func
         func = getattr(module, 'SparseVector')
         globals()['SparseVector'] = func
         uri = common_values.TEST_LOCAL_PATH
-        request.cls.infinity_obj = infinity_embedded.connect(uri)
+        request.cls.hybridsearch_obj = hybridsearch_embedded.connect(uri)
     elif http:
         uri = common_values.TEST_LOCAL_HOST
-        request.cls.infinity_obj = infinity_http()
+        request.cls.hybridsearch_obj = hybridsearch_http()
     else:
         uri = common_values.TEST_LOCAL_HOST
-        request.cls.infinity_obj = infinity.connect(uri)
+        request.cls.hybridsearch_obj = hybridsearch.connect(uri)
     request.cls.uri = uri
     yield
-    request.cls.infinity_obj.disconnect()
+    request.cls.hybridsearch_obj.disconnect()
 
 
 @pytest.mark.usefixtures("setup_class")
 @pytest.mark.usefixtures("suffix")
-class TestInfinity:
+class Testhybridsearch:
     # def test_version(self):
-    #     self.test_infinity_obj._test_version()
+    #     self.test_hybridsearch_obj._test_version()
 
     @pytest.mark.parametrize("check_data", [{"file_name": "tmp_20240116.csv",
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     def test_knn(self, check_data, suffix):
         #
-        # infinity
+        # hybridsearch
         #
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
 
         db_obj.drop_table("fix_tmp_20240116" + suffix,
                           conflict_type=ConflictType.Ignore)
@@ -86,7 +86,7 @@ class TestInfinity:
             "query_price": {"type": "float"}
         }, ConflictType.Error)
 
-        test_csv_dir = "/var/infinity/test_data/tmp_20240116.csv"
+        test_csv_dir = "/var/hybridsearch/test_data/tmp_20240116.csv"
         if not check_data:
             copy_data("tmp_20240116.csv")
         print("import:", test_csv_dir, " start!")
@@ -120,13 +120,13 @@ class TestInfinity:
     @pytest.mark.parametrize("check_data", [{"file_name": "embedding_int_dim3.csv",
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     def test_knn_u8(self, check_data, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_knn_u8" + suffix, conflict_type=ConflictType.Ignore)
         table_obj = db_obj.create_table("test_knn_u8" + suffix, {
             "c1": {"type": "int"},
             "c2": {"type": "vector,3,uint8"}
         }, ConflictType.Error)
-        test_csv_dir = "/var/infinity/test_data/embedding_int_dim3.csv"
+        test_csv_dir = "/var/hybridsearch/test_data/embedding_int_dim3.csv"
         if not check_data:
             copy_data("embedding_int_dim3.csv")
         print("import:", test_csv_dir, " start!")
@@ -148,7 +148,7 @@ class TestInfinity:
         print(res)
         pd.testing.assert_frame_equal(res, pd.DataFrame({'c1': (1, 5), 'DISTANCE': (29.0, 149.0)}).astype(
             {'c1': dtype('int32'), 'DISTANCE': dtype('float32')}))
-        with pytest.raises(InfinityException):
+        with pytest.raises(hybridsearchException):
             table_obj.create_index("invalid_lvq", index.IndexInfo("c2", index.IndexType.Hnsw,
                                                                   {
                                                                       "M": "16",
@@ -174,7 +174,7 @@ class TestInfinity:
         print(res)
         pd.testing.assert_frame_equal(res, pd.DataFrame({'c1': (1, 5), 'DISTANCE': (29.0, 149.0)}).astype(
             {'c1': dtype('int32'), 'DISTANCE': dtype('float32')}))
-        with pytest.raises(InfinityException):
+        with pytest.raises(hybridsearchException):
             table_obj.output(["c1", "_distance"]).match_dense('c2', [0, 0, 0], "int8", "l2", 10).to_result()
         res = db_obj.drop_table("test_knn_u8" + suffix, ConflictType.Error)
         assert res.error_code == ErrorCode.OK
@@ -184,13 +184,13 @@ class TestInfinity:
     @pytest.mark.parametrize("save_elem_type", ["float", "float16", "bfloat16"])
     @pytest.mark.parametrize("query_elem_type", ["float", "float16", "bfloat16"])
     def test_knn_fp16_bf16(self, check_data, save_elem_type, query_elem_type, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_knn_fp16_bf16" + suffix, conflict_type=ConflictType.Ignore)
         table_obj = db_obj.create_table("test_knn_fp16_bf16" + suffix, {
             "c1": {"type": "int"},
             "c2": {"type": f"vector,3,{save_elem_type}"}
         }, ConflictType.Error)
-        test_csv_dir = "/var/infinity/test_data/embedding_int_dim3.csv"
+        test_csv_dir = "/var/hybridsearch/test_data/embedding_int_dim3.csv"
         if not check_data:
             copy_data("embedding_int_dim3.csv")
         print("import:", test_csv_dir, " start!")
@@ -212,7 +212,7 @@ class TestInfinity:
 
     def test_insert_multi_column(self, suffix):
         with pytest.raises(Exception, match=r".*No default value found*"):
-            db_obj = self.infinity_obj.get_database("default_db")
+            db_obj = self.hybridsearch_obj.get_database("default_db")
             db_obj.drop_table("test_insert_multi_column" + suffix,
                               conflict_type=ConflictType.Ignore)
             table = db_obj.create_table("test_insert_multi_column" + suffix, {
@@ -247,7 +247,7 @@ class TestInfinity:
     @pytest.mark.parametrize("column_name", ["gender_vector",
                                              "color_vector"])
     def test_knn_on_vector_column(self, check_data, column_name, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_knn_on_vector_column" + suffix,
                           conflict_type=ConflictType.Ignore)
         table_obj = db_obj.create_table("test_knn_on_vector_column" + suffix, {
@@ -264,7 +264,7 @@ class TestInfinity:
         }, ConflictType.Error)
         if not check_data:
             copy_data("tmp_20240116.csv")
-        test_csv_dir = "/var/infinity/test_data/tmp_20240116.csv"
+        test_csv_dir = "/var/hybridsearch/test_data/tmp_20240116.csv"
         table_obj.import_data(test_csv_dir, None)
         res, extra_result = table_obj.output(["variant_id", "_row_id", "_similarity"]).match_dense(
             column_name, [1.0] * 4, "float", "ip", 2).to_pl()
@@ -283,7 +283,7 @@ class TestInfinity:
                                              # pytest.param("!@#/\#$ ## #$%  @#$^", marks=pytest.mark.xfail),
                                              ])
     def test_knn_on_non_vector_column(self, check_data, column_name, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_knn_on_non_vector_column" + suffix,
                           conflict_type=ConflictType.Ignore)
         table_obj = db_obj.create_table("test_knn_on_non_vector_column" + suffix, {
@@ -300,12 +300,12 @@ class TestInfinity:
         }, ConflictType.Error)
         if not check_data:
             copy_data("tmp_20240116.csv")
-        test_csv_dir = "/var/infinity/test_data/tmp_20240116.csv"
+        test_csv_dir = "/var/hybridsearch/test_data/tmp_20240116.csv"
         table_obj.import_data(test_csv_dir, None)
-        with pytest.raises(InfinityException) as e:
+        with pytest.raises(hybridsearchException) as e:
             table_obj.output(["variant_id", "_row_id"]).match_dense(column_name, [1.0] * 4, "float", "ip", 2).to_pl()
 
-        assert e.type == InfinityException
+        assert e.type == hybridsearchException
         assert e.value.args[0] == ErrorCode.SYNTAX_ERROR
 
         res = db_obj.drop_table(
@@ -319,7 +319,7 @@ class TestInfinity:
         (1, 2, 3, 4),
     ])
     def test_valid_embedding_data(self, check_data, embedding_data, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_valid_embedding_data" + suffix,
                           conflict_type=ConflictType.Ignore)
         table_obj = db_obj.create_table("test_valid_embedding_data" + suffix, {
@@ -336,7 +336,7 @@ class TestInfinity:
         }, ConflictType.Error)
         if not check_data:
             copy_data("tmp_20240116.csv")
-        test_csv_dir = "/var/infinity/test_data/tmp_20240116.csv"
+        test_csv_dir = "/var/hybridsearch/test_data/tmp_20240116.csv"
         table_obj.import_data(test_csv_dir, None)
         res, extra_result = table_obj.output(["variant_id", "_row_id"]).match_dense(
             "gender_vector", embedding_data, "float", "ip", 2).to_pl()
@@ -358,7 +358,7 @@ class TestInfinity:
         pytest.param({"c": "12"}),
     ])
     def test_invalid_embedding_data(self, check_data, embedding_data, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_invalid_embedding_data" + suffix,
                           conflict_type=ConflictType.Ignore)
         table_obj = db_obj.create_table("test_invalid_embedding_data" + suffix, {
@@ -375,7 +375,7 @@ class TestInfinity:
         }, ConflictType.Error)
         if not check_data:
             copy_data("tmp_20240116.csv")
-        test_csv_dir = "/var/infinity/test_data/tmp_20240116.csv"
+        test_csv_dir = "/var/hybridsearch/test_data/tmp_20240116.csv"
         table_obj.import_data(test_csv_dir, None)
         with pytest.raises(Exception):
             res, extra_result = table_obj.output(["variant_id", "_row_id"]).match_dense(
@@ -396,7 +396,7 @@ class TestInfinity:
         ("float", True),
     ])
     def test_valid_embedding_data_type(self, check_data, embedding_data, embedding_data_type, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_valid_embedding_data_type" + suffix,
                           conflict_type=ConflictType.Ignore)
         table_obj = db_obj.create_table("test_valid_embedding_data_type" + suffix, {
@@ -413,7 +413,7 @@ class TestInfinity:
         }, ConflictType.Error)
         if not check_data:
             copy_data("tmp_20240116.csv")
-        test_csv_dir = "/var/infinity/test_data/tmp_20240116.csv"
+        test_csv_dir = "/var/hybridsearch/test_data/tmp_20240116.csv"
         table_obj.import_data(test_csv_dir, None)
         if embedding_data_type[1]:
             res, extra_result = table_obj.output(["variant_id", "_distance"]).match_dense("gender_vector",
@@ -446,7 +446,7 @@ class TestInfinity:
         pytest.param("#@!$!@"),
     ])
     def test_invalid_embedding_data_type(self, check_data, embedding_data, embedding_data_type, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_invalid_embedding_data_type" + suffix,
                           conflict_type=ConflictType.Ignore)
         table_obj = db_obj.create_table("test_invalid_embedding_data_type" + suffix, {
@@ -463,7 +463,7 @@ class TestInfinity:
         }, ConflictType.Error)
         if not check_data:
             copy_data("tmp_20240116.csv")
-        test_csv_dir = "/var/infinity/test_data/tmp_20240116.csv"
+        test_csv_dir = "/var/hybridsearch/test_data/tmp_20240116.csv"
         table_obj.import_data(test_csv_dir, None)
         with pytest.raises(Exception):
             if embedding_data_type[1]:
@@ -500,7 +500,7 @@ class TestInfinity:
     ])
     def test_various_distance_type(self, check_data, embedding_data, embedding_data_type,
                                    distance_type, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_various_distance_type" + suffix,
                           conflict_type=ConflictType.Ignore)
         table_obj = db_obj.create_table("test_various_distance_type" + suffix, {
@@ -517,7 +517,7 @@ class TestInfinity:
         }, ConflictType.Error)
         if not check_data:
             copy_data("tmp_20240116.csv")
-        test_csv_dir = "/var/infinity/test_data/tmp_20240116.csv"
+        test_csv_dir = "/var/hybridsearch/test_data/tmp_20240116.csv"
         table_obj.import_data(test_csv_dir, None)
         if distance_type[1] and embedding_data_type[1]:
             res, extra_result = table_obj.output(["variant_id"]).match_dense("gender_vector", embedding_data,
@@ -526,12 +526,12 @@ class TestInfinity:
                                                                              2).to_pl()
             print(res)
         else:
-            with pytest.raises(InfinityException) as e:
+            with pytest.raises(hybridsearchException) as e:
                 table_obj.output(["variant_id"]).match_dense("gender_vector", embedding_data, embedding_data_type[0],
                                                              distance_type[0],
                                                              2).to_pl()
 
-            assert e.type == InfinityException
+            assert e.type == hybridsearchException
             assert e.value.args[0] == ErrorCode.NOT_SUPPORTED
 
         res = db_obj.drop_table(
@@ -552,7 +552,7 @@ class TestInfinity:
         ([1] * 4, False, ErrorCode.INVALID_TOPK_TYPE),
     ])
     def test_various_topn(self, check_data, topn, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_various_topn" + suffix,
                           conflict_type=ConflictType.Ignore)
         table_obj = db_obj.create_table("test_various_topn" + suffix, {
@@ -569,18 +569,18 @@ class TestInfinity:
         }, ConflictType.Error)
         if not check_data:
             copy_data("tmp_20240116.csv")
-        test_csv_dir = "/var/infinity/test_data/tmp_20240116.csv"
+        test_csv_dir = "/var/hybridsearch/test_data/tmp_20240116.csv"
         table_obj.import_data(test_csv_dir, None)
         if topn[1]:
             res, extra_result = table_obj.output(["variant_id"]).match_dense(
                 "gender_vector", [1] * 4, "float", "l2", topn[0]).to_pl()
             print(res)
         else:
-            with pytest.raises(InfinityException) as e:
+            with pytest.raises(hybridsearchException) as e:
                 table_obj.output(["variant_id"]).match_dense(
                     "gender_vector", [1] * 4, "float", "l2", topn[0]).to_pl()
 
-            assert e.type == InfinityException
+            assert e.type == hybridsearchException
             # assert e.value.args[0] == topn[2]
 
         res = db_obj.drop_table("test_various_topn" + suffix, ConflictType.Error)
@@ -602,7 +602,7 @@ class TestInfinity:
     @pytest.mark.parametrize("knn_distance_type", ["l2", "ip"])
     def test_with_index_before(self, check_data, index_column_name, knn_column_name,
                                index_distance_type, knn_distance_type, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_with_index" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_with_index" + suffix, {
             "variant_id": {"type": "varchar"},
@@ -618,7 +618,7 @@ class TestInfinity:
         }, ConflictType.Error)
         if not check_data:
             copy_data("pysdk_test_knn.csv")
-        test_csv_dir = "/var/infinity/test_data/pysdk_test_knn.csv"
+        test_csv_dir = "/var/hybridsearch/test_data/pysdk_test_knn.csv"
         table_obj.import_data(test_csv_dir, None)
         res = table_obj.create_index("my_index",
                                      index.IndexInfo(index_column_name,
@@ -658,7 +658,7 @@ class TestInfinity:
     def test_with_index_after(self, check_data,
                               index_column_name, knn_column_name,
                               index_distance_type, knn_distance_type, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_with_index_after" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_with_index_after" + suffix, {
             "variant_id": {"type": "varchar"},
@@ -674,7 +674,7 @@ class TestInfinity:
         }, ConflictType.Error)
         if not check_data:
             copy_data("pysdk_test_knn.csv")
-        test_csv_dir = "/var/infinity/test_data/pysdk_test_knn.csv"
+        test_csv_dir = "/var/hybridsearch/test_data/pysdk_test_knn.csv"
         table_obj.import_data(test_csv_dir, None)
         res, extra_result = table_obj.output(["variant_id"]).match_dense(
             knn_column_name, [1.0] * 4, "float", knn_distance_type, 5).to_pl()
@@ -699,7 +699,7 @@ class TestInfinity:
     @pytest.mark.parametrize("check_data", [{"file_name": "enwiki_99.csv", "data_dir": common_values.TEST_TMP_DIR}],
                              indirect=True)
     def test_fulltext_operator_option(self, check_data, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_fulltext_operator_option" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_fulltext_operator_option" + suffix,
                                         {"doctitle": {"type": "varchar"}, "docdate": {"type": "varchar"},
@@ -747,7 +747,7 @@ class TestInfinity:
                                           {'SCORE': dtype('float32')}))
         # expect throw
         print('No operator option for query "TO BE OR NOT", expect throw:')
-        with pytest.raises(InfinityException) as e_info:
+        with pytest.raises(hybridsearchException) as e_info:
             table_obj.output(["*", "_row_id", "_score"]).match_text("body^5", "TO BE OR NOT", 5).to_pl()
         print(e_info.value.error_message)
         res = table_obj.drop_index("my_index", ConflictType.Error)
@@ -759,7 +759,7 @@ class TestInfinity:
     @pytest.mark.parametrize("check_data", [{"file_name": "enwiki_embedding_99_commas.csv",
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     def test_with_fulltext_match_with_valid_columns(self, check_data, match_param_1, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table(
             "test_with_fulltext_match_with_valid_columns" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_with_fulltext_match_with_valid_columns" + suffix,
@@ -819,7 +819,7 @@ class TestInfinity:
              .fusion(method='rrf', topn=10)
              .to_pl())
 
-        with pytest.raises(InfinityException) as e_info:
+        with pytest.raises(hybridsearchException) as e_info:
             res_filter_3, extra_result = (table_obj
                                           .output(["*"])
                                           .match_dense("vec", [3.0, 2.8, 2.7, 3.1], "float", "ip", 1,
@@ -846,7 +846,7 @@ class TestInfinity:
     @pytest.mark.parametrize("check_data", [{"file_name": "enwiki_embedding_99_commas.csv",
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     def test_with_fulltext_match_with_invalid_columns(self, check_data, match_param_1, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table(
             "test_with_fulltext_match_with_invalid_columns" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_with_fulltext_match_with_invalid_columns" + suffix,
@@ -889,7 +889,7 @@ class TestInfinity:
     @pytest.mark.parametrize("check_data", [{"file_name": "enwiki_embedding_99_commas.csv",
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     def test_with_fulltext_match_with_valid_words(self, check_data, match_param_2, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table(
             "test_with_fulltext_match_with_valid_words" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_with_fulltext_match_with_valid_words" + suffix,
@@ -935,7 +935,7 @@ class TestInfinity:
     @pytest.mark.parametrize("check_data", [{"file_name": "enwiki_embedding_99_commas.csv",
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     def test_with_fulltext_match_with_invalid_words(self, check_data, match_param_2, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table(
             "test_with_fulltext_match_with_invalid_words" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_with_fulltext_match_with_invalid_words" + suffix,
@@ -979,7 +979,7 @@ class TestInfinity:
     @pytest.mark.parametrize("save_elem_t", ["float32", "float16", "bfloat16"])
     @pytest.mark.parametrize("query_elem_t", ["float32", "float16", "bfloat16"])
     def test_tensor_scan(self, check_data, save_elem_t, query_elem_t, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_tensor_scan" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_tensor_scan" + suffix,
                                         {"title": {"type": "varchar"},
@@ -995,7 +995,7 @@ class TestInfinity:
                              .match_tensor('t', [[0.0, -10.0, 0.0, 0.7], [9.2, 45.6, -55.8, 3.5]], query_elem_t, 3)
                              .to_pl())
         print(res)
-        with pytest.raises(InfinityException) as e:
+        with pytest.raises(hybridsearchException) as e:
             table_obj.output(["*", "_row_id", "_score"]).match_tensor('t',
                                                                       [[0.0, -10.0, 0.0, 0.7], [9.2, 45.6, -55.8, 3.5]],
                                                                       query_elem_t, 3, {"some_option": 222}).to_df()
@@ -1018,7 +1018,7 @@ class TestInfinity:
     @pytest.mark.parametrize("check_data", [{"file_name": "sparse_knn.csv",
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     def test_sparse_knn(self, check_data, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_sparse_scan" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_sparse_scan" + suffix,
                                         {"c1": {"type": "int"}, "c2": {"type": "sparse,100,float,int8"}},
@@ -1055,7 +1055,7 @@ class TestInfinity:
     @pytest.mark.parametrize("check_data", [{"file_name": "sparse_knn.csv",
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     def test_sparse_knn_with_index(self, check_data, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_sparse_knn_with_index" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_sparse_knn_with_index" + suffix,
                                         {"c1": {"type": "int"}, "c2": {"type": "sparse,100,float,int8"}},
@@ -1107,7 +1107,7 @@ class TestInfinity:
     @pytest.mark.parametrize("check_data", [{"file_name": "tensor_maxsim.csv",
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     def test_with_multiple_fusion(self, check_data, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_with_multiple_fusion" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_with_multiple_fusion" + suffix,
                                         {"title": {"type": "varchar"},
@@ -1147,7 +1147,7 @@ class TestInfinity:
     @pytest.mark.parametrize("index_type", [common_index.IndexType.Hnsw, common_index.IndexType.IVF])
     def test_with_various_index_knn_distance_combination(self, check_data, index_column_name, knn_column_name,
                                                          index_distance_type, knn_distance_type, index_type, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_with_index" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_with_index" + suffix, {
             "variant_id": {"type": "varchar"},
@@ -1163,7 +1163,7 @@ class TestInfinity:
         }, ConflictType.Error)
         if not check_data:
             copy_data("pysdk_test_knn.csv")
-        test_csv_dir = "/var/infinity/test_data/pysdk_test_knn.csv"
+        test_csv_dir = "/var/hybridsearch/test_data/pysdk_test_knn.csv"
         table_obj.import_data(test_csv_dir, None)
         if index_type == common_index.IndexType.Hnsw:
             res = table_obj.create_index("my_index",
@@ -1198,7 +1198,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     def test_zero_dimension_vector(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_zero_dimension_vector" + suffix,
                           conflict_type=ConflictType.Ignore)
         table_obj = db_obj.create_table("test_zero_dimension_vector" + suffix, {
@@ -1206,14 +1206,14 @@ class TestInfinity:
         }, ConflictType.Error)
 
         # try to insert and search a non-zero dim vector
-        with pytest.raises(InfinityException) as e:
+        with pytest.raises(hybridsearchException) as e:
             table_obj.insert([{"zero_vector": [0.0]}])
-        assert e.type == InfinityException
+        assert e.type == hybridsearchException
         assert e.value.args[0] == ErrorCode.DATA_TYPE_MISMATCH
-        with pytest.raises(InfinityException) as e:
+        with pytest.raises(hybridsearchException) as e:
             res, extra_result = table_obj.output(["_row_id"]).match_dense(
                 "zero_vector", [0.0], "float", "l2", 5).to_pl()
-        assert e.type == InfinityException
+        assert e.type == hybridsearchException
         assert e.value.args[0] == ErrorCode.SYNTAX_ERROR
 
         # try to insert and search a zero dim vector
@@ -1230,7 +1230,7 @@ class TestInfinity:
 
     @pytest.mark.parametrize("dim", [1000, 16384])
     def test_big_dimension_vector(self, dim, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_big_dimension_vector" + suffix,
                           conflict_type=ConflictType.Ignore)
         table_obj = db_obj.create_table("test_big_dimension_vector" + suffix, {
@@ -1254,7 +1254,7 @@ class TestInfinity:
     # sql:
     # create table test_with_various_fulltext_match_http(doctitle varchar, docdate varchar, body varchar, num int, vec embedding(float, 4));
     # create index my_index on test_with_various_fulltext_match_http(body) using fulltext with(analyzer=standard);
-    # copy test_with_various_fulltext_match_http from '/home/huikong/Code/work/infinity/test/data/csv/enwiki_embedding_99_commas.csv' with(delimiter ',', format csv);
+    # copy test_with_various_fulltext_match_http from '/home/huikong/Code/work/hybridsearch/test/data/csv/enwiki_embedding_99_commas.csv' with(delimiter ',', format csv);
     # select * from test_with_various_fulltext_match_http search match text('body','"black white"', 'topn=1'),match vector(vec,[3.0,2.8,2.7,3.1],'float','ip',1),fusion('rrf');
     @pytest.mark.parametrize("fields_and_matching_text", [
         ["body", "black"],
@@ -1279,7 +1279,7 @@ class TestInfinity:
     @pytest.mark.parametrize("check_data", [{"file_name": "enwiki_embedding_99_commas.csv",
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     def test_with_various_fulltext_match(self, check_data, fields_and_matching_text, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table(
             "test_with_various_fulltext_match" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_with_various_fulltext_match" + suffix,
@@ -1327,7 +1327,7 @@ class TestInfinity:
     @pytest.mark.parametrize("check_data", [{"file_name": "tensor_maxsim.csv",
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     def test_tensor_scan_with_invalid_data_type(self, check_data, data_type, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_tensor_scan" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_tensor_scan" + suffix,
                                         {"title": {"type": "varchar"},
@@ -1358,7 +1358,7 @@ class TestInfinity:
     @pytest.mark.parametrize("check_data", [{"file_name": "tensor_maxsim.csv",
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     def test_tensor_scan_with_invalid_extra_option(self, check_data, extra_option, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_tensor_scan" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_tensor_scan" + suffix,
                                         {"title": {"type": "varchar"},
@@ -1381,7 +1381,7 @@ class TestInfinity:
     @pytest.mark.skip(
         reason="UnrecoverableException The tensor column basic embedding dimension should be greater than 0")
     def test_zero_dimension_tensor_scan(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_tensor_scan" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_tensor_scan" + suffix,
                                         {"t": {"type": "tensor, 0, float"}})
@@ -1399,7 +1399,7 @@ class TestInfinity:
 
     @pytest.mark.parametrize("dim", [1, 10, 100])  # 1^3, 10^3, 100^3
     def test_big_dimension_tensor_scan(self, dim, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_tensor_scan" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_tensor_scan" + suffix,
                                         {"t": {"type": f"tensorarray, {dim}, float"}})
@@ -1429,7 +1429,7 @@ class TestInfinity:
     @pytest.mark.parametrize("check_data", [{"file_name": "sparse_knn.csv",
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     def test_sparse_with_invalid_table_params(self, check_data, table_params, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_sparse_scan" + suffix, ConflictType.Ignore)
         params = table_params.split(",")
         if not check_data:
@@ -1437,7 +1437,7 @@ class TestInfinity:
         test_csv_dir = common_values.TEST_TMP_DIR + "sparse_knn.csv"
 
         if params[0] == "int8":
-            with pytest.raises(InfinityException) as e:
+            with pytest.raises(hybridsearchException) as e:
                 table_obj = db_obj.create_table("test_sparse_scan" + suffix,
                                                 {"c1": {"type": "int"}, "c2": {"type": table_params}},
                                                 ConflictType.Error)
@@ -1448,7 +1448,7 @@ class TestInfinity:
                                             ConflictType.Error)
             table_obj.import_data(test_csv_dir, import_options={"delimiter": ","})
 
-            with pytest.raises(InfinityException) as e:
+            with pytest.raises(hybridsearchException) as e:
                 res, extra_result = (table_obj.output(["*", "_row_id", "_similarity"])
                                      .match_sparse("c2",
                                                    SparseVector(**{"indices": [0, 20, 80], "values": [1.0, 2.0, 3.0]}),
@@ -1464,7 +1464,7 @@ class TestInfinity:
                                             ConflictType.Error)
             table_obj.import_data(test_csv_dir, import_options={"delimiter": ","})
 
-            with pytest.raises(InfinityException) as e:
+            with pytest.raises(hybridsearchException) as e:
                 res, extra_result = (table_obj.output(["*", "_row_id", "_similarity"])
                                      .match_sparse("c2",
                                                    SparseVector(**{"indices": [0, 20, 80], "values": [1.0, 2.0, 3.0]}),
@@ -1478,13 +1478,13 @@ class TestInfinity:
             table_obj = db_obj.create_table("test_sparse_scan" + suffix,
                                             {"c1": {"type": "int"}, "c2": {"type": table_params}},
                                             ConflictType.Error)
-            with pytest.raises(InfinityException) as e:
+            with pytest.raises(hybridsearchException) as e:
                 table_obj.import_data(test_csv_dir, import_options={"delimiter": ","})
             assert e.value.args[0] == ErrorCode.PARSER_ERROR
             res = db_obj.drop_table("test_sparse_scan" + suffix, ConflictType.Error)
             assert res.error_code == ErrorCode.OK
         elif params[3] == "float":
-            with pytest.raises(InfinityException) as e:
+            with pytest.raises(hybridsearchException) as e:
                 table_obj = db_obj.create_table("test_sparse_scan" + suffix,
                                                 {"c1": {"type": "int"}, "c2": {"type": table_params}},
                                                 ConflictType.Error)
@@ -1498,7 +1498,7 @@ class TestInfinity:
     @pytest.mark.parametrize("check_data", [{"file_name": "sparse_knn.csv",
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     def test_sparse_knn_with_invalid_index_type(self, check_data, index_type, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_sparse_knn_with_index" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_sparse_knn_with_index" + suffix,
                                         {"c1": {"type": "int"}, "c2": {"type": "sparse,100,float,int8"}},
@@ -1508,7 +1508,7 @@ class TestInfinity:
         test_csv_dir = common_values.TEST_TMP_DIR + "sparse_knn.csv"
         table_obj.import_data(test_csv_dir, import_options={"delimiter": ","})
 
-        with pytest.raises(InfinityException) as e:
+        with pytest.raises(hybridsearchException) as e:
             if index_type == common_index.IndexType.IVF:
                 res = table_obj.create_index("my_index",
                                              index.IndexInfo("c2",
@@ -1552,7 +1552,7 @@ class TestInfinity:
     @pytest.mark.parametrize("check_data", [{"file_name": "sparse_knn.csv",
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     def test_sparse_knn_with_invalid_index_params(self, check_data, index_params, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_sparse_knn_with_index" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_sparse_knn_with_index" + suffix,
                                         {"c1": {"type": "int"}, "c2": {"type": "sparse,100,float,int8"}},
@@ -1561,7 +1561,7 @@ class TestInfinity:
             copy_data("sparse_knn.csv")
         test_csv_dir = common_values.TEST_TMP_DIR + "sparse_knn.csv"
         table_obj.import_data(test_csv_dir, import_options={"delimiter": ","})
-        with pytest.raises(InfinityException) as e:
+        with pytest.raises(hybridsearchException) as e:
             table_obj.create_index("idx1",
                                    index.IndexInfo("c2",
                                                    index.IndexType.BMP,
@@ -1578,7 +1578,7 @@ class TestInfinity:
     @pytest.mark.parametrize("check_data", [{"file_name": "sparse_knn.csv",
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     def test_sparse_knn_with_invalid_alpha_beta(self, check_data, alpha, beta, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_sparse_knn_with_index" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_sparse_knn_with_index" + suffix,
                                         {"c1": {"type": "int"}, "c2": {"type": "sparse,100,float,int8"}},
@@ -1594,7 +1594,7 @@ class TestInfinity:
 
         table_obj.optimize("idx1", {"topk": "3"})
 
-        with pytest.raises(InfinityException) as e:
+        with pytest.raises(hybridsearchException) as e:
             res, extra_result = (table_obj
                                  .output(["*", "_row_id", "_similarity"])
                                  .match_sparse("c2",
@@ -1613,7 +1613,7 @@ class TestInfinity:
     @pytest.mark.parametrize("check_data", [{"file_name": "sparse_knn.csv",
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     def test_sparse_knn_with_indices_values_mismatch(self, check_data, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_sparse_knn_with_index" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_sparse_knn_with_index" + suffix,
                                         {"c1": {"type": "int"}, "c2": {"type": "sparse,100,float,int8"}},
@@ -1638,7 +1638,7 @@ class TestInfinity:
     @pytest.mark.parametrize("check_data", [{"file_name": "sparse_knn.csv",
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     def test_sparse_knn_with_invalid_distance_type(self, check_data, distance_type, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_sparse_knn_with_index" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_sparse_knn_with_index" + suffix,
                                         {"c1": {"type": "int"}, "c2": {"type": "sparse,100,float,int8"}},
@@ -1664,7 +1664,7 @@ class TestInfinity:
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     @pytest.mark.parametrize("knn_distance_type", ["l2", "ip"])
     def test_knn_with_given_index_name(self, check_data, knn_distance_type, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_with_index" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_with_index" + suffix, {
             "variant_id": {"type": "varchar"},
@@ -1680,7 +1680,7 @@ class TestInfinity:
         }, ConflictType.Error)
         if not check_data:
             copy_data("pysdk_test_knn.csv")
-        test_csv_dir = "/var/infinity/test_data/pysdk_test_knn.csv"
+        test_csv_dir = "/var/hybridsearch/test_data/pysdk_test_knn.csv"
         table_obj.import_data(test_csv_dir, None)
         res = table_obj.create_index("my_index_l2",
                                      index.IndexInfo("gender_vector",
@@ -1725,7 +1725,7 @@ class TestInfinity:
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     @pytest.mark.parametrize("knn_distance_type", ["l2", "ip"])
     def test_knn_with_ignore_index(self, check_data, knn_distance_type, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_with_index" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_with_index" + suffix, {
             "variant_id": {"type": "varchar"},
@@ -1741,7 +1741,7 @@ class TestInfinity:
         }, ConflictType.Error)
         if not check_data:
             copy_data("pysdk_test_knn.csv")
-        test_csv_dir = "/var/infinity/test_data/pysdk_test_knn.csv"
+        test_csv_dir = "/var/hybridsearch/test_data/pysdk_test_knn.csv"
         table_obj.import_data(test_csv_dir, None)
         res = table_obj.create_index("my_index_l2",
                                      index.IndexInfo("gender_vector",
@@ -1768,7 +1768,7 @@ class TestInfinity:
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     @pytest.mark.parametrize("knn_distance_type", ["l2", "ip"])
     def test_knn_with_given_invalid_index_name(self, check_data, knn_distance_type, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_with_index" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_with_index" + suffix, {
             "variant_id": {"type": "varchar"},
@@ -1784,7 +1784,7 @@ class TestInfinity:
         }, ConflictType.Error)
         if not check_data:
             copy_data("pysdk_test_knn.csv")
-        test_csv_dir = "/var/infinity/test_data/pysdk_test_knn.csv"
+        test_csv_dir = "/var/hybridsearch/test_data/pysdk_test_knn.csv"
         table_obj.import_data(test_csv_dir, None)
         res = table_obj.create_index("my_index_l2",
                                      index.IndexInfo("gender_vector",
@@ -1797,7 +1797,7 @@ class TestInfinity:
 
         assert res.error_code == ErrorCode.OK
 
-        with  pytest.raises(InfinityException) as e:
+        with  pytest.raises(hybridsearchException) as e:
             res, extra_result = table_obj.output(["variant_id"]).match_dense(
                 "gender_vector", [1.0] * 4, "float", knn_distance_type, 5, {"index_name": "my_index_ip"}).to_pl()
         assert e.value.args[0] == ErrorCode.INDEX_NOT_EXIST
@@ -1812,7 +1812,7 @@ class TestInfinity:
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     @pytest.mark.parametrize("knn_distance_type", ["l2", "ip"])
     def test_knn_with_given_index_name_and_ignore_index(self, check_data, knn_distance_type, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_with_index" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_with_index" + suffix, {
             "variant_id": {"type": "varchar"},
@@ -1828,7 +1828,7 @@ class TestInfinity:
         }, ConflictType.Error)
         if not check_data:
             copy_data("pysdk_test_knn.csv")
-        test_csv_dir = "/var/infinity/test_data/pysdk_test_knn.csv"
+        test_csv_dir = "/var/hybridsearch/test_data/pysdk_test_knn.csv"
         table_obj.import_data(test_csv_dir, None)
         res = table_obj.create_index("my_index_l2",
                                      index.IndexInfo("gender_vector",
@@ -1846,7 +1846,7 @@ class TestInfinity:
             {"index_name": "my_index_l2", "ignore_index": "false"}).to_pl()
         print(res)
 
-        with pytest.raises(InfinityException) as e:
+        with pytest.raises(hybridsearchException) as e:
             res, extra_result = table_obj.output(["variant_id"]).match_dense(
                 "gender_vector", [1.0] * 4, "float", knn_distance_type, 5,
                 {"index_name": "my_index_l2", "ignore_index": "true"}).to_pl()
@@ -1862,7 +1862,7 @@ class TestInfinity:
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     @pytest.mark.parametrize("knn_distance_type", ["hamming"])
     def test_binary_embedding_hamming_distance(self, check_data, knn_distance_type, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_binary_knn_hamming_distance" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_binary_knn_hamming_distance" + suffix, {
             "c1": {"type": "int"},
@@ -1892,7 +1892,7 @@ class TestInfinity:
     @pytest.mark.parametrize("check_data", [{"file_name": "sparse_knn.csv",
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     def test_match_sparse_index_hint(self, check_data, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_sparse_knn_with_index" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_sparse_knn_with_index" + suffix,
                                         {"c1": {"type": "int"}, "c2": {"type": "sparse,100,float,int8"}},
@@ -1942,7 +1942,7 @@ class TestInfinity:
             {'c1': dtype('int32'), 'SIMILARITY': dtype('float32')}))
 
         # non-existent index
-        with pytest.raises(InfinityException) as e:
+        with pytest.raises(hybridsearchException) as e:
             res, extra_result = table_obj.output(["c1", "_similarity"]).match_sparse("c2",
                                                                                      SparseVector(
                                                                                          **{"indices": [0, 20, 80],
@@ -1967,7 +1967,7 @@ class TestInfinity:
     @pytest.mark.parametrize("check_data", [{"file_name": "enwiki_embedding_99_commas.csv",
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     def test_match_text_index_hints(self, check_data, match_param_1, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table(
             "test_with_fulltext_match_with_valid_columns" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_with_fulltext_match_with_valid_columns" + suffix,
@@ -2027,7 +2027,7 @@ class TestInfinity:
              .fusion(method='rrf', topn=10)
              .to_pl())
 
-        with pytest.raises(InfinityException) as e_info:
+        with pytest.raises(hybridsearchException) as e_info:
             res_filter_3, extra_result = (table_obj
                                           .output(["*"])
                                           .match_dense("vec", [3.0, 2.8, 2.7, 3.1], "float", "ip", 1,

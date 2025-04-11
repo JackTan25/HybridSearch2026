@@ -30,7 +30,7 @@ import index_base;
 import status;
 import logger;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import segment_entry;
 import block_entry;
@@ -41,7 +41,7 @@ import buffer_manager;
 import default_values;
 import block_index;
 
-namespace infinity {
+namespace hybridsearch {
 
 extern template class EMVBSharedVec<u32>;
 extern template class EMVBSearch<32>;
@@ -636,4 +636,4 @@ EMVBIndex &EMVBIndex::operator=(EMVBIndex &&other) {
     return *this;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

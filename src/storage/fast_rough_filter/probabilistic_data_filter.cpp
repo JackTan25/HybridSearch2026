@@ -20,9 +20,9 @@ module probabilistic_data_filter;
 import stl;
 import logical_type;
 import binary_fuse_filter;
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 void ProbabilisticDataFilter::Build(TxnTimeStamp begin_ts, ColumnID column_id, u64 *data, u32 count) {
     auto &binary_fuse_filter = binary_fuse_filters_[column_id];
@@ -200,4 +200,4 @@ u64 ConvertValueToU64(const Value &value) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -7,7 +7,7 @@ export module quick_sort_set;
 import stl;
 import lexeme;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class QuickSortSet {
 public:
@@ -103,4 +103,4 @@ public:
 
     Cell *GetHead() const { return head_; }
 };
-} // namespace infinity
+} // namespace hybridsearch

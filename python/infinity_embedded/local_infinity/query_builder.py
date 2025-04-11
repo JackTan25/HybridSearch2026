@@ -24,13 +24,13 @@ import pyarrow as pa
 from pyarrow import Table
 from sqlglot import condition, maybe_parse
 
-from infinity_embedded.common import VEC, SparseVector, InfinityException, SortType
-from infinity_embedded.embedded_infinity_ext import *
-from infinity_embedded.local_infinity.types import logic_type_to_dtype, make_match_tensor_expr
-from infinity_embedded.local_infinity.utils import traverse_conditions, parse_expr
-from infinity_embedded.local_infinity.utils import get_search_optional_filter_from_opt_params
-from infinity_embedded.table import ExplainType as BaseExplainType
-from infinity_embedded.errors import ErrorCode
+from hybridsearch_embedded.common import VEC, SparseVector, hybridsearchException, SortType
+from hybridsearch_embedded.embedded_hybridsearch_ext import *
+from hybridsearch_embedded.local_hybridsearch.types import logic_type_to_dtype, make_match_tensor_expr
+from hybridsearch_embedded.local_hybridsearch.utils import traverse_conditions, parse_expr
+from hybridsearch_embedded.local_hybridsearch.utils import get_search_optional_filter_from_opt_params
+from hybridsearch_embedded.table import ExplainType as BaseExplainType
+from hybridsearch_embedded.errors import ErrorCode
 
 
 class Query(ABC):
@@ -77,7 +77,7 @@ class ExplainQuery(Query):
         self.explain_type = explain_type
 
 
-class InfinityLocalQueryBuilder(ABC):
+class hybridsearchLocalQueryBuilder(ABC):
     def __init__(self, table):
         self._table = table
         self._columns = None
@@ -111,7 +111,7 @@ class InfinityLocalQueryBuilder(ABC):
             distance_type: str,
             topn: int,
             knn_params: {} = None,
-    ) -> InfinityLocalQueryBuilder:
+    ) -> hybridsearchLocalQueryBuilder:
         if self._search is None:
             self._search = WrapSearchExpr()
             self._search.match_exprs = []
@@ -121,13 +121,13 @@ class InfinityLocalQueryBuilder(ABC):
         column_expr.star = False
 
         if not isinstance(topn, int):
-            raise InfinityException(
+            raise hybridsearchException(
                 ErrorCode.INVALID_TOPK_TYPE, f"Invalid topn, type should be embedded, but get {type(topn)}"
             )
 
         if embedding_data_type == "bit":
             if len(embedding_data) % 8 != 0:
-                raise InfinityException(
+                raise hybridsearchException(
                     ErrorCode.INVALID_EMBEDDING_DATA_TYPE,
                     f"Embeddings with data bit must have dimension of times of 8!"
                 )
@@ -150,7 +150,7 @@ class InfinityLocalQueryBuilder(ABC):
         elif isinstance(embedding_data, np.ndarray):
             embedding_data = embedding_data.tolist()
         else:
-            raise InfinityException(
+            raise hybridsearchException(
                 ErrorCode.INVALID_DATA_TYPE,
                 f"Invalid embedding data, type should be embedded, but get {type(embedding_data)}",
             )
@@ -195,7 +195,7 @@ class InfinityLocalQueryBuilder(ABC):
             elem_type = EmbeddingDataType.kElemBFloat16
             data.bf16_array_value = embedding_data
         else:
-            raise InfinityException(ErrorCode.INVALID_EMBEDDING_DATA_TYPE,
+            raise hybridsearchException(ErrorCode.INVALID_EMBEDDING_DATA_TYPE,
                                     f"Invalid embedding {embedding_data[0]} type")
 
         dist_type = KnnDistanceType.kInvalid
@@ -208,7 +208,7 @@ class InfinityLocalQueryBuilder(ABC):
         elif distance_type == "hamming":
             dist_type = KnnDistanceType.kHamming
         else:
-            raise InfinityException(ErrorCode.INVALID_KNN_DISTANCE_TYPE, f"Invalid distance type {distance_type}")
+            raise hybridsearchException(ErrorCode.INVALID_KNN_DISTANCE_TYPE, f"Invalid distance type {distance_type}")
 
         knn_opt_params = []
         optional_filter = None
@@ -246,7 +246,7 @@ class InfinityLocalQueryBuilder(ABC):
             metric_type: str,
             topn: int,
             opt_params: {} = None,
-    ) -> InfinityLocalQueryBuilder:
+    ) -> hybridsearchLocalQueryBuilder:
         if self._search is None:
             self._search = WrapSearchExpr()
             self._search.match_exprs = list()
@@ -256,7 +256,7 @@ class InfinityLocalQueryBuilder(ABC):
         column_expr.star = False
 
         if not isinstance(topn, int):
-            raise InfinityException(
+            raise hybridsearchException(
                 ErrorCode.INVALID_TOPK_TYPE, f"Invalid topn, type should be embedded, but get {type(topn)}"
             )
 
@@ -286,11 +286,11 @@ class InfinityLocalQueryBuilder(ABC):
                 sparse_expr.i64_array_idx = indices
                 sparse_expr.f64_array_value = values
             case SparseVector([int(), *_], None):
-                raise InfinityException(ErrorCode.INVALID_CONSTANT_TYPE,
+                raise hybridsearchException(ErrorCode.INVALID_CONSTANT_TYPE,
                                         "No values! Sparse data does not support bool value type now")
             case dict():
                 if len(sparse_data) == 0:
-                    raise InfinityException(ErrorCode.INVALID_EXPRESSION, "Empty sparse vector")
+                    raise hybridsearchException(ErrorCode.INVALID_EXPRESSION, "Empty sparse vector")
                 match next(iter(sparse_data.values())):
                     case int():
                         sparse_expr.literal_type = LiteralType.kLongSparseArray
@@ -301,10 +301,10 @@ class InfinityLocalQueryBuilder(ABC):
                         sparse_expr.i64_array_idx = [int(kk) for kk in sparse_data.keys()]
                         sparse_expr.f64_array_value = [float(vv) for vv in sparse_data.values()]
                     case _:
-                        raise InfinityException(ErrorCode.INVALID_EXPRESSION,
+                        raise hybridsearchException(ErrorCode.INVALID_EXPRESSION,
                                                 f"Invalid sparse vector value type: {type(next(iter(sparse_data.values())))}")
             case _:
-                raise InfinityException(ErrorCode.INVALID_CONSTANT_TYPE,
+                raise hybridsearchException(ErrorCode.INVALID_CONSTANT_TYPE,
                                         f"Invalid sparse data type {type(sparse_data)}")
 
         match_sparse_expr.sparse_expr = sparse_expr
@@ -321,7 +321,7 @@ class InfinityLocalQueryBuilder(ABC):
 
     def match_text(
             self, fields: str, matching_text: str, topn: int, extra_options: Optional[dict]
-    ) -> InfinityLocalQueryBuilder:
+    ) -> hybridsearchLocalQueryBuilder:
         if self._search is None:
             self._search = WrapSearchExpr()
             self._search.match_exprs = list()
@@ -352,7 +352,7 @@ class InfinityLocalQueryBuilder(ABC):
             query_data_type: str,
             topn: int,
             extra_option: Optional[dict] = None,
-    ) -> InfinityLocalQueryBuilder:
+    ) -> hybridsearchLocalQueryBuilder:
         if self._search is None:
             self._search = WrapSearchExpr()
             self._search.match_exprs = list()
@@ -376,7 +376,7 @@ class InfinityLocalQueryBuilder(ABC):
         self._search.match_exprs += [match_tensor_expr]
         return self
 
-    def fusion(self, method: str, topn: int, fusion_params: Optional[dict]) -> InfinityLocalQueryBuilder:
+    def fusion(self, method: str, topn: int, fusion_params: Optional[dict]) -> hybridsearchLocalQueryBuilder:
         if self._search is None:
             self._search = WrapSearchExpr()
         fusion_expr = WrapFusionExpr()
@@ -386,7 +386,7 @@ class InfinityLocalQueryBuilder(ABC):
             if isinstance(fusion_params, dict):
                 for k, v in fusion_params.items():
                     if k == "topn":
-                        raise InfinityException(ErrorCode.INVALID_EXPRESSION, "topn is not allowed in fusion params")
+                        raise hybridsearchException(ErrorCode.INVALID_EXPRESSION, "topn is not allowed in fusion params")
                     final_option_text += f";{k}={v}"
         elif method in ["match_tensor"]:
             fusion_expr.has_match_tensor_expr = True
@@ -394,7 +394,7 @@ class InfinityLocalQueryBuilder(ABC):
                 vector_column_name=fusion_params["field"], embedding_data=fusion_params["query_tensor"],
                 embedding_data_type=fusion_params["element_type"], method_type="maxsim", extra_option=None)
         else:
-            raise InfinityException(ErrorCode.INVALID_EXPRESSION, "Invalid fusion method")
+            raise hybridsearchException(ErrorCode.INVALID_EXPRESSION, "Invalid fusion method")
         fusion_expr.options_text = final_option_text
         self._search.fusion_exprs += [fusion_expr]
         # *WARN*: A list in nanobind wrapped object is odd that append() does nothing!
@@ -403,12 +403,12 @@ class InfinityLocalQueryBuilder(ABC):
         assert len(self._search.fusion_exprs) > 0
         return self
 
-    def filter(self, where: Optional[str]) -> InfinityLocalQueryBuilder:
+    def filter(self, where: Optional[str]) -> hybridsearchLocalQueryBuilder:
         where_expr = traverse_conditions(condition(where))
         self._filter = where_expr
         return self
 
-    def limit(self, limit: Optional[int]) -> InfinityLocalQueryBuilder:
+    def limit(self, limit: Optional[int]) -> hybridsearchLocalQueryBuilder:
         constant_exp = WrapConstantExpr()
         constant_exp.literal_type = LiteralType.kInteger
         constant_exp.i64_value = limit
@@ -417,7 +417,7 @@ class InfinityLocalQueryBuilder(ABC):
         self._limit = limit_expr
         return self
 
-    def offset(self, offset: Optional[int]) -> InfinityLocalQueryBuilder:
+    def offset(self, offset: Optional[int]) -> hybridsearchLocalQueryBuilder:
         constant_exp = WrapConstantExpr()
         constant_exp.literal_type = LiteralType.kInteger
         constant_exp.i64_value = offset
@@ -426,7 +426,7 @@ class InfinityLocalQueryBuilder(ABC):
         self._offset = offset_expr
         return self
 
-    def group_by(self, columns: List[str] | str) -> InfinityLocalQueryBuilder:
+    def group_by(self, columns: List[str] | str) -> hybridsearchLocalQueryBuilder:
         group_by_list = []
         if isinstance(columns, list):
             for column in columns:
@@ -438,12 +438,12 @@ class InfinityLocalQueryBuilder(ABC):
         self._group_by = group_by_list
         return self
 
-    def having(self, having: Optional[str]) -> InfinityLocalQueryBuilder:
+    def having(self, having: Optional[str]) -> hybridsearchLocalQueryBuilder:
         having_expr = traverse_conditions(condition(having))
         self._having = having_expr
         return self
 
-    def output(self, columns: Optional[list]) -> InfinityLocalQueryBuilder:
+    def output(self, columns: Optional[list]) -> hybridsearchLocalQueryBuilder:
         self._columns = columns
         select_list: List[WrapParsedExpr] = []
         for column in columns:
@@ -559,7 +559,7 @@ class InfinityLocalQueryBuilder(ABC):
         self._columns = select_list
         return self
 
-    def highlight(self, columns: Optional[list]) -> InfinityLocalQueryBuilder:
+    def highlight(self, columns: Optional[list]) -> hybridsearchLocalQueryBuilder:
         highlight_list: List[WrapParsedExpr] = []
         for column in columns:
             if isinstance(column, str):
@@ -577,7 +577,7 @@ class InfinityLocalQueryBuilder(ABC):
                 self._total_hits_count = option_kv['total_hits_count']
         return self
 
-    def sort(self, order_by_expr_list: Optional[List[list[str, SortType]]]) -> InfinityLocalQueryBuilder:
+    def sort(self, order_by_expr_list: Optional[List[list[str, SortType]]]) -> hybridsearchLocalQueryBuilder:
         sort_list: List[WrapOrderByExpr] = []
 
         order_by_expr_str = str

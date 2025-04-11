@@ -18,26 +18,26 @@ module;
 
 export module peer_server_thrift_types;
 
-namespace infinity_peer_server {
+namespace hybridsearch_peer_server {
 
-export using infinity_peer_server::PeerServiceIf;
-export using infinity_peer_server::PeerServiceClient;
-export using infinity_peer_server::PeerServiceIfFactory;
-export using infinity_peer_server::PeerServiceProcessorFactory;
-export using infinity_peer_server::NodeStatus;
-export using infinity_peer_server::NodeType;
-export using infinity_peer_server::NodeInfo;
-export using infinity_peer_server::RegisterRequest;
-export using infinity_peer_server::RegisterResponse;
-export using infinity_peer_server::UnregisterRequest;
-export using infinity_peer_server::UnregisterResponse;
-export using infinity_peer_server::HeartBeatRequest;
-export using infinity_peer_server::HeartBeatResponse;
-export using infinity_peer_server::SyncLogRequest;
-export using infinity_peer_server::SyncLogResponse;
-export using infinity_peer_server::ChangeRoleRequest;
-export using infinity_peer_server::ChangeRoleResponse;
-export using infinity_peer_server::NewLeaderRequest;
-export using infinity_peer_server::NewLeaderResponse;
-export using infinity_peer_server::to_string;
-} // namespace infinity_peer_server
+export using hybridsearch_peer_server::PeerServiceIf;
+export using hybridsearch_peer_server::PeerServiceClient;
+export using hybridsearch_peer_server::PeerServiceIfFactory;
+export using hybridsearch_peer_server::PeerServiceProcessorFactory;
+export using hybridsearch_peer_server::NodeStatus;
+export using hybridsearch_peer_server::NodeType;
+export using hybridsearch_peer_server::NodeInfo;
+export using hybridsearch_peer_server::RegisterRequest;
+export using hybridsearch_peer_server::RegisterResponse;
+export using hybridsearch_peer_server::UnregisterRequest;
+export using hybridsearch_peer_server::UnregisterResponse;
+export using hybridsearch_peer_server::HeartBeatRequest;
+export using hybridsearch_peer_server::HeartBeatResponse;
+export using hybridsearch_peer_server::SyncLogRequest;
+export using hybridsearch_peer_server::SyncLogResponse;
+export using hybridsearch_peer_server::ChangeRoleRequest;
+export using hybridsearch_peer_server::ChangeRoleResponse;
+export using hybridsearch_peer_server::NewLeaderRequest;
+export using hybridsearch_peer_server::NewLeaderResponse;
+export using hybridsearch_peer_server::to_string;
+} // namespace hybridsearch_peer_server

@@ -18,10 +18,10 @@ import stl;
 
 export module substring;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 
 export void RegisterSubstringFunction(const UniquePtr<Catalog> &catalog_ptr);
 
-} // namespace infinity
+} // namespace hybridsearch

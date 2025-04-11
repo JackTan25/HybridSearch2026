@@ -4,16 +4,16 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
  *  @generated
  */
-#include "InfinityService.h"
+#include "hybridsearchService.h"
 
-namespace infinity_thrift_rpc {
+namespace hybridsearch_thrift_rpc {
 
 
-InfinityService_Connect_args::~InfinityService_Connect_args() noexcept {
+hybridsearchService_Connect_args::~hybridsearchService_Connect_args() noexcept {
 }
 
 
-uint32_t InfinityService_Connect_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Connect_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -54,10 +54,10 @@ uint32_t InfinityService_Connect_args::read(::apache::thrift::protocol::TProtoco
   return xfer;
 }
 
-uint32_t InfinityService_Connect_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Connect_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Connect_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_Connect_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -69,14 +69,14 @@ uint32_t InfinityService_Connect_args::write(::apache::thrift::protocol::TProtoc
 }
 
 
-InfinityService_Connect_pargs::~InfinityService_Connect_pargs() noexcept {
+hybridsearchService_Connect_pargs::~hybridsearchService_Connect_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_Connect_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Connect_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Connect_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_Connect_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -88,11 +88,11 @@ uint32_t InfinityService_Connect_pargs::write(::apache::thrift::protocol::TProto
 }
 
 
-InfinityService_Connect_result::~InfinityService_Connect_result() noexcept {
+hybridsearchService_Connect_result::~hybridsearchService_Connect_result() noexcept {
 }
 
 
-uint32_t InfinityService_Connect_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Connect_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -133,11 +133,11 @@ uint32_t InfinityService_Connect_result::read(::apache::thrift::protocol::TProto
   return xfer;
 }
 
-uint32_t InfinityService_Connect_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Connect_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_Connect_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_Connect_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -150,11 +150,11 @@ uint32_t InfinityService_Connect_result::write(::apache::thrift::protocol::TProt
 }
 
 
-InfinityService_Connect_presult::~InfinityService_Connect_presult() noexcept {
+hybridsearchService_Connect_presult::~hybridsearchService_Connect_presult() noexcept {
 }
 
 
-uint32_t InfinityService_Connect_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Connect_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -196,11 +196,11 @@ uint32_t InfinityService_Connect_presult::read(::apache::thrift::protocol::TProt
 }
 
 
-InfinityService_Disconnect_args::~InfinityService_Disconnect_args() noexcept {
+hybridsearchService_Disconnect_args::~hybridsearchService_Disconnect_args() noexcept {
 }
 
 
-uint32_t InfinityService_Disconnect_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Disconnect_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -241,10 +241,10 @@ uint32_t InfinityService_Disconnect_args::read(::apache::thrift::protocol::TProt
   return xfer;
 }
 
-uint32_t InfinityService_Disconnect_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Disconnect_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Disconnect_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_Disconnect_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -256,14 +256,14 @@ uint32_t InfinityService_Disconnect_args::write(::apache::thrift::protocol::TPro
 }
 
 
-InfinityService_Disconnect_pargs::~InfinityService_Disconnect_pargs() noexcept {
+hybridsearchService_Disconnect_pargs::~hybridsearchService_Disconnect_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_Disconnect_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Disconnect_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Disconnect_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_Disconnect_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -275,11 +275,11 @@ uint32_t InfinityService_Disconnect_pargs::write(::apache::thrift::protocol::TPr
 }
 
 
-InfinityService_Disconnect_result::~InfinityService_Disconnect_result() noexcept {
+hybridsearchService_Disconnect_result::~hybridsearchService_Disconnect_result() noexcept {
 }
 
 
-uint32_t InfinityService_Disconnect_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Disconnect_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -320,11 +320,11 @@ uint32_t InfinityService_Disconnect_result::read(::apache::thrift::protocol::TPr
   return xfer;
 }
 
-uint32_t InfinityService_Disconnect_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Disconnect_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_Disconnect_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_Disconnect_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -337,11 +337,11 @@ uint32_t InfinityService_Disconnect_result::write(::apache::thrift::protocol::TP
 }
 
 
-InfinityService_Disconnect_presult::~InfinityService_Disconnect_presult() noexcept {
+hybridsearchService_Disconnect_presult::~hybridsearchService_Disconnect_presult() noexcept {
 }
 
 
-uint32_t InfinityService_Disconnect_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Disconnect_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -383,11 +383,11 @@ uint32_t InfinityService_Disconnect_presult::read(::apache::thrift::protocol::TP
 }
 
 
-InfinityService_CreateDatabase_args::~InfinityService_CreateDatabase_args() noexcept {
+hybridsearchService_CreateDatabase_args::~hybridsearchService_CreateDatabase_args() noexcept {
 }
 
 
-uint32_t InfinityService_CreateDatabase_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_CreateDatabase_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -428,10 +428,10 @@ uint32_t InfinityService_CreateDatabase_args::read(::apache::thrift::protocol::T
   return xfer;
 }
 
-uint32_t InfinityService_CreateDatabase_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_CreateDatabase_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_CreateDatabase_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_CreateDatabase_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -443,14 +443,14 @@ uint32_t InfinityService_CreateDatabase_args::write(::apache::thrift::protocol::
 }
 
 
-InfinityService_CreateDatabase_pargs::~InfinityService_CreateDatabase_pargs() noexcept {
+hybridsearchService_CreateDatabase_pargs::~hybridsearchService_CreateDatabase_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_CreateDatabase_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_CreateDatabase_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_CreateDatabase_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_CreateDatabase_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -462,11 +462,11 @@ uint32_t InfinityService_CreateDatabase_pargs::write(::apache::thrift::protocol:
 }
 
 
-InfinityService_CreateDatabase_result::~InfinityService_CreateDatabase_result() noexcept {
+hybridsearchService_CreateDatabase_result::~hybridsearchService_CreateDatabase_result() noexcept {
 }
 
 
-uint32_t InfinityService_CreateDatabase_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_CreateDatabase_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -507,11 +507,11 @@ uint32_t InfinityService_CreateDatabase_result::read(::apache::thrift::protocol:
   return xfer;
 }
 
-uint32_t InfinityService_CreateDatabase_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_CreateDatabase_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_CreateDatabase_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_CreateDatabase_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -524,11 +524,11 @@ uint32_t InfinityService_CreateDatabase_result::write(::apache::thrift::protocol
 }
 
 
-InfinityService_CreateDatabase_presult::~InfinityService_CreateDatabase_presult() noexcept {
+hybridsearchService_CreateDatabase_presult::~hybridsearchService_CreateDatabase_presult() noexcept {
 }
 
 
-uint32_t InfinityService_CreateDatabase_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_CreateDatabase_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -570,11 +570,11 @@ uint32_t InfinityService_CreateDatabase_presult::read(::apache::thrift::protocol
 }
 
 
-InfinityService_DropDatabase_args::~InfinityService_DropDatabase_args() noexcept {
+hybridsearchService_DropDatabase_args::~hybridsearchService_DropDatabase_args() noexcept {
 }
 
 
-uint32_t InfinityService_DropDatabase_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_DropDatabase_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -615,10 +615,10 @@ uint32_t InfinityService_DropDatabase_args::read(::apache::thrift::protocol::TPr
   return xfer;
 }
 
-uint32_t InfinityService_DropDatabase_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_DropDatabase_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_DropDatabase_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_DropDatabase_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -630,14 +630,14 @@ uint32_t InfinityService_DropDatabase_args::write(::apache::thrift::protocol::TP
 }
 
 
-InfinityService_DropDatabase_pargs::~InfinityService_DropDatabase_pargs() noexcept {
+hybridsearchService_DropDatabase_pargs::~hybridsearchService_DropDatabase_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_DropDatabase_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_DropDatabase_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_DropDatabase_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_DropDatabase_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -649,11 +649,11 @@ uint32_t InfinityService_DropDatabase_pargs::write(::apache::thrift::protocol::T
 }
 
 
-InfinityService_DropDatabase_result::~InfinityService_DropDatabase_result() noexcept {
+hybridsearchService_DropDatabase_result::~hybridsearchService_DropDatabase_result() noexcept {
 }
 
 
-uint32_t InfinityService_DropDatabase_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_DropDatabase_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -694,11 +694,11 @@ uint32_t InfinityService_DropDatabase_result::read(::apache::thrift::protocol::T
   return xfer;
 }
 
-uint32_t InfinityService_DropDatabase_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_DropDatabase_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_DropDatabase_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_DropDatabase_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -711,11 +711,11 @@ uint32_t InfinityService_DropDatabase_result::write(::apache::thrift::protocol::
 }
 
 
-InfinityService_DropDatabase_presult::~InfinityService_DropDatabase_presult() noexcept {
+hybridsearchService_DropDatabase_presult::~hybridsearchService_DropDatabase_presult() noexcept {
 }
 
 
-uint32_t InfinityService_DropDatabase_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_DropDatabase_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -757,11 +757,11 @@ uint32_t InfinityService_DropDatabase_presult::read(::apache::thrift::protocol::
 }
 
 
-InfinityService_CreateTable_args::~InfinityService_CreateTable_args() noexcept {
+hybridsearchService_CreateTable_args::~hybridsearchService_CreateTable_args() noexcept {
 }
 
 
-uint32_t InfinityService_CreateTable_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_CreateTable_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -802,10 +802,10 @@ uint32_t InfinityService_CreateTable_args::read(::apache::thrift::protocol::TPro
   return xfer;
 }
 
-uint32_t InfinityService_CreateTable_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_CreateTable_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_CreateTable_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_CreateTable_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -817,14 +817,14 @@ uint32_t InfinityService_CreateTable_args::write(::apache::thrift::protocol::TPr
 }
 
 
-InfinityService_CreateTable_pargs::~InfinityService_CreateTable_pargs() noexcept {
+hybridsearchService_CreateTable_pargs::~hybridsearchService_CreateTable_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_CreateTable_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_CreateTable_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_CreateTable_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_CreateTable_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -836,11 +836,11 @@ uint32_t InfinityService_CreateTable_pargs::write(::apache::thrift::protocol::TP
 }
 
 
-InfinityService_CreateTable_result::~InfinityService_CreateTable_result() noexcept {
+hybridsearchService_CreateTable_result::~hybridsearchService_CreateTable_result() noexcept {
 }
 
 
-uint32_t InfinityService_CreateTable_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_CreateTable_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -881,11 +881,11 @@ uint32_t InfinityService_CreateTable_result::read(::apache::thrift::protocol::TP
   return xfer;
 }
 
-uint32_t InfinityService_CreateTable_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_CreateTable_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_CreateTable_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_CreateTable_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -898,11 +898,11 @@ uint32_t InfinityService_CreateTable_result::write(::apache::thrift::protocol::T
 }
 
 
-InfinityService_CreateTable_presult::~InfinityService_CreateTable_presult() noexcept {
+hybridsearchService_CreateTable_presult::~hybridsearchService_CreateTable_presult() noexcept {
 }
 
 
-uint32_t InfinityService_CreateTable_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_CreateTable_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -944,11 +944,11 @@ uint32_t InfinityService_CreateTable_presult::read(::apache::thrift::protocol::T
 }
 
 
-InfinityService_DropTable_args::~InfinityService_DropTable_args() noexcept {
+hybridsearchService_DropTable_args::~hybridsearchService_DropTable_args() noexcept {
 }
 
 
-uint32_t InfinityService_DropTable_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_DropTable_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -989,10 +989,10 @@ uint32_t InfinityService_DropTable_args::read(::apache::thrift::protocol::TProto
   return xfer;
 }
 
-uint32_t InfinityService_DropTable_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_DropTable_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_DropTable_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_DropTable_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -1004,14 +1004,14 @@ uint32_t InfinityService_DropTable_args::write(::apache::thrift::protocol::TProt
 }
 
 
-InfinityService_DropTable_pargs::~InfinityService_DropTable_pargs() noexcept {
+hybridsearchService_DropTable_pargs::~hybridsearchService_DropTable_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_DropTable_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_DropTable_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_DropTable_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_DropTable_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -1023,11 +1023,11 @@ uint32_t InfinityService_DropTable_pargs::write(::apache::thrift::protocol::TPro
 }
 
 
-InfinityService_DropTable_result::~InfinityService_DropTable_result() noexcept {
+hybridsearchService_DropTable_result::~hybridsearchService_DropTable_result() noexcept {
 }
 
 
-uint32_t InfinityService_DropTable_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_DropTable_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -1068,11 +1068,11 @@ uint32_t InfinityService_DropTable_result::read(::apache::thrift::protocol::TPro
   return xfer;
 }
 
-uint32_t InfinityService_DropTable_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_DropTable_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_DropTable_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_DropTable_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -1085,11 +1085,11 @@ uint32_t InfinityService_DropTable_result::write(::apache::thrift::protocol::TPr
 }
 
 
-InfinityService_DropTable_presult::~InfinityService_DropTable_presult() noexcept {
+hybridsearchService_DropTable_presult::~hybridsearchService_DropTable_presult() noexcept {
 }
 
 
-uint32_t InfinityService_DropTable_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_DropTable_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -1131,11 +1131,11 @@ uint32_t InfinityService_DropTable_presult::read(::apache::thrift::protocol::TPr
 }
 
 
-InfinityService_Insert_args::~InfinityService_Insert_args() noexcept {
+hybridsearchService_Insert_args::~hybridsearchService_Insert_args() noexcept {
 }
 
 
-uint32_t InfinityService_Insert_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Insert_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -1176,10 +1176,10 @@ uint32_t InfinityService_Insert_args::read(::apache::thrift::protocol::TProtocol
   return xfer;
 }
 
-uint32_t InfinityService_Insert_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Insert_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Insert_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_Insert_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -1191,14 +1191,14 @@ uint32_t InfinityService_Insert_args::write(::apache::thrift::protocol::TProtoco
 }
 
 
-InfinityService_Insert_pargs::~InfinityService_Insert_pargs() noexcept {
+hybridsearchService_Insert_pargs::~hybridsearchService_Insert_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_Insert_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Insert_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Insert_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_Insert_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -1210,11 +1210,11 @@ uint32_t InfinityService_Insert_pargs::write(::apache::thrift::protocol::TProtoc
 }
 
 
-InfinityService_Insert_result::~InfinityService_Insert_result() noexcept {
+hybridsearchService_Insert_result::~hybridsearchService_Insert_result() noexcept {
 }
 
 
-uint32_t InfinityService_Insert_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Insert_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -1255,11 +1255,11 @@ uint32_t InfinityService_Insert_result::read(::apache::thrift::protocol::TProtoc
   return xfer;
 }
 
-uint32_t InfinityService_Insert_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Insert_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_Insert_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_Insert_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -1272,11 +1272,11 @@ uint32_t InfinityService_Insert_result::write(::apache::thrift::protocol::TProto
 }
 
 
-InfinityService_Insert_presult::~InfinityService_Insert_presult() noexcept {
+hybridsearchService_Insert_presult::~hybridsearchService_Insert_presult() noexcept {
 }
 
 
-uint32_t InfinityService_Insert_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Insert_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -1318,11 +1318,11 @@ uint32_t InfinityService_Insert_presult::read(::apache::thrift::protocol::TProto
 }
 
 
-InfinityService_Import_args::~InfinityService_Import_args() noexcept {
+hybridsearchService_Import_args::~hybridsearchService_Import_args() noexcept {
 }
 
 
-uint32_t InfinityService_Import_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Import_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -1363,10 +1363,10 @@ uint32_t InfinityService_Import_args::read(::apache::thrift::protocol::TProtocol
   return xfer;
 }
 
-uint32_t InfinityService_Import_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Import_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Import_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_Import_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -1378,14 +1378,14 @@ uint32_t InfinityService_Import_args::write(::apache::thrift::protocol::TProtoco
 }
 
 
-InfinityService_Import_pargs::~InfinityService_Import_pargs() noexcept {
+hybridsearchService_Import_pargs::~hybridsearchService_Import_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_Import_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Import_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Import_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_Import_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -1397,11 +1397,11 @@ uint32_t InfinityService_Import_pargs::write(::apache::thrift::protocol::TProtoc
 }
 
 
-InfinityService_Import_result::~InfinityService_Import_result() noexcept {
+hybridsearchService_Import_result::~hybridsearchService_Import_result() noexcept {
 }
 
 
-uint32_t InfinityService_Import_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Import_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -1442,11 +1442,11 @@ uint32_t InfinityService_Import_result::read(::apache::thrift::protocol::TProtoc
   return xfer;
 }
 
-uint32_t InfinityService_Import_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Import_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_Import_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_Import_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -1459,11 +1459,11 @@ uint32_t InfinityService_Import_result::write(::apache::thrift::protocol::TProto
 }
 
 
-InfinityService_Import_presult::~InfinityService_Import_presult() noexcept {
+hybridsearchService_Import_presult::~hybridsearchService_Import_presult() noexcept {
 }
 
 
-uint32_t InfinityService_Import_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Import_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -1505,11 +1505,11 @@ uint32_t InfinityService_Import_presult::read(::apache::thrift::protocol::TProto
 }
 
 
-InfinityService_Export_args::~InfinityService_Export_args() noexcept {
+hybridsearchService_Export_args::~hybridsearchService_Export_args() noexcept {
 }
 
 
-uint32_t InfinityService_Export_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Export_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -1550,10 +1550,10 @@ uint32_t InfinityService_Export_args::read(::apache::thrift::protocol::TProtocol
   return xfer;
 }
 
-uint32_t InfinityService_Export_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Export_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Export_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_Export_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -1565,14 +1565,14 @@ uint32_t InfinityService_Export_args::write(::apache::thrift::protocol::TProtoco
 }
 
 
-InfinityService_Export_pargs::~InfinityService_Export_pargs() noexcept {
+hybridsearchService_Export_pargs::~hybridsearchService_Export_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_Export_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Export_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Export_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_Export_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -1584,11 +1584,11 @@ uint32_t InfinityService_Export_pargs::write(::apache::thrift::protocol::TProtoc
 }
 
 
-InfinityService_Export_result::~InfinityService_Export_result() noexcept {
+hybridsearchService_Export_result::~hybridsearchService_Export_result() noexcept {
 }
 
 
-uint32_t InfinityService_Export_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Export_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -1629,11 +1629,11 @@ uint32_t InfinityService_Export_result::read(::apache::thrift::protocol::TProtoc
   return xfer;
 }
 
-uint32_t InfinityService_Export_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Export_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_Export_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_Export_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -1646,11 +1646,11 @@ uint32_t InfinityService_Export_result::write(::apache::thrift::protocol::TProto
 }
 
 
-InfinityService_Export_presult::~InfinityService_Export_presult() noexcept {
+hybridsearchService_Export_presult::~hybridsearchService_Export_presult() noexcept {
 }
 
 
-uint32_t InfinityService_Export_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Export_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -1692,11 +1692,11 @@ uint32_t InfinityService_Export_presult::read(::apache::thrift::protocol::TProto
 }
 
 
-InfinityService_Select_args::~InfinityService_Select_args() noexcept {
+hybridsearchService_Select_args::~hybridsearchService_Select_args() noexcept {
 }
 
 
-uint32_t InfinityService_Select_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Select_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -1737,10 +1737,10 @@ uint32_t InfinityService_Select_args::read(::apache::thrift::protocol::TProtocol
   return xfer;
 }
 
-uint32_t InfinityService_Select_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Select_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Select_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_Select_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -1752,14 +1752,14 @@ uint32_t InfinityService_Select_args::write(::apache::thrift::protocol::TProtoco
 }
 
 
-InfinityService_Select_pargs::~InfinityService_Select_pargs() noexcept {
+hybridsearchService_Select_pargs::~hybridsearchService_Select_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_Select_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Select_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Select_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_Select_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -1771,11 +1771,11 @@ uint32_t InfinityService_Select_pargs::write(::apache::thrift::protocol::TProtoc
 }
 
 
-InfinityService_Select_result::~InfinityService_Select_result() noexcept {
+hybridsearchService_Select_result::~hybridsearchService_Select_result() noexcept {
 }
 
 
-uint32_t InfinityService_Select_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Select_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -1816,11 +1816,11 @@ uint32_t InfinityService_Select_result::read(::apache::thrift::protocol::TProtoc
   return xfer;
 }
 
-uint32_t InfinityService_Select_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Select_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_Select_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_Select_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -1833,11 +1833,11 @@ uint32_t InfinityService_Select_result::write(::apache::thrift::protocol::TProto
 }
 
 
-InfinityService_Select_presult::~InfinityService_Select_presult() noexcept {
+hybridsearchService_Select_presult::~hybridsearchService_Select_presult() noexcept {
 }
 
 
-uint32_t InfinityService_Select_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Select_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -1879,11 +1879,11 @@ uint32_t InfinityService_Select_presult::read(::apache::thrift::protocol::TProto
 }
 
 
-InfinityService_Explain_args::~InfinityService_Explain_args() noexcept {
+hybridsearchService_Explain_args::~hybridsearchService_Explain_args() noexcept {
 }
 
 
-uint32_t InfinityService_Explain_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Explain_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -1924,10 +1924,10 @@ uint32_t InfinityService_Explain_args::read(::apache::thrift::protocol::TProtoco
   return xfer;
 }
 
-uint32_t InfinityService_Explain_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Explain_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Explain_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_Explain_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -1939,14 +1939,14 @@ uint32_t InfinityService_Explain_args::write(::apache::thrift::protocol::TProtoc
 }
 
 
-InfinityService_Explain_pargs::~InfinityService_Explain_pargs() noexcept {
+hybridsearchService_Explain_pargs::~hybridsearchService_Explain_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_Explain_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Explain_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Explain_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_Explain_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -1958,11 +1958,11 @@ uint32_t InfinityService_Explain_pargs::write(::apache::thrift::protocol::TProto
 }
 
 
-InfinityService_Explain_result::~InfinityService_Explain_result() noexcept {
+hybridsearchService_Explain_result::~hybridsearchService_Explain_result() noexcept {
 }
 
 
-uint32_t InfinityService_Explain_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Explain_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -2003,11 +2003,11 @@ uint32_t InfinityService_Explain_result::read(::apache::thrift::protocol::TProto
   return xfer;
 }
 
-uint32_t InfinityService_Explain_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Explain_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_Explain_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_Explain_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -2020,11 +2020,11 @@ uint32_t InfinityService_Explain_result::write(::apache::thrift::protocol::TProt
 }
 
 
-InfinityService_Explain_presult::~InfinityService_Explain_presult() noexcept {
+hybridsearchService_Explain_presult::~hybridsearchService_Explain_presult() noexcept {
 }
 
 
-uint32_t InfinityService_Explain_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Explain_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -2066,11 +2066,11 @@ uint32_t InfinityService_Explain_presult::read(::apache::thrift::protocol::TProt
 }
 
 
-InfinityService_Delete_args::~InfinityService_Delete_args() noexcept {
+hybridsearchService_Delete_args::~hybridsearchService_Delete_args() noexcept {
 }
 
 
-uint32_t InfinityService_Delete_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Delete_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -2111,10 +2111,10 @@ uint32_t InfinityService_Delete_args::read(::apache::thrift::protocol::TProtocol
   return xfer;
 }
 
-uint32_t InfinityService_Delete_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Delete_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Delete_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_Delete_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -2126,14 +2126,14 @@ uint32_t InfinityService_Delete_args::write(::apache::thrift::protocol::TProtoco
 }
 
 
-InfinityService_Delete_pargs::~InfinityService_Delete_pargs() noexcept {
+hybridsearchService_Delete_pargs::~hybridsearchService_Delete_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_Delete_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Delete_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Delete_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_Delete_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -2145,11 +2145,11 @@ uint32_t InfinityService_Delete_pargs::write(::apache::thrift::protocol::TProtoc
 }
 
 
-InfinityService_Delete_result::~InfinityService_Delete_result() noexcept {
+hybridsearchService_Delete_result::~hybridsearchService_Delete_result() noexcept {
 }
 
 
-uint32_t InfinityService_Delete_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Delete_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -2190,11 +2190,11 @@ uint32_t InfinityService_Delete_result::read(::apache::thrift::protocol::TProtoc
   return xfer;
 }
 
-uint32_t InfinityService_Delete_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Delete_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_Delete_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_Delete_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -2207,11 +2207,11 @@ uint32_t InfinityService_Delete_result::write(::apache::thrift::protocol::TProto
 }
 
 
-InfinityService_Delete_presult::~InfinityService_Delete_presult() noexcept {
+hybridsearchService_Delete_presult::~hybridsearchService_Delete_presult() noexcept {
 }
 
 
-uint32_t InfinityService_Delete_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Delete_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -2253,11 +2253,11 @@ uint32_t InfinityService_Delete_presult::read(::apache::thrift::protocol::TProto
 }
 
 
-InfinityService_Update_args::~InfinityService_Update_args() noexcept {
+hybridsearchService_Update_args::~hybridsearchService_Update_args() noexcept {
 }
 
 
-uint32_t InfinityService_Update_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Update_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -2298,10 +2298,10 @@ uint32_t InfinityService_Update_args::read(::apache::thrift::protocol::TProtocol
   return xfer;
 }
 
-uint32_t InfinityService_Update_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Update_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Update_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_Update_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -2313,14 +2313,14 @@ uint32_t InfinityService_Update_args::write(::apache::thrift::protocol::TProtoco
 }
 
 
-InfinityService_Update_pargs::~InfinityService_Update_pargs() noexcept {
+hybridsearchService_Update_pargs::~hybridsearchService_Update_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_Update_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Update_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Update_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_Update_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -2332,11 +2332,11 @@ uint32_t InfinityService_Update_pargs::write(::apache::thrift::protocol::TProtoc
 }
 
 
-InfinityService_Update_result::~InfinityService_Update_result() noexcept {
+hybridsearchService_Update_result::~hybridsearchService_Update_result() noexcept {
 }
 
 
-uint32_t InfinityService_Update_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Update_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -2377,11 +2377,11 @@ uint32_t InfinityService_Update_result::read(::apache::thrift::protocol::TProtoc
   return xfer;
 }
 
-uint32_t InfinityService_Update_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Update_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_Update_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_Update_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -2394,11 +2394,11 @@ uint32_t InfinityService_Update_result::write(::apache::thrift::protocol::TProto
 }
 
 
-InfinityService_Update_presult::~InfinityService_Update_presult() noexcept {
+hybridsearchService_Update_presult::~hybridsearchService_Update_presult() noexcept {
 }
 
 
-uint32_t InfinityService_Update_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Update_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -2440,11 +2440,11 @@ uint32_t InfinityService_Update_presult::read(::apache::thrift::protocol::TProto
 }
 
 
-InfinityService_ListDatabase_args::~InfinityService_ListDatabase_args() noexcept {
+hybridsearchService_ListDatabase_args::~hybridsearchService_ListDatabase_args() noexcept {
 }
 
 
-uint32_t InfinityService_ListDatabase_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ListDatabase_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -2485,10 +2485,10 @@ uint32_t InfinityService_ListDatabase_args::read(::apache::thrift::protocol::TPr
   return xfer;
 }
 
-uint32_t InfinityService_ListDatabase_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ListDatabase_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ListDatabase_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_ListDatabase_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -2500,14 +2500,14 @@ uint32_t InfinityService_ListDatabase_args::write(::apache::thrift::protocol::TP
 }
 
 
-InfinityService_ListDatabase_pargs::~InfinityService_ListDatabase_pargs() noexcept {
+hybridsearchService_ListDatabase_pargs::~hybridsearchService_ListDatabase_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_ListDatabase_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ListDatabase_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ListDatabase_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_ListDatabase_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -2519,11 +2519,11 @@ uint32_t InfinityService_ListDatabase_pargs::write(::apache::thrift::protocol::T
 }
 
 
-InfinityService_ListDatabase_result::~InfinityService_ListDatabase_result() noexcept {
+hybridsearchService_ListDatabase_result::~hybridsearchService_ListDatabase_result() noexcept {
 }
 
 
-uint32_t InfinityService_ListDatabase_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ListDatabase_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -2564,11 +2564,11 @@ uint32_t InfinityService_ListDatabase_result::read(::apache::thrift::protocol::T
   return xfer;
 }
 
-uint32_t InfinityService_ListDatabase_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ListDatabase_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_ListDatabase_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_ListDatabase_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -2581,11 +2581,11 @@ uint32_t InfinityService_ListDatabase_result::write(::apache::thrift::protocol::
 }
 
 
-InfinityService_ListDatabase_presult::~InfinityService_ListDatabase_presult() noexcept {
+hybridsearchService_ListDatabase_presult::~hybridsearchService_ListDatabase_presult() noexcept {
 }
 
 
-uint32_t InfinityService_ListDatabase_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ListDatabase_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -2627,11 +2627,11 @@ uint32_t InfinityService_ListDatabase_presult::read(::apache::thrift::protocol::
 }
 
 
-InfinityService_ListTable_args::~InfinityService_ListTable_args() noexcept {
+hybridsearchService_ListTable_args::~hybridsearchService_ListTable_args() noexcept {
 }
 
 
-uint32_t InfinityService_ListTable_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ListTable_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -2672,10 +2672,10 @@ uint32_t InfinityService_ListTable_args::read(::apache::thrift::protocol::TProto
   return xfer;
 }
 
-uint32_t InfinityService_ListTable_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ListTable_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ListTable_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_ListTable_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -2687,14 +2687,14 @@ uint32_t InfinityService_ListTable_args::write(::apache::thrift::protocol::TProt
 }
 
 
-InfinityService_ListTable_pargs::~InfinityService_ListTable_pargs() noexcept {
+hybridsearchService_ListTable_pargs::~hybridsearchService_ListTable_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_ListTable_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ListTable_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ListTable_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_ListTable_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -2706,11 +2706,11 @@ uint32_t InfinityService_ListTable_pargs::write(::apache::thrift::protocol::TPro
 }
 
 
-InfinityService_ListTable_result::~InfinityService_ListTable_result() noexcept {
+hybridsearchService_ListTable_result::~hybridsearchService_ListTable_result() noexcept {
 }
 
 
-uint32_t InfinityService_ListTable_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ListTable_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -2751,11 +2751,11 @@ uint32_t InfinityService_ListTable_result::read(::apache::thrift::protocol::TPro
   return xfer;
 }
 
-uint32_t InfinityService_ListTable_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ListTable_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_ListTable_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_ListTable_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -2768,11 +2768,11 @@ uint32_t InfinityService_ListTable_result::write(::apache::thrift::protocol::TPr
 }
 
 
-InfinityService_ListTable_presult::~InfinityService_ListTable_presult() noexcept {
+hybridsearchService_ListTable_presult::~hybridsearchService_ListTable_presult() noexcept {
 }
 
 
-uint32_t InfinityService_ListTable_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ListTable_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -2814,11 +2814,11 @@ uint32_t InfinityService_ListTable_presult::read(::apache::thrift::protocol::TPr
 }
 
 
-InfinityService_ListIndex_args::~InfinityService_ListIndex_args() noexcept {
+hybridsearchService_ListIndex_args::~hybridsearchService_ListIndex_args() noexcept {
 }
 
 
-uint32_t InfinityService_ListIndex_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ListIndex_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -2859,10 +2859,10 @@ uint32_t InfinityService_ListIndex_args::read(::apache::thrift::protocol::TProto
   return xfer;
 }
 
-uint32_t InfinityService_ListIndex_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ListIndex_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ListIndex_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_ListIndex_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -2874,14 +2874,14 @@ uint32_t InfinityService_ListIndex_args::write(::apache::thrift::protocol::TProt
 }
 
 
-InfinityService_ListIndex_pargs::~InfinityService_ListIndex_pargs() noexcept {
+hybridsearchService_ListIndex_pargs::~hybridsearchService_ListIndex_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_ListIndex_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ListIndex_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ListIndex_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_ListIndex_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -2893,11 +2893,11 @@ uint32_t InfinityService_ListIndex_pargs::write(::apache::thrift::protocol::TPro
 }
 
 
-InfinityService_ListIndex_result::~InfinityService_ListIndex_result() noexcept {
+hybridsearchService_ListIndex_result::~hybridsearchService_ListIndex_result() noexcept {
 }
 
 
-uint32_t InfinityService_ListIndex_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ListIndex_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -2938,11 +2938,11 @@ uint32_t InfinityService_ListIndex_result::read(::apache::thrift::protocol::TPro
   return xfer;
 }
 
-uint32_t InfinityService_ListIndex_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ListIndex_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_ListIndex_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_ListIndex_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -2955,11 +2955,11 @@ uint32_t InfinityService_ListIndex_result::write(::apache::thrift::protocol::TPr
 }
 
 
-InfinityService_ListIndex_presult::~InfinityService_ListIndex_presult() noexcept {
+hybridsearchService_ListIndex_presult::~hybridsearchService_ListIndex_presult() noexcept {
 }
 
 
-uint32_t InfinityService_ListIndex_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ListIndex_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -3001,11 +3001,11 @@ uint32_t InfinityService_ListIndex_presult::read(::apache::thrift::protocol::TPr
 }
 
 
-InfinityService_ShowTable_args::~InfinityService_ShowTable_args() noexcept {
+hybridsearchService_ShowTable_args::~hybridsearchService_ShowTable_args() noexcept {
 }
 
 
-uint32_t InfinityService_ShowTable_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowTable_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -3046,10 +3046,10 @@ uint32_t InfinityService_ShowTable_args::read(::apache::thrift::protocol::TProto
   return xfer;
 }
 
-uint32_t InfinityService_ShowTable_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowTable_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ShowTable_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowTable_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -3061,14 +3061,14 @@ uint32_t InfinityService_ShowTable_args::write(::apache::thrift::protocol::TProt
 }
 
 
-InfinityService_ShowTable_pargs::~InfinityService_ShowTable_pargs() noexcept {
+hybridsearchService_ShowTable_pargs::~hybridsearchService_ShowTable_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_ShowTable_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowTable_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ShowTable_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowTable_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -3080,11 +3080,11 @@ uint32_t InfinityService_ShowTable_pargs::write(::apache::thrift::protocol::TPro
 }
 
 
-InfinityService_ShowTable_result::~InfinityService_ShowTable_result() noexcept {
+hybridsearchService_ShowTable_result::~hybridsearchService_ShowTable_result() noexcept {
 }
 
 
-uint32_t InfinityService_ShowTable_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowTable_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -3125,11 +3125,11 @@ uint32_t InfinityService_ShowTable_result::read(::apache::thrift::protocol::TPro
   return xfer;
 }
 
-uint32_t InfinityService_ShowTable_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowTable_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_ShowTable_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowTable_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -3142,11 +3142,11 @@ uint32_t InfinityService_ShowTable_result::write(::apache::thrift::protocol::TPr
 }
 
 
-InfinityService_ShowTable_presult::~InfinityService_ShowTable_presult() noexcept {
+hybridsearchService_ShowTable_presult::~hybridsearchService_ShowTable_presult() noexcept {
 }
 
 
-uint32_t InfinityService_ShowTable_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowTable_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -3188,11 +3188,11 @@ uint32_t InfinityService_ShowTable_presult::read(::apache::thrift::protocol::TPr
 }
 
 
-InfinityService_ShowColumns_args::~InfinityService_ShowColumns_args() noexcept {
+hybridsearchService_ShowColumns_args::~hybridsearchService_ShowColumns_args() noexcept {
 }
 
 
-uint32_t InfinityService_ShowColumns_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowColumns_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -3233,10 +3233,10 @@ uint32_t InfinityService_ShowColumns_args::read(::apache::thrift::protocol::TPro
   return xfer;
 }
 
-uint32_t InfinityService_ShowColumns_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowColumns_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ShowColumns_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowColumns_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -3248,14 +3248,14 @@ uint32_t InfinityService_ShowColumns_args::write(::apache::thrift::protocol::TPr
 }
 
 
-InfinityService_ShowColumns_pargs::~InfinityService_ShowColumns_pargs() noexcept {
+hybridsearchService_ShowColumns_pargs::~hybridsearchService_ShowColumns_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_ShowColumns_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowColumns_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ShowColumns_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowColumns_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -3267,11 +3267,11 @@ uint32_t InfinityService_ShowColumns_pargs::write(::apache::thrift::protocol::TP
 }
 
 
-InfinityService_ShowColumns_result::~InfinityService_ShowColumns_result() noexcept {
+hybridsearchService_ShowColumns_result::~hybridsearchService_ShowColumns_result() noexcept {
 }
 
 
-uint32_t InfinityService_ShowColumns_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowColumns_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -3312,11 +3312,11 @@ uint32_t InfinityService_ShowColumns_result::read(::apache::thrift::protocol::TP
   return xfer;
 }
 
-uint32_t InfinityService_ShowColumns_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowColumns_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_ShowColumns_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowColumns_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -3329,11 +3329,11 @@ uint32_t InfinityService_ShowColumns_result::write(::apache::thrift::protocol::T
 }
 
 
-InfinityService_ShowColumns_presult::~InfinityService_ShowColumns_presult() noexcept {
+hybridsearchService_ShowColumns_presult::~hybridsearchService_ShowColumns_presult() noexcept {
 }
 
 
-uint32_t InfinityService_ShowColumns_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowColumns_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -3375,11 +3375,11 @@ uint32_t InfinityService_ShowColumns_presult::read(::apache::thrift::protocol::T
 }
 
 
-InfinityService_ShowDatabase_args::~InfinityService_ShowDatabase_args() noexcept {
+hybridsearchService_ShowDatabase_args::~hybridsearchService_ShowDatabase_args() noexcept {
 }
 
 
-uint32_t InfinityService_ShowDatabase_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowDatabase_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -3420,10 +3420,10 @@ uint32_t InfinityService_ShowDatabase_args::read(::apache::thrift::protocol::TPr
   return xfer;
 }
 
-uint32_t InfinityService_ShowDatabase_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowDatabase_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ShowDatabase_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowDatabase_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -3435,14 +3435,14 @@ uint32_t InfinityService_ShowDatabase_args::write(::apache::thrift::protocol::TP
 }
 
 
-InfinityService_ShowDatabase_pargs::~InfinityService_ShowDatabase_pargs() noexcept {
+hybridsearchService_ShowDatabase_pargs::~hybridsearchService_ShowDatabase_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_ShowDatabase_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowDatabase_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ShowDatabase_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowDatabase_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -3454,11 +3454,11 @@ uint32_t InfinityService_ShowDatabase_pargs::write(::apache::thrift::protocol::T
 }
 
 
-InfinityService_ShowDatabase_result::~InfinityService_ShowDatabase_result() noexcept {
+hybridsearchService_ShowDatabase_result::~hybridsearchService_ShowDatabase_result() noexcept {
 }
 
 
-uint32_t InfinityService_ShowDatabase_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowDatabase_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -3499,11 +3499,11 @@ uint32_t InfinityService_ShowDatabase_result::read(::apache::thrift::protocol::T
   return xfer;
 }
 
-uint32_t InfinityService_ShowDatabase_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowDatabase_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_ShowDatabase_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowDatabase_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -3516,11 +3516,11 @@ uint32_t InfinityService_ShowDatabase_result::write(::apache::thrift::protocol::
 }
 
 
-InfinityService_ShowDatabase_presult::~InfinityService_ShowDatabase_presult() noexcept {
+hybridsearchService_ShowDatabase_presult::~hybridsearchService_ShowDatabase_presult() noexcept {
 }
 
 
-uint32_t InfinityService_ShowDatabase_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowDatabase_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -3562,11 +3562,11 @@ uint32_t InfinityService_ShowDatabase_presult::read(::apache::thrift::protocol::
 }
 
 
-InfinityService_ShowTables_args::~InfinityService_ShowTables_args() noexcept {
+hybridsearchService_ShowTables_args::~hybridsearchService_ShowTables_args() noexcept {
 }
 
 
-uint32_t InfinityService_ShowTables_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowTables_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -3607,10 +3607,10 @@ uint32_t InfinityService_ShowTables_args::read(::apache::thrift::protocol::TProt
   return xfer;
 }
 
-uint32_t InfinityService_ShowTables_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowTables_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ShowTables_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowTables_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -3622,14 +3622,14 @@ uint32_t InfinityService_ShowTables_args::write(::apache::thrift::protocol::TPro
 }
 
 
-InfinityService_ShowTables_pargs::~InfinityService_ShowTables_pargs() noexcept {
+hybridsearchService_ShowTables_pargs::~hybridsearchService_ShowTables_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_ShowTables_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowTables_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ShowTables_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowTables_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -3641,11 +3641,11 @@ uint32_t InfinityService_ShowTables_pargs::write(::apache::thrift::protocol::TPr
 }
 
 
-InfinityService_ShowTables_result::~InfinityService_ShowTables_result() noexcept {
+hybridsearchService_ShowTables_result::~hybridsearchService_ShowTables_result() noexcept {
 }
 
 
-uint32_t InfinityService_ShowTables_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowTables_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -3686,11 +3686,11 @@ uint32_t InfinityService_ShowTables_result::read(::apache::thrift::protocol::TPr
   return xfer;
 }
 
-uint32_t InfinityService_ShowTables_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowTables_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_ShowTables_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowTables_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -3703,11 +3703,11 @@ uint32_t InfinityService_ShowTables_result::write(::apache::thrift::protocol::TP
 }
 
 
-InfinityService_ShowTables_presult::~InfinityService_ShowTables_presult() noexcept {
+hybridsearchService_ShowTables_presult::~hybridsearchService_ShowTables_presult() noexcept {
 }
 
 
-uint32_t InfinityService_ShowTables_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowTables_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -3749,11 +3749,11 @@ uint32_t InfinityService_ShowTables_presult::read(::apache::thrift::protocol::TP
 }
 
 
-InfinityService_ShowSegments_args::~InfinityService_ShowSegments_args() noexcept {
+hybridsearchService_ShowSegments_args::~hybridsearchService_ShowSegments_args() noexcept {
 }
 
 
-uint32_t InfinityService_ShowSegments_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowSegments_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -3794,10 +3794,10 @@ uint32_t InfinityService_ShowSegments_args::read(::apache::thrift::protocol::TPr
   return xfer;
 }
 
-uint32_t InfinityService_ShowSegments_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowSegments_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ShowSegments_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowSegments_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -3809,14 +3809,14 @@ uint32_t InfinityService_ShowSegments_args::write(::apache::thrift::protocol::TP
 }
 
 
-InfinityService_ShowSegments_pargs::~InfinityService_ShowSegments_pargs() noexcept {
+hybridsearchService_ShowSegments_pargs::~hybridsearchService_ShowSegments_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_ShowSegments_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowSegments_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ShowSegments_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowSegments_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -3828,11 +3828,11 @@ uint32_t InfinityService_ShowSegments_pargs::write(::apache::thrift::protocol::T
 }
 
 
-InfinityService_ShowSegments_result::~InfinityService_ShowSegments_result() noexcept {
+hybridsearchService_ShowSegments_result::~hybridsearchService_ShowSegments_result() noexcept {
 }
 
 
-uint32_t InfinityService_ShowSegments_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowSegments_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -3873,11 +3873,11 @@ uint32_t InfinityService_ShowSegments_result::read(::apache::thrift::protocol::T
   return xfer;
 }
 
-uint32_t InfinityService_ShowSegments_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowSegments_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_ShowSegments_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowSegments_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -3890,11 +3890,11 @@ uint32_t InfinityService_ShowSegments_result::write(::apache::thrift::protocol::
 }
 
 
-InfinityService_ShowSegments_presult::~InfinityService_ShowSegments_presult() noexcept {
+hybridsearchService_ShowSegments_presult::~hybridsearchService_ShowSegments_presult() noexcept {
 }
 
 
-uint32_t InfinityService_ShowSegments_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowSegments_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -3936,11 +3936,11 @@ uint32_t InfinityService_ShowSegments_presult::read(::apache::thrift::protocol::
 }
 
 
-InfinityService_ShowSegment_args::~InfinityService_ShowSegment_args() noexcept {
+hybridsearchService_ShowSegment_args::~hybridsearchService_ShowSegment_args() noexcept {
 }
 
 
-uint32_t InfinityService_ShowSegment_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowSegment_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -3981,10 +3981,10 @@ uint32_t InfinityService_ShowSegment_args::read(::apache::thrift::protocol::TPro
   return xfer;
 }
 
-uint32_t InfinityService_ShowSegment_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowSegment_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ShowSegment_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowSegment_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -3996,14 +3996,14 @@ uint32_t InfinityService_ShowSegment_args::write(::apache::thrift::protocol::TPr
 }
 
 
-InfinityService_ShowSegment_pargs::~InfinityService_ShowSegment_pargs() noexcept {
+hybridsearchService_ShowSegment_pargs::~hybridsearchService_ShowSegment_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_ShowSegment_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowSegment_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ShowSegment_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowSegment_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -4015,11 +4015,11 @@ uint32_t InfinityService_ShowSegment_pargs::write(::apache::thrift::protocol::TP
 }
 
 
-InfinityService_ShowSegment_result::~InfinityService_ShowSegment_result() noexcept {
+hybridsearchService_ShowSegment_result::~hybridsearchService_ShowSegment_result() noexcept {
 }
 
 
-uint32_t InfinityService_ShowSegment_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowSegment_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -4060,11 +4060,11 @@ uint32_t InfinityService_ShowSegment_result::read(::apache::thrift::protocol::TP
   return xfer;
 }
 
-uint32_t InfinityService_ShowSegment_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowSegment_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_ShowSegment_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowSegment_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -4077,11 +4077,11 @@ uint32_t InfinityService_ShowSegment_result::write(::apache::thrift::protocol::T
 }
 
 
-InfinityService_ShowSegment_presult::~InfinityService_ShowSegment_presult() noexcept {
+hybridsearchService_ShowSegment_presult::~hybridsearchService_ShowSegment_presult() noexcept {
 }
 
 
-uint32_t InfinityService_ShowSegment_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowSegment_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -4123,11 +4123,11 @@ uint32_t InfinityService_ShowSegment_presult::read(::apache::thrift::protocol::T
 }
 
 
-InfinityService_ShowBlocks_args::~InfinityService_ShowBlocks_args() noexcept {
+hybridsearchService_ShowBlocks_args::~hybridsearchService_ShowBlocks_args() noexcept {
 }
 
 
-uint32_t InfinityService_ShowBlocks_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowBlocks_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -4168,10 +4168,10 @@ uint32_t InfinityService_ShowBlocks_args::read(::apache::thrift::protocol::TProt
   return xfer;
 }
 
-uint32_t InfinityService_ShowBlocks_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowBlocks_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ShowBlocks_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowBlocks_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -4183,14 +4183,14 @@ uint32_t InfinityService_ShowBlocks_args::write(::apache::thrift::protocol::TPro
 }
 
 
-InfinityService_ShowBlocks_pargs::~InfinityService_ShowBlocks_pargs() noexcept {
+hybridsearchService_ShowBlocks_pargs::~hybridsearchService_ShowBlocks_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_ShowBlocks_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowBlocks_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ShowBlocks_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowBlocks_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -4202,11 +4202,11 @@ uint32_t InfinityService_ShowBlocks_pargs::write(::apache::thrift::protocol::TPr
 }
 
 
-InfinityService_ShowBlocks_result::~InfinityService_ShowBlocks_result() noexcept {
+hybridsearchService_ShowBlocks_result::~hybridsearchService_ShowBlocks_result() noexcept {
 }
 
 
-uint32_t InfinityService_ShowBlocks_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowBlocks_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -4247,11 +4247,11 @@ uint32_t InfinityService_ShowBlocks_result::read(::apache::thrift::protocol::TPr
   return xfer;
 }
 
-uint32_t InfinityService_ShowBlocks_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowBlocks_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_ShowBlocks_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowBlocks_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -4264,11 +4264,11 @@ uint32_t InfinityService_ShowBlocks_result::write(::apache::thrift::protocol::TP
 }
 
 
-InfinityService_ShowBlocks_presult::~InfinityService_ShowBlocks_presult() noexcept {
+hybridsearchService_ShowBlocks_presult::~hybridsearchService_ShowBlocks_presult() noexcept {
 }
 
 
-uint32_t InfinityService_ShowBlocks_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowBlocks_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -4310,11 +4310,11 @@ uint32_t InfinityService_ShowBlocks_presult::read(::apache::thrift::protocol::TP
 }
 
 
-InfinityService_ShowBlock_args::~InfinityService_ShowBlock_args() noexcept {
+hybridsearchService_ShowBlock_args::~hybridsearchService_ShowBlock_args() noexcept {
 }
 
 
-uint32_t InfinityService_ShowBlock_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowBlock_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -4355,10 +4355,10 @@ uint32_t InfinityService_ShowBlock_args::read(::apache::thrift::protocol::TProto
   return xfer;
 }
 
-uint32_t InfinityService_ShowBlock_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowBlock_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ShowBlock_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowBlock_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -4370,14 +4370,14 @@ uint32_t InfinityService_ShowBlock_args::write(::apache::thrift::protocol::TProt
 }
 
 
-InfinityService_ShowBlock_pargs::~InfinityService_ShowBlock_pargs() noexcept {
+hybridsearchService_ShowBlock_pargs::~hybridsearchService_ShowBlock_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_ShowBlock_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowBlock_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ShowBlock_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowBlock_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -4389,11 +4389,11 @@ uint32_t InfinityService_ShowBlock_pargs::write(::apache::thrift::protocol::TPro
 }
 
 
-InfinityService_ShowBlock_result::~InfinityService_ShowBlock_result() noexcept {
+hybridsearchService_ShowBlock_result::~hybridsearchService_ShowBlock_result() noexcept {
 }
 
 
-uint32_t InfinityService_ShowBlock_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowBlock_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -4434,11 +4434,11 @@ uint32_t InfinityService_ShowBlock_result::read(::apache::thrift::protocol::TPro
   return xfer;
 }
 
-uint32_t InfinityService_ShowBlock_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowBlock_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_ShowBlock_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowBlock_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -4451,11 +4451,11 @@ uint32_t InfinityService_ShowBlock_result::write(::apache::thrift::protocol::TPr
 }
 
 
-InfinityService_ShowBlock_presult::~InfinityService_ShowBlock_presult() noexcept {
+hybridsearchService_ShowBlock_presult::~hybridsearchService_ShowBlock_presult() noexcept {
 }
 
 
-uint32_t InfinityService_ShowBlock_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowBlock_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -4497,11 +4497,11 @@ uint32_t InfinityService_ShowBlock_presult::read(::apache::thrift::protocol::TPr
 }
 
 
-InfinityService_ShowBlockColumn_args::~InfinityService_ShowBlockColumn_args() noexcept {
+hybridsearchService_ShowBlockColumn_args::~hybridsearchService_ShowBlockColumn_args() noexcept {
 }
 
 
-uint32_t InfinityService_ShowBlockColumn_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowBlockColumn_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -4542,10 +4542,10 @@ uint32_t InfinityService_ShowBlockColumn_args::read(::apache::thrift::protocol::
   return xfer;
 }
 
-uint32_t InfinityService_ShowBlockColumn_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowBlockColumn_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ShowBlockColumn_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowBlockColumn_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -4557,14 +4557,14 @@ uint32_t InfinityService_ShowBlockColumn_args::write(::apache::thrift::protocol:
 }
 
 
-InfinityService_ShowBlockColumn_pargs::~InfinityService_ShowBlockColumn_pargs() noexcept {
+hybridsearchService_ShowBlockColumn_pargs::~hybridsearchService_ShowBlockColumn_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_ShowBlockColumn_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowBlockColumn_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ShowBlockColumn_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowBlockColumn_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -4576,11 +4576,11 @@ uint32_t InfinityService_ShowBlockColumn_pargs::write(::apache::thrift::protocol
 }
 
 
-InfinityService_ShowBlockColumn_result::~InfinityService_ShowBlockColumn_result() noexcept {
+hybridsearchService_ShowBlockColumn_result::~hybridsearchService_ShowBlockColumn_result() noexcept {
 }
 
 
-uint32_t InfinityService_ShowBlockColumn_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowBlockColumn_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -4621,11 +4621,11 @@ uint32_t InfinityService_ShowBlockColumn_result::read(::apache::thrift::protocol
   return xfer;
 }
 
-uint32_t InfinityService_ShowBlockColumn_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowBlockColumn_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_ShowBlockColumn_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowBlockColumn_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -4638,11 +4638,11 @@ uint32_t InfinityService_ShowBlockColumn_result::write(::apache::thrift::protoco
 }
 
 
-InfinityService_ShowBlockColumn_presult::~InfinityService_ShowBlockColumn_presult() noexcept {
+hybridsearchService_ShowBlockColumn_presult::~hybridsearchService_ShowBlockColumn_presult() noexcept {
 }
 
 
-uint32_t InfinityService_ShowBlockColumn_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowBlockColumn_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -4684,11 +4684,11 @@ uint32_t InfinityService_ShowBlockColumn_presult::read(::apache::thrift::protoco
 }
 
 
-InfinityService_ShowCurrentNode_args::~InfinityService_ShowCurrentNode_args() noexcept {
+hybridsearchService_ShowCurrentNode_args::~hybridsearchService_ShowCurrentNode_args() noexcept {
 }
 
 
-uint32_t InfinityService_ShowCurrentNode_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowCurrentNode_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -4729,10 +4729,10 @@ uint32_t InfinityService_ShowCurrentNode_args::read(::apache::thrift::protocol::
   return xfer;
 }
 
-uint32_t InfinityService_ShowCurrentNode_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowCurrentNode_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ShowCurrentNode_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowCurrentNode_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -4744,14 +4744,14 @@ uint32_t InfinityService_ShowCurrentNode_args::write(::apache::thrift::protocol:
 }
 
 
-InfinityService_ShowCurrentNode_pargs::~InfinityService_ShowCurrentNode_pargs() noexcept {
+hybridsearchService_ShowCurrentNode_pargs::~hybridsearchService_ShowCurrentNode_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_ShowCurrentNode_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowCurrentNode_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ShowCurrentNode_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowCurrentNode_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -4763,11 +4763,11 @@ uint32_t InfinityService_ShowCurrentNode_pargs::write(::apache::thrift::protocol
 }
 
 
-InfinityService_ShowCurrentNode_result::~InfinityService_ShowCurrentNode_result() noexcept {
+hybridsearchService_ShowCurrentNode_result::~hybridsearchService_ShowCurrentNode_result() noexcept {
 }
 
 
-uint32_t InfinityService_ShowCurrentNode_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowCurrentNode_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -4808,11 +4808,11 @@ uint32_t InfinityService_ShowCurrentNode_result::read(::apache::thrift::protocol
   return xfer;
 }
 
-uint32_t InfinityService_ShowCurrentNode_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowCurrentNode_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_ShowCurrentNode_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowCurrentNode_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -4825,11 +4825,11 @@ uint32_t InfinityService_ShowCurrentNode_result::write(::apache::thrift::protoco
 }
 
 
-InfinityService_ShowCurrentNode_presult::~InfinityService_ShowCurrentNode_presult() noexcept {
+hybridsearchService_ShowCurrentNode_presult::~hybridsearchService_ShowCurrentNode_presult() noexcept {
 }
 
 
-uint32_t InfinityService_ShowCurrentNode_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowCurrentNode_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -4871,11 +4871,11 @@ uint32_t InfinityService_ShowCurrentNode_presult::read(::apache::thrift::protoco
 }
 
 
-InfinityService_GetDatabase_args::~InfinityService_GetDatabase_args() noexcept {
+hybridsearchService_GetDatabase_args::~hybridsearchService_GetDatabase_args() noexcept {
 }
 
 
-uint32_t InfinityService_GetDatabase_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_GetDatabase_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -4916,10 +4916,10 @@ uint32_t InfinityService_GetDatabase_args::read(::apache::thrift::protocol::TPro
   return xfer;
 }
 
-uint32_t InfinityService_GetDatabase_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_GetDatabase_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_GetDatabase_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_GetDatabase_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -4931,14 +4931,14 @@ uint32_t InfinityService_GetDatabase_args::write(::apache::thrift::protocol::TPr
 }
 
 
-InfinityService_GetDatabase_pargs::~InfinityService_GetDatabase_pargs() noexcept {
+hybridsearchService_GetDatabase_pargs::~hybridsearchService_GetDatabase_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_GetDatabase_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_GetDatabase_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_GetDatabase_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_GetDatabase_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -4950,11 +4950,11 @@ uint32_t InfinityService_GetDatabase_pargs::write(::apache::thrift::protocol::TP
 }
 
 
-InfinityService_GetDatabase_result::~InfinityService_GetDatabase_result() noexcept {
+hybridsearchService_GetDatabase_result::~hybridsearchService_GetDatabase_result() noexcept {
 }
 
 
-uint32_t InfinityService_GetDatabase_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_GetDatabase_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -4995,11 +4995,11 @@ uint32_t InfinityService_GetDatabase_result::read(::apache::thrift::protocol::TP
   return xfer;
 }
 
-uint32_t InfinityService_GetDatabase_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_GetDatabase_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_GetDatabase_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_GetDatabase_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -5012,11 +5012,11 @@ uint32_t InfinityService_GetDatabase_result::write(::apache::thrift::protocol::T
 }
 
 
-InfinityService_GetDatabase_presult::~InfinityService_GetDatabase_presult() noexcept {
+hybridsearchService_GetDatabase_presult::~hybridsearchService_GetDatabase_presult() noexcept {
 }
 
 
-uint32_t InfinityService_GetDatabase_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_GetDatabase_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -5058,11 +5058,11 @@ uint32_t InfinityService_GetDatabase_presult::read(::apache::thrift::protocol::T
 }
 
 
-InfinityService_GetTable_args::~InfinityService_GetTable_args() noexcept {
+hybridsearchService_GetTable_args::~hybridsearchService_GetTable_args() noexcept {
 }
 
 
-uint32_t InfinityService_GetTable_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_GetTable_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -5103,10 +5103,10 @@ uint32_t InfinityService_GetTable_args::read(::apache::thrift::protocol::TProtoc
   return xfer;
 }
 
-uint32_t InfinityService_GetTable_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_GetTable_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_GetTable_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_GetTable_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -5118,14 +5118,14 @@ uint32_t InfinityService_GetTable_args::write(::apache::thrift::protocol::TProto
 }
 
 
-InfinityService_GetTable_pargs::~InfinityService_GetTable_pargs() noexcept {
+hybridsearchService_GetTable_pargs::~hybridsearchService_GetTable_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_GetTable_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_GetTable_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_GetTable_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_GetTable_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -5137,11 +5137,11 @@ uint32_t InfinityService_GetTable_pargs::write(::apache::thrift::protocol::TProt
 }
 
 
-InfinityService_GetTable_result::~InfinityService_GetTable_result() noexcept {
+hybridsearchService_GetTable_result::~hybridsearchService_GetTable_result() noexcept {
 }
 
 
-uint32_t InfinityService_GetTable_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_GetTable_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -5182,11 +5182,11 @@ uint32_t InfinityService_GetTable_result::read(::apache::thrift::protocol::TProt
   return xfer;
 }
 
-uint32_t InfinityService_GetTable_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_GetTable_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_GetTable_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_GetTable_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -5199,11 +5199,11 @@ uint32_t InfinityService_GetTable_result::write(::apache::thrift::protocol::TPro
 }
 
 
-InfinityService_GetTable_presult::~InfinityService_GetTable_presult() noexcept {
+hybridsearchService_GetTable_presult::~hybridsearchService_GetTable_presult() noexcept {
 }
 
 
-uint32_t InfinityService_GetTable_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_GetTable_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -5245,11 +5245,11 @@ uint32_t InfinityService_GetTable_presult::read(::apache::thrift::protocol::TPro
 }
 
 
-InfinityService_CreateIndex_args::~InfinityService_CreateIndex_args() noexcept {
+hybridsearchService_CreateIndex_args::~hybridsearchService_CreateIndex_args() noexcept {
 }
 
 
-uint32_t InfinityService_CreateIndex_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_CreateIndex_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -5290,10 +5290,10 @@ uint32_t InfinityService_CreateIndex_args::read(::apache::thrift::protocol::TPro
   return xfer;
 }
 
-uint32_t InfinityService_CreateIndex_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_CreateIndex_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_CreateIndex_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_CreateIndex_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -5305,14 +5305,14 @@ uint32_t InfinityService_CreateIndex_args::write(::apache::thrift::protocol::TPr
 }
 
 
-InfinityService_CreateIndex_pargs::~InfinityService_CreateIndex_pargs() noexcept {
+hybridsearchService_CreateIndex_pargs::~hybridsearchService_CreateIndex_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_CreateIndex_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_CreateIndex_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_CreateIndex_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_CreateIndex_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -5324,11 +5324,11 @@ uint32_t InfinityService_CreateIndex_pargs::write(::apache::thrift::protocol::TP
 }
 
 
-InfinityService_CreateIndex_result::~InfinityService_CreateIndex_result() noexcept {
+hybridsearchService_CreateIndex_result::~hybridsearchService_CreateIndex_result() noexcept {
 }
 
 
-uint32_t InfinityService_CreateIndex_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_CreateIndex_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -5369,11 +5369,11 @@ uint32_t InfinityService_CreateIndex_result::read(::apache::thrift::protocol::TP
   return xfer;
 }
 
-uint32_t InfinityService_CreateIndex_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_CreateIndex_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_CreateIndex_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_CreateIndex_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -5386,11 +5386,11 @@ uint32_t InfinityService_CreateIndex_result::write(::apache::thrift::protocol::T
 }
 
 
-InfinityService_CreateIndex_presult::~InfinityService_CreateIndex_presult() noexcept {
+hybridsearchService_CreateIndex_presult::~hybridsearchService_CreateIndex_presult() noexcept {
 }
 
 
-uint32_t InfinityService_CreateIndex_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_CreateIndex_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -5432,11 +5432,11 @@ uint32_t InfinityService_CreateIndex_presult::read(::apache::thrift::protocol::T
 }
 
 
-InfinityService_DropIndex_args::~InfinityService_DropIndex_args() noexcept {
+hybridsearchService_DropIndex_args::~hybridsearchService_DropIndex_args() noexcept {
 }
 
 
-uint32_t InfinityService_DropIndex_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_DropIndex_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -5477,10 +5477,10 @@ uint32_t InfinityService_DropIndex_args::read(::apache::thrift::protocol::TProto
   return xfer;
 }
 
-uint32_t InfinityService_DropIndex_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_DropIndex_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_DropIndex_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_DropIndex_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -5492,14 +5492,14 @@ uint32_t InfinityService_DropIndex_args::write(::apache::thrift::protocol::TProt
 }
 
 
-InfinityService_DropIndex_pargs::~InfinityService_DropIndex_pargs() noexcept {
+hybridsearchService_DropIndex_pargs::~hybridsearchService_DropIndex_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_DropIndex_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_DropIndex_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_DropIndex_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_DropIndex_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -5511,11 +5511,11 @@ uint32_t InfinityService_DropIndex_pargs::write(::apache::thrift::protocol::TPro
 }
 
 
-InfinityService_DropIndex_result::~InfinityService_DropIndex_result() noexcept {
+hybridsearchService_DropIndex_result::~hybridsearchService_DropIndex_result() noexcept {
 }
 
 
-uint32_t InfinityService_DropIndex_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_DropIndex_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -5556,11 +5556,11 @@ uint32_t InfinityService_DropIndex_result::read(::apache::thrift::protocol::TPro
   return xfer;
 }
 
-uint32_t InfinityService_DropIndex_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_DropIndex_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_DropIndex_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_DropIndex_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -5573,11 +5573,11 @@ uint32_t InfinityService_DropIndex_result::write(::apache::thrift::protocol::TPr
 }
 
 
-InfinityService_DropIndex_presult::~InfinityService_DropIndex_presult() noexcept {
+hybridsearchService_DropIndex_presult::~hybridsearchService_DropIndex_presult() noexcept {
 }
 
 
-uint32_t InfinityService_DropIndex_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_DropIndex_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -5619,11 +5619,11 @@ uint32_t InfinityService_DropIndex_presult::read(::apache::thrift::protocol::TPr
 }
 
 
-InfinityService_ShowIndex_args::~InfinityService_ShowIndex_args() noexcept {
+hybridsearchService_ShowIndex_args::~hybridsearchService_ShowIndex_args() noexcept {
 }
 
 
-uint32_t InfinityService_ShowIndex_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowIndex_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -5664,10 +5664,10 @@ uint32_t InfinityService_ShowIndex_args::read(::apache::thrift::protocol::TProto
   return xfer;
 }
 
-uint32_t InfinityService_ShowIndex_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowIndex_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ShowIndex_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowIndex_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -5679,14 +5679,14 @@ uint32_t InfinityService_ShowIndex_args::write(::apache::thrift::protocol::TProt
 }
 
 
-InfinityService_ShowIndex_pargs::~InfinityService_ShowIndex_pargs() noexcept {
+hybridsearchService_ShowIndex_pargs::~hybridsearchService_ShowIndex_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_ShowIndex_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowIndex_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_ShowIndex_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowIndex_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -5698,11 +5698,11 @@ uint32_t InfinityService_ShowIndex_pargs::write(::apache::thrift::protocol::TPro
 }
 
 
-InfinityService_ShowIndex_result::~InfinityService_ShowIndex_result() noexcept {
+hybridsearchService_ShowIndex_result::~hybridsearchService_ShowIndex_result() noexcept {
 }
 
 
-uint32_t InfinityService_ShowIndex_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowIndex_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -5743,11 +5743,11 @@ uint32_t InfinityService_ShowIndex_result::read(::apache::thrift::protocol::TPro
   return xfer;
 }
 
-uint32_t InfinityService_ShowIndex_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_ShowIndex_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_ShowIndex_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_ShowIndex_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -5760,11 +5760,11 @@ uint32_t InfinityService_ShowIndex_result::write(::apache::thrift::protocol::TPr
 }
 
 
-InfinityService_ShowIndex_presult::~InfinityService_ShowIndex_presult() noexcept {
+hybridsearchService_ShowIndex_presult::~hybridsearchService_ShowIndex_presult() noexcept {
 }
 
 
-uint32_t InfinityService_ShowIndex_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_ShowIndex_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -5806,11 +5806,11 @@ uint32_t InfinityService_ShowIndex_presult::read(::apache::thrift::protocol::TPr
 }
 
 
-InfinityService_Optimize_args::~InfinityService_Optimize_args() noexcept {
+hybridsearchService_Optimize_args::~hybridsearchService_Optimize_args() noexcept {
 }
 
 
-uint32_t InfinityService_Optimize_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Optimize_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -5851,10 +5851,10 @@ uint32_t InfinityService_Optimize_args::read(::apache::thrift::protocol::TProtoc
   return xfer;
 }
 
-uint32_t InfinityService_Optimize_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Optimize_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Optimize_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_Optimize_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -5866,14 +5866,14 @@ uint32_t InfinityService_Optimize_args::write(::apache::thrift::protocol::TProto
 }
 
 
-InfinityService_Optimize_pargs::~InfinityService_Optimize_pargs() noexcept {
+hybridsearchService_Optimize_pargs::~hybridsearchService_Optimize_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_Optimize_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Optimize_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Optimize_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_Optimize_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -5885,11 +5885,11 @@ uint32_t InfinityService_Optimize_pargs::write(::apache::thrift::protocol::TProt
 }
 
 
-InfinityService_Optimize_result::~InfinityService_Optimize_result() noexcept {
+hybridsearchService_Optimize_result::~hybridsearchService_Optimize_result() noexcept {
 }
 
 
-uint32_t InfinityService_Optimize_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Optimize_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -5930,11 +5930,11 @@ uint32_t InfinityService_Optimize_result::read(::apache::thrift::protocol::TProt
   return xfer;
 }
 
-uint32_t InfinityService_Optimize_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Optimize_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_Optimize_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_Optimize_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -5947,11 +5947,11 @@ uint32_t InfinityService_Optimize_result::write(::apache::thrift::protocol::TPro
 }
 
 
-InfinityService_Optimize_presult::~InfinityService_Optimize_presult() noexcept {
+hybridsearchService_Optimize_presult::~hybridsearchService_Optimize_presult() noexcept {
 }
 
 
-uint32_t InfinityService_Optimize_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Optimize_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -5993,11 +5993,11 @@ uint32_t InfinityService_Optimize_presult::read(::apache::thrift::protocol::TPro
 }
 
 
-InfinityService_AddColumns_args::~InfinityService_AddColumns_args() noexcept {
+hybridsearchService_AddColumns_args::~hybridsearchService_AddColumns_args() noexcept {
 }
 
 
-uint32_t InfinityService_AddColumns_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_AddColumns_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -6038,10 +6038,10 @@ uint32_t InfinityService_AddColumns_args::read(::apache::thrift::protocol::TProt
   return xfer;
 }
 
-uint32_t InfinityService_AddColumns_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_AddColumns_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_AddColumns_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_AddColumns_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -6053,14 +6053,14 @@ uint32_t InfinityService_AddColumns_args::write(::apache::thrift::protocol::TPro
 }
 
 
-InfinityService_AddColumns_pargs::~InfinityService_AddColumns_pargs() noexcept {
+hybridsearchService_AddColumns_pargs::~hybridsearchService_AddColumns_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_AddColumns_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_AddColumns_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_AddColumns_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_AddColumns_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -6072,11 +6072,11 @@ uint32_t InfinityService_AddColumns_pargs::write(::apache::thrift::protocol::TPr
 }
 
 
-InfinityService_AddColumns_result::~InfinityService_AddColumns_result() noexcept {
+hybridsearchService_AddColumns_result::~hybridsearchService_AddColumns_result() noexcept {
 }
 
 
-uint32_t InfinityService_AddColumns_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_AddColumns_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -6117,11 +6117,11 @@ uint32_t InfinityService_AddColumns_result::read(::apache::thrift::protocol::TPr
   return xfer;
 }
 
-uint32_t InfinityService_AddColumns_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_AddColumns_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_AddColumns_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_AddColumns_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -6134,11 +6134,11 @@ uint32_t InfinityService_AddColumns_result::write(::apache::thrift::protocol::TP
 }
 
 
-InfinityService_AddColumns_presult::~InfinityService_AddColumns_presult() noexcept {
+hybridsearchService_AddColumns_presult::~hybridsearchService_AddColumns_presult() noexcept {
 }
 
 
-uint32_t InfinityService_AddColumns_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_AddColumns_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -6180,11 +6180,11 @@ uint32_t InfinityService_AddColumns_presult::read(::apache::thrift::protocol::TP
 }
 
 
-InfinityService_DropColumns_args::~InfinityService_DropColumns_args() noexcept {
+hybridsearchService_DropColumns_args::~hybridsearchService_DropColumns_args() noexcept {
 }
 
 
-uint32_t InfinityService_DropColumns_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_DropColumns_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -6225,10 +6225,10 @@ uint32_t InfinityService_DropColumns_args::read(::apache::thrift::protocol::TPro
   return xfer;
 }
 
-uint32_t InfinityService_DropColumns_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_DropColumns_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_DropColumns_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_DropColumns_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -6240,14 +6240,14 @@ uint32_t InfinityService_DropColumns_args::write(::apache::thrift::protocol::TPr
 }
 
 
-InfinityService_DropColumns_pargs::~InfinityService_DropColumns_pargs() noexcept {
+hybridsearchService_DropColumns_pargs::~hybridsearchService_DropColumns_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_DropColumns_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_DropColumns_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_DropColumns_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_DropColumns_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -6259,11 +6259,11 @@ uint32_t InfinityService_DropColumns_pargs::write(::apache::thrift::protocol::TP
 }
 
 
-InfinityService_DropColumns_result::~InfinityService_DropColumns_result() noexcept {
+hybridsearchService_DropColumns_result::~hybridsearchService_DropColumns_result() noexcept {
 }
 
 
-uint32_t InfinityService_DropColumns_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_DropColumns_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -6304,11 +6304,11 @@ uint32_t InfinityService_DropColumns_result::read(::apache::thrift::protocol::TP
   return xfer;
 }
 
-uint32_t InfinityService_DropColumns_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_DropColumns_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_DropColumns_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_DropColumns_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -6321,11 +6321,11 @@ uint32_t InfinityService_DropColumns_result::write(::apache::thrift::protocol::T
 }
 
 
-InfinityService_DropColumns_presult::~InfinityService_DropColumns_presult() noexcept {
+hybridsearchService_DropColumns_presult::~hybridsearchService_DropColumns_presult() noexcept {
 }
 
 
-uint32_t InfinityService_DropColumns_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_DropColumns_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -6367,11 +6367,11 @@ uint32_t InfinityService_DropColumns_presult::read(::apache::thrift::protocol::T
 }
 
 
-InfinityService_Cleanup_args::~InfinityService_Cleanup_args() noexcept {
+hybridsearchService_Cleanup_args::~hybridsearchService_Cleanup_args() noexcept {
 }
 
 
-uint32_t InfinityService_Cleanup_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Cleanup_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -6412,10 +6412,10 @@ uint32_t InfinityService_Cleanup_args::read(::apache::thrift::protocol::TProtoco
   return xfer;
 }
 
-uint32_t InfinityService_Cleanup_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Cleanup_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Cleanup_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_Cleanup_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -6427,14 +6427,14 @@ uint32_t InfinityService_Cleanup_args::write(::apache::thrift::protocol::TProtoc
 }
 
 
-InfinityService_Cleanup_pargs::~InfinityService_Cleanup_pargs() noexcept {
+hybridsearchService_Cleanup_pargs::~hybridsearchService_Cleanup_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_Cleanup_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Cleanup_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Cleanup_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_Cleanup_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -6446,11 +6446,11 @@ uint32_t InfinityService_Cleanup_pargs::write(::apache::thrift::protocol::TProto
 }
 
 
-InfinityService_Cleanup_result::~InfinityService_Cleanup_result() noexcept {
+hybridsearchService_Cleanup_result::~hybridsearchService_Cleanup_result() noexcept {
 }
 
 
-uint32_t InfinityService_Cleanup_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Cleanup_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -6491,11 +6491,11 @@ uint32_t InfinityService_Cleanup_result::read(::apache::thrift::protocol::TProto
   return xfer;
 }
 
-uint32_t InfinityService_Cleanup_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Cleanup_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_Cleanup_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_Cleanup_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -6508,11 +6508,11 @@ uint32_t InfinityService_Cleanup_result::write(::apache::thrift::protocol::TProt
 }
 
 
-InfinityService_Cleanup_presult::~InfinityService_Cleanup_presult() noexcept {
+hybridsearchService_Cleanup_presult::~hybridsearchService_Cleanup_presult() noexcept {
 }
 
 
-uint32_t InfinityService_Cleanup_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Cleanup_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -6554,11 +6554,11 @@ uint32_t InfinityService_Cleanup_presult::read(::apache::thrift::protocol::TProt
 }
 
 
-InfinityService_Command_args::~InfinityService_Command_args() noexcept {
+hybridsearchService_Command_args::~hybridsearchService_Command_args() noexcept {
 }
 
 
-uint32_t InfinityService_Command_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Command_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -6599,10 +6599,10 @@ uint32_t InfinityService_Command_args::read(::apache::thrift::protocol::TProtoco
   return xfer;
 }
 
-uint32_t InfinityService_Command_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Command_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Command_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_Command_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -6614,14 +6614,14 @@ uint32_t InfinityService_Command_args::write(::apache::thrift::protocol::TProtoc
 }
 
 
-InfinityService_Command_pargs::~InfinityService_Command_pargs() noexcept {
+hybridsearchService_Command_pargs::~hybridsearchService_Command_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_Command_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Command_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Command_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_Command_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -6633,11 +6633,11 @@ uint32_t InfinityService_Command_pargs::write(::apache::thrift::protocol::TProto
 }
 
 
-InfinityService_Command_result::~InfinityService_Command_result() noexcept {
+hybridsearchService_Command_result::~hybridsearchService_Command_result() noexcept {
 }
 
 
-uint32_t InfinityService_Command_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Command_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -6678,11 +6678,11 @@ uint32_t InfinityService_Command_result::read(::apache::thrift::protocol::TProto
   return xfer;
 }
 
-uint32_t InfinityService_Command_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Command_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_Command_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_Command_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -6695,11 +6695,11 @@ uint32_t InfinityService_Command_result::write(::apache::thrift::protocol::TProt
 }
 
 
-InfinityService_Command_presult::~InfinityService_Command_presult() noexcept {
+hybridsearchService_Command_presult::~hybridsearchService_Command_presult() noexcept {
 }
 
 
-uint32_t InfinityService_Command_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Command_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -6741,11 +6741,11 @@ uint32_t InfinityService_Command_presult::read(::apache::thrift::protocol::TProt
 }
 
 
-InfinityService_Flush_args::~InfinityService_Flush_args() noexcept {
+hybridsearchService_Flush_args::~hybridsearchService_Flush_args() noexcept {
 }
 
 
-uint32_t InfinityService_Flush_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Flush_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -6786,10 +6786,10 @@ uint32_t InfinityService_Flush_args::read(::apache::thrift::protocol::TProtocol*
   return xfer;
 }
 
-uint32_t InfinityService_Flush_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Flush_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Flush_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_Flush_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -6801,14 +6801,14 @@ uint32_t InfinityService_Flush_args::write(::apache::thrift::protocol::TProtocol
 }
 
 
-InfinityService_Flush_pargs::~InfinityService_Flush_pargs() noexcept {
+hybridsearchService_Flush_pargs::~hybridsearchService_Flush_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_Flush_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Flush_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Flush_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_Flush_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -6820,11 +6820,11 @@ uint32_t InfinityService_Flush_pargs::write(::apache::thrift::protocol::TProtoco
 }
 
 
-InfinityService_Flush_result::~InfinityService_Flush_result() noexcept {
+hybridsearchService_Flush_result::~hybridsearchService_Flush_result() noexcept {
 }
 
 
-uint32_t InfinityService_Flush_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Flush_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -6865,11 +6865,11 @@ uint32_t InfinityService_Flush_result::read(::apache::thrift::protocol::TProtoco
   return xfer;
 }
 
-uint32_t InfinityService_Flush_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Flush_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_Flush_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_Flush_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -6882,11 +6882,11 @@ uint32_t InfinityService_Flush_result::write(::apache::thrift::protocol::TProtoc
 }
 
 
-InfinityService_Flush_presult::~InfinityService_Flush_presult() noexcept {
+hybridsearchService_Flush_presult::~hybridsearchService_Flush_presult() noexcept {
 }
 
 
-uint32_t InfinityService_Flush_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Flush_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -6928,11 +6928,11 @@ uint32_t InfinityService_Flush_presult::read(::apache::thrift::protocol::TProtoc
 }
 
 
-InfinityService_Compact_args::~InfinityService_Compact_args() noexcept {
+hybridsearchService_Compact_args::~hybridsearchService_Compact_args() noexcept {
 }
 
 
-uint32_t InfinityService_Compact_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Compact_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -6973,10 +6973,10 @@ uint32_t InfinityService_Compact_args::read(::apache::thrift::protocol::TProtoco
   return xfer;
 }
 
-uint32_t InfinityService_Compact_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Compact_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Compact_args");
+  xfer += oprot->writeStructBegin("hybridsearchService_Compact_args");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->request.write(oprot);
@@ -6988,14 +6988,14 @@ uint32_t InfinityService_Compact_args::write(::apache::thrift::protocol::TProtoc
 }
 
 
-InfinityService_Compact_pargs::~InfinityService_Compact_pargs() noexcept {
+hybridsearchService_Compact_pargs::~hybridsearchService_Compact_pargs() noexcept {
 }
 
 
-uint32_t InfinityService_Compact_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Compact_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   ::apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
-  xfer += oprot->writeStructBegin("InfinityService_Compact_pargs");
+  xfer += oprot->writeStructBegin("hybridsearchService_Compact_pargs");
 
   xfer += oprot->writeFieldBegin("request", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->request)).write(oprot);
@@ -7007,11 +7007,11 @@ uint32_t InfinityService_Compact_pargs::write(::apache::thrift::protocol::TProto
 }
 
 
-InfinityService_Compact_result::~InfinityService_Compact_result() noexcept {
+hybridsearchService_Compact_result::~hybridsearchService_Compact_result() noexcept {
 }
 
 
-uint32_t InfinityService_Compact_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Compact_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -7052,11 +7052,11 @@ uint32_t InfinityService_Compact_result::read(::apache::thrift::protocol::TProto
   return xfer;
 }
 
-uint32_t InfinityService_Compact_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t hybridsearchService_Compact_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("InfinityService_Compact_result");
+  xfer += oprot->writeStructBegin("hybridsearchService_Compact_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
@@ -7069,11 +7069,11 @@ uint32_t InfinityService_Compact_result::write(::apache::thrift::protocol::TProt
 }
 
 
-InfinityService_Compact_presult::~InfinityService_Compact_presult() noexcept {
+hybridsearchService_Compact_presult::~hybridsearchService_Compact_presult() noexcept {
 }
 
 
-uint32_t InfinityService_Compact_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t hybridsearchService_Compact_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   ::apache::thrift::protocol::TInputRecursionTracker tracker(*iprot);
   uint32_t xfer = 0;
@@ -7114,18 +7114,18 @@ uint32_t InfinityService_Compact_presult::read(::apache::thrift::protocol::TProt
   return xfer;
 }
 
-void InfinityServiceClient::Connect(CommonResponse& _return, const ConnectRequest& request)
+void hybridsearchServiceClient::Connect(CommonResponse& _return, const ConnectRequest& request)
 {
   send_Connect(request);
   recv_Connect(_return);
 }
 
-void InfinityServiceClient::send_Connect(const ConnectRequest& request)
+void hybridsearchServiceClient::send_Connect(const ConnectRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("Connect", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Connect_pargs args;
+  hybridsearchService_Connect_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -7134,7 +7134,7 @@ void InfinityServiceClient::send_Connect(const ConnectRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_Connect(CommonResponse& _return)
+void hybridsearchServiceClient::recv_Connect(CommonResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -7159,7 +7159,7 @@ void InfinityServiceClient::recv_Connect(CommonResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_Connect_presult result;
+  hybridsearchService_Connect_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -7172,18 +7172,18 @@ void InfinityServiceClient::recv_Connect(CommonResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "Connect failed: unknown result");
 }
 
-void InfinityServiceClient::Disconnect(CommonResponse& _return, const CommonRequest& request)
+void hybridsearchServiceClient::Disconnect(CommonResponse& _return, const CommonRequest& request)
 {
   send_Disconnect(request);
   recv_Disconnect(_return);
 }
 
-void InfinityServiceClient::send_Disconnect(const CommonRequest& request)
+void hybridsearchServiceClient::send_Disconnect(const CommonRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("Disconnect", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Disconnect_pargs args;
+  hybridsearchService_Disconnect_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -7192,7 +7192,7 @@ void InfinityServiceClient::send_Disconnect(const CommonRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_Disconnect(CommonResponse& _return)
+void hybridsearchServiceClient::recv_Disconnect(CommonResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -7217,7 +7217,7 @@ void InfinityServiceClient::recv_Disconnect(CommonResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_Disconnect_presult result;
+  hybridsearchService_Disconnect_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -7230,18 +7230,18 @@ void InfinityServiceClient::recv_Disconnect(CommonResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "Disconnect failed: unknown result");
 }
 
-void InfinityServiceClient::CreateDatabase(CommonResponse& _return, const CreateDatabaseRequest& request)
+void hybridsearchServiceClient::CreateDatabase(CommonResponse& _return, const CreateDatabaseRequest& request)
 {
   send_CreateDatabase(request);
   recv_CreateDatabase(_return);
 }
 
-void InfinityServiceClient::send_CreateDatabase(const CreateDatabaseRequest& request)
+void hybridsearchServiceClient::send_CreateDatabase(const CreateDatabaseRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("CreateDatabase", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_CreateDatabase_pargs args;
+  hybridsearchService_CreateDatabase_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -7250,7 +7250,7 @@ void InfinityServiceClient::send_CreateDatabase(const CreateDatabaseRequest& req
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_CreateDatabase(CommonResponse& _return)
+void hybridsearchServiceClient::recv_CreateDatabase(CommonResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -7275,7 +7275,7 @@ void InfinityServiceClient::recv_CreateDatabase(CommonResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_CreateDatabase_presult result;
+  hybridsearchService_CreateDatabase_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -7288,18 +7288,18 @@ void InfinityServiceClient::recv_CreateDatabase(CommonResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "CreateDatabase failed: unknown result");
 }
 
-void InfinityServiceClient::DropDatabase(CommonResponse& _return, const DropDatabaseRequest& request)
+void hybridsearchServiceClient::DropDatabase(CommonResponse& _return, const DropDatabaseRequest& request)
 {
   send_DropDatabase(request);
   recv_DropDatabase(_return);
 }
 
-void InfinityServiceClient::send_DropDatabase(const DropDatabaseRequest& request)
+void hybridsearchServiceClient::send_DropDatabase(const DropDatabaseRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("DropDatabase", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_DropDatabase_pargs args;
+  hybridsearchService_DropDatabase_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -7308,7 +7308,7 @@ void InfinityServiceClient::send_DropDatabase(const DropDatabaseRequest& request
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_DropDatabase(CommonResponse& _return)
+void hybridsearchServiceClient::recv_DropDatabase(CommonResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -7333,7 +7333,7 @@ void InfinityServiceClient::recv_DropDatabase(CommonResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_DropDatabase_presult result;
+  hybridsearchService_DropDatabase_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -7346,18 +7346,18 @@ void InfinityServiceClient::recv_DropDatabase(CommonResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "DropDatabase failed: unknown result");
 }
 
-void InfinityServiceClient::CreateTable(CommonResponse& _return, const CreateTableRequest& request)
+void hybridsearchServiceClient::CreateTable(CommonResponse& _return, const CreateTableRequest& request)
 {
   send_CreateTable(request);
   recv_CreateTable(_return);
 }
 
-void InfinityServiceClient::send_CreateTable(const CreateTableRequest& request)
+void hybridsearchServiceClient::send_CreateTable(const CreateTableRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("CreateTable", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_CreateTable_pargs args;
+  hybridsearchService_CreateTable_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -7366,7 +7366,7 @@ void InfinityServiceClient::send_CreateTable(const CreateTableRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_CreateTable(CommonResponse& _return)
+void hybridsearchServiceClient::recv_CreateTable(CommonResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -7391,7 +7391,7 @@ void InfinityServiceClient::recv_CreateTable(CommonResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_CreateTable_presult result;
+  hybridsearchService_CreateTable_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -7404,18 +7404,18 @@ void InfinityServiceClient::recv_CreateTable(CommonResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "CreateTable failed: unknown result");
 }
 
-void InfinityServiceClient::DropTable(CommonResponse& _return, const DropTableRequest& request)
+void hybridsearchServiceClient::DropTable(CommonResponse& _return, const DropTableRequest& request)
 {
   send_DropTable(request);
   recv_DropTable(_return);
 }
 
-void InfinityServiceClient::send_DropTable(const DropTableRequest& request)
+void hybridsearchServiceClient::send_DropTable(const DropTableRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("DropTable", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_DropTable_pargs args;
+  hybridsearchService_DropTable_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -7424,7 +7424,7 @@ void InfinityServiceClient::send_DropTable(const DropTableRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_DropTable(CommonResponse& _return)
+void hybridsearchServiceClient::recv_DropTable(CommonResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -7449,7 +7449,7 @@ void InfinityServiceClient::recv_DropTable(CommonResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_DropTable_presult result;
+  hybridsearchService_DropTable_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -7462,18 +7462,18 @@ void InfinityServiceClient::recv_DropTable(CommonResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "DropTable failed: unknown result");
 }
 
-void InfinityServiceClient::Insert(CommonResponse& _return, const InsertRequest& request)
+void hybridsearchServiceClient::Insert(CommonResponse& _return, const InsertRequest& request)
 {
   send_Insert(request);
   recv_Insert(_return);
 }
 
-void InfinityServiceClient::send_Insert(const InsertRequest& request)
+void hybridsearchServiceClient::send_Insert(const InsertRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("Insert", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Insert_pargs args;
+  hybridsearchService_Insert_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -7482,7 +7482,7 @@ void InfinityServiceClient::send_Insert(const InsertRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_Insert(CommonResponse& _return)
+void hybridsearchServiceClient::recv_Insert(CommonResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -7507,7 +7507,7 @@ void InfinityServiceClient::recv_Insert(CommonResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_Insert_presult result;
+  hybridsearchService_Insert_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -7520,18 +7520,18 @@ void InfinityServiceClient::recv_Insert(CommonResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "Insert failed: unknown result");
 }
 
-void InfinityServiceClient::Import(CommonResponse& _return, const ImportRequest& request)
+void hybridsearchServiceClient::Import(CommonResponse& _return, const ImportRequest& request)
 {
   send_Import(request);
   recv_Import(_return);
 }
 
-void InfinityServiceClient::send_Import(const ImportRequest& request)
+void hybridsearchServiceClient::send_Import(const ImportRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("Import", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Import_pargs args;
+  hybridsearchService_Import_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -7540,7 +7540,7 @@ void InfinityServiceClient::send_Import(const ImportRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_Import(CommonResponse& _return)
+void hybridsearchServiceClient::recv_Import(CommonResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -7565,7 +7565,7 @@ void InfinityServiceClient::recv_Import(CommonResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_Import_presult result;
+  hybridsearchService_Import_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -7578,18 +7578,18 @@ void InfinityServiceClient::recv_Import(CommonResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "Import failed: unknown result");
 }
 
-void InfinityServiceClient::Export(CommonResponse& _return, const ExportRequest& request)
+void hybridsearchServiceClient::Export(CommonResponse& _return, const ExportRequest& request)
 {
   send_Export(request);
   recv_Export(_return);
 }
 
-void InfinityServiceClient::send_Export(const ExportRequest& request)
+void hybridsearchServiceClient::send_Export(const ExportRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("Export", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Export_pargs args;
+  hybridsearchService_Export_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -7598,7 +7598,7 @@ void InfinityServiceClient::send_Export(const ExportRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_Export(CommonResponse& _return)
+void hybridsearchServiceClient::recv_Export(CommonResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -7623,7 +7623,7 @@ void InfinityServiceClient::recv_Export(CommonResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_Export_presult result;
+  hybridsearchService_Export_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -7636,18 +7636,18 @@ void InfinityServiceClient::recv_Export(CommonResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "Export failed: unknown result");
 }
 
-void InfinityServiceClient::Select(SelectResponse& _return, const SelectRequest& request)
+void hybridsearchServiceClient::Select(SelectResponse& _return, const SelectRequest& request)
 {
   send_Select(request);
   recv_Select(_return);
 }
 
-void InfinityServiceClient::send_Select(const SelectRequest& request)
+void hybridsearchServiceClient::send_Select(const SelectRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("Select", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Select_pargs args;
+  hybridsearchService_Select_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -7656,7 +7656,7 @@ void InfinityServiceClient::send_Select(const SelectRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_Select(SelectResponse& _return)
+void hybridsearchServiceClient::recv_Select(SelectResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -7681,7 +7681,7 @@ void InfinityServiceClient::recv_Select(SelectResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_Select_presult result;
+  hybridsearchService_Select_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -7694,18 +7694,18 @@ void InfinityServiceClient::recv_Select(SelectResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "Select failed: unknown result");
 }
 
-void InfinityServiceClient::Explain(SelectResponse& _return, const ExplainRequest& request)
+void hybridsearchServiceClient::Explain(SelectResponse& _return, const ExplainRequest& request)
 {
   send_Explain(request);
   recv_Explain(_return);
 }
 
-void InfinityServiceClient::send_Explain(const ExplainRequest& request)
+void hybridsearchServiceClient::send_Explain(const ExplainRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("Explain", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Explain_pargs args;
+  hybridsearchService_Explain_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -7714,7 +7714,7 @@ void InfinityServiceClient::send_Explain(const ExplainRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_Explain(SelectResponse& _return)
+void hybridsearchServiceClient::recv_Explain(SelectResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -7739,7 +7739,7 @@ void InfinityServiceClient::recv_Explain(SelectResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_Explain_presult result;
+  hybridsearchService_Explain_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -7752,18 +7752,18 @@ void InfinityServiceClient::recv_Explain(SelectResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "Explain failed: unknown result");
 }
 
-void InfinityServiceClient::Delete(DeleteResponse& _return, const DeleteRequest& request)
+void hybridsearchServiceClient::Delete(DeleteResponse& _return, const DeleteRequest& request)
 {
   send_Delete(request);
   recv_Delete(_return);
 }
 
-void InfinityServiceClient::send_Delete(const DeleteRequest& request)
+void hybridsearchServiceClient::send_Delete(const DeleteRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("Delete", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Delete_pargs args;
+  hybridsearchService_Delete_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -7772,7 +7772,7 @@ void InfinityServiceClient::send_Delete(const DeleteRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_Delete(DeleteResponse& _return)
+void hybridsearchServiceClient::recv_Delete(DeleteResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -7797,7 +7797,7 @@ void InfinityServiceClient::recv_Delete(DeleteResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_Delete_presult result;
+  hybridsearchService_Delete_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -7810,18 +7810,18 @@ void InfinityServiceClient::recv_Delete(DeleteResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "Delete failed: unknown result");
 }
 
-void InfinityServiceClient::Update(CommonResponse& _return, const UpdateRequest& request)
+void hybridsearchServiceClient::Update(CommonResponse& _return, const UpdateRequest& request)
 {
   send_Update(request);
   recv_Update(_return);
 }
 
-void InfinityServiceClient::send_Update(const UpdateRequest& request)
+void hybridsearchServiceClient::send_Update(const UpdateRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("Update", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Update_pargs args;
+  hybridsearchService_Update_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -7830,7 +7830,7 @@ void InfinityServiceClient::send_Update(const UpdateRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_Update(CommonResponse& _return)
+void hybridsearchServiceClient::recv_Update(CommonResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -7855,7 +7855,7 @@ void InfinityServiceClient::recv_Update(CommonResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_Update_presult result;
+  hybridsearchService_Update_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -7868,18 +7868,18 @@ void InfinityServiceClient::recv_Update(CommonResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "Update failed: unknown result");
 }
 
-void InfinityServiceClient::ListDatabase(ListDatabaseResponse& _return, const ListDatabaseRequest& request)
+void hybridsearchServiceClient::ListDatabase(ListDatabaseResponse& _return, const ListDatabaseRequest& request)
 {
   send_ListDatabase(request);
   recv_ListDatabase(_return);
 }
 
-void InfinityServiceClient::send_ListDatabase(const ListDatabaseRequest& request)
+void hybridsearchServiceClient::send_ListDatabase(const ListDatabaseRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("ListDatabase", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ListDatabase_pargs args;
+  hybridsearchService_ListDatabase_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -7888,7 +7888,7 @@ void InfinityServiceClient::send_ListDatabase(const ListDatabaseRequest& request
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_ListDatabase(ListDatabaseResponse& _return)
+void hybridsearchServiceClient::recv_ListDatabase(ListDatabaseResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -7913,7 +7913,7 @@ void InfinityServiceClient::recv_ListDatabase(ListDatabaseResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_ListDatabase_presult result;
+  hybridsearchService_ListDatabase_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -7926,18 +7926,18 @@ void InfinityServiceClient::recv_ListDatabase(ListDatabaseResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "ListDatabase failed: unknown result");
 }
 
-void InfinityServiceClient::ListTable(ListTableResponse& _return, const ListTableRequest& request)
+void hybridsearchServiceClient::ListTable(ListTableResponse& _return, const ListTableRequest& request)
 {
   send_ListTable(request);
   recv_ListTable(_return);
 }
 
-void InfinityServiceClient::send_ListTable(const ListTableRequest& request)
+void hybridsearchServiceClient::send_ListTable(const ListTableRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("ListTable", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ListTable_pargs args;
+  hybridsearchService_ListTable_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -7946,7 +7946,7 @@ void InfinityServiceClient::send_ListTable(const ListTableRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_ListTable(ListTableResponse& _return)
+void hybridsearchServiceClient::recv_ListTable(ListTableResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -7971,7 +7971,7 @@ void InfinityServiceClient::recv_ListTable(ListTableResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_ListTable_presult result;
+  hybridsearchService_ListTable_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -7984,18 +7984,18 @@ void InfinityServiceClient::recv_ListTable(ListTableResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "ListTable failed: unknown result");
 }
 
-void InfinityServiceClient::ListIndex(ListIndexResponse& _return, const ListIndexRequest& request)
+void hybridsearchServiceClient::ListIndex(ListIndexResponse& _return, const ListIndexRequest& request)
 {
   send_ListIndex(request);
   recv_ListIndex(_return);
 }
 
-void InfinityServiceClient::send_ListIndex(const ListIndexRequest& request)
+void hybridsearchServiceClient::send_ListIndex(const ListIndexRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("ListIndex", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ListIndex_pargs args;
+  hybridsearchService_ListIndex_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -8004,7 +8004,7 @@ void InfinityServiceClient::send_ListIndex(const ListIndexRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_ListIndex(ListIndexResponse& _return)
+void hybridsearchServiceClient::recv_ListIndex(ListIndexResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -8029,7 +8029,7 @@ void InfinityServiceClient::recv_ListIndex(ListIndexResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_ListIndex_presult result;
+  hybridsearchService_ListIndex_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -8042,18 +8042,18 @@ void InfinityServiceClient::recv_ListIndex(ListIndexResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "ListIndex failed: unknown result");
 }
 
-void InfinityServiceClient::ShowTable(ShowTableResponse& _return, const ShowTableRequest& request)
+void hybridsearchServiceClient::ShowTable(ShowTableResponse& _return, const ShowTableRequest& request)
 {
   send_ShowTable(request);
   recv_ShowTable(_return);
 }
 
-void InfinityServiceClient::send_ShowTable(const ShowTableRequest& request)
+void hybridsearchServiceClient::send_ShowTable(const ShowTableRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("ShowTable", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ShowTable_pargs args;
+  hybridsearchService_ShowTable_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -8062,7 +8062,7 @@ void InfinityServiceClient::send_ShowTable(const ShowTableRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_ShowTable(ShowTableResponse& _return)
+void hybridsearchServiceClient::recv_ShowTable(ShowTableResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -8087,7 +8087,7 @@ void InfinityServiceClient::recv_ShowTable(ShowTableResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_ShowTable_presult result;
+  hybridsearchService_ShowTable_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -8100,18 +8100,18 @@ void InfinityServiceClient::recv_ShowTable(ShowTableResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "ShowTable failed: unknown result");
 }
 
-void InfinityServiceClient::ShowColumns(SelectResponse& _return, const ShowColumnsRequest& request)
+void hybridsearchServiceClient::ShowColumns(SelectResponse& _return, const ShowColumnsRequest& request)
 {
   send_ShowColumns(request);
   recv_ShowColumns(_return);
 }
 
-void InfinityServiceClient::send_ShowColumns(const ShowColumnsRequest& request)
+void hybridsearchServiceClient::send_ShowColumns(const ShowColumnsRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("ShowColumns", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ShowColumns_pargs args;
+  hybridsearchService_ShowColumns_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -8120,7 +8120,7 @@ void InfinityServiceClient::send_ShowColumns(const ShowColumnsRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_ShowColumns(SelectResponse& _return)
+void hybridsearchServiceClient::recv_ShowColumns(SelectResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -8145,7 +8145,7 @@ void InfinityServiceClient::recv_ShowColumns(SelectResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_ShowColumns_presult result;
+  hybridsearchService_ShowColumns_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -8158,18 +8158,18 @@ void InfinityServiceClient::recv_ShowColumns(SelectResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "ShowColumns failed: unknown result");
 }
 
-void InfinityServiceClient::ShowDatabase(ShowDatabaseResponse& _return, const ShowDatabaseRequest& request)
+void hybridsearchServiceClient::ShowDatabase(ShowDatabaseResponse& _return, const ShowDatabaseRequest& request)
 {
   send_ShowDatabase(request);
   recv_ShowDatabase(_return);
 }
 
-void InfinityServiceClient::send_ShowDatabase(const ShowDatabaseRequest& request)
+void hybridsearchServiceClient::send_ShowDatabase(const ShowDatabaseRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("ShowDatabase", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ShowDatabase_pargs args;
+  hybridsearchService_ShowDatabase_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -8178,7 +8178,7 @@ void InfinityServiceClient::send_ShowDatabase(const ShowDatabaseRequest& request
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_ShowDatabase(ShowDatabaseResponse& _return)
+void hybridsearchServiceClient::recv_ShowDatabase(ShowDatabaseResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -8203,7 +8203,7 @@ void InfinityServiceClient::recv_ShowDatabase(ShowDatabaseResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_ShowDatabase_presult result;
+  hybridsearchService_ShowDatabase_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -8216,18 +8216,18 @@ void InfinityServiceClient::recv_ShowDatabase(ShowDatabaseResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "ShowDatabase failed: unknown result");
 }
 
-void InfinityServiceClient::ShowTables(SelectResponse& _return, const ShowTablesRequest& request)
+void hybridsearchServiceClient::ShowTables(SelectResponse& _return, const ShowTablesRequest& request)
 {
   send_ShowTables(request);
   recv_ShowTables(_return);
 }
 
-void InfinityServiceClient::send_ShowTables(const ShowTablesRequest& request)
+void hybridsearchServiceClient::send_ShowTables(const ShowTablesRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("ShowTables", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ShowTables_pargs args;
+  hybridsearchService_ShowTables_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -8236,7 +8236,7 @@ void InfinityServiceClient::send_ShowTables(const ShowTablesRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_ShowTables(SelectResponse& _return)
+void hybridsearchServiceClient::recv_ShowTables(SelectResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -8261,7 +8261,7 @@ void InfinityServiceClient::recv_ShowTables(SelectResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_ShowTables_presult result;
+  hybridsearchService_ShowTables_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -8274,18 +8274,18 @@ void InfinityServiceClient::recv_ShowTables(SelectResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "ShowTables failed: unknown result");
 }
 
-void InfinityServiceClient::ShowSegments(SelectResponse& _return, const ShowSegmentsRequest& request)
+void hybridsearchServiceClient::ShowSegments(SelectResponse& _return, const ShowSegmentsRequest& request)
 {
   send_ShowSegments(request);
   recv_ShowSegments(_return);
 }
 
-void InfinityServiceClient::send_ShowSegments(const ShowSegmentsRequest& request)
+void hybridsearchServiceClient::send_ShowSegments(const ShowSegmentsRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("ShowSegments", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ShowSegments_pargs args;
+  hybridsearchService_ShowSegments_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -8294,7 +8294,7 @@ void InfinityServiceClient::send_ShowSegments(const ShowSegmentsRequest& request
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_ShowSegments(SelectResponse& _return)
+void hybridsearchServiceClient::recv_ShowSegments(SelectResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -8319,7 +8319,7 @@ void InfinityServiceClient::recv_ShowSegments(SelectResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_ShowSegments_presult result;
+  hybridsearchService_ShowSegments_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -8332,18 +8332,18 @@ void InfinityServiceClient::recv_ShowSegments(SelectResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "ShowSegments failed: unknown result");
 }
 
-void InfinityServiceClient::ShowSegment(ShowSegmentResponse& _return, const ShowSegmentRequest& request)
+void hybridsearchServiceClient::ShowSegment(ShowSegmentResponse& _return, const ShowSegmentRequest& request)
 {
   send_ShowSegment(request);
   recv_ShowSegment(_return);
 }
 
-void InfinityServiceClient::send_ShowSegment(const ShowSegmentRequest& request)
+void hybridsearchServiceClient::send_ShowSegment(const ShowSegmentRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("ShowSegment", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ShowSegment_pargs args;
+  hybridsearchService_ShowSegment_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -8352,7 +8352,7 @@ void InfinityServiceClient::send_ShowSegment(const ShowSegmentRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_ShowSegment(ShowSegmentResponse& _return)
+void hybridsearchServiceClient::recv_ShowSegment(ShowSegmentResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -8377,7 +8377,7 @@ void InfinityServiceClient::recv_ShowSegment(ShowSegmentResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_ShowSegment_presult result;
+  hybridsearchService_ShowSegment_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -8390,18 +8390,18 @@ void InfinityServiceClient::recv_ShowSegment(ShowSegmentResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "ShowSegment failed: unknown result");
 }
 
-void InfinityServiceClient::ShowBlocks(SelectResponse& _return, const ShowBlocksRequest& request)
+void hybridsearchServiceClient::ShowBlocks(SelectResponse& _return, const ShowBlocksRequest& request)
 {
   send_ShowBlocks(request);
   recv_ShowBlocks(_return);
 }
 
-void InfinityServiceClient::send_ShowBlocks(const ShowBlocksRequest& request)
+void hybridsearchServiceClient::send_ShowBlocks(const ShowBlocksRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("ShowBlocks", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ShowBlocks_pargs args;
+  hybridsearchService_ShowBlocks_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -8410,7 +8410,7 @@ void InfinityServiceClient::send_ShowBlocks(const ShowBlocksRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_ShowBlocks(SelectResponse& _return)
+void hybridsearchServiceClient::recv_ShowBlocks(SelectResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -8435,7 +8435,7 @@ void InfinityServiceClient::recv_ShowBlocks(SelectResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_ShowBlocks_presult result;
+  hybridsearchService_ShowBlocks_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -8448,18 +8448,18 @@ void InfinityServiceClient::recv_ShowBlocks(SelectResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "ShowBlocks failed: unknown result");
 }
 
-void InfinityServiceClient::ShowBlock(ShowBlockResponse& _return, const ShowBlockRequest& request)
+void hybridsearchServiceClient::ShowBlock(ShowBlockResponse& _return, const ShowBlockRequest& request)
 {
   send_ShowBlock(request);
   recv_ShowBlock(_return);
 }
 
-void InfinityServiceClient::send_ShowBlock(const ShowBlockRequest& request)
+void hybridsearchServiceClient::send_ShowBlock(const ShowBlockRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("ShowBlock", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ShowBlock_pargs args;
+  hybridsearchService_ShowBlock_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -8468,7 +8468,7 @@ void InfinityServiceClient::send_ShowBlock(const ShowBlockRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_ShowBlock(ShowBlockResponse& _return)
+void hybridsearchServiceClient::recv_ShowBlock(ShowBlockResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -8493,7 +8493,7 @@ void InfinityServiceClient::recv_ShowBlock(ShowBlockResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_ShowBlock_presult result;
+  hybridsearchService_ShowBlock_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -8506,18 +8506,18 @@ void InfinityServiceClient::recv_ShowBlock(ShowBlockResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "ShowBlock failed: unknown result");
 }
 
-void InfinityServiceClient::ShowBlockColumn(ShowBlockColumnResponse& _return, const ShowBlockColumnRequest& request)
+void hybridsearchServiceClient::ShowBlockColumn(ShowBlockColumnResponse& _return, const ShowBlockColumnRequest& request)
 {
   send_ShowBlockColumn(request);
   recv_ShowBlockColumn(_return);
 }
 
-void InfinityServiceClient::send_ShowBlockColumn(const ShowBlockColumnRequest& request)
+void hybridsearchServiceClient::send_ShowBlockColumn(const ShowBlockColumnRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("ShowBlockColumn", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ShowBlockColumn_pargs args;
+  hybridsearchService_ShowBlockColumn_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -8526,7 +8526,7 @@ void InfinityServiceClient::send_ShowBlockColumn(const ShowBlockColumnRequest& r
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_ShowBlockColumn(ShowBlockColumnResponse& _return)
+void hybridsearchServiceClient::recv_ShowBlockColumn(ShowBlockColumnResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -8551,7 +8551,7 @@ void InfinityServiceClient::recv_ShowBlockColumn(ShowBlockColumnResponse& _retur
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_ShowBlockColumn_presult result;
+  hybridsearchService_ShowBlockColumn_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -8564,18 +8564,18 @@ void InfinityServiceClient::recv_ShowBlockColumn(ShowBlockColumnResponse& _retur
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "ShowBlockColumn failed: unknown result");
 }
 
-void InfinityServiceClient::ShowCurrentNode(ShowCurrentNodeResponse& _return, const ShowCurrentNodeRequest& request)
+void hybridsearchServiceClient::ShowCurrentNode(ShowCurrentNodeResponse& _return, const ShowCurrentNodeRequest& request)
 {
   send_ShowCurrentNode(request);
   recv_ShowCurrentNode(_return);
 }
 
-void InfinityServiceClient::send_ShowCurrentNode(const ShowCurrentNodeRequest& request)
+void hybridsearchServiceClient::send_ShowCurrentNode(const ShowCurrentNodeRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("ShowCurrentNode", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ShowCurrentNode_pargs args;
+  hybridsearchService_ShowCurrentNode_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -8584,7 +8584,7 @@ void InfinityServiceClient::send_ShowCurrentNode(const ShowCurrentNodeRequest& r
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_ShowCurrentNode(ShowCurrentNodeResponse& _return)
+void hybridsearchServiceClient::recv_ShowCurrentNode(ShowCurrentNodeResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -8609,7 +8609,7 @@ void InfinityServiceClient::recv_ShowCurrentNode(ShowCurrentNodeResponse& _retur
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_ShowCurrentNode_presult result;
+  hybridsearchService_ShowCurrentNode_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -8622,18 +8622,18 @@ void InfinityServiceClient::recv_ShowCurrentNode(ShowCurrentNodeResponse& _retur
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "ShowCurrentNode failed: unknown result");
 }
 
-void InfinityServiceClient::GetDatabase(CommonResponse& _return, const GetDatabaseRequest& request)
+void hybridsearchServiceClient::GetDatabase(CommonResponse& _return, const GetDatabaseRequest& request)
 {
   send_GetDatabase(request);
   recv_GetDatabase(_return);
 }
 
-void InfinityServiceClient::send_GetDatabase(const GetDatabaseRequest& request)
+void hybridsearchServiceClient::send_GetDatabase(const GetDatabaseRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("GetDatabase", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_GetDatabase_pargs args;
+  hybridsearchService_GetDatabase_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -8642,7 +8642,7 @@ void InfinityServiceClient::send_GetDatabase(const GetDatabaseRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_GetDatabase(CommonResponse& _return)
+void hybridsearchServiceClient::recv_GetDatabase(CommonResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -8667,7 +8667,7 @@ void InfinityServiceClient::recv_GetDatabase(CommonResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_GetDatabase_presult result;
+  hybridsearchService_GetDatabase_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -8680,18 +8680,18 @@ void InfinityServiceClient::recv_GetDatabase(CommonResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "GetDatabase failed: unknown result");
 }
 
-void InfinityServiceClient::GetTable(CommonResponse& _return, const GetTableRequest& request)
+void hybridsearchServiceClient::GetTable(CommonResponse& _return, const GetTableRequest& request)
 {
   send_GetTable(request);
   recv_GetTable(_return);
 }
 
-void InfinityServiceClient::send_GetTable(const GetTableRequest& request)
+void hybridsearchServiceClient::send_GetTable(const GetTableRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("GetTable", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_GetTable_pargs args;
+  hybridsearchService_GetTable_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -8700,7 +8700,7 @@ void InfinityServiceClient::send_GetTable(const GetTableRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_GetTable(CommonResponse& _return)
+void hybridsearchServiceClient::recv_GetTable(CommonResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -8725,7 +8725,7 @@ void InfinityServiceClient::recv_GetTable(CommonResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_GetTable_presult result;
+  hybridsearchService_GetTable_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -8738,18 +8738,18 @@ void InfinityServiceClient::recv_GetTable(CommonResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "GetTable failed: unknown result");
 }
 
-void InfinityServiceClient::CreateIndex(CommonResponse& _return, const CreateIndexRequest& request)
+void hybridsearchServiceClient::CreateIndex(CommonResponse& _return, const CreateIndexRequest& request)
 {
   send_CreateIndex(request);
   recv_CreateIndex(_return);
 }
 
-void InfinityServiceClient::send_CreateIndex(const CreateIndexRequest& request)
+void hybridsearchServiceClient::send_CreateIndex(const CreateIndexRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("CreateIndex", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_CreateIndex_pargs args;
+  hybridsearchService_CreateIndex_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -8758,7 +8758,7 @@ void InfinityServiceClient::send_CreateIndex(const CreateIndexRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_CreateIndex(CommonResponse& _return)
+void hybridsearchServiceClient::recv_CreateIndex(CommonResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -8783,7 +8783,7 @@ void InfinityServiceClient::recv_CreateIndex(CommonResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_CreateIndex_presult result;
+  hybridsearchService_CreateIndex_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -8796,18 +8796,18 @@ void InfinityServiceClient::recv_CreateIndex(CommonResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "CreateIndex failed: unknown result");
 }
 
-void InfinityServiceClient::DropIndex(CommonResponse& _return, const DropIndexRequest& request)
+void hybridsearchServiceClient::DropIndex(CommonResponse& _return, const DropIndexRequest& request)
 {
   send_DropIndex(request);
   recv_DropIndex(_return);
 }
 
-void InfinityServiceClient::send_DropIndex(const DropIndexRequest& request)
+void hybridsearchServiceClient::send_DropIndex(const DropIndexRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("DropIndex", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_DropIndex_pargs args;
+  hybridsearchService_DropIndex_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -8816,7 +8816,7 @@ void InfinityServiceClient::send_DropIndex(const DropIndexRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_DropIndex(CommonResponse& _return)
+void hybridsearchServiceClient::recv_DropIndex(CommonResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -8841,7 +8841,7 @@ void InfinityServiceClient::recv_DropIndex(CommonResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_DropIndex_presult result;
+  hybridsearchService_DropIndex_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -8854,18 +8854,18 @@ void InfinityServiceClient::recv_DropIndex(CommonResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "DropIndex failed: unknown result");
 }
 
-void InfinityServiceClient::ShowIndex(ShowIndexResponse& _return, const ShowIndexRequest& request)
+void hybridsearchServiceClient::ShowIndex(ShowIndexResponse& _return, const ShowIndexRequest& request)
 {
   send_ShowIndex(request);
   recv_ShowIndex(_return);
 }
 
-void InfinityServiceClient::send_ShowIndex(const ShowIndexRequest& request)
+void hybridsearchServiceClient::send_ShowIndex(const ShowIndexRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("ShowIndex", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ShowIndex_pargs args;
+  hybridsearchService_ShowIndex_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -8874,7 +8874,7 @@ void InfinityServiceClient::send_ShowIndex(const ShowIndexRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_ShowIndex(ShowIndexResponse& _return)
+void hybridsearchServiceClient::recv_ShowIndex(ShowIndexResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -8899,7 +8899,7 @@ void InfinityServiceClient::recv_ShowIndex(ShowIndexResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_ShowIndex_presult result;
+  hybridsearchService_ShowIndex_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -8912,18 +8912,18 @@ void InfinityServiceClient::recv_ShowIndex(ShowIndexResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "ShowIndex failed: unknown result");
 }
 
-void InfinityServiceClient::Optimize(CommonResponse& _return, const OptimizeRequest& request)
+void hybridsearchServiceClient::Optimize(CommonResponse& _return, const OptimizeRequest& request)
 {
   send_Optimize(request);
   recv_Optimize(_return);
 }
 
-void InfinityServiceClient::send_Optimize(const OptimizeRequest& request)
+void hybridsearchServiceClient::send_Optimize(const OptimizeRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("Optimize", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Optimize_pargs args;
+  hybridsearchService_Optimize_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -8932,7 +8932,7 @@ void InfinityServiceClient::send_Optimize(const OptimizeRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_Optimize(CommonResponse& _return)
+void hybridsearchServiceClient::recv_Optimize(CommonResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -8957,7 +8957,7 @@ void InfinityServiceClient::recv_Optimize(CommonResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_Optimize_presult result;
+  hybridsearchService_Optimize_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -8970,18 +8970,18 @@ void InfinityServiceClient::recv_Optimize(CommonResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "Optimize failed: unknown result");
 }
 
-void InfinityServiceClient::AddColumns(CommonResponse& _return, const AddColumnsRequest& request)
+void hybridsearchServiceClient::AddColumns(CommonResponse& _return, const AddColumnsRequest& request)
 {
   send_AddColumns(request);
   recv_AddColumns(_return);
 }
 
-void InfinityServiceClient::send_AddColumns(const AddColumnsRequest& request)
+void hybridsearchServiceClient::send_AddColumns(const AddColumnsRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("AddColumns", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_AddColumns_pargs args;
+  hybridsearchService_AddColumns_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -8990,7 +8990,7 @@ void InfinityServiceClient::send_AddColumns(const AddColumnsRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_AddColumns(CommonResponse& _return)
+void hybridsearchServiceClient::recv_AddColumns(CommonResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -9015,7 +9015,7 @@ void InfinityServiceClient::recv_AddColumns(CommonResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_AddColumns_presult result;
+  hybridsearchService_AddColumns_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -9028,18 +9028,18 @@ void InfinityServiceClient::recv_AddColumns(CommonResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "AddColumns failed: unknown result");
 }
 
-void InfinityServiceClient::DropColumns(CommonResponse& _return, const DropColumnsRequest& request)
+void hybridsearchServiceClient::DropColumns(CommonResponse& _return, const DropColumnsRequest& request)
 {
   send_DropColumns(request);
   recv_DropColumns(_return);
 }
 
-void InfinityServiceClient::send_DropColumns(const DropColumnsRequest& request)
+void hybridsearchServiceClient::send_DropColumns(const DropColumnsRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("DropColumns", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_DropColumns_pargs args;
+  hybridsearchService_DropColumns_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -9048,7 +9048,7 @@ void InfinityServiceClient::send_DropColumns(const DropColumnsRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_DropColumns(CommonResponse& _return)
+void hybridsearchServiceClient::recv_DropColumns(CommonResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -9073,7 +9073,7 @@ void InfinityServiceClient::recv_DropColumns(CommonResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_DropColumns_presult result;
+  hybridsearchService_DropColumns_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -9086,18 +9086,18 @@ void InfinityServiceClient::recv_DropColumns(CommonResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "DropColumns failed: unknown result");
 }
 
-void InfinityServiceClient::Cleanup(CommonResponse& _return, const CommonRequest& request)
+void hybridsearchServiceClient::Cleanup(CommonResponse& _return, const CommonRequest& request)
 {
   send_Cleanup(request);
   recv_Cleanup(_return);
 }
 
-void InfinityServiceClient::send_Cleanup(const CommonRequest& request)
+void hybridsearchServiceClient::send_Cleanup(const CommonRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("Cleanup", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Cleanup_pargs args;
+  hybridsearchService_Cleanup_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -9106,7 +9106,7 @@ void InfinityServiceClient::send_Cleanup(const CommonRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_Cleanup(CommonResponse& _return)
+void hybridsearchServiceClient::recv_Cleanup(CommonResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -9131,7 +9131,7 @@ void InfinityServiceClient::recv_Cleanup(CommonResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_Cleanup_presult result;
+  hybridsearchService_Cleanup_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -9144,18 +9144,18 @@ void InfinityServiceClient::recv_Cleanup(CommonResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "Cleanup failed: unknown result");
 }
 
-void InfinityServiceClient::Command(CommonResponse& _return, const CommandRequest& request)
+void hybridsearchServiceClient::Command(CommonResponse& _return, const CommandRequest& request)
 {
   send_Command(request);
   recv_Command(_return);
 }
 
-void InfinityServiceClient::send_Command(const CommandRequest& request)
+void hybridsearchServiceClient::send_Command(const CommandRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("Command", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Command_pargs args;
+  hybridsearchService_Command_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -9164,7 +9164,7 @@ void InfinityServiceClient::send_Command(const CommandRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_Command(CommonResponse& _return)
+void hybridsearchServiceClient::recv_Command(CommonResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -9189,7 +9189,7 @@ void InfinityServiceClient::recv_Command(CommonResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_Command_presult result;
+  hybridsearchService_Command_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -9202,18 +9202,18 @@ void InfinityServiceClient::recv_Command(CommonResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "Command failed: unknown result");
 }
 
-void InfinityServiceClient::Flush(CommonResponse& _return, const FlushRequest& request)
+void hybridsearchServiceClient::Flush(CommonResponse& _return, const FlushRequest& request)
 {
   send_Flush(request);
   recv_Flush(_return);
 }
 
-void InfinityServiceClient::send_Flush(const FlushRequest& request)
+void hybridsearchServiceClient::send_Flush(const FlushRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("Flush", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Flush_pargs args;
+  hybridsearchService_Flush_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -9222,7 +9222,7 @@ void InfinityServiceClient::send_Flush(const FlushRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_Flush(CommonResponse& _return)
+void hybridsearchServiceClient::recv_Flush(CommonResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -9247,7 +9247,7 @@ void InfinityServiceClient::recv_Flush(CommonResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_Flush_presult result;
+  hybridsearchService_Flush_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -9260,18 +9260,18 @@ void InfinityServiceClient::recv_Flush(CommonResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "Flush failed: unknown result");
 }
 
-void InfinityServiceClient::Compact(CommonResponse& _return, const CompactRequest& request)
+void hybridsearchServiceClient::Compact(CommonResponse& _return, const CompactRequest& request)
 {
   send_Compact(request);
   recv_Compact(_return);
 }
 
-void InfinityServiceClient::send_Compact(const CompactRequest& request)
+void hybridsearchServiceClient::send_Compact(const CompactRequest& request)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("Compact", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Compact_pargs args;
+  hybridsearchService_Compact_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -9280,7 +9280,7 @@ void InfinityServiceClient::send_Compact(const CompactRequest& request)
   oprot_->getTransport()->flush();
 }
 
-void InfinityServiceClient::recv_Compact(CommonResponse& _return)
+void hybridsearchServiceClient::recv_Compact(CommonResponse& _return)
 {
 
   int32_t rseqid = 0;
@@ -9305,7 +9305,7 @@ void InfinityServiceClient::recv_Compact(CommonResponse& _return)
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  InfinityService_Compact_presult result;
+  hybridsearchService_Compact_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -9318,7 +9318,7 @@ void InfinityServiceClient::recv_Compact(CommonResponse& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "Compact failed: unknown result");
 }
 
-bool InfinityServiceProcessor::dispatchCall(::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, const std::string& fname, int32_t seqid, void* callContext) {
+bool hybridsearchServiceProcessor::dispatchCall(::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, const std::string& fname, int32_t seqid, void* callContext) {
   ProcessMap::iterator pfn;
   pfn = processMap_.find(fname);
   if (pfn == processMap_.end()) {
@@ -9337,34 +9337,34 @@ bool InfinityServiceProcessor::dispatchCall(::apache::thrift::protocol::TProtoco
   return true;
 }
 
-void InfinityServiceProcessor::process_Connect(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_Connect(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.Connect", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.Connect", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.Connect");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.Connect");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.Connect");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.Connect");
   }
 
-  InfinityService_Connect_args args;
+  hybridsearchService_Connect_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.Connect", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.Connect", bytes);
   }
 
-  InfinityService_Connect_result result;
+  hybridsearchService_Connect_result result;
   try {
     iface_->Connect(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.Connect");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.Connect");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -9377,7 +9377,7 @@ void InfinityServiceProcessor::process_Connect(int32_t seqid, ::apache::thrift::
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.Connect");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.Connect");
   }
 
   oprot->writeMessageBegin("Connect", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -9387,38 +9387,38 @@ void InfinityServiceProcessor::process_Connect(int32_t seqid, ::apache::thrift::
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.Connect", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.Connect", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_Disconnect(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_Disconnect(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.Disconnect", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.Disconnect", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.Disconnect");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.Disconnect");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.Disconnect");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.Disconnect");
   }
 
-  InfinityService_Disconnect_args args;
+  hybridsearchService_Disconnect_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.Disconnect", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.Disconnect", bytes);
   }
 
-  InfinityService_Disconnect_result result;
+  hybridsearchService_Disconnect_result result;
   try {
     iface_->Disconnect(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.Disconnect");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.Disconnect");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -9431,7 +9431,7 @@ void InfinityServiceProcessor::process_Disconnect(int32_t seqid, ::apache::thrif
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.Disconnect");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.Disconnect");
   }
 
   oprot->writeMessageBegin("Disconnect", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -9441,38 +9441,38 @@ void InfinityServiceProcessor::process_Disconnect(int32_t seqid, ::apache::thrif
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.Disconnect", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.Disconnect", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_CreateDatabase(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_CreateDatabase(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.CreateDatabase", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.CreateDatabase", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.CreateDatabase");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.CreateDatabase");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.CreateDatabase");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.CreateDatabase");
   }
 
-  InfinityService_CreateDatabase_args args;
+  hybridsearchService_CreateDatabase_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.CreateDatabase", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.CreateDatabase", bytes);
   }
 
-  InfinityService_CreateDatabase_result result;
+  hybridsearchService_CreateDatabase_result result;
   try {
     iface_->CreateDatabase(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.CreateDatabase");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.CreateDatabase");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -9485,7 +9485,7 @@ void InfinityServiceProcessor::process_CreateDatabase(int32_t seqid, ::apache::t
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.CreateDatabase");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.CreateDatabase");
   }
 
   oprot->writeMessageBegin("CreateDatabase", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -9495,38 +9495,38 @@ void InfinityServiceProcessor::process_CreateDatabase(int32_t seqid, ::apache::t
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.CreateDatabase", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.CreateDatabase", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_DropDatabase(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_DropDatabase(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.DropDatabase", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.DropDatabase", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.DropDatabase");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.DropDatabase");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.DropDatabase");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.DropDatabase");
   }
 
-  InfinityService_DropDatabase_args args;
+  hybridsearchService_DropDatabase_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.DropDatabase", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.DropDatabase", bytes);
   }
 
-  InfinityService_DropDatabase_result result;
+  hybridsearchService_DropDatabase_result result;
   try {
     iface_->DropDatabase(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.DropDatabase");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.DropDatabase");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -9539,7 +9539,7 @@ void InfinityServiceProcessor::process_DropDatabase(int32_t seqid, ::apache::thr
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.DropDatabase");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.DropDatabase");
   }
 
   oprot->writeMessageBegin("DropDatabase", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -9549,38 +9549,38 @@ void InfinityServiceProcessor::process_DropDatabase(int32_t seqid, ::apache::thr
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.DropDatabase", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.DropDatabase", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_CreateTable(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_CreateTable(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.CreateTable", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.CreateTable", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.CreateTable");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.CreateTable");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.CreateTable");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.CreateTable");
   }
 
-  InfinityService_CreateTable_args args;
+  hybridsearchService_CreateTable_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.CreateTable", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.CreateTable", bytes);
   }
 
-  InfinityService_CreateTable_result result;
+  hybridsearchService_CreateTable_result result;
   try {
     iface_->CreateTable(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.CreateTable");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.CreateTable");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -9593,7 +9593,7 @@ void InfinityServiceProcessor::process_CreateTable(int32_t seqid, ::apache::thri
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.CreateTable");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.CreateTable");
   }
 
   oprot->writeMessageBegin("CreateTable", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -9603,38 +9603,38 @@ void InfinityServiceProcessor::process_CreateTable(int32_t seqid, ::apache::thri
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.CreateTable", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.CreateTable", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_DropTable(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_DropTable(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.DropTable", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.DropTable", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.DropTable");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.DropTable");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.DropTable");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.DropTable");
   }
 
-  InfinityService_DropTable_args args;
+  hybridsearchService_DropTable_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.DropTable", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.DropTable", bytes);
   }
 
-  InfinityService_DropTable_result result;
+  hybridsearchService_DropTable_result result;
   try {
     iface_->DropTable(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.DropTable");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.DropTable");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -9647,7 +9647,7 @@ void InfinityServiceProcessor::process_DropTable(int32_t seqid, ::apache::thrift
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.DropTable");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.DropTable");
   }
 
   oprot->writeMessageBegin("DropTable", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -9657,38 +9657,38 @@ void InfinityServiceProcessor::process_DropTable(int32_t seqid, ::apache::thrift
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.DropTable", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.DropTable", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_Insert(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_Insert(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.Insert", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.Insert", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.Insert");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.Insert");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.Insert");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.Insert");
   }
 
-  InfinityService_Insert_args args;
+  hybridsearchService_Insert_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.Insert", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.Insert", bytes);
   }
 
-  InfinityService_Insert_result result;
+  hybridsearchService_Insert_result result;
   try {
     iface_->Insert(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.Insert");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.Insert");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -9701,7 +9701,7 @@ void InfinityServiceProcessor::process_Insert(int32_t seqid, ::apache::thrift::p
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.Insert");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.Insert");
   }
 
   oprot->writeMessageBegin("Insert", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -9711,38 +9711,38 @@ void InfinityServiceProcessor::process_Insert(int32_t seqid, ::apache::thrift::p
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.Insert", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.Insert", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_Import(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_Import(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.Import", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.Import", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.Import");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.Import");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.Import");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.Import");
   }
 
-  InfinityService_Import_args args;
+  hybridsearchService_Import_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.Import", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.Import", bytes);
   }
 
-  InfinityService_Import_result result;
+  hybridsearchService_Import_result result;
   try {
     iface_->Import(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.Import");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.Import");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -9755,7 +9755,7 @@ void InfinityServiceProcessor::process_Import(int32_t seqid, ::apache::thrift::p
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.Import");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.Import");
   }
 
   oprot->writeMessageBegin("Import", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -9765,38 +9765,38 @@ void InfinityServiceProcessor::process_Import(int32_t seqid, ::apache::thrift::p
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.Import", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.Import", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_Export(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_Export(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.Export", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.Export", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.Export");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.Export");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.Export");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.Export");
   }
 
-  InfinityService_Export_args args;
+  hybridsearchService_Export_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.Export", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.Export", bytes);
   }
 
-  InfinityService_Export_result result;
+  hybridsearchService_Export_result result;
   try {
     iface_->Export(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.Export");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.Export");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -9809,7 +9809,7 @@ void InfinityServiceProcessor::process_Export(int32_t seqid, ::apache::thrift::p
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.Export");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.Export");
   }
 
   oprot->writeMessageBegin("Export", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -9819,38 +9819,38 @@ void InfinityServiceProcessor::process_Export(int32_t seqid, ::apache::thrift::p
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.Export", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.Export", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_Select(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_Select(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.Select", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.Select", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.Select");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.Select");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.Select");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.Select");
   }
 
-  InfinityService_Select_args args;
+  hybridsearchService_Select_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.Select", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.Select", bytes);
   }
 
-  InfinityService_Select_result result;
+  hybridsearchService_Select_result result;
   try {
     iface_->Select(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.Select");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.Select");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -9863,7 +9863,7 @@ void InfinityServiceProcessor::process_Select(int32_t seqid, ::apache::thrift::p
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.Select");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.Select");
   }
 
   oprot->writeMessageBegin("Select", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -9873,38 +9873,38 @@ void InfinityServiceProcessor::process_Select(int32_t seqid, ::apache::thrift::p
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.Select", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.Select", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_Explain(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_Explain(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.Explain", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.Explain", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.Explain");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.Explain");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.Explain");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.Explain");
   }
 
-  InfinityService_Explain_args args;
+  hybridsearchService_Explain_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.Explain", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.Explain", bytes);
   }
 
-  InfinityService_Explain_result result;
+  hybridsearchService_Explain_result result;
   try {
     iface_->Explain(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.Explain");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.Explain");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -9917,7 +9917,7 @@ void InfinityServiceProcessor::process_Explain(int32_t seqid, ::apache::thrift::
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.Explain");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.Explain");
   }
 
   oprot->writeMessageBegin("Explain", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -9927,38 +9927,38 @@ void InfinityServiceProcessor::process_Explain(int32_t seqid, ::apache::thrift::
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.Explain", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.Explain", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_Delete(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_Delete(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.Delete", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.Delete", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.Delete");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.Delete");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.Delete");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.Delete");
   }
 
-  InfinityService_Delete_args args;
+  hybridsearchService_Delete_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.Delete", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.Delete", bytes);
   }
 
-  InfinityService_Delete_result result;
+  hybridsearchService_Delete_result result;
   try {
     iface_->Delete(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.Delete");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.Delete");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -9971,7 +9971,7 @@ void InfinityServiceProcessor::process_Delete(int32_t seqid, ::apache::thrift::p
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.Delete");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.Delete");
   }
 
   oprot->writeMessageBegin("Delete", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -9981,38 +9981,38 @@ void InfinityServiceProcessor::process_Delete(int32_t seqid, ::apache::thrift::p
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.Delete", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.Delete", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_Update(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_Update(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.Update", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.Update", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.Update");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.Update");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.Update");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.Update");
   }
 
-  InfinityService_Update_args args;
+  hybridsearchService_Update_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.Update", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.Update", bytes);
   }
 
-  InfinityService_Update_result result;
+  hybridsearchService_Update_result result;
   try {
     iface_->Update(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.Update");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.Update");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -10025,7 +10025,7 @@ void InfinityServiceProcessor::process_Update(int32_t seqid, ::apache::thrift::p
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.Update");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.Update");
   }
 
   oprot->writeMessageBegin("Update", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -10035,38 +10035,38 @@ void InfinityServiceProcessor::process_Update(int32_t seqid, ::apache::thrift::p
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.Update", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.Update", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_ListDatabase(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_ListDatabase(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.ListDatabase", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.ListDatabase", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.ListDatabase");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.ListDatabase");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.ListDatabase");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.ListDatabase");
   }
 
-  InfinityService_ListDatabase_args args;
+  hybridsearchService_ListDatabase_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.ListDatabase", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.ListDatabase", bytes);
   }
 
-  InfinityService_ListDatabase_result result;
+  hybridsearchService_ListDatabase_result result;
   try {
     iface_->ListDatabase(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.ListDatabase");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.ListDatabase");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -10079,7 +10079,7 @@ void InfinityServiceProcessor::process_ListDatabase(int32_t seqid, ::apache::thr
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.ListDatabase");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.ListDatabase");
   }
 
   oprot->writeMessageBegin("ListDatabase", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -10089,38 +10089,38 @@ void InfinityServiceProcessor::process_ListDatabase(int32_t seqid, ::apache::thr
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.ListDatabase", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.ListDatabase", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_ListTable(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_ListTable(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.ListTable", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.ListTable", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.ListTable");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.ListTable");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.ListTable");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.ListTable");
   }
 
-  InfinityService_ListTable_args args;
+  hybridsearchService_ListTable_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.ListTable", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.ListTable", bytes);
   }
 
-  InfinityService_ListTable_result result;
+  hybridsearchService_ListTable_result result;
   try {
     iface_->ListTable(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.ListTable");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.ListTable");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -10133,7 +10133,7 @@ void InfinityServiceProcessor::process_ListTable(int32_t seqid, ::apache::thrift
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.ListTable");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.ListTable");
   }
 
   oprot->writeMessageBegin("ListTable", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -10143,38 +10143,38 @@ void InfinityServiceProcessor::process_ListTable(int32_t seqid, ::apache::thrift
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.ListTable", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.ListTable", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_ListIndex(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_ListIndex(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.ListIndex", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.ListIndex", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.ListIndex");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.ListIndex");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.ListIndex");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.ListIndex");
   }
 
-  InfinityService_ListIndex_args args;
+  hybridsearchService_ListIndex_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.ListIndex", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.ListIndex", bytes);
   }
 
-  InfinityService_ListIndex_result result;
+  hybridsearchService_ListIndex_result result;
   try {
     iface_->ListIndex(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.ListIndex");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.ListIndex");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -10187,7 +10187,7 @@ void InfinityServiceProcessor::process_ListIndex(int32_t seqid, ::apache::thrift
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.ListIndex");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.ListIndex");
   }
 
   oprot->writeMessageBegin("ListIndex", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -10197,38 +10197,38 @@ void InfinityServiceProcessor::process_ListIndex(int32_t seqid, ::apache::thrift
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.ListIndex", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.ListIndex", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_ShowTable(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_ShowTable(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.ShowTable", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.ShowTable", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.ShowTable");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.ShowTable");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.ShowTable");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.ShowTable");
   }
 
-  InfinityService_ShowTable_args args;
+  hybridsearchService_ShowTable_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.ShowTable", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.ShowTable", bytes);
   }
 
-  InfinityService_ShowTable_result result;
+  hybridsearchService_ShowTable_result result;
   try {
     iface_->ShowTable(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.ShowTable");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.ShowTable");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -10241,7 +10241,7 @@ void InfinityServiceProcessor::process_ShowTable(int32_t seqid, ::apache::thrift
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.ShowTable");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.ShowTable");
   }
 
   oprot->writeMessageBegin("ShowTable", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -10251,38 +10251,38 @@ void InfinityServiceProcessor::process_ShowTable(int32_t seqid, ::apache::thrift
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.ShowTable", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.ShowTable", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_ShowColumns(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_ShowColumns(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.ShowColumns", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.ShowColumns", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.ShowColumns");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.ShowColumns");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.ShowColumns");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.ShowColumns");
   }
 
-  InfinityService_ShowColumns_args args;
+  hybridsearchService_ShowColumns_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.ShowColumns", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.ShowColumns", bytes);
   }
 
-  InfinityService_ShowColumns_result result;
+  hybridsearchService_ShowColumns_result result;
   try {
     iface_->ShowColumns(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.ShowColumns");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.ShowColumns");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -10295,7 +10295,7 @@ void InfinityServiceProcessor::process_ShowColumns(int32_t seqid, ::apache::thri
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.ShowColumns");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.ShowColumns");
   }
 
   oprot->writeMessageBegin("ShowColumns", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -10305,38 +10305,38 @@ void InfinityServiceProcessor::process_ShowColumns(int32_t seqid, ::apache::thri
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.ShowColumns", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.ShowColumns", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_ShowDatabase(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_ShowDatabase(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.ShowDatabase", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.ShowDatabase", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.ShowDatabase");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.ShowDatabase");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.ShowDatabase");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.ShowDatabase");
   }
 
-  InfinityService_ShowDatabase_args args;
+  hybridsearchService_ShowDatabase_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.ShowDatabase", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.ShowDatabase", bytes);
   }
 
-  InfinityService_ShowDatabase_result result;
+  hybridsearchService_ShowDatabase_result result;
   try {
     iface_->ShowDatabase(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.ShowDatabase");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.ShowDatabase");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -10349,7 +10349,7 @@ void InfinityServiceProcessor::process_ShowDatabase(int32_t seqid, ::apache::thr
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.ShowDatabase");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.ShowDatabase");
   }
 
   oprot->writeMessageBegin("ShowDatabase", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -10359,38 +10359,38 @@ void InfinityServiceProcessor::process_ShowDatabase(int32_t seqid, ::apache::thr
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.ShowDatabase", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.ShowDatabase", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_ShowTables(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_ShowTables(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.ShowTables", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.ShowTables", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.ShowTables");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.ShowTables");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.ShowTables");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.ShowTables");
   }
 
-  InfinityService_ShowTables_args args;
+  hybridsearchService_ShowTables_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.ShowTables", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.ShowTables", bytes);
   }
 
-  InfinityService_ShowTables_result result;
+  hybridsearchService_ShowTables_result result;
   try {
     iface_->ShowTables(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.ShowTables");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.ShowTables");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -10403,7 +10403,7 @@ void InfinityServiceProcessor::process_ShowTables(int32_t seqid, ::apache::thrif
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.ShowTables");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.ShowTables");
   }
 
   oprot->writeMessageBegin("ShowTables", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -10413,38 +10413,38 @@ void InfinityServiceProcessor::process_ShowTables(int32_t seqid, ::apache::thrif
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.ShowTables", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.ShowTables", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_ShowSegments(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_ShowSegments(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.ShowSegments", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.ShowSegments", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.ShowSegments");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.ShowSegments");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.ShowSegments");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.ShowSegments");
   }
 
-  InfinityService_ShowSegments_args args;
+  hybridsearchService_ShowSegments_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.ShowSegments", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.ShowSegments", bytes);
   }
 
-  InfinityService_ShowSegments_result result;
+  hybridsearchService_ShowSegments_result result;
   try {
     iface_->ShowSegments(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.ShowSegments");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.ShowSegments");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -10457,7 +10457,7 @@ void InfinityServiceProcessor::process_ShowSegments(int32_t seqid, ::apache::thr
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.ShowSegments");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.ShowSegments");
   }
 
   oprot->writeMessageBegin("ShowSegments", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -10467,38 +10467,38 @@ void InfinityServiceProcessor::process_ShowSegments(int32_t seqid, ::apache::thr
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.ShowSegments", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.ShowSegments", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_ShowSegment(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_ShowSegment(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.ShowSegment", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.ShowSegment", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.ShowSegment");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.ShowSegment");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.ShowSegment");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.ShowSegment");
   }
 
-  InfinityService_ShowSegment_args args;
+  hybridsearchService_ShowSegment_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.ShowSegment", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.ShowSegment", bytes);
   }
 
-  InfinityService_ShowSegment_result result;
+  hybridsearchService_ShowSegment_result result;
   try {
     iface_->ShowSegment(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.ShowSegment");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.ShowSegment");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -10511,7 +10511,7 @@ void InfinityServiceProcessor::process_ShowSegment(int32_t seqid, ::apache::thri
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.ShowSegment");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.ShowSegment");
   }
 
   oprot->writeMessageBegin("ShowSegment", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -10521,38 +10521,38 @@ void InfinityServiceProcessor::process_ShowSegment(int32_t seqid, ::apache::thri
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.ShowSegment", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.ShowSegment", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_ShowBlocks(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_ShowBlocks(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.ShowBlocks", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.ShowBlocks", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.ShowBlocks");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.ShowBlocks");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.ShowBlocks");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.ShowBlocks");
   }
 
-  InfinityService_ShowBlocks_args args;
+  hybridsearchService_ShowBlocks_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.ShowBlocks", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.ShowBlocks", bytes);
   }
 
-  InfinityService_ShowBlocks_result result;
+  hybridsearchService_ShowBlocks_result result;
   try {
     iface_->ShowBlocks(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.ShowBlocks");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.ShowBlocks");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -10565,7 +10565,7 @@ void InfinityServiceProcessor::process_ShowBlocks(int32_t seqid, ::apache::thrif
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.ShowBlocks");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.ShowBlocks");
   }
 
   oprot->writeMessageBegin("ShowBlocks", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -10575,38 +10575,38 @@ void InfinityServiceProcessor::process_ShowBlocks(int32_t seqid, ::apache::thrif
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.ShowBlocks", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.ShowBlocks", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_ShowBlock(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_ShowBlock(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.ShowBlock", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.ShowBlock", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.ShowBlock");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.ShowBlock");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.ShowBlock");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.ShowBlock");
   }
 
-  InfinityService_ShowBlock_args args;
+  hybridsearchService_ShowBlock_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.ShowBlock", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.ShowBlock", bytes);
   }
 
-  InfinityService_ShowBlock_result result;
+  hybridsearchService_ShowBlock_result result;
   try {
     iface_->ShowBlock(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.ShowBlock");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.ShowBlock");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -10619,7 +10619,7 @@ void InfinityServiceProcessor::process_ShowBlock(int32_t seqid, ::apache::thrift
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.ShowBlock");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.ShowBlock");
   }
 
   oprot->writeMessageBegin("ShowBlock", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -10629,38 +10629,38 @@ void InfinityServiceProcessor::process_ShowBlock(int32_t seqid, ::apache::thrift
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.ShowBlock", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.ShowBlock", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_ShowBlockColumn(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_ShowBlockColumn(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.ShowBlockColumn", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.ShowBlockColumn", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.ShowBlockColumn");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.ShowBlockColumn");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.ShowBlockColumn");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.ShowBlockColumn");
   }
 
-  InfinityService_ShowBlockColumn_args args;
+  hybridsearchService_ShowBlockColumn_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.ShowBlockColumn", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.ShowBlockColumn", bytes);
   }
 
-  InfinityService_ShowBlockColumn_result result;
+  hybridsearchService_ShowBlockColumn_result result;
   try {
     iface_->ShowBlockColumn(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.ShowBlockColumn");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.ShowBlockColumn");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -10673,7 +10673,7 @@ void InfinityServiceProcessor::process_ShowBlockColumn(int32_t seqid, ::apache::
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.ShowBlockColumn");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.ShowBlockColumn");
   }
 
   oprot->writeMessageBegin("ShowBlockColumn", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -10683,38 +10683,38 @@ void InfinityServiceProcessor::process_ShowBlockColumn(int32_t seqid, ::apache::
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.ShowBlockColumn", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.ShowBlockColumn", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_ShowCurrentNode(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_ShowCurrentNode(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.ShowCurrentNode", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.ShowCurrentNode", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.ShowCurrentNode");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.ShowCurrentNode");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.ShowCurrentNode");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.ShowCurrentNode");
   }
 
-  InfinityService_ShowCurrentNode_args args;
+  hybridsearchService_ShowCurrentNode_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.ShowCurrentNode", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.ShowCurrentNode", bytes);
   }
 
-  InfinityService_ShowCurrentNode_result result;
+  hybridsearchService_ShowCurrentNode_result result;
   try {
     iface_->ShowCurrentNode(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.ShowCurrentNode");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.ShowCurrentNode");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -10727,7 +10727,7 @@ void InfinityServiceProcessor::process_ShowCurrentNode(int32_t seqid, ::apache::
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.ShowCurrentNode");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.ShowCurrentNode");
   }
 
   oprot->writeMessageBegin("ShowCurrentNode", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -10737,38 +10737,38 @@ void InfinityServiceProcessor::process_ShowCurrentNode(int32_t seqid, ::apache::
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.ShowCurrentNode", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.ShowCurrentNode", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_GetDatabase(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_GetDatabase(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.GetDatabase", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.GetDatabase", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.GetDatabase");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.GetDatabase");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.GetDatabase");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.GetDatabase");
   }
 
-  InfinityService_GetDatabase_args args;
+  hybridsearchService_GetDatabase_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.GetDatabase", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.GetDatabase", bytes);
   }
 
-  InfinityService_GetDatabase_result result;
+  hybridsearchService_GetDatabase_result result;
   try {
     iface_->GetDatabase(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.GetDatabase");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.GetDatabase");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -10781,7 +10781,7 @@ void InfinityServiceProcessor::process_GetDatabase(int32_t seqid, ::apache::thri
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.GetDatabase");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.GetDatabase");
   }
 
   oprot->writeMessageBegin("GetDatabase", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -10791,38 +10791,38 @@ void InfinityServiceProcessor::process_GetDatabase(int32_t seqid, ::apache::thri
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.GetDatabase", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.GetDatabase", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_GetTable(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_GetTable(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.GetTable", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.GetTable", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.GetTable");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.GetTable");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.GetTable");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.GetTable");
   }
 
-  InfinityService_GetTable_args args;
+  hybridsearchService_GetTable_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.GetTable", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.GetTable", bytes);
   }
 
-  InfinityService_GetTable_result result;
+  hybridsearchService_GetTable_result result;
   try {
     iface_->GetTable(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.GetTable");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.GetTable");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -10835,7 +10835,7 @@ void InfinityServiceProcessor::process_GetTable(int32_t seqid, ::apache::thrift:
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.GetTable");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.GetTable");
   }
 
   oprot->writeMessageBegin("GetTable", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -10845,38 +10845,38 @@ void InfinityServiceProcessor::process_GetTable(int32_t seqid, ::apache::thrift:
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.GetTable", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.GetTable", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_CreateIndex(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_CreateIndex(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.CreateIndex", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.CreateIndex", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.CreateIndex");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.CreateIndex");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.CreateIndex");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.CreateIndex");
   }
 
-  InfinityService_CreateIndex_args args;
+  hybridsearchService_CreateIndex_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.CreateIndex", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.CreateIndex", bytes);
   }
 
-  InfinityService_CreateIndex_result result;
+  hybridsearchService_CreateIndex_result result;
   try {
     iface_->CreateIndex(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.CreateIndex");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.CreateIndex");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -10889,7 +10889,7 @@ void InfinityServiceProcessor::process_CreateIndex(int32_t seqid, ::apache::thri
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.CreateIndex");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.CreateIndex");
   }
 
   oprot->writeMessageBegin("CreateIndex", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -10899,38 +10899,38 @@ void InfinityServiceProcessor::process_CreateIndex(int32_t seqid, ::apache::thri
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.CreateIndex", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.CreateIndex", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_DropIndex(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_DropIndex(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.DropIndex", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.DropIndex", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.DropIndex");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.DropIndex");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.DropIndex");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.DropIndex");
   }
 
-  InfinityService_DropIndex_args args;
+  hybridsearchService_DropIndex_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.DropIndex", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.DropIndex", bytes);
   }
 
-  InfinityService_DropIndex_result result;
+  hybridsearchService_DropIndex_result result;
   try {
     iface_->DropIndex(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.DropIndex");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.DropIndex");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -10943,7 +10943,7 @@ void InfinityServiceProcessor::process_DropIndex(int32_t seqid, ::apache::thrift
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.DropIndex");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.DropIndex");
   }
 
   oprot->writeMessageBegin("DropIndex", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -10953,38 +10953,38 @@ void InfinityServiceProcessor::process_DropIndex(int32_t seqid, ::apache::thrift
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.DropIndex", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.DropIndex", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_ShowIndex(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_ShowIndex(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.ShowIndex", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.ShowIndex", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.ShowIndex");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.ShowIndex");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.ShowIndex");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.ShowIndex");
   }
 
-  InfinityService_ShowIndex_args args;
+  hybridsearchService_ShowIndex_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.ShowIndex", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.ShowIndex", bytes);
   }
 
-  InfinityService_ShowIndex_result result;
+  hybridsearchService_ShowIndex_result result;
   try {
     iface_->ShowIndex(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.ShowIndex");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.ShowIndex");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -10997,7 +10997,7 @@ void InfinityServiceProcessor::process_ShowIndex(int32_t seqid, ::apache::thrift
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.ShowIndex");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.ShowIndex");
   }
 
   oprot->writeMessageBegin("ShowIndex", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -11007,38 +11007,38 @@ void InfinityServiceProcessor::process_ShowIndex(int32_t seqid, ::apache::thrift
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.ShowIndex", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.ShowIndex", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_Optimize(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_Optimize(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.Optimize", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.Optimize", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.Optimize");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.Optimize");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.Optimize");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.Optimize");
   }
 
-  InfinityService_Optimize_args args;
+  hybridsearchService_Optimize_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.Optimize", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.Optimize", bytes);
   }
 
-  InfinityService_Optimize_result result;
+  hybridsearchService_Optimize_result result;
   try {
     iface_->Optimize(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.Optimize");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.Optimize");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -11051,7 +11051,7 @@ void InfinityServiceProcessor::process_Optimize(int32_t seqid, ::apache::thrift:
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.Optimize");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.Optimize");
   }
 
   oprot->writeMessageBegin("Optimize", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -11061,38 +11061,38 @@ void InfinityServiceProcessor::process_Optimize(int32_t seqid, ::apache::thrift:
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.Optimize", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.Optimize", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_AddColumns(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_AddColumns(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.AddColumns", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.AddColumns", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.AddColumns");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.AddColumns");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.AddColumns");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.AddColumns");
   }
 
-  InfinityService_AddColumns_args args;
+  hybridsearchService_AddColumns_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.AddColumns", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.AddColumns", bytes);
   }
 
-  InfinityService_AddColumns_result result;
+  hybridsearchService_AddColumns_result result;
   try {
     iface_->AddColumns(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.AddColumns");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.AddColumns");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -11105,7 +11105,7 @@ void InfinityServiceProcessor::process_AddColumns(int32_t seqid, ::apache::thrif
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.AddColumns");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.AddColumns");
   }
 
   oprot->writeMessageBegin("AddColumns", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -11115,38 +11115,38 @@ void InfinityServiceProcessor::process_AddColumns(int32_t seqid, ::apache::thrif
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.AddColumns", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.AddColumns", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_DropColumns(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_DropColumns(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.DropColumns", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.DropColumns", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.DropColumns");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.DropColumns");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.DropColumns");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.DropColumns");
   }
 
-  InfinityService_DropColumns_args args;
+  hybridsearchService_DropColumns_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.DropColumns", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.DropColumns", bytes);
   }
 
-  InfinityService_DropColumns_result result;
+  hybridsearchService_DropColumns_result result;
   try {
     iface_->DropColumns(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.DropColumns");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.DropColumns");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -11159,7 +11159,7 @@ void InfinityServiceProcessor::process_DropColumns(int32_t seqid, ::apache::thri
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.DropColumns");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.DropColumns");
   }
 
   oprot->writeMessageBegin("DropColumns", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -11169,38 +11169,38 @@ void InfinityServiceProcessor::process_DropColumns(int32_t seqid, ::apache::thri
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.DropColumns", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.DropColumns", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_Cleanup(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_Cleanup(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.Cleanup", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.Cleanup", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.Cleanup");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.Cleanup");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.Cleanup");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.Cleanup");
   }
 
-  InfinityService_Cleanup_args args;
+  hybridsearchService_Cleanup_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.Cleanup", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.Cleanup", bytes);
   }
 
-  InfinityService_Cleanup_result result;
+  hybridsearchService_Cleanup_result result;
   try {
     iface_->Cleanup(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.Cleanup");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.Cleanup");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -11213,7 +11213,7 @@ void InfinityServiceProcessor::process_Cleanup(int32_t seqid, ::apache::thrift::
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.Cleanup");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.Cleanup");
   }
 
   oprot->writeMessageBegin("Cleanup", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -11223,38 +11223,38 @@ void InfinityServiceProcessor::process_Cleanup(int32_t seqid, ::apache::thrift::
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.Cleanup", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.Cleanup", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_Command(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_Command(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.Command", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.Command", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.Command");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.Command");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.Command");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.Command");
   }
 
-  InfinityService_Command_args args;
+  hybridsearchService_Command_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.Command", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.Command", bytes);
   }
 
-  InfinityService_Command_result result;
+  hybridsearchService_Command_result result;
   try {
     iface_->Command(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.Command");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.Command");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -11267,7 +11267,7 @@ void InfinityServiceProcessor::process_Command(int32_t seqid, ::apache::thrift::
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.Command");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.Command");
   }
 
   oprot->writeMessageBegin("Command", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -11277,38 +11277,38 @@ void InfinityServiceProcessor::process_Command(int32_t seqid, ::apache::thrift::
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.Command", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.Command", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_Flush(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_Flush(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.Flush", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.Flush", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.Flush");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.Flush");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.Flush");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.Flush");
   }
 
-  InfinityService_Flush_args args;
+  hybridsearchService_Flush_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.Flush", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.Flush", bytes);
   }
 
-  InfinityService_Flush_result result;
+  hybridsearchService_Flush_result result;
   try {
     iface_->Flush(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.Flush");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.Flush");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -11321,7 +11321,7 @@ void InfinityServiceProcessor::process_Flush(int32_t seqid, ::apache::thrift::pr
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.Flush");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.Flush");
   }
 
   oprot->writeMessageBegin("Flush", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -11331,38 +11331,38 @@ void InfinityServiceProcessor::process_Flush(int32_t seqid, ::apache::thrift::pr
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.Flush", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.Flush", bytes);
   }
 }
 
-void InfinityServiceProcessor::process_Compact(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void hybridsearchServiceProcessor::process_Compact(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = nullptr;
   if (this->eventHandler_.get() != nullptr) {
-    ctx = this->eventHandler_->getContext("InfinityService.Compact", callContext);
+    ctx = this->eventHandler_->getContext("hybridsearchService.Compact", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "InfinityService.Compact");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "hybridsearchService.Compact");
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preRead(ctx, "InfinityService.Compact");
+    this->eventHandler_->preRead(ctx, "hybridsearchService.Compact");
   }
 
-  InfinityService_Compact_args args;
+  hybridsearchService_Compact_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postRead(ctx, "InfinityService.Compact", bytes);
+    this->eventHandler_->postRead(ctx, "hybridsearchService.Compact", bytes);
   }
 
-  InfinityService_Compact_result result;
+  hybridsearchService_Compact_result result;
   try {
     iface_->Compact(result.success, args.request);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != nullptr) {
-      this->eventHandler_->handlerError(ctx, "InfinityService.Compact");
+      this->eventHandler_->handlerError(ctx, "hybridsearchService.Compact");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
@@ -11375,7 +11375,7 @@ void InfinityServiceProcessor::process_Compact(int32_t seqid, ::apache::thrift::
   }
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->preWrite(ctx, "InfinityService.Compact");
+    this->eventHandler_->preWrite(ctx, "hybridsearchService.Compact");
   }
 
   oprot->writeMessageBegin("Compact", ::apache::thrift::protocol::T_REPLY, seqid);
@@ -11385,30 +11385,30 @@ void InfinityServiceProcessor::process_Compact(int32_t seqid, ::apache::thrift::
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != nullptr) {
-    this->eventHandler_->postWrite(ctx, "InfinityService.Compact", bytes);
+    this->eventHandler_->postWrite(ctx, "hybridsearchService.Compact", bytes);
   }
 }
 
-::std::shared_ptr< ::apache::thrift::TProcessor > InfinityServiceProcessorFactory::getProcessor(const ::apache::thrift::TConnectionInfo& connInfo) {
-  ::apache::thrift::ReleaseHandler< InfinityServiceIfFactory > cleanup(handlerFactory_);
-  ::std::shared_ptr< InfinityServiceIf > handler(handlerFactory_->getHandler(connInfo), cleanup);
-  ::std::shared_ptr< ::apache::thrift::TProcessor > processor(new InfinityServiceProcessor(handler));
+::std::shared_ptr< ::apache::thrift::TProcessor > hybridsearchServiceProcessorFactory::getProcessor(const ::apache::thrift::TConnectionInfo& connInfo) {
+  ::apache::thrift::ReleaseHandler< hybridsearchServiceIfFactory > cleanup(handlerFactory_);
+  ::std::shared_ptr< hybridsearchServiceIf > handler(handlerFactory_->getHandler(connInfo), cleanup);
+  ::std::shared_ptr< ::apache::thrift::TProcessor > processor(new hybridsearchServiceProcessor(handler));
   return processor;
 }
 
-void InfinityServiceConcurrentClient::Connect(CommonResponse& _return, const ConnectRequest& request)
+void hybridsearchServiceConcurrentClient::Connect(CommonResponse& _return, const ConnectRequest& request)
 {
   int32_t seqid = send_Connect(request);
   recv_Connect(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_Connect(const ConnectRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_Connect(const ConnectRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("Connect", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Connect_pargs args;
+  hybridsearchService_Connect_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -11420,7 +11420,7 @@ int32_t InfinityServiceConcurrentClient::send_Connect(const ConnectRequest& requ
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_Connect(CommonResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_Connect(CommonResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -11458,7 +11458,7 @@ void InfinityServiceConcurrentClient::recv_Connect(CommonResponse& _return, cons
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_Connect_presult result;
+      hybridsearchService_Connect_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -11480,19 +11480,19 @@ void InfinityServiceConcurrentClient::recv_Connect(CommonResponse& _return, cons
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::Disconnect(CommonResponse& _return, const CommonRequest& request)
+void hybridsearchServiceConcurrentClient::Disconnect(CommonResponse& _return, const CommonRequest& request)
 {
   int32_t seqid = send_Disconnect(request);
   recv_Disconnect(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_Disconnect(const CommonRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_Disconnect(const CommonRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("Disconnect", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Disconnect_pargs args;
+  hybridsearchService_Disconnect_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -11504,7 +11504,7 @@ int32_t InfinityServiceConcurrentClient::send_Disconnect(const CommonRequest& re
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_Disconnect(CommonResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_Disconnect(CommonResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -11542,7 +11542,7 @@ void InfinityServiceConcurrentClient::recv_Disconnect(CommonResponse& _return, c
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_Disconnect_presult result;
+      hybridsearchService_Disconnect_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -11564,19 +11564,19 @@ void InfinityServiceConcurrentClient::recv_Disconnect(CommonResponse& _return, c
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::CreateDatabase(CommonResponse& _return, const CreateDatabaseRequest& request)
+void hybridsearchServiceConcurrentClient::CreateDatabase(CommonResponse& _return, const CreateDatabaseRequest& request)
 {
   int32_t seqid = send_CreateDatabase(request);
   recv_CreateDatabase(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_CreateDatabase(const CreateDatabaseRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_CreateDatabase(const CreateDatabaseRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("CreateDatabase", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_CreateDatabase_pargs args;
+  hybridsearchService_CreateDatabase_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -11588,7 +11588,7 @@ int32_t InfinityServiceConcurrentClient::send_CreateDatabase(const CreateDatabas
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_CreateDatabase(CommonResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_CreateDatabase(CommonResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -11626,7 +11626,7 @@ void InfinityServiceConcurrentClient::recv_CreateDatabase(CommonResponse& _retur
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_CreateDatabase_presult result;
+      hybridsearchService_CreateDatabase_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -11648,19 +11648,19 @@ void InfinityServiceConcurrentClient::recv_CreateDatabase(CommonResponse& _retur
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::DropDatabase(CommonResponse& _return, const DropDatabaseRequest& request)
+void hybridsearchServiceConcurrentClient::DropDatabase(CommonResponse& _return, const DropDatabaseRequest& request)
 {
   int32_t seqid = send_DropDatabase(request);
   recv_DropDatabase(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_DropDatabase(const DropDatabaseRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_DropDatabase(const DropDatabaseRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("DropDatabase", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_DropDatabase_pargs args;
+  hybridsearchService_DropDatabase_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -11672,7 +11672,7 @@ int32_t InfinityServiceConcurrentClient::send_DropDatabase(const DropDatabaseReq
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_DropDatabase(CommonResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_DropDatabase(CommonResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -11710,7 +11710,7 @@ void InfinityServiceConcurrentClient::recv_DropDatabase(CommonResponse& _return,
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_DropDatabase_presult result;
+      hybridsearchService_DropDatabase_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -11732,19 +11732,19 @@ void InfinityServiceConcurrentClient::recv_DropDatabase(CommonResponse& _return,
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::CreateTable(CommonResponse& _return, const CreateTableRequest& request)
+void hybridsearchServiceConcurrentClient::CreateTable(CommonResponse& _return, const CreateTableRequest& request)
 {
   int32_t seqid = send_CreateTable(request);
   recv_CreateTable(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_CreateTable(const CreateTableRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_CreateTable(const CreateTableRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("CreateTable", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_CreateTable_pargs args;
+  hybridsearchService_CreateTable_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -11756,7 +11756,7 @@ int32_t InfinityServiceConcurrentClient::send_CreateTable(const CreateTableReque
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_CreateTable(CommonResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_CreateTable(CommonResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -11794,7 +11794,7 @@ void InfinityServiceConcurrentClient::recv_CreateTable(CommonResponse& _return, 
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_CreateTable_presult result;
+      hybridsearchService_CreateTable_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -11816,19 +11816,19 @@ void InfinityServiceConcurrentClient::recv_CreateTable(CommonResponse& _return, 
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::DropTable(CommonResponse& _return, const DropTableRequest& request)
+void hybridsearchServiceConcurrentClient::DropTable(CommonResponse& _return, const DropTableRequest& request)
 {
   int32_t seqid = send_DropTable(request);
   recv_DropTable(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_DropTable(const DropTableRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_DropTable(const DropTableRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("DropTable", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_DropTable_pargs args;
+  hybridsearchService_DropTable_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -11840,7 +11840,7 @@ int32_t InfinityServiceConcurrentClient::send_DropTable(const DropTableRequest& 
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_DropTable(CommonResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_DropTable(CommonResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -11878,7 +11878,7 @@ void InfinityServiceConcurrentClient::recv_DropTable(CommonResponse& _return, co
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_DropTable_presult result;
+      hybridsearchService_DropTable_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -11900,19 +11900,19 @@ void InfinityServiceConcurrentClient::recv_DropTable(CommonResponse& _return, co
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::Insert(CommonResponse& _return, const InsertRequest& request)
+void hybridsearchServiceConcurrentClient::Insert(CommonResponse& _return, const InsertRequest& request)
 {
   int32_t seqid = send_Insert(request);
   recv_Insert(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_Insert(const InsertRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_Insert(const InsertRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("Insert", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Insert_pargs args;
+  hybridsearchService_Insert_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -11924,7 +11924,7 @@ int32_t InfinityServiceConcurrentClient::send_Insert(const InsertRequest& reques
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_Insert(CommonResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_Insert(CommonResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -11962,7 +11962,7 @@ void InfinityServiceConcurrentClient::recv_Insert(CommonResponse& _return, const
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_Insert_presult result;
+      hybridsearchService_Insert_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -11984,19 +11984,19 @@ void InfinityServiceConcurrentClient::recv_Insert(CommonResponse& _return, const
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::Import(CommonResponse& _return, const ImportRequest& request)
+void hybridsearchServiceConcurrentClient::Import(CommonResponse& _return, const ImportRequest& request)
 {
   int32_t seqid = send_Import(request);
   recv_Import(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_Import(const ImportRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_Import(const ImportRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("Import", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Import_pargs args;
+  hybridsearchService_Import_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -12008,7 +12008,7 @@ int32_t InfinityServiceConcurrentClient::send_Import(const ImportRequest& reques
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_Import(CommonResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_Import(CommonResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -12046,7 +12046,7 @@ void InfinityServiceConcurrentClient::recv_Import(CommonResponse& _return, const
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_Import_presult result;
+      hybridsearchService_Import_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -12068,19 +12068,19 @@ void InfinityServiceConcurrentClient::recv_Import(CommonResponse& _return, const
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::Export(CommonResponse& _return, const ExportRequest& request)
+void hybridsearchServiceConcurrentClient::Export(CommonResponse& _return, const ExportRequest& request)
 {
   int32_t seqid = send_Export(request);
   recv_Export(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_Export(const ExportRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_Export(const ExportRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("Export", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Export_pargs args;
+  hybridsearchService_Export_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -12092,7 +12092,7 @@ int32_t InfinityServiceConcurrentClient::send_Export(const ExportRequest& reques
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_Export(CommonResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_Export(CommonResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -12130,7 +12130,7 @@ void InfinityServiceConcurrentClient::recv_Export(CommonResponse& _return, const
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_Export_presult result;
+      hybridsearchService_Export_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -12152,19 +12152,19 @@ void InfinityServiceConcurrentClient::recv_Export(CommonResponse& _return, const
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::Select(SelectResponse& _return, const SelectRequest& request)
+void hybridsearchServiceConcurrentClient::Select(SelectResponse& _return, const SelectRequest& request)
 {
   int32_t seqid = send_Select(request);
   recv_Select(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_Select(const SelectRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_Select(const SelectRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("Select", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Select_pargs args;
+  hybridsearchService_Select_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -12176,7 +12176,7 @@ int32_t InfinityServiceConcurrentClient::send_Select(const SelectRequest& reques
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_Select(SelectResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_Select(SelectResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -12214,7 +12214,7 @@ void InfinityServiceConcurrentClient::recv_Select(SelectResponse& _return, const
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_Select_presult result;
+      hybridsearchService_Select_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -12236,19 +12236,19 @@ void InfinityServiceConcurrentClient::recv_Select(SelectResponse& _return, const
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::Explain(SelectResponse& _return, const ExplainRequest& request)
+void hybridsearchServiceConcurrentClient::Explain(SelectResponse& _return, const ExplainRequest& request)
 {
   int32_t seqid = send_Explain(request);
   recv_Explain(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_Explain(const ExplainRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_Explain(const ExplainRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("Explain", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Explain_pargs args;
+  hybridsearchService_Explain_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -12260,7 +12260,7 @@ int32_t InfinityServiceConcurrentClient::send_Explain(const ExplainRequest& requ
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_Explain(SelectResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_Explain(SelectResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -12298,7 +12298,7 @@ void InfinityServiceConcurrentClient::recv_Explain(SelectResponse& _return, cons
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_Explain_presult result;
+      hybridsearchService_Explain_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -12320,19 +12320,19 @@ void InfinityServiceConcurrentClient::recv_Explain(SelectResponse& _return, cons
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::Delete(DeleteResponse& _return, const DeleteRequest& request)
+void hybridsearchServiceConcurrentClient::Delete(DeleteResponse& _return, const DeleteRequest& request)
 {
   int32_t seqid = send_Delete(request);
   recv_Delete(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_Delete(const DeleteRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_Delete(const DeleteRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("Delete", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Delete_pargs args;
+  hybridsearchService_Delete_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -12344,7 +12344,7 @@ int32_t InfinityServiceConcurrentClient::send_Delete(const DeleteRequest& reques
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_Delete(DeleteResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_Delete(DeleteResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -12382,7 +12382,7 @@ void InfinityServiceConcurrentClient::recv_Delete(DeleteResponse& _return, const
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_Delete_presult result;
+      hybridsearchService_Delete_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -12404,19 +12404,19 @@ void InfinityServiceConcurrentClient::recv_Delete(DeleteResponse& _return, const
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::Update(CommonResponse& _return, const UpdateRequest& request)
+void hybridsearchServiceConcurrentClient::Update(CommonResponse& _return, const UpdateRequest& request)
 {
   int32_t seqid = send_Update(request);
   recv_Update(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_Update(const UpdateRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_Update(const UpdateRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("Update", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Update_pargs args;
+  hybridsearchService_Update_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -12428,7 +12428,7 @@ int32_t InfinityServiceConcurrentClient::send_Update(const UpdateRequest& reques
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_Update(CommonResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_Update(CommonResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -12466,7 +12466,7 @@ void InfinityServiceConcurrentClient::recv_Update(CommonResponse& _return, const
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_Update_presult result;
+      hybridsearchService_Update_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -12488,19 +12488,19 @@ void InfinityServiceConcurrentClient::recv_Update(CommonResponse& _return, const
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::ListDatabase(ListDatabaseResponse& _return, const ListDatabaseRequest& request)
+void hybridsearchServiceConcurrentClient::ListDatabase(ListDatabaseResponse& _return, const ListDatabaseRequest& request)
 {
   int32_t seqid = send_ListDatabase(request);
   recv_ListDatabase(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_ListDatabase(const ListDatabaseRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_ListDatabase(const ListDatabaseRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("ListDatabase", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ListDatabase_pargs args;
+  hybridsearchService_ListDatabase_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -12512,7 +12512,7 @@ int32_t InfinityServiceConcurrentClient::send_ListDatabase(const ListDatabaseReq
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_ListDatabase(ListDatabaseResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_ListDatabase(ListDatabaseResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -12550,7 +12550,7 @@ void InfinityServiceConcurrentClient::recv_ListDatabase(ListDatabaseResponse& _r
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_ListDatabase_presult result;
+      hybridsearchService_ListDatabase_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -12572,19 +12572,19 @@ void InfinityServiceConcurrentClient::recv_ListDatabase(ListDatabaseResponse& _r
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::ListTable(ListTableResponse& _return, const ListTableRequest& request)
+void hybridsearchServiceConcurrentClient::ListTable(ListTableResponse& _return, const ListTableRequest& request)
 {
   int32_t seqid = send_ListTable(request);
   recv_ListTable(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_ListTable(const ListTableRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_ListTable(const ListTableRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("ListTable", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ListTable_pargs args;
+  hybridsearchService_ListTable_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -12596,7 +12596,7 @@ int32_t InfinityServiceConcurrentClient::send_ListTable(const ListTableRequest& 
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_ListTable(ListTableResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_ListTable(ListTableResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -12634,7 +12634,7 @@ void InfinityServiceConcurrentClient::recv_ListTable(ListTableResponse& _return,
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_ListTable_presult result;
+      hybridsearchService_ListTable_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -12656,19 +12656,19 @@ void InfinityServiceConcurrentClient::recv_ListTable(ListTableResponse& _return,
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::ListIndex(ListIndexResponse& _return, const ListIndexRequest& request)
+void hybridsearchServiceConcurrentClient::ListIndex(ListIndexResponse& _return, const ListIndexRequest& request)
 {
   int32_t seqid = send_ListIndex(request);
   recv_ListIndex(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_ListIndex(const ListIndexRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_ListIndex(const ListIndexRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("ListIndex", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ListIndex_pargs args;
+  hybridsearchService_ListIndex_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -12680,7 +12680,7 @@ int32_t InfinityServiceConcurrentClient::send_ListIndex(const ListIndexRequest& 
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_ListIndex(ListIndexResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_ListIndex(ListIndexResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -12718,7 +12718,7 @@ void InfinityServiceConcurrentClient::recv_ListIndex(ListIndexResponse& _return,
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_ListIndex_presult result;
+      hybridsearchService_ListIndex_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -12740,19 +12740,19 @@ void InfinityServiceConcurrentClient::recv_ListIndex(ListIndexResponse& _return,
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::ShowTable(ShowTableResponse& _return, const ShowTableRequest& request)
+void hybridsearchServiceConcurrentClient::ShowTable(ShowTableResponse& _return, const ShowTableRequest& request)
 {
   int32_t seqid = send_ShowTable(request);
   recv_ShowTable(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_ShowTable(const ShowTableRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_ShowTable(const ShowTableRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("ShowTable", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ShowTable_pargs args;
+  hybridsearchService_ShowTable_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -12764,7 +12764,7 @@ int32_t InfinityServiceConcurrentClient::send_ShowTable(const ShowTableRequest& 
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_ShowTable(ShowTableResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_ShowTable(ShowTableResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -12802,7 +12802,7 @@ void InfinityServiceConcurrentClient::recv_ShowTable(ShowTableResponse& _return,
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_ShowTable_presult result;
+      hybridsearchService_ShowTable_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -12824,19 +12824,19 @@ void InfinityServiceConcurrentClient::recv_ShowTable(ShowTableResponse& _return,
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::ShowColumns(SelectResponse& _return, const ShowColumnsRequest& request)
+void hybridsearchServiceConcurrentClient::ShowColumns(SelectResponse& _return, const ShowColumnsRequest& request)
 {
   int32_t seqid = send_ShowColumns(request);
   recv_ShowColumns(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_ShowColumns(const ShowColumnsRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_ShowColumns(const ShowColumnsRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("ShowColumns", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ShowColumns_pargs args;
+  hybridsearchService_ShowColumns_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -12848,7 +12848,7 @@ int32_t InfinityServiceConcurrentClient::send_ShowColumns(const ShowColumnsReque
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_ShowColumns(SelectResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_ShowColumns(SelectResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -12886,7 +12886,7 @@ void InfinityServiceConcurrentClient::recv_ShowColumns(SelectResponse& _return, 
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_ShowColumns_presult result;
+      hybridsearchService_ShowColumns_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -12908,19 +12908,19 @@ void InfinityServiceConcurrentClient::recv_ShowColumns(SelectResponse& _return, 
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::ShowDatabase(ShowDatabaseResponse& _return, const ShowDatabaseRequest& request)
+void hybridsearchServiceConcurrentClient::ShowDatabase(ShowDatabaseResponse& _return, const ShowDatabaseRequest& request)
 {
   int32_t seqid = send_ShowDatabase(request);
   recv_ShowDatabase(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_ShowDatabase(const ShowDatabaseRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_ShowDatabase(const ShowDatabaseRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("ShowDatabase", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ShowDatabase_pargs args;
+  hybridsearchService_ShowDatabase_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -12932,7 +12932,7 @@ int32_t InfinityServiceConcurrentClient::send_ShowDatabase(const ShowDatabaseReq
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_ShowDatabase(ShowDatabaseResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_ShowDatabase(ShowDatabaseResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -12970,7 +12970,7 @@ void InfinityServiceConcurrentClient::recv_ShowDatabase(ShowDatabaseResponse& _r
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_ShowDatabase_presult result;
+      hybridsearchService_ShowDatabase_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -12992,19 +12992,19 @@ void InfinityServiceConcurrentClient::recv_ShowDatabase(ShowDatabaseResponse& _r
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::ShowTables(SelectResponse& _return, const ShowTablesRequest& request)
+void hybridsearchServiceConcurrentClient::ShowTables(SelectResponse& _return, const ShowTablesRequest& request)
 {
   int32_t seqid = send_ShowTables(request);
   recv_ShowTables(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_ShowTables(const ShowTablesRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_ShowTables(const ShowTablesRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("ShowTables", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ShowTables_pargs args;
+  hybridsearchService_ShowTables_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -13016,7 +13016,7 @@ int32_t InfinityServiceConcurrentClient::send_ShowTables(const ShowTablesRequest
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_ShowTables(SelectResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_ShowTables(SelectResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -13054,7 +13054,7 @@ void InfinityServiceConcurrentClient::recv_ShowTables(SelectResponse& _return, c
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_ShowTables_presult result;
+      hybridsearchService_ShowTables_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -13076,19 +13076,19 @@ void InfinityServiceConcurrentClient::recv_ShowTables(SelectResponse& _return, c
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::ShowSegments(SelectResponse& _return, const ShowSegmentsRequest& request)
+void hybridsearchServiceConcurrentClient::ShowSegments(SelectResponse& _return, const ShowSegmentsRequest& request)
 {
   int32_t seqid = send_ShowSegments(request);
   recv_ShowSegments(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_ShowSegments(const ShowSegmentsRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_ShowSegments(const ShowSegmentsRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("ShowSegments", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ShowSegments_pargs args;
+  hybridsearchService_ShowSegments_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -13100,7 +13100,7 @@ int32_t InfinityServiceConcurrentClient::send_ShowSegments(const ShowSegmentsReq
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_ShowSegments(SelectResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_ShowSegments(SelectResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -13138,7 +13138,7 @@ void InfinityServiceConcurrentClient::recv_ShowSegments(SelectResponse& _return,
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_ShowSegments_presult result;
+      hybridsearchService_ShowSegments_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -13160,19 +13160,19 @@ void InfinityServiceConcurrentClient::recv_ShowSegments(SelectResponse& _return,
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::ShowSegment(ShowSegmentResponse& _return, const ShowSegmentRequest& request)
+void hybridsearchServiceConcurrentClient::ShowSegment(ShowSegmentResponse& _return, const ShowSegmentRequest& request)
 {
   int32_t seqid = send_ShowSegment(request);
   recv_ShowSegment(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_ShowSegment(const ShowSegmentRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_ShowSegment(const ShowSegmentRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("ShowSegment", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ShowSegment_pargs args;
+  hybridsearchService_ShowSegment_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -13184,7 +13184,7 @@ int32_t InfinityServiceConcurrentClient::send_ShowSegment(const ShowSegmentReque
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_ShowSegment(ShowSegmentResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_ShowSegment(ShowSegmentResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -13222,7 +13222,7 @@ void InfinityServiceConcurrentClient::recv_ShowSegment(ShowSegmentResponse& _ret
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_ShowSegment_presult result;
+      hybridsearchService_ShowSegment_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -13244,19 +13244,19 @@ void InfinityServiceConcurrentClient::recv_ShowSegment(ShowSegmentResponse& _ret
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::ShowBlocks(SelectResponse& _return, const ShowBlocksRequest& request)
+void hybridsearchServiceConcurrentClient::ShowBlocks(SelectResponse& _return, const ShowBlocksRequest& request)
 {
   int32_t seqid = send_ShowBlocks(request);
   recv_ShowBlocks(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_ShowBlocks(const ShowBlocksRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_ShowBlocks(const ShowBlocksRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("ShowBlocks", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ShowBlocks_pargs args;
+  hybridsearchService_ShowBlocks_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -13268,7 +13268,7 @@ int32_t InfinityServiceConcurrentClient::send_ShowBlocks(const ShowBlocksRequest
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_ShowBlocks(SelectResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_ShowBlocks(SelectResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -13306,7 +13306,7 @@ void InfinityServiceConcurrentClient::recv_ShowBlocks(SelectResponse& _return, c
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_ShowBlocks_presult result;
+      hybridsearchService_ShowBlocks_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -13328,19 +13328,19 @@ void InfinityServiceConcurrentClient::recv_ShowBlocks(SelectResponse& _return, c
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::ShowBlock(ShowBlockResponse& _return, const ShowBlockRequest& request)
+void hybridsearchServiceConcurrentClient::ShowBlock(ShowBlockResponse& _return, const ShowBlockRequest& request)
 {
   int32_t seqid = send_ShowBlock(request);
   recv_ShowBlock(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_ShowBlock(const ShowBlockRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_ShowBlock(const ShowBlockRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("ShowBlock", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ShowBlock_pargs args;
+  hybridsearchService_ShowBlock_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -13352,7 +13352,7 @@ int32_t InfinityServiceConcurrentClient::send_ShowBlock(const ShowBlockRequest& 
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_ShowBlock(ShowBlockResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_ShowBlock(ShowBlockResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -13390,7 +13390,7 @@ void InfinityServiceConcurrentClient::recv_ShowBlock(ShowBlockResponse& _return,
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_ShowBlock_presult result;
+      hybridsearchService_ShowBlock_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -13412,19 +13412,19 @@ void InfinityServiceConcurrentClient::recv_ShowBlock(ShowBlockResponse& _return,
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::ShowBlockColumn(ShowBlockColumnResponse& _return, const ShowBlockColumnRequest& request)
+void hybridsearchServiceConcurrentClient::ShowBlockColumn(ShowBlockColumnResponse& _return, const ShowBlockColumnRequest& request)
 {
   int32_t seqid = send_ShowBlockColumn(request);
   recv_ShowBlockColumn(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_ShowBlockColumn(const ShowBlockColumnRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_ShowBlockColumn(const ShowBlockColumnRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("ShowBlockColumn", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ShowBlockColumn_pargs args;
+  hybridsearchService_ShowBlockColumn_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -13436,7 +13436,7 @@ int32_t InfinityServiceConcurrentClient::send_ShowBlockColumn(const ShowBlockCol
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_ShowBlockColumn(ShowBlockColumnResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_ShowBlockColumn(ShowBlockColumnResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -13474,7 +13474,7 @@ void InfinityServiceConcurrentClient::recv_ShowBlockColumn(ShowBlockColumnRespon
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_ShowBlockColumn_presult result;
+      hybridsearchService_ShowBlockColumn_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -13496,19 +13496,19 @@ void InfinityServiceConcurrentClient::recv_ShowBlockColumn(ShowBlockColumnRespon
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::ShowCurrentNode(ShowCurrentNodeResponse& _return, const ShowCurrentNodeRequest& request)
+void hybridsearchServiceConcurrentClient::ShowCurrentNode(ShowCurrentNodeResponse& _return, const ShowCurrentNodeRequest& request)
 {
   int32_t seqid = send_ShowCurrentNode(request);
   recv_ShowCurrentNode(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_ShowCurrentNode(const ShowCurrentNodeRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_ShowCurrentNode(const ShowCurrentNodeRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("ShowCurrentNode", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ShowCurrentNode_pargs args;
+  hybridsearchService_ShowCurrentNode_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -13520,7 +13520,7 @@ int32_t InfinityServiceConcurrentClient::send_ShowCurrentNode(const ShowCurrentN
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_ShowCurrentNode(ShowCurrentNodeResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_ShowCurrentNode(ShowCurrentNodeResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -13558,7 +13558,7 @@ void InfinityServiceConcurrentClient::recv_ShowCurrentNode(ShowCurrentNodeRespon
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_ShowCurrentNode_presult result;
+      hybridsearchService_ShowCurrentNode_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -13580,19 +13580,19 @@ void InfinityServiceConcurrentClient::recv_ShowCurrentNode(ShowCurrentNodeRespon
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::GetDatabase(CommonResponse& _return, const GetDatabaseRequest& request)
+void hybridsearchServiceConcurrentClient::GetDatabase(CommonResponse& _return, const GetDatabaseRequest& request)
 {
   int32_t seqid = send_GetDatabase(request);
   recv_GetDatabase(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_GetDatabase(const GetDatabaseRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_GetDatabase(const GetDatabaseRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("GetDatabase", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_GetDatabase_pargs args;
+  hybridsearchService_GetDatabase_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -13604,7 +13604,7 @@ int32_t InfinityServiceConcurrentClient::send_GetDatabase(const GetDatabaseReque
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_GetDatabase(CommonResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_GetDatabase(CommonResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -13642,7 +13642,7 @@ void InfinityServiceConcurrentClient::recv_GetDatabase(CommonResponse& _return, 
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_GetDatabase_presult result;
+      hybridsearchService_GetDatabase_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -13664,19 +13664,19 @@ void InfinityServiceConcurrentClient::recv_GetDatabase(CommonResponse& _return, 
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::GetTable(CommonResponse& _return, const GetTableRequest& request)
+void hybridsearchServiceConcurrentClient::GetTable(CommonResponse& _return, const GetTableRequest& request)
 {
   int32_t seqid = send_GetTable(request);
   recv_GetTable(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_GetTable(const GetTableRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_GetTable(const GetTableRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("GetTable", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_GetTable_pargs args;
+  hybridsearchService_GetTable_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -13688,7 +13688,7 @@ int32_t InfinityServiceConcurrentClient::send_GetTable(const GetTableRequest& re
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_GetTable(CommonResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_GetTable(CommonResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -13726,7 +13726,7 @@ void InfinityServiceConcurrentClient::recv_GetTable(CommonResponse& _return, con
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_GetTable_presult result;
+      hybridsearchService_GetTable_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -13748,19 +13748,19 @@ void InfinityServiceConcurrentClient::recv_GetTable(CommonResponse& _return, con
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::CreateIndex(CommonResponse& _return, const CreateIndexRequest& request)
+void hybridsearchServiceConcurrentClient::CreateIndex(CommonResponse& _return, const CreateIndexRequest& request)
 {
   int32_t seqid = send_CreateIndex(request);
   recv_CreateIndex(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_CreateIndex(const CreateIndexRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_CreateIndex(const CreateIndexRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("CreateIndex", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_CreateIndex_pargs args;
+  hybridsearchService_CreateIndex_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -13772,7 +13772,7 @@ int32_t InfinityServiceConcurrentClient::send_CreateIndex(const CreateIndexReque
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_CreateIndex(CommonResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_CreateIndex(CommonResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -13810,7 +13810,7 @@ void InfinityServiceConcurrentClient::recv_CreateIndex(CommonResponse& _return, 
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_CreateIndex_presult result;
+      hybridsearchService_CreateIndex_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -13832,19 +13832,19 @@ void InfinityServiceConcurrentClient::recv_CreateIndex(CommonResponse& _return, 
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::DropIndex(CommonResponse& _return, const DropIndexRequest& request)
+void hybridsearchServiceConcurrentClient::DropIndex(CommonResponse& _return, const DropIndexRequest& request)
 {
   int32_t seqid = send_DropIndex(request);
   recv_DropIndex(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_DropIndex(const DropIndexRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_DropIndex(const DropIndexRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("DropIndex", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_DropIndex_pargs args;
+  hybridsearchService_DropIndex_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -13856,7 +13856,7 @@ int32_t InfinityServiceConcurrentClient::send_DropIndex(const DropIndexRequest& 
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_DropIndex(CommonResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_DropIndex(CommonResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -13894,7 +13894,7 @@ void InfinityServiceConcurrentClient::recv_DropIndex(CommonResponse& _return, co
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_DropIndex_presult result;
+      hybridsearchService_DropIndex_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -13916,19 +13916,19 @@ void InfinityServiceConcurrentClient::recv_DropIndex(CommonResponse& _return, co
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::ShowIndex(ShowIndexResponse& _return, const ShowIndexRequest& request)
+void hybridsearchServiceConcurrentClient::ShowIndex(ShowIndexResponse& _return, const ShowIndexRequest& request)
 {
   int32_t seqid = send_ShowIndex(request);
   recv_ShowIndex(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_ShowIndex(const ShowIndexRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_ShowIndex(const ShowIndexRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("ShowIndex", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_ShowIndex_pargs args;
+  hybridsearchService_ShowIndex_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -13940,7 +13940,7 @@ int32_t InfinityServiceConcurrentClient::send_ShowIndex(const ShowIndexRequest& 
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_ShowIndex(ShowIndexResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_ShowIndex(ShowIndexResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -13978,7 +13978,7 @@ void InfinityServiceConcurrentClient::recv_ShowIndex(ShowIndexResponse& _return,
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_ShowIndex_presult result;
+      hybridsearchService_ShowIndex_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -14000,19 +14000,19 @@ void InfinityServiceConcurrentClient::recv_ShowIndex(ShowIndexResponse& _return,
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::Optimize(CommonResponse& _return, const OptimizeRequest& request)
+void hybridsearchServiceConcurrentClient::Optimize(CommonResponse& _return, const OptimizeRequest& request)
 {
   int32_t seqid = send_Optimize(request);
   recv_Optimize(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_Optimize(const OptimizeRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_Optimize(const OptimizeRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("Optimize", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Optimize_pargs args;
+  hybridsearchService_Optimize_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -14024,7 +14024,7 @@ int32_t InfinityServiceConcurrentClient::send_Optimize(const OptimizeRequest& re
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_Optimize(CommonResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_Optimize(CommonResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -14062,7 +14062,7 @@ void InfinityServiceConcurrentClient::recv_Optimize(CommonResponse& _return, con
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_Optimize_presult result;
+      hybridsearchService_Optimize_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -14084,19 +14084,19 @@ void InfinityServiceConcurrentClient::recv_Optimize(CommonResponse& _return, con
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::AddColumns(CommonResponse& _return, const AddColumnsRequest& request)
+void hybridsearchServiceConcurrentClient::AddColumns(CommonResponse& _return, const AddColumnsRequest& request)
 {
   int32_t seqid = send_AddColumns(request);
   recv_AddColumns(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_AddColumns(const AddColumnsRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_AddColumns(const AddColumnsRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("AddColumns", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_AddColumns_pargs args;
+  hybridsearchService_AddColumns_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -14108,7 +14108,7 @@ int32_t InfinityServiceConcurrentClient::send_AddColumns(const AddColumnsRequest
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_AddColumns(CommonResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_AddColumns(CommonResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -14146,7 +14146,7 @@ void InfinityServiceConcurrentClient::recv_AddColumns(CommonResponse& _return, c
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_AddColumns_presult result;
+      hybridsearchService_AddColumns_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -14168,19 +14168,19 @@ void InfinityServiceConcurrentClient::recv_AddColumns(CommonResponse& _return, c
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::DropColumns(CommonResponse& _return, const DropColumnsRequest& request)
+void hybridsearchServiceConcurrentClient::DropColumns(CommonResponse& _return, const DropColumnsRequest& request)
 {
   int32_t seqid = send_DropColumns(request);
   recv_DropColumns(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_DropColumns(const DropColumnsRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_DropColumns(const DropColumnsRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("DropColumns", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_DropColumns_pargs args;
+  hybridsearchService_DropColumns_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -14192,7 +14192,7 @@ int32_t InfinityServiceConcurrentClient::send_DropColumns(const DropColumnsReque
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_DropColumns(CommonResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_DropColumns(CommonResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -14230,7 +14230,7 @@ void InfinityServiceConcurrentClient::recv_DropColumns(CommonResponse& _return, 
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_DropColumns_presult result;
+      hybridsearchService_DropColumns_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -14252,19 +14252,19 @@ void InfinityServiceConcurrentClient::recv_DropColumns(CommonResponse& _return, 
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::Cleanup(CommonResponse& _return, const CommonRequest& request)
+void hybridsearchServiceConcurrentClient::Cleanup(CommonResponse& _return, const CommonRequest& request)
 {
   int32_t seqid = send_Cleanup(request);
   recv_Cleanup(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_Cleanup(const CommonRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_Cleanup(const CommonRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("Cleanup", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Cleanup_pargs args;
+  hybridsearchService_Cleanup_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -14276,7 +14276,7 @@ int32_t InfinityServiceConcurrentClient::send_Cleanup(const CommonRequest& reque
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_Cleanup(CommonResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_Cleanup(CommonResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -14314,7 +14314,7 @@ void InfinityServiceConcurrentClient::recv_Cleanup(CommonResponse& _return, cons
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_Cleanup_presult result;
+      hybridsearchService_Cleanup_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -14336,19 +14336,19 @@ void InfinityServiceConcurrentClient::recv_Cleanup(CommonResponse& _return, cons
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::Command(CommonResponse& _return, const CommandRequest& request)
+void hybridsearchServiceConcurrentClient::Command(CommonResponse& _return, const CommandRequest& request)
 {
   int32_t seqid = send_Command(request);
   recv_Command(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_Command(const CommandRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_Command(const CommandRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("Command", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Command_pargs args;
+  hybridsearchService_Command_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -14360,7 +14360,7 @@ int32_t InfinityServiceConcurrentClient::send_Command(const CommandRequest& requ
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_Command(CommonResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_Command(CommonResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -14398,7 +14398,7 @@ void InfinityServiceConcurrentClient::recv_Command(CommonResponse& _return, cons
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_Command_presult result;
+      hybridsearchService_Command_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -14420,19 +14420,19 @@ void InfinityServiceConcurrentClient::recv_Command(CommonResponse& _return, cons
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::Flush(CommonResponse& _return, const FlushRequest& request)
+void hybridsearchServiceConcurrentClient::Flush(CommonResponse& _return, const FlushRequest& request)
 {
   int32_t seqid = send_Flush(request);
   recv_Flush(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_Flush(const FlushRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_Flush(const FlushRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("Flush", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Flush_pargs args;
+  hybridsearchService_Flush_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -14444,7 +14444,7 @@ int32_t InfinityServiceConcurrentClient::send_Flush(const FlushRequest& request)
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_Flush(CommonResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_Flush(CommonResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -14482,7 +14482,7 @@ void InfinityServiceConcurrentClient::recv_Flush(CommonResponse& _return, const 
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_Flush_presult result;
+      hybridsearchService_Flush_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();
@@ -14504,19 +14504,19 @@ void InfinityServiceConcurrentClient::recv_Flush(CommonResponse& _return, const 
   } // end while(true)
 }
 
-void InfinityServiceConcurrentClient::Compact(CommonResponse& _return, const CompactRequest& request)
+void hybridsearchServiceConcurrentClient::Compact(CommonResponse& _return, const CompactRequest& request)
 {
   int32_t seqid = send_Compact(request);
   recv_Compact(_return, seqid);
 }
 
-int32_t InfinityServiceConcurrentClient::send_Compact(const CompactRequest& request)
+int32_t hybridsearchServiceConcurrentClient::send_Compact(const CompactRequest& request)
 {
   int32_t cseqid = this->sync_->generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(this->sync_.get());
   oprot_->writeMessageBegin("Compact", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  InfinityService_Compact_pargs args;
+  hybridsearchService_Compact_pargs args;
   args.request = &request;
   args.write(oprot_);
 
@@ -14528,7 +14528,7 @@ int32_t InfinityServiceConcurrentClient::send_Compact(const CompactRequest& requ
   return cseqid;
 }
 
-void InfinityServiceConcurrentClient::recv_Compact(CommonResponse& _return, const int32_t seqid)
+void hybridsearchServiceConcurrentClient::recv_Compact(CommonResponse& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -14566,7 +14566,7 @@ void InfinityServiceConcurrentClient::recv_Compact(CommonResponse& _return, cons
         using ::apache::thrift::protocol::TProtocolException;
         throw TProtocolException(TProtocolException::INVALID_DATA);
       }
-      InfinityService_Compact_presult result;
+      hybridsearchService_Compact_presult result;
       result.success = &_return;
       result.read(iprot_);
       iprot_->readMessageEnd();

@@ -24,13 +24,13 @@ import base_expression;
 import value_expression;
 import data_table;
 import load_meta;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import data_type;
 
 export module physical_limit;
 
-namespace infinity {
+namespace hybridsearch {
 
 class DataBlock;
 
@@ -127,4 +127,4 @@ private:
     bool total_hits_count_flag_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

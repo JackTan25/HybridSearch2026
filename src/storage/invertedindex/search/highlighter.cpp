@@ -27,7 +27,7 @@ import aho_corasick;
 import analyzer;
 import term;
 
-namespace infinity {
+namespace hybridsearch {
 
 Highlighter::Highlighter() {
     Set<String> patterns;
@@ -181,4 +181,4 @@ void Highlighter::GetHighlightWithStemmer(const Vector<String> &query, const Str
     }
 }
 
-}; // namespace infinity
+}; // namespace hybridsearch

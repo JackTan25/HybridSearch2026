@@ -27,7 +27,7 @@ import bound_select_statement;
 
 export module project_binder;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class ProjectBinder final : public ExpressionBinder {
 public:
@@ -53,4 +53,4 @@ private:
     BoundSelectStatement *bound_select_statement_ = nullptr;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

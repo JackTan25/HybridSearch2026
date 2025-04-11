@@ -26,7 +26,7 @@ import posting_list_format;
 import internal_types;
 import term_meta;
 
-namespace infinity {
+namespace hybridsearch {
 export class DiskIndexSegmentReader : public IndexSegmentReader {
 public:
     DiskIndexSegmentReader(SegmentID segment_id,
@@ -50,4 +50,4 @@ private:
     SizeT data_len_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

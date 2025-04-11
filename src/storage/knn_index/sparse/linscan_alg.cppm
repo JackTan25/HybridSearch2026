@@ -24,10 +24,10 @@ import sparse_util;
 import local_file_handle;
 import knn_result_handler;
 import serialize;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 template <typename DataType>
 struct Posting {
@@ -207,4 +207,4 @@ private:
     u32 row_num_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

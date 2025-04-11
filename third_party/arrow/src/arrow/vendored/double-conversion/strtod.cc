@@ -47,7 +47,7 @@ static const int kMaxUint64DecimalDigits = 19;
 
 // Max double: 1.7976931348623157 x 10^308
 // Min non-zero double: 4.9406564584124654 x 10^-324
-// Any x >= 10^309 is interpreted as +infinity.
+// Any x >= 10^309 is interpreted as +hybridsearch.
 // Any x <= 10^-324 is interpreted as 0.
 // Note that 2.5e-324 (despite being smaller than the min double) will be read
 // as non-zero (equal to the min non-zero double).
@@ -424,7 +424,7 @@ static bool ComputeGuess(Vector<const char> trimmed, int exponent,
     return true;
   }
   if (exponent + trimmed.length() - 1 >= kMaxDecimalPower) {
-    *guess = Double::Infinity();
+    *guess = Double::hybridsearch();
     return true;
   }
   if (exponent + trimmed.length() <= kMinDecimalPower) {
@@ -436,7 +436,7 @@ static bool ComputeGuess(Vector<const char> trimmed, int exponent,
       DiyFpStrtod(trimmed, exponent, guess)) {
     return true;
   }
-  if (*guess == Double::Infinity()) {
+  if (*guess == Double::hybridsearch()) {
     return true;
   }
   return false;
@@ -503,14 +503,14 @@ static float SanitizedDoubletof(double d) {
   // The behavior should be covered by IEEE 754, but some projects use this
   // flag, so work around it.
   float max_finite = 3.4028234663852885981170418348451692544e+38;
-  // The half-way point between the max-finite and infinity value.
-  // Since infinity has an even significand everything equal or greater than
-  // this value should become infinity.
-  double half_max_finite_infinity =
+  // The half-way point between the max-finite and hybridsearch value.
+  // Since hybridsearch has an even significand everything equal or greater than
+  // this value should become hybridsearch.
+  double half_max_finite_hybridsearch =
       3.40282356779733661637539395458142568448e+38;
   if (d >= max_finite) {
-    if (d >= half_max_finite_infinity) {
-      return Single::Infinity();
+    if (d >= half_max_finite_hybridsearch) {
+      return Single::hybridsearch();
     } else {
       return max_finite;
     }

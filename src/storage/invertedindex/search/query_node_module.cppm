@@ -18,24 +18,24 @@ module;
 
 export module query_node;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::QueryNodeType;
-export using infinity::QueryNodeTypeToString;
-export using infinity::CreateSearchParams;
-export using infinity::QueryNode;
-export using infinity::TermQueryNode;
-export using infinity::MultiQueryNode;
-export using infinity::AndQueryNode;
-export using infinity::AndNotQueryNode;
-export using infinity::OrQueryNode;
-export using infinity::NotQueryNode;
-export using infinity::PhraseQueryNode;
+export using hybridsearch::QueryNodeType;
+export using hybridsearch::QueryNodeTypeToString;
+export using hybridsearch::CreateSearchParams;
+export using hybridsearch::QueryNode;
+export using hybridsearch::TermQueryNode;
+export using hybridsearch::MultiQueryNode;
+export using hybridsearch::AndQueryNode;
+export using hybridsearch::AndNotQueryNode;
+export using hybridsearch::OrQueryNode;
+export using hybridsearch::NotQueryNode;
+export using hybridsearch::PhraseQueryNode;
 
 // unimplemented
-// export using infinity::WandQueryNode;
-// export using infinity::PrefixTermQueryNode;
-// export using infinity::SuffixTermQueryNode;
-// export using infinity::SubstringTermQueryNode;
+// export using hybridsearch::WandQueryNode;
+// export using hybridsearch::PrefixTermQueryNode;
+// export using hybridsearch::SuffixTermQueryNode;
+// export using hybridsearch::SubstringTermQueryNode;
 
-} // namespace infinity
+} // namespace hybridsearch

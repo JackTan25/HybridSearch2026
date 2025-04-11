@@ -14,17 +14,17 @@
 
 module;
 
-namespace infinity {
+namespace hybridsearch {
 struct SegmentEntry;
 class ColumnDef;
 struct RowID;
-} // namespace infinity
+} // namespace hybridsearch
 
 export module hnsw_lsg_builder;
 
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct HnswIndexInMem;
 class BufferManager;
@@ -70,4 +70,4 @@ private:
     UniquePtr<KnnDistanceBase1> knn_distance_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

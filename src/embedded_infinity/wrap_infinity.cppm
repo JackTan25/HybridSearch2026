@@ -5,7 +5,7 @@ module;
 #include <nanobind/nanobind.h>
 #include <string>
 
-export module wrap_infinity;
+export module wrap_hybridsearch;
 
 import stl;
 import config;
@@ -15,7 +15,7 @@ import storage;
 import status;
 import query_result;
 import query_options;
-import infinity_context;
+import hybridsearch_context;
 import session;
 import parsed_expr;
 import search_expr;
@@ -26,7 +26,7 @@ import update_statement;
 import explain_statement;
 import command_statement;
 import select_statement;
-import infinity;
+import hybridsearch;
 import data_type;
 import type_info;
 import logical_type;
@@ -50,8 +50,8 @@ import extra_ddl_info;
 
 namespace nb = nanobind;
 
-// wrap Infinity function for nanobind infinity
-namespace infinity {
+// wrap hybridsearch function for nanobind hybridsearch
+namespace hybridsearch {
 
 export struct ColumnField {
     LogicalType column_type;
@@ -307,62 +307,62 @@ export struct WrapInsertRowExpr {
     InsertRowExpr *GetInsertRowExpr(Status &status);
 };
 
-export WrapQueryResult WrapCreateDatabase(Infinity &instance, const String &db_name, const CreateDatabaseOptions &options, const String &comment);
+export WrapQueryResult WrapCreateDatabase(hybridsearch &instance, const String &db_name, const CreateDatabaseOptions &options, const String &comment);
 
-export WrapQueryResult WrapDropDatabase(Infinity &instance, const String &db_name, const DropDatabaseOptions &options);
+export WrapQueryResult WrapDropDatabase(hybridsearch &instance, const String &db_name, const DropDatabaseOptions &options);
 
-export WrapQueryResult WrapListDatabases(Infinity &instance);
+export WrapQueryResult WrapListDatabases(hybridsearch &instance);
 
-export WrapQueryResult WrapGetDatabase(Infinity &instance, const String &db_name);
+export WrapQueryResult WrapGetDatabase(hybridsearch &instance, const String &db_name);
 
-export WrapQueryResult WrapShowDatabase(Infinity &instance, const String &db_name);
+export WrapQueryResult WrapShowDatabase(hybridsearch &instance, const String &db_name);
 
-export WrapQueryResult WrapFlush(Infinity &instance);
+export WrapQueryResult WrapFlush(hybridsearch &instance);
 
-export WrapQueryResult WrapSetVariableOrConfig(Infinity &instance, const String &name, bool value, SetScope scope);
+export WrapQueryResult WrapSetVariableOrConfig(hybridsearch &instance, const String &name, bool value, SetScope scope);
 
-export WrapQueryResult WrapSetVariableOrConfig(Infinity &instance, const String &name, i64 value, SetScope scope);
+export WrapQueryResult WrapSetVariableOrConfig(hybridsearch &instance, const String &name, i64 value, SetScope scope);
 
-export WrapQueryResult WrapSetVariableOrConfig(Infinity &instance, const String &name, double value, SetScope scope);
+export WrapQueryResult WrapSetVariableOrConfig(hybridsearch &instance, const String &name, double value, SetScope scope);
 
-export WrapQueryResult WrapSetVariableOrConfig(Infinity &instance, const String &name, String value, SetScope scope);
+export WrapQueryResult WrapSetVariableOrConfig(hybridsearch &instance, const String &name, String value, SetScope scope);
 
-export WrapQueryResult WrapShowVariable(Infinity &instance, const String &variable_name, SetScope scope);
+export WrapQueryResult WrapShowVariable(hybridsearch &instance, const String &variable_name, SetScope scope);
 
-export WrapQueryResult WrapShowVariables(Infinity &instance, SetScope scope);
+export WrapQueryResult WrapShowVariables(hybridsearch &instance, SetScope scope);
 
-export WrapQueryResult WrapShowConfig(Infinity &instance, const String &config_name);
+export WrapQueryResult WrapShowConfig(hybridsearch &instance, const String &config_name);
 
-export WrapQueryResult WrapShowConfigs(Infinity &instance);
+export WrapQueryResult WrapShowConfigs(hybridsearch &instance);
 
-export WrapQueryResult WrapShowInfo(Infinity &instance, const String &info_name);
+export WrapQueryResult WrapShowInfo(hybridsearch &instance, const String &info_name);
 
 // For embedded sqllogictest
-export WrapQueryResult WrapQuery(Infinity &instance, const String &query_text);
+export WrapQueryResult WrapQuery(hybridsearch &instance, const String &query_text);
 
 // Database related functions
-export WrapQueryResult WrapCreateTable(Infinity &instance,
+export WrapQueryResult WrapCreateTable(hybridsearch &instance,
                                        const String &db_name,
                                        const String &table_name,
                                        Vector<WrapColumnDef> column_defs,
                                        WrapCreateTableOptions create_table_options);
 
-export WrapQueryResult WrapDropTable(Infinity &instance, const String &db_name, const String &table_name, const DropTableOptions &drop_table_options);
+export WrapQueryResult WrapDropTable(hybridsearch &instance, const String &db_name, const String &table_name, const DropTableOptions &drop_table_options);
 
-export WrapQueryResult WrapListTables(Infinity &instance, const String &db_name);
+export WrapQueryResult WrapListTables(hybridsearch &instance, const String &db_name);
 
-export WrapQueryResult WrapShowTable(Infinity &instance, const String &db_name, const String &table_name);
+export WrapQueryResult WrapShowTable(hybridsearch &instance, const String &db_name, const String &table_name);
 
-export WrapQueryResult WrapShowColumns(Infinity &instance, const String &db_name, const String &table_name);
+export WrapQueryResult WrapShowColumns(hybridsearch &instance, const String &db_name, const String &table_name);
 
-export WrapQueryResult WrapListTableIndexes(Infinity &instance, const String &db_name, const String &table_name);
+export WrapQueryResult WrapListTableIndexes(hybridsearch &instance, const String &db_name, const String &table_name);
 
-export WrapQueryResult WrapShowTables(Infinity &instance, const String &db_name);
+export WrapQueryResult WrapShowTables(hybridsearch &instance, const String &db_name);
 
-export WrapQueryResult WrapGetTable(Infinity &instance, const String &db_name, const String &table_name);
+export WrapQueryResult WrapGetTable(hybridsearch &instance, const String &db_name, const String &table_name);
 
 // Table related functions
-export WrapQueryResult WrapCreateIndex(Infinity &instance,
+export WrapQueryResult WrapCreateIndex(hybridsearch &instance,
                                        const String &db_name,
                                        const String &table_name,
                                        const String &index_name,
@@ -370,53 +370,53 @@ export WrapQueryResult WrapCreateIndex(Infinity &instance,
                                        const CreateIndexOptions &create_index_options,
                                        const String &index_comment);
 
-export WrapQueryResult WrapDropIndex(Infinity &instance,
+export WrapQueryResult WrapDropIndex(hybridsearch &instance,
                                      const String &db_name,
                                      const String &table_name,
                                      const String &index_name,
                                      const DropIndexOptions &drop_index_option);
 
-export WrapQueryResult WrapShowIndex(Infinity &instance, const String &db_name, const String &table_name, const String &index_name);
+export WrapQueryResult WrapShowIndex(hybridsearch &instance, const String &db_name, const String &table_name, const String &index_name);
 
-export WrapQueryResult WrapShowSegment(Infinity &instance, const String &db_name, const String &table_name, const SegmentID &segment_id);
+export WrapQueryResult WrapShowSegment(hybridsearch &instance, const String &db_name, const String &table_name, const SegmentID &segment_id);
 
-export WrapQueryResult WrapShowSegments(Infinity &instance, const String &db_name, const String &table_name);
+export WrapQueryResult WrapShowSegments(hybridsearch &instance, const String &db_name, const String &table_name);
 
 export WrapQueryResult
-WrapShowBlock(Infinity &instance, const String &db_name, const String &table_name, const SegmentID &segment_id, const BlockID &block_id);
+WrapShowBlock(hybridsearch &instance, const String &db_name, const String &table_name, const SegmentID &segment_id, const BlockID &block_id);
 
-export WrapQueryResult WrapShowBlocks(Infinity &instance, const String &db_name, const String &table_name, const SegmentID &segment_id);
+export WrapQueryResult WrapShowBlocks(hybridsearch &instance, const String &db_name, const String &table_name, const SegmentID &segment_id);
 
-export WrapQueryResult WrapShowBlockColumn(Infinity &instance,
+export WrapQueryResult WrapShowBlockColumn(hybridsearch &instance,
                                            const String &db_name,
                                            const String &table_name,
                                            const SegmentID &segment_id,
                                            const BlockID &block_id,
                                            const SizeT &column_id);
 
-export WrapQueryResult WrapShowCurrentNode(Infinity &instance);
+export WrapQueryResult WrapShowCurrentNode(hybridsearch &instance);
 
-export WrapQueryResult WrapInsert(Infinity &instance, const String &db_name, const String &table_name, Vector<WrapInsertRowExpr> &insert_rows);
+export WrapQueryResult WrapInsert(hybridsearch &instance, const String &db_name, const String &table_name, Vector<WrapInsertRowExpr> &insert_rows);
 
 export WrapQueryResult
-WrapImport(Infinity &instance, const String &db_name, const String &table_name, const String &path, ImportOptions import_options);
+WrapImport(hybridsearch &instance, const String &db_name, const String &table_name, const String &path, ImportOptions import_options);
 
-export WrapQueryResult WrapExport(Infinity &instance,
+export WrapQueryResult WrapExport(hybridsearch &instance,
                                   const String &db_name,
                                   const String &table_name,
                                   Vector<String> &columns,
                                   const String &path,
                                   ExportOptions export_options);
 
-export WrapQueryResult WrapDelete(Infinity &instance, const String &db_name, const String &table_name, WrapParsedExpr *filter);
+export WrapQueryResult WrapDelete(hybridsearch &instance, const String &db_name, const String &table_name, WrapParsedExpr *filter);
 
-export WrapQueryResult WrapUpdate(Infinity &instance,
+export WrapQueryResult WrapUpdate(hybridsearch &instance,
                                   const String &db_name,
                                   const String &table_name,
                                   WrapParsedExpr *wrap_filter,
                                   Vector<WrapUpdateExpr> *wrap_update_list);
 
-export WrapQueryResult WrapExplain(Infinity &instance,
+export WrapQueryResult WrapExplain(hybridsearch &instance,
                                    const String &db_name,
                                    const String &table_name,
                                    ExplainType explain_type,
@@ -430,7 +430,7 @@ export WrapQueryResult WrapExplain(Infinity &instance,
                                    WrapParsedExpr *limit_expr,
                                    WrapParsedExpr *offset_expr);
 
-export WrapQueryResult WrapSearch(Infinity &instance,
+export WrapQueryResult WrapSearch(hybridsearch &instance,
                                   const String &db_name,
                                   const String &table_name,
                                   Vector<WrapParsedExpr> select_list,
@@ -444,10 +444,10 @@ export WrapQueryResult WrapSearch(Infinity &instance,
                                   WrapParsedExpr *limit_expr = nullptr,
                                   WrapParsedExpr *offset_expr = nullptr);
 
-export WrapQueryResult WrapOptimize(Infinity &instance, const String &db_name, const String &table_name, WrapOptimizeOptions optimize_options);
+export WrapQueryResult WrapOptimize(hybridsearch &instance, const String &db_name, const String &table_name, WrapOptimizeOptions optimize_options);
 
-export WrapQueryResult WrapAddColumns(Infinity &instance, const String &db_name, const String &table_name, Vector<WrapColumnDef> column_defs);
+export WrapQueryResult WrapAddColumns(hybridsearch &instance, const String &db_name, const String &table_name, Vector<WrapColumnDef> column_defs);
 
-export WrapQueryResult WrapDropColumns(Infinity &instance, const String &db_name, const String &table_name, Vector<String> column_names);
+export WrapQueryResult WrapDropColumns(hybridsearch &instance, const String &db_name, const String &table_name, Vector<String> column_names);
 
-} // namespace infinity
+} // namespace hybridsearch

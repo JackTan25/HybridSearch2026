@@ -16,7 +16,7 @@
 #include "spdlog/fmt/fmt.h"
 #include "type/number/decimal_type.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 std::shared_ptr<DecimalInfo> DecimalInfo::Make(int64_t precision, int64_t scale) {
     if (precision == 0 && scale == 0) {
@@ -45,4 +45,4 @@ nlohmann::json DecimalInfo::Serialize() const {
     return res;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

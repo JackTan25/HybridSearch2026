@@ -18,10 +18,10 @@ module binding;
 
 import stl;
 import block_index;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 SharedPtr<Binding> Binding::MakeBinding(BindingType binding_type,
                                         const String &name,
@@ -62,4 +62,4 @@ SharedPtr<Binding> Binding::MakeBinding(BindingType binding_type,
     return binding;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

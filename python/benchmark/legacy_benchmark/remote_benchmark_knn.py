@@ -20,9 +20,9 @@ import struct
 import time
 import traceback
 
-import infinity
-from infinity.remote_thrift.query_builder import InfinityThriftQueryBuilder
-from infinity.common import LOCAL_HOST, LOCAL_INFINITY_PATH
+import hybridsearch
+from hybridsearch.remote_thrift.query_builder import hybridsearchThriftQueryBuilder
+from hybridsearch.common import LOCAL_HOST, LOCAL_hybridsearch_PATH
 
 def fvecs_read_all(filename):
     vectors = []
@@ -111,20 +111,20 @@ def trace_unhandled_exceptions(func):
 
 @trace_unhandled_exceptions
 def work(queries, topk, metric_type, column_name, data_type,ef: int, remote: bool, table_name="sift_benchmark"):
-    infinity_obj = None
+    hybridsearch_obj = None
     if remote:
-        infinity_obj = infinity.connect(LOCAL_HOST)
+        hybridsearch_obj = hybridsearch.connect(LOCAL_HOST)
     else:
-        infinity_obj = infinity.connect(LOCAL_INFINITY_PATH)
-    table = infinity_obj.get_database("default_db").get_table(table_name)
+        hybridsearch_obj = hybridsearch.connect(LOCAL_hybridsearch_PATH)
+    table = hybridsearch_obj.get_database("default_db").get_table(table_name)
     for query in queries:
         # print(len(query))
         # table.match_dense(column_name, query_vec, data_type, metric_type, topk).output(["_row_id"]).to_result()
-        query_builder = InfinityThriftQueryBuilder(table)
+        query_builder = hybridsearchThriftQueryBuilder(table)
         query_builder.output(["_row_id"])
         query_builder.match_dense(column_name, query, data_type, metric_type, topk, {"ef": str(ef)})
         query_builder.to_result()
-    infinity_obj.disconnect()
+    hybridsearch_obj.disconnect()
 
 
 def fvecs_read(filename):
@@ -179,14 +179,14 @@ def one_thread(rounds, query_path, ground_truth_path, ef: int, remote: bool, tab
     results = []
     queries = fvecs_read_all(query_path)
 
-    infinity_obj = None
+    hybridsearch_obj = None
     if remote:
-        infinity_obj = infinity.connect(LOCAL_HOST)
+        hybridsearch_obj = hybridsearch.connect(LOCAL_HOST)
     else:
-        infinity_obj = infinity.connect(LOCAL_INFINITY_PATH)
+        hybridsearch_obj = hybridsearch.connect(LOCAL_hybridsearch_PATH)
 
-    table = infinity_obj.get_database("default_db").get_table(table_name)
-    query_builder = InfinityThriftQueryBuilder(table)
+    table = hybridsearch_obj.get_database("default_db").get_table(table_name)
+    query_builder = hybridsearchThriftQueryBuilder(table)
     query_builder.output(["_row_id"])
     query_builder.match_dense('col1', queries[0], 'float', 'l2', 100, {'ef': str(ef)})
     res, _ = query_builder.to_result()
@@ -201,7 +201,7 @@ def one_thread(rounds, query_path, ground_truth_path, ef: int, remote: bool, tab
 
             start = time.time()
 
-            query_builder = InfinityThriftQueryBuilder(table)
+            query_builder = hybridsearchThriftQueryBuilder(table)
             query_builder.output(["_row_id"])
             query_builder.match_dense('col1', query_vec, 'float', 'l2', 100, {'index_name': 'hnsw_index', 'ef': str(ef)})
             res, _ = query_builder.to_result()
@@ -234,7 +234,7 @@ def one_thread(rounds, query_path, ground_truth_path, ef: int, remote: bool, tab
     results.append(f"Avg total dur: {dur_sum:.2f} s")
     results.append(f"Avg QPS: {(len(queries) / dur_sum):.2f}")
 
-    infinity_obj.disconnect()
+    hybridsearch_obj.disconnect()
 
     for result in results:
         print(result)
@@ -282,7 +282,7 @@ def str2bool(value):
 if __name__ == '__main__':
     current_path = os.getcwd()
 
-    parser = argparse.ArgumentParser(description="Benchmark Infinity")
+    parser = argparse.ArgumentParser(description="Benchmark hybridsearch")
 
     parser.add_argument(
         "-t",

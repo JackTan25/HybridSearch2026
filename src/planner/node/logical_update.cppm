@@ -26,7 +26,7 @@ import base_expression;
 import internal_types;
 import data_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalUpdate final : public LogicalNode {
 
@@ -55,4 +55,4 @@ public:
     Vector<SharedPtr<BaseExpression>> final_result_columns_{};      // columns for the new blocks
 };
 
-} // namespace infinity
+} // namespace hybridsearch

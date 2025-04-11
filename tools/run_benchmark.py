@@ -19,8 +19,8 @@ def benchmark_test(benchmark_dir: str):
             f"{benchmark_dir}embedding/ann_ivfflat_benchmark",
         ],
         [f"{benchmark_dir}embedding/hnsw_benchmark2"],
-        [f"{benchmark_dir}local_infinity/infinity_benchmark"],
-        [f"{benchmark_dir}local_infinity/fulltext_benchmark"],
+        [f"{benchmark_dir}local_hybridsearch/hybridsearch_benchmark"],
+        [f"{benchmark_dir}local_hybridsearch/fulltext_benchmark"],
     ]
 
     run_benchmark_cmds = [

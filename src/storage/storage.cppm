@@ -32,7 +32,7 @@ import status;
 
 export module storage;
 
-namespace infinity {
+namespace hybridsearch {
 
 class CleanupInfoTracer;
 class ResultCacheManager;
@@ -124,4 +124,4 @@ private:
     ReaderInitPhase reader_init_phase_{ReaderInitPhase::kInvalid};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

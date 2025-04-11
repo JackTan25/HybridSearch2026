@@ -36,7 +36,7 @@ import snapshot_info;
 import txn_context;
 import block_index;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct GetParam {
     const String &db_name_{};
@@ -352,4 +352,4 @@ private:
     SharedPtr<TxnContext> txn_context_ptr_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

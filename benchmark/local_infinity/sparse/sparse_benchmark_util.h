@@ -18,15 +18,15 @@
 
 import stl;
 import virtual_store;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 import sparse_util;
 import compilation_config;
 import bmp_util;
 import local_file_handle;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 namespace benchmark {
 

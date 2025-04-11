@@ -17,8 +17,8 @@ module;
 
 export module search_options;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::SearchOptions;
+export using hybridsearch::SearchOptions;
 
 }

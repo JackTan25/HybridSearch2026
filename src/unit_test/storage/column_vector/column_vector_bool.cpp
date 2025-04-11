@@ -15,7 +15,7 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import logger;
 import column_vector;
@@ -26,17 +26,17 @@ import third_party;
 import stl;
 import selection;
 import vector_buffer;
-import infinity_context;
+import hybridsearch_context;
 import global_resource_usage;
 import logical_type;
 import data_type;
 import compilation_config;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class ColumnVectorBoolTest : public BaseTest {
     void SetUp() override {
-        using namespace infinity;
+        using namespace hybridsearch;
 
         LoggerConfig logger_config;
         logger_config.log_level_ = LogLevel::kOff;
@@ -44,14 +44,14 @@ class ColumnVectorBoolTest : public BaseTest {
     }
 
     void TearDown() override {
-        using namespace infinity;
+        using namespace hybridsearch;
 
         Logger::Shutdown();
     }
 };
 
 TEST_F(ColumnVectorBoolTest, flat_boolean) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kBoolean);
     ColumnVector column_vector(data_type);
@@ -153,7 +153,7 @@ TEST_F(ColumnVectorBoolTest, flat_boolean) {
 
 TEST_F(ColumnVectorBoolTest, contant_bool) {
 
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kBoolean);
     ColumnVector column_vector(data_type);
@@ -230,7 +230,7 @@ TEST_F(ColumnVectorBoolTest, contant_bool) {
 }
 
 TEST_F(ColumnVectorBoolTest, bool_column_vector_select) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kBoolean);
     ColumnVector column_vector(data_type);
@@ -264,7 +264,7 @@ TEST_F(ColumnVectorBoolTest, bool_column_vector_select) {
 }
 
 TEST_F(ColumnVectorBoolTest, bool_column_slice_init) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kBoolean);
     ColumnVector column_vector(data_type);

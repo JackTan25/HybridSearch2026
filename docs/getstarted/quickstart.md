@@ -15,22 +15,22 @@ A quickstart guide.
   - Windows 10+ with WSL/WSL2.
 - Python: Python 3.10+.
 
-## Install embedded Infinity
+## Install embedded hybridsearch
 
-If you wish to embed Infinity into your Python application without the need for a separate backend server:  
+If you wish to embed hybridsearch into your Python application without the need for a separate backend server:  
 
-1. Install the Infinity-embedded SDK:
+1. Install the hybridsearch-embedded SDK:
    ```bash
-   pip install infinity-embedded-sdk==0.6.0.dev3
+   pip install hybridsearch-embedded-sdk==0.6.0.dev3
    ```
-2. Use Infinity to conduct a dense vector search:
+2. Use hybridsearch to conduct a dense vector search:
    ```python
-   import infinity_embedded
+   import hybridsearch_embedded
 
-   # Connect to infinity
-   infinity_object = infinity_embedded.connect("/absolute/path/to/save/to")
+   # Connect to hybridsearch
+   hybridsearch_object = hybridsearch_embedded.connect("/absolute/path/to/save/to")
    # Retrieve a database object named default_db
-   db_object = infinity_object.get_database("default_db")
+   db_object = hybridsearch_object.get_database("default_db")
    # Create a table with an integer column, a varchar column, and a dense vector column
    table_object = db_object.create_table("my_table", {"num": {"type": "integer"}, "body": {"type": "varchar"}, "vec": {"type": "vector, 4, float"}})
    # Insert two rows into the table
@@ -43,25 +43,25 @@ If you wish to embed Infinity into your Python application without the need for 
    print(res)
    ```
 
-## Deploy Infinity in client-server mode
+## Deploy hybridsearch in client-server mode
 
-If you wish to deploy Infinity with the server and client as separate processes, see the [Deploy infinity server](https://infiniflow.org/docs/dev/deploy_infinity_server) guide.
+If you wish to deploy hybridsearch with the server and client as separate processes, see the [Deploy hybridsearch server](https://infiniflow.org/docs/dev/deploy_hybridsearch_server) guide.
 
 ## Build from Source
 
-If you wish to build Infinity from source, see the [Build from Source](https://infiniflow.org/docs/dev/build_from_source) guide.
+If you wish to build hybridsearch from source, see the [Build from Source](https://infiniflow.org/docs/dev/build_from_source) guide.
 
 ### Try our Python examples
 
-Try the following links to explore practical examples of using Infinity in Python:
+Try the following links to explore practical examples of using hybridsearch in Python:
 
-- [Create table, insert data, and search](https://github.com/infiniflow/infinity/blob/main/example/simple_example.py)
-- [Import file and export data](https://github.com/infiniflow/infinity/blob/main/example/import_data.py)
-- [Delete or update data](https://github.com/infiniflow/infinity/blob/main/example/delete_update_data.py)
-- [Conduct a vector search](https://github.com/infiniflow/infinity/blob/main/example/vector_search.py)
-- [Conduct a full-text search](https://github.com/infiniflow/infinity/blob/main/example/fulltext_search.py)
-- [Conduct a hybrid search](https://github.com/infiniflow/infinity/blob/main/example/hybrid_search.py)
+- [Create table, insert data, and search](https://github.com/infiniflow/hybridsearch/blob/main/example/simple_example.py)
+- [Import file and export data](https://github.com/infiniflow/hybridsearch/blob/main/example/import_data.py)
+- [Delete or update data](https://github.com/infiniflow/hybridsearch/blob/main/example/delete_update_data.py)
+- [Conduct a vector search](https://github.com/infiniflow/hybridsearch/blob/main/example/vector_search.py)
+- [Conduct a full-text search](https://github.com/infiniflow/hybridsearch/blob/main/example/fulltext_search.py)
+- [Conduct a hybrid search](https://github.com/infiniflow/hybridsearch/blob/main/example/hybrid_search.py)
 
 ## Python API reference
 
-For detailed information about the capabilities and usage of Infinity's Python API, see the [Python API Reference](https://infiniflow.org/docs/dev/pysdk_api_reference).
+For detailed information about the capabilities and usage of hybridsearch's Python API, see the [Python API Reference](https://infiniflow.org/docs/dev/pysdk_api_reference).

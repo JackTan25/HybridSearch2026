@@ -153,7 +153,7 @@
 #define YYRECOVERING()  (!!yyerrstatus_)
 
 #line 10 "search_parser.y"
-namespace infinity {
+namespace hybridsearch {
 #line 158 "search_parser.cpp"
 
   /// Build a parser object.
@@ -807,7 +807,7 @@ namespace infinity {
   case 4: // query: query clause
 #line 91 "search_parser.y"
                {
-    assert(driver.operator_option_ == FulltextQueryOperatorOption::kInfinitySyntax);
+    assert(driver.operator_option_ == FulltextQueryOperatorOption::khybridsearchSyntax);
     if (!(yystack_[1].value.as < std::unique_ptr<QueryNode> > ())) {
         yylhs.value.as < std::unique_ptr<QueryNode> > () = std::move(yystack_[0].value.as < std::unique_ptr<QueryNode> > ());
     } else if (!(yystack_[0].value.as < std::unique_ptr<QueryNode> > ())) {
@@ -1446,14 +1446,14 @@ namespace infinity {
   }
 
 #line 10 "search_parser.y"
-} // infinity
+} // hybridsearch
 #line 1451 "search_parser.cpp"
 
 #line 192 "search_parser.y"
 
 
-namespace infinity{
+namespace hybridsearch{
 void SearchParser::error(const location_type &l, const std::string &err_message) {
     std::cerr << "Error: " << err_message << " at " << l << "\n";
 }
-} //namespace infinity
+} //namespace hybridsearch

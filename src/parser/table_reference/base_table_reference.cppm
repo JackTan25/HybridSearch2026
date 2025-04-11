@@ -18,8 +18,8 @@ module;
 
 export module base_table_reference;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::BaseTableReference;
+export using hybridsearch::BaseTableReference;
 
 }

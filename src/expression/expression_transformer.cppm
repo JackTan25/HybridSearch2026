@@ -20,7 +20,7 @@ import conjunction_expression;
 
 export module expression_transformer;
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class VisitControlType { kInvalid, kVisit, kNotVisit };
 
@@ -35,4 +35,4 @@ void VisitExpression(const SharedPtr<BaseExpression> &expression, const std::fun
 
 export void VisitExpression(const SharedPtr<BaseExpression> &expression, const std::function<void(SharedPtr<BaseExpression> &child)> &visitor);
 
-} // namespace infinity
+} // namespace hybridsearch

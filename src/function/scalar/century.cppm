@@ -16,10 +16,10 @@ export module century;
 
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 
 export void RegisterCenturyFunction(const UniquePtr<Catalog> &catalog_ptr);
 
-} // namespace infinity
+} // namespace hybridsearch

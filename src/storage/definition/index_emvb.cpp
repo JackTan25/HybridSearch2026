@@ -24,7 +24,7 @@ module index_emvb;
 import stl;
 import status;
 import base_table_ref;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import logger;
 import logical_type;
@@ -33,7 +33,7 @@ import embedding_info;
 import internal_types;
 import serialize;
 
-namespace infinity {
+namespace hybridsearch {
 
 // TODO: now only support tensor column
 // TODO: now only support float element type
@@ -131,4 +131,4 @@ nlohmann::json IndexEMVB::Serialize() const {
     return res;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

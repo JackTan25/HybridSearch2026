@@ -18,28 +18,28 @@ import base_test;
 import stl;
 import global_resource_usage;
 
-using namespace infinity;
+using namespace hybridsearch;
 class GlobalResourceUsageTest : public BaseTest {
     void SetUp() override {
-#ifdef INFINITY_DEBUG
-        infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+        hybridsearch::GlobalResourceUsage::Init();
 #endif
     }
 
     void TearDown() override {
-#ifdef INFINITY_DEBUG
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetObjectCount(), 0);
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetRawMemoryCount(), 0);
-        infinity::GlobalResourceUsage::UnInit();
+#ifdef hybridsearch_DEBUG
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetObjectCount(), 0);
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetRawMemoryCount(), 0);
+        hybridsearch::GlobalResourceUsage::UnInit();
 #endif
     }
 };
 
 TEST_F(GlobalResourceUsageTest, usage_test) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     // Object count
-#ifdef INFINITY_STATS
+#ifdef hybridsearch_STATS
     GlobalResourceUsage::IncrObjectCount("GlobalResourceUsageTest");
     EXPECT_EQ(GlobalResourceUsage::GetObjectCount(), 1);
 

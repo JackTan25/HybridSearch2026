@@ -18,10 +18,10 @@ module;
 
 export module case_expr;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::CaseExpr;
-export using infinity::WhenThen;
-export using infinity::CaseExpr;
+export using hybridsearch::CaseExpr;
+export using hybridsearch::WhenThen;
+export using hybridsearch::CaseExpr;
 
-} // namespace infinity
+} // namespace hybridsearch

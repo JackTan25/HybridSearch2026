@@ -23,13 +23,13 @@ import operator_state;
 import physical_operator;
 import physical_operator_type;
 import load_meta;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import extra_ddl_info;
 import data_type;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 export class PhysicalDropView final : public PhysicalOperator {
 public:
     explicit PhysicalDropView(SharedPtr<String> schema_name,
@@ -68,4 +68,4 @@ private:
     SharedPtr<Vector<SharedPtr<DataType>>> output_types_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -20,19 +20,19 @@ import singleton;
 import stl;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class ResourceManager : public Singleton<ResourceManager> {
 public:
     explicit ResourceManager(u64 total_cpu_count, u64 total_memory)
         : total_cpu_count_(total_cpu_count), total_memory_(total_memory), hardware_concurrency_(Thread::hardware_concurrency()) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("ResourceManager");
 #endif
     }
 
     ~ResourceManager() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("ResourceManager");
 #endif
     }
@@ -61,4 +61,4 @@ private:
     u64 hardware_concurrency_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

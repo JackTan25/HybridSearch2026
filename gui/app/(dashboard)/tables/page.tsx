@@ -8,9 +8,9 @@ import {
   TableRow
 } from '@/components/ui/table';
 import { listDatabase, listTable } from '../actions';
-import { InfinityContextMenuContent } from './context-menu';
+import { hybridsearchContextMenuContent } from './context-menu';
 
-async function InfinityTable() {
+async function hybridsearchTable() {
   const tables = await listTable('default_db');
   return (
     <Table>
@@ -66,14 +66,14 @@ export default async function DatabasePage() {
         <SideMenu
           items={items}
           contextMenuContent={(key: string) => (
-            <InfinityContextMenuContent
+            <hybridsearchContextMenuContent
               databaseName={key}
-            ></InfinityContextMenuContent>
+            ></hybridsearchContextMenuContent>
           )}
         ></SideMenu>
       </section>
       <section className="flex-1 text-center">
-        <InfinityTable></InfinityTable>
+        <hybridsearchTable></hybridsearchTable>
       </section>
     </div>
   );

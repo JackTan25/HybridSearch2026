@@ -5,7 +5,7 @@ import posting_field;
 import index_defines;
 export module position_list_format_option;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PositionListFormatOption {
 public:
@@ -92,4 +92,4 @@ private:
     PositionSkipListFormat *skiplist_format_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

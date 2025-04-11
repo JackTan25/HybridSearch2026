@@ -23,12 +23,12 @@ import bound_cast_func;
 import data_type;
 import column_vector_cast;
 import logical_type;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import internal_types;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct DateTimeTryCastToFixlen;
 export struct DateTimeTryCastToVarlen;
@@ -104,4 +104,4 @@ inline bool DateTimeTryCastToVarlen::Run(DateTimeT, VarcharT &, ColumnVector *) 
     return false;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

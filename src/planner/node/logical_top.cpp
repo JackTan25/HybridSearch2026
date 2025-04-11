@@ -27,7 +27,7 @@ import base_expression;
 import internal_types;
 import select_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<ColumnBinding> LogicalTop::GetColumnBindings() const { return LogicalCommonFunctionUsingLoadMeta::GetColumnBindings(*this); }
 
@@ -58,4 +58,4 @@ String LogicalTop::ToString(i64 &space) const {
     return std::move(ss).str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

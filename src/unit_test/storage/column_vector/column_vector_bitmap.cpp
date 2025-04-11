@@ -15,7 +15,7 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import logger;
 import column_vector;
@@ -27,17 +27,17 @@ import stl;
 import selection;
 import vector_buffer;
 import global_resource_usage;
-import infinity_context;
+import hybridsearch_context;
 import internal_types;
 import logical_type;
 #if 0
 
-using namespace infinity;
+using namespace hybridsearch;
 class ColumnVectorBitmapTest : public BaseTest {};
 
 TEST_F(ColumnVectorBitmapTest, flat_bitmap) {
 
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kBitmap);
     ColumnVector column_vector(data_type);
@@ -204,7 +204,7 @@ TEST_F(ColumnVectorBitmapTest, flat_bitmap) {
 #if 0
 TEST_F(ColumnVectorBitmapTest, contant_bitmap) {
 
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kBitmap);
     ColumnVector column_vector(data_type);
@@ -316,7 +316,7 @@ TEST_F(ColumnVectorBitmapTest, contant_bitmap) {
 }
 
 TEST_F(ColumnVectorBitmapTest, bitmap_column_vector_select) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kBitmap);
     ColumnVector column_vector(data_type);
@@ -376,7 +376,7 @@ TEST_F(ColumnVectorBitmapTest, bitmap_column_vector_select) {
 }
 
 TEST_F(ColumnVectorBitmapTest, bitmap_column_slice_init) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kBitmap);
     ColumnVector column_vector(data_type);

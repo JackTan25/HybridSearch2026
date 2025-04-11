@@ -3,44 +3,44 @@ import pytest
 import os
 import sys
 from common import common_values
-import infinity_embedded
-import infinity
+import hybridsearch_embedded
+import hybridsearch
 import pandas as pd
-from infinity.common import ConflictType
-import infinity.index as index
+from hybridsearch.common import ConflictType
+import hybridsearch.index as index
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
 import importlib
-from infinity_http import infinity_http
+from hybridsearch_http import hybridsearch_http
 
 
-class TestInfinity:
+class Testhybridsearch:
     @pytest.fixture(autouse=True)
-    def setup_and_teardown(self, local_infinity, http, suffix):
-        if local_infinity:
-            module = importlib.import_module("infinity_embedded.index")
+    def setup_and_teardown(self, local_hybridsearch, http, suffix):
+        if local_hybridsearch:
+            module = importlib.import_module("hybridsearch_embedded.index")
             globals()["index"] = module
             self.uri = common_values.TEST_LOCAL_PATH
-            self.infinity_obj = infinity_embedded.connect(self.uri)
+            self.hybridsearch_obj = hybridsearch_embedded.connect(self.uri)
         elif http:
             self.uri = common_values.TEST_LOCAL_HOST
-            self.infinity_obj = infinity_http()
+            self.hybridsearch_obj = hybridsearch_http()
         else:
             self.uri = common_values.TEST_LOCAL_HOST
-            self.infinity_obj = infinity.connect(self.uri)
+            self.hybridsearch_obj = hybridsearch.connect(self.uri)
 
         self.suffix = suffix
         yield
 
-        res = self.infinity_obj.disconnect()
-        assert res.error_code == infinity.ErrorCode.OK
+        res = self.hybridsearch_obj.disconnect()
+        assert res.error_code == hybridsearch.ErrorCode.OK
 
     def test_simple_add_columns(self):
         table_name = "test_add_column" + self.suffix
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table(table_name, ConflictType.Ignore)
         table_obj = db_obj.create_table(
             table_name,
@@ -52,7 +52,7 @@ class TestInfinity:
         assert table_obj is not None
 
         res = table_obj.insert([{"c1": 1, "c2": 2}])
-        assert res.error_code == infinity.ErrorCode.OK
+        assert res.error_code == hybridsearch.ErrorCode.OK
 
         res, extra_result = table_obj.output(["*"]).to_df()
         pd.testing.assert_frame_equal(
@@ -63,13 +63,13 @@ class TestInfinity:
         )
 
         res = table_obj.add_columns({"c2": {"type": "varchar", "default": "default"}})
-        assert res.error_code == infinity.ErrorCode.DUPLICATE_COLUMN_NAME
+        assert res.error_code == hybridsearch.ErrorCode.DUPLICATE_COLUMN_NAME
 
         res = table_obj.add_columns({"c3": {"type": "varchar"}})
-        assert res.error_code == infinity.ErrorCode.NOT_SUPPORTED
+        assert res.error_code == hybridsearch.ErrorCode.NOT_SUPPORTED
 
         res = table_obj.add_columns({"c3": {"type": "varchar", "default": "default"}})
-        assert res.error_code == infinity.ErrorCode.OK
+        assert res.error_code == hybridsearch.ErrorCode.OK
 
         res, extra_result = table_obj.output(["*"]).to_df()
         pd.testing.assert_frame_equal(
@@ -95,7 +95,7 @@ class TestInfinity:
 
     def test_simple_drop_columns(self):
         table_name = "test_drop_column" + self.suffix
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table(table_name, ConflictType.Ignore)
         table_obj = db_obj.create_table(
             table_name,
@@ -108,7 +108,7 @@ class TestInfinity:
         assert table_obj is not None
 
         res = table_obj.insert([{"c1": 1, "c2": 2, "c3": "test"}])
-        assert res.error_code == infinity.ErrorCode.OK
+        assert res.error_code == hybridsearch.ErrorCode.OK
 
         res, extra_result = table_obj.output(["*"]).to_df()
         pd.testing.assert_frame_equal(
@@ -119,10 +119,10 @@ class TestInfinity:
         )
 
         res = table_obj.drop_columns("c4")
-        assert res.error_code == infinity.ErrorCode.COLUMN_NOT_EXIST
+        assert res.error_code == hybridsearch.ErrorCode.COLUMN_NOT_EXIST
 
         res = table_obj.drop_columns("c2")
-        assert res.error_code == infinity.ErrorCode.OK
+        assert res.error_code == hybridsearch.ErrorCode.OK
 
         res, extra_result = table_obj.output(["*"]).to_df()
         pd.testing.assert_frame_equal(
@@ -146,9 +146,9 @@ class TestInfinity:
 
     def test_insert_after_drop_columns(self):
         table_name = "testing_table" + self.suffix
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
 
-        db_obj.drop_table(table_name, infinity.common.ConflictType.Ignore)
+        db_obj.drop_table(table_name, hybridsearch.common.ConflictType.Ignore)
 
         table_obj = db_obj.create_table(
             table_name,
@@ -218,13 +218,13 @@ class TestInfinity:
             ),
         )
         db_obj.drop_table(table_name)
-        self.infinity_obj.disconnect()
+        self.hybridsearch_obj.disconnect()
 
         print("test done")
 
     def test_add_drop_column_with_index(self):
         table_name = "test_add_drop_column_with_index" + self.suffix
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table(table_name, ConflictType.Ignore)
         table_obj = db_obj.create_table(
             table_name,
@@ -239,18 +239,18 @@ class TestInfinity:
         res = table_obj.create_index(
             "index1", index.IndexInfo("c3", index.IndexType.FullText)
         )
-        assert res.error_code == infinity.ErrorCode.OK
+        assert res.error_code == hybridsearch.ErrorCode.OK
 
         table_obj.insert([{"c1": 1, "c2": 2, "c3": "test"}])
 
         # res = table_obj.drop_columns("c3")
-        # assert res.error_code == infinity.ErrorCode.NOT_SUPPORTED
+        # assert res.error_code == hybridsearch.ErrorCode.NOT_SUPPORTED
 
         res = table_obj.drop_columns("c2")
-        assert res.error_code == infinity.ErrorCode.OK
+        assert res.error_code == hybridsearch.ErrorCode.OK
 
         res = table_obj.add_columns({"c2": {"type": "varchar", "default": "test"}})
-        assert res.error_code == infinity.ErrorCode.OK
+        assert res.error_code == hybridsearch.ErrorCode.OK
 
         res, extra_result = table_obj.output(["*"]).to_df()
         pd.testing.assert_frame_equal(

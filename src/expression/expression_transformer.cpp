@@ -29,11 +29,11 @@ import in_expression;
 import conjunction_expression;
 import expression_type;
 
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<SharedPtr<BaseExpression>> SplitExpressionByDelimiter(const SharedPtr<BaseExpression> &expression, ConjunctionType delimiter) {
     Vector<SharedPtr<BaseExpression>> result;
@@ -153,4 +153,4 @@ void VisitExpression(const SharedPtr<BaseExpression> &expression, const std::fun
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

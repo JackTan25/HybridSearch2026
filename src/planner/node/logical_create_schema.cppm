@@ -24,7 +24,7 @@ import data_type;
 import internal_types;
 import extra_ddl_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalCreateSchema : public LogicalNode {
 public:
@@ -60,4 +60,4 @@ private:
     SharedPtr<String> comment_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

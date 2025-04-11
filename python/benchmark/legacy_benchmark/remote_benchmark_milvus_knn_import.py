@@ -189,7 +189,7 @@ if __name__ == '__main__':
     print(f"Current Path: {current_path}")
     print(f"Parent Path: {parent_path}")
 
-    parser = argparse.ArgumentParser(description="Benchmark Infinity")
+    parser = argparse.ArgumentParser(description="Benchmark hybridsearch")
 
     parser.add_argument(
         "-d",

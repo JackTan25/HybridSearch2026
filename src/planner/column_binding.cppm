@@ -20,7 +20,7 @@ import stl;
 
 export module column_binding;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct ColumnBinding {
 
@@ -34,14 +34,14 @@ export struct ColumnBinding {
     SizeT column_idx{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch
 
 namespace std {
 
 template <>
-class hash<infinity::ColumnBinding> {
+class hash<hybridsearch::ColumnBinding> {
 public:
-    std::size_t operator()(const infinity::ColumnBinding &rhs) const {
+    std::size_t operator()(const hybridsearch::ColumnBinding &rhs) const {
         return hash<std::size_t>().operator()(rhs.table_idx) ^ hash<std::size_t>().operator()(rhs.column_idx);
     }
 };

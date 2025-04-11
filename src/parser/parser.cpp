@@ -81,7 +81,7 @@
 #include "parser.h"
 #include "lexer.h"
 
-void yyerror(YYLTYPE * llocp, void* lexer, infinity::ParserResult* result, const char* msg);
+void yyerror(YYLTYPE * llocp, void* lexer, hybridsearch::ParserResult* result, const char* msg);
 
 #line 87 "parser.cpp"
 
@@ -2064,7 +2064,7 @@ do {                                                                      \
 
 static void
 yy_symbol_value_print (FILE *yyo,
-                       yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, void *scanner, infinity::ParserResult* result)
+                       yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, void *scanner, hybridsearch::ParserResult* result)
 {
   FILE *yyoutput = yyo;
   YY_USE (yyoutput);
@@ -2085,7 +2085,7 @@ yy_symbol_value_print (FILE *yyo,
 
 static void
 yy_symbol_print (FILE *yyo,
-                 yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, void *scanner, infinity::ParserResult* result)
+                 yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, void *scanner, hybridsearch::ParserResult* result)
 {
   YYFPRINTF (yyo, "%s %s (",
              yykind < YYNTOKENS ? "token" : "nterm", yysymbol_name (yykind));
@@ -2126,7 +2126,7 @@ do {                                                            \
 
 static void
 yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp, YYLTYPE *yylsp,
-                 int yyrule, void *scanner, infinity::ParserResult* result)
+                 int yyrule, void *scanner, hybridsearch::ParserResult* result)
 {
   int yylno = yyrline[yyrule];
   int yynrhs = yyr2[yyrule];
@@ -2457,7 +2457,7 @@ yysyntax_error (YYPTRDIFF_T *yymsg_alloc, char **yymsg,
 
 static void
 yydestruct (const char *yymsg,
-            yysymbol_kind_t yykind, YYSTYPE *yyvaluep, YYLTYPE *yylocationp, void *scanner, infinity::ParserResult* result)
+            yysymbol_kind_t yykind, YYSTYPE *yyvaluep, YYLTYPE *yylocationp, void *scanner, hybridsearch::ParserResult* result)
 {
   YY_USE (yyvaluep);
   YY_USE (yylocationp);
@@ -3328,7 +3328,7 @@ yydestruct (const char *yymsg,
 `----------*/
 
 int
-yyparse (void *scanner, infinity::ParserResult* result)
+yyparse (void *scanner, hybridsearch::ParserResult* result)
 {
 /* Lookahead token kind.  */
 int yychar;
@@ -3640,7 +3640,7 @@ yyreduce:
                            {
     (yyvsp[0].base_stmt)->stmt_length_ = yylloc.string_length;
     yylloc.string_length = 0;
-    (yyval.stmt_array) = new std::vector<infinity::BaseStatement*>();
+    (yyval.stmt_array) = new std::vector<hybridsearch::BaseStatement*>();
     (yyval.stmt_array)->push_back((yyvsp[0].base_stmt));
 }
 #line 3647 "parser.cpp"
@@ -3822,8 +3822,8 @@ yyreduce:
   case 32: /* create_statement: CREATE DATABASE if_not_exists IDENTIFIER COMMENT STRING  */
 #line 568 "parser.y"
                                                                            {
-    (yyval.create_stmt) = new infinity::CreateStatement();
-    std::shared_ptr<infinity::CreateSchemaInfo> create_schema_info = std::make_shared<infinity::CreateSchemaInfo>();
+    (yyval.create_stmt) = new hybridsearch::CreateStatement();
+    std::shared_ptr<hybridsearch::CreateSchemaInfo> create_schema_info = std::make_shared<hybridsearch::CreateSchemaInfo>();
 
     ParserHelper::ToLower((yyvsp[-2].str_value));
     create_schema_info->schema_name_ = (yyvsp[-2].str_value);
@@ -3834,7 +3834,7 @@ yyreduce:
     }
 
     (yyval.create_stmt)->create_info_ = create_schema_info;
-    (yyval.create_stmt)->create_info_->conflict_type_ = (yyvsp[-3].bool_value) ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+    (yyval.create_stmt)->create_info_->conflict_type_ = (yyvsp[-3].bool_value) ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
     (yyval.create_stmt)->create_info_->comment_ = (yyvsp[0].str_value);
     free((yyvsp[0].str_value));
 }
@@ -3844,8 +3844,8 @@ yyreduce:
   case 33: /* create_statement: CREATE DATABASE if_not_exists IDENTIFIER  */
 #line 585 "parser.y"
                                            {
-    (yyval.create_stmt) = new infinity::CreateStatement();
-    std::shared_ptr<infinity::CreateSchemaInfo> create_schema_info = std::make_shared<infinity::CreateSchemaInfo>();
+    (yyval.create_stmt) = new hybridsearch::CreateStatement();
+    std::shared_ptr<hybridsearch::CreateSchemaInfo> create_schema_info = std::make_shared<hybridsearch::CreateSchemaInfo>();
 
     ParserHelper::ToLower((yyvsp[0].str_value));
     create_schema_info->schema_name_ = (yyvsp[0].str_value);
@@ -3856,7 +3856,7 @@ yyreduce:
     }
 
     (yyval.create_stmt)->create_info_ = create_schema_info;
-    (yyval.create_stmt)->create_info_->conflict_type_ = (yyvsp[-1].bool_value) ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+    (yyval.create_stmt)->create_info_->conflict_type_ = (yyvsp[-1].bool_value) ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
 }
 #line 3862 "parser.cpp"
     break;
@@ -3864,8 +3864,8 @@ yyreduce:
   case 34: /* create_statement: CREATE COLLECTION if_not_exists table_name  */
 #line 602 "parser.y"
                                              {
-    (yyval.create_stmt) = new infinity::CreateStatement();
-    std::shared_ptr<infinity::CreateCollectionInfo> create_collection_info = std::make_shared<infinity::CreateCollectionInfo>();
+    (yyval.create_stmt) = new hybridsearch::CreateStatement();
+    std::shared_ptr<hybridsearch::CreateCollectionInfo> create_collection_info = std::make_shared<hybridsearch::CreateCollectionInfo>();
     if((yyvsp[0].table_name_t)->schema_name_ptr_ != nullptr) {
         create_collection_info->schema_name_ = (yyvsp[0].table_name_t)->schema_name_ptr_;
         free((yyvsp[0].table_name_t)->schema_name_ptr_);
@@ -3873,7 +3873,7 @@ yyreduce:
     create_collection_info->collection_name_ = (yyvsp[0].table_name_t)->table_name_ptr_;
     free((yyvsp[0].table_name_t)->table_name_ptr_);
     (yyval.create_stmt)->create_info_ = create_collection_info;
-    (yyval.create_stmt)->create_info_->conflict_type_ = (yyvsp[-1].bool_value) ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+    (yyval.create_stmt)->create_info_->conflict_type_ = (yyvsp[-1].bool_value) ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
     delete (yyvsp[0].table_name_t);
 }
 #line 3880 "parser.cpp"
@@ -3882,8 +3882,8 @@ yyreduce:
   case 35: /* create_statement: CREATE TABLE if_not_exists table_name '(' table_element_array ')' optional_table_properties_list  */
 #line 618 "parser.y"
                                                                                                    {
-    (yyval.create_stmt) = new infinity::CreateStatement();
-    std::shared_ptr<infinity::CreateTableInfo> create_table_info = std::make_shared<infinity::CreateTableInfo>();
+    (yyval.create_stmt) = new hybridsearch::CreateStatement();
+    std::shared_ptr<hybridsearch::CreateTableInfo> create_table_info = std::make_shared<hybridsearch::CreateTableInfo>();
     if((yyvsp[-4].table_name_t)->schema_name_ptr_ != nullptr) {
         create_table_info->schema_name_ = (yyvsp[-4].table_name_t)->schema_name_ptr_;
         free((yyvsp[-4].table_name_t)->schema_name_ptr_);
@@ -3892,11 +3892,11 @@ yyreduce:
     free((yyvsp[-4].table_name_t)->table_name_ptr_);
     delete (yyvsp[-4].table_name_t);
 
-    for (infinity::TableElement*& element : *(yyvsp[-2].table_element_array_t)) {
-        if(element->type_ == infinity::TableElementType::kColumn) {
-            create_table_info->column_defs_.emplace_back((infinity::ColumnDef*)element);
+    for (hybridsearch::TableElement*& element : *(yyvsp[-2].table_element_array_t)) {
+        if(element->type_ == hybridsearch::TableElementType::kColumn) {
+            create_table_info->column_defs_.emplace_back((hybridsearch::ColumnDef*)element);
         } else {
-            create_table_info->constraints_.emplace_back((infinity::TableConstraint*)element);
+            create_table_info->constraints_.emplace_back((hybridsearch::TableConstraint*)element);
         }
     }
     delete (yyvsp[-2].table_element_array_t);
@@ -3907,7 +3907,7 @@ yyreduce:
     }
 
     (yyval.create_stmt)->create_info_ = create_table_info;
-    (yyval.create_stmt)->create_info_->conflict_type_ = (yyvsp[-5].bool_value) ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+    (yyval.create_stmt)->create_info_->conflict_type_ = (yyvsp[-5].bool_value) ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
 }
 #line 3913 "parser.cpp"
     break;
@@ -3915,8 +3915,8 @@ yyreduce:
   case 36: /* create_statement: CREATE TABLE if_not_exists table_name AS select_statement  */
 #line 647 "parser.y"
                                                             {
-    (yyval.create_stmt) = new infinity::CreateStatement();
-    std::shared_ptr<infinity::CreateTableInfo> create_table_info = std::make_shared<infinity::CreateTableInfo>();
+    (yyval.create_stmt) = new hybridsearch::CreateStatement();
+    std::shared_ptr<hybridsearch::CreateTableInfo> create_table_info = std::make_shared<hybridsearch::CreateTableInfo>();
     if((yyvsp[-2].table_name_t)->schema_name_ptr_ != nullptr) {
         create_table_info->schema_name_ = (yyvsp[-2].table_name_t)->schema_name_ptr_;
         free((yyvsp[-2].table_name_t)->schema_name_ptr_);
@@ -3925,7 +3925,7 @@ yyreduce:
     free((yyvsp[-2].table_name_t)->table_name_ptr_);
     delete (yyvsp[-2].table_name_t);
 
-    create_table_info->conflict_type_ = (yyvsp[-3].bool_value) ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+    create_table_info->conflict_type_ = (yyvsp[-3].bool_value) ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
     create_table_info->select_ = (yyvsp[0].select_stmt);
     (yyval.create_stmt)->create_info_ = create_table_info;
 }
@@ -3935,8 +3935,8 @@ yyreduce:
   case 37: /* create_statement: CREATE TABLE if_not_exists table_name '(' table_element_array ')' optional_table_properties_list COMMENT STRING  */
 #line 662 "parser.y"
                                                                                                                   {
-    (yyval.create_stmt) = new infinity::CreateStatement();
-    std::shared_ptr<infinity::CreateTableInfo> create_table_info = std::make_shared<infinity::CreateTableInfo>();
+    (yyval.create_stmt) = new hybridsearch::CreateStatement();
+    std::shared_ptr<hybridsearch::CreateTableInfo> create_table_info = std::make_shared<hybridsearch::CreateTableInfo>();
     if((yyvsp[-6].table_name_t)->schema_name_ptr_ != nullptr) {
         create_table_info->schema_name_ = (yyvsp[-6].table_name_t)->schema_name_ptr_;
         free((yyvsp[-6].table_name_t)->schema_name_ptr_);
@@ -3945,11 +3945,11 @@ yyreduce:
     free((yyvsp[-6].table_name_t)->table_name_ptr_);
     delete (yyvsp[-6].table_name_t);
 
-    for (infinity::TableElement*& element : *(yyvsp[-4].table_element_array_t)) {
-        if(element->type_ == infinity::TableElementType::kColumn) {
-            create_table_info->column_defs_.emplace_back((infinity::ColumnDef*)element);
+    for (hybridsearch::TableElement*& element : *(yyvsp[-4].table_element_array_t)) {
+        if(element->type_ == hybridsearch::TableElementType::kColumn) {
+            create_table_info->column_defs_.emplace_back((hybridsearch::ColumnDef*)element);
         } else {
-            create_table_info->constraints_.emplace_back((infinity::TableConstraint*)element);
+            create_table_info->constraints_.emplace_back((hybridsearch::TableConstraint*)element);
         }
     }
     delete (yyvsp[-4].table_element_array_t);
@@ -3963,7 +3963,7 @@ yyreduce:
     free((yyvsp[0].str_value));
 
     (yyval.create_stmt)->create_info_ = create_table_info;
-    (yyval.create_stmt)->create_info_->conflict_type_ = (yyvsp[-7].bool_value) ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+    (yyval.create_stmt)->create_info_->conflict_type_ = (yyvsp[-7].bool_value) ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
 }
 #line 3969 "parser.cpp"
     break;
@@ -3971,8 +3971,8 @@ yyreduce:
   case 38: /* create_statement: CREATE TABLE if_not_exists table_name AS select_statement COMMENT STRING  */
 #line 694 "parser.y"
                                                                            {
-    (yyval.create_stmt) = new infinity::CreateStatement();
-    std::shared_ptr<infinity::CreateTableInfo> create_table_info = std::make_shared<infinity::CreateTableInfo>();
+    (yyval.create_stmt) = new hybridsearch::CreateStatement();
+    std::shared_ptr<hybridsearch::CreateTableInfo> create_table_info = std::make_shared<hybridsearch::CreateTableInfo>();
     if((yyvsp[-4].table_name_t)->schema_name_ptr_ != nullptr) {
         create_table_info->schema_name_ = (yyvsp[-4].table_name_t)->schema_name_ptr_;
         free((yyvsp[-4].table_name_t)->schema_name_ptr_);
@@ -3981,7 +3981,7 @@ yyreduce:
     free((yyvsp[-4].table_name_t)->table_name_ptr_);
     delete (yyvsp[-4].table_name_t);
 
-    create_table_info->conflict_type_ = (yyvsp[-5].bool_value) ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+    create_table_info->conflict_type_ = (yyvsp[-5].bool_value) ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
     create_table_info->select_ = (yyvsp[-2].select_stmt);
     create_table_info->comment_ = (yyvsp[0].str_value);
     free((yyvsp[0].str_value));
@@ -3993,8 +3993,8 @@ yyreduce:
   case 39: /* create_statement: CREATE VIEW if_not_exists table_name optional_identifier_array AS select_statement  */
 #line 712 "parser.y"
                                                                                      {
-    (yyval.create_stmt) = new infinity::CreateStatement();
-    std::shared_ptr<infinity::CreateViewInfo> create_view_info = std::make_shared<infinity::CreateViewInfo>();
+    (yyval.create_stmt) = new hybridsearch::CreateStatement();
+    std::shared_ptr<hybridsearch::CreateViewInfo> create_view_info = std::make_shared<hybridsearch::CreateViewInfo>();
     if((yyvsp[-3].table_name_t)->schema_name_ptr_ != nullptr) {
         create_view_info->schema_name_ = (yyvsp[-3].table_name_t)->schema_name_ptr_;
         free((yyvsp[-3].table_name_t)->schema_name_ptr_);
@@ -4005,7 +4005,7 @@ yyreduce:
 
     create_view_info->view_columns_ = (yyvsp[-2].identifier_array_t);
     create_view_info->select_ = (yyvsp[0].select_stmt);
-    create_view_info->conflict_type_ = (yyvsp[-4].bool_value) ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+    create_view_info->conflict_type_ = (yyvsp[-4].bool_value) ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
     (yyval.create_stmt)->create_info_ = create_view_info;
 }
 #line 4012 "parser.cpp"
@@ -4014,7 +4014,7 @@ yyreduce:
   case 40: /* create_statement: CREATE INDEX if_not_exists_info ON table_name index_info  */
 #line 730 "parser.y"
                                                            {
-    std::shared_ptr<infinity::CreateIndexInfo> create_index_info = std::make_shared<infinity::CreateIndexInfo>();
+    std::shared_ptr<hybridsearch::CreateIndexInfo> create_index_info = std::make_shared<hybridsearch::CreateIndexInfo>();
     if((yyvsp[-1].table_name_t)->schema_name_ptr_ != nullptr) {
         create_index_info->schema_name_ = (yyvsp[-1].table_name_t)->schema_name_ptr_;
         free((yyvsp[-1].table_name_t)->schema_name_ptr_);
@@ -4025,9 +4025,9 @@ yyreduce:
 
     create_index_info->index_name_ = (yyvsp[-3].if_not_exists_info_t)->info_;
     if ((yyvsp[-3].if_not_exists_info_t)->exists_) {
-        create_index_info->conflict_type_ = (yyvsp[-3].if_not_exists_info_t)->if_not_exists_ ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+        create_index_info->conflict_type_ = (yyvsp[-3].if_not_exists_info_t)->if_not_exists_ ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
     } else {
-        create_index_info->conflict_type_ = infinity::ConflictType::kIgnore;
+        create_index_info->conflict_type_ = hybridsearch::ConflictType::kIgnore;
     }
     delete (yyvsp[-3].if_not_exists_info_t);
 
@@ -4038,7 +4038,7 @@ yyreduce:
         YYERROR;
     }
 
-    (yyval.create_stmt) = new infinity::CreateStatement();
+    (yyval.create_stmt) = new hybridsearch::CreateStatement();
     (yyval.create_stmt)->create_info_ = create_index_info;
 }
 #line 4045 "parser.cpp"
@@ -4047,7 +4047,7 @@ yyreduce:
   case 41: /* create_statement: CREATE INDEX if_not_exists_info ON table_name index_info COMMENT STRING  */
 #line 758 "parser.y"
                                                                           {
-    std::shared_ptr<infinity::CreateIndexInfo> create_index_info = std::make_shared<infinity::CreateIndexInfo>();
+    std::shared_ptr<hybridsearch::CreateIndexInfo> create_index_info = std::make_shared<hybridsearch::CreateIndexInfo>();
     if((yyvsp[-3].table_name_t)->schema_name_ptr_ != nullptr) {
         create_index_info->schema_name_ = (yyvsp[-3].table_name_t)->schema_name_ptr_;
         free((yyvsp[-3].table_name_t)->schema_name_ptr_);
@@ -4058,9 +4058,9 @@ yyreduce:
 
     create_index_info->index_name_ = (yyvsp[-5].if_not_exists_info_t)->info_;
     if ((yyvsp[-5].if_not_exists_info_t)->exists_) {
-        create_index_info->conflict_type_ = (yyvsp[-5].if_not_exists_info_t)->if_not_exists_ ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+        create_index_info->conflict_type_ = (yyvsp[-5].if_not_exists_info_t)->if_not_exists_ ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
     } else {
-        create_index_info->conflict_type_ = infinity::ConflictType::kIgnore;
+        create_index_info->conflict_type_ = hybridsearch::ConflictType::kIgnore;
     }
     delete (yyvsp[-5].if_not_exists_info_t);
 
@@ -4073,7 +4073,7 @@ yyreduce:
         YYERROR;
     }
 
-    (yyval.create_stmt) = new infinity::CreateStatement();
+    (yyval.create_stmt) = new hybridsearch::CreateStatement();
     (yyval.create_stmt)->create_info_ = create_index_info;
 }
 #line 4080 "parser.cpp"
@@ -4082,7 +4082,7 @@ yyreduce:
   case 42: /* table_element_array: table_element  */
 #line 789 "parser.y"
                                     {
-    (yyval.table_element_array_t) = new std::vector<infinity::TableElement*>();
+    (yyval.table_element_array_t) = new std::vector<hybridsearch::TableElement*>();
     (yyval.table_element_array_t)->push_back((yyvsp[0].table_element_t));
 }
 #line 4089 "parser.cpp"
@@ -4100,7 +4100,7 @@ yyreduce:
   case 44: /* column_def_array: table_column  */
 #line 798 "parser.y"
                                 {
-    (yyval.column_def_array_t) = new std::vector<infinity::ColumnDef*>();
+    (yyval.column_def_array_t) = new std::vector<hybridsearch::ColumnDef*>();
     (yyval.column_def_array_t)->push_back((yyvsp[0].table_column_t));
 }
 #line 4107 "parser.cpp"
@@ -4134,16 +4134,16 @@ yyreduce:
   case 48: /* table_column: IDENTIFIER column_type with_index_param_list default_expr  */
 #line 818 "parser.y"
                                                           {
-    std::shared_ptr<infinity::ParsedExpr> default_expr((yyvsp[0].const_expr_t));
-    std::vector<std::unique_ptr<infinity::InitParameter>> index_param_list = infinity::InitParameter::MakeInitParameterList((yyvsp[-1].with_index_param_list_t));
-    auto [data_type_result, fail_reason] = infinity::ColumnType::GetDataTypeFromColumnType(*((yyvsp[-2].column_type_t)), index_param_list);
+    std::shared_ptr<hybridsearch::ParsedExpr> default_expr((yyvsp[0].const_expr_t));
+    std::vector<std::unique_ptr<hybridsearch::InitParameter>> index_param_list = hybridsearch::InitParameter::MakeInitParameterList((yyvsp[-1].with_index_param_list_t));
+    auto [data_type_result, fail_reason] = hybridsearch::ColumnType::GetDataTypeFromColumnType(*((yyvsp[-2].column_type_t)), index_param_list);
     delete (yyvsp[-2].column_type_t);
     if (!data_type_result) {
         yyerror(&yyloc, scanner, result, fail_reason.c_str());
         free((yyvsp[-3].str_value));
         YYERROR;
     }
-    (yyval.table_column_t) = new infinity::ColumnDef(std::move(data_type_result), "", std::move(default_expr));
+    (yyval.table_column_t) = new hybridsearch::ColumnDef(std::move(data_type_result), "", std::move(default_expr));
     ParserHelper::ToLower((yyvsp[-3].str_value));
     (yyval.table_column_t)->name_ = (yyvsp[-3].str_value);
     free((yyvsp[-3].str_value));
@@ -4159,8 +4159,8 @@ yyreduce:
   case 49: /* table_column: IDENTIFIER column_type column_constraints default_expr  */
 #line 838 "parser.y"
                                                          {
-    std::shared_ptr<infinity::ParsedExpr> default_expr((yyvsp[0].const_expr_t));
-    auto [data_type_result, fail_reason] = infinity::ColumnType::GetDataTypeFromColumnType(*((yyvsp[-2].column_type_t)), std::vector<std::unique_ptr<infinity::InitParameter>>{});
+    std::shared_ptr<hybridsearch::ParsedExpr> default_expr((yyvsp[0].const_expr_t));
+    auto [data_type_result, fail_reason] = hybridsearch::ColumnType::GetDataTypeFromColumnType(*((yyvsp[-2].column_type_t)), std::vector<std::unique_ptr<hybridsearch::InitParameter>>{});
     delete (yyvsp[-2].column_type_t);
     if (!data_type_result) {
         yyerror(&yyloc, scanner, result, fail_reason.c_str());
@@ -4168,7 +4168,7 @@ yyreduce:
         delete (yyvsp[-1].column_constraints_t);
         YYERROR;
     }
-    (yyval.table_column_t) = new infinity::ColumnDef(std::move(data_type_result), "", std::move(default_expr));
+    (yyval.table_column_t) = new hybridsearch::ColumnDef(std::move(data_type_result), "", std::move(default_expr));
     ParserHelper::ToLower((yyvsp[-3].str_value));
     (yyval.table_column_t)->name_ = (yyvsp[-3].str_value);
     free((yyvsp[-3].str_value));
@@ -4186,9 +4186,9 @@ yyreduce:
   case 50: /* table_column: IDENTIFIER column_type with_index_param_list default_expr COMMENT STRING  */
 #line 860 "parser.y"
                                                                            {
-    std::shared_ptr<infinity::ParsedExpr> default_expr((yyvsp[-2].const_expr_t));
-    std::vector<std::unique_ptr<infinity::InitParameter>> index_param_list = infinity::InitParameter::MakeInitParameterList((yyvsp[-3].with_index_param_list_t));
-    auto [data_type_result, fail_reason] = infinity::ColumnType::GetDataTypeFromColumnType(*((yyvsp[-4].column_type_t)), index_param_list);
+    std::shared_ptr<hybridsearch::ParsedExpr> default_expr((yyvsp[-2].const_expr_t));
+    std::vector<std::unique_ptr<hybridsearch::InitParameter>> index_param_list = hybridsearch::InitParameter::MakeInitParameterList((yyvsp[-3].with_index_param_list_t));
+    auto [data_type_result, fail_reason] = hybridsearch::ColumnType::GetDataTypeFromColumnType(*((yyvsp[-4].column_type_t)), index_param_list);
     delete (yyvsp[-4].column_type_t);
     if (!data_type_result) {
         yyerror(&yyloc, scanner, result, fail_reason.c_str());
@@ -4197,7 +4197,7 @@ yyreduce:
         YYERROR;
     }
 
-    (yyval.table_column_t) = new infinity::ColumnDef(std::move(data_type_result), (yyvsp[0].str_value), std::move(default_expr));
+    (yyval.table_column_t) = new hybridsearch::ColumnDef(std::move(data_type_result), (yyvsp[0].str_value), std::move(default_expr));
     free((yyvsp[0].str_value));
 
     ParserHelper::ToLower((yyvsp[-5].str_value));
@@ -4215,8 +4215,8 @@ yyreduce:
   case 51: /* table_column: IDENTIFIER column_type column_constraints default_expr COMMENT STRING  */
 #line 884 "parser.y"
                                                                         {
-    std::shared_ptr<infinity::ParsedExpr> default_expr((yyvsp[-2].const_expr_t));
-    auto [data_type_result, fail_reason] = infinity::ColumnType::GetDataTypeFromColumnType(*((yyvsp[-4].column_type_t)), std::vector<std::unique_ptr<infinity::InitParameter>>{});
+    std::shared_ptr<hybridsearch::ParsedExpr> default_expr((yyvsp[-2].const_expr_t));
+    auto [data_type_result, fail_reason] = hybridsearch::ColumnType::GetDataTypeFromColumnType(*((yyvsp[-4].column_type_t)), std::vector<std::unique_ptr<hybridsearch::InitParameter>>{});
     delete (yyvsp[-4].column_type_t);
     if (!data_type_result) {
         yyerror(&yyloc, scanner, result, fail_reason.c_str());
@@ -4225,7 +4225,7 @@ yyreduce:
         delete (yyvsp[-3].column_constraints_t);
         YYERROR;
     }
-    (yyval.table_column_t) = new infinity::ColumnDef(std::move(data_type_result), (yyvsp[0].str_value), std::move(default_expr));
+    (yyval.table_column_t) = new hybridsearch::ColumnDef(std::move(data_type_result), (yyvsp[0].str_value), std::move(default_expr));
     free((yyvsp[0].str_value));
 
     ParserHelper::ToLower((yyvsp[-5].str_value));
@@ -4245,7 +4245,7 @@ yyreduce:
   case 52: /* column_type_array: column_type  */
 #line 910 "parser.y"
                                 {
-    (yyval.column_type_array_t) = new std::vector<std::unique_ptr<infinity::ColumnType>>();
+    (yyval.column_type_array_t) = new std::vector<std::unique_ptr<hybridsearch::ColumnType>>();
     (yyval.column_type_array_t)->emplace_back((yyvsp[0].column_type_t));
 }
 #line 4252 "parser.cpp"
@@ -4262,560 +4262,560 @@ yyreduce:
 
   case 54: /* column_type: BOOLEAN  */
 #line 920 "parser.y"
-        { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kBoolean, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
+        { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kBoolean, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
 #line 4267 "parser.cpp"
     break;
 
   case 55: /* column_type: TINYINT  */
 #line 921 "parser.y"
-          { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kTinyInt, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
+          { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTinyInt, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
 #line 4273 "parser.cpp"
     break;
 
   case 56: /* column_type: SMALLINT  */
 #line 922 "parser.y"
-           { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kSmallInt, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
+           { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kSmallInt, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
 #line 4279 "parser.cpp"
     break;
 
   case 57: /* column_type: INTEGER  */
 #line 923 "parser.y"
-          { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kInteger, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
+          { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kInteger, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
 #line 4285 "parser.cpp"
     break;
 
   case 58: /* column_type: INT  */
 #line 924 "parser.y"
-      { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kInteger, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
+      { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kInteger, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
 #line 4291 "parser.cpp"
     break;
 
   case 59: /* column_type: BIGINT  */
 #line 925 "parser.y"
-         { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kBigInt, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
+         { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kBigInt, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
 #line 4297 "parser.cpp"
     break;
 
   case 60: /* column_type: HUGEINT  */
 #line 926 "parser.y"
-          { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kHugeInt, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
+          { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kHugeInt, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
 #line 4303 "parser.cpp"
     break;
 
   case 61: /* column_type: FLOAT  */
 #line 927 "parser.y"
-        { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kFloat, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
+        { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kFloat, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
 #line 4309 "parser.cpp"
     break;
 
   case 62: /* column_type: REAL  */
 #line 928 "parser.y"
-        { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kFloat, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
+        { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kFloat, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
 #line 4315 "parser.cpp"
     break;
 
   case 63: /* column_type: DOUBLE  */
 #line 929 "parser.y"
-         { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kDouble, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
+         { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kDouble, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
 #line 4321 "parser.cpp"
     break;
 
   case 64: /* column_type: FLOAT16  */
 #line 930 "parser.y"
-          { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kFloat16, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
+          { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kFloat16, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
 #line 4327 "parser.cpp"
     break;
 
   case 65: /* column_type: BFLOAT16  */
 #line 931 "parser.y"
-           { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kBFloat16, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
+           { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kBFloat16, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
 #line 4333 "parser.cpp"
     break;
 
   case 66: /* column_type: DATE  */
 #line 932 "parser.y"
-       { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kDate, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
+       { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kDate, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
 #line 4339 "parser.cpp"
     break;
 
   case 67: /* column_type: TIME  */
 #line 933 "parser.y"
-       { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kTime, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
+       { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTime, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
 #line 4345 "parser.cpp"
     break;
 
   case 68: /* column_type: DATETIME  */
 #line 934 "parser.y"
-           { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kDateTime, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
+           { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kDateTime, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
 #line 4351 "parser.cpp"
     break;
 
   case 69: /* column_type: TIMESTAMP  */
 #line 935 "parser.y"
-            { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kTimestamp, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
+            { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTimestamp, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
 #line 4357 "parser.cpp"
     break;
 
   case 70: /* column_type: UUID  */
 #line 936 "parser.y"
-       { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kUuid, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
+       { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kUuid, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
 #line 4363 "parser.cpp"
     break;
 
   case 71: /* column_type: POINT  */
 #line 937 "parser.y"
-        { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kPoint, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
+        { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kPoint, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
 #line 4369 "parser.cpp"
     break;
 
   case 72: /* column_type: LINE  */
 #line 938 "parser.y"
-       { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kLine, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
+       { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kLine, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
 #line 4375 "parser.cpp"
     break;
 
   case 73: /* column_type: LSEG  */
 #line 939 "parser.y"
-       { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kLineSeg, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
+       { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kLineSeg, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
 #line 4381 "parser.cpp"
     break;
 
   case 74: /* column_type: BOX  */
 #line 940 "parser.y"
-      { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kBox, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
+      { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kBox, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
 #line 4387 "parser.cpp"
     break;
 
   case 75: /* column_type: CIRCLE  */
 #line 943 "parser.y"
-         { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kCircle, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
+         { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kCircle, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
 #line 4393 "parser.cpp"
     break;
 
   case 76: /* column_type: VARCHAR  */
 #line 945 "parser.y"
-          { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kVarchar, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
+          { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kVarchar, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
 #line 4399 "parser.cpp"
     break;
 
   case 77: /* column_type: DECIMAL '(' LONG_VALUE ',' LONG_VALUE ')'  */
 #line 946 "parser.y"
-                                            { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kDecimal, 0, (yyvsp[-3].long_value), (yyvsp[-1].long_value), infinity::EmbeddingDataType::kElemInvalid}; }
+                                            { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kDecimal, 0, (yyvsp[-3].long_value), (yyvsp[-1].long_value), hybridsearch::EmbeddingDataType::kElemInvalid}; }
 #line 4405 "parser.cpp"
     break;
 
   case 78: /* column_type: DECIMAL '(' LONG_VALUE ')'  */
 #line 947 "parser.y"
-                             { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kDecimal, 0, (yyvsp[-1].long_value), 0, infinity::EmbeddingDataType::kElemInvalid}; }
+                             { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kDecimal, 0, (yyvsp[-1].long_value), 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
 #line 4411 "parser.cpp"
     break;
 
   case 79: /* column_type: DECIMAL  */
 #line 948 "parser.y"
-          { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kDecimal, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
+          { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kDecimal, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
 #line 4417 "parser.cpp"
     break;
 
   case 80: /* column_type: EMBEDDING '(' BIT ',' LONG_VALUE ')'  */
 #line 951 "parser.y"
-                                       { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemBit}; }
+                                       { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemBit}; }
 #line 4423 "parser.cpp"
     break;
 
   case 81: /* column_type: EMBEDDING '(' TINYINT ',' LONG_VALUE ')'  */
 #line 952 "parser.y"
-                                           { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt8}; }
+                                           { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt8}; }
 #line 4429 "parser.cpp"
     break;
 
   case 82: /* column_type: EMBEDDING '(' SMALLINT ',' LONG_VALUE ')'  */
 #line 953 "parser.y"
-                                            { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt16}; }
+                                            { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt16}; }
 #line 4435 "parser.cpp"
     break;
 
   case 83: /* column_type: EMBEDDING '(' INTEGER ',' LONG_VALUE ')'  */
 #line 954 "parser.y"
-                                           { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt32}; }
+                                           { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt32}; }
 #line 4441 "parser.cpp"
     break;
 
   case 84: /* column_type: EMBEDDING '(' INT ',' LONG_VALUE ')'  */
 #line 955 "parser.y"
-                                       { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt32}; }
+                                       { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt32}; }
 #line 4447 "parser.cpp"
     break;
 
   case 85: /* column_type: EMBEDDING '(' BIGINT ',' LONG_VALUE ')'  */
 #line 956 "parser.y"
-                                          { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt64}; }
+                                          { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt64}; }
 #line 4453 "parser.cpp"
     break;
 
   case 86: /* column_type: EMBEDDING '(' FLOAT ',' LONG_VALUE ')'  */
 #line 957 "parser.y"
-                                         { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemFloat}; }
+                                         { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemFloat}; }
 #line 4459 "parser.cpp"
     break;
 
   case 87: /* column_type: EMBEDDING '(' DOUBLE ',' LONG_VALUE ')'  */
 #line 958 "parser.y"
-                                          { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemDouble}; }
+                                          { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemDouble}; }
 #line 4465 "parser.cpp"
     break;
 
   case 88: /* column_type: EMBEDDING '(' FLOAT16 ',' LONG_VALUE ')'  */
 #line 959 "parser.y"
-                                           { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemFloat16}; }
+                                           { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemFloat16}; }
 #line 4471 "parser.cpp"
     break;
 
   case 89: /* column_type: EMBEDDING '(' BFLOAT16 ',' LONG_VALUE ')'  */
 #line 960 "parser.y"
-                                            { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemBFloat16}; }
+                                            { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemBFloat16}; }
 #line 4477 "parser.cpp"
     break;
 
   case 90: /* column_type: EMBEDDING '(' UNSIGNED TINYINT ',' LONG_VALUE ')'  */
 #line 961 "parser.y"
-                                                    { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemUInt8}; }
+                                                    { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemUInt8}; }
 #line 4483 "parser.cpp"
     break;
 
   case 91: /* column_type: MULTIVECTOR '(' BIT ',' LONG_VALUE ')'  */
 #line 962 "parser.y"
-                                         { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kMultiVector, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemBit}; }
+                                         { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kMultiVector, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemBit}; }
 #line 4489 "parser.cpp"
     break;
 
   case 92: /* column_type: MULTIVECTOR '(' TINYINT ',' LONG_VALUE ')'  */
 #line 963 "parser.y"
-                                             { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kMultiVector, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt8}; }
+                                             { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kMultiVector, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt8}; }
 #line 4495 "parser.cpp"
     break;
 
   case 93: /* column_type: MULTIVECTOR '(' SMALLINT ',' LONG_VALUE ')'  */
 #line 964 "parser.y"
-                                              { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kMultiVector, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt16}; }
+                                              { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kMultiVector, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt16}; }
 #line 4501 "parser.cpp"
     break;
 
   case 94: /* column_type: MULTIVECTOR '(' INTEGER ',' LONG_VALUE ')'  */
 #line 965 "parser.y"
-                                             { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kMultiVector, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt32}; }
+                                             { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kMultiVector, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt32}; }
 #line 4507 "parser.cpp"
     break;
 
   case 95: /* column_type: MULTIVECTOR '(' INT ',' LONG_VALUE ')'  */
 #line 966 "parser.y"
-                                         { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kMultiVector, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt32}; }
+                                         { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kMultiVector, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt32}; }
 #line 4513 "parser.cpp"
     break;
 
   case 96: /* column_type: MULTIVECTOR '(' BIGINT ',' LONG_VALUE ')'  */
 #line 967 "parser.y"
-                                            { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kMultiVector, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt64}; }
+                                            { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kMultiVector, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt64}; }
 #line 4519 "parser.cpp"
     break;
 
   case 97: /* column_type: MULTIVECTOR '(' FLOAT ',' LONG_VALUE ')'  */
 #line 968 "parser.y"
-                                           { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kMultiVector, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemFloat}; }
+                                           { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kMultiVector, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemFloat}; }
 #line 4525 "parser.cpp"
     break;
 
   case 98: /* column_type: MULTIVECTOR '(' DOUBLE ',' LONG_VALUE ')'  */
 #line 969 "parser.y"
-                                            { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kMultiVector, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemDouble}; }
+                                            { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kMultiVector, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemDouble}; }
 #line 4531 "parser.cpp"
     break;
 
   case 99: /* column_type: MULTIVECTOR '(' FLOAT16 ',' LONG_VALUE ')'  */
 #line 970 "parser.y"
-                                             { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kMultiVector, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemFloat16}; }
+                                             { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kMultiVector, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemFloat16}; }
 #line 4537 "parser.cpp"
     break;
 
   case 100: /* column_type: MULTIVECTOR '(' BFLOAT16 ',' LONG_VALUE ')'  */
 #line 971 "parser.y"
-                                              { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kMultiVector, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemBFloat16}; }
+                                              { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kMultiVector, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemBFloat16}; }
 #line 4543 "parser.cpp"
     break;
 
   case 101: /* column_type: MULTIVECTOR '(' UNSIGNED TINYINT ',' LONG_VALUE ')'  */
 #line 972 "parser.y"
-                                                      { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kMultiVector, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemUInt8}; }
+                                                      { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kMultiVector, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemUInt8}; }
 #line 4549 "parser.cpp"
     break;
 
   case 102: /* column_type: TENSOR '(' BIT ',' LONG_VALUE ')'  */
 #line 973 "parser.y"
-                                    { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kTensor, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemBit}; }
+                                    { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensor, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemBit}; }
 #line 4555 "parser.cpp"
     break;
 
   case 103: /* column_type: TENSOR '(' TINYINT ',' LONG_VALUE ')'  */
 #line 974 "parser.y"
-                                        { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kTensor, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt8}; }
+                                        { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensor, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt8}; }
 #line 4561 "parser.cpp"
     break;
 
   case 104: /* column_type: TENSOR '(' SMALLINT ',' LONG_VALUE ')'  */
 #line 975 "parser.y"
-                                         { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kTensor, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt16}; }
+                                         { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensor, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt16}; }
 #line 4567 "parser.cpp"
     break;
 
   case 105: /* column_type: TENSOR '(' INTEGER ',' LONG_VALUE ')'  */
 #line 976 "parser.y"
-                                        { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kTensor, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt32}; }
+                                        { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensor, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt32}; }
 #line 4573 "parser.cpp"
     break;
 
   case 106: /* column_type: TENSOR '(' INT ',' LONG_VALUE ')'  */
 #line 977 "parser.y"
-                                    { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kTensor, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt32}; }
+                                    { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensor, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt32}; }
 #line 4579 "parser.cpp"
     break;
 
   case 107: /* column_type: TENSOR '(' BIGINT ',' LONG_VALUE ')'  */
 #line 978 "parser.y"
-                                       { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kTensor, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt64}; }
+                                       { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensor, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt64}; }
 #line 4585 "parser.cpp"
     break;
 
   case 108: /* column_type: TENSOR '(' FLOAT ',' LONG_VALUE ')'  */
 #line 979 "parser.y"
-                                      { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kTensor, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemFloat}; }
+                                      { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensor, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemFloat}; }
 #line 4591 "parser.cpp"
     break;
 
   case 109: /* column_type: TENSOR '(' DOUBLE ',' LONG_VALUE ')'  */
 #line 980 "parser.y"
-                                       { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kTensor, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemDouble}; }
+                                       { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensor, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemDouble}; }
 #line 4597 "parser.cpp"
     break;
 
   case 110: /* column_type: TENSOR '(' FLOAT16 ',' LONG_VALUE ')'  */
 #line 981 "parser.y"
-                                        { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kTensor, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemFloat16}; }
+                                        { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensor, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemFloat16}; }
 #line 4603 "parser.cpp"
     break;
 
   case 111: /* column_type: TENSOR '(' BFLOAT16 ',' LONG_VALUE ')'  */
 #line 982 "parser.y"
-                                         { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kTensor, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemBFloat16}; }
+                                         { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensor, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemBFloat16}; }
 #line 4609 "parser.cpp"
     break;
 
   case 112: /* column_type: TENSOR '(' UNSIGNED TINYINT ',' LONG_VALUE ')'  */
 #line 983 "parser.y"
-                                                 { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kTensor, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemUInt8}; }
+                                                 { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensor, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemUInt8}; }
 #line 4615 "parser.cpp"
     break;
 
   case 113: /* column_type: TENSORARRAY '(' BIT ',' LONG_VALUE ')'  */
 #line 984 "parser.y"
-                                         { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kTensorArray, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemBit}; }
+                                         { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensorArray, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemBit}; }
 #line 4621 "parser.cpp"
     break;
 
   case 114: /* column_type: TENSORARRAY '(' TINYINT ',' LONG_VALUE ')'  */
 #line 985 "parser.y"
-                                             { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kTensorArray, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt8}; }
+                                             { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensorArray, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt8}; }
 #line 4627 "parser.cpp"
     break;
 
   case 115: /* column_type: TENSORARRAY '(' SMALLINT ',' LONG_VALUE ')'  */
 #line 986 "parser.y"
-                                              { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kTensorArray, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt16}; }
+                                              { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensorArray, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt16}; }
 #line 4633 "parser.cpp"
     break;
 
   case 116: /* column_type: TENSORARRAY '(' INTEGER ',' LONG_VALUE ')'  */
 #line 987 "parser.y"
-                                             { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kTensorArray, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt32}; }
+                                             { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensorArray, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt32}; }
 #line 4639 "parser.cpp"
     break;
 
   case 117: /* column_type: TENSORARRAY '(' INT ',' LONG_VALUE ')'  */
 #line 988 "parser.y"
-                                         { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kTensorArray, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt32}; }
+                                         { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensorArray, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt32}; }
 #line 4645 "parser.cpp"
     break;
 
   case 118: /* column_type: TENSORARRAY '(' BIGINT ',' LONG_VALUE ')'  */
 #line 989 "parser.y"
-                                            { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kTensorArray, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt64}; }
+                                            { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensorArray, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt64}; }
 #line 4651 "parser.cpp"
     break;
 
   case 119: /* column_type: TENSORARRAY '(' FLOAT ',' LONG_VALUE ')'  */
 #line 990 "parser.y"
-                                           { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kTensorArray, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemFloat}; }
+                                           { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensorArray, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemFloat}; }
 #line 4657 "parser.cpp"
     break;
 
   case 120: /* column_type: TENSORARRAY '(' DOUBLE ',' LONG_VALUE ')'  */
 #line 991 "parser.y"
-                                            { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kTensorArray, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemDouble}; }
+                                            { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensorArray, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemDouble}; }
 #line 4663 "parser.cpp"
     break;
 
   case 121: /* column_type: TENSORARRAY '(' FLOAT16 ',' LONG_VALUE ')'  */
 #line 992 "parser.y"
-                                             { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kTensorArray, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemFloat16}; }
+                                             { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensorArray, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemFloat16}; }
 #line 4669 "parser.cpp"
     break;
 
   case 122: /* column_type: TENSORARRAY '(' BFLOAT16 ',' LONG_VALUE ')'  */
 #line 993 "parser.y"
-                                              { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kTensorArray, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemBFloat16}; }
+                                              { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensorArray, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemBFloat16}; }
 #line 4675 "parser.cpp"
     break;
 
   case 123: /* column_type: TENSORARRAY '(' UNSIGNED TINYINT ',' LONG_VALUE ')'  */
 #line 994 "parser.y"
-                                                      { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kTensorArray, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemUInt8}; }
+                                                      { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensorArray, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemUInt8}; }
 #line 4681 "parser.cpp"
     break;
 
   case 124: /* column_type: VECTOR '(' BIT ',' LONG_VALUE ')'  */
 #line 995 "parser.y"
-                                    { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemBit}; }
+                                    { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemBit}; }
 #line 4687 "parser.cpp"
     break;
 
   case 125: /* column_type: VECTOR '(' TINYINT ',' LONG_VALUE ')'  */
 #line 996 "parser.y"
-                                        { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt8}; }
+                                        { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt8}; }
 #line 4693 "parser.cpp"
     break;
 
   case 126: /* column_type: VECTOR '(' SMALLINT ',' LONG_VALUE ')'  */
 #line 997 "parser.y"
-                                         { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt16}; }
+                                         { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt16}; }
 #line 4699 "parser.cpp"
     break;
 
   case 127: /* column_type: VECTOR '(' INTEGER ',' LONG_VALUE ')'  */
 #line 998 "parser.y"
-                                        { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt32}; }
+                                        { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt32}; }
 #line 4705 "parser.cpp"
     break;
 
   case 128: /* column_type: VECTOR '(' INT ',' LONG_VALUE ')'  */
 #line 999 "parser.y"
-                                    { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt32}; }
+                                    { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt32}; }
 #line 4711 "parser.cpp"
     break;
 
   case 129: /* column_type: VECTOR '(' BIGINT ',' LONG_VALUE ')'  */
 #line 1000 "parser.y"
-                                       { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt64}; }
+                                       { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt64}; }
 #line 4717 "parser.cpp"
     break;
 
   case 130: /* column_type: VECTOR '(' FLOAT ',' LONG_VALUE ')'  */
 #line 1001 "parser.y"
-                                      { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemFloat}; }
+                                      { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemFloat}; }
 #line 4723 "parser.cpp"
     break;
 
   case 131: /* column_type: VECTOR '(' DOUBLE ',' LONG_VALUE ')'  */
 #line 1002 "parser.y"
-                                       { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemDouble}; }
+                                       { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemDouble}; }
 #line 4729 "parser.cpp"
     break;
 
   case 132: /* column_type: VECTOR '(' FLOAT16 ',' LONG_VALUE ')'  */
 #line 1003 "parser.y"
-                                        { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemFloat16}; }
+                                        { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemFloat16}; }
 #line 4735 "parser.cpp"
     break;
 
   case 133: /* column_type: VECTOR '(' BFLOAT16 ',' LONG_VALUE ')'  */
 #line 1004 "parser.y"
-                                         { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemBFloat16}; }
+                                         { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemBFloat16}; }
 #line 4741 "parser.cpp"
     break;
 
   case 134: /* column_type: VECTOR '(' UNSIGNED TINYINT ',' LONG_VALUE ')'  */
 #line 1005 "parser.y"
-                                                 { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemUInt8}; }
+                                                 { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemUInt8}; }
 #line 4747 "parser.cpp"
     break;
 
   case 135: /* column_type: SPARSE '(' BIT ',' LONG_VALUE ')'  */
 #line 1006 "parser.y"
-                                    { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kSparse, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemBit}; }
+                                    { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kSparse, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemBit}; }
 #line 4753 "parser.cpp"
     break;
 
   case 136: /* column_type: SPARSE '(' TINYINT ',' LONG_VALUE ')'  */
 #line 1007 "parser.y"
-                                        { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kSparse, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt8}; }
+                                        { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kSparse, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt8}; }
 #line 4759 "parser.cpp"
     break;
 
   case 137: /* column_type: SPARSE '(' SMALLINT ',' LONG_VALUE ')'  */
 #line 1008 "parser.y"
-                                         { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kSparse, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt16}; }
+                                         { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kSparse, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt16}; }
 #line 4765 "parser.cpp"
     break;
 
   case 138: /* column_type: SPARSE '(' INTEGER ',' LONG_VALUE ')'  */
 #line 1009 "parser.y"
-                                        { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kSparse, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt32}; }
+                                        { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kSparse, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt32}; }
 #line 4771 "parser.cpp"
     break;
 
   case 139: /* column_type: SPARSE '(' INT ',' LONG_VALUE ')'  */
 #line 1010 "parser.y"
-                                    { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kSparse, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt32}; }
+                                    { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kSparse, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt32}; }
 #line 4777 "parser.cpp"
     break;
 
   case 140: /* column_type: SPARSE '(' BIGINT ',' LONG_VALUE ')'  */
 #line 1011 "parser.y"
-                                       { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kSparse, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemInt64}; }
+                                       { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kSparse, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemInt64}; }
 #line 4783 "parser.cpp"
     break;
 
   case 141: /* column_type: SPARSE '(' FLOAT ',' LONG_VALUE ')'  */
 #line 1012 "parser.y"
-                                      { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kSparse, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemFloat}; }
+                                      { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kSparse, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemFloat}; }
 #line 4789 "parser.cpp"
     break;
 
   case 142: /* column_type: SPARSE '(' DOUBLE ',' LONG_VALUE ')'  */
 #line 1013 "parser.y"
-                                       { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kSparse, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemDouble}; }
+                                       { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kSparse, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemDouble}; }
 #line 4795 "parser.cpp"
     break;
 
   case 143: /* column_type: SPARSE '(' FLOAT16 ',' LONG_VALUE ')'  */
 #line 1014 "parser.y"
-                                        { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kSparse, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemFloat16}; }
+                                        { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kSparse, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemFloat16}; }
 #line 4801 "parser.cpp"
     break;
 
   case 144: /* column_type: SPARSE '(' BFLOAT16 ',' LONG_VALUE ')'  */
 #line 1015 "parser.y"
-                                         { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kSparse, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemBFloat16}; }
+                                         { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kSparse, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemBFloat16}; }
 #line 4807 "parser.cpp"
     break;
 
   case 145: /* column_type: SPARSE '(' UNSIGNED TINYINT ',' LONG_VALUE ')'  */
 #line 1016 "parser.y"
-                                                 { (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kSparse, (yyvsp[-1].long_value), 0, 0, infinity::EmbeddingDataType::kElemUInt8}; }
+                                                 { (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kSparse, (yyvsp[-1].long_value), 0, 0, hybridsearch::EmbeddingDataType::kElemUInt8}; }
 #line 4813 "parser.cpp"
     break;
 
   case 146: /* column_type: ARRAY '(' column_type ')'  */
 #line 1017 "parser.y"
                             {
-  (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kArray, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid};
+  (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kArray, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid};
   (yyval.column_type_t)->element_types_.emplace_back((yyvsp[-1].column_type_t));
 }
 #line 4822 "parser.cpp"
@@ -4824,7 +4824,7 @@ yyreduce:
   case 147: /* column_type: TUPLE '(' column_type_array ')'  */
 #line 1021 "parser.y"
                                   {
-  (yyval.column_type_t) = new infinity::ColumnType{infinity::LogicalType::kTuple, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid};
+  (yyval.column_type_t) = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTuple, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid};
   (yyval.column_type_t)->element_types_ = std::move(*((yyvsp[-1].column_type_array_t)));
   delete (yyvsp[-1].column_type_array_t);
 }
@@ -4834,7 +4834,7 @@ yyreduce:
   case 148: /* column_constraints: column_constraint  */
 #line 1044 "parser.y"
                                        {
-    (yyval.column_constraints_t) = new std::set<infinity::ConstraintType>();
+    (yyval.column_constraints_t) = new std::set<hybridsearch::ConstraintType>();
     (yyval.column_constraints_t)->insert((yyvsp[0].column_constraint_t));
 }
 #line 4841 "parser.cpp"
@@ -4857,7 +4857,7 @@ yyreduce:
   case 150: /* column_constraint: PRIMARY KEY  */
 #line 1058 "parser.y"
                                 {
-    (yyval.column_constraint_t) = infinity::ConstraintType::kPrimaryKey;
+    (yyval.column_constraint_t) = hybridsearch::ConstraintType::kPrimaryKey;
 }
 #line 4863 "parser.cpp"
     break;
@@ -4865,7 +4865,7 @@ yyreduce:
   case 151: /* column_constraint: UNIQUE  */
 #line 1061 "parser.y"
          {
-    (yyval.column_constraint_t) = infinity::ConstraintType::kUnique;
+    (yyval.column_constraint_t) = hybridsearch::ConstraintType::kUnique;
 }
 #line 4871 "parser.cpp"
     break;
@@ -4873,7 +4873,7 @@ yyreduce:
   case 152: /* column_constraint: NULLABLE  */
 #line 1064 "parser.y"
            {
-    (yyval.column_constraint_t) = infinity::ConstraintType::kNull;
+    (yyval.column_constraint_t) = hybridsearch::ConstraintType::kNull;
 }
 #line 4879 "parser.cpp"
     break;
@@ -4881,7 +4881,7 @@ yyreduce:
   case 153: /* column_constraint: NOT NULLABLE  */
 #line 1067 "parser.y"
                {
-    (yyval.column_constraint_t) = infinity::ConstraintType::kNotNull;
+    (yyval.column_constraint_t) = hybridsearch::ConstraintType::kNotNull;
 }
 #line 4887 "parser.cpp"
     break;
@@ -4905,9 +4905,9 @@ yyreduce:
   case 156: /* table_constraint: PRIMARY KEY '(' identifier_array ')'  */
 #line 1079 "parser.y"
                                                         {
-    (yyval.table_constraint_t) = new infinity::TableConstraint();
+    (yyval.table_constraint_t) = new hybridsearch::TableConstraint();
     (yyval.table_constraint_t)->names_ptr_ = (yyvsp[-1].identifier_array_t);
-    (yyval.table_constraint_t)->constraint_ = infinity::ConstraintType::kPrimaryKey;
+    (yyval.table_constraint_t)->constraint_ = hybridsearch::ConstraintType::kPrimaryKey;
 }
 #line 4913 "parser.cpp"
     break;
@@ -4915,9 +4915,9 @@ yyreduce:
   case 157: /* table_constraint: UNIQUE '(' identifier_array ')'  */
 #line 1084 "parser.y"
                                   {
-    (yyval.table_constraint_t) = new infinity::TableConstraint();
+    (yyval.table_constraint_t) = new hybridsearch::TableConstraint();
     (yyval.table_constraint_t)->names_ptr_ = (yyvsp[-1].identifier_array_t);
-    (yyval.table_constraint_t)->constraint_ = infinity::ConstraintType::kUnique;
+    (yyval.table_constraint_t)->constraint_ = hybridsearch::ConstraintType::kUnique;
 }
 #line 4923 "parser.cpp"
     break;
@@ -4947,7 +4947,7 @@ yyreduce:
   case 160: /* delete_statement: DELETE FROM table_name where_clause  */
 #line 1107 "parser.y"
                                                        {
-    (yyval.delete_stmt) = new infinity::DeleteStatement();
+    (yyval.delete_stmt) = new hybridsearch::DeleteStatement();
 
     if((yyvsp[-1].table_name_t)->schema_name_ptr_ != nullptr) {
         (yyval.delete_stmt)->schema_name_ = (yyvsp[-1].table_name_t)->schema_name_ptr_;
@@ -4967,7 +4967,7 @@ yyreduce:
     bool is_error{false};
     for (auto expr_array : *(yyvsp[0].insert_row_list_t)) {
         for (const auto &expr : expr_array->values_) {
-            if(expr->type_ != infinity::ParsedExprType::kConstant) {
+            if(expr->type_ != hybridsearch::ParsedExprType::kConstant) {
                 yyerror(&yyloc, scanner, result, ("Value list has non-constant expression: " + expr->ToString()).c_str());
                 is_error = true;
             }
@@ -4983,7 +4983,7 @@ yyreduce:
         YYERROR;
     }
 
-    (yyval.insert_stmt) = new infinity::InsertStatement();
+    (yyval.insert_stmt) = new hybridsearch::InsertStatement();
     if((yyvsp[-3].table_name_t)->schema_name_ptr_ != nullptr) {
         (yyval.insert_stmt)->schema_name_ = (yyvsp[-3].table_name_t)->schema_name_ptr_;
         free((yyvsp[-3].table_name_t)->schema_name_ptr_);
@@ -4991,7 +4991,7 @@ yyreduce:
     (yyval.insert_stmt)->table_name_ = (yyvsp[-3].table_name_t)->table_name_ptr_;
     free((yyvsp[-3].table_name_t)->table_name_ptr_);
     delete (yyvsp[-3].table_name_t);
-    for (infinity::InsertRowExpr* &expr_ptr : *(yyvsp[0].insert_row_list_t)) {
+    for (hybridsearch::InsertRowExpr* &expr_ptr : *(yyvsp[0].insert_row_list_t)) {
         if ((yyvsp[-2].identifier_array_t)) {
             expr_ptr->columns_ = *((yyvsp[-2].identifier_array_t));
         }
@@ -5007,7 +5007,7 @@ yyreduce:
   case 162: /* insert_statement: INSERT INTO table_name optional_identifier_array select_without_paren  */
 #line 1161 "parser.y"
                                                                         {
-    (yyval.insert_stmt) = new infinity::InsertStatement();
+    (yyval.insert_stmt) = new hybridsearch::InsertStatement();
     if((yyvsp[-2].table_name_t)->schema_name_ptr_ != nullptr) {
         (yyval.insert_stmt)->schema_name_ = (yyvsp[-2].table_name_t)->schema_name_ptr_;
         free((yyvsp[-2].table_name_t)->schema_name_ptr_);
@@ -5043,15 +5043,15 @@ yyreduce:
   case 165: /* explain_statement: EXPLAIN IDENTIFIER explainable_statement  */
 #line 1187 "parser.y"
                                                              {
-    (yyval.explain_stmt) = new infinity::ExplainStatement();
+    (yyval.explain_stmt) = new hybridsearch::ExplainStatement();
     ParserHelper::ToLower((yyvsp[-1].str_value));
-    if(!strcmp((yyvsp[-1].str_value), "analyze")) (yyval.explain_stmt)->type_ = infinity::ExplainType::kAnalyze;
-    else if(!strcmp((yyvsp[-1].str_value), "ast")) (yyval.explain_stmt)->type_ =infinity::ExplainType::kAst;
-    else if(!strcmp((yyvsp[-1].str_value), "raw")) (yyval.explain_stmt)->type_ =infinity::ExplainType::kUnOpt;
-    else if(!strcmp((yyvsp[-1].str_value), "logical")) (yyval.explain_stmt)->type_ =infinity::ExplainType::kOpt;
-    else if(!strcmp((yyvsp[-1].str_value), "physical")) (yyval.explain_stmt)->type_ =infinity::ExplainType::kPhysical;
-    else if(!strcmp((yyvsp[-1].str_value), "pipeline")) (yyval.explain_stmt)->type_ =infinity::ExplainType::kPipeline;
-    else if(!strcmp((yyvsp[-1].str_value), "fragment")) (yyval.explain_stmt)->type_ =infinity::ExplainType::kFragment;
+    if(!strcmp((yyvsp[-1].str_value), "analyze")) (yyval.explain_stmt)->type_ = hybridsearch::ExplainType::kAnalyze;
+    else if(!strcmp((yyvsp[-1].str_value), "ast")) (yyval.explain_stmt)->type_ =hybridsearch::ExplainType::kAst;
+    else if(!strcmp((yyvsp[-1].str_value), "raw")) (yyval.explain_stmt)->type_ =hybridsearch::ExplainType::kUnOpt;
+    else if(!strcmp((yyvsp[-1].str_value), "logical")) (yyval.explain_stmt)->type_ =hybridsearch::ExplainType::kOpt;
+    else if(!strcmp((yyvsp[-1].str_value), "physical")) (yyval.explain_stmt)->type_ =hybridsearch::ExplainType::kPhysical;
+    else if(!strcmp((yyvsp[-1].str_value), "pipeline")) (yyval.explain_stmt)->type_ =hybridsearch::ExplainType::kPipeline;
+    else if(!strcmp((yyvsp[-1].str_value), "fragment")) (yyval.explain_stmt)->type_ =hybridsearch::ExplainType::kFragment;
     free((yyvsp[-1].str_value));
     (yyval.explain_stmt)->statement_ = (yyvsp[0].base_stmt);
 }
@@ -5061,8 +5061,8 @@ yyreduce:
   case 166: /* explain_statement: EXPLAIN explainable_statement  */
 #line 1199 "parser.y"
                                   {
-    (yyval.explain_stmt) = new infinity::ExplainStatement();
-    (yyval.explain_stmt)->type_ =infinity::ExplainType::kPhysical;
+    (yyval.explain_stmt) = new hybridsearch::ExplainStatement();
+    (yyval.explain_stmt)->type_ =hybridsearch::ExplainType::kPhysical;
     (yyval.explain_stmt)->statement_ = (yyvsp[0].base_stmt);
 }
 #line 5069 "parser.cpp"
@@ -5071,7 +5071,7 @@ yyreduce:
   case 167: /* update_statement: UPDATE table_name SET update_expr_array where_clause  */
 #line 1208 "parser.y"
                                                                        {
-    (yyval.update_stmt) = new infinity::UpdateStatement();
+    (yyval.update_stmt) = new hybridsearch::UpdateStatement();
     if((yyvsp[-3].table_name_t)->schema_name_ptr_ != nullptr) {
         (yyval.update_stmt)->schema_name_ = (yyvsp[-3].table_name_t)->schema_name_ptr_;
         free((yyvsp[-3].table_name_t)->schema_name_ptr_);
@@ -5088,7 +5088,7 @@ yyreduce:
   case 168: /* update_expr_array: update_expr  */
 #line 1221 "parser.y"
                                {
-    (yyval.update_expr_array_t) = new std::vector<infinity::UpdateExpr*>();
+    (yyval.update_expr_array_t) = new std::vector<hybridsearch::UpdateExpr*>();
     (yyval.update_expr_array_t)->emplace_back((yyvsp[0].update_expr_t));
 }
 #line 5095 "parser.cpp"
@@ -5106,7 +5106,7 @@ yyreduce:
   case 170: /* update_expr: IDENTIFIER '=' expr  */
 #line 1230 "parser.y"
                                   {
-    (yyval.update_expr_t) = new infinity::UpdateExpr();
+    (yyval.update_expr_t) = new hybridsearch::UpdateExpr();
     ParserHelper::ToLower((yyvsp[-2].str_value));
     (yyval.update_expr_t)->column_name = (yyvsp[-2].str_value);
     free((yyvsp[-2].str_value));
@@ -5118,15 +5118,15 @@ yyreduce:
   case 171: /* drop_statement: DROP DATABASE if_exists IDENTIFIER  */
 #line 1243 "parser.y"
                                                    {
-    (yyval.drop_stmt) = new infinity::DropStatement();
-    std::shared_ptr<infinity::DropSchemaInfo> drop_schema_info = std::make_shared<infinity::DropSchemaInfo>();
+    (yyval.drop_stmt) = new hybridsearch::DropStatement();
+    std::shared_ptr<hybridsearch::DropSchemaInfo> drop_schema_info = std::make_shared<hybridsearch::DropSchemaInfo>();
 
     ParserHelper::ToLower((yyvsp[0].str_value));
     drop_schema_info->schema_name_ = (yyvsp[0].str_value);
     free((yyvsp[0].str_value));
 
     (yyval.drop_stmt)->drop_info_ = drop_schema_info;
-    (yyval.drop_stmt)->drop_info_->conflict_type_ = (yyvsp[-1].bool_value) ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+    (yyval.drop_stmt)->drop_info_->conflict_type_ = (yyvsp[-1].bool_value) ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
 }
 #line 5132 "parser.cpp"
     break;
@@ -5134,8 +5134,8 @@ yyreduce:
   case 172: /* drop_statement: DROP COLLECTION if_exists table_name  */
 #line 1256 "parser.y"
                                        {
-    (yyval.drop_stmt) = new infinity::DropStatement();
-    std::shared_ptr<infinity::DropCollectionInfo> drop_collection_info = std::make_unique<infinity::DropCollectionInfo>();
+    (yyval.drop_stmt) = new hybridsearch::DropStatement();
+    std::shared_ptr<hybridsearch::DropCollectionInfo> drop_collection_info = std::make_unique<hybridsearch::DropCollectionInfo>();
     if((yyvsp[0].table_name_t)->schema_name_ptr_ != nullptr) {
         drop_collection_info->schema_name_ = (yyvsp[0].table_name_t)->schema_name_ptr_;
         free((yyvsp[0].table_name_t)->schema_name_ptr_);
@@ -5143,7 +5143,7 @@ yyreduce:
     drop_collection_info->collection_name_ = (yyvsp[0].table_name_t)->table_name_ptr_;
     free((yyvsp[0].table_name_t)->table_name_ptr_);
     (yyval.drop_stmt)->drop_info_ = drop_collection_info;
-    (yyval.drop_stmt)->drop_info_->conflict_type_ = (yyvsp[-1].bool_value) ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+    (yyval.drop_stmt)->drop_info_->conflict_type_ = (yyvsp[-1].bool_value) ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
     delete (yyvsp[0].table_name_t);
 }
 #line 5150 "parser.cpp"
@@ -5152,8 +5152,8 @@ yyreduce:
   case 173: /* drop_statement: DROP TABLE if_exists table_name  */
 #line 1271 "parser.y"
                                   {
-    (yyval.drop_stmt) = new infinity::DropStatement();
-    std::shared_ptr<infinity::DropTableInfo> drop_table_info = std::make_unique<infinity::DropTableInfo>();
+    (yyval.drop_stmt) = new hybridsearch::DropStatement();
+    std::shared_ptr<hybridsearch::DropTableInfo> drop_table_info = std::make_unique<hybridsearch::DropTableInfo>();
     if((yyvsp[0].table_name_t)->schema_name_ptr_ != nullptr) {
         drop_table_info->schema_name_ = (yyvsp[0].table_name_t)->schema_name_ptr_;
         free((yyvsp[0].table_name_t)->schema_name_ptr_);
@@ -5161,7 +5161,7 @@ yyreduce:
     drop_table_info->table_name_ = (yyvsp[0].table_name_t)->table_name_ptr_;
     free((yyvsp[0].table_name_t)->table_name_ptr_);
     (yyval.drop_stmt)->drop_info_ = drop_table_info;
-    (yyval.drop_stmt)->drop_info_->conflict_type_ = (yyvsp[-1].bool_value) ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+    (yyval.drop_stmt)->drop_info_->conflict_type_ = (yyvsp[-1].bool_value) ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
     delete (yyvsp[0].table_name_t);
 }
 #line 5168 "parser.cpp"
@@ -5170,8 +5170,8 @@ yyreduce:
   case 174: /* drop_statement: DROP VIEW if_exists table_name  */
 #line 1286 "parser.y"
                                  {
-    (yyval.drop_stmt) = new infinity::DropStatement();
-    std::shared_ptr<infinity::DropViewInfo> drop_view_info = std::make_unique<infinity::DropViewInfo>();
+    (yyval.drop_stmt) = new hybridsearch::DropStatement();
+    std::shared_ptr<hybridsearch::DropViewInfo> drop_view_info = std::make_unique<hybridsearch::DropViewInfo>();
     if((yyvsp[0].table_name_t)->schema_name_ptr_ != nullptr) {
         drop_view_info->schema_name_ = (yyvsp[0].table_name_t)->schema_name_ptr_;
         free((yyvsp[0].table_name_t)->schema_name_ptr_);
@@ -5179,7 +5179,7 @@ yyreduce:
     drop_view_info->view_name_ = (yyvsp[0].table_name_t)->table_name_ptr_;
     free((yyvsp[0].table_name_t)->table_name_ptr_);
     (yyval.drop_stmt)->drop_info_ = drop_view_info;
-    (yyval.drop_stmt)->drop_info_->conflict_type_ = (yyvsp[-1].bool_value) ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+    (yyval.drop_stmt)->drop_info_->conflict_type_ = (yyvsp[-1].bool_value) ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
     delete (yyvsp[0].table_name_t);
 }
 #line 5186 "parser.cpp"
@@ -5188,11 +5188,11 @@ yyreduce:
   case 175: /* drop_statement: DROP INDEX if_exists IDENTIFIER ON table_name  */
 #line 1301 "parser.y"
                                                 {
-    (yyval.drop_stmt) = new infinity::DropStatement();
-    std::shared_ptr<infinity::DropIndexInfo> drop_index_info = std::make_shared<infinity::DropIndexInfo>();
+    (yyval.drop_stmt) = new hybridsearch::DropStatement();
+    std::shared_ptr<hybridsearch::DropIndexInfo> drop_index_info = std::make_shared<hybridsearch::DropIndexInfo>();
 
     (yyval.drop_stmt)->drop_info_ = drop_index_info;
-    (yyval.drop_stmt)->drop_info_->conflict_type_ = (yyvsp[-3].bool_value) ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+    (yyval.drop_stmt)->drop_info_->conflict_type_ = (yyvsp[-3].bool_value) ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
 
     drop_index_info->index_name_ = (yyvsp[-2].str_value);
     free((yyvsp[-2].str_value));
@@ -5211,7 +5211,7 @@ yyreduce:
   case 176: /* copy_statement: COPY table_name TO file_path WITH '(' copy_option_list ')'  */
 #line 1324 "parser.y"
                                                                            {
-    (yyval.copy_stmt) = new infinity::CopyStatement();
+    (yyval.copy_stmt) = new hybridsearch::CopyStatement();
 
     // Copy To
     (yyval.copy_stmt)->copy_from_ = false;
@@ -5232,29 +5232,29 @@ yyreduce:
     // copy options
     size_t option_count = (*(yyvsp[-1].copy_option_array)).size();
     for(size_t idx = 0; idx < option_count; ++ idx) {
-        infinity::CopyOption* option_ptr = (*(yyvsp[-1].copy_option_array))[idx];
+        hybridsearch::CopyOption* option_ptr = (*(yyvsp[-1].copy_option_array))[idx];
         switch(option_ptr->option_type_) {
-            case infinity::CopyOptionType::kFormat: {
+            case hybridsearch::CopyOptionType::kFormat: {
                 (yyval.copy_stmt)->copy_file_type_ = option_ptr->file_type_;
                 break;
             }
-            case infinity::CopyOptionType::kDelimiter: {
+            case hybridsearch::CopyOptionType::kDelimiter: {
                 (yyval.copy_stmt)->delimiter_ = option_ptr->delimiter_;
                 break;
             }
-            case infinity::CopyOptionType::kHeader: {
+            case hybridsearch::CopyOptionType::kHeader: {
                 (yyval.copy_stmt)->header_ = option_ptr->header_;
                 break;
             }
-            case infinity::CopyOptionType::kOffset: {
+            case hybridsearch::CopyOptionType::kOffset: {
                 (yyval.copy_stmt)->offset_ = option_ptr->offset_;
                 break;
             }
-            case infinity::CopyOptionType::kLimit: {
+            case hybridsearch::CopyOptionType::kLimit: {
                 (yyval.copy_stmt)->limit_ = option_ptr->limit_;
                 break;
             }
-            case infinity::CopyOptionType::kRowLimit: {
+            case hybridsearch::CopyOptionType::kRowLimit: {
                 (yyval.copy_stmt)->row_limit_ = option_ptr->row_limit_;
                 break;
             }
@@ -5269,7 +5269,7 @@ yyreduce:
   case 177: /* copy_statement: COPY table_name '(' expr_array ')' TO file_path WITH '(' copy_option_list ')'  */
 #line 1377 "parser.y"
                                                                                 {
-    (yyval.copy_stmt) = new infinity::CopyStatement();
+    (yyval.copy_stmt) = new hybridsearch::CopyStatement();
 
     // Copy To
     (yyval.copy_stmt)->copy_from_ = false;
@@ -5292,29 +5292,29 @@ yyreduce:
     // copy options
     size_t option_count = (*(yyvsp[-1].copy_option_array)).size();
     for(size_t idx = 0; idx < option_count; ++ idx) {
-        infinity::CopyOption* option_ptr = (*(yyvsp[-1].copy_option_array))[idx];
+        hybridsearch::CopyOption* option_ptr = (*(yyvsp[-1].copy_option_array))[idx];
         switch(option_ptr->option_type_) {
-            case infinity::CopyOptionType::kFormat: {
+            case hybridsearch::CopyOptionType::kFormat: {
                 (yyval.copy_stmt)->copy_file_type_ = option_ptr->file_type_;
                 break;
             }
-            case infinity::CopyOptionType::kDelimiter: {
+            case hybridsearch::CopyOptionType::kDelimiter: {
                 (yyval.copy_stmt)->delimiter_ = option_ptr->delimiter_;
                 break;
             }
-            case infinity::CopyOptionType::kHeader: {
+            case hybridsearch::CopyOptionType::kHeader: {
                 (yyval.copy_stmt)->header_ = option_ptr->header_;
                 break;
             }
-            case infinity::CopyOptionType::kOffset: {
+            case hybridsearch::CopyOptionType::kOffset: {
                 (yyval.copy_stmt)->offset_ = option_ptr->offset_;
                 break;
             }
-            case infinity::CopyOptionType::kLimit: {
+            case hybridsearch::CopyOptionType::kLimit: {
                 (yyval.copy_stmt)->limit_ = option_ptr->limit_;
                 break;
             }
-            case infinity::CopyOptionType::kRowLimit: {
+            case hybridsearch::CopyOptionType::kRowLimit: {
                 (yyval.copy_stmt)->row_limit_ = option_ptr->row_limit_;
                 break;
             }
@@ -5329,7 +5329,7 @@ yyreduce:
   case 178: /* copy_statement: COPY table_name FROM file_path WITH '(' copy_option_list ')'  */
 #line 1432 "parser.y"
                                                                {
-    (yyval.copy_stmt) = new infinity::CopyStatement();
+    (yyval.copy_stmt) = new hybridsearch::CopyStatement();
 
     // Copy From
     (yyval.copy_stmt)->copy_from_ = true;
@@ -5350,17 +5350,17 @@ yyreduce:
     // copy options
     size_t option_count = (*(yyvsp[-1].copy_option_array)).size();
     for(size_t idx = 0; idx < option_count; ++ idx) {
-        infinity::CopyOption* option_ptr = (*(yyvsp[-1].copy_option_array))[idx];
+        hybridsearch::CopyOption* option_ptr = (*(yyvsp[-1].copy_option_array))[idx];
         switch(option_ptr->option_type_) {
-            case infinity::CopyOptionType::kFormat: {
+            case hybridsearch::CopyOptionType::kFormat: {
                 (yyval.copy_stmt)->copy_file_type_ = option_ptr->file_type_;
                 break;
             }
-            case infinity::CopyOptionType::kDelimiter: {
+            case hybridsearch::CopyOptionType::kDelimiter: {
                 (yyval.copy_stmt)->delimiter_ = option_ptr->delimiter_;
                 break;
             }
-            case infinity::CopyOptionType::kHeader: {
+            case hybridsearch::CopyOptionType::kHeader: {
                 (yyval.copy_stmt)->header_ = option_ptr->header_;
                 break;
             }
@@ -5397,7 +5397,7 @@ yyreduce:
   case 181: /* select_statement: select_statement set_operator select_clause_without_modifier_paren  */
 #line 1489 "parser.y"
                                                                      {
-    infinity::SelectStatement* node = (yyvsp[-2].select_stmt);
+    hybridsearch::SelectStatement* node = (yyvsp[-2].select_stmt);
     while(node->nested_select_ != nullptr) {
         node = node->nested_select_;
     }
@@ -5411,7 +5411,7 @@ yyreduce:
   case 182: /* select_statement: select_statement set_operator select_clause_without_modifier  */
 #line 1498 "parser.y"
                                                                {
-    infinity::SelectStatement* node = (yyvsp[-2].select_stmt);
+    hybridsearch::SelectStatement* node = (yyvsp[-2].select_stmt);
     while(node->nested_select_ != nullptr) {
         node = node->nested_select_;
     }
@@ -5497,7 +5497,7 @@ yyreduce:
   case 189: /* select_clause_without_modifier: SELECT distinct expr_array highlight_clause from_clause search_clause where_clause group_by_clause having_clause  */
 #line 1555 "parser.y"
                                                                                                                  {
-    (yyval.select_stmt) = new infinity::SelectStatement();
+    (yyval.select_stmt) = new hybridsearch::SelectStatement();
     (yyval.select_stmt)->select_distinct_ = (yyvsp[-7].bool_value);
     (yyval.select_stmt)->select_list_ = (yyvsp[-6].expr_array_t);
     (yyval.select_stmt)->highlight_list_ = (yyvsp[-5].expr_array_t);
@@ -5534,7 +5534,7 @@ yyreduce:
   case 192: /* order_by_expr_list: order_by_expr  */
 #line 1579 "parser.y"
                                   {
-    (yyval.order_by_expr_list_t) = new std::vector<infinity::OrderByExpr*>();
+    (yyval.order_by_expr_list_t) = new std::vector<hybridsearch::OrderByExpr*>();
     (yyval.order_by_expr_list_t)->emplace_back((yyvsp[0].order_by_expr_t));
 }
 #line 5541 "parser.cpp"
@@ -5552,7 +5552,7 @@ yyreduce:
   case 194: /* order_by_expr: expr order_by_type  */
 #line 1588 "parser.y"
                                    {
-    (yyval.order_by_expr_t) = new infinity::OrderByExpr();
+    (yyval.order_by_expr_t) = new hybridsearch::OrderByExpr();
     (yyval.order_by_expr_t)->expr_ = (yyvsp[-1].expr_t);
     (yyval.order_by_expr_t)->type_ = (yyvsp[0].order_by_type_t);
 }
@@ -5562,7 +5562,7 @@ yyreduce:
   case 195: /* order_by_type: ASC  */
 #line 1594 "parser.y"
                    {
-    (yyval.order_by_type_t) = infinity::kAsc;
+    (yyval.order_by_type_t) = hybridsearch::kAsc;
 }
 #line 5568 "parser.cpp"
     break;
@@ -5570,7 +5570,7 @@ yyreduce:
   case 196: /* order_by_type: DESC  */
 #line 1597 "parser.y"
        {
-    (yyval.order_by_type_t) = infinity::kDesc;
+    (yyval.order_by_type_t) = hybridsearch::kDesc;
 }
 #line 5576 "parser.cpp"
     break;
@@ -5578,7 +5578,7 @@ yyreduce:
   case 197: /* order_by_type: %empty  */
 #line 1600 "parser.y"
   {
-    (yyval.order_by_type_t) = infinity::kAsc;
+    (yyval.order_by_type_t) = hybridsearch::kAsc;
 }
 #line 5584 "parser.cpp"
     break;
@@ -5662,7 +5662,7 @@ yyreduce:
   case 208: /* search_clause: SEARCH sub_search_array  */
 #line 1637 "parser.y"
                                        {
-    infinity::SearchExpr* search_expr = new infinity::SearchExpr();
+    hybridsearch::SearchExpr* search_expr = new hybridsearch::SearchExpr();
     search_expr->SetExprs((yyvsp[0].expr_array_t));
     (yyval.expr_t) = search_expr;
 }
@@ -5744,7 +5744,7 @@ yyreduce:
   case 218: /* set_operator: UNION  */
 #line 1674 "parser.y"
                      {
-    (yyval.set_operator_t) = infinity::SetOperatorType::kUnion;
+    (yyval.set_operator_t) = hybridsearch::SetOperatorType::kUnion;
 }
 #line 5750 "parser.cpp"
     break;
@@ -5752,7 +5752,7 @@ yyreduce:
   case 219: /* set_operator: UNION ALL  */
 #line 1677 "parser.y"
             {
-    (yyval.set_operator_t) = infinity::SetOperatorType::kUnionAll;
+    (yyval.set_operator_t) = hybridsearch::SetOperatorType::kUnionAll;
 }
 #line 5758 "parser.cpp"
     break;
@@ -5760,7 +5760,7 @@ yyreduce:
   case 220: /* set_operator: INTERSECT  */
 #line 1680 "parser.y"
             {
-    (yyval.set_operator_t) = infinity::SetOperatorType::kIntersect;
+    (yyval.set_operator_t) = hybridsearch::SetOperatorType::kIntersect;
 }
 #line 5766 "parser.cpp"
     break;
@@ -5768,7 +5768,7 @@ yyreduce:
   case 221: /* set_operator: EXCEPT  */
 #line 1683 "parser.y"
          {
-    (yyval.set_operator_t) = infinity::SetOperatorType::kExcept;
+    (yyval.set_operator_t) = hybridsearch::SetOperatorType::kExcept;
 }
 #line 5774 "parser.cpp"
     break;
@@ -5784,12 +5784,12 @@ yyreduce:
   case 223: /* table_reference: table_reference ',' table_reference_unit  */
 #line 1694 "parser.y"
                                            {
-    infinity::CrossProductReference* cross_product_ref = nullptr;
-    if((yyvsp[-2].table_reference_t)->type_ == infinity::TableRefType::kCrossProduct) {
-        cross_product_ref = (infinity::CrossProductReference*)(yyvsp[-2].table_reference_t);
+    hybridsearch::CrossProductReference* cross_product_ref = nullptr;
+    if((yyvsp[-2].table_reference_t)->type_ == hybridsearch::TableRefType::kCrossProduct) {
+        cross_product_ref = (hybridsearch::CrossProductReference*)(yyvsp[-2].table_reference_t);
         cross_product_ref->tables_.emplace_back((yyvsp[0].table_reference_t));
     } else {
-        cross_product_ref = new infinity::CrossProductReference();
+        cross_product_ref = new hybridsearch::CrossProductReference();
         cross_product_ref->tables_.emplace_back((yyvsp[-2].table_reference_t));
         cross_product_ref->tables_.emplace_back((yyvsp[0].table_reference_t));
     }
@@ -5802,7 +5802,7 @@ yyreduce:
   case 226: /* table_reference_name: table_name table_alias  */
 #line 1711 "parser.y"
                                               {
-    infinity::TableReference* table_ref = new infinity::TableReference();
+    hybridsearch::TableReference* table_ref = new hybridsearch::TableReference();
     if((yyvsp[-1].table_name_t)->schema_name_ptr_ != nullptr) {
         table_ref->db_name_ = (yyvsp[-1].table_name_t)->schema_name_ptr_;
         free((yyvsp[-1].table_name_t)->schema_name_ptr_);
@@ -5820,7 +5820,7 @@ yyreduce:
   case 227: /* table_reference_name: '(' select_statement ')' table_alias  */
 #line 1725 "parser.y"
                                        {
-    infinity::SubqueryReference* subquery_reference = new infinity::SubqueryReference();
+    hybridsearch::SubqueryReference* subquery_reference = new hybridsearch::SubqueryReference();
     subquery_reference->select_statement_ = (yyvsp[-2].select_stmt);
     subquery_reference->alias_ = (yyvsp[0].table_alias_t);
     (yyval.table_reference_t) = subquery_reference;
@@ -5831,7 +5831,7 @@ yyreduce:
   case 228: /* table_name: IDENTIFIER  */
 #line 1734 "parser.y"
                         {
-    (yyval.table_name_t) = new infinity::TableName();
+    (yyval.table_name_t) = new hybridsearch::TableName();
     ParserHelper::ToLower((yyvsp[0].str_value));
     (yyval.table_name_t)->table_name_ptr_ = (yyvsp[0].str_value);
 }
@@ -5841,7 +5841,7 @@ yyreduce:
   case 229: /* table_name: IDENTIFIER '.' IDENTIFIER  */
 #line 1739 "parser.y"
                             {
-    (yyval.table_name_t) = new infinity::TableName();
+    (yyval.table_name_t) = new hybridsearch::TableName();
     ParserHelper::ToLower((yyvsp[-2].str_value));
     ParserHelper::ToLower((yyvsp[0].str_value));
     (yyval.table_name_t)->schema_name_ptr_ = (yyvsp[-2].str_value);
@@ -5853,7 +5853,7 @@ yyreduce:
   case 230: /* table_alias: AS IDENTIFIER  */
 #line 1748 "parser.y"
                             {
-    (yyval.table_alias_t) = new infinity::TableAlias();
+    (yyval.table_alias_t) = new hybridsearch::TableAlias();
     ParserHelper::ToLower((yyvsp[0].str_value));
     (yyval.table_alias_t)->alias_ = (yyvsp[0].str_value);
 }
@@ -5863,7 +5863,7 @@ yyreduce:
   case 231: /* table_alias: IDENTIFIER  */
 #line 1753 "parser.y"
              {
-    (yyval.table_alias_t) = new infinity::TableAlias();
+    (yyval.table_alias_t) = new hybridsearch::TableAlias();
     ParserHelper::ToLower((yyvsp[0].str_value));
     (yyval.table_alias_t)->alias_ = (yyvsp[0].str_value);
 }
@@ -5873,7 +5873,7 @@ yyreduce:
   case 232: /* table_alias: AS IDENTIFIER '(' identifier_array ')'  */
 #line 1758 "parser.y"
                                          {
-    (yyval.table_alias_t) = new infinity::TableAlias();
+    (yyval.table_alias_t) = new hybridsearch::TableAlias();
     ParserHelper::ToLower((yyvsp[-3].str_value));
     (yyval.table_alias_t)->alias_ = (yyvsp[-3].str_value);
     (yyval.table_alias_t)->column_alias_array_ = (yyvsp[-1].identifier_array_t);
@@ -5908,7 +5908,7 @@ yyreduce:
   case 236: /* with_expr_list: with_expr  */
 #line 1778 "parser.y"
                           {
-    (yyval.with_expr_list_t) = new std::vector<infinity::WithExpr*>();
+    (yyval.with_expr_list_t) = new std::vector<hybridsearch::WithExpr*>();
     (yyval.with_expr_list_t)->emplace_back((yyvsp[0].with_expr_t));
 }
 #line 5915 "parser.cpp"
@@ -5926,7 +5926,7 @@ yyreduce:
   case 238: /* with_expr: IDENTIFIER AS '(' select_clause_with_modifier ')'  */
 #line 1786 "parser.y"
                                                              {
-    (yyval.with_expr_t) = new infinity::WithExpr();
+    (yyval.with_expr_t) = new hybridsearch::WithExpr();
     ParserHelper::ToLower((yyvsp[-4].str_value));
     (yyval.with_expr_t)->alias_ = (yyvsp[-4].str_value);
     free((yyvsp[-4].str_value));
@@ -5938,10 +5938,10 @@ yyreduce:
   case 239: /* join_clause: table_reference_unit NATURAL JOIN table_reference_name  */
 #line 1798 "parser.y"
                                                                     {
-    infinity::JoinReference* join_reference = new infinity::JoinReference();
+    hybridsearch::JoinReference* join_reference = new hybridsearch::JoinReference();
     join_reference->left_ = (yyvsp[-3].table_reference_t);
     join_reference->right_ = (yyvsp[0].table_reference_t);
-    join_reference->join_type_ = infinity::JoinType::kNatural;
+    join_reference->join_type_ = hybridsearch::JoinType::kNatural;
     (yyval.table_reference_t) = join_reference;
 }
 #line 5948 "parser.cpp"
@@ -5950,7 +5950,7 @@ yyreduce:
   case 240: /* join_clause: table_reference_unit join_type JOIN table_reference_name ON expr  */
 #line 1805 "parser.y"
                                                                    {
-    infinity::JoinReference* join_reference = new infinity::JoinReference();
+    hybridsearch::JoinReference* join_reference = new hybridsearch::JoinReference();
     join_reference->left_ = (yyvsp[-5].table_reference_t);
     join_reference->right_ = (yyvsp[-2].table_reference_t);
     join_reference->join_type_ = (yyvsp[-4].join_type_t);
@@ -5963,7 +5963,7 @@ yyreduce:
   case 241: /* join_type: INNER  */
 #line 1819 "parser.y"
                   {
-    (yyval.join_type_t) = infinity::JoinType::kInner;
+    (yyval.join_type_t) = hybridsearch::JoinType::kInner;
 }
 #line 5969 "parser.cpp"
     break;
@@ -5971,7 +5971,7 @@ yyreduce:
   case 242: /* join_type: LEFT  */
 #line 1822 "parser.y"
        {
-    (yyval.join_type_t) = infinity::JoinType::kLeft;
+    (yyval.join_type_t) = hybridsearch::JoinType::kLeft;
 }
 #line 5977 "parser.cpp"
     break;
@@ -5979,7 +5979,7 @@ yyreduce:
   case 243: /* join_type: RIGHT  */
 #line 1825 "parser.y"
         {
-    (yyval.join_type_t) = infinity::JoinType::kRight;
+    (yyval.join_type_t) = hybridsearch::JoinType::kRight;
 }
 #line 5985 "parser.cpp"
     break;
@@ -5987,7 +5987,7 @@ yyreduce:
   case 244: /* join_type: OUTER  */
 #line 1828 "parser.y"
         {
-    (yyval.join_type_t) = infinity::JoinType::kFull;
+    (yyval.join_type_t) = hybridsearch::JoinType::kFull;
 }
 #line 5993 "parser.cpp"
     break;
@@ -5995,7 +5995,7 @@ yyreduce:
   case 245: /* join_type: FULL  */
 #line 1831 "parser.y"
        {
-    (yyval.join_type_t) = infinity::JoinType::kFull;
+    (yyval.join_type_t) = hybridsearch::JoinType::kFull;
 }
 #line 6001 "parser.cpp"
     break;
@@ -6003,7 +6003,7 @@ yyreduce:
   case 246: /* join_type: CROSS  */
 #line 1834 "parser.y"
         {
-    (yyval.join_type_t) = infinity::JoinType::kCross;
+    (yyval.join_type_t) = hybridsearch::JoinType::kCross;
 }
 #line 6009 "parser.cpp"
     break;
@@ -6018,8 +6018,8 @@ yyreduce:
   case 248: /* show_statement: SHOW DATABASES  */
 #line 1843 "parser.y"
                                {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kDatabases;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kDatabases;
 }
 #line 6025 "parser.cpp"
     break;
@@ -6027,8 +6027,8 @@ yyreduce:
   case 249: /* show_statement: SHOW TABLES  */
 #line 1847 "parser.y"
               {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kTables;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kTables;
 }
 #line 6034 "parser.cpp"
     break;
@@ -6036,8 +6036,8 @@ yyreduce:
   case 250: /* show_statement: SHOW VIEWS  */
 #line 1851 "parser.y"
              {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kViews;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kViews;
 }
 #line 6043 "parser.cpp"
     break;
@@ -6045,8 +6045,8 @@ yyreduce:
   case 251: /* show_statement: SHOW CONFIGS  */
 #line 1855 "parser.y"
                {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kConfigs;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kConfigs;
 }
 #line 6052 "parser.cpp"
     break;
@@ -6054,8 +6054,8 @@ yyreduce:
   case 252: /* show_statement: SHOW CONFIG IDENTIFIER  */
 #line 1859 "parser.y"
                          {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kConfig;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kConfig;
     ParserHelper::ToLower((yyvsp[0].str_value));
     (yyval.show_stmt)->var_name_ = std::string((yyvsp[0].str_value));
     free((yyvsp[0].str_value));
@@ -6066,8 +6066,8 @@ yyreduce:
   case 253: /* show_statement: SHOW PROFILES  */
 #line 1866 "parser.y"
                 {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kProfiles;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kProfiles;
 }
 #line 6073 "parser.cpp"
     break;
@@ -6075,8 +6075,8 @@ yyreduce:
   case 254: /* show_statement: SHOW BUFFER  */
 #line 1870 "parser.y"
               {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kBuffer;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kBuffer;
 }
 #line 6082 "parser.cpp"
     break;
@@ -6084,8 +6084,8 @@ yyreduce:
   case 255: /* show_statement: SHOW MEMINDEX  */
 #line 1874 "parser.y"
                 {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kMemIndex;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kMemIndex;
 }
 #line 6091 "parser.cpp"
     break;
@@ -6093,8 +6093,8 @@ yyreduce:
   case 256: /* show_statement: SHOW QUERIES  */
 #line 1878 "parser.y"
                {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kQueries;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kQueries;
 }
 #line 6100 "parser.cpp"
     break;
@@ -6102,8 +6102,8 @@ yyreduce:
   case 257: /* show_statement: SHOW QUERY LONG_VALUE  */
 #line 1882 "parser.y"
                         {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kQuery;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kQuery;
     (yyval.show_stmt)->session_id_ = (yyvsp[0].long_value);
 }
 #line 6110 "parser.cpp"
@@ -6112,8 +6112,8 @@ yyreduce:
   case 258: /* show_statement: SHOW TRANSACTIONS  */
 #line 1887 "parser.y"
                     {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kTransactions;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kTransactions;
 }
 #line 6119 "parser.cpp"
     break;
@@ -6121,8 +6121,8 @@ yyreduce:
   case 259: /* show_statement: SHOW TRANSACTION LONG_VALUE  */
 #line 1891 "parser.y"
                               {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kTransaction;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kTransaction;
     (yyval.show_stmt)->txn_id_ = (yyvsp[0].long_value);
 }
 #line 6129 "parser.cpp"
@@ -6131,8 +6131,8 @@ yyreduce:
   case 260: /* show_statement: SHOW TRANSACTION HISTORY  */
 #line 1896 "parser.y"
                            {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kTransactionHistory;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kTransactionHistory;
 }
 #line 6138 "parser.cpp"
     break;
@@ -6140,8 +6140,8 @@ yyreduce:
   case 261: /* show_statement: SHOW SESSION VARIABLES  */
 #line 1900 "parser.y"
                          {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kSessionVariables;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kSessionVariables;
 }
 #line 6147 "parser.cpp"
     break;
@@ -6149,8 +6149,8 @@ yyreduce:
   case 262: /* show_statement: SHOW GLOBAL VARIABLES  */
 #line 1904 "parser.y"
                         {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kGlobalVariables;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kGlobalVariables;
 }
 #line 6156 "parser.cpp"
     break;
@@ -6158,8 +6158,8 @@ yyreduce:
   case 263: /* show_statement: SHOW SESSION VARIABLE IDENTIFIER  */
 #line 1908 "parser.y"
                                    {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kSessionVariable;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kSessionVariable;
     (yyval.show_stmt)->var_name_ = std::string((yyvsp[0].str_value));
     free((yyvsp[0].str_value));
 }
@@ -6169,8 +6169,8 @@ yyreduce:
   case 264: /* show_statement: SHOW GLOBAL VARIABLE IDENTIFIER  */
 #line 1914 "parser.y"
                                   {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kGlobalVariable;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kGlobalVariable;
     (yyval.show_stmt)->var_name_ = std::string((yyvsp[0].str_value));
     free((yyvsp[0].str_value));
 }
@@ -6180,8 +6180,8 @@ yyreduce:
   case 265: /* show_statement: SHOW DATABASE IDENTIFIER  */
 #line 1920 "parser.y"
                            {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kDatabase;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kDatabase;
     (yyval.show_stmt)->schema_name_ = (yyvsp[0].str_value);
     free((yyvsp[0].str_value));
 }
@@ -6191,8 +6191,8 @@ yyreduce:
   case 266: /* show_statement: SHOW TABLE table_name  */
 #line 1926 "parser.y"
                         {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kTable;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kTable;
     if((yyvsp[0].table_name_t)->schema_name_ptr_ != nullptr) {
         (yyval.show_stmt)->schema_name_ = (yyvsp[0].table_name_t)->schema_name_ptr_;
         free((yyvsp[0].table_name_t)->schema_name_ptr_);
@@ -6207,8 +6207,8 @@ yyreduce:
   case 267: /* show_statement: SHOW TABLE table_name COLUMNS  */
 #line 1937 "parser.y"
                                 {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kColumns;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kColumns;
     if((yyvsp[-1].table_name_t)->schema_name_ptr_ != nullptr) {
         (yyval.show_stmt)->schema_name_ = (yyvsp[-1].table_name_t)->schema_name_ptr_;
         free((yyvsp[-1].table_name_t)->schema_name_ptr_);
@@ -6223,8 +6223,8 @@ yyreduce:
   case 268: /* show_statement: SHOW TABLE table_name SEGMENTS  */
 #line 1948 "parser.y"
                                  {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kSegments;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kSegments;
     if((yyvsp[-1].table_name_t)->schema_name_ptr_ != nullptr) {
         (yyval.show_stmt)->schema_name_ = (yyvsp[-1].table_name_t)->schema_name_ptr_;
         free((yyvsp[-1].table_name_t)->schema_name_ptr_);
@@ -6239,8 +6239,8 @@ yyreduce:
   case 269: /* show_statement: SHOW TABLE table_name SEGMENT LONG_VALUE  */
 #line 1959 "parser.y"
                                            {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kSegment;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kSegment;
     if((yyvsp[-2].table_name_t)->schema_name_ptr_ != nullptr) {
         (yyval.show_stmt)->schema_name_ = (yyvsp[-2].table_name_t)->schema_name_ptr_;
         free((yyvsp[-2].table_name_t)->schema_name_ptr_);
@@ -6256,8 +6256,8 @@ yyreduce:
   case 270: /* show_statement: SHOW TABLE table_name SEGMENT LONG_VALUE BLOCKS  */
 #line 1971 "parser.y"
                                                   {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kBlocks;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kBlocks;
     if((yyvsp[-3].table_name_t)->schema_name_ptr_ != nullptr) {
         (yyval.show_stmt)->schema_name_ = (yyvsp[-3].table_name_t)->schema_name_ptr_;
         free((yyvsp[-3].table_name_t)->schema_name_ptr_);
@@ -6273,8 +6273,8 @@ yyreduce:
   case 271: /* show_statement: SHOW TABLE table_name SEGMENT LONG_VALUE BLOCK LONG_VALUE  */
 #line 1983 "parser.y"
                                                             {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kBlock;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kBlock;
     if((yyvsp[-4].table_name_t)->schema_name_ptr_ != nullptr) {
         (yyval.show_stmt)->schema_name_ = (yyvsp[-4].table_name_t)->schema_name_ptr_;
         free((yyvsp[-4].table_name_t)->schema_name_ptr_);
@@ -6291,8 +6291,8 @@ yyreduce:
   case 272: /* show_statement: SHOW TABLE table_name SEGMENT LONG_VALUE BLOCK LONG_VALUE COLUMN LONG_VALUE  */
 #line 1996 "parser.y"
                                                                               {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kBlockColumn;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kBlockColumn;
     if((yyvsp[-6].table_name_t)->schema_name_ptr_ != nullptr) {
         (yyval.show_stmt)->schema_name_ = (yyvsp[-6].table_name_t)->schema_name_ptr_;
         free((yyvsp[-6].table_name_t)->schema_name_ptr_);
@@ -6310,8 +6310,8 @@ yyreduce:
   case 273: /* show_statement: SHOW TABLE table_name INDEXES  */
 #line 2010 "parser.y"
                                 {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kIndexes;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kIndexes;
     if((yyvsp[-1].table_name_t)->schema_name_ptr_ != nullptr) {
         (yyval.show_stmt)->schema_name_ = (yyvsp[-1].table_name_t)->schema_name_ptr_;
         free((yyvsp[-1].table_name_t)->schema_name_ptr_);
@@ -6326,8 +6326,8 @@ yyreduce:
   case 274: /* show_statement: SHOW TABLE table_name INDEX IDENTIFIER  */
 #line 2021 "parser.y"
                                          {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kIndex;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kIndex;
     if((yyvsp[-2].table_name_t)->schema_name_ptr_ != nullptr) {
         (yyval.show_stmt)->schema_name_ = (yyvsp[-2].table_name_t)->schema_name_ptr_;
         free((yyvsp[-2].table_name_t)->schema_name_ptr_);
@@ -6345,8 +6345,8 @@ yyreduce:
   case 275: /* show_statement: SHOW TABLE table_name INDEX IDENTIFIER SEGMENT LONG_VALUE  */
 #line 2035 "parser.y"
                                                             {
-    (yyval.show_stmt) = new infinity::ShowStatement();
-    (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kIndexSegment;
+    (yyval.show_stmt) = new hybridsearch::ShowStatement();
+    (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kIndexSegment;
     if((yyvsp[-4].table_name_t)->schema_name_ptr_ != nullptr) {
         (yyval.show_stmt)->schema_name_ = (yyvsp[-4].table_name_t)->schema_name_ptr_;
         free((yyvsp[-4].table_name_t)->schema_name_ptr_);
@@ -6366,8 +6366,8 @@ yyreduce:
   case 276: /* show_statement: SHOW TABLE table_name INDEX IDENTIFIER SEGMENT LONG_VALUE CHUNK LONG_VALUE  */
 #line 2051 "parser.y"
                                                                              {
-      (yyval.show_stmt) = new infinity::ShowStatement();
-      (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kIndexChunk;
+      (yyval.show_stmt) = new hybridsearch::ShowStatement();
+      (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kIndexChunk;
       if((yyvsp[-6].table_name_t)->schema_name_ptr_ != nullptr) {
           (yyval.show_stmt)->schema_name_ = (yyvsp[-6].table_name_t)->schema_name_ptr_;
           free((yyvsp[-6].table_name_t)->schema_name_ptr_);
@@ -6388,8 +6388,8 @@ yyreduce:
   case 277: /* show_statement: SHOW LOGS  */
 #line 2068 "parser.y"
             {
-      (yyval.show_stmt) = new infinity::ShowStatement();
-      (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kLogs;
+      (yyval.show_stmt) = new hybridsearch::ShowStatement();
+      (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kLogs;
 }
 #line 6395 "parser.cpp"
     break;
@@ -6397,8 +6397,8 @@ yyreduce:
   case 278: /* show_statement: SHOW DELTA LOGS  */
 #line 2072 "parser.y"
                   {
-      (yyval.show_stmt) = new infinity::ShowStatement();
-      (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kDeltaLogs;
+      (yyval.show_stmt) = new hybridsearch::ShowStatement();
+      (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kDeltaLogs;
 }
 #line 6404 "parser.cpp"
     break;
@@ -6406,8 +6406,8 @@ yyreduce:
   case 279: /* show_statement: SHOW CATALOGS  */
 #line 2076 "parser.y"
                 {
-      (yyval.show_stmt) = new infinity::ShowStatement();
-      (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kCatalogs;
+      (yyval.show_stmt) = new hybridsearch::ShowStatement();
+      (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kCatalogs;
 }
 #line 6413 "parser.cpp"
     break;
@@ -6415,8 +6415,8 @@ yyreduce:
   case 280: /* show_statement: SHOW PERSISTENCE FILES  */
 #line 2080 "parser.y"
                          {
-      (yyval.show_stmt) = new infinity::ShowStatement();
-      (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kPersistenceFiles;
+      (yyval.show_stmt) = new hybridsearch::ShowStatement();
+      (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kPersistenceFiles;
 }
 #line 6422 "parser.cpp"
     break;
@@ -6424,8 +6424,8 @@ yyreduce:
   case 281: /* show_statement: SHOW PERSISTENCE OBJECTS  */
 #line 2084 "parser.y"
                            {
-      (yyval.show_stmt) = new infinity::ShowStatement();
-      (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kPersistenceObjects;
+      (yyval.show_stmt) = new hybridsearch::ShowStatement();
+      (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kPersistenceObjects;
 }
 #line 6431 "parser.cpp"
     break;
@@ -6433,8 +6433,8 @@ yyreduce:
   case 282: /* show_statement: SHOW PERSISTENCE OBJECT STRING  */
 #line 2088 "parser.y"
                                  {
-      (yyval.show_stmt) = new infinity::ShowStatement();
-      (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kPersistenceObject;
+      (yyval.show_stmt) = new hybridsearch::ShowStatement();
+      (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kPersistenceObject;
       (yyval.show_stmt)->file_name_ = (yyvsp[0].str_value);
       free((yyvsp[0].str_value));
 }
@@ -6444,8 +6444,8 @@ yyreduce:
   case 283: /* show_statement: SHOW MEMORY  */
 #line 2094 "parser.y"
               {
-      (yyval.show_stmt) = new infinity::ShowStatement();
-      (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kMemory;
+      (yyval.show_stmt) = new hybridsearch::ShowStatement();
+      (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kMemory;
 }
 #line 6451 "parser.cpp"
     break;
@@ -6453,8 +6453,8 @@ yyreduce:
   case 284: /* show_statement: SHOW MEMORY OBJECTS  */
 #line 2098 "parser.y"
                       {
-      (yyval.show_stmt) = new infinity::ShowStatement();
-      (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kMemoryObjects;
+      (yyval.show_stmt) = new hybridsearch::ShowStatement();
+      (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kMemoryObjects;
 }
 #line 6460 "parser.cpp"
     break;
@@ -6462,8 +6462,8 @@ yyreduce:
   case 285: /* show_statement: SHOW MEMORY ALLOCATION  */
 #line 2102 "parser.y"
                          {
-      (yyval.show_stmt) = new infinity::ShowStatement();
-      (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kMemoryAllocation;
+      (yyval.show_stmt) = new hybridsearch::ShowStatement();
+      (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kMemoryAllocation;
 }
 #line 6469 "parser.cpp"
     break;
@@ -6471,8 +6471,8 @@ yyreduce:
   case 286: /* show_statement: SHOW IDENTIFIER '(' ')'  */
 #line 2106 "parser.y"
                           {
-      (yyval.show_stmt) = new infinity::ShowStatement();
-      (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kFunction;
+      (yyval.show_stmt) = new hybridsearch::ShowStatement();
+      (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kFunction;
       (yyval.show_stmt)->function_name_ = (yyvsp[-2].str_value);
       free((yyvsp[-2].str_value));
 }
@@ -6482,8 +6482,8 @@ yyreduce:
   case 287: /* show_statement: SHOW SNAPSHOTS  */
 #line 2112 "parser.y"
                  {
-     (yyval.show_stmt) = new infinity::ShowStatement();
-     (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kListSnapshots;
+     (yyval.show_stmt) = new hybridsearch::ShowStatement();
+     (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kListSnapshots;
 }
 #line 6489 "parser.cpp"
     break;
@@ -6491,8 +6491,8 @@ yyreduce:
   case 288: /* show_statement: SHOW SNAPSHOT IDENTIFIER  */
 #line 2116 "parser.y"
                            {
-     (yyval.show_stmt) = new infinity::ShowStatement();
-     (yyval.show_stmt)->show_type_ = infinity::ShowStmtType::kShowSnapshot;
+     (yyval.show_stmt) = new hybridsearch::ShowStatement();
+     (yyval.show_stmt)->show_type_ = hybridsearch::ShowStmtType::kShowSnapshot;
      (yyval.show_stmt)->snapshot_name_ = (yyvsp[0].str_value);
      free((yyvsp[0].str_value));
 }
@@ -6502,8 +6502,8 @@ yyreduce:
   case 289: /* flush_statement: FLUSH DATA  */
 #line 2126 "parser.y"
                             {
-    (yyval.flush_stmt) = new infinity::FlushStatement();
-    (yyval.flush_stmt)->type_ = infinity::FlushType::kData;
+    (yyval.flush_stmt) = new hybridsearch::FlushStatement();
+    (yyval.flush_stmt)->type_ = hybridsearch::FlushType::kData;
 }
 #line 6509 "parser.cpp"
     break;
@@ -6511,8 +6511,8 @@ yyreduce:
   case 290: /* flush_statement: FLUSH LOG  */
 #line 2130 "parser.y"
             {
-    (yyval.flush_stmt) = new infinity::FlushStatement();
-    (yyval.flush_stmt)->type_ = infinity::FlushType::kLog;
+    (yyval.flush_stmt) = new hybridsearch::FlushStatement();
+    (yyval.flush_stmt)->type_ = hybridsearch::FlushType::kLog;
 }
 #line 6518 "parser.cpp"
     break;
@@ -6520,8 +6520,8 @@ yyreduce:
   case 291: /* flush_statement: FLUSH BUFFER  */
 #line 2134 "parser.y"
                {
-    (yyval.flush_stmt) = new infinity::FlushStatement();
-    (yyval.flush_stmt)->type_ = infinity::FlushType::kBuffer;
+    (yyval.flush_stmt) = new hybridsearch::FlushStatement();
+    (yyval.flush_stmt)->type_ = hybridsearch::FlushType::kBuffer;
 }
 #line 6527 "parser.cpp"
     break;
@@ -6529,7 +6529,7 @@ yyreduce:
   case 292: /* optimize_statement: OPTIMIZE table_name  */
 #line 2142 "parser.y"
                                         {
-    (yyval.optimize_stmt) = new infinity::OptimizeStatement();
+    (yyval.optimize_stmt) = new hybridsearch::OptimizeStatement();
     if((yyvsp[0].table_name_t)->schema_name_ptr_ != nullptr) {
         (yyval.optimize_stmt)->schema_name_ = (yyvsp[0].table_name_t)->schema_name_ptr_;
         free((yyvsp[0].table_name_t)->schema_name_ptr_);
@@ -6544,7 +6544,7 @@ yyreduce:
   case 293: /* optimize_statement: OPTIMIZE IDENTIFIER ON table_name with_index_param_list  */
 #line 2153 "parser.y"
                                                          {
-    (yyval.optimize_stmt) = new infinity::OptimizeStatement();
+    (yyval.optimize_stmt) = new hybridsearch::OptimizeStatement();
     if((yyvsp[-1].table_name_t)->schema_name_ptr_ != nullptr) {
         (yyval.optimize_stmt)->schema_name_ = (yyvsp[-1].table_name_t)->schema_name_ptr_;
         free((yyvsp[-1].table_name_t)->schema_name_ptr_);
@@ -6557,7 +6557,7 @@ yyreduce:
     free((yyvsp[-3].str_value));
 
     for (auto *&index_param : *(yyvsp[0].with_index_param_list_t)) {
-        (yyval.optimize_stmt)->opt_params_.emplace_back(std::unique_ptr<infinity::InitParameter>(index_param));
+        (yyval.optimize_stmt)->opt_params_.emplace_back(std::unique_ptr<hybridsearch::InitParameter>(index_param));
         index_param = nullptr;
     }
     delete (yyvsp[0].with_index_param_list_t);
@@ -6568,9 +6568,9 @@ yyreduce:
   case 294: /* command_statement: USE IDENTIFIER  */
 #line 2176 "parser.y"
                                   {
-    (yyval.command_stmt) = new infinity::CommandStatement();
+    (yyval.command_stmt) = new hybridsearch::CommandStatement();
     ParserHelper::ToLower((yyvsp[0].str_value));
-    (yyval.command_stmt)->command_info_ = std::make_shared<infinity::UseCmd>((yyvsp[0].str_value));
+    (yyval.command_stmt)->command_info_ = std::make_shared<hybridsearch::UseCmd>((yyvsp[0].str_value));
     free((yyvsp[0].str_value));
 }
 #line 6577 "parser.cpp"
@@ -6579,8 +6579,8 @@ yyreduce:
   case 295: /* command_statement: EXPORT PROFILES LONG_VALUE file_path  */
 #line 2182 "parser.y"
                                        {
-    (yyval.command_stmt) = new infinity::CommandStatement();
-    (yyval.command_stmt)->command_info_ = std::make_shared<infinity::ExportCmd>((yyvsp[0].str_value), infinity::ExportType::kProfileRecord, (yyvsp[-1].long_value));
+    (yyval.command_stmt) = new hybridsearch::CommandStatement();
+    (yyval.command_stmt)->command_info_ = std::make_shared<hybridsearch::ExportCmd>((yyvsp[0].str_value), hybridsearch::ExportType::kProfileRecord, (yyvsp[-1].long_value));
     free((yyvsp[0].str_value));
 }
 #line 6587 "parser.cpp"
@@ -6590,8 +6590,8 @@ yyreduce:
 #line 2187 "parser.y"
                             {
     ParserHelper::ToLower((yyvsp[-1].str_value));
-    (yyval.command_stmt) = new infinity::CommandStatement();
-    (yyval.command_stmt)->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kSession, infinity::SetVarType::kBool, (yyvsp[-1].str_value), true);
+    (yyval.command_stmt) = new hybridsearch::CommandStatement();
+    (yyval.command_stmt)->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kSession, hybridsearch::SetVarType::kBool, (yyvsp[-1].str_value), true);
     free((yyvsp[-1].str_value));
 }
 #line 6598 "parser.cpp"
@@ -6601,8 +6601,8 @@ yyreduce:
 #line 2193 "parser.y"
                              {
     ParserHelper::ToLower((yyvsp[-1].str_value));
-    (yyval.command_stmt) = new infinity::CommandStatement();
-    (yyval.command_stmt)->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kSession, infinity::SetVarType::kBool, (yyvsp[-1].str_value), false);
+    (yyval.command_stmt) = new hybridsearch::CommandStatement();
+    (yyval.command_stmt)->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kSession, hybridsearch::SetVarType::kBool, (yyvsp[-1].str_value), false);
     free((yyvsp[-1].str_value));
 }
 #line 6609 "parser.cpp"
@@ -6613,8 +6613,8 @@ yyreduce:
                                     {
     ParserHelper::ToLower((yyvsp[-1].str_value));
     ParserHelper::ToLower((yyvsp[0].str_value));
-    (yyval.command_stmt) = new infinity::CommandStatement();
-    (yyval.command_stmt)->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kSession, infinity::SetVarType::kString, (yyvsp[-1].str_value), (yyvsp[0].str_value));
+    (yyval.command_stmt) = new hybridsearch::CommandStatement();
+    (yyval.command_stmt)->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kSession, hybridsearch::SetVarType::kString, (yyvsp[-1].str_value), (yyvsp[0].str_value));
     free((yyvsp[-1].str_value));
     free((yyvsp[0].str_value));
 }
@@ -6625,8 +6625,8 @@ yyreduce:
 #line 2207 "parser.y"
                                     {
     ParserHelper::ToLower((yyvsp[-1].str_value));
-    (yyval.command_stmt) = new infinity::CommandStatement();
-    (yyval.command_stmt)->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kSession, infinity::SetVarType::kInteger, (yyvsp[-1].str_value), (yyvsp[0].long_value));
+    (yyval.command_stmt) = new hybridsearch::CommandStatement();
+    (yyval.command_stmt)->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kSession, hybridsearch::SetVarType::kInteger, (yyvsp[-1].str_value), (yyvsp[0].long_value));
     free((yyvsp[-1].str_value));
 }
 #line 6633 "parser.cpp"
@@ -6636,8 +6636,8 @@ yyreduce:
 #line 2213 "parser.y"
                                       {
     ParserHelper::ToLower((yyvsp[-1].str_value));
-    (yyval.command_stmt) = new infinity::CommandStatement();
-    (yyval.command_stmt)->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kSession, infinity::SetVarType::kDouble, (yyvsp[-1].str_value), (yyvsp[0].double_value));
+    (yyval.command_stmt) = new hybridsearch::CommandStatement();
+    (yyval.command_stmt)->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kSession, hybridsearch::SetVarType::kDouble, (yyvsp[-1].str_value), (yyvsp[0].double_value));
     free((yyvsp[-1].str_value));
 }
 #line 6644 "parser.cpp"
@@ -6647,8 +6647,8 @@ yyreduce:
 #line 2219 "parser.y"
                            {
     ParserHelper::ToLower((yyvsp[-1].str_value));
-    (yyval.command_stmt) = new infinity::CommandStatement();
-    (yyval.command_stmt)->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kGlobal, infinity::SetVarType::kBool, (yyvsp[-1].str_value), true);
+    (yyval.command_stmt) = new hybridsearch::CommandStatement();
+    (yyval.command_stmt)->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kGlobal, hybridsearch::SetVarType::kBool, (yyvsp[-1].str_value), true);
     free((yyvsp[-1].str_value));
 }
 #line 6655 "parser.cpp"
@@ -6658,8 +6658,8 @@ yyreduce:
 #line 2225 "parser.y"
                             {
     ParserHelper::ToLower((yyvsp[-1].str_value));
-    (yyval.command_stmt) = new infinity::CommandStatement();
-    (yyval.command_stmt)->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kGlobal, infinity::SetVarType::kBool, (yyvsp[-1].str_value), false);
+    (yyval.command_stmt) = new hybridsearch::CommandStatement();
+    (yyval.command_stmt)->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kGlobal, hybridsearch::SetVarType::kBool, (yyvsp[-1].str_value), false);
     free((yyvsp[-1].str_value));
 }
 #line 6666 "parser.cpp"
@@ -6670,8 +6670,8 @@ yyreduce:
                                    {
     ParserHelper::ToLower((yyvsp[-1].str_value));
     ParserHelper::ToLower((yyvsp[0].str_value));
-    (yyval.command_stmt) = new infinity::CommandStatement();
-    (yyval.command_stmt)->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kGlobal, infinity::SetVarType::kString, (yyvsp[-1].str_value), (yyvsp[0].str_value));
+    (yyval.command_stmt) = new hybridsearch::CommandStatement();
+    (yyval.command_stmt)->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kGlobal, hybridsearch::SetVarType::kString, (yyvsp[-1].str_value), (yyvsp[0].str_value));
     free((yyvsp[-1].str_value));
     free((yyvsp[0].str_value));
 }
@@ -6682,8 +6682,8 @@ yyreduce:
 #line 2239 "parser.y"
                                    {
     ParserHelper::ToLower((yyvsp[-1].str_value));
-    (yyval.command_stmt) = new infinity::CommandStatement();
-    (yyval.command_stmt)->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kGlobal, infinity::SetVarType::kInteger, (yyvsp[-1].str_value), (yyvsp[0].long_value));
+    (yyval.command_stmt) = new hybridsearch::CommandStatement();
+    (yyval.command_stmt)->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kGlobal, hybridsearch::SetVarType::kInteger, (yyvsp[-1].str_value), (yyvsp[0].long_value));
     free((yyvsp[-1].str_value));
 }
 #line 6690 "parser.cpp"
@@ -6693,8 +6693,8 @@ yyreduce:
 #line 2245 "parser.y"
                                      {
     ParserHelper::ToLower((yyvsp[-1].str_value));
-    (yyval.command_stmt) = new infinity::CommandStatement();
-    (yyval.command_stmt)->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kGlobal, infinity::SetVarType::kDouble, (yyvsp[-1].str_value), (yyvsp[0].double_value));
+    (yyval.command_stmt) = new hybridsearch::CommandStatement();
+    (yyval.command_stmt)->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kGlobal, hybridsearch::SetVarType::kDouble, (yyvsp[-1].str_value), (yyvsp[0].double_value));
     free((yyvsp[-1].str_value));
 }
 #line 6701 "parser.cpp"
@@ -6704,8 +6704,8 @@ yyreduce:
 #line 2251 "parser.y"
                            {
     ParserHelper::ToLower((yyvsp[-1].str_value));
-    (yyval.command_stmt) = new infinity::CommandStatement();
-    (yyval.command_stmt)->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kConfig, infinity::SetVarType::kBool, (yyvsp[-1].str_value), true);
+    (yyval.command_stmt) = new hybridsearch::CommandStatement();
+    (yyval.command_stmt)->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kConfig, hybridsearch::SetVarType::kBool, (yyvsp[-1].str_value), true);
     free((yyvsp[-1].str_value));
 }
 #line 6712 "parser.cpp"
@@ -6715,8 +6715,8 @@ yyreduce:
 #line 2257 "parser.y"
                             {
     ParserHelper::ToLower((yyvsp[-1].str_value));
-    (yyval.command_stmt) = new infinity::CommandStatement();
-    (yyval.command_stmt)->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kConfig, infinity::SetVarType::kBool, (yyvsp[-1].str_value), false);
+    (yyval.command_stmt) = new hybridsearch::CommandStatement();
+    (yyval.command_stmt)->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kConfig, hybridsearch::SetVarType::kBool, (yyvsp[-1].str_value), false);
     free((yyvsp[-1].str_value));
 }
 #line 6723 "parser.cpp"
@@ -6727,8 +6727,8 @@ yyreduce:
                                    {
     ParserHelper::ToLower((yyvsp[-1].str_value));
     ParserHelper::ToLower((yyvsp[0].str_value));
-    (yyval.command_stmt) = new infinity::CommandStatement();
-    (yyval.command_stmt)->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kConfig, infinity::SetVarType::kString, (yyvsp[-1].str_value), (yyvsp[0].str_value));
+    (yyval.command_stmt) = new hybridsearch::CommandStatement();
+    (yyval.command_stmt)->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kConfig, hybridsearch::SetVarType::kString, (yyvsp[-1].str_value), (yyvsp[0].str_value));
     free((yyvsp[-1].str_value));
     free((yyvsp[0].str_value));
 }
@@ -6739,8 +6739,8 @@ yyreduce:
 #line 2271 "parser.y"
                                    {
     ParserHelper::ToLower((yyvsp[-1].str_value));
-    (yyval.command_stmt) = new infinity::CommandStatement();
-    (yyval.command_stmt)->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kConfig, infinity::SetVarType::kInteger, (yyvsp[-1].str_value), (yyvsp[0].long_value));
+    (yyval.command_stmt) = new hybridsearch::CommandStatement();
+    (yyval.command_stmt)->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kConfig, hybridsearch::SetVarType::kInteger, (yyvsp[-1].str_value), (yyvsp[0].long_value));
     free((yyvsp[-1].str_value));
 }
 #line 6747 "parser.cpp"
@@ -6750,8 +6750,8 @@ yyreduce:
 #line 2277 "parser.y"
                                      {
     ParserHelper::ToLower((yyvsp[-1].str_value));
-    (yyval.command_stmt) = new infinity::CommandStatement();
-    (yyval.command_stmt)->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kConfig, infinity::SetVarType::kDouble, (yyvsp[-1].str_value), (yyvsp[0].double_value));
+    (yyval.command_stmt) = new hybridsearch::CommandStatement();
+    (yyval.command_stmt)->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kConfig, hybridsearch::SetVarType::kDouble, (yyvsp[-1].str_value), (yyvsp[0].double_value));
     free((yyvsp[-1].str_value));
 }
 #line 6758 "parser.cpp"
@@ -6760,10 +6760,10 @@ yyreduce:
   case 311: /* command_statement: LOCK TABLE table_name  */
 #line 2283 "parser.y"
                         {
-    (yyval.command_stmt) = new infinity::CommandStatement();
+    (yyval.command_stmt) = new hybridsearch::CommandStatement();
     ParserHelper::ToLower((yyvsp[0].table_name_t)->schema_name_ptr_);
     ParserHelper::ToLower((yyvsp[0].table_name_t)->table_name_ptr_);
-    (yyval.command_stmt)->command_info_ = std::make_shared<infinity::LockCmd>((yyvsp[0].table_name_t)->schema_name_ptr_, (yyvsp[0].table_name_t)->table_name_ptr_);
+    (yyval.command_stmt)->command_info_ = std::make_shared<hybridsearch::LockCmd>((yyvsp[0].table_name_t)->schema_name_ptr_, (yyvsp[0].table_name_t)->table_name_ptr_);
     free((yyvsp[0].table_name_t)->schema_name_ptr_);
     free((yyvsp[0].table_name_t)->table_name_ptr_);
     delete (yyvsp[0].table_name_t);
@@ -6774,10 +6774,10 @@ yyreduce:
   case 312: /* command_statement: UNLOCK TABLE table_name  */
 #line 2292 "parser.y"
                           {
-    (yyval.command_stmt) = new infinity::CommandStatement();
+    (yyval.command_stmt) = new hybridsearch::CommandStatement();
     ParserHelper::ToLower((yyvsp[0].table_name_t)->schema_name_ptr_);
     ParserHelper::ToLower((yyvsp[0].table_name_t)->table_name_ptr_);
-    (yyval.command_stmt)->command_info_ = std::make_shared<infinity::UnlockCmd>((yyvsp[0].table_name_t)->schema_name_ptr_, (yyvsp[0].table_name_t)->table_name_ptr_);
+    (yyval.command_stmt)->command_info_ = std::make_shared<hybridsearch::UnlockCmd>((yyvsp[0].table_name_t)->schema_name_ptr_, (yyvsp[0].table_name_t)->table_name_ptr_);
     free((yyvsp[0].table_name_t)->schema_name_ptr_);
     free((yyvsp[0].table_name_t)->table_name_ptr_);
     delete (yyvsp[0].table_name_t);
@@ -6790,8 +6790,8 @@ yyreduce:
                                                  {
     ParserHelper::ToLower((yyvsp[-3].str_value));
     ParserHelper::ToLower((yyvsp[0].str_value));
-    (yyval.command_stmt) = new infinity::CommandStatement();
-    (yyval.command_stmt)->command_info_ = std::make_shared<infinity::SnapshotCmd>((yyvsp[-3].str_value), infinity::SnapshotOp::kCreate, infinity::SnapshotScope::kTable, (yyvsp[0].str_value));
+    (yyval.command_stmt) = new hybridsearch::CommandStatement();
+    (yyval.command_stmt)->command_info_ = std::make_shared<hybridsearch::SnapshotCmd>((yyvsp[-3].str_value), hybridsearch::SnapshotOp::kCreate, hybridsearch::SnapshotScope::kTable, (yyvsp[0].str_value));
     free((yyvsp[-3].str_value));
     free((yyvsp[0].str_value));
 }
@@ -6803,8 +6803,8 @@ yyreduce:
                                                     {
     ParserHelper::ToLower((yyvsp[-3].str_value));
     ParserHelper::ToLower((yyvsp[0].str_value));
-    (yyval.command_stmt) = new infinity::CommandStatement();
-    (yyval.command_stmt)->command_info_ = std::make_shared<infinity::SnapshotCmd>((yyvsp[-3].str_value), infinity::SnapshotOp::kCreate, infinity::SnapshotScope::kDatabase, (yyvsp[0].str_value));
+    (yyval.command_stmt) = new hybridsearch::CommandStatement();
+    (yyval.command_stmt)->command_info_ = std::make_shared<hybridsearch::SnapshotCmd>((yyvsp[-3].str_value), hybridsearch::SnapshotOp::kCreate, hybridsearch::SnapshotScope::kDatabase, (yyvsp[0].str_value));
     free((yyvsp[-3].str_value));
     free((yyvsp[0].str_value));
 }
@@ -6815,8 +6815,8 @@ yyreduce:
 #line 2317 "parser.y"
                                        {
     ParserHelper::ToLower((yyvsp[-2].str_value));
-    (yyval.command_stmt) = new infinity::CommandStatement();
-    (yyval.command_stmt)->command_info_ = std::make_shared<infinity::SnapshotCmd>((yyvsp[-2].str_value), infinity::SnapshotOp::kCreate, infinity::SnapshotScope::kSystem);
+    (yyval.command_stmt) = new hybridsearch::CommandStatement();
+    (yyval.command_stmt)->command_info_ = std::make_shared<hybridsearch::SnapshotCmd>((yyvsp[-2].str_value), hybridsearch::SnapshotOp::kCreate, hybridsearch::SnapshotScope::kSystem);
     free((yyvsp[-2].str_value));
 }
 #line 6823 "parser.cpp"
@@ -6826,8 +6826,8 @@ yyreduce:
 #line 2323 "parser.y"
                            {
     ParserHelper::ToLower((yyvsp[0].str_value));
-    (yyval.command_stmt) = new infinity::CommandStatement();
-    (yyval.command_stmt)->command_info_ = std::make_shared<infinity::SnapshotCmd>((yyvsp[0].str_value), infinity::SnapshotOp::kDrop, infinity::SnapshotScope::kIgnore);
+    (yyval.command_stmt) = new hybridsearch::CommandStatement();
+    (yyval.command_stmt)->command_info_ = std::make_shared<hybridsearch::SnapshotCmd>((yyvsp[0].str_value), hybridsearch::SnapshotOp::kDrop, hybridsearch::SnapshotScope::kIgnore);
     free((yyvsp[0].str_value));
 }
 #line 6834 "parser.cpp"
@@ -6837,8 +6837,8 @@ yyreduce:
 #line 2329 "parser.y"
                                        {
     ParserHelper::ToLower((yyvsp[0].str_value));
-    (yyval.command_stmt) = new infinity::CommandStatement();
-    (yyval.command_stmt)->command_info_ = std::make_shared<infinity::SnapshotCmd>((yyvsp[0].str_value), infinity::SnapshotOp::kRestore, infinity::SnapshotScope::kDatabase);
+    (yyval.command_stmt) = new hybridsearch::CommandStatement();
+    (yyval.command_stmt)->command_info_ = std::make_shared<hybridsearch::SnapshotCmd>((yyvsp[0].str_value), hybridsearch::SnapshotOp::kRestore, hybridsearch::SnapshotScope::kDatabase);
     free((yyvsp[0].str_value));
 }
 #line 6845 "parser.cpp"
@@ -6848,8 +6848,8 @@ yyreduce:
 #line 2335 "parser.y"
                                     {
     ParserHelper::ToLower((yyvsp[0].str_value));
-    (yyval.command_stmt) = new infinity::CommandStatement();
-    (yyval.command_stmt)->command_info_ = std::make_shared<infinity::SnapshotCmd>((yyvsp[0].str_value), infinity::SnapshotOp::kRestore, infinity::SnapshotScope::kTable);
+    (yyval.command_stmt) = new hybridsearch::CommandStatement();
+    (yyval.command_stmt)->command_info_ = std::make_shared<hybridsearch::SnapshotCmd>((yyvsp[0].str_value), hybridsearch::SnapshotOp::kRestore, hybridsearch::SnapshotScope::kTable);
     free((yyvsp[0].str_value));
 }
 #line 6856 "parser.cpp"
@@ -6866,7 +6866,7 @@ yyreduce:
     std::string table_name = std::string((yyvsp[0].table_name_t)->table_name_ptr_);
     free((yyvsp[0].table_name_t)->table_name_ptr_);
 
-    (yyval.compact_stmt) = new infinity::ManualCompactStatement(std::move(schema_name), std::move(table_name));
+    (yyval.compact_stmt) = new hybridsearch::ManualCompactStatement(std::move(schema_name), std::move(table_name));
     delete (yyvsp[0].table_name_t);
 }
 #line 6873 "parser.cpp"
@@ -6875,8 +6875,8 @@ yyreduce:
   case 320: /* admin_statement: ADMIN SHOW CATALOGS  */
 #line 2355 "parser.y"
                                      {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kListCatalogs;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kListCatalogs;
 }
 #line 6882 "parser.cpp"
     break;
@@ -6884,8 +6884,8 @@ yyreduce:
   case 321: /* admin_statement: ADMIN SHOW CATALOG LONG_VALUE  */
 #line 2359 "parser.y"
                                 {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kShowCatalog;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kShowCatalog;
      (yyval.admin_stmt)->catalog_file_index_ = (yyvsp[0].long_value);
 }
 #line 6892 "parser.cpp"
@@ -6894,8 +6894,8 @@ yyreduce:
   case 322: /* admin_statement: ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASES  */
 #line 2364 "parser.y"
                                                      {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kListDatabases;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kListDatabases;
      (yyval.admin_stmt)->catalog_file_start_index_ = (yyvsp[-2].long_value);
      (yyval.admin_stmt)->catalog_file_end_index_ = (yyvsp[-1].long_value);
 }
@@ -6905,8 +6905,8 @@ yyreduce:
   case 323: /* admin_statement: ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASE LONG_VALUE  */
 #line 2370 "parser.y"
                                                                {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kShowDatabase;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kShowDatabase;
      (yyval.admin_stmt)->catalog_file_start_index_ = (yyvsp[-3].long_value);
      (yyval.admin_stmt)->catalog_file_end_index_ = (yyvsp[-2].long_value);
      (yyval.admin_stmt)->database_meta_index_ = (yyvsp[0].long_value);
@@ -6917,8 +6917,8 @@ yyreduce:
   case 324: /* admin_statement: ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASE LONG_VALUE LONG_VALUE TABLES  */
 #line 2377 "parser.y"
                                                                                  {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kListTables;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kListTables;
      (yyval.admin_stmt)->catalog_file_start_index_ = (yyvsp[-5].long_value);
      (yyval.admin_stmt)->catalog_file_end_index_ = (yyvsp[-4].long_value);
      (yyval.admin_stmt)->database_meta_index_ = (yyvsp[-2].long_value);
@@ -6930,8 +6930,8 @@ yyreduce:
   case 325: /* admin_statement: ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASE LONG_VALUE LONG_VALUE TABLE LONG_VALUE  */
 #line 2385 "parser.y"
                                                                                            {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kShowTable;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kShowTable;
      (yyval.admin_stmt)->catalog_file_start_index_ = (yyvsp[-6].long_value);
      (yyval.admin_stmt)->catalog_file_end_index_ = (yyvsp[-5].long_value);
      (yyval.admin_stmt)->database_meta_index_ = (yyvsp[-3].long_value);
@@ -6944,8 +6944,8 @@ yyreduce:
   case 326: /* admin_statement: ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASE LONG_VALUE LONG_VALUE TABLE LONG_VALUE LONG_VALUE COLUMNS  */
 #line 2394 "parser.y"
                                                                                                               {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kShowColumn;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kShowColumn;
      (yyval.admin_stmt)->catalog_file_start_index_ = (yyvsp[-8].long_value);
      (yyval.admin_stmt)->catalog_file_end_index_ = (yyvsp[-7].long_value);
      (yyval.admin_stmt)->database_meta_index_ = (yyvsp[-5].long_value);
@@ -6959,8 +6959,8 @@ yyreduce:
   case 327: /* admin_statement: ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASE LONG_VALUE LONG_VALUE TABLE LONG_VALUE LONG_VALUE SEGMENTS  */
 #line 2404 "parser.y"
                                                                                                                {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kListSegments;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kListSegments;
      (yyval.admin_stmt)->catalog_file_start_index_ = (yyvsp[-8].long_value);
      (yyval.admin_stmt)->catalog_file_end_index_ = (yyvsp[-7].long_value);
      (yyval.admin_stmt)->database_meta_index_ = (yyvsp[-5].long_value);
@@ -6974,8 +6974,8 @@ yyreduce:
   case 328: /* admin_statement: ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASE LONG_VALUE LONG_VALUE TABLE LONG_VALUE LONG_VALUE SEGMENT LONG_VALUE  */
 #line 2414 "parser.y"
                                                                                                                          {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kShowSegment;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kShowSegment;
      (yyval.admin_stmt)->catalog_file_start_index_ = (yyvsp[-9].long_value);
      (yyval.admin_stmt)->catalog_file_end_index_ = (yyvsp[-8].long_value);
      (yyval.admin_stmt)->database_meta_index_ = (yyvsp[-6].long_value);
@@ -6990,8 +6990,8 @@ yyreduce:
   case 329: /* admin_statement: ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASE LONG_VALUE LONG_VALUE TABLE LONG_VALUE LONG_VALUE SEGMENT LONG_VALUE BLOCKS  */
 #line 2425 "parser.y"
                                                                                                                                 {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kListBlocks;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kListBlocks;
      (yyval.admin_stmt)->catalog_file_start_index_ = (yyvsp[-10].long_value);
      (yyval.admin_stmt)->catalog_file_end_index_ = (yyvsp[-9].long_value);
      (yyval.admin_stmt)->database_meta_index_ = (yyvsp[-7].long_value);
@@ -7006,8 +7006,8 @@ yyreduce:
   case 330: /* admin_statement: ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASE LONG_VALUE LONG_VALUE TABLE LONG_VALUE LONG_VALUE SEGMENT LONG_VALUE BLOCK LONG_VALUE  */
 #line 2436 "parser.y"
                                                                                                                                           {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kShowBlock;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kShowBlock;
      (yyval.admin_stmt)->catalog_file_start_index_ = (yyvsp[-11].long_value);
      (yyval.admin_stmt)->catalog_file_end_index_ = (yyvsp[-10].long_value);
      (yyval.admin_stmt)->database_meta_index_ = (yyvsp[-8].long_value);
@@ -7023,8 +7023,8 @@ yyreduce:
   case 331: /* admin_statement: ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASE LONG_VALUE LONG_VALUE TABLE LONG_VALUE LONG_VALUE SEGMENT LONG_VALUE BLOCK LONG_VALUE COLUMNS  */
 #line 2448 "parser.y"
                                                                                                                                                   {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kListColumns;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kListColumns;
      (yyval.admin_stmt)->catalog_file_start_index_ = (yyvsp[-12].long_value);
      (yyval.admin_stmt)->catalog_file_end_index_ = (yyvsp[-11].long_value);
      (yyval.admin_stmt)->database_meta_index_ = (yyvsp[-9].long_value);
@@ -7040,8 +7040,8 @@ yyreduce:
   case 332: /* admin_statement: ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASE LONG_VALUE LONG_VALUE TABLE LONG_VALUE LONG_VALUE INDEXES  */
 #line 2460 "parser.y"
                                                                                                               {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kListIndexes;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kListIndexes;
      (yyval.admin_stmt)->catalog_file_start_index_ = (yyvsp[-8].long_value);
      (yyval.admin_stmt)->catalog_file_end_index_ = (yyvsp[-7].long_value);
      (yyval.admin_stmt)->database_meta_index_ = (yyvsp[-5].long_value);
@@ -7055,8 +7055,8 @@ yyreduce:
   case 333: /* admin_statement: ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASE LONG_VALUE LONG_VALUE TABLE LONG_VALUE LONG_VALUE INDEX LONG_VALUE  */
 #line 2470 "parser.y"
                                                                                                                        {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kShowIndex;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kShowIndex;
      (yyval.admin_stmt)->catalog_file_start_index_ = (yyvsp[-9].long_value);
      (yyval.admin_stmt)->catalog_file_end_index_ = (yyvsp[-8].long_value);
      (yyval.admin_stmt)->database_meta_index_ = (yyvsp[-6].long_value);
@@ -7071,8 +7071,8 @@ yyreduce:
   case 334: /* admin_statement: ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASE LONG_VALUE LONG_VALUE TABLE LONG_VALUE LONG_VALUE INDEX LONG_VALUE LONG_VALUE SEGMENTS  */
 #line 2481 "parser.y"
                                                                                                                                            {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kListIndexSegments;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kListIndexSegments;
      (yyval.admin_stmt)->catalog_file_start_index_ = (yyvsp[-11].long_value);
      (yyval.admin_stmt)->catalog_file_end_index_ = (yyvsp[-10].long_value);
      (yyval.admin_stmt)->database_meta_index_ = (yyvsp[-8].long_value);
@@ -7088,8 +7088,8 @@ yyreduce:
   case 335: /* admin_statement: ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASE LONG_VALUE LONG_VALUE TABLE LONG_VALUE LONG_VALUE INDEX LONG_VALUE LONG_VALUE SEGMENT LONG_VALUE  */
 #line 2493 "parser.y"
                                                                                                                                                      {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kShowIndexSegment;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kShowIndexSegment;
      (yyval.admin_stmt)->catalog_file_start_index_ = (yyvsp[-12].long_value);
      (yyval.admin_stmt)->catalog_file_end_index_ = (yyvsp[-11].long_value);
      (yyval.admin_stmt)->database_meta_index_ = (yyvsp[-9].long_value);
@@ -7106,8 +7106,8 @@ yyreduce:
   case 336: /* admin_statement: ADMIN SHOW LOGS  */
 #line 2506 "parser.y"
                   {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kListLogFiles;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kListLogFiles;
 }
 #line 7113 "parser.cpp"
     break;
@@ -7115,8 +7115,8 @@ yyreduce:
   case 337: /* admin_statement: ADMIN SHOW LOG LONG_VALUE  */
 #line 2510 "parser.y"
                             {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kShowLogFile;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kShowLogFile;
      (yyval.admin_stmt)->log_file_index_ = (yyvsp[0].long_value);
 }
 #line 7123 "parser.cpp"
@@ -7125,8 +7125,8 @@ yyreduce:
   case 338: /* admin_statement: ADMIN SHOW LOG LONG_VALUE INDEXES  */
 #line 2515 "parser.y"
                                     {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kListLogIndexes;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kListLogIndexes;
      (yyval.admin_stmt)->log_file_index_ = (yyvsp[-1].long_value);
 }
 #line 7133 "parser.cpp"
@@ -7135,8 +7135,8 @@ yyreduce:
   case 339: /* admin_statement: ADMIN SHOW LOG LONG_VALUE INDEX LONG_VALUE  */
 #line 2520 "parser.y"
                                              {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kShowLogIndex;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kShowLogIndex;
      (yyval.admin_stmt)->log_file_index_ = (yyvsp[-2].long_value);
      (yyval.admin_stmt)->log_index_in_file_ = (yyvsp[0].long_value);
 }
@@ -7146,8 +7146,8 @@ yyreduce:
   case 340: /* admin_statement: ADMIN SHOW CONFIGS  */
 #line 2526 "parser.y"
                      {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kListConfigs;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kListConfigs;
 }
 #line 7153 "parser.cpp"
     break;
@@ -7155,8 +7155,8 @@ yyreduce:
   case 341: /* admin_statement: ADMIN SHOW VARIABLES  */
 #line 2530 "parser.y"
                        {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kListVariables;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kListVariables;
 }
 #line 7162 "parser.cpp"
     break;
@@ -7164,8 +7164,8 @@ yyreduce:
   case 342: /* admin_statement: ADMIN SHOW VARIABLE IDENTIFIER  */
 #line 2534 "parser.y"
                                  {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kShowVariable;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kShowVariable;
      (yyval.admin_stmt)->variable_name_ = (yyvsp[0].str_value);
      free((yyvsp[0].str_value));
 }
@@ -7175,8 +7175,8 @@ yyreduce:
   case 343: /* admin_statement: ADMIN CREATE SNAPSHOT  */
 #line 2540 "parser.y"
                         {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kCreateSnapshot;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kCreateSnapshot;
 }
 #line 7182 "parser.cpp"
     break;
@@ -7184,8 +7184,8 @@ yyreduce:
   case 344: /* admin_statement: ADMIN SHOW SNAPSHOTS  */
 #line 2544 "parser.y"
                        {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kListSnapshots;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kListSnapshots;
 }
 #line 7191 "parser.cpp"
     break;
@@ -7193,8 +7193,8 @@ yyreduce:
   case 345: /* admin_statement: ADMIN SHOW SNAPSHOT IDENTIFIER  */
 #line 2548 "parser.y"
                                  {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kShowSnapshot;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kShowSnapshot;
      (yyval.admin_stmt)->snapshot_name_ = (yyvsp[0].str_value);
      free((yyvsp[0].str_value));
 }
@@ -7204,8 +7204,8 @@ yyreduce:
   case 346: /* admin_statement: ADMIN DELETE SNAPSHOT STRING  */
 #line 2554 "parser.y"
                                {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kDeleteSnapshot;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kDeleteSnapshot;
      (yyval.admin_stmt)->snapshot_name_ = (yyvsp[0].str_value);
      free((yyvsp[0].str_value));
 }
@@ -7215,8 +7215,8 @@ yyreduce:
   case 347: /* admin_statement: ADMIN EXPORT SNAPSHOT STRING TO STRING  */
 #line 2560 "parser.y"
                                          {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kExportSnapshot;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kExportSnapshot;
      (yyval.admin_stmt)->snapshot_name_ = (yyvsp[-2].str_value);
      (yyval.admin_stmt)->export_path_ = (yyvsp[0].str_value);
      free((yyvsp[-2].str_value));
@@ -7228,8 +7228,8 @@ yyreduce:
   case 348: /* admin_statement: ADMIN RECOVER FROM SNAPSHOT STRING  */
 #line 2568 "parser.y"
                                      {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kRecoverFromSnapshot;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kRecoverFromSnapshot;
      (yyval.admin_stmt)->snapshot_name_ = (yyvsp[0].str_value);
      free((yyvsp[0].str_value));
 }
@@ -7239,8 +7239,8 @@ yyreduce:
   case 349: /* admin_statement: ADMIN SHOW NODES  */
 #line 2574 "parser.y"
                    {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kListNodes;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kListNodes;
 }
 #line 7246 "parser.cpp"
     break;
@@ -7248,8 +7248,8 @@ yyreduce:
   case 350: /* admin_statement: ADMIN SHOW NODE STRING  */
 #line 2578 "parser.y"
                          {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kShowNode;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kShowNode;
      (yyval.admin_stmt)->node_name_ = (yyvsp[0].str_value);
      free((yyvsp[0].str_value));
 }
@@ -7259,8 +7259,8 @@ yyreduce:
   case 351: /* admin_statement: ADMIN SHOW NODE  */
 #line 2584 "parser.y"
                   {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kShowCurrentNode;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kShowCurrentNode;
 }
 #line 7266 "parser.cpp"
     break;
@@ -7268,8 +7268,8 @@ yyreduce:
   case 352: /* admin_statement: ADMIN REMOVE NODE STRING  */
 #line 2588 "parser.y"
                            {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kRemoveNode;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kRemoveNode;
      (yyval.admin_stmt)->node_name_ = (yyvsp[0].str_value);
      free((yyvsp[0].str_value));
 }
@@ -7279,9 +7279,9 @@ yyreduce:
   case 353: /* admin_statement: ADMIN SET ADMIN  */
 #line 2594 "parser.y"
                   {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kSetRole;
-     (yyval.admin_stmt)->node_role_ = infinity::NodeRole::kAdmin;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kSetRole;
+     (yyval.admin_stmt)->node_role_ = hybridsearch::NodeRole::kAdmin;
 }
 #line 7287 "parser.cpp"
     break;
@@ -7289,9 +7289,9 @@ yyreduce:
   case 354: /* admin_statement: ADMIN SET STANDALONE  */
 #line 2599 "parser.y"
                        {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kSetRole;
-     (yyval.admin_stmt)->node_role_ = infinity::NodeRole::kStandalone;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kSetRole;
+     (yyval.admin_stmt)->node_role_ = hybridsearch::NodeRole::kStandalone;
 }
 #line 7297 "parser.cpp"
     break;
@@ -7299,9 +7299,9 @@ yyreduce:
   case 355: /* admin_statement: ADMIN SET LEADER USING STRING  */
 #line 2604 "parser.y"
                                 {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kSetRole;
-     (yyval.admin_stmt)->node_role_ = infinity::NodeRole::kLeader;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kSetRole;
+     (yyval.admin_stmt)->node_role_ = hybridsearch::NodeRole::kLeader;
      (yyval.admin_stmt)->node_name_ = (yyvsp[0].str_value);
      free((yyvsp[0].str_value));
 }
@@ -7311,9 +7311,9 @@ yyreduce:
   case 356: /* admin_statement: ADMIN CONNECT STRING AS FOLLOWER USING STRING  */
 #line 2611 "parser.y"
                                                 {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kSetRole;
-     (yyval.admin_stmt)->node_role_ = infinity::NodeRole::kFollower;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kSetRole;
+     (yyval.admin_stmt)->node_role_ = hybridsearch::NodeRole::kFollower;
      (yyval.admin_stmt)->leader_address_ = (yyvsp[-4].str_value);
      (yyval.admin_stmt)->node_name_ = (yyvsp[0].str_value);
      free((yyvsp[-4].str_value));
@@ -7325,9 +7325,9 @@ yyreduce:
   case 357: /* admin_statement: ADMIN CONNECT STRING AS LEARNER USING STRING  */
 #line 2620 "parser.y"
                                                {
-     (yyval.admin_stmt) = new infinity::AdminStatement();
-     (yyval.admin_stmt)->admin_type_ = infinity::AdminStmtType::kSetRole;
-     (yyval.admin_stmt)->node_role_ = infinity::NodeRole::kLearner;
+     (yyval.admin_stmt) = new hybridsearch::AdminStatement();
+     (yyval.admin_stmt)->admin_type_ = hybridsearch::AdminStmtType::kSetRole;
+     (yyval.admin_stmt)->node_role_ = hybridsearch::NodeRole::kLearner;
      (yyval.admin_stmt)->leader_address_ = (yyvsp[-4].str_value);
      (yyval.admin_stmt)->node_name_ = (yyvsp[0].str_value);
      free((yyvsp[-4].str_value));
@@ -7339,7 +7339,7 @@ yyreduce:
   case 358: /* alter_statement: ALTER TABLE table_name RENAME TO IDENTIFIER  */
 #line 2630 "parser.y"
                                                               {
-    auto *ret = new infinity::RenameTableStatement((yyvsp[-3].table_name_t)->schema_name_ptr_, (yyvsp[-3].table_name_t)->table_name_ptr_);
+    auto *ret = new hybridsearch::RenameTableStatement((yyvsp[-3].table_name_t)->schema_name_ptr_, (yyvsp[-3].table_name_t)->table_name_ptr_);
     (yyval.alter_stmt) = ret;
     ret->new_table_name_ = (yyvsp[0].str_value);
     free((yyvsp[0].str_value));
@@ -7353,10 +7353,10 @@ yyreduce:
   case 359: /* alter_statement: ALTER TABLE table_name ADD COLUMN '(' column_def_array ')'  */
 #line 2639 "parser.y"
                                                              {
-    auto *ret = new infinity::AddColumnsStatement((yyvsp[-5].table_name_t)->schema_name_ptr_, (yyvsp[-5].table_name_t)->table_name_ptr_);
+    auto *ret = new hybridsearch::AddColumnsStatement((yyvsp[-5].table_name_t)->schema_name_ptr_, (yyvsp[-5].table_name_t)->table_name_ptr_);
     (yyval.alter_stmt) = ret;
 
-    for (infinity::ColumnDef*& column_def : *(yyvsp[-1].column_def_array_t)) {
+    for (hybridsearch::ColumnDef*& column_def : *(yyvsp[-1].column_def_array_t)) {
         ret->column_defs_.emplace_back(column_def);
     }
     delete (yyvsp[-1].column_def_array_t);
@@ -7370,7 +7370,7 @@ yyreduce:
   case 360: /* alter_statement: ALTER TABLE table_name DROP COLUMN '(' identifier_array ')'  */
 #line 2651 "parser.y"
                                                               {
-    auto *ret = new infinity::DropColumnsStatement((yyvsp[-5].table_name_t)->schema_name_ptr_, (yyvsp[-5].table_name_t)->table_name_ptr_);
+    auto *ret = new hybridsearch::DropColumnsStatement((yyvsp[-5].table_name_t)->schema_name_ptr_, (yyvsp[-5].table_name_t)->table_name_ptr_);
     (yyval.alter_stmt) = ret;
     for (std::string &column_name : *(yyvsp[-1].identifier_array_t)) {
         ret->column_names_.emplace_back(std::move(column_name));
@@ -7386,7 +7386,7 @@ yyreduce:
   case 361: /* expr_array: expr_alias  */
 #line 2667 "parser.y"
                         {
-    (yyval.expr_array_t) = new std::vector<infinity::ParsedExpr*>();
+    (yyval.expr_array_t) = new std::vector<hybridsearch::ParsedExpr*>();
     (yyval.expr_array_t)->emplace_back((yyvsp[0].expr_t));
 }
 #line 7393 "parser.cpp"
@@ -7404,13 +7404,13 @@ yyreduce:
   case 363: /* insert_row_list: '(' expr_array ')'  */
 #line 2676 "parser.y"
                                      {
-    auto res = std::make_unique<infinity::InsertRowExpr>();
+    auto res = std::make_unique<hybridsearch::InsertRowExpr>();
     for (auto* &expr : *(yyvsp[-1].expr_array_t)) {
         res->values_.emplace_back(expr);
         expr = nullptr;
     }
     delete (yyvsp[-1].expr_array_t);
-    (yyval.insert_row_list_t) = new std::vector<infinity::InsertRowExpr*>();
+    (yyval.insert_row_list_t) = new std::vector<hybridsearch::InsertRowExpr*>();
     (yyval.insert_row_list_t)->emplace_back(res.release());
 }
 #line 7417 "parser.cpp"
@@ -7420,7 +7420,7 @@ yyreduce:
 #line 2686 "parser.y"
                                          {
     (yyval.insert_row_list_t) = (yyvsp[-4].insert_row_list_t);
-    auto res = std::make_unique<infinity::InsertRowExpr>();
+    auto res = std::make_unique<hybridsearch::InsertRowExpr>();
     for (auto* &expr : *(yyvsp[-1].expr_array_t)) {
         res->values_.emplace_back(expr);
         expr = nullptr;
@@ -7461,8 +7461,8 @@ yyreduce:
   case 373: /* operand: '(' select_without_paren ')'  */
 #line 2727 "parser.y"
                                {
-    infinity::SubqueryExpr* subquery_expr = new infinity::SubqueryExpr();
-    subquery_expr->subquery_type_ = infinity::SubqueryType::kScalar;
+    hybridsearch::SubqueryExpr* subquery_expr = new hybridsearch::SubqueryExpr();
+    subquery_expr->subquery_type_ = hybridsearch::SubqueryType::kScalar;
     subquery_expr->select_ = (yyvsp[-1].select_stmt);
     (yyval.expr_t) = subquery_expr;
 }
@@ -7480,7 +7480,7 @@ yyreduce:
   case 385: /* match_tensor_expr: MATCH TENSOR '(' column_expr ',' common_array_expr ',' STRING ',' STRING ',' STRING optional_search_filter_expr ')'  */
 #line 2749 "parser.y"
                                                                                                                                         {
-    auto match_tensor_expr = std::make_unique<infinity::MatchTensorExpr>();
+    auto match_tensor_expr = std::make_unique<hybridsearch::MatchTensorExpr>();
     // search column
     match_tensor_expr->SetSearchColumn((yyvsp[-10].expr_t));
     // search tensor
@@ -7500,7 +7500,7 @@ yyreduce:
   case 386: /* match_tensor_expr: MATCH TENSOR '(' column_expr ',' common_array_expr ',' STRING ',' STRING ',' STRING optional_search_filter_expr ')' USING INDEX '(' IDENTIFIER ')'  */
 #line 2765 "parser.y"
                                                                                                                                                    {
-    auto match_tensor_expr = std::make_unique<infinity::MatchTensorExpr>();
+    auto match_tensor_expr = std::make_unique<hybridsearch::MatchTensorExpr>();
     // search column
     match_tensor_expr->SetSearchColumn((yyvsp[-15].expr_t));
     // search tensor
@@ -7521,7 +7521,7 @@ yyreduce:
   case 387: /* match_tensor_expr: MATCH TENSOR '(' column_expr ',' common_array_expr ',' STRING ',' STRING ',' STRING optional_search_filter_expr ')' IGNORE INDEX  */
 #line 2782 "parser.y"
                                                                                                                                  {
-    auto match_tensor_expr = std::make_unique<infinity::MatchTensorExpr>();
+    auto match_tensor_expr = std::make_unique<hybridsearch::MatchTensorExpr>();
     // search column
     match_tensor_expr->SetSearchColumn((yyvsp[-12].expr_t));
     // search tensor
@@ -7542,7 +7542,7 @@ yyreduce:
   case 388: /* match_vector_expr: MATCH VECTOR '(' expr ',' array_expr ',' STRING ',' STRING ',' LONG_VALUE optional_search_filter_expr ')' USING INDEX '(' IDENTIFIER ')' with_index_param_list  */
 #line 2800 "parser.y"
                                                                                                                                                                                    {
-    infinity::KnnExpr* match_vector_expr = new infinity::KnnExpr();
+    hybridsearch::KnnExpr* match_vector_expr = new hybridsearch::KnnExpr();
     (yyval.expr_t) = match_vector_expr;
 
     // vector search column
@@ -7592,7 +7592,7 @@ Return1:
   case 389: /* match_vector_expr: MATCH VECTOR '(' expr ',' array_expr ',' STRING ',' STRING ',' LONG_VALUE optional_search_filter_expr ')' IGNORE INDEX  */
 #line 2846 "parser.y"
                                                                                                                        {
-    infinity::KnnExpr* match_vector_expr = new infinity::KnnExpr();
+    hybridsearch::KnnExpr* match_vector_expr = new hybridsearch::KnnExpr();
     (yyval.expr_t) = match_vector_expr;
 
     // vector search column
@@ -7635,7 +7635,7 @@ Return2:
   case 390: /* match_vector_expr: MATCH VECTOR '(' expr ',' array_expr ',' STRING ',' STRING ',' LONG_VALUE optional_search_filter_expr ')' with_index_param_list  */
 #line 2885 "parser.y"
                                                                                                                                 {
-    infinity::KnnExpr* match_vector_expr = new infinity::KnnExpr();
+    hybridsearch::KnnExpr* match_vector_expr = new hybridsearch::KnnExpr();
     (yyval.expr_t) = match_vector_expr;
 
     // vector search column
@@ -7682,7 +7682,7 @@ Return3:
   case 391: /* match_vector_expr: MATCH VECTOR '(' expr ',' array_expr ',' STRING ',' STRING optional_search_filter_expr ')' with_index_param_list  */
 #line 2928 "parser.y"
                                                                                                                  {
-    infinity::KnnExpr* match_vector_expr = new infinity::KnnExpr();
+    hybridsearch::KnnExpr* match_vector_expr = new hybridsearch::KnnExpr();
     (yyval.expr_t) = match_vector_expr;
 
     // vector search search column
@@ -7705,7 +7705,7 @@ Return3:
     free((yyvsp[-3].str_value));
     delete (yyvsp[-7].const_expr_t);
 
-    match_vector_expr->topn_ = infinity::DEFAULT_MATCH_VECTOR_TOP_N;
+    match_vector_expr->topn_ = hybridsearch::DEFAULT_MATCH_VECTOR_TOP_N;
     match_vector_expr->filter_expr_.reset((yyvsp[-2].expr_t));
     match_vector_expr->opt_params_ = (yyvsp[0].with_index_param_list_t);
     goto Return4;
@@ -7730,7 +7730,7 @@ Return4:
   case 392: /* match_sparse_expr: MATCH SPARSE '(' expr ',' common_sparse_array_expr ',' STRING ',' LONG_VALUE optional_search_filter_expr ')' USING INDEX '(' IDENTIFIER ')' with_index_param_list  */
 #line 2975 "parser.y"
                                                                                                                                                                                      {
-    auto match_sparse_expr = new infinity::MatchSparseExpr();
+    auto match_sparse_expr = new hybridsearch::MatchSparseExpr();
     (yyval.expr_t) = match_sparse_expr;
 
     // search column
@@ -7758,7 +7758,7 @@ Return4:
   case 393: /* match_sparse_expr: MATCH SPARSE '(' expr ',' common_sparse_array_expr ',' STRING ',' LONG_VALUE optional_search_filter_expr ')' IGNORE INDEX  */
 #line 2999 "parser.y"
                                                                                                                           {
-    auto match_sparse_expr = new infinity::MatchSparseExpr();
+    auto match_sparse_expr = new hybridsearch::MatchSparseExpr();
     (yyval.expr_t) = match_sparse_expr;
 
     // search column
@@ -7785,7 +7785,7 @@ Return4:
   case 394: /* match_sparse_expr: MATCH SPARSE '(' expr ',' common_sparse_array_expr ',' STRING ',' LONG_VALUE optional_search_filter_expr ')' with_index_param_list  */
 #line 3022 "parser.y"
                                                                                                                                    {
-    auto match_sparse_expr = new infinity::MatchSparseExpr();
+    auto match_sparse_expr = new hybridsearch::MatchSparseExpr();
     (yyval.expr_t) = match_sparse_expr;
 
     // search column
@@ -7810,7 +7810,7 @@ Return4:
   case 395: /* match_sparse_expr: MATCH SPARSE '(' expr ',' common_sparse_array_expr ',' STRING optional_search_filter_expr ')' with_index_param_list  */
 #line 3043 "parser.y"
                                                                                                                     {
-    auto match_sparse_expr = new infinity::MatchSparseExpr();
+    auto match_sparse_expr = new hybridsearch::MatchSparseExpr();
     (yyval.expr_t) = match_sparse_expr;
 
     // search column
@@ -7827,7 +7827,7 @@ Return4:
     match_sparse_expr->SetOptionalFilter((yyvsp[-2].expr_t));
 
     // topn and options
-    match_sparse_expr->SetOptParams(infinity::DEFAULT_MATCH_SPARSE_TOP_N, (yyvsp[0].with_index_param_list_t));
+    match_sparse_expr->SetOptParams(hybridsearch::DEFAULT_MATCH_SPARSE_TOP_N, (yyvsp[0].with_index_param_list_t));
 }
 #line 7833 "parser.cpp"
     break;
@@ -7835,7 +7835,7 @@ Return4:
   case 396: /* match_text_expr: MATCH TEXT '(' STRING ',' STRING optional_search_filter_expr ')'  */
 #line 3064 "parser.y"
                                                                                    {
-    infinity::MatchExpr* match_text_expr = new infinity::MatchExpr();
+    hybridsearch::MatchExpr* match_text_expr = new hybridsearch::MatchExpr();
     match_text_expr->fields_ = std::string((yyvsp[-4].str_value));
     match_text_expr->matching_text_ = std::string((yyvsp[-2].str_value));
     match_text_expr->filter_expr_.reset((yyvsp[-1].expr_t));
@@ -7849,7 +7849,7 @@ Return4:
   case 397: /* match_text_expr: MATCH TEXT '(' STRING ',' STRING ',' STRING optional_search_filter_expr ')'  */
 #line 3073 "parser.y"
                                                                               {
-    infinity::MatchExpr* match_text_expr = new infinity::MatchExpr();
+    hybridsearch::MatchExpr* match_text_expr = new hybridsearch::MatchExpr();
     match_text_expr->fields_ = std::string((yyvsp[-6].str_value));
     match_text_expr->matching_text_ = std::string((yyvsp[-4].str_value));
     match_text_expr->options_text_ = std::string((yyvsp[-2].str_value));
@@ -7865,7 +7865,7 @@ Return4:
   case 398: /* match_text_expr: MATCH TEXT '(' STRING ',' STRING optional_search_filter_expr ')' USING INDEXES '(' STRING ')'  */
 #line 3084 "parser.y"
                                                                                                 {
-    infinity::MatchExpr* match_text_expr = new infinity::MatchExpr();
+    hybridsearch::MatchExpr* match_text_expr = new hybridsearch::MatchExpr();
     match_text_expr->fields_ = std::string((yyvsp[-9].str_value));
     match_text_expr->matching_text_ = std::string((yyvsp[-7].str_value));
     match_text_expr->filter_expr_.reset((yyvsp[-6].expr_t));
@@ -7881,7 +7881,7 @@ Return4:
   case 399: /* match_text_expr: MATCH TEXT '(' STRING ',' STRING ',' STRING optional_search_filter_expr ')' USING INDEXES '(' STRING ')'  */
 #line 3095 "parser.y"
                                                                                                            {
-    infinity::MatchExpr* match_text_expr = new infinity::MatchExpr();
+    hybridsearch::MatchExpr* match_text_expr = new hybridsearch::MatchExpr();
     match_text_expr->fields_ = std::string((yyvsp[-11].str_value));
     match_text_expr->matching_text_ = std::string((yyvsp[-9].str_value));
     match_text_expr->options_text_ = std::string((yyvsp[-7].str_value));
@@ -7899,7 +7899,7 @@ Return4:
   case 400: /* query_expr: QUERY '(' STRING optional_search_filter_expr ')'  */
 #line 3109 "parser.y"
                                                               {
-    infinity::MatchExpr* match_text_expr = new infinity::MatchExpr();
+    hybridsearch::MatchExpr* match_text_expr = new hybridsearch::MatchExpr();
     match_text_expr->matching_text_ = std::string((yyvsp[-2].str_value));
     match_text_expr->filter_expr_.reset((yyvsp[-1].expr_t));
     free((yyvsp[-2].str_value));
@@ -7911,7 +7911,7 @@ Return4:
   case 401: /* query_expr: QUERY '(' STRING ',' STRING optional_search_filter_expr ')'  */
 #line 3116 "parser.y"
                                                               {
-    infinity::MatchExpr* match_text_expr = new infinity::MatchExpr();
+    hybridsearch::MatchExpr* match_text_expr = new hybridsearch::MatchExpr();
     match_text_expr->matching_text_ = std::string((yyvsp[-4].str_value));
     match_text_expr->options_text_ = std::string((yyvsp[-2].str_value));
     match_text_expr->filter_expr_.reset((yyvsp[-1].expr_t));
@@ -7925,7 +7925,7 @@ Return4:
   case 402: /* fusion_expr: FUSION '(' STRING ')'  */
 #line 3126 "parser.y"
                                     {
-    infinity::FusionExpr* fusion_expr = new infinity::FusionExpr();
+    hybridsearch::FusionExpr* fusion_expr = new hybridsearch::FusionExpr();
     fusion_expr->method_ = std::string((yyvsp[-1].str_value));
     free((yyvsp[-1].str_value));
     (yyval.expr_t) = fusion_expr;
@@ -7936,7 +7936,7 @@ Return4:
   case 403: /* fusion_expr: FUSION '(' STRING ',' STRING ')'  */
 #line 3132 "parser.y"
                                    {
-    auto fusion_expr = std::make_unique<infinity::FusionExpr>();
+    auto fusion_expr = std::make_unique<hybridsearch::FusionExpr>();
     fusion_expr->method_ = std::string((yyvsp[-3].str_value));
     free((yyvsp[-3].str_value));
     (yyvsp[-3].str_value) = nullptr;
@@ -8000,7 +8000,7 @@ Return4:
   case 410: /* sub_search_array: sub_search  */
 #line 3163 "parser.y"
                               {
-    (yyval.expr_array_t) = new std::vector<infinity::ParsedExpr*>();
+    (yyval.expr_array_t) = new std::vector<hybridsearch::ParsedExpr*>();
     (yyval.expr_array_t)->emplace_back((yyvsp[0].expr_t));
 }
 #line 8007 "parser.cpp"
@@ -8018,7 +8018,7 @@ Return4:
   case 412: /* function_expr: IDENTIFIER '(' ')'  */
 #line 3172 "parser.y"
                                    {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     ParserHelper::ToLower((yyvsp[-2].str_value));
     func_expr->func_name_ = (yyvsp[-2].str_value);
     free((yyvsp[-2].str_value));
@@ -8031,7 +8031,7 @@ Return4:
   case 413: /* function_expr: IDENTIFIER '(' expr_array ')'  */
 #line 3180 "parser.y"
                                 {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     ParserHelper::ToLower((yyvsp[-3].str_value));
     func_expr->func_name_ = (yyvsp[-3].str_value);
     free((yyvsp[-3].str_value));
@@ -8044,7 +8044,7 @@ Return4:
   case 414: /* function_expr: IDENTIFIER '(' DISTINCT expr_array ')'  */
 #line 3188 "parser.y"
                                          {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     ParserHelper::ToLower((yyvsp[-4].str_value));
     func_expr->func_name_ = (yyvsp[-4].str_value);
     free((yyvsp[-4].str_value));
@@ -8058,9 +8058,9 @@ Return4:
   case 415: /* function_expr: YEAR '(' expr ')'  */
 #line 3197 "parser.y"
                     {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "year";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-1].expr_t));
     (yyval.expr_t) = func_expr;
 }
@@ -8070,9 +8070,9 @@ Return4:
   case 416: /* function_expr: MONTH '(' expr ')'  */
 #line 3204 "parser.y"
                      {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "month";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-1].expr_t));
     (yyval.expr_t) = func_expr;
 }
@@ -8082,9 +8082,9 @@ Return4:
   case 417: /* function_expr: DAY '(' expr ')'  */
 #line 3211 "parser.y"
                    {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "day";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-1].expr_t));
     (yyval.expr_t) = func_expr;
 }
@@ -8094,9 +8094,9 @@ Return4:
   case 418: /* function_expr: HOUR '(' expr ')'  */
 #line 3218 "parser.y"
                     {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "hour";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-1].expr_t));
     (yyval.expr_t) = func_expr;
 }
@@ -8106,9 +8106,9 @@ Return4:
   case 419: /* function_expr: MINUTE '(' expr ')'  */
 #line 3225 "parser.y"
                       {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "minute";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-1].expr_t));
     (yyval.expr_t) = func_expr;
 }
@@ -8118,9 +8118,9 @@ Return4:
   case 420: /* function_expr: SECOND '(' expr ')'  */
 #line 3232 "parser.y"
                       {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "second";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-1].expr_t));
     (yyval.expr_t) = func_expr;
 }
@@ -8130,9 +8130,9 @@ Return4:
   case 421: /* function_expr: operand IS NOT NULLABLE  */
 #line 3239 "parser.y"
                           {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "is_not_null";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-3].expr_t));
     (yyval.expr_t) = func_expr;
 }
@@ -8142,9 +8142,9 @@ Return4:
   case 422: /* function_expr: operand IS NULLABLE  */
 #line 3246 "parser.y"
                       {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "is_null";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     (yyval.expr_t) = func_expr;
 }
@@ -8154,9 +8154,9 @@ Return4:
   case 423: /* function_expr: NOT operand  */
 #line 3253 "parser.y"
               {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "not";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
 }
@@ -8166,9 +8166,9 @@ Return4:
   case 424: /* function_expr: '-' operand  */
 #line 3260 "parser.y"
               {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "-";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
 }
@@ -8178,9 +8178,9 @@ Return4:
   case 425: /* function_expr: '+' operand  */
 #line 3267 "parser.y"
               {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "+";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
 }
@@ -8190,9 +8190,9 @@ Return4:
   case 426: /* function_expr: operand '-' operand  */
 #line 3274 "parser.y"
                       {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "-";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -8203,9 +8203,9 @@ Return4:
   case 427: /* function_expr: operand '+' operand  */
 #line 3282 "parser.y"
                       {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "+";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -8216,9 +8216,9 @@ Return4:
   case 428: /* function_expr: operand '*' operand  */
 #line 3290 "parser.y"
                       {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "*";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -8229,9 +8229,9 @@ Return4:
   case 429: /* function_expr: operand '/' operand  */
 #line 3298 "parser.y"
                       {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "/";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -8242,9 +8242,9 @@ Return4:
   case 430: /* function_expr: operand '%' operand  */
 #line 3306 "parser.y"
                       {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "%";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -8255,9 +8255,9 @@ Return4:
   case 431: /* function_expr: operand '=' operand  */
 #line 3314 "parser.y"
                       {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "=";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -8268,9 +8268,9 @@ Return4:
   case 432: /* function_expr: operand EQUAL operand  */
 #line 3322 "parser.y"
                         {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "=";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -8281,9 +8281,9 @@ Return4:
   case 433: /* function_expr: operand NOT_EQ operand  */
 #line 3330 "parser.y"
                          {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "<>";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -8294,9 +8294,9 @@ Return4:
   case 434: /* function_expr: operand '<' operand  */
 #line 3338 "parser.y"
                       {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "<";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -8307,9 +8307,9 @@ Return4:
   case 435: /* function_expr: operand '>' operand  */
 #line 3346 "parser.y"
                       {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = ">";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -8320,9 +8320,9 @@ Return4:
   case 436: /* function_expr: operand LESS_EQ operand  */
 #line 3354 "parser.y"
                           {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "<=";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -8333,9 +8333,9 @@ Return4:
   case 437: /* function_expr: operand GREATER_EQ operand  */
 #line 3362 "parser.y"
                              {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = ">=";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -8346,26 +8346,26 @@ Return4:
   case 438: /* function_expr: EXTRACT '(' STRING FROM operand ')'  */
 #line 3370 "parser.y"
                                       {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     ParserHelper::ToLower((yyvsp[-3].str_value));
     if(strcmp((yyvsp[-3].str_value), "year") == 0) {
         func_expr->func_name_ = "extract_year";
-        func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+        func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     } else if(strcmp((yyvsp[-3].str_value), "month") == 0) {
         func_expr->func_name_ = "extract_month";
-        func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+        func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     } else if(strcmp((yyvsp[-3].str_value), "day") == 0) {
         func_expr->func_name_ = "extract_day";
-        func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+        func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     } else if(strcmp((yyvsp[-3].str_value), "hour") == 0) {
         func_expr->func_name_ = "extract_hour";
-        func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+        func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     } else if(strcmp((yyvsp[-3].str_value), "minute") == 0) {
         func_expr->func_name_ = "extract_minute";
-        func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+        func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     } else if(strcmp((yyvsp[-3].str_value), "second") == 0) {
         func_expr->func_name_ = "extract_second";
-        func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+        func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     } else {
         delete func_expr;
         yyerror(&yyloc, scanner, result, "Invalid column expression format");
@@ -8381,9 +8381,9 @@ Return4:
   case 439: /* function_expr: operand LIKE operand  */
 #line 3400 "parser.y"
                        {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "like";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -8394,9 +8394,9 @@ Return4:
   case 440: /* function_expr: operand NOT LIKE operand  */
 #line 3408 "parser.y"
                            {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "not_like";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-3].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -8407,9 +8407,9 @@ Return4:
   case 441: /* conjunction_expr: expr AND expr  */
 #line 3417 "parser.y"
                                 {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "and";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -8420,9 +8420,9 @@ Return4:
   case 442: /* conjunction_expr: expr OR expr  */
 #line 3425 "parser.y"
                {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "or";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back((yyvsp[-2].expr_t));
     func_expr->arguments_->emplace_back((yyvsp[0].expr_t));
     (yyval.expr_t) = func_expr;
@@ -8433,7 +8433,7 @@ Return4:
   case 443: /* between_expr: operand BETWEEN operand AND operand  */
 #line 3434 "parser.y"
                                                   {
-    infinity::BetweenExpr* between_expr = new infinity::BetweenExpr();
+    hybridsearch::BetweenExpr* between_expr = new hybridsearch::BetweenExpr();
     between_expr->value_ = (yyvsp[-4].expr_t);
     between_expr->lower_bound_ = (yyvsp[-2].expr_t);
     between_expr->upper_bound_ = (yyvsp[0].expr_t);
@@ -8445,7 +8445,7 @@ Return4:
   case 444: /* in_expr: operand IN '(' expr_array ')'  */
 #line 3442 "parser.y"
                                        {
-    infinity::InExpr* in_expr = new infinity::InExpr(true);
+    hybridsearch::InExpr* in_expr = new hybridsearch::InExpr(true);
     in_expr->left_ = (yyvsp[-4].expr_t);
     in_expr->arguments_ = (yyvsp[-1].expr_array_t);
     (yyval.expr_t) = in_expr;
@@ -8456,7 +8456,7 @@ Return4:
   case 445: /* in_expr: operand NOT IN '(' expr_array ')'  */
 #line 3448 "parser.y"
                                     {
-    infinity::InExpr* in_expr = new infinity::InExpr(false);
+    hybridsearch::InExpr* in_expr = new hybridsearch::InExpr(false);
     in_expr->left_ = (yyvsp[-5].expr_t);
     in_expr->arguments_ = (yyvsp[-1].expr_array_t);
     (yyval.expr_t) = in_expr;
@@ -8467,7 +8467,7 @@ Return4:
   case 446: /* case_expr: CASE expr case_check_array END  */
 #line 3455 "parser.y"
                                           {
-    infinity::CaseExpr* case_expr = new infinity::CaseExpr();
+    hybridsearch::CaseExpr* case_expr = new hybridsearch::CaseExpr();
     case_expr->expr_ = (yyvsp[-2].expr_t);
     case_expr->case_check_array_ = (yyvsp[-1].case_check_array_t);
     (yyval.expr_t) = case_expr;
@@ -8478,7 +8478,7 @@ Return4:
   case 447: /* case_expr: CASE expr case_check_array ELSE expr END  */
 #line 3461 "parser.y"
                                            {
-    infinity::CaseExpr* case_expr = new infinity::CaseExpr();
+    hybridsearch::CaseExpr* case_expr = new hybridsearch::CaseExpr();
     case_expr->expr_ = (yyvsp[-4].expr_t);
     case_expr->case_check_array_ = (yyvsp[-3].case_check_array_t);
     case_expr->else_expr_ = (yyvsp[-1].expr_t);
@@ -8490,7 +8490,7 @@ Return4:
   case 448: /* case_expr: CASE case_check_array END  */
 #line 3468 "parser.y"
                             {
-    infinity::CaseExpr* case_expr = new infinity::CaseExpr();
+    hybridsearch::CaseExpr* case_expr = new hybridsearch::CaseExpr();
     case_expr->case_check_array_ = (yyvsp[-1].case_check_array_t);
     (yyval.expr_t) = case_expr;
 }
@@ -8500,7 +8500,7 @@ Return4:
   case 449: /* case_expr: CASE case_check_array ELSE expr END  */
 #line 3473 "parser.y"
                                       {
-    infinity::CaseExpr* case_expr = new infinity::CaseExpr();
+    hybridsearch::CaseExpr* case_expr = new hybridsearch::CaseExpr();
     case_expr->case_check_array_ = (yyvsp[-3].case_check_array_t);
     case_expr->else_expr_ = (yyvsp[-1].expr_t);
     (yyval.expr_t) = case_expr;
@@ -8511,8 +8511,8 @@ Return4:
   case 450: /* case_check_array: WHEN expr THEN expr  */
 #line 3480 "parser.y"
                                       {
-    (yyval.case_check_array_t) = new std::vector<infinity::WhenThen*>();
-    infinity::WhenThen* when_then_ptr = new infinity::WhenThen();
+    (yyval.case_check_array_t) = new std::vector<hybridsearch::WhenThen*>();
+    hybridsearch::WhenThen* when_then_ptr = new hybridsearch::WhenThen();
     when_then_ptr->when_ = (yyvsp[-2].expr_t);
     when_then_ptr->then_ = (yyvsp[0].expr_t);
     (yyval.case_check_array_t)->emplace_back(when_then_ptr);
@@ -8523,7 +8523,7 @@ Return4:
   case 451: /* case_check_array: case_check_array WHEN expr THEN expr  */
 #line 3487 "parser.y"
                                        {
-    infinity::WhenThen* when_then_ptr = new infinity::WhenThen();
+    hybridsearch::WhenThen* when_then_ptr = new hybridsearch::WhenThen();
     when_then_ptr->when_ = (yyvsp[-2].expr_t);
     when_then_ptr->then_ = (yyvsp[0].expr_t);
     (yyvsp[-4].case_check_array_t)->emplace_back(when_then_ptr);
@@ -8535,14 +8535,14 @@ Return4:
   case 452: /* cast_expr: CAST '(' expr AS column_type ')'  */
 #line 3495 "parser.y"
                                             {
-    auto [data_type_result, fail_reason] = infinity::ColumnType::GetDataTypeFromColumnType(*((yyvsp[-1].column_type_t)), std::vector<std::unique_ptr<infinity::InitParameter>>{});
+    auto [data_type_result, fail_reason] = hybridsearch::ColumnType::GetDataTypeFromColumnType(*((yyvsp[-1].column_type_t)), std::vector<std::unique_ptr<hybridsearch::InitParameter>>{});
     delete (yyvsp[-1].column_type_t);
     if (!data_type_result) {
         yyerror(&yyloc, scanner, result, fail_reason.c_str());
         delete (yyvsp[-3].expr_t);
         YYERROR;
     }
-    infinity::CastExpr* cast_expr = new infinity::CastExpr(std::move(*data_type_result));
+    hybridsearch::CastExpr* cast_expr = new hybridsearch::CastExpr(std::move(*data_type_result));
     cast_expr->expr_ = (yyvsp[-3].expr_t);
     (yyval.expr_t) = cast_expr;
 }
@@ -8552,8 +8552,8 @@ Return4:
   case 453: /* subquery_expr: EXISTS '(' select_without_paren ')'  */
 #line 3508 "parser.y"
                                                    {
-    infinity::SubqueryExpr* subquery_expr = new infinity::SubqueryExpr();
-    subquery_expr->subquery_type_ = infinity::SubqueryType::kExists;
+    hybridsearch::SubqueryExpr* subquery_expr = new hybridsearch::SubqueryExpr();
+    subquery_expr->subquery_type_ = hybridsearch::SubqueryType::kExists;
     subquery_expr->select_ = (yyvsp[-1].select_stmt);
     (yyval.expr_t) = subquery_expr;
 }
@@ -8563,8 +8563,8 @@ Return4:
   case 454: /* subquery_expr: NOT EXISTS '(' select_without_paren ')'  */
 #line 3514 "parser.y"
                                           {
-    infinity::SubqueryExpr* subquery_expr = new infinity::SubqueryExpr();
-    subquery_expr->subquery_type_ = infinity::SubqueryType::kNotExists;
+    hybridsearch::SubqueryExpr* subquery_expr = new hybridsearch::SubqueryExpr();
+    subquery_expr->subquery_type_ = hybridsearch::SubqueryType::kNotExists;
     subquery_expr->select_ = (yyvsp[-1].select_stmt);
     (yyval.expr_t) = subquery_expr;
 }
@@ -8574,8 +8574,8 @@ Return4:
   case 455: /* subquery_expr: operand IN '(' select_without_paren ')'  */
 #line 3520 "parser.y"
                                           {
-    infinity::SubqueryExpr* subquery_expr = new infinity::SubqueryExpr();
-    subquery_expr->subquery_type_ = infinity::SubqueryType::kIn;
+    hybridsearch::SubqueryExpr* subquery_expr = new hybridsearch::SubqueryExpr();
+    subquery_expr->subquery_type_ = hybridsearch::SubqueryType::kIn;
     subquery_expr->left_ = (yyvsp[-4].expr_t);
     subquery_expr->select_ = (yyvsp[-1].select_stmt);
     (yyval.expr_t) = subquery_expr;
@@ -8586,8 +8586,8 @@ Return4:
   case 456: /* subquery_expr: operand NOT IN '(' select_without_paren ')'  */
 #line 3527 "parser.y"
                                               {
-    infinity::SubqueryExpr* subquery_expr = new infinity::SubqueryExpr();
-    subquery_expr->subquery_type_ = infinity::SubqueryType::kNotIn;
+    hybridsearch::SubqueryExpr* subquery_expr = new hybridsearch::SubqueryExpr();
+    subquery_expr->subquery_type_ = hybridsearch::SubqueryType::kNotIn;
     subquery_expr->left_ = (yyvsp[-5].expr_t);
     subquery_expr->select_ = (yyvsp[-1].select_stmt);
     (yyval.expr_t) = subquery_expr;
@@ -8598,7 +8598,7 @@ Return4:
   case 457: /* column_expr: IDENTIFIER  */
 #line 3535 "parser.y"
                          {
-    infinity::ColumnExpr* column_expr = new infinity::ColumnExpr();
+    hybridsearch::ColumnExpr* column_expr = new hybridsearch::ColumnExpr();
     ParserHelper::ToLower((yyvsp[0].str_value));
     column_expr->names_.emplace_back((yyvsp[0].str_value));
     free((yyvsp[0].str_value));
@@ -8610,7 +8610,7 @@ Return4:
   case 458: /* column_expr: column_expr '.' IDENTIFIER  */
 #line 3542 "parser.y"
                              {
-    infinity::ColumnExpr* column_expr = (infinity::ColumnExpr*)(yyvsp[-2].expr_t);
+    hybridsearch::ColumnExpr* column_expr = (hybridsearch::ColumnExpr*)(yyvsp[-2].expr_t);
     ParserHelper::ToLower((yyvsp[0].str_value));
     column_expr->names_.emplace_back((yyvsp[0].str_value));
     free((yyvsp[0].str_value));
@@ -8622,7 +8622,7 @@ Return4:
   case 459: /* column_expr: '*'  */
 #line 3549 "parser.y"
       {
-    infinity::ColumnExpr* column_expr = new infinity::ColumnExpr();
+    hybridsearch::ColumnExpr* column_expr = new hybridsearch::ColumnExpr();
     column_expr->star_ = true;
     (yyval.expr_t) = column_expr;
 }
@@ -8632,7 +8632,7 @@ Return4:
   case 460: /* column_expr: column_expr '.' '*'  */
 #line 3554 "parser.y"
                       {
-    infinity::ColumnExpr* column_expr = (infinity::ColumnExpr*)(yyvsp[-2].expr_t);
+    hybridsearch::ColumnExpr* column_expr = (hybridsearch::ColumnExpr*)(yyvsp[-2].expr_t);
     if(column_expr->star_) {
         yyerror(&yyloc, scanner, result, "Invalid column expression format");
         YYERROR;
@@ -8646,7 +8646,7 @@ Return4:
   case 461: /* constant_expr: STRING  */
 #line 3564 "parser.y"
                       {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kString);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kString);
     const_expr->str_value_ = (yyvsp[0].str_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -8656,7 +8656,7 @@ Return4:
   case 462: /* constant_expr: TRUE  */
 #line 3569 "parser.y"
        {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kBoolean);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kBoolean);
     const_expr->bool_value_ = true;
     (yyval.const_expr_t) = const_expr;
 }
@@ -8666,7 +8666,7 @@ Return4:
   case 463: /* constant_expr: FALSE  */
 #line 3574 "parser.y"
         {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kBoolean);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kBoolean);
     const_expr->bool_value_ = false;
     (yyval.const_expr_t) = const_expr;
 }
@@ -8676,7 +8676,7 @@ Return4:
   case 464: /* constant_expr: DOUBLE_VALUE  */
 #line 3579 "parser.y"
                {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kDouble);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kDouble);
     const_expr->double_value_ = (yyvsp[0].double_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -8686,7 +8686,7 @@ Return4:
   case 465: /* constant_expr: LONG_VALUE  */
 #line 3584 "parser.y"
              {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInteger);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInteger);
     const_expr->integer_value_ = (yyvsp[0].long_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -8696,7 +8696,7 @@ Return4:
   case 466: /* constant_expr: DATE STRING  */
 #line 3589 "parser.y"
               {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kDate);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kDate);
     const_expr->date_value_ = (yyvsp[0].str_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -8706,7 +8706,7 @@ Return4:
   case 467: /* constant_expr: TIME STRING  */
 #line 3594 "parser.y"
               {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kTime);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kTime);
     const_expr->date_value_ = (yyvsp[0].str_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -8716,7 +8716,7 @@ Return4:
   case 468: /* constant_expr: DATETIME STRING  */
 #line 3599 "parser.y"
                   {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kDateTime);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kDateTime);
     const_expr->date_value_ = (yyvsp[0].str_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -8726,7 +8726,7 @@ Return4:
   case 469: /* constant_expr: TIMESTAMP STRING  */
 #line 3604 "parser.y"
                    {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kTimestamp);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kTimestamp);
     const_expr->date_value_ = (yyvsp[0].str_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -8832,7 +8832,7 @@ Return4:
   case 482: /* unclosed_subarray_array_expr: '[' common_array_expr  */
 #line 3649 "parser.y"
                                                     {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kSubArrayArray);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kSubArrayArray);
     const_expr->sub_array_array_.emplace_back((yyvsp[0].const_expr_t));
     (yyval.const_expr_t) = const_expr;
 }
@@ -8875,7 +8875,7 @@ Return4:
   case 487: /* unclosed_long_sparse_array_expr: '[' int_sparse_ele  */
 #line 3670 "parser.y"
                                                     {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kLongSparseArray);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kLongSparseArray);
     const_expr->long_sparse_array_.first.emplace_back((yyvsp[0].int_sparse_ele_t)->first);
     const_expr->long_sparse_array_.second.emplace_back((yyvsp[0].int_sparse_ele_t)->second);
     delete (yyvsp[0].int_sparse_ele_t);
@@ -8906,7 +8906,7 @@ Return4:
   case 490: /* unclosed_double_sparse_array_expr: '[' float_sparse_ele  */
 #line 3688 "parser.y"
                                                         {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kDoubleSparseArray);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kDoubleSparseArray);
     const_expr->double_sparse_array_.first.emplace_back((yyvsp[0].float_sparse_ele_t)->first);
     const_expr->double_sparse_array_.second.emplace_back((yyvsp[0].float_sparse_ele_t)->second);
     delete (yyvsp[0].float_sparse_ele_t);
@@ -8929,7 +8929,7 @@ Return4:
   case 492: /* empty_array_expr: '[' ']'  */
 #line 3702 "parser.y"
                           {
-    (yyval.const_expr_t) = new infinity::ConstantExpr(infinity::LiteralType::kEmptyArray);
+    (yyval.const_expr_t) = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kEmptyArray);
 }
 #line 8935 "parser.cpp"
     break;
@@ -8945,7 +8945,7 @@ Return4:
   case 494: /* curly_brackets_expr: '{' '}'  */
 #line 3709 "parser.y"
           {
-    (yyval.const_expr_t) = new infinity::ConstantExpr(infinity::LiteralType::kCurlyBracketsArray);
+    (yyval.const_expr_t) = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kCurlyBracketsArray);
 }
 #line 8951 "parser.cpp"
     break;
@@ -8953,7 +8953,7 @@ Return4:
   case 495: /* unclosed_curly_brackets_expr: '{' constant_expr  */
 #line 3713 "parser.y"
                                                 {
-    (yyval.const_expr_t) = new infinity::ConstantExpr(infinity::LiteralType::kCurlyBracketsArray);
+    (yyval.const_expr_t) = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kCurlyBracketsArray);
     (yyval.const_expr_t)->curly_brackets_array_.emplace_back((yyvsp[0].const_expr_t));
 }
 #line 8960 "parser.cpp"
@@ -9011,7 +9011,7 @@ Return4:
   case 502: /* unclosed_long_array_expr: '[' LONG_VALUE  */
 #line 3741 "parser.y"
                                          {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kIntegerArray);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kIntegerArray);
     const_expr->long_array_.emplace_back((yyvsp[0].long_value));
     (yyval.const_expr_t) = const_expr;
 }
@@ -9038,7 +9038,7 @@ Return4:
   case 505: /* unclosed_double_array_expr: '[' DOUBLE_VALUE  */
 #line 3755 "parser.y"
                                              {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kDoubleArray);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kDoubleArray);
     const_expr->double_array_.emplace_back((yyvsp[0].double_value));
     (yyval.const_expr_t) = const_expr;
 }
@@ -9057,8 +9057,8 @@ Return4:
   case 507: /* interval_expr: LONG_VALUE SECONDS  */
 #line 3765 "parser.y"
                                   {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kSecond;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kSecond;
     const_expr->integer_value_ = (yyvsp[-1].long_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -9068,8 +9068,8 @@ Return4:
   case 508: /* interval_expr: LONG_VALUE SECOND  */
 #line 3771 "parser.y"
                     {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kSecond;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kSecond;
     const_expr->integer_value_ = (yyvsp[-1].long_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -9079,8 +9079,8 @@ Return4:
   case 509: /* interval_expr: LONG_VALUE MINUTES  */
 #line 3777 "parser.y"
                      {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kMinute;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kMinute;
     const_expr->integer_value_ = (yyvsp[-1].long_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -9090,8 +9090,8 @@ Return4:
   case 510: /* interval_expr: LONG_VALUE MINUTE  */
 #line 3783 "parser.y"
                     {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kMinute;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kMinute;
     const_expr->integer_value_ = (yyvsp[-1].long_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -9101,8 +9101,8 @@ Return4:
   case 511: /* interval_expr: LONG_VALUE HOURS  */
 #line 3789 "parser.y"
                    {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kHour;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kHour;
     const_expr->integer_value_ = (yyvsp[-1].long_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -9112,8 +9112,8 @@ Return4:
   case 512: /* interval_expr: LONG_VALUE HOUR  */
 #line 3795 "parser.y"
                   {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kHour;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kHour;
     const_expr->integer_value_ = (yyvsp[-1].long_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -9123,8 +9123,8 @@ Return4:
   case 513: /* interval_expr: LONG_VALUE DAYS  */
 #line 3801 "parser.y"
                   {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kDay;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kDay;
     const_expr->integer_value_ = (yyvsp[-1].long_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -9134,8 +9134,8 @@ Return4:
   case 514: /* interval_expr: LONG_VALUE DAY  */
 #line 3807 "parser.y"
                  {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kDay;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kDay;
     const_expr->integer_value_ = (yyvsp[-1].long_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -9145,8 +9145,8 @@ Return4:
   case 515: /* interval_expr: LONG_VALUE MONTHS  */
 #line 3813 "parser.y"
                     {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kMonth;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kMonth;
     const_expr->integer_value_ = (yyvsp[-1].long_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -9156,8 +9156,8 @@ Return4:
   case 516: /* interval_expr: LONG_VALUE MONTH  */
 #line 3819 "parser.y"
                    {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kMonth;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kMonth;
     const_expr->integer_value_ = (yyvsp[-1].long_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -9167,8 +9167,8 @@ Return4:
   case 517: /* interval_expr: LONG_VALUE YEARS  */
 #line 3825 "parser.y"
                    {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kYear;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kYear;
     const_expr->integer_value_ = (yyvsp[-1].long_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -9178,8 +9178,8 @@ Return4:
   case 518: /* interval_expr: LONG_VALUE YEAR  */
 #line 3831 "parser.y"
                   {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kYear;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kYear;
     const_expr->integer_value_ = (yyvsp[-1].long_value);
     (yyval.const_expr_t) = const_expr;
 }
@@ -9189,7 +9189,7 @@ Return4:
   case 519: /* copy_option_list: copy_option  */
 #line 3842 "parser.y"
                                {
-    (yyval.copy_option_array) = new std::vector<infinity::CopyOption*>();
+    (yyval.copy_option_array) = new std::vector<hybridsearch::CopyOption*>();
     (yyval.copy_option_array)->push_back((yyvsp[0].copy_option_t));
 }
 #line 9196 "parser.cpp"
@@ -9207,28 +9207,28 @@ Return4:
   case 521: /* copy_option: FORMAT IDENTIFIER  */
 #line 3851 "parser.y"
                                 {
-    (yyval.copy_option_t) = new infinity::CopyOption();
-    (yyval.copy_option_t)->option_type_ = infinity::CopyOptionType::kFormat;
+    (yyval.copy_option_t) = new hybridsearch::CopyOption();
+    (yyval.copy_option_t)->option_type_ = hybridsearch::CopyOptionType::kFormat;
     if (strcasecmp((yyvsp[0].str_value), "csv") == 0) {
-        (yyval.copy_option_t)->file_type_ = infinity::CopyFileType::kCSV;
+        (yyval.copy_option_t)->file_type_ = hybridsearch::CopyFileType::kCSV;
         free((yyvsp[0].str_value));
     } else if (strcasecmp((yyvsp[0].str_value), "json") == 0) {
-        (yyval.copy_option_t)->file_type_ = infinity::CopyFileType::kJSON;
+        (yyval.copy_option_t)->file_type_ = hybridsearch::CopyFileType::kJSON;
         free((yyvsp[0].str_value));
     } else if (strcasecmp((yyvsp[0].str_value), "jsonl") == 0) {
-        (yyval.copy_option_t)->file_type_ = infinity::CopyFileType::kJSONL;
+        (yyval.copy_option_t)->file_type_ = hybridsearch::CopyFileType::kJSONL;
         free((yyvsp[0].str_value));
     } else if (strcasecmp((yyvsp[0].str_value), "fvecs") == 0) {
-        (yyval.copy_option_t)->file_type_ = infinity::CopyFileType::kFVECS;
+        (yyval.copy_option_t)->file_type_ = hybridsearch::CopyFileType::kFVECS;
         free((yyvsp[0].str_value));
     } else if (strcasecmp((yyvsp[0].str_value), "csr") == 0) {
-        (yyval.copy_option_t)->file_type_ = infinity::CopyFileType::kCSR;
+        (yyval.copy_option_t)->file_type_ = hybridsearch::CopyFileType::kCSR;
         free((yyvsp[0].str_value));
     } else if (strcasecmp((yyvsp[0].str_value), "bvecs") == 0) {
-        (yyval.copy_option_t)->file_type_ = infinity::CopyFileType::kBVECS;
+        (yyval.copy_option_t)->file_type_ = hybridsearch::CopyFileType::kBVECS;
         free((yyvsp[0].str_value));
     } else if (strcasecmp((yyvsp[0].str_value), "parquet") == 0) {
-        (yyval.copy_option_t)->file_type_ = infinity::CopyFileType::kPARQUET;
+        (yyval.copy_option_t)->file_type_ = hybridsearch::CopyFileType::kPARQUET;
         free((yyvsp[0].str_value));
     } else {
         free((yyvsp[0].str_value));
@@ -9243,8 +9243,8 @@ Return4:
   case 522: /* copy_option: DELIMITER STRING  */
 #line 3882 "parser.y"
                    {
-    (yyval.copy_option_t) = new infinity::CopyOption();
-    (yyval.copy_option_t)->option_type_ = infinity::CopyOptionType::kDelimiter;
+    (yyval.copy_option_t) = new hybridsearch::CopyOption();
+    (yyval.copy_option_t)->option_type_ = hybridsearch::CopyOptionType::kDelimiter;
     if(strlen((yyvsp[0].str_value)) > 1 && (yyvsp[0].str_value)[0] == '\\') {
         if((yyvsp[0].str_value)[1] == 't') (yyval.copy_option_t)->delimiter_ = '\t';
     }else {
@@ -9258,8 +9258,8 @@ Return4:
   case 523: /* copy_option: HEADER  */
 #line 3892 "parser.y"
          {
-    (yyval.copy_option_t) = new infinity::CopyOption();
-    (yyval.copy_option_t)->option_type_ = infinity::CopyOptionType::kHeader;
+    (yyval.copy_option_t) = new hybridsearch::CopyOption();
+    (yyval.copy_option_t)->option_type_ = hybridsearch::CopyOptionType::kHeader;
     (yyval.copy_option_t)->header_ = true;
 }
 #line 9266 "parser.cpp"
@@ -9268,8 +9268,8 @@ Return4:
   case 524: /* copy_option: OFFSET LONG_VALUE  */
 #line 3897 "parser.y"
                     {
-    (yyval.copy_option_t) = new infinity::CopyOption();
-    (yyval.copy_option_t)->option_type_ = infinity::CopyOptionType::kOffset;
+    (yyval.copy_option_t) = new hybridsearch::CopyOption();
+    (yyval.copy_option_t)->option_type_ = hybridsearch::CopyOptionType::kOffset;
     (yyval.copy_option_t)->offset_ = (yyvsp[0].long_value);
 }
 #line 9276 "parser.cpp"
@@ -9278,8 +9278,8 @@ Return4:
   case 525: /* copy_option: LIMIT LONG_VALUE  */
 #line 3902 "parser.y"
                    {
-    (yyval.copy_option_t) = new infinity::CopyOption();
-    (yyval.copy_option_t)->option_type_ = infinity::CopyOptionType::kLimit;
+    (yyval.copy_option_t) = new hybridsearch::CopyOption();
+    (yyval.copy_option_t)->option_type_ = hybridsearch::CopyOptionType::kLimit;
     (yyval.copy_option_t)->limit_ = (yyvsp[0].long_value);
 }
 #line 9286 "parser.cpp"
@@ -9288,8 +9288,8 @@ Return4:
   case 526: /* copy_option: ROWLIMIT LONG_VALUE  */
 #line 3907 "parser.y"
                       {
-    (yyval.copy_option_t) = new infinity::CopyOption();
-    (yyval.copy_option_t)->option_type_ = infinity::CopyOptionType::kRowLimit;
+    (yyval.copy_option_t) = new hybridsearch::CopyOption();
+    (yyval.copy_option_t)->option_type_ = hybridsearch::CopyOptionType::kRowLimit;
     (yyval.copy_option_t)->row_limit_ = (yyvsp[0].long_value);
 }
 #line 9296 "parser.cpp"
@@ -9330,7 +9330,7 @@ Return4:
   case 534: /* if_not_exists_info: if_not_exists IDENTIFIER  */
 #line 3936 "parser.y"
                                               {
-    (yyval.if_not_exists_info_t) = new infinity::IfNotExistsInfo();
+    (yyval.if_not_exists_info_t) = new hybridsearch::IfNotExistsInfo();
     (yyval.if_not_exists_info_t)->exists_ = true;
     (yyval.if_not_exists_info_t)->if_not_exists_ = (yyvsp[-1].bool_value);
     ParserHelper::ToLower((yyvsp[0].str_value));
@@ -9343,7 +9343,7 @@ Return4:
   case 535: /* if_not_exists_info: %empty  */
 #line 3944 "parser.y"
   {
-    (yyval.if_not_exists_info_t) = new infinity::IfNotExistsInfo();
+    (yyval.if_not_exists_info_t) = new hybridsearch::IfNotExistsInfo();
 }
 #line 9349 "parser.cpp"
     break;
@@ -9359,7 +9359,7 @@ Return4:
   case 537: /* with_index_param_list: %empty  */
 #line 3951 "parser.y"
   {
-    (yyval.with_index_param_list_t) = new std::vector<infinity::InitParameter*>();
+    (yyval.with_index_param_list_t) = new std::vector<hybridsearch::InitParameter*>();
 }
 #line 9365 "parser.cpp"
     break;
@@ -9383,7 +9383,7 @@ Return4:
   case 540: /* index_param_list: index_param  */
 #line 3962 "parser.y"
                                {
-    (yyval.index_param_list_t) = new std::vector<infinity::InitParameter*>();
+    (yyval.index_param_list_t) = new std::vector<hybridsearch::InitParameter*>();
     (yyval.index_param_list_t)->push_back((yyvsp[0].index_param_t));
 }
 #line 9390 "parser.cpp"
@@ -9402,7 +9402,7 @@ Return4:
 #line 3971 "parser.y"
                          {
     ParserHelper::ToLower((yyvsp[0].str_value));
-    (yyval.index_param_t) = new infinity::InitParameter();
+    (yyval.index_param_t) = new hybridsearch::InitParameter();
     (yyval.index_param_t)->param_name_ = (yyvsp[0].str_value);
     free((yyvsp[0].str_value));
 }
@@ -9414,7 +9414,7 @@ Return4:
                             {
     ParserHelper::ToLower((yyvsp[-2].str_value));
     ParserHelper::ToLower((yyvsp[0].str_value));
-    (yyval.index_param_t) = new infinity::InitParameter();
+    (yyval.index_param_t) = new hybridsearch::InitParameter();
     (yyval.index_param_t)->param_name_ = (yyvsp[-2].str_value);
     free((yyvsp[-2].str_value));
 
@@ -9429,7 +9429,7 @@ Return4:
                         {
     ParserHelper::ToLower((yyvsp[-2].str_value));
     ParserHelper::ToLower((yyvsp[0].str_value));
-    (yyval.index_param_t) = new infinity::InitParameter();
+    (yyval.index_param_t) = new hybridsearch::InitParameter();
     (yyval.index_param_t)->param_name_ = (yyvsp[-2].str_value);
     free((yyvsp[-2].str_value));
 
@@ -9443,7 +9443,7 @@ Return4:
 #line 3997 "parser.y"
                             {
     ParserHelper::ToLower((yyvsp[-2].str_value));
-    (yyval.index_param_t) = new infinity::InitParameter();
+    (yyval.index_param_t) = new hybridsearch::InitParameter();
     (yyval.index_param_t)->param_name_ = (yyvsp[-2].str_value);
     free((yyvsp[-2].str_value));
 
@@ -9456,7 +9456,7 @@ Return4:
 #line 4005 "parser.y"
                               {
     ParserHelper::ToLower((yyvsp[-2].str_value));
-    (yyval.index_param_t) = new infinity::InitParameter();
+    (yyval.index_param_t) = new hybridsearch::InitParameter();
     (yyval.index_param_t)->param_name_ = (yyvsp[-2].str_value);
     free((yyvsp[-2].str_value));
 
@@ -9469,19 +9469,19 @@ Return4:
 #line 4016 "parser.y"
                                                                        {
     ParserHelper::ToLower((yyvsp[-1].str_value));
-    infinity::IndexType index_type = infinity::IndexType::kInvalid;
+    hybridsearch::IndexType index_type = hybridsearch::IndexType::kInvalid;
     if(strcmp((yyvsp[-1].str_value), "fulltext") == 0) {
-        index_type = infinity::IndexType::kFullText;
+        index_type = hybridsearch::IndexType::kFullText;
     } else if (strcmp((yyvsp[-1].str_value), "hnsw") == 0) {
-        index_type = infinity::IndexType::kHnsw;
+        index_type = hybridsearch::IndexType::kHnsw;
     } else if (strcmp((yyvsp[-1].str_value), "bmp") == 0) {
-        index_type = infinity::IndexType::kBMP;
+        index_type = hybridsearch::IndexType::kBMP;
     } else if (strcmp((yyvsp[-1].str_value), "ivf") == 0) {
-        index_type = infinity::IndexType::kIVF;
+        index_type = hybridsearch::IndexType::kIVF;
     } else if (strcmp((yyvsp[-1].str_value), "emvb") == 0) {
-        index_type = infinity::IndexType::kEMVB;
+        index_type = hybridsearch::IndexType::kEMVB;
     } else if(strcmp((yyvsp[-1].str_value), "diskann") == 0){
-        index_type = infinity::IndexType::kDiskAnn;
+        index_type = hybridsearch::IndexType::kDiskAnn;
     } else {
         free((yyvsp[-1].str_value));
         free((yyvsp[-4].str_value));
@@ -9491,7 +9491,7 @@ Return4:
     }
     free((yyvsp[-1].str_value));
 
-    (yyval.index_info_t) = new infinity::IndexInfo();
+    (yyval.index_info_t) = new hybridsearch::IndexInfo();
 
     (yyval.index_info_t)->index_type_ = index_type;
     (yyval.index_info_t)->column_name_ = (yyvsp[-4].str_value);
@@ -9504,8 +9504,8 @@ Return4:
   case 548: /* index_info: '(' IDENTIFIER ')'  */
 #line 4047 "parser.y"
                      {
-    (yyval.index_info_t) = new infinity::IndexInfo();
-    (yyval.index_info_t)->index_type_ = infinity::IndexType::kSecondary;
+    (yyval.index_info_t) = new hybridsearch::IndexInfo();
+    (yyval.index_info_t)->index_type_ = hybridsearch::IndexType::kSecondary;
     (yyval.index_info_t)->column_name_ = (yyvsp[-1].str_value);
     free((yyvsp[-1].str_value));
 }
@@ -9746,7 +9746,7 @@ yyreturnlab:
 
 
 void
-yyerror(YYLTYPE * llocp, void* lexer, infinity::ParserResult* result, const char* msg) {
+yyerror(YYLTYPE * llocp, void* lexer, hybridsearch::ParserResult* result, const char* msg) {
     if(result->IsError()) return ;
 
     result->error_message_ = std::string(msg) + ", " + std::to_string(llocp->first_column);

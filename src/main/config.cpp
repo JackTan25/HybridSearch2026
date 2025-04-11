@@ -31,20 +31,20 @@ import utility;
 import status;
 import options;
 import command_statement;
-import infinity_exception;
+import hybridsearch_exception;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 using namespace std::chrono;
 
 Config::Config() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::IncrObjectCount("Config");
 #endif
 }
 
 Config::~Config() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::DecrObjectCount("Config");
 #endif
 }
@@ -321,7 +321,7 @@ Status Config::Init(const SharedPtr<String> &config_path, DefaultConfig *default
         }
 
         // Log file name
-        String log_filename = "infinity.log";
+        String log_filename = "hybridsearch.log";
         UniquePtr<StringOption> log_file_name_option = MakeUnique<StringOption>(LOG_FILENAME_OPTION_NAME, log_filename);
         status = global_options_.AddOption(std::move(log_file_name_option));
         if (!status.ok()) {
@@ -330,7 +330,7 @@ Status Config::Init(const SharedPtr<String> &config_path, DefaultConfig *default
         }
 
         // Log dir
-        String log_dir = "/var/infinity/log";
+        String log_dir = "/var/hybridsearch/log";
         if (default_config != nullptr) {
             log_dir = default_config->default_log_dir_;
         }
@@ -386,7 +386,7 @@ Status Config::Init(const SharedPtr<String> &config_path, DefaultConfig *default
         }
 
         // Data Dir
-        String data_dir = "/var/infinity/data";
+        String data_dir = "/var/hybridsearch/data";
         if (default_config != nullptr) {
             data_dir = default_config->default_data_dir_;
         }
@@ -552,7 +552,7 @@ Status Config::Init(const SharedPtr<String> &config_path, DefaultConfig *default
         }
 
         // Temp Dir
-        String temp_dir = "/var/infinity/tmp";
+        String temp_dir = "/var/hybridsearch/tmp";
         if (default_config != nullptr) {
             temp_dir = default_config->default_temp_dir_;
         }
@@ -564,7 +564,7 @@ Status Config::Init(const SharedPtr<String> &config_path, DefaultConfig *default
         }
 
         // WAL Dir
-        String wal_dir = "/var/infinity/wal";
+        String wal_dir = "/var/hybridsearch/wal";
         if (default_config != nullptr) {
             wal_dir = default_config->default_wal_dir_;
         }
@@ -631,7 +631,7 @@ Status Config::Init(const SharedPtr<String> &config_path, DefaultConfig *default
         }
 
         // Resource Dir
-        String resource_dir = "/var/infinity/resource";
+        String resource_dir = "/var/hybridsearch/resource";
         if (default_config != nullptr) {
             resource_dir = default_config->default_resource_dir_;
         }
@@ -1300,7 +1300,7 @@ Status Config::Init(const SharedPtr<String> &config_path, DefaultConfig *default
                     switch (option_index) {
                         case GlobalOptionIndex::kLogFileName: {
                             // Log file name
-                            String log_filename = "infinity.log";
+                            String log_filename = "hybridsearch.log";
                             if (elem.second.is_string()) {
                                 log_filename = elem.second.value_or(log_filename);
                             } else {
@@ -1316,7 +1316,7 @@ Status Config::Init(const SharedPtr<String> &config_path, DefaultConfig *default
                         }
                         case GlobalOptionIndex::kLogDir: {
                             // Log dir
-                            String log_filename = "/var/infinity/log";
+                            String log_filename = "/var/hybridsearch/log";
                             if (elem.second.is_string()) {
                                 log_filename = elem.second.value_or(log_filename);
                             } else {
@@ -1434,7 +1434,7 @@ Status Config::Init(const SharedPtr<String> &config_path, DefaultConfig *default
 
                 if (global_options_.GetOptionByIndex(GlobalOptionIndex::kLogFileName) == nullptr) {
                     // Log file name
-                    String log_filename = "infinity.log";
+                    String log_filename = "hybridsearch.log";
                     UniquePtr<StringOption> log_file_name_option = MakeUnique<StringOption>(LOG_FILENAME_OPTION_NAME, log_filename);
                     Status status = global_options_.AddOption(std::move(log_file_name_option));
                     if (!status.ok()) {
@@ -1444,7 +1444,7 @@ Status Config::Init(const SharedPtr<String> &config_path, DefaultConfig *default
 
                 if (global_options_.GetOptionByIndex(GlobalOptionIndex::kLogDir) == nullptr) {
                     // Log dir
-                    String log_dir = "/var/infinity/log";
+                    String log_dir = "/var/hybridsearch/log";
                     UniquePtr<StringOption> log_dir_option = MakeUnique<StringOption>(LOG_DIR_OPTION_NAME, log_dir);
                     Status status = global_options_.AddOption(std::move(log_dir_option));
                     if (!status.ok()) {
@@ -1520,7 +1520,7 @@ Status Config::Init(const SharedPtr<String> &config_path, DefaultConfig *default
                     switch (option_index) {
                         case GlobalOptionIndex::kDataDir: {
                             // Data Dir
-                            String data_dir = "/var/infinity/data";
+                            String data_dir = "/var/hybridsearch/data";
                             if (elem.second.is_string()) {
                                 data_dir = elem.second.value_or(data_dir);
                             } else {
@@ -1888,7 +1888,7 @@ Status Config::Init(const SharedPtr<String> &config_path, DefaultConfig *default
                 }
                 if (global_options_.GetOptionByIndex(GlobalOptionIndex::kDataDir) == nullptr) {
                     // Data Dir
-                    String data_dir = "/var/infinity/data";
+                    String data_dir = "/var/hybridsearch/data";
                     UniquePtr<StringOption> data_dir_option = MakeUnique<StringOption>(DATA_DIR_OPTION_NAME, data_dir);
                     Status status = global_options_.AddOption(std::move(data_dir_option));
                     if (!status.ok()) {
@@ -2056,7 +2056,7 @@ Status Config::Init(const SharedPtr<String> &config_path, DefaultConfig *default
                             break;
                         }
                         case GlobalOptionIndex::kTempDir: {
-                            String temp_dir = "/var/infinity/tmp";
+                            String temp_dir = "/var/hybridsearch/tmp";
                             if (elem.second.is_string()) {
                                 temp_dir = elem.second.value_or(temp_dir);
                             } else {
@@ -2136,7 +2136,7 @@ Status Config::Init(const SharedPtr<String> &config_path, DefaultConfig *default
 
                 if (global_options_.GetOptionByIndex(GlobalOptionIndex::kTempDir) == nullptr) {
                     // Temp Dir
-                    String temp_dir = "/var/infinity/tmp";
+                    String temp_dir = "/var/hybridsearch/tmp";
                     UniquePtr<StringOption> temp_dir_option = MakeUnique<StringOption>(TEMP_DIR_OPTION_NAME, temp_dir);
                     Status status = global_options_.AddOption(std::move(temp_dir_option));
                     if (!status.ok()) {
@@ -2195,7 +2195,7 @@ Status Config::Init(const SharedPtr<String> &config_path, DefaultConfig *default
                     switch (option_index) {
                         case GlobalOptionIndex::kWALDir: {
                             // WAL Dir
-                            String wal_dir = "/var/infinity/wal";
+                            String wal_dir = "/var/hybridsearch/wal";
 
                             if (elem.second.is_string()) {
                                 wal_dir = elem.second.value_or(wal_dir);
@@ -2354,7 +2354,7 @@ Status Config::Init(const SharedPtr<String> &config_path, DefaultConfig *default
 
                 if (global_options_.GetOptionByIndex(GlobalOptionIndex::kWALDir) == nullptr) {
                     // WAL Dir
-                    String wal_dir = "/var/infinity/wal";
+                    String wal_dir = "/var/hybridsearch/wal";
                     UniquePtr<StringOption> wal_dir_option = MakeUnique<StringOption>(WAL_DIR_OPTION_NAME, wal_dir);
                     Status status = global_options_.AddOption(std::move(wal_dir_option));
                     if (!status.ok()) {
@@ -2444,7 +2444,7 @@ Status Config::Init(const SharedPtr<String> &config_path, DefaultConfig *default
                     switch (option_index) {
                         case GlobalOptionIndex::kResourcePath: {
                             // Resource Dir
-                            String resource_dir = "/var/infinity/resource";
+                            String resource_dir = "/var/hybridsearch/resource";
                             if (elem.second.is_string()) {
                                 resource_dir = elem.second.value_or(resource_dir);
                             } else {
@@ -2466,7 +2466,7 @@ Status Config::Init(const SharedPtr<String> &config_path, DefaultConfig *default
 
                 if (global_options_.GetOptionByIndex(GlobalOptionIndex::kResourcePath) == nullptr) {
                     // Resource Dir
-                    String resource_dir = "/var/infinity/resource";
+                    String resource_dir = "/var/hybridsearch/resource";
                     UniquePtr<StringOption> resource_dir_option = MakeUnique<StringOption>("resource_dir", resource_dir);
                     Status status = global_options_.AddOption(std::move(resource_dir_option));
                     if (!status.ok()) {
@@ -2927,7 +2927,7 @@ Tuple<BaseOption *, Status> Config::GetConfigByName(const String &name) { return
 // }
 
 void Config::PrintAll() {
-    fmt::print("Infinity system configs: \n");
+    fmt::print("hybridsearch system configs: \n");
 
     // General
     fmt::print(" - version: {}\n", Version());
@@ -3005,4 +3005,4 @@ void Config::PrintAll() {
     fmt::print(" - resource_dir: {}\n", ResourcePath());
 }
 
-} // namespace infinity
+} // namespace hybridsearch

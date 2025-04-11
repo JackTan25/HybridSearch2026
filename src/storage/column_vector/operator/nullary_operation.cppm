@@ -23,7 +23,7 @@ import stl;
 import column_vector;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class NullaryOperator {
 
@@ -39,4 +39,4 @@ public:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

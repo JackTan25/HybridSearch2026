@@ -29,11 +29,11 @@ import internal_types;
 import extra_ddl_info;
 import data_type;
 import wal_manager;
-import infinity_context;
+import hybridsearch_context;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 PhysicalCreateCollection::PhysicalCreateCollection(SharedPtr<String> schema_name,
                                                    SharedPtr<String> collection_name,
@@ -50,7 +50,7 @@ PhysicalCreateCollection::PhysicalCreateCollection(SharedPtr<String> schema_name
 void PhysicalCreateCollection::Init(QueryContext* query_context) {}
 
 bool PhysicalCreateCollection::Execute(QueryContext *, OperatorState *operator_state) {
-    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
     if (storage_mode == StorageMode::kUnInitialized) {
         UnrecoverableError("Uninitialized storage mode");
     }
@@ -65,4 +65,4 @@ bool PhysicalCreateCollection::Execute(QueryContext *, OperatorState *operator_s
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

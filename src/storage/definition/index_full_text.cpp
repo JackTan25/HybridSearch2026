@@ -25,7 +25,7 @@ import index_base;
 import third_party;
 import status;
 import serialize;
-import infinity_exception;
+import hybridsearch_exception;
 import statement_common;
 import base_table_ref;
 import logical_type;
@@ -34,7 +34,7 @@ import analyzer_pool;
 import analyzer;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 void ToLowerString(String &lower) { std::transform(lower.begin(), lower.end(), lower.begin(), ::tolower); }
 
@@ -139,4 +139,4 @@ void IndexFullText::ValidateColumnDataType(const SharedPtr<BaseTableRef> &base_t
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

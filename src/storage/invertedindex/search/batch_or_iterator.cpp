@@ -28,10 +28,10 @@ import term_doc_iterator;
 import multi_doc_iterator;
 import internal_types;
 import logger;
-import infinity_exception;
+import hybridsearch_exception;
 import simd_functions;
 
-namespace infinity {
+namespace hybridsearch {
 
 constexpr u32 BATCH_OR_LEN = 128;
 
@@ -136,4 +136,4 @@ void BatchOrIterator::DecodeFrom(const RowID buffer_start_doc_id) {
                                             bm25_score_sum_ptr_);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

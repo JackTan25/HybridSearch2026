@@ -16,7 +16,7 @@
 
 #include "search_parser.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 class SearchScanner {
 public:
@@ -24,4 +24,4 @@ public:
     virtual int yylex(SearchParser::semantic_type *lval, SearchParser::location_type *location) = 0;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

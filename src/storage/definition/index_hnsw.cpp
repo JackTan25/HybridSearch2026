@@ -24,7 +24,7 @@ import stl;
 import status;
 import index_base;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 import serialize;
 import default_values;
 import index_base;
@@ -36,7 +36,7 @@ import embedding_info;
 import internal_types;
 import hnsw_lsg_builder;
 
-namespace infinity {
+namespace hybridsearch {
 
 HnswEncodeType StringToHnswEncodeType(const String &str) {
     if (str == "plain") {
@@ -329,4 +329,4 @@ void IndexHnsw::ValidateColumnDataType(const SharedPtr<BaseTableRef> &base_table
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

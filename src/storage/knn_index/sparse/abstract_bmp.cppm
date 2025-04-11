@@ -14,7 +14,7 @@
 
 module;
 
-namespace infinity {
+namespace hybridsearch {
 struct SegmentEntry;
 }
 
@@ -34,7 +34,7 @@ import base_memindex;
 import memindex_tracer;
 import table_index_entry;
 
-namespace infinity {
+namespace hybridsearch {
 
 class BufferManager;
 struct ChunkIndexEntry;
@@ -167,4 +167,4 @@ private:
     SegmentIndexEntry *segment_index_entry_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

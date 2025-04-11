@@ -23,12 +23,12 @@ import bound_cast_func;
 import data_type;
 import column_vector_cast;
 import logical_type;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import internal_types;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct GeographyTryCastToVarlen;
 
@@ -109,4 +109,4 @@ inline bool GeographyTryCastToVarlen::Run(const CircleT &, VarcharT &, ColumnVec
     return false;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

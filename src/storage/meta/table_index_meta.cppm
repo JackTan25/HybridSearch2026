@@ -27,7 +27,7 @@ import entry_list;
 import cleanup_scanner;
 import meta_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 class TxnManager;
 class BufferManager;
@@ -131,4 +131,4 @@ public:
 
     SizeT EntryCount() const { return index_entry_list_.size(); }
 };
-} // namespace infinity
+} // namespace hybridsearch

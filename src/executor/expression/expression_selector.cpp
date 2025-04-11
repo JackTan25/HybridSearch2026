@@ -30,9 +30,9 @@ import third_party;
 import data_type;
 import logger;
 
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 SizeT ExpressionSelector::Select(const SharedPtr<BaseExpression> &expr,
                                  SharedPtr<ExpressionState> &state,
@@ -112,4 +112,4 @@ void ExpressionSelector::Select(const SharedPtr<ColumnVector> &bool_column, Size
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

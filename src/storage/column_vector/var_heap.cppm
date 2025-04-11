@@ -22,7 +22,7 @@ import allocator;
 import default_values;
 import vector_heap_chunk;
 
-namespace infinity {
+namespace hybridsearch {
 #if 0
 export struct VarHeapManager {
     // Use to store string.
@@ -31,13 +31,13 @@ export struct VarHeapManager {
 
 public:
     inline explicit VarHeapManager(u64 chunk_size = MIN_VECTOR_CHUNK_SIZE) : current_chunk_size_(chunk_size) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount();
 #endif
     }
 
     inline ~VarHeapManager() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
 GlobalResourceUsage::DecrObjectCount();
 #endif
 }
@@ -76,4 +76,4 @@ private:
     u64 current_chunk_offset_{0};
 };
 #endif
-} // namespace infinity
+} // namespace hybridsearch

@@ -40,7 +40,7 @@
 
 #include <vector>
 
-namespace infinity {
+namespace hybridsearch {
 
 struct Value;
 
@@ -114,4 +114,4 @@ using BFloat16T = bfloat16_t;
 // MultiVector
 using MultiVectorT = MultiVectorType;
 
-} // namespace infinity
+} // namespace hybridsearch

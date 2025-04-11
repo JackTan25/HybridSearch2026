@@ -20,7 +20,7 @@ import term;
 import ngram_analyzer;
 import standard_analyzer;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class NGramAnalyzerTest : public BaseTest {};
 

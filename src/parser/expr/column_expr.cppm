@@ -18,8 +18,8 @@ module;
 
 export module column_expr;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::ColumnExpr;
+export using hybridsearch::ColumnExpr;
 
 }

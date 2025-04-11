@@ -19,7 +19,7 @@ import global_block_id;
 
 export module block_index;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct SegmentEntry;
 struct BlockEntry;
@@ -82,4 +82,4 @@ public:
     Vector<IndexSnapshot *> index_snapshots_vec_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

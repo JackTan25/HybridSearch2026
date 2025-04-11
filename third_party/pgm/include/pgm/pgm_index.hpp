@@ -81,7 +81,7 @@ protected:
     std::vector<size_t> levels_offsets; ///< The starting position of each level in segments[], in reverse order.
 
     /// Sentinel value to avoid bounds checking.
-    static constexpr K sentinel = std::numeric_limits<K>::has_infinity ? std::numeric_limits<K>::infinity()
+    static constexpr K sentinel = std::numeric_limits<K>::has_hybridsearch ? std::numeric_limits<K>::hybridsearch()
                                                                        : std::numeric_limits<K>::max();
 
     template<typename RandomIt>

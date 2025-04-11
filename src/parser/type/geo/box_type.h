@@ -17,7 +17,7 @@
 #include "parser_assert.h"
 #include "point_type.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 // A box is specified by two points: upper left  point and lower right point.
 struct BoxType {
@@ -47,4 +47,4 @@ struct BoxType {
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

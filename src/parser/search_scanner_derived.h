@@ -14,7 +14,7 @@
 
 #include "search_scanner.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 class SearchScannerDerived final : public SearchScanner, public yyFlexLexer {
 public:
@@ -28,4 +28,4 @@ private:
     SearchParser::semantic_type *yylval = nullptr;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

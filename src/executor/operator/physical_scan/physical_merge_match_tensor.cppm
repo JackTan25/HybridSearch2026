@@ -27,7 +27,7 @@ import data_type;
 import base_expression;
 import logical_match_tensor_scan;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct LoadMeta;
 class ResultCacheManager;
@@ -91,4 +91,4 @@ private:
     void ExecuteInner(QueryContext *query_context, MergeMatchTensorOperatorState *operator_state) const;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

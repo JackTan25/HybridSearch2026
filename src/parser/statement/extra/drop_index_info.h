@@ -17,7 +17,7 @@
 #include "extra_ddl_info.h"
 #include "statement/statement_common.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 class DropIndexInfo : public ExtraDDLInfo {
 public:
@@ -29,4 +29,4 @@ public:
     std::string index_name_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

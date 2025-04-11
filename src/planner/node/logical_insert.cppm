@@ -26,7 +26,7 @@ import meta_info;
 import internal_types;
 import data_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalInsert : public LogicalNode {
 public:
@@ -75,4 +75,4 @@ private:
     u64 table_index_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -23,11 +23,11 @@ import bmp_ivt;
 import bmp_fwd;
 import compilation_config;
 import virtual_store;
-import infinity_exception;
+import hybridsearch_exception;
 import local_file_handle;
 import third_party;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class BMPIvtTest : public BaseTest {
 protected:

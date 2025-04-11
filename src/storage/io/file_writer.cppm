@@ -19,7 +19,7 @@ export module file_writer;
 import stl;
 import local_file_handle;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class FileWriter {
 public:
@@ -56,4 +56,4 @@ public:
     SizeT TotalWrittenBytes() const;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

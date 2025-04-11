@@ -21,10 +21,10 @@ module file_writer;
 import stl;
 import virtual_store;
 import local_file_handle;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 FileWriter::FileWriter(const String &path, SizeT buffer_size)
     : path_(path), data_(MakeUnique<char_t[]>(buffer_size)), offset_(0), total_written_(0), buffer_size_(buffer_size) {
@@ -112,4 +112,4 @@ i64 FileWriter::GetFileSize() { return file_handle_->FileSize() + offset_; }
 
 SizeT FileWriter::TotalWrittenBytes() const { return total_written_ + offset_; }
 
-} // namespace infinity
+} // namespace hybridsearch

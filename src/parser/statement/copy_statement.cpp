@@ -15,7 +15,7 @@
 #include "copy_statement.h"
 #include <sstream>
 
-namespace infinity {
+namespace hybridsearch {
 
 CopyStatement::~CopyStatement() {
     if (expr_array_ != nullptr) {
@@ -76,4 +76,4 @@ std::string CopyStatement::ToString() const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

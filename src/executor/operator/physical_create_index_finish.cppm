@@ -27,7 +27,7 @@ import index_base;
 import internal_types;
 import data_type;
 
-namespace infinity {
+namespace hybridsearch {
 export class PhysicalCreateIndexFinish : public PhysicalOperator {
 public:
     PhysicalCreateIndexFinish(u64 id,
@@ -57,4 +57,4 @@ public:
     const SharedPtr<Vector<SharedPtr<DataType>>> output_types_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

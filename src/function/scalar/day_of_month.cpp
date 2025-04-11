@@ -17,7 +17,7 @@ import stl;
 import catalog;
 import status;
 import logical_type;
-import infinity_exception;
+import hybridsearch_exception;
 import scalar_function;
 import scalar_function_set;
 import third_party;
@@ -25,7 +25,7 @@ import internal_types;
 import data_type;
 import column_vector;
 
-namespace infinity {
+namespace hybridsearch {
 using namespace std::chrono;
 struct DayOfMonthFunction {
     template <typename TA, typename TB>
@@ -99,4 +99,4 @@ void RegisterDayOfMonthFunction(const UniquePtr<Catalog> &catalog_ptr) {
     Catalog::AddFunctionSet(catalog_ptr.get(), function_set_ptr);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

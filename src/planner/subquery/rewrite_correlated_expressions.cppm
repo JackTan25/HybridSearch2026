@@ -24,7 +24,7 @@ import subquery_expression;
 
 export module rewrite_correlated_expression;
 
-namespace infinity {
+namespace hybridsearch {
 
 class BindContext;
 
@@ -44,4 +44,4 @@ private:
     ColumnBinding base_binding_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

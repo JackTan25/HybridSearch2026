@@ -11,7 +11,7 @@ import posting_field;
 import posting_buffer;
 export module posting_byte_slice_reader;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PostingByteSliceReader {
 public:
@@ -98,4 +98,4 @@ bool PostingByteSliceReader::Decode(T *buffer, SizeT count, SizeT &decode_count)
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

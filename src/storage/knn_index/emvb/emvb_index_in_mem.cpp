@@ -27,7 +27,7 @@ import default_values;
 import buffer_manager;
 import block_column_entry;
 import block_column_iter;
-import infinity_exception;
+import hybridsearch_exception;
 import emvb_index;
 import index_emvb;
 import chunk_index_entry;
@@ -45,7 +45,7 @@ import emvb_product_quantization;
 import column_vector;
 import block_index;
 
-namespace infinity {
+namespace hybridsearch {
 
 EMVBIndexInMem::EMVBIndexInMem(const u32 residual_pq_subspace_num,
                                const u32 residual_pq_subspace_bits,
@@ -168,4 +168,4 @@ std::variant<Pair<u32, u32>, EMVBInMemQueryResultType> EMVBIndexInMem::SearchWit
     return std::make_pair(begin_row_id_.segment_offset_, row_count_);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

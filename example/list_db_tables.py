@@ -13,47 +13,47 @@
 # limitations under the License.
 
 '''
-This example is about connecting to the local infinity instance, creating table, inserting data, and searching data
+This example is about connecting to the local hybridsearch instance, creating table, inserting data, and searching data
 '''
 
-# import infinity_embedded as infinity
-import infinity
+# import hybridsearch_embedded as hybridsearch
+import hybridsearch
 import sys
 
 try:
-    # Use infinity_embedded module to open a local directory
-    # infinity_instance = infinity.connect("/var/infinity")
+    # Use hybridsearch_embedded module to open a local directory
+    # hybridsearch_instance = hybridsearch.connect("/var/hybridsearch")
 
-    #  Use infinity module to connect a remote server
-    infinity_instance = infinity.connect(infinity.common.NetworkAddress("127.0.0.1", 23817))
+    #  Use hybridsearch module to connect a remote server
+    hybridsearch_instance = hybridsearch.connect(hybridsearch.common.NetworkAddress("127.0.0.1", 23817))
 
-    infinity_instance.create_database("db1", infinity.common.ConflictType.Ignore, "database1")
-    infinity_instance.create_database("db2", infinity.common.ConflictType.Ignore, "database2")
-    infinity_instance.create_database("db3", infinity.common.ConflictType.Ignore, "database3")
+    hybridsearch_instance.create_database("db1", hybridsearch.common.ConflictType.Ignore, "database1")
+    hybridsearch_instance.create_database("db2", hybridsearch.common.ConflictType.Ignore, "database2")
+    hybridsearch_instance.create_database("db3", hybridsearch.common.ConflictType.Ignore, "database3")
 
-    res = infinity_instance.list_databases()
+    res = hybridsearch_instance.list_databases()
     print(res.db_names)
 
     # 'default_db' is the default database
-    db_instance = infinity_instance.get_database("db1")
+    db_instance = hybridsearch_instance.get_database("db1")
 
     table1_object = db_instance.create_table("table1", {
         "num": {"type": "integer", "constraints": ["PRIMARY KEY"], "comment": "number column"},
         "body": {"type": "varchar", "comment": "body column"},
         "vec": {"type": "vector, 4, float", "comment": "vec column"},
-    }, infinity.common.ConflictType.Ignore)
+    }, hybridsearch.common.ConflictType.Ignore)
 
     db_instance.create_table("table2", {
         "num": {"type": "integer", "constraints": ["PRIMARY KEY"]},
         "body": {"type": "varchar"},
         "vec": {"type": "vector, 4, float"},
-    }, infinity.common.ConflictType.Ignore)
+    }, hybridsearch.common.ConflictType.Ignore)
 
     db_instance.create_table("table3", {
         "num": {"type": "integer", "constraints": ["PRIMARY KEY"]},
         "body": {"type": "varchar"},
         "vec": {"type": "vector, 4, float"},
-    }, infinity.common.ConflictType.Ignore)
+    }, hybridsearch.common.ConflictType.Ignore)
 
     res = db_instance.list_tables()
     print(res.table_names)
@@ -84,7 +84,7 @@ try:
     # res = table_instance.output(["num", "body", "vec"]).to_pl()
     # print(res)
 
-    infinity_instance.disconnect()
+    hybridsearch_instance.disconnect()
 
     print('test done')
     sys.exit(0)

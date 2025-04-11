@@ -21,19 +21,19 @@ import default_values;
 import global_resource_usage;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename T>
 class BlockingQueue {
 public:
     explicit BlockingQueue(const String &name, SizeT capacity = DEFAULT_BLOCKING_QUEUE_SIZE) : capacity_(capacity) {
         name_ = name;
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount(fmt::format("BlockingQueue: {}", name_));
 #endif
     }
     ~BlockingQueue() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount(fmt::format("BlockingQueue: {}", name_));
 #endif
     }
@@ -181,4 +181,4 @@ protected:
     String name_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

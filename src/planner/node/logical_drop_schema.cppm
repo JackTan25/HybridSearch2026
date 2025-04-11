@@ -25,7 +25,7 @@ import internal_types;
 import extra_ddl_info;
 import data_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalDropSchema final : public LogicalNode {
 public:
@@ -51,4 +51,4 @@ private:
     ConflictType conflict_type_{ConflictType::kInvalid};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

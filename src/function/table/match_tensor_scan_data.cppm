@@ -23,11 +23,11 @@ import global_block_id;
 import block_index;
 import internal_types;
 import knn_result_handler;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 import merge_knn;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class MatchTensorScanFunctionData final : public TableFunctionData {
 public:
@@ -61,4 +61,4 @@ public:
     UniquePtr<TensorResultHandler> result_handler_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -24,15 +24,15 @@ import pyarrow as pa
 from pyarrow import Table
 from sqlglot import condition, maybe_parse
 
-from infinity.common import VEC, SparseVector, InfinityException, SortType
-from infinity.errors import ErrorCode
-from infinity.remote_thrift.infinity_thrift_rpc.ttypes import *
-from infinity.remote_thrift.types import (
+from hybridsearch.common import VEC, SparseVector, hybridsearchException, SortType
+from hybridsearch.errors import ErrorCode
+from hybridsearch.remote_thrift.hybridsearch_thrift_rpc.ttypes import *
+from hybridsearch.remote_thrift.types import (
     logic_type_to_dtype,
     make_match_tensor_expr,
     make_match_sparse_expr,
 )
-from infinity.remote_thrift.utils import traverse_conditions, parse_expr, get_search_optional_filter_from_opt_params
+from hybridsearch.remote_thrift.utils import traverse_conditions, parse_expr, get_search_optional_filter_from_opt_params
 
 """FIXME: How to disable validation of only the search field?"""
 
@@ -81,7 +81,7 @@ class ExplainQuery(Query):
         self.explain_type = explain_type
 
 
-class InfinityThriftQueryBuilder(ABC):
+class hybridsearchThriftQueryBuilder(ABC):
     def __init__(self, table):
         self._table = table
         self._columns = None
@@ -115,7 +115,7 @@ class InfinityThriftQueryBuilder(ABC):
             distance_type: str,
             topn: int,
             knn_params: {} = None,
-    ) -> InfinityThriftQueryBuilder:
+    ) -> hybridsearchThriftQueryBuilder:
         if self._search is None:
             self._search = SearchExpr()
             self._search.match_exprs = list()
@@ -123,7 +123,7 @@ class InfinityThriftQueryBuilder(ABC):
         column_expr = ColumnExpr(column_name=[vector_column_name], star=False)
 
         if not isinstance(topn, int):
-            raise InfinityException(
+            raise hybridsearchException(
                 ErrorCode.INVALID_TOPK_TYPE, f"Invalid topn, type should be embedded, but get {type(topn)}"
             )
 
@@ -135,14 +135,14 @@ class InfinityThriftQueryBuilder(ABC):
         elif isinstance(embedding_data, np.ndarray):
             embedding_data = embedding_data.tolist()
         else:
-            raise InfinityException(
+            raise hybridsearchException(
                 ErrorCode.INVALID_DATA_TYPE,
                 f"Invalid embedding data, type should be embedded, but get {type(embedding_data)}",
             )
 
         if embedding_data_type == "bit":
             if len(embedding_data) % 8 != 0:
-                raise InfinityException(
+                raise hybridsearchException(
                     ErrorCode.INVALID_EMBEDDING_DATA_TYPE,
                     f"Embeddings with data bit must have dimension of times of 8!"
                 )
@@ -196,7 +196,7 @@ class InfinityThriftQueryBuilder(ABC):
             elem_type = ElementType.ElementBFloat16
             data.bf16_array_value = embedding_data
         else:
-            raise InfinityException(ErrorCode.INVALID_EMBEDDING_DATA_TYPE,
+            raise hybridsearchException(ErrorCode.INVALID_EMBEDDING_DATA_TYPE,
                                     f"Invalid embedding {embedding_data[0]} type")
 
         dist_type = KnnDistanceType.L2
@@ -209,7 +209,7 @@ class InfinityThriftQueryBuilder(ABC):
         elif distance_type == "hamming":
             dist_type = KnnDistanceType.Hamming
         else:
-            raise InfinityException(ErrorCode.INVALID_KNN_DISTANCE_TYPE, f"Invalid distance type {distance_type}")
+            raise hybridsearchException(ErrorCode.INVALID_KNN_DISTANCE_TYPE, f"Invalid distance type {distance_type}")
 
         knn_opt_params = []
         optional_filter = None
@@ -240,7 +240,7 @@ class InfinityThriftQueryBuilder(ABC):
             metric_type: str,
             topn: int,
             opt_params: Optional[dict] = None,
-    ) -> InfinityThriftQueryBuilder:
+    ) -> hybridsearchThriftQueryBuilder:
         if self._search is None:
             self._search = SearchExpr()
             self._search.match_exprs = list()
@@ -255,7 +255,7 @@ class InfinityThriftQueryBuilder(ABC):
 
     def match_text(
             self, fields: str, matching_text: str, topn: int, extra_options: Optional[dict]
-    ) -> InfinityThriftQueryBuilder:
+    ) -> hybridsearchThriftQueryBuilder:
         if self._search is None:
             self._search = SearchExpr()
             self._search.match_exprs = list()
@@ -279,7 +279,7 @@ class InfinityThriftQueryBuilder(ABC):
             query_data_type: str,
             topn: int,
             extra_option: Optional[dict] = None,
-    ) -> InfinityThriftQueryBuilder:
+    ) -> hybridsearchThriftQueryBuilder:
         if self._search is None:
             self._search = SearchExpr()
             self._search.match_exprs = list()
@@ -301,7 +301,7 @@ class InfinityThriftQueryBuilder(ABC):
         self._search.match_exprs.append(generic_match_expr)
         return self
 
-    def fusion(self, method: str, topn: int, fusion_params: Optional[dict]) -> InfinityThriftQueryBuilder:
+    def fusion(self, method: str, topn: int, fusion_params: Optional[dict]) -> hybridsearchThriftQueryBuilder:
         if self._search is None:
             self._search = SearchExpr()
         if self._search.fusion_exprs is None:
@@ -313,38 +313,38 @@ class InfinityThriftQueryBuilder(ABC):
             if isinstance(fusion_params, dict):
                 for k, v in fusion_params.items():
                     if k == "topn":
-                        raise InfinityException(ErrorCode.INVALID_EXPRESSION, "topn is not allowed in fusion params")
+                        raise hybridsearchException(ErrorCode.INVALID_EXPRESSION, "topn is not allowed in fusion params")
                     final_option_text += f";{k}={v}"
         elif method in ["match_tensor"]:
             fusion_expr.optional_match_tensor_expr = make_match_tensor_expr(
                 vector_column_name=fusion_params["field"], embedding_data=fusion_params["query_tensor"],
                 embedding_data_type=fusion_params["element_type"], method_type="maxsim", extra_option=None)
         else:
-            raise InfinityException(ErrorCode.INVALID_EXPRESSION, "Invalid fusion method")
+            raise hybridsearchException(ErrorCode.INVALID_EXPRESSION, "Invalid fusion method")
         fusion_expr.options_text = final_option_text
         self._search.fusion_exprs.append(fusion_expr)
         return self
 
-    def filter(self, where: Optional[str]) -> InfinityThriftQueryBuilder:
+    def filter(self, where: Optional[str]) -> hybridsearchThriftQueryBuilder:
         where_expr = traverse_conditions(condition(where))
         self._filter = where_expr
         return self
 
-    def limit(self, limit: Optional[int]) -> InfinityThriftQueryBuilder:
+    def limit(self, limit: Optional[int]) -> hybridsearchThriftQueryBuilder:
         constant_exp = ConstantExpr(literal_type=LiteralType.Int64, i64_value=limit)
         expr_type = ParsedExprType(constant_expr=constant_exp)
         limit_expr = ParsedExpr(type=expr_type)
         self._limit = limit_expr
         return self
 
-    def offset(self, offset: Optional[int]) -> InfinityThriftQueryBuilder:
+    def offset(self, offset: Optional[int]) -> hybridsearchThriftQueryBuilder:
         constant_exp = ConstantExpr(literal_type=LiteralType.Int64, i64_value=offset)
         expr_type = ParsedExprType(constant_expr=constant_exp)
         offset_expr = ParsedExpr(type=expr_type)
         self._offset = offset_expr
         return self
     
-    def group_by(self, columns: List[str] | str) -> InfinityThriftQueryBuilder:
+    def group_by(self, columns: List[str] | str) -> hybridsearchThriftQueryBuilder:
         group_by_list: List[ParsedExpr] = []
         if isinstance(columns, list):
             for column in columns:
@@ -355,12 +355,12 @@ class InfinityThriftQueryBuilder(ABC):
         self._groupby = group_by_list
         return self
     
-    def having(self, having: Optional[str]) -> InfinityThriftQueryBuilder:
+    def having(self, having: Optional[str]) -> hybridsearchThriftQueryBuilder:
         having_expr = traverse_conditions(condition(having))
         self._having = having_expr
         return self
 
-    def output(self, columns: Optional[list]) -> InfinityThriftQueryBuilder:
+    def output(self, columns: Optional[list]) -> hybridsearchThriftQueryBuilder:
         self._columns = columns
         select_list: List[ParsedExpr] = []
         for column in columns:
@@ -424,7 +424,7 @@ class InfinityThriftQueryBuilder(ABC):
         self._columns = select_list
         return self
 
-    def highlight(self, columns: Optional[list]) -> InfinityThriftQueryBuilder:
+    def highlight(self, columns: Optional[list]) -> hybridsearchThriftQueryBuilder:
         highlight_list: List[ParsedExpr] = []
         for column in columns:
             if isinstance(column, str):
@@ -440,7 +440,7 @@ class InfinityThriftQueryBuilder(ABC):
                 self._total_hits_count = option_kv['total_hits_count']
         return self
 
-    def sort(self, order_by_expr_list: Optional[List[list[str, SortType]]]) -> InfinityThriftQueryBuilder:
+    def sort(self, order_by_expr_list: Optional[List[list[str, SortType]]]) -> hybridsearchThriftQueryBuilder:
         sort_list: List[OrderByExpr] = []
         for order_by_expr in order_by_expr_list:
             order_by_expr_str = str

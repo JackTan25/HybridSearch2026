@@ -19,7 +19,7 @@
 #include <source_location>
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 class ParserException : public std::exception {
 public:
@@ -30,7 +30,7 @@ private:
     std::string message_;
 };
 
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
 inline void ParserAssert(bool is_true,
                          const std::string &message,
                          const char *file_name = std::source_location::current().file_name(),
@@ -57,4 +57,4 @@ inline void ParserAssert(bool is_true, const std::string &message) {
 
 #define ParserError(message) ParserAssert(false, message)
 
-} // namespace infinity
+} // namespace hybridsearch

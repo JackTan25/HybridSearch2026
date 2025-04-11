@@ -28,14 +28,14 @@ import logger;
 import bg_task;
 import third_party;
 import status;
-import infinity_context;
+import hybridsearch_context;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalFlush::Init(QueryContext* query_context) {}
 
 bool PhysicalFlush::Execute(QueryContext *query_context, OperatorState *operator_state) {
-    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
     if (storage_mode == StorageMode::kUnInitialized) {
         UnrecoverableError("Uninitialized storage mode");
     }
@@ -91,4 +91,4 @@ void PhysicalFlush::FlushBuffer(QueryContext *query_context, OperatorState *oper
     RecoverableError(status);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

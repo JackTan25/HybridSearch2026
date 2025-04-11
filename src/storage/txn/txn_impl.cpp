@@ -16,7 +16,7 @@
 //
 //module txn;
 //
-//namespace infinity {
+//namespace hybridsearch {
 //
 //Status Txn::CreateDatabaseInternal(const SharedPtr<String> &db_name, ConflictType conflict_type, const SharedPtr<String> &comment) {
 //    return Status::OK();

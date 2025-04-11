@@ -136,7 +136,7 @@ if __name__ == "__main__":
         "-c",
         "--copy",
         type=str,
-        default="/var/infinity/test_data",
+        default="/var/hybridsearch/test_data",
         dest="copy_dir",
     )
     args = parser.parse_args()

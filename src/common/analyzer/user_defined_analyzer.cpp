@@ -26,7 +26,7 @@ import status;
 import third_party;
 import defer_op;
 
-namespace infinity {
+namespace hybridsearch {
 
 Tuple<Vector<String>, Status> UserDefinedAnalyzer::Analyze(const String &text) {
     Vector<String> return_list;
@@ -93,5 +93,5 @@ Tuple<Vector<String>, Status> UserDefinedAnalyzer::Analyze(const String &text) {
     return {return_list, Status::OK()};
 }
 
-} // namespace infinity
+} // namespace hybridsearch
 #endif

@@ -40,7 +40,7 @@ import segment_index_entry;
 import table_index_entry;
 import mem_usage_change;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class MemoryIndexer final : public BaseMemIndex {
 public:
@@ -188,4 +188,4 @@ private:
     SegmentIndexEntry *segment_index_entry_{nullptr};
     Atomic<SizeT> mem_used_{0};
 };
-} // namespace infinity
+} // namespace hybridsearch

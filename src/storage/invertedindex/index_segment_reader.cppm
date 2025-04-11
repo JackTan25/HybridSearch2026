@@ -20,7 +20,7 @@ import segment_posting;
 import index_defines;
 export module index_segment_reader;
 
-namespace infinity {
+namespace hybridsearch {
 export class IndexSegmentReader {
 public:
     IndexSegmentReader(SegmentID segment_id, ChunkID chunk_id);
@@ -38,4 +38,4 @@ private:
     ChunkID chunk_id_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

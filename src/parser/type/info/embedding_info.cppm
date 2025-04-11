@@ -18,8 +18,8 @@ module;
 
 export module embedding_info;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::EmbeddingInfo;
+export using hybridsearch::EmbeddingInfo;
 
 }

@@ -80,7 +80,7 @@ class CompressedPGMIndex {
     std::vector<CompressedLevel> levels;  ///< The levels composing the compressed index.
 
     /// Sentinel value to avoid bounds checking.
-    static constexpr K sentinel = std::numeric_limits<K>::has_infinity ? std::numeric_limits<K>::infinity()
+    static constexpr K sentinel = std::numeric_limits<K>::has_hybridsearch ? std::numeric_limits<K>::hybridsearch()
                                                                        : std::numeric_limits<K>::max();
     using floating_pair = std::pair<Floating, Floating>;
     using canonical_segment = typename internal::OptimalPiecewiseLinearModel<K, size_t>::CanonicalSegment;

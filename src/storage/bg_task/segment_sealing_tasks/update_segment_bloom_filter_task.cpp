@@ -23,15 +23,15 @@ import txn_manager;
 import segment_entry;
 import table_entry;
 import buffer_manager;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 import wal_entry;
 import third_party;
 import build_fast_rough_filter_task;
 import catalog_delta_entry;
-import infinity_context;
+import hybridsearch_context;
 
-namespace infinity {
+namespace hybridsearch {
 
 void UpdateSegmentBloomFilterTask::CreateAndSubmitTask(SegmentEntry *segment_entry, TableEntry *table_entry, TxnManager *txn_mgr) {
     if (SegmentStatus status = segment_entry->status(); status != SegmentStatus::kSealed) {
@@ -40,7 +40,7 @@ void UpdateSegmentBloomFilterTask::CreateAndSubmitTask(SegmentEntry *segment_ent
     }
     LOG_TRACE(fmt::format("UpdateSegmentBloomFilterTask: create task for segment: {}", segment_entry->segment_id()));
     auto update_bloom_filter_task = MakeShared<UpdateSegmentBloomFilterTask>(segment_entry, table_entry, txn_mgr);
-    BGTaskProcessor *bg_processor = InfinityContext::instance().storage()->bg_processor();
+    BGTaskProcessor *bg_processor = hybridsearchContext::instance().storage()->bg_processor();
     bg_processor->Submit(std::move(update_bloom_filter_task));
 }
 
@@ -93,4 +93,4 @@ void UpdateSegmentBloomFilterTask::ExecuteInner(SegmentEntry *segment, TxnManage
     // LOG_TRACE(fmt::format("SetSegmentStatusSealedTask: CommitTS: {} end task for segment: {}", commit_ts, segment->segment_id()));
 }
 
-} // namespace infinity
+} // namespace hybridsearch

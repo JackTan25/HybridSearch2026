@@ -6,7 +6,7 @@ module;
 export module buf_writer;
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 // A simple buffer writer that writes data to a file.
 // Now only used for ColumnInverter
 // ColumnInverter will use BufWriter sequentially write data and use spill_file pointer randomly write data
@@ -37,4 +37,4 @@ export struct BufWriter {
     UniquePtr<char_t[]> spill_buffer_{};
     SizeT spill_buf_size_{0};
 };
-} // namespace infinity
+} // namespace hybridsearch

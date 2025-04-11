@@ -22,7 +22,7 @@ import column_binding;
 import internal_types;
 import data_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct LoadMeta {
     ColumnBinding binding_{};
@@ -31,4 +31,4 @@ export struct LoadMeta {
     String column_name_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

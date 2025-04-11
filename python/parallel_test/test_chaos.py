@@ -1,14 +1,14 @@
 import os
 import time
 
-import infinity.index as index
+import hybridsearch.index as index
 import pandas
 import pytest
 import random
 from threading import Thread
-from infinity.common import ConflictType
-from infinity.errors import ErrorCode
-from infinity.connection_pool import ConnectionPool
+from hybridsearch.common import ConflictType
+from hybridsearch.errors import ErrorCode
+from hybridsearch.connection_pool import ConnectionPool
 
 TEST_DATA_DIR = "/test/data/"
 fulltext_file_path = os.getcwd() + TEST_DATA_DIR + "csv/enwiki_99.csv"
@@ -21,11 +21,11 @@ insert_delete_size = 100
 
 class TestIndexParallel:
     # @pytest.mark.skip(reason="To pass benchmark, use wrong row count in knn scan")
-    def test_chaos(self, get_infinity_connection_pool):
+    def test_chaos(self, get_hybridsearch_connection_pool):
         data = read_out_data()
-        connection_pool = get_infinity_connection_pool
-        infinity_obj = connection_pool.get_conn()
-        db_obj = infinity_obj.get_database("default_db")
+        connection_pool = get_hybridsearch_connection_pool
+        hybridsearch_obj = connection_pool.get_conn()
+        db_obj = hybridsearch_obj.get_database("default_db")
 
         res = db_obj.drop_table("chaos_test", ConflictType.Ignore)
         assert res.error_code == ErrorCode.OK
@@ -43,7 +43,7 @@ class TestIndexParallel:
                                          "metric": "l2"
                                      }), ConflictType.Error)
         assert res.error_code == ErrorCode.OK
-        connection_pool.release_conn(infinity_obj)
+        connection_pool.release_conn(hybridsearch_obj)
 
         threads = []
         end_time = time.time() + kRunningTime
@@ -54,11 +54,11 @@ class TestIndexParallel:
         for i in range(len(threads)):
             threads[i].join()
 
-        infinity_obj = connection_pool.get_conn()
-        db_obj = infinity_obj.get_database("default_db")
+        hybridsearch_obj = connection_pool.get_conn()
+        db_obj = hybridsearch_obj.get_database("default_db")
         res = db_obj.drop_table("chaos_test", ConflictType.Error)
         assert res.error_code == ErrorCode.OK
-        connection_pool.release_conn(infinity_obj)
+        connection_pool.release_conn(hybridsearch_obj)
 
 
 def read_out_data():
@@ -115,14 +115,14 @@ def delete(table_obj):
 def updata(table_obj):
     pos = random.randint(0, data_size - 1)
     try:
-        table_obj.update(f"index = {pos}", [{"index": pos, "body": "infinity", "other_vector": [0.0, 0.0, 0.0, 0.0]}])
+        table_obj.update(f"index = {pos}", [{"index": pos, "body": "hybridsearch", "other_vector": [0.0, 0.0, 0.0, 0.0]}])
     except Exception as e:
         print(e)
 
 
 def random_exec(connection_pool: ConnectionPool, data, end_time, thread_id):
-    infinity_obj = connection_pool.get_conn()
-    db_obj = infinity_obj.get_database("default_db")
+    hybridsearch_obj = connection_pool.get_conn()
+    db_obj = hybridsearch_obj.get_database("default_db")
     table_obj = db_obj.get_table("chaos_test")
     while time.time() < end_time:
         rand_v = random.randint(0, 4)
@@ -141,4 +141,4 @@ def random_exec(connection_pool: ConnectionPool, data, end_time, thread_id):
         else:
             print(thread_id, "search vector")
             search_vector(table_obj)
-    connection_pool.release_conn(infinity_obj)
+    connection_pool.release_conn(hybridsearch_obj)

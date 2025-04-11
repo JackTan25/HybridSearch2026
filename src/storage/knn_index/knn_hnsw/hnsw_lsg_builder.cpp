@@ -27,7 +27,7 @@ import index_hnsw;
 import index_ivf;
 import statement_common;
 import defer_op;
-import infinity_exception;
+import hybridsearch_exception;
 import index_base;
 import ivf_index_data;
 import third_party;
@@ -44,10 +44,10 @@ import embedding_info;
 import hnsw_common;
 import status;
 import merge_knn;
-import infinity_context;
+import hybridsearch_context;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 namespace {
 
@@ -362,7 +362,7 @@ UniquePtr<float[]> HnswLSGBuilder::GetAvgBF(Iter iter, SizeT row_count) {
     if constexpr (SplitIter<Iter>) {
         Iter iter_copy = iter;
         auto iters = std::move(iter_copy).split();
-        auto &thread_pool = InfinityContext::instance().GetHnswBuildThreadPool();
+        auto &thread_pool = hybridsearchContext::instance().GetHnswBuildThreadPool();
         Vector<std::future<void>> futs;
         for (auto &splited_iter : iters) {
             futs.emplace_back(thread_pool.push([&](int id) {
@@ -419,4 +419,4 @@ template UniquePtr<HnswIndexInMem> HnswLSGBuilder::MakeImplIter<DenseVectorIter<
                                                                                                      const RowID &base_row_id,
                                                                                                      bool trace);
 
-} // namespace infinity
+} // namespace hybridsearch

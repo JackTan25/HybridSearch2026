@@ -27,9 +27,9 @@ import internal_types;
 import segment_posting;
 import posting_iterator;
 import vector_with_lock;
-import infinity_context;
+import hybridsearch_context;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class PostingWriterTest : public BaseTestParamStr {
 public:

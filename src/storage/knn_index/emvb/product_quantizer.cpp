@@ -26,11 +26,11 @@ import vector_distance;
 import index_base;
 import third_party;
 import logger;
-import infinity_exception;
+import hybridsearch_exception;
 import local_file_handle;
 import eigen_svd;
 
-namespace infinity {
+namespace hybridsearch {
 
 template <std::unsigned_integral SUBSPACE_CENTROID_TAG, u32 SUBSPACE_NUM>
 void PQ<SUBSPACE_CENTROID_TAG, SUBSPACE_NUM>::EncodeEmbedding(const f32 *embedding_data, const u32 embedding_num, auto output_iter) const {
@@ -464,4 +464,4 @@ UniquePtr<EMVBProductQuantizer> GetEMVBOPQ(const u32 pq_subspace_num, const u32 
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

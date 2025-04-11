@@ -15,7 +15,7 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import logger;
 import column_vector;
@@ -26,7 +26,7 @@ import third_party;
 import stl;
 import selection;
 import vector_buffer;
-import infinity_context;
+import hybridsearch_context;
 import global_resource_usage;
 import internal_types;
 import logical_type;
@@ -39,11 +39,11 @@ class ColumnVectorGeoTest : public BaseTest {
 
 INSTANTIATE_TEST_SUITE_P(TestWithDifferentParams,
                          ColumnVectorGeoTest,
-                         ::testing::Values((std::string(infinity::test_data_path()) + "/config/test_close_bgtask_silent.toml").c_str(),
-                                           (std::string(infinity::test_data_path()) + "/config/test_close_bgtask_silent_vfs_off.toml").c_str()));
+                         ::testing::Values((std::string(hybridsearch::test_data_path()) + "/config/test_close_bgtask_silent.toml").c_str(),
+                                           (std::string(hybridsearch::test_data_path()) + "/config/test_close_bgtask_silent_vfs_off.toml").c_str()));
 
 TEST_P(ColumnVectorGeoTest, flat_point) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kPoint);
     ColumnVector column_vector(data_type);
@@ -148,7 +148,7 @@ TEST_P(ColumnVectorGeoTest, flat_point) {
 
 TEST_P(ColumnVectorGeoTest, contant_point) {
 
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kPoint);
     ColumnVector column_vector(data_type);
@@ -231,7 +231,7 @@ TEST_P(ColumnVectorGeoTest, contant_point) {
 }
 
 TEST_P(ColumnVectorGeoTest, point_column_vector_select) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kPoint);
     ColumnVector column_vector(data_type);
@@ -269,7 +269,7 @@ TEST_P(ColumnVectorGeoTest, point_column_vector_select) {
 }
 
 TEST_P(ColumnVectorGeoTest, point_column_slice_init) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kPoint);
     ColumnVector column_vector(data_type);
@@ -306,7 +306,7 @@ TEST_P(ColumnVectorGeoTest, point_column_slice_init) {
 }
 
 TEST_P(ColumnVectorGeoTest, flat_line) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kLine);
     ColumnVector column_vector(data_type);
@@ -415,7 +415,7 @@ TEST_P(ColumnVectorGeoTest, flat_line) {
 
 TEST_P(ColumnVectorGeoTest, contant_line) {
 
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kLine);
     ColumnVector column_vector(data_type);
@@ -501,7 +501,7 @@ TEST_P(ColumnVectorGeoTest, contant_line) {
 }
 
 TEST_P(ColumnVectorGeoTest, line_column_vector_select) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kLine);
     ColumnVector column_vector(data_type);
@@ -541,7 +541,7 @@ TEST_P(ColumnVectorGeoTest, line_column_vector_select) {
 }
 
 TEST_P(ColumnVectorGeoTest, line_column_slice_init) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kLine);
     ColumnVector column_vector(data_type);
@@ -580,7 +580,7 @@ TEST_P(ColumnVectorGeoTest, line_column_slice_init) {
 }
 
 TEST_P(ColumnVectorGeoTest, flat_line_seg) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kLineSeg);
     ColumnVector column_vector(data_type);
@@ -697,7 +697,7 @@ TEST_P(ColumnVectorGeoTest, flat_line_seg) {
 
 TEST_P(ColumnVectorGeoTest, contant_line_seg) {
 
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kLineSeg);
     ColumnVector column_vector(data_type);
@@ -790,7 +790,7 @@ TEST_P(ColumnVectorGeoTest, contant_line_seg) {
 }
 
 TEST_P(ColumnVectorGeoTest, line_seg_column_vector_select) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kLineSeg);
     ColumnVector column_vector(data_type);
@@ -834,7 +834,7 @@ TEST_P(ColumnVectorGeoTest, line_seg_column_vector_select) {
 }
 
 TEST_P(ColumnVectorGeoTest, line_seg_column_slice_init) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kLineSeg);
     ColumnVector column_vector(data_type);
@@ -877,7 +877,7 @@ TEST_P(ColumnVectorGeoTest, line_seg_column_slice_init) {
 }
 
 TEST_P(ColumnVectorGeoTest, flat_box) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kBox);
     ColumnVector column_vector(data_type);
@@ -995,7 +995,7 @@ TEST_P(ColumnVectorGeoTest, flat_box) {
 
 TEST_P(ColumnVectorGeoTest, contant_box) {
 
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kBox);
     ColumnVector column_vector(data_type);
@@ -1088,7 +1088,7 @@ TEST_P(ColumnVectorGeoTest, contant_box) {
 }
 
 TEST_P(ColumnVectorGeoTest, box_column_vector_select) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kBox);
     ColumnVector column_vector(data_type);
@@ -1132,7 +1132,7 @@ TEST_P(ColumnVectorGeoTest, box_column_vector_select) {
 }
 
 TEST_P(ColumnVectorGeoTest, box_column_slice_init) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kBox);
     ColumnVector column_vector(data_type);
@@ -1176,7 +1176,7 @@ TEST_P(ColumnVectorGeoTest, box_column_slice_init) {
 #if 0
 TEST_P(ColumnVectorGeoTest, flat_path) {
 
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kPath);
     ColumnVector column_vector(data_type);
@@ -1367,7 +1367,7 @@ TEST_P(ColumnVectorGeoTest, flat_path) {
 
 TEST_P(ColumnVectorGeoTest, contant_path) {
 
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kPath);
     ColumnVector column_vector(data_type);
@@ -1496,7 +1496,7 @@ TEST_P(ColumnVectorGeoTest, contant_path) {
 }
 
 TEST_P(ColumnVectorGeoTest, path_column_vector_select) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kPath);
     ColumnVector column_vector(data_type);
@@ -1561,7 +1561,7 @@ TEST_P(ColumnVectorGeoTest, path_column_vector_select) {
 }
 
 TEST_P(ColumnVectorGeoTest, path_column_slice_init) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kPath);
     ColumnVector column_vector(data_type);
@@ -1626,7 +1626,7 @@ TEST_P(ColumnVectorGeoTest, path_column_slice_init) {
 
 TEST_P(ColumnVectorGeoTest, flat_polygon) {
 
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kPolygon);
     ColumnVector column_vector(data_type);
@@ -1841,7 +1841,7 @@ TEST_P(ColumnVectorGeoTest, flat_polygon) {
 
 TEST_P(ColumnVectorGeoTest, contant_polygon) {
 
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kPolygon);
     ColumnVector column_vector(data_type);
@@ -1985,7 +1985,7 @@ TEST_P(ColumnVectorGeoTest, contant_polygon) {
 }
 
 TEST_P(ColumnVectorGeoTest, polygon_column_vector_select) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kPolygon);
     ColumnVector column_vector(data_type);
@@ -2060,7 +2060,7 @@ TEST_P(ColumnVectorGeoTest, polygon_column_vector_select) {
 }
 
 TEST_P(ColumnVectorGeoTest, polygon_column_slice_init) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kPolygon);
     ColumnVector column_vector(data_type);
@@ -2136,7 +2136,7 @@ TEST_P(ColumnVectorGeoTest, polygon_column_slice_init) {
 }
 #endif
 TEST_P(ColumnVectorGeoTest, flat_circle) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kCircle);
     ColumnVector column_vector(data_type);
@@ -2249,7 +2249,7 @@ TEST_P(ColumnVectorGeoTest, flat_circle) {
 
 TEST_P(ColumnVectorGeoTest, contant_circle) {
 
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kCircle);
     ColumnVector column_vector(data_type);
@@ -2339,7 +2339,7 @@ TEST_P(ColumnVectorGeoTest, contant_circle) {
 }
 
 TEST_P(ColumnVectorGeoTest, circle_column_vector_select) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kCircle);
     ColumnVector column_vector(data_type);
@@ -2381,7 +2381,7 @@ TEST_P(ColumnVectorGeoTest, circle_column_vector_select) {
 }
 
 TEST_P(ColumnVectorGeoTest, circle_column_slice_init) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kCircle);
     ColumnVector column_vector(data_type);

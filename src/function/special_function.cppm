@@ -21,7 +21,7 @@ import function;
 import data_type;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class SpecialType {
     kRowID,
@@ -56,4 +56,4 @@ private:
     SizeT extra_idx_{0};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

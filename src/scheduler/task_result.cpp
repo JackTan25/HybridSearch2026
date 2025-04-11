@@ -19,7 +19,7 @@ import data_block;
 
 module task_result;
 
-namespace infinity {
+namespace hybridsearch {
 
 void TaskResult::Init(const Vector<SharedPtr<DataType>> &types, SizeT capacity) {
     data_ = MakeUnique<DataBlock>();
@@ -28,4 +28,4 @@ void TaskResult::Init(const Vector<SharedPtr<DataType>> &types, SizeT capacity) 
 
 void TaskResult::Seal() { data_->Finalize(); }
 
-} // namespace infinity
+} // namespace hybridsearch

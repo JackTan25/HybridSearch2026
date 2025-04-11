@@ -15,14 +15,14 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 
 import scalar_function;
 import scalar_function_set;
@@ -41,13 +41,13 @@ import internal_types;
 import data_type;
 import catalog;
 
-using namespace infinity;
+using namespace hybridsearch;
 class SubtractFunctionsTest : public BaseTestParamStr {};
 
 INSTANTIATE_TEST_SUITE_P(TestWithDifferentParams, SubtractFunctionsTest, ::testing::Values(BaseTestParamStr::NULL_CONFIG_PATH));
 
 TEST_P(SubtractFunctionsTest, add_func) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     UniquePtr<Catalog> catalog_ptr = MakeUnique<Catalog>();
 

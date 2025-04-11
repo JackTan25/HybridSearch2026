@@ -23,7 +23,7 @@ import vec_store_type;
 import stl;
 import hnsw_common;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class DistFuncTest2 : public BaseTest {};
 

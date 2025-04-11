@@ -24,16 +24,16 @@ import posting_merger;
 import third_party;
 import virtual_store;
 import local_file_handle;
-import infinity_exception;
+import hybridsearch_exception;
 import vector_with_lock;
 import logger;
 import persistence_manager;
-import infinity_context;
+import hybridsearch_context;
 import defer_op;
 import utility;
 import persist_result_handler;
 
-namespace infinity {
+namespace hybridsearch {
 ColumnIndexMerger::ColumnIndexMerger(const String &index_dir, optionflag_t flag) : index_dir_(index_dir), flag_(flag) {}
 
 ColumnIndexMerger::~ColumnIndexMerger() {}
@@ -45,7 +45,7 @@ void ColumnIndexMerger::Merge(const Vector<String> &base_names, const Vector<Row
     if (base_rowids.empty()) {
         return;
     }
-    Path path = Path(InfinityContext::instance().config()->DataDir()) / index_dir_ / dst_base_name;
+    Path path = Path(hybridsearchContext::instance().config()->DataDir()) / index_dir_ / dst_base_name;
     String index_prefix = path.string();
     String dict_file = index_prefix + DICT_SUFFIX;
     String fst_file = dict_file + ".fst";
@@ -58,10 +58,10 @@ void ColumnIndexMerger::Merge(const Vector<String> &base_names, const Vector<Row
     String tmp_fst_file(fst_file);
 
     // handle persistence obj_addrs
-    PersistenceManager *pm = InfinityContext::instance().persistence_manager();
+    PersistenceManager *pm = hybridsearchContext::instance().persistence_manager();
     bool use_object_cache = pm != nullptr;
     if (use_object_cache) {
-        Path temp_dir = Path(InfinityContext::instance().config()->TempDir());
+        Path temp_dir = Path(hybridsearchContext::instance().config()->TempDir());
         tmp_dict_file = temp_dir / StringTransform(tmp_dict_file, "/", "_");
         tmp_posting_file = temp_dir / StringTransform(tmp_posting_file, "/", "_");
         tmp_column_length_file = temp_dir / StringTransform(tmp_column_length_file, "/", "_");
@@ -93,7 +93,7 @@ void ColumnIndexMerger::Merge(const Vector<String> &base_names, const Vector<Row
         unsafe_column_lengths.clear();
         PersistResultHandler handler(pm);
         for (u32 i = 0; i < base_names.size(); ++i) {
-            String column_len_file = Path(InfinityContext::instance().config()->DataDir()) / index_dir_ / (base_names[i] + LENGTH_SUFFIX);
+            String column_len_file = Path(hybridsearchContext::instance().config()->DataDir()) / index_dir_ / (base_names[i] + LENGTH_SUFFIX);
             RowID base_row_id = base_rowids[i];
             u32 id_offset = base_row_id - merge_base_rowid;
 
@@ -123,7 +123,7 @@ void ColumnIndexMerger::Merge(const Vector<String> &base_names, const Vector<Row
             }
 
             if (use_object_cache) {
-                column_len_file = Path(InfinityContext::instance().config()->DataDir()) / index_dir_ / (base_names[i] + LENGTH_SUFFIX);
+                column_len_file = Path(hybridsearchContext::instance().config()->DataDir()) / index_dir_ / (base_names[i] + LENGTH_SUFFIX);
                 PersistWriteResult res = pm->PutObjCache(column_len_file);
                 handler.HandleWriteResult(res);
             }
@@ -177,4 +177,4 @@ void ColumnIndexMerger::MergeTerm(const String &term,
     posting_merger->Dump(posting_file_writer_, term_meta);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -8,7 +8,7 @@
 #include "base_profiler.h"
 #include <vector>
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class QueryPhase : int8_t {
     kParser = 0,
@@ -51,4 +51,4 @@ private:
     QueryPhase current_phase_{QueryPhase::kInvalid};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

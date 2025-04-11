@@ -22,7 +22,7 @@ import file_worker_type;
 import buffer_obj;
 import persistence_manager;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct VersionFileWorkerSaveCtx : public FileWorkerSaveCtx {
     VersionFileWorkerSaveCtx(TxnTimeStamp checkpoint_ts) : checkpoint_ts_(checkpoint_ts) {}
@@ -59,4 +59,4 @@ private:
     SizeT capacity_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

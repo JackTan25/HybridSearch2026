@@ -20,10 +20,10 @@ import stl;
 import expression_type;
 import data_type;
 import internal_types;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class ExprSourceType {
     kInvalid,
@@ -86,4 +86,4 @@ protected:
     Vector<SharedPtr<BaseExpression>> arguments_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

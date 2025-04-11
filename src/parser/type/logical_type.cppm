@@ -18,14 +18,14 @@ module;
 
 export module logical_type;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::LogicalType;
+export using hybridsearch::LogicalType;
 
-export using infinity::GetCommonLogicalType;
+export using hybridsearch::GetCommonLogicalType;
 
-export using infinity::LogicalType2Str;
+export using hybridsearch::LogicalType2Str;
 
-export using infinity::to_underlying_val;
+export using hybridsearch::to_underlying_val;
 
-} // namespace infinity
+} // namespace hybridsearch

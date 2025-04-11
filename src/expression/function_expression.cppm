@@ -22,7 +22,7 @@ import data_type;
 import scalar_function;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class FunctionExpression : public BaseExpression {
 public:
@@ -43,4 +43,4 @@ public:
     bool nullary_{false};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

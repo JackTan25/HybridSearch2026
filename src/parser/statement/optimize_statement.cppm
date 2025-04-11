@@ -18,7 +18,7 @@ module;
 
 export module optimize_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::OptimizeStatement;
+export using hybridsearch::OptimizeStatement;
 }

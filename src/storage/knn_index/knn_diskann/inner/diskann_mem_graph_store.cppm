@@ -22,7 +22,7 @@ export module diskann_mem_graph_store;
 import stl;
 import local_file_handle;
 
-namespace infinity {
+namespace hybridsearch {
 export class DiskAnnMemGraphStore {
 public:
     using This = DiskAnnMemGraphStore;
@@ -172,4 +172,4 @@ private:
     u32 max_observecd_degree_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

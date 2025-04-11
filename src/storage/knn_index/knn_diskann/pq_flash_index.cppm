@@ -31,7 +31,7 @@ import logger;
 import index_base;
 import local_file_handle;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import logical_type;
 import third_party;
 import diskann_dist_func;
@@ -40,7 +40,7 @@ import default_values;
 import diskann_partition_and_pq;
 import virtual_store;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename VectorDataType, typename LabelType>
 class PqFlashIndex {
@@ -744,4 +744,4 @@ private:
     std::unordered_map<SizeT, SizeT> dummy_to_real_map_; // map the dummy point to its real point
 };
 
-} // namespace infinity
+} // namespace hybridsearch

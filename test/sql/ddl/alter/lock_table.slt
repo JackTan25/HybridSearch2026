@@ -20,7 +20,7 @@ statement error
 UPDATE products SET price=1 WHERE product_no=1;
 
 statement error
-COPY products FROM '/var/infinity/test_data/basic.csv' WITH (FORMAT CSV);
+COPY products FROM '/var/hybridsearch/test_data/basic.csv' WITH (FORMAT CSV);
 
 statement error
 DELETE FROM products WHERE product_no=1;

@@ -8,7 +8,7 @@ import file_writer;
 import file_reader;
 export module posting_buffer;
 
-namespace infinity {
+namespace hybridsearch {
 
 // Small buffer to store uncompressed posting data
 // according to the layout defined in posting formats
@@ -135,4 +135,4 @@ inline u8 *PostingBuffer::GetRow(u8 *buffer, u8 capacity, const PostingField *va
     return buffer + offset * capacity;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

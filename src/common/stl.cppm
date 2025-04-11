@@ -337,7 +337,7 @@ using std::localtime;
 using std::put_time;
 } // namespace std
 
-namespace infinity {
+namespace hybridsearch {
 
 export {
 
@@ -637,4 +637,4 @@ struct CompareByFirstReverse {
     bool operator()(const P &lhs, const P &rhs) const { return lhs.first > rhs.first; }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

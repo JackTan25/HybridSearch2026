@@ -23,7 +23,7 @@ import stl;
 import aggregate_function;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class AggregateExpression : public BaseExpression {
 public:
@@ -39,4 +39,4 @@ public:
     AggregateFunction aggregate_function_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

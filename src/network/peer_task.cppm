@@ -21,7 +21,7 @@ import admin_statement;
 import global_resource_usage;
 import node_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class PeerTaskType {
     kInvalid,
@@ -40,12 +40,12 @@ public:
         : type_(type), complete_(false), async_(async) // complete_ should not be assigned false in wait(), otherwise it might be stuck in wait()
                                                        // forever if complete() is called before wait().
     {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("PeerTask");
 #endif
     }
     virtual ~PeerTask() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("PeerTask");
 #endif
     }
@@ -174,4 +174,4 @@ public:
     String error_message_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

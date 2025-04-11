@@ -20,11 +20,11 @@ module logical_show;
 
 import stl;
 import internal_types;
-import infinity_exception;
+import hybridsearch_exception;
 import column_binding;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 String ToString(ShowStmtType type) {
     switch (type) {
@@ -140,4 +140,4 @@ String LogicalShow::ToString(i64 &space) const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

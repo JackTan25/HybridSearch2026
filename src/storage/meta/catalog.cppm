@@ -44,7 +44,7 @@ import cleanup_scanner;
 import log_file;
 import snapshot_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 class TxnManager;
 class Txn;
@@ -327,4 +327,4 @@ private:
     UniquePtr<GlobalCatalogDeltaEntry> global_catalog_delta_entry_{MakeUnique<GlobalCatalogDeltaEntry>()};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

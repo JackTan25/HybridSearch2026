@@ -24,11 +24,11 @@ import third_party;
 import pg_message;
 import ring_buffer_iterator;
 
-import infinity_exception;
+import hybridsearch_exception;
 import default_values;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 SizeT BufferWriter::size() const {
     const auto current_size = RingBufferIterator::Distance(start_pos_, current_pos_);
@@ -146,4 +146,4 @@ void BufferWriter::try_flush(SizeT bytes) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

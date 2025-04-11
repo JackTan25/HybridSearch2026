@@ -21,7 +21,7 @@ module logical_node_visitor;
 import stl;
 import base_expression;
 import logical_node_type;
-import infinity_exception;
+import hybridsearch_exception;
 
 import third_party;
 import expression_type;
@@ -57,7 +57,7 @@ import knn_expression;
 import conjunction_expression;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 void LogicalNodeVisitor::VisitNodeChildren(LogicalNode &op) {
     if (op.left_node()) {
@@ -475,4 +475,4 @@ SharedPtr<BaseExpression> LogicalNodeVisitor::VisitReplace(const SharedPtr<KnnEx
 
 SharedPtr<BaseExpression> LogicalNodeVisitor::VisitReplace(const SharedPtr<UnnestExpression> &) { return nullptr; }
 
-} // namespace infinity
+} // namespace hybridsearch

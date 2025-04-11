@@ -33,7 +33,7 @@ import value;
 import doc_iterator;
 import parse_fulltext_options;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct IndexFilterEvaluatorAllTrue : IndexFilterEvaluator {
     IndexFilterEvaluatorAllTrue() : IndexFilterEvaluator(Type::kAllTrue) {}
@@ -144,4 +144,4 @@ struct IndexFilterEvaluatorOR final : IndexFilterEvaluatorLogicalChildren {
     Bitmask Evaluate(SegmentID segment_id, SegmentOffset segment_row_count, Txn *txn) const override;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

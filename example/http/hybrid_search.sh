@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Connect to the local Infinity instance and use the default database
-echo -e "\n-- Connect to Infinity and use default_db"
+# Connect to the local hybridsearch instance and use the default database
+echo -e "\n-- Connect to hybridsearch and use default_db"
 curl --request POST \
      --url http://localhost:23820/databases/default_db \
      --header 'accept: application/json' \

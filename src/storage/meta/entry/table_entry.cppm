@@ -44,11 +44,11 @@ import meta_info;
 import block_entry;
 import column_index_reader;
 import value;
-import infinity_exception;
+import hybridsearch_exception;
 import snapshot_info;
 import txn;
 
-namespace infinity {
+namespace hybridsearch {
 
 class IndexBase;
 struct DBEntry;
@@ -415,4 +415,4 @@ public:
     SharedPtr<TableSnapshotInfo> GetSnapshotInfo(Txn *txn_ptr) const;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

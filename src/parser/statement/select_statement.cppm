@@ -18,12 +18,12 @@ module;
 
 export module select_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::SelectStatement;
-export using infinity::OrderByExpr;
-export using infinity::WithExpr;
-export using infinity::OrderType;
-export using infinity::SetOperatorType;
+export using hybridsearch::SelectStatement;
+export using hybridsearch::OrderByExpr;
+export using hybridsearch::WithExpr;
+export using hybridsearch::OrderType;
+export using hybridsearch::SetOperatorType;
 
-} // namespace infinity
+} // namespace hybridsearch

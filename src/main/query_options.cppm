@@ -18,7 +18,7 @@ import stl;
 import extra_ddl_info;
 import statement_common;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class CreateDatabaseOptions {
 public:
@@ -74,4 +74,4 @@ public:
     Vector<InitParameter *> opt_params_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -24,7 +24,7 @@ import data_type;
 import table_entry;
 import logical_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<ColumnBinding> LogicalCompactIndex::GetColumnBindings() const { return {}; }
 
@@ -54,4 +54,4 @@ String LogicalCompactIndex::ToString(i64 &space) const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

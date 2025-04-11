@@ -17,14 +17,14 @@ import base_test;
 
 import stl;
 import config;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import status;
 import compilation_config;
 import virtual_store;
 import default_values;
 
-using namespace infinity;
+using namespace hybridsearch;
 class ConfigTest : public BaseTest {};
 
 // static size_t GetAvailableMem() {
@@ -34,7 +34,7 @@ class ConfigTest : public BaseTest {};
 // }
 
 TEST_F(ConfigTest, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
     SharedPtr<String> path = nullptr;
     Config config;
     auto status = config.Init(path, nullptr);
@@ -58,23 +58,23 @@ TEST_F(ConfigTest, test1) {
     EXPECT_EQ(config.PeerSendTimeout(), DEFAULT_PEER_SEND_TIMEOUT);
 
     // Log
-    EXPECT_EQ(config.LogFileName(), "infinity.log");
-    EXPECT_EQ(config.LogDir(), "/var/infinity/log");
-    EXPECT_EQ(config.LogFilePath(), "/var/infinity/log/infinity.log");
+    EXPECT_EQ(config.LogFileName(), "hybridsearch.log");
+    EXPECT_EQ(config.LogDir(), "/var/hybridsearch/log");
+    EXPECT_EQ(config.LogFilePath(), "/var/hybridsearch/log/hybridsearch.log");
     EXPECT_EQ(config.LogToStdout(), true);
     EXPECT_EQ(config.LogFileMaxSize(), 1024l * 1024l * 1024l);
     EXPECT_EQ(config.LogFileRotateCount(), 8l);
     EXPECT_EQ(config.GetLogLevel(), LogLevel::kInfo);
 
     // Storage
-    EXPECT_EQ(config.DataDir(), "/var/infinity/data");
-    EXPECT_EQ(config.WALDir(), "/var/infinity/wal");
+    EXPECT_EQ(config.DataDir(), "/var/hybridsearch/data");
+    EXPECT_EQ(config.WALDir(), "/var/hybridsearch/wal");
     EXPECT_EQ(config.StorageType(), StorageType::kLocal);
 
     // buffer
     EXPECT_EQ(config.BufferManagerSize(), 8 * 1024l * 1024l * 1024l);
     EXPECT_EQ(config.LRUNum(), 7);
-    EXPECT_EQ(config.TempDir(), "/var/infinity/tmp");
+    EXPECT_EQ(config.TempDir(), "/var/hybridsearch/tmp");
     EXPECT_EQ(config.MemIndexMemoryQuota(), 4 * 1024l * 1024l * 1024l);
 
     EXPECT_EQ(config.ResultCache(), "off");
@@ -82,8 +82,8 @@ TEST_F(ConfigTest, test1) {
 }
 
 TEST_F(ConfigTest, test2) {
-    using namespace infinity;
-    SharedPtr<String> path = MakeShared<String>(String(test_data_path()) + "/config/infinity_conf.toml");
+    using namespace hybridsearch;
+    SharedPtr<String> path = MakeShared<String>(String(test_data_path()) + "/config/hybridsearch_conf.toml");
     Config config;
     auto status = config.Init(path, nullptr);
     ASSERT_TRUE(status.ok());
@@ -105,20 +105,20 @@ TEST_F(ConfigTest, test2) {
     EXPECT_EQ(config.PeerRecvTimeout(), 2000);
     EXPECT_EQ(config.PeerSendTimeout(), 2000);
 
-    EXPECT_EQ(config.LogFileName(), "infinity.log");
-    EXPECT_EQ(config.LogDir(), "/var/infinity/log");
-    EXPECT_EQ(config.LogFilePath(), "/var/infinity/log/infinity.log");
+    EXPECT_EQ(config.LogFileName(), "hybridsearch.log");
+    EXPECT_EQ(config.LogDir(), "/var/hybridsearch/log");
+    EXPECT_EQ(config.LogFilePath(), "/var/hybridsearch/log/hybridsearch.log");
     EXPECT_EQ(config.LogToStdout(), false);
     EXPECT_EQ(config.LogFileMaxSize(), 2 * 1024l * 1024l * 1024l);
     EXPECT_EQ(config.LogFileRotateCount(), 3l);
     EXPECT_EQ(config.GetLogLevel(), LogLevel::kTrace);
 
     // Storage
-    EXPECT_EQ(config.DataDir(), "/var/infinity/data");
-    EXPECT_EQ(config.WALDir(), "/var/infinity/wal");
+    EXPECT_EQ(config.DataDir(), "/var/hybridsearch/data");
+    EXPECT_EQ(config.WALDir(), "/var/hybridsearch/wal");
     EXPECT_EQ(config.StorageType(), StorageType::kLocal);
     EXPECT_EQ(config.ObjectStorageUrl(), "0.0.0.0:9000");
-    EXPECT_EQ(config.ObjectStorageBucket(), "infinity");
+    EXPECT_EQ(config.ObjectStorageBucket(), "hybridsearch");
     EXPECT_EQ(config.ObjectStorageAccessKey(), "minioadmin");
     EXPECT_EQ(config.ObjectStorageSecretKey(), "minioadmin");
     EXPECT_EQ(config.ObjectStorageHttps(), false);
@@ -126,7 +126,7 @@ TEST_F(ConfigTest, test2) {
     // buffer
     EXPECT_EQ(config.BufferManagerSize(), 3 * 1024l * 1024l * 1024l);
     EXPECT_EQ(config.LRUNum(), 8);
-    EXPECT_EQ(config.TempDir(), "/var/infinity/tmp");
+    EXPECT_EQ(config.TempDir(), "/var/hybridsearch/tmp");
     EXPECT_EQ(config.MemIndexMemoryQuota(), 2 * 1024l * 1024l * 1024l);
 
     EXPECT_EQ(config.ResultCache(), "on");
@@ -134,7 +134,7 @@ TEST_F(ConfigTest, test2) {
 }
 
 TEST_F(ConfigTest, TestWrongParamNames) {
-    using namespace infinity;
+    using namespace hybridsearch;
     SharedPtr<String> path = MakeShared<String>(String(test_data_path()) + "/config/test_conf_invalid_param.toml");
     Config config;
     auto status = config.Init(path, nullptr);
@@ -142,7 +142,7 @@ TEST_F(ConfigTest, TestWrongParamNames) {
 }
 
 TEST_F(ConfigTest, TestConfInvalidValues) {
-    using namespace infinity;
+    using namespace hybridsearch;
     SharedPtr<String> path = MakeShared<String>(String(test_data_path()) + "/config/test_conf_invalid_version.toml");
     Config config_invalid_version;
     auto status = config_invalid_version.Init(path, nullptr);
@@ -176,7 +176,7 @@ TEST_F(ConfigTest, TestConfInvalidValues) {
 
 TEST_F(ConfigTest, TestOutofRangeValues) {
 
-    using namespace infinity;
+    using namespace hybridsearch;
     SharedPtr<String> path = MakeShared<String>(String(test_data_path()) + "/config/test_conf_out_of_bound_bytesize.toml");
     Config config_bytesize;
     auto status = config_bytesize.Init(path, nullptr);
@@ -204,7 +204,7 @@ TEST_F(ConfigTest, TestOutofRangeValues) {
 }
 
 TEST_F(ConfigTest, TestValidValues) {
-    using namespace infinity;
+    using namespace hybridsearch;
     SharedPtr<String> path = MakeShared<String>(String(test_data_path()) + "/config/test_conf_valid_value.toml");
     Config config;
     auto status = config.Init(path, nullptr);
@@ -229,35 +229,35 @@ TEST_F(ConfigTest, TestValidValues) {
     EXPECT_EQ(config.PeerSendTimeout(), 200);
 
     // Log
-    EXPECT_EQ(config.LogFileName(), "infinity.log");
-    EXPECT_EQ(config.LogDir(), "/var/infinity/log");
-    EXPECT_EQ(config.LogFilePath(), "/var/infinity/log/infinity.log");
+    EXPECT_EQ(config.LogFileName(), "hybridsearch.log");
+    EXPECT_EQ(config.LogDir(), "/var/hybridsearch/log");
+    EXPECT_EQ(config.LogFilePath(), "/var/hybridsearch/log/hybridsearch.log");
     EXPECT_EQ(config.LogToStdout(), false);
     EXPECT_EQ(config.LogFileMaxSize(), 1024l * 1024l * 1024l);
     EXPECT_EQ(config.LogFileRotateCount(), 10l);
     EXPECT_EQ(config.GetLogLevel(), LogLevel::kInfo);
 
     // storage
-    EXPECT_EQ(config.DataDir(), "/var/infinity/data");
+    EXPECT_EQ(config.DataDir(), "/var/hybridsearch/data");
     EXPECT_EQ(config.OptimizeIndexInterval(), 10);
     EXPECT_EQ(config.CleanupInterval(), 60);
     EXPECT_EQ(config.CompactInterval(), 120);
     EXPECT_EQ(config.MemIndexCapacity(), 1048576);
-    EXPECT_EQ(config.SnapshotDir(), "/var/infinity/snapshot");
+    EXPECT_EQ(config.SnapshotDir(), "/var/hybridsearch/snapshot");
 
     // buffer
     EXPECT_EQ(config.BufferManagerSize(), 4 * 1024l * 1024l * 1024l);
     EXPECT_EQ(config.LRUNum(), 7);
-    EXPECT_EQ(config.TempDir(), "/var/infinity/tmp");
+    EXPECT_EQ(config.TempDir(), "/var/hybridsearch/tmp");
     EXPECT_EQ(config.MemIndexMemoryQuota(), 1024l * 1024l * 1024l);
 
     // wal
-    EXPECT_EQ(config.WALDir(), "/var/infinity/wal");
+    EXPECT_EQ(config.WALDir(), "/var/hybridsearch/wal");
     EXPECT_EQ(config.FullCheckpointInterval(), 86400l);
     EXPECT_EQ(config.DeltaCheckpointInterval(), 60l);
     EXPECT_EQ(config.WALCompactThreshold(), 1024l * 1024l * 1024l);
     // resource
-    EXPECT_EQ(config.ResourcePath(), "/var/infinity/resource");
+    EXPECT_EQ(config.ResourcePath(), "/var/hybridsearch/resource");
     // persistence
-    EXPECT_EQ(config.PersistenceDir(), "/var/infinity/persistence");
+    EXPECT_EQ(config.PersistenceDir(), "/var/hybridsearch/persistence");
 }

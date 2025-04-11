@@ -21,7 +21,7 @@ module;
 module ivf_index_storage;
 
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 import status;
 import logger;
 import third_party;
@@ -40,7 +40,7 @@ import knn_expr;
 import vector_distance;
 import mlas_matrix_multiply;
 
-namespace infinity {
+namespace hybridsearch {
 
 // IVF_Centroids_Storage
 
@@ -342,4 +342,4 @@ void IVF_Index_Storage::SearchIndex(const KnnDistanceBase1 *knn_distance,
     ivf_parts_storage_->SearchIndex(nprobe_result, this, knn_distance, query_ptr, query_element_type, satisfy_filter_func, add_result_func);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

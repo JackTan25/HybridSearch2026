@@ -24,7 +24,7 @@ import simd_functions;
 
 export module dist_func_l2;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename DataType, typename CompressType>
 class LVQL2Dist;
@@ -200,4 +200,4 @@ LVQL2Dist<DataType, i8> PlainL2Dist<DataType>::ToLVQDistance(SizeT dim) && {
     return LVQL2Dist<DataType, i8>(dim);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -6,7 +6,7 @@
  */
 #include "PeerService.h"
 
-namespace infinity_peer_server {
+namespace hybridsearch_peer_server {
 
 
 PeerService_Register_args::~PeerService_Register_args() noexcept {

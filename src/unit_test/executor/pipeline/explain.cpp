@@ -18,11 +18,11 @@ import base_test;
 import stl;
 import physical_explain;
 
-using namespace infinity;
+using namespace hybridsearch;
 class ExplainTest : public BaseTest {};
 
 TEST_F(ExplainTest, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     Vector<SharedPtr<String>> fragment_text;
     Vector<SharedPtr<String>> task_text;

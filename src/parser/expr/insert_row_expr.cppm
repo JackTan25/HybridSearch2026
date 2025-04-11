@@ -18,8 +18,8 @@ module;
 
 export module insert_row_expr;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::InsertRowExpr;
+export using hybridsearch::InsertRowExpr;
 
 }

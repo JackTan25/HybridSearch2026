@@ -21,7 +21,7 @@ import simd_init;
 import simd_functions;
 import roaring_bitmap;
 
-namespace infinity {
+namespace hybridsearch {
 
 extern template class EMVBSharedVec<u32>;
 class EMVBProductQuantizer;
@@ -89,4 +89,4 @@ private:
     auto compute_topk_documents_selected(const f32 *query_ptr, auto selected_docs_centroid_scores, u32 k, f32 th) const;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

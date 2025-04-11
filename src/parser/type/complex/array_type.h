@@ -16,7 +16,7 @@
 
 #include <cstdint>
 
-namespace infinity {
+namespace hybridsearch {
 
 #pragma pack(1)
 
@@ -30,4 +30,4 @@ static_assert(sizeof(ArrayType) == 8u);
 
 #pragma pack()
 
-} // namespace infinity
+} // namespace hybridsearch

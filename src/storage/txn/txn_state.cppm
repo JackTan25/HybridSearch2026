@@ -18,9 +18,9 @@ export module txn_state;
 
 import stl;
 import logger;
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class TxnState {
     kNotStarted,
@@ -82,4 +82,4 @@ export inline String TransactionType2Str(TransactionType txn_type) {
     return "Normal";
 }
 
-} // namespace infinity
+} // namespace hybridsearch

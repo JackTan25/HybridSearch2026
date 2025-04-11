@@ -18,8 +18,8 @@ module;
 
 export module bitmap_info;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::BitmapInfo;
+export using hybridsearch::BitmapInfo;
 
 }

@@ -22,9 +22,9 @@
 import stl;
 import compilation_config;
 import internal_types;
-import infinity;
+import hybridsearch;
 import logical_type;
-import infinity_exception;
+import hybridsearch_exception;
 import profiler;
 import third_party;
 import logical_node_type;
@@ -39,7 +39,7 @@ import statement_common;
 import data_type;
 import virtual_store;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 enum class BuildType : i8 {
     PLAIN,
@@ -69,7 +69,7 @@ public:
         app_.add_option("--ef_construction", ef_construction_, "ef construction")->required(false);
         app_.add_option("--M", M_, "M")->required(false);
         app_.add_option("--dataset_dir", dataset_dir_, "dataset dir")->required();
-        app_.add_option("--infinity_dir", infinity_dir_, "infinity dir")->required(false);
+        app_.add_option("--hybridsearch_dir", hybridsearch_dir_, "hybridsearch dir")->required(false);
         app_.add_option("--config_path", config_path_, "config path")->required(false);
     }
 
@@ -100,7 +100,7 @@ public:
     SizeT M_ = 16;
 
     String dataset_dir_ = String(test_data_path());
-    String infinity_dir_ = "/var/infinity";
+    String hybridsearch_dir_ = "/var/hybridsearch";
     String config_path_;
 
     String data_path_;
@@ -124,7 +124,7 @@ int main(int argc, char *argv[]) {
     BenchmarkArgs args;
     args.Parse(argc, argv);
 
-    Infinity::LocalInit(args.infinity_dir_, args.config_path_);
+    hybridsearch::LocalInit(args.hybridsearch_dir_, args.config_path_);
 
     std::cout << ">>> Import Benchmark Start <<<" << std::endl;
 
@@ -154,15 +154,15 @@ int main(int argc, char *argv[]) {
         std::string db_name = "default_db";
         std::string index_name = "hnsw_index";
 
-        std::shared_ptr<Infinity> infinity = Infinity::LocalConnect();
+        std::shared_ptr<hybridsearch> hybridsearch = hybridsearch::LocalConnect();
         CreateDatabaseOptions create_db_options;
         create_db_options.conflict_type_ = ConflictType::kIgnore;
-        auto r1 = infinity->CreateDatabase(db_name, std::move(create_db_options), "");
+        auto r1 = hybridsearch->CreateDatabase(db_name, std::move(create_db_options), "");
 
-        //        auto [ data_base, status1 ] = infinity->GetDatabase(db_name);
+        //        auto [ data_base, status1 ] = hybridsearch->GetDatabase(db_name);
         CreateTableOptions create_tb_options;
         create_tb_options.conflict_type_ = ConflictType::kIgnore;
-        auto r2 = infinity->CreateTable(db_name, table_name, std::move(column_defs), std::vector<TableConstraint *>{}, std::move(create_tb_options));
+        auto r2 = hybridsearch->CreateTable(db_name, table_name, std::move(column_defs), std::vector<TableConstraint *>{}, std::move(create_tb_options));
 
         //        auto [ table, status2 ] = data_base->GetTable(table_name);
 
@@ -174,9 +174,9 @@ int main(int argc, char *argv[]) {
         ImportOptions import_options;
         import_options.copy_file_type_ = CopyFileType::kFVECS;
 
-        infinity::BaseProfiler profiler;
+        hybridsearch::BaseProfiler profiler;
         profiler.Begin();
-        QueryResult query_result = infinity->Import(db_name, table_name, base_path, import_options);
+        QueryResult query_result = hybridsearch->Import(db_name, table_name, base_path, import_options);
         std::cout << "Import data cost: " << profiler.ElapsedToString() << std::endl;
 
         auto index_info = new IndexInfo();
@@ -209,7 +209,7 @@ int main(int argc, char *argv[]) {
         }
 
         String index_comment = "";
-        query_result = infinity->CreateIndex(db_name, table_name, index_name, index_comment, index_info, CreateIndexOptions());
+        query_result = hybridsearch->CreateIndex(db_name, table_name, index_name, index_comment, index_info, CreateIndexOptions());
 
         if (!query_result.IsOk()) {
             std::cout << "Fail to create index." << profiler.ElapsedToString() << std::endl;
@@ -221,7 +221,7 @@ int main(int argc, char *argv[]) {
             OptimizeOptions options;
             options.index_name_ = index_name;
             options.opt_params_.emplace_back(new InitParameter("compress_to_lvq"));
-            query_result = infinity->Optimize(db_name, table_name, options);
+            query_result = hybridsearch->Optimize(db_name, table_name, options);
             if (!query_result.IsOk()) {
                 std::cout << "Fail to optimize index." << profiler.ElapsedToString() << std::endl;
                 profiler.End();
@@ -230,7 +230,7 @@ int main(int argc, char *argv[]) {
         }
 
         std::cout << "Create Index cost: " << profiler.ElapsedToString() << std::endl;
-        query_result = infinity->Flush();
+        query_result = hybridsearch->Flush();
         profiler.End();
         std::cout << "Flush data cost: " << profiler.ElapsedToString() << std::endl;
     } while (false);
@@ -239,5 +239,5 @@ int main(int argc, char *argv[]) {
     for (const auto &item : results) {
         std::cout << item << std::endl;
     }
-    Infinity::LocalUnInit();
+    hybridsearch::LocalUnInit();
 }

@@ -24,7 +24,7 @@ import knn_expr;
 
 export module aggregate_binder;
 
-namespace infinity {
+namespace hybridsearch {
 
 class AggregateBinder : public ExpressionBinder {
 public:
@@ -42,4 +42,4 @@ public:
 private:
 };
 
-} // namespace infinity
+} // namespace hybridsearch

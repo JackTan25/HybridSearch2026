@@ -2,10 +2,10 @@ import os
 import threading
 import time
 import pytest
-from infinity_runner import InfinityRunner, infinity_runner_decorator_factory
+from hybridsearch_runner import hybridsearchRunner, hybridsearch_runner_decorator_factory
 from restart_util import *
 from common import common_values
-from infinity.common import ConflictType
+from hybridsearch.common import ConflictType
 import random
 from util import RtnThread
 
@@ -13,7 +13,7 @@ from util import RtnThread
 class TestInsertImport:
     def insert_import_inner(
         self,
-        infinity_runner: InfinityRunner,
+        hybridsearch_runner: hybridsearchRunner,
         total_n: int,
         config: str,
         columns: dict,
@@ -40,10 +40,10 @@ class TestInsertImport:
 
         lock = threading.Lock()
 
-        logger = infinity_runner.logger
+        logger = hybridsearch_runner.logger
         write_i = 0
 
-        decorator = infinity_runner_decorator_factory(config, uri, infinity_runner, shutdown_out=True)
+        decorator = hybridsearch_runner_decorator_factory(config, uri, hybridsearch_runner, shutdown_out=True)
 
         def insert_import_func(table_obj):
             nonlocal cur_n, insert_finish, shutdown, error, write_i
@@ -99,16 +99,16 @@ class TestInsertImport:
                 ):
                     with lock:
                         shutdown = True
-                        infinity_runner.uninit()
-                        logger.debug("shutdown infinity")
+                        hybridsearch_runner.uninit()
+                        logger.debug("shutdown hybridsearch")
                     shutdown_time += 1
                     return
                 logger.debug(f"cur_n inner: {cur_n}")
                 time.sleep(0.1)
 
         @decorator
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.get_table("test_insert")
 
             data_dict, _, _ = table_obj.output(["count(*)"]).to_result()
@@ -160,7 +160,7 @@ class TestInsertImport:
     )
     def test_data_with_import(
         self,
-        infinity_runner: InfinityRunner,
+        hybridsearch_runner: hybridsearchRunner,
         total_n: int,
         config: str,
         columns: dict,
@@ -170,19 +170,19 @@ class TestInsertImport:
         import_options: dict,
     ):
         uri = common_values.TEST_LOCAL_HOST
-        infinity_runner.clear()
+        hybridsearch_runner.clear()
 
-        decorator = infinity_runner_decorator_factory(config, uri, infinity_runner)
+        decorator = hybridsearch_runner_decorator_factory(config, uri, hybridsearch_runner)
 
         @decorator
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.create_table("test_insert", columns, ConflictType.Error)
 
         part1()
 
         self.insert_import_inner(
-            infinity_runner,
+            hybridsearch_runner,
             total_n,
             config,
             columns,
@@ -193,8 +193,8 @@ class TestInsertImport:
         )
 
         @decorator
-        def part2(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part2(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.drop_table("test_insert", ConflictType.Error)
 
         part2()
@@ -240,7 +240,7 @@ class TestInsertImport:
     )
     def test_index_with_import(
         self,
-        infinity_runner: InfinityRunner,
+        hybridsearch_runner: hybridsearchRunner,
         total_n: int,
         config: str,
         columns: dict,
@@ -251,13 +251,13 @@ class TestInsertImport:
         import_options: dict,
     ):
         uri = common_values.TEST_LOCAL_HOST
-        infinity_runner.clear()
+        hybridsearch_runner.clear()
 
-        decorator = infinity_runner_decorator_factory(config, uri, infinity_runner)
+        decorator = hybridsearch_runner_decorator_factory(config, uri, hybridsearch_runner)
 
         @decorator
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.create_table("test_insert", columns, ConflictType.Error)
             for idx in indexes:
                 table_obj.create_index(f"idx_{idx.column_name}", idx)
@@ -265,7 +265,7 @@ class TestInsertImport:
         part1()
 
         self.insert_import_inner(
-            infinity_runner,
+            hybridsearch_runner,
             total_n,
             config,
             columns,
@@ -276,8 +276,8 @@ class TestInsertImport:
         )
 
         @decorator
-        def part2(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part2(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.drop_table("test_insert", ConflictType.Error)
 
         part2()

@@ -8,7 +8,7 @@ export module character_util;
 
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class CharacterUtil {
 public:
@@ -155,4 +155,4 @@ public:
         return utf8_str;
     }
 };
-} // namespace infinity
+} // namespace hybridsearch

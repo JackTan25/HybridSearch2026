@@ -22,7 +22,7 @@ import term;
 import common_analyzer;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class KoreanAnalyzer : public CommonLanguageAnalyzer {
 public:
@@ -77,4 +77,4 @@ private:
 
     String token_str_;
 };
-} // namespace infinity
+} // namespace hybridsearch

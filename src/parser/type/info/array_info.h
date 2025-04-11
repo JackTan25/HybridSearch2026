@@ -19,7 +19,7 @@
 #include "type/data_type.h"
 #include "type/type_info.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 class ArrayInfo : public TypeInfo {
 public:
@@ -46,4 +46,4 @@ private:
     DataType elem_type_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

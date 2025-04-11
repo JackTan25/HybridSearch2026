@@ -22,7 +22,7 @@ import block_index;
 
 export module table_scan_function_data;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class TableScanFunctionData : public TableFunctionData {
 public:
@@ -37,4 +37,4 @@ public:
     SizeT current_read_offset_{0};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

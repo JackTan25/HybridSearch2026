@@ -30,12 +30,12 @@ import physical_operator_type;
 import operator_state;
 import data_block;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import expression_type;
 import value_expression;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 void LimitCounter::AddHitsCount(u64 row_count) { total_hits_count_ += row_count; }
 
@@ -236,4 +236,4 @@ bool PhysicalLimit::Execute(QueryContext *query_context, OperatorState *operator
     return result;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

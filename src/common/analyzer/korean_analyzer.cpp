@@ -35,7 +35,7 @@ module korean_analyzer;
 
 namespace fs = std::filesystem;
 
-namespace infinity {
+namespace hybridsearch {
 static const String KNOWLEDGE_PATH = "mecab/ko-dic";
 
 KoreanAnalyzer::KoreanAnalyzer(const String &base_path) {
@@ -70,4 +70,4 @@ Status KoreanAnalyzer::Load() {
     return Status::OK();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

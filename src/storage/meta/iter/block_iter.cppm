@@ -24,11 +24,11 @@ import stl;
 import block_entry;
 import block_column_iter;
 import buffer_manager;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 import column_vector;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <bool CheckTS = true>
 class BlockIter {
@@ -85,4 +85,4 @@ private:
     Vector<BlockColumnIter<CheckTS>> column_iters_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

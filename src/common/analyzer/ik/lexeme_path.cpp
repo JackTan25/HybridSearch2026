@@ -8,7 +8,7 @@ module lexeme_path;
 import lexeme;
 import quick_sort_set;
 
-namespace infinity {
+namespace hybridsearch {
 
 LexemePath::LexemePath() {
     path_begin_ = -1;
@@ -163,4 +163,4 @@ std::string LexemePath::ToString() const {
     return sb.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

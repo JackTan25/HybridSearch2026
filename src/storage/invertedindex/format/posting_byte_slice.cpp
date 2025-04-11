@@ -8,7 +8,7 @@ import flush_info;
 import file_writer;
 import file_reader;
 
-namespace infinity {
+namespace hybridsearch {
 
 PostingByteSlice::PostingByteSlice() : buffer_(), posting_writer_() {}
 
@@ -73,4 +73,4 @@ void PostingByteSlice::SnapShot(PostingByteSlice *buffer) const {
         posting_writer_.SnapShot(buffer->posting_writer_);
     }
 }
-} // namespace infinity
+} // namespace hybridsearch

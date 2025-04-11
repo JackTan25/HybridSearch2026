@@ -15,7 +15,7 @@
 #include "case_expr.h"
 #include <sstream>
 
-namespace infinity {
+namespace hybridsearch {
 
 WhenThen::~WhenThen() {
     if (when_ != nullptr) {
@@ -65,4 +65,4 @@ std::string CaseExpr::ToString() const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

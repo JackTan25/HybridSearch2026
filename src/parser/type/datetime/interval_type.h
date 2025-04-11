@@ -16,7 +16,7 @@
 
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 enum TimeUnit : int32_t {
     kYear = 0,
@@ -44,4 +44,4 @@ struct IntervalType {
     int32_t value{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

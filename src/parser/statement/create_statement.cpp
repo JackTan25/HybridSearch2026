@@ -14,8 +14,8 @@
 
 #include "create_statement.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 std::string CreateStatement::ToString() const { return create_info_->ToString(); }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -22,7 +22,7 @@ import logical_type;
 import internal_types;
 import data_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct CaseCheck {
     CaseCheck(SharedPtr<BaseExpression> when_expr, SharedPtr<BaseExpression> then_expr)
@@ -56,4 +56,4 @@ private:
     DataType return_type_{LogicalType::kInvalid};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

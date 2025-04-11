@@ -26,7 +26,7 @@ import knn_scan_data;
 import logical_type;
 import knn_result_handler;
 import multivector_result_handler;
-import infinity_exception;
+import hybridsearch_exception;
 import status;
 import third_party;
 import roaring_bitmap;
@@ -37,7 +37,7 @@ import ivf_index_storage;
 import search_top_1;
 import search_top_k;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct IVF_Search_Params {
     const KnnDistanceBase1 *knn_distance_{};
@@ -191,4 +191,4 @@ GetIVFSearchHandler(const IVF_Search_Params &ivf_params, const bool use_bitmask,
     return GetIVFSearchHandler<t, C, DistanceDataType, false>(ivf_params, bitmask, max_segment_offset);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

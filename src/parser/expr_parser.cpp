@@ -18,7 +18,7 @@
 
 #include <iostream>
 
-namespace infinity {
+namespace hybridsearch {
 
 ExprParser::ExprParser() {
     scanner_ = nullptr;
@@ -43,4 +43,4 @@ void ExprParser::Parse(const std::string &expr_text, ExpressionParserResult *res
     expression_delete_buffer(state_, scanner_);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -15,8 +15,8 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_context;
-import infinity_exception;
+import hybridsearch_context;
+import hybridsearch_exception;
 
 import stl;
 import global_resource_usage;
@@ -33,16 +33,16 @@ import status;
 import background_process;
 import bg_task;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class BGProcessTest : public BaseTestParamStr {};
 
 INSTANTIATE_TEST_SUITE_P(TestWithDifferentParams, BGProcessTest, ::testing::Values(BaseTestParamStr::NULL_CONFIG_PATH));
 
 TEST_P(BGProcessTest, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
-    BGTaskProcessor processor(infinity::InfinityContext::instance().storage()->wal_manager(), nullptr);
+    BGTaskProcessor processor(hybridsearch::hybridsearchContext::instance().storage()->wal_manager(), nullptr);
 
     processor.Start();
 

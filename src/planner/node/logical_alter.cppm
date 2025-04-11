@@ -26,7 +26,7 @@ import data_type;
 import alter_statement;
 import column_def;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalAlter : public LogicalNode {
 public:
@@ -83,4 +83,4 @@ public:
     Vector<String> column_names_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

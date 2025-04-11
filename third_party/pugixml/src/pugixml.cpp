@@ -8428,7 +8428,7 @@ PUGI_IMPL_NS_BEGIN
 	#if defined(PUGI_IMPL_MSVC_CRT_VERSION) || defined(__BORLANDC__)
 		if (_finite(value)) return (value == 0) ? PUGIXML_TEXT("0") : 0;
 		if (_isnan(value)) return PUGIXML_TEXT("NaN");
-		return value > 0 ? PUGIXML_TEXT("Infinity") : PUGIXML_TEXT("-Infinity");
+		return value > 0 ? PUGIXML_TEXT("hybridsearch") : PUGIXML_TEXT("-hybridsearch");
 	#elif defined(fpclassify) && defined(FP_NAN) && defined(FP_INFINITE) && defined(FP_ZERO)
 		switch (fpclassify(value))
 		{
@@ -8436,7 +8436,7 @@ PUGI_IMPL_NS_BEGIN
 			return PUGIXML_TEXT("NaN");
 
 		case FP_INFINITE:
-			return value > 0 ? PUGIXML_TEXT("Infinity") : PUGIXML_TEXT("-Infinity");
+			return value > 0 ? PUGIXML_TEXT("hybridsearch") : PUGIXML_TEXT("-hybridsearch");
 
 		case FP_ZERO:
 			return PUGIXML_TEXT("0");
@@ -8450,7 +8450,7 @@ PUGI_IMPL_NS_BEGIN
 
 		if (v == 0) return PUGIXML_TEXT("0");
 		if (v != v) return PUGIXML_TEXT("NaN");
-		if (v * 2 == v) return value > 0 ? PUGIXML_TEXT("Infinity") : PUGIXML_TEXT("-Infinity");
+		if (v * 2 == v) return value > 0 ? PUGIXML_TEXT("hybridsearch") : PUGIXML_TEXT("-hybridsearch");
 		return 0;
 	#endif
 	}

@@ -18,8 +18,8 @@ module;
 
 export module subquery_reference;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::SubqueryReference;
+export using hybridsearch::SubqueryReference;
 
 }

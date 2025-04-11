@@ -22,7 +22,7 @@ import doc_iterator;
 import multi_doc_iterator;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class MustFirstIterator final : public MultiDocIterator {
 public:
@@ -100,4 +100,4 @@ private:
     float score_cache_ = 0.0f;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

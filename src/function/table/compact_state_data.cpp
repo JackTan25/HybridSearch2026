@@ -22,7 +22,7 @@ module compact_state_data;
 import third_party;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 void RowIDRemap::AddMap(SegmentID segment_id, BlockID block_id, BlockOffset block_offset, RowID new_row_id) {
     std::lock_guard lock(mutex_);
@@ -111,4 +111,4 @@ Map<SegmentID, SegmentIndexEntry *> CompactStateData::GetSegmentIndexEntries(con
     return res;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

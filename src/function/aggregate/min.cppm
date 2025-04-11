@@ -18,10 +18,10 @@ import stl;
 
 export module min;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 
 export void RegisterMinFunction(const UniquePtr<Catalog> &catalog_ptr);
 
-} // namespace infinity
+} // namespace hybridsearch

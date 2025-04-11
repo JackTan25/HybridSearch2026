@@ -18,7 +18,7 @@ import stl;
 
 module cast_table;
 
-namespace infinity {
+namespace hybridsearch {
 
 CastTable::CastTable() {
     for (auto &arr : matrix_) {
@@ -252,4 +252,4 @@ CastTable::CastTable() {
 
 i64 CastTable::GetCastCost(LogicalType from, LogicalType to) const { return matrix_[to_underlying_val(from)][to_underlying_val(to)]; }
 
-} // namespace infinity
+} // namespace hybridsearch

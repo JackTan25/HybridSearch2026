@@ -23,10 +23,10 @@ import expression_type;
 
 import scalar_function;
 import search_options;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 FusionExpression::FusionExpression(const String &method, SharedPtr<SearchOptions> options)
     : BaseExpression(ExpressionType::kFusion, Vector<SharedPtr<BaseExpression>>()), method_(method), options_(std::move(options)) {}
@@ -39,4 +39,4 @@ String FusionExpression::ToString() const {
     return expr_str;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

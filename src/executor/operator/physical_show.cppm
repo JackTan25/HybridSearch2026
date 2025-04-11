@@ -25,7 +25,7 @@ import physical_operator_type;
 import base_expression;
 import logical_show;
 import load_meta;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import column_def;
 import data_type;
@@ -34,7 +34,7 @@ import data_block;
 import logger;
 import show_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PhysicalShow : public PhysicalOperator {
 public:
@@ -178,4 +178,4 @@ private:
     SharedPtr<Vector<SharedPtr<DataType>>> output_types_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

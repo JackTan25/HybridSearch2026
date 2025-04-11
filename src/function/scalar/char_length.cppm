@@ -4,10 +4,10 @@ import stl;
 
 export module char_length;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 
 export void RegisterCharLengthFunction(const UniquePtr<Catalog> &catalog_ptr);
 
-} // namespace infinity
+} // namespace hybridsearch

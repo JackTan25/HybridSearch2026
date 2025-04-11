@@ -7,11 +7,11 @@ python_executable = sys.executable
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Python restart test for infinity")
+    parser = argparse.ArgumentParser(description="Python restart test for hybridsearch")
     parser.add_argument(
-        "--infinity_path",
+        "--hybridsearch_path",
         type=str,
-        default="./build/Debug/src/infinity",
+        default="./build/Debug/src/hybridsearch",
     )
     parser.add_argument(
         "--slow",
@@ -25,7 +25,7 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
-    infinity_path = args.infinity_path
+    hybridsearch_path = args.hybridsearch_path
     slow = args.slow
 
     current_path = os.getcwd()
@@ -45,7 +45,7 @@ if __name__ == "__main__":
                 "pytest",
                 "-v",
                 test_case,
-                f"--infinity_path={infinity_path}",
+                f"--hybridsearch_path={hybridsearch_path}",
                 "-x",
                 "-s",
                 "-m",
@@ -62,7 +62,7 @@ if __name__ == "__main__":
                 "pytest",
                 "-v",
                 test_case,
-                f"--infinity_path={infinity_path}",
+                f"--hybridsearch_path={hybridsearch_path}",
                 "-x",
                 "-s",
             ]

@@ -24,7 +24,7 @@
 #include <cstring>
 #include <sstream>
 
-namespace infinity {
+namespace hybridsearch {
 
 ConstantExpr::ConstantExpr(ConstantExpr &&constant_expr) noexcept : ParsedExpr(ParsedExprType::kConstant) {
     literal_type_ = constant_expr.literal_type_;
@@ -601,4 +601,4 @@ void ConstantExpr::TrySortSparseVec(const ColumnDef *col_def) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

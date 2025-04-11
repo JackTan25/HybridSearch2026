@@ -18,7 +18,7 @@
 #include <memory>
 #include <vector>
 
-namespace infinity {
+namespace hybridsearch {
 
 struct SegmentEntry;
 
@@ -54,4 +54,4 @@ public:
     std::vector<SegmentEntry *> segments_to_compact_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

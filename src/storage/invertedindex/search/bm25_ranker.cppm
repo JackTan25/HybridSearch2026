@@ -19,7 +19,7 @@ export module bm25_ranker;
 import stl;
 import index_defines;
 
-namespace infinity {
+namespace hybridsearch {
 export class BM25Ranker {
 public:
     BM25Ranker(u64 total_df);
@@ -35,4 +35,4 @@ private:
     float score_{0};
     u64 total_df_{0};
 };
-} // namespace infinity
+} // namespace hybridsearch

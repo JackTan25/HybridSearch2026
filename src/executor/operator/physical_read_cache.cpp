@@ -16,11 +16,11 @@ module;
 module physical_read_cache;
 
 import column_binding;
-import infinity_exception;
+import hybridsearch_exception;
 import data_block;
 import column_vector;
 
-namespace infinity {
+namespace hybridsearch {
 
 PhysicalReadCache::PhysicalReadCache(u64 id,
                                      LogicalNodeType origin_type,
@@ -98,4 +98,4 @@ SharedPtr<Vector<SharedPtr<DataType>>> PhysicalReadCache::GetOutputTypes() const
     return result_types;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

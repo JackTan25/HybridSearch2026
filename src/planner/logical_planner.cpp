@@ -25,7 +25,7 @@ module logical_planner;
 import stl;
 import bind_context;
 
-import infinity_exception;
+import hybridsearch_exception;
 import query_binder;
 import bound_delete_statement;
 import bound_update_statement;
@@ -105,10 +105,10 @@ import catalog;
 import special_function;
 import utility;
 import wal_manager;
-import infinity_context;
+import hybridsearch_context;
 import table_entry;
 
-namespace infinity {
+namespace hybridsearch {
 
 Status LogicalPlanner::Build(const BaseStatement *statement, SharedPtr<BindContext> &bind_context_ptr) {
     if (bind_context_ptr.get() == nullptr) {
@@ -119,7 +119,7 @@ Status LogicalPlanner::Build(const BaseStatement *statement, SharedPtr<BindConte
             return BuildSelect(static_cast<const SelectStatement *>(statement), bind_context_ptr);
         }
         case StatementType::kInsert: {
-            StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+            StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
             if (storage_mode == StorageMode::kUnInitialized) {
                 UnrecoverableError("Uninitialized storage mode");
             }
@@ -130,7 +130,7 @@ Status LogicalPlanner::Build(const BaseStatement *statement, SharedPtr<BindConte
             return BuildInsert(const_cast<InsertStatement *>(static_cast<const InsertStatement *>(statement)), bind_context_ptr);
         }
         case StatementType::kUpdate: {
-            StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+            StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
             if (storage_mode == StorageMode::kUnInitialized) {
                 UnrecoverableError("Uninitialized storage mode");
             }
@@ -141,7 +141,7 @@ Status LogicalPlanner::Build(const BaseStatement *statement, SharedPtr<BindConte
             return BuildUpdate(static_cast<const UpdateStatement *>(statement), bind_context_ptr);
         }
         case StatementType::kDelete: {
-            StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+            StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
             if (storage_mode == StorageMode::kUnInitialized) {
                 UnrecoverableError("Uninitialized storage mode");
             }
@@ -152,7 +152,7 @@ Status LogicalPlanner::Build(const BaseStatement *statement, SharedPtr<BindConte
             return BuildDelete(static_cast<const DeleteStatement *>(statement), bind_context_ptr);
         }
         case StatementType::kCreate: {
-            StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+            StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
             if (storage_mode == StorageMode::kUnInitialized) {
                 UnrecoverableError("Uninitialized storage mode");
             }
@@ -163,7 +163,7 @@ Status LogicalPlanner::Build(const BaseStatement *statement, SharedPtr<BindConte
             return BuildCreate(const_cast<CreateStatement *>(static_cast<const CreateStatement *>(statement)), bind_context_ptr);
         }
         case StatementType::kDrop: {
-            StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+            StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
             if (storage_mode == StorageMode::kUnInitialized) {
                 UnrecoverableError("Uninitialized storage mode");
             }
@@ -177,7 +177,7 @@ Status LogicalPlanner::Build(const BaseStatement *statement, SharedPtr<BindConte
             return BuildShow(const_cast<ShowStatement *>(static_cast<const ShowStatement *>(statement)), bind_context_ptr);
         }
         case StatementType::kFlush: {
-            StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+            StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
             if (storage_mode == StorageMode::kUnInitialized) {
                 UnrecoverableError("Uninitialized storage mode");
             }
@@ -188,7 +188,7 @@ Status LogicalPlanner::Build(const BaseStatement *statement, SharedPtr<BindConte
             return BuildFlush(static_cast<const FlushStatement *>(statement), bind_context_ptr);
         }
         case StatementType::kOptimize: {
-            StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+            StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
             if (storage_mode == StorageMode::kUnInitialized) {
                 UnrecoverableError("Uninitialized storage mode");
             }
@@ -211,7 +211,7 @@ Status LogicalPlanner::Build(const BaseStatement *statement, SharedPtr<BindConte
             return BuildExecute(static_cast<const ExecuteStatement *>(statement), bind_context_ptr);
         }
         case StatementType::kAlter: {
-            StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+            StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
             if (storage_mode == StorageMode::kUnInitialized) {
                 UnrecoverableError("Uninitialized storage mode");
             }
@@ -225,7 +225,7 @@ Status LogicalPlanner::Build(const BaseStatement *statement, SharedPtr<BindConte
             return BuildCommand(static_cast<const CommandStatement *>(statement), bind_context_ptr);
         }
         case StatementType::kCompact: {
-            StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+            StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
             if (storage_mode == StorageMode::kUnInitialized) {
                 UnrecoverableError("Uninitialized storage mode");
             }
@@ -981,7 +981,7 @@ Status LogicalPlanner::BuildExecute(const ExecuteStatement *, SharedPtr<BindCont
 Status LogicalPlanner::BuildCopy(CopyStatement *statement, SharedPtr<BindContext> &bind_context_ptr) {
     BindSchemaName(statement->schema_name_);
     if (statement->copy_from_) {
-        StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+        StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
         if (storage_mode == StorageMode::kUnInitialized) {
             UnrecoverableError("Uninitialized storage mode");
         }
@@ -1299,7 +1299,7 @@ Status LogicalPlanner::BuildCommand(const CommandStatement *command_statement, S
             break;
         }
         case CommandType::kLockTable: {
-            StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+            StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
             if (storage_mode == StorageMode::kUnInitialized) {
                 UnrecoverableError("Uninitialized storage mode");
             }
@@ -1320,7 +1320,7 @@ Status LogicalPlanner::BuildCommand(const CommandStatement *command_statement, S
             break;
         }
         case CommandType::kUnlockTable: {
-            StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+            StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
             if (storage_mode == StorageMode::kUnInitialized) {
                 UnrecoverableError("Uninitialized storage mode");
             }
@@ -1341,7 +1341,7 @@ Status LogicalPlanner::BuildCommand(const CommandStatement *command_statement, S
             break;
         }
         case CommandType::kCleanup: {
-            StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+            StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
             if (storage_mode == StorageMode::kUnInitialized) {
                 UnrecoverableError("Uninitialized storage mode");
             }
@@ -1359,7 +1359,7 @@ Status LogicalPlanner::BuildCommand(const CommandStatement *command_statement, S
             break;
         }
         case CommandType::kSnapshot: {
-            StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+            StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
             if (storage_mode == StorageMode::kUnInitialized) {
                 UnrecoverableError("Uninitialized storage mode");
             }
@@ -1891,4 +1891,4 @@ void LogicalPlanner::BindSchemaName(String &schema_name) const {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -16,7 +16,7 @@ module;
 
 export module expression_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class ExpressionType {
     // Aggregate function

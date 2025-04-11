@@ -24,14 +24,14 @@ import logical_type;
 import data_type;
 import knn_expr;
 import knn_scan_data;
-import infinity_exception;
+import hybridsearch_exception;
 import status;
 import third_party;
 import ivf_index_data;
 import ivf_index_data_in_mem;
 import ivf_index_storage;
 
-namespace infinity {
+namespace hybridsearch {
 
 IVF_Search_Params IVF_Search_Params::Make(const KnnScanFunctionData *knn_scan_function_data) {
     IVF_Search_Params params;
@@ -60,4 +60,4 @@ IVF_Search_Params IVF_Search_Params::Make(const KnnScanFunctionData *knn_scan_fu
     return params;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

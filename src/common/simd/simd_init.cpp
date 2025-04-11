@@ -23,7 +23,7 @@ import emvb_simd_funcs;
 import search_top_1_sgemm;
 import batch_bm25_simd_funcs;
 
-namespace infinity {
+namespace hybridsearch {
 
 F32DistanceFuncType GetL2DistanceFuncPtr() {
 #ifdef __AVX2__
@@ -607,4 +607,4 @@ BatchBM25FuncType GetBatchBM25FuncPtr() {
     return &BatchBM25Simple;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

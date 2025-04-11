@@ -19,11 +19,11 @@ export module build_fast_rough_filter_task;
 import stl;
 import segment_entry;
 import buffer_manager;
-import infinity_exception;
+import hybridsearch_exception;
 import filter_value_type_classification;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct TotalRowCount {
     u32 total_row_count_read_{};
@@ -120,4 +120,4 @@ private:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

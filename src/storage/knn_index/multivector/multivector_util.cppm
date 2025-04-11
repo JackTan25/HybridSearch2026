@@ -19,7 +19,7 @@ export module multivector_util;
 import stl;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename ElementT>
 class MultiVectorRef {
@@ -37,4 +37,4 @@ public:
     [[nodiscard]] SizeT embedding_num() const { return embedding_num_; }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

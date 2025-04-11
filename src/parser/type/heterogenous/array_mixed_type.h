@@ -16,7 +16,7 @@
 
 #include "base_mixed_type.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 struct __attribute__((packed)) ArrayMixedType : public BaseMixedType {
 
@@ -35,4 +35,4 @@ public:
     char *ptr{nullptr}; // pointer to child mixed type
 };
 
-} // namespace infinity
+} // namespace hybridsearch

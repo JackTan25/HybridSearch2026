@@ -24,11 +24,11 @@ import block_column_iter;
 import sparse_util;
 import segment_iter;
 import segment_entry;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 MemIndexTracerInfo BMPIndexInMem::GetInfo() const {
     auto *table_index_entry = segment_index_entry_->table_index_entry();
@@ -210,4 +210,4 @@ SharedPtr<ChunkIndexEntry> BMPIndexInMem::Dump(SegmentIndexEntry *segment_index_
     return new_chunk_index_entry;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

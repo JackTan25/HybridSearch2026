@@ -22,7 +22,7 @@ import simd_common_tools;
 
 export module diskann_simd_func;
 
-namespace infinity {
+namespace hybridsearch {
 
 #if defined(__aarch64__)
 inline float hsum256_ps_avx(__m256 v) {
@@ -93,4 +93,4 @@ export float hsumFloatVecAVX(const float *array, size_t size) {
     return sum;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

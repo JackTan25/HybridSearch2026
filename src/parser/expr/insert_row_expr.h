@@ -18,7 +18,7 @@
 #include <memory>
 #include <vector>
 
-namespace infinity {
+namespace hybridsearch {
 
 class InsertRowExpr : public ParsedExpr {
 public:
@@ -32,4 +32,4 @@ public:
     std::vector<std::unique_ptr<ParsedExpr>> values_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

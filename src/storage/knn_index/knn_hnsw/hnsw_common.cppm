@@ -20,10 +20,10 @@ module;
 export module hnsw_common;
 
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 import sparse_util;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct HnswConfig {
     SizeT lvq_buffer_size_;
@@ -110,4 +110,4 @@ export constexpr HnswInsertConfig kDefaultHnswInsertConfig = {
     .optimize_ = false,
 };
 
-} // namespace infinity
+} // namespace hybridsearch

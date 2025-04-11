@@ -7,7 +7,7 @@ import third_party;
 import persist_result_handler;
 import local_file_handle;
 
-using namespace infinity;
+using namespace hybridsearch;
 namespace fs = std::filesystem;
 
 class PersistenceManagerTest : public BaseTest {

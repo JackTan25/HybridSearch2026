@@ -18,7 +18,7 @@ export module function;
 
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class FunctionType {
     kInvalid,
@@ -46,4 +46,4 @@ protected:
     FunctionType type_{FunctionType::kInvalid};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

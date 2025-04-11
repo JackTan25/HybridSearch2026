@@ -22,7 +22,7 @@ import table_def;
 import data_block;
 import stl;
 
-import infinity_exception;
+import hybridsearch_exception;
 import db_entry;
 import table_entry;
 import segment_entry;
@@ -42,7 +42,7 @@ import default_values;
 import constant_expr;
 import persistence_manager;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class CatalogDeltaOpType : i8 {
     INVALID = 0,
@@ -435,4 +435,4 @@ private:
     mutable std::mutex catalog_delta_locker_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

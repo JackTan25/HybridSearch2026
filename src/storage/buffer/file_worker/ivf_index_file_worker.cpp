@@ -22,11 +22,11 @@ import file_worker;
 import logger;
 import index_base;
 import ivf_index_data;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import persistence_manager;
 
-namespace infinity {
+namespace hybridsearch {
 
 IVFIndexFileWorker::~IVFIndexFileWorker() {
     if (data_ != nullptr) {
@@ -76,4 +76,4 @@ void IVFIndexFileWorker::ReadFromFileImpl(SizeT file_size, bool from_spill) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

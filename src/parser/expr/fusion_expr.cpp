@@ -6,7 +6,7 @@
 #include <cmath>
 #include <utility>
 
-namespace infinity {
+namespace hybridsearch {
 
 FusionExpr::FusionExpr() : ParsedExpr(ParsedExprType::kFusion) {}
 
@@ -187,4 +187,4 @@ std::unique_ptr<MatchTensorExpr> GetFusionMatchTensorExpr(SearchOptions &search_
     return match_tensor_expr;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

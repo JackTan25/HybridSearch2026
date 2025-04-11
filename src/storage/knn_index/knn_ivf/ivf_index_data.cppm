@@ -24,9 +24,9 @@ import embedding_info;
 import internal_types;
 import logical_type;
 import local_file_handle;
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 class IndexBase;
 struct SegmentEntry;
@@ -74,4 +74,4 @@ private:
                         const SharedPtr<ColumnDef> &column_def);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

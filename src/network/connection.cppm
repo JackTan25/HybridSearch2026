@@ -24,7 +24,7 @@ import query_context;
 import data_table;
 import query_result;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class Connection {
 public:
@@ -68,4 +68,4 @@ private:
     SharedPtr<RemoteSession> session_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

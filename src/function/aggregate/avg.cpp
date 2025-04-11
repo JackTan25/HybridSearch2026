@@ -19,7 +19,7 @@ module avg;
 import stl;
 import catalog;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import aggregate_function;
 import aggregate_function_set;
 
@@ -29,7 +29,7 @@ import internal_types;
 import data_type;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 template <typename ValueType, typename ResultType>
 struct AvgState {
@@ -422,4 +422,4 @@ void RegisterAvgFunction(const UniquePtr<Catalog> &catalog_ptr) {
     Catalog::AddFunctionSet(catalog_ptr.get(), function_set_ptr);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -18,15 +18,15 @@ import stl;
 
 export module utility;
 
-export namespace infinity::Utility {
+export namespace hybridsearch::Utility {
 
 SizeT NextPowerOfTwo(SizeT input);
 String FormatByteSize(u64 byte_size);
 String FormatTimeInfo(u64 seconds);
 
-} // namespace infinity::Utility
+} // namespace hybridsearch::Utility
 
-export namespace infinity {
+export namespace hybridsearch {
 
 enum class IdentifierValidationStatus {
     kOk,
@@ -45,4 +45,4 @@ String CalcMD5(const char* input_str, SizeT length);
 
 String CalcMD5(const String& filename);
 
-} // namespace infinity
+} // namespace hybridsearch

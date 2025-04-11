@@ -20,7 +20,7 @@ import logical_index_scan;
 import physical_index_scan;
 import logical_node_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 CachedIndexScan::CachedIndexScan(TxnTimeStamp query_ts, const LogicalIndexScan *logical_index_scan)
     : CachedScanBase(logical_index_scan->operator_type(), logical_index_scan->base_table_ref_.get(), query_ts, logical_index_scan->GetOutputNames()),
@@ -47,4 +47,4 @@ bool CachedIndexScan::Eq(const CachedNodeBase &other_base) const {
     return filter_expression_->Eq(*other.filter_expression_);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

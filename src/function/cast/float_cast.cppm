@@ -21,7 +21,7 @@ import bound_cast_func;
 import vector_buffer;
 import column_vector_cast;
 import logical_type;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import column_vector;
 import internal_types;
@@ -29,7 +29,7 @@ import data_type;
 import status;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct FloatTryCastToFixlen;
 export struct FloatTryCastToVarlen;
@@ -338,4 +338,4 @@ inline bool FloatTryCastToVarlen::Run(BFloat16T source, VarcharT &target, Column
     return FloatTryCastToVarlen::Run(static_cast<float>(source), target, vector_ptr);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -24,7 +24,7 @@ import knn_expression;
 import base_table_ref;
 import logical_match_scan_base;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalKnnScan : public LogicalMatchScanBase {
 public:
@@ -43,4 +43,4 @@ public:
     u64 knn_table_index_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

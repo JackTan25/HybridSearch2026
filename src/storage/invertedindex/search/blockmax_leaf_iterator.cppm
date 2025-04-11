@@ -21,7 +21,7 @@ import internal_types;
 import doc_iterator;
 import column_length_io;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class BlockMaxLeafIterator : public DocIterator {
 public:
@@ -43,4 +43,4 @@ public:
     virtual float BM25Score() = 0;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

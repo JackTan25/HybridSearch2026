@@ -18,13 +18,13 @@ import stl;
 import buffer_manager;
 import data_file_worker;
 import buffer_obj;
-import infinity_exception;
+import hybridsearch_exception;
 import global_resource_usage;
-import infinity_context;
+import hybridsearch_context;
 import persistence_manager;
 import default_values;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class BufferHandleTest : public BaseTestParamStr {};
 
@@ -33,7 +33,7 @@ INSTANTIATE_TEST_SUITE_P(TestWithDifferentParams,
                          ::testing::Values(BaseTestParamStr::NULL_CONFIG_PATH, BaseTestParamStr::VFS_OFF_CONFIG_PATH));
 
 TEST_P(BufferHandleTest, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SizeT memory_limit = 1024;
     String data_dir(GetFullDataDir());

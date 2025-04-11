@@ -21,7 +21,7 @@ module;
 
 module http_server;
 
-import infinity;
+import hybridsearch;
 import stl;
 import status;
 import third_party;
@@ -30,12 +30,12 @@ import data_block;
 import data_table;
 import data_type;
 import value;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 import query_result;
 import query_options;
 import column_vector;
-import infinity_context;
+import hybridsearch_context;
 import query_context;
 import column_def;
 import internal_types;
@@ -65,15 +65,15 @@ import physical_import;
 
 namespace {
 
-using namespace infinity;
+using namespace hybridsearch;
 
-Pair<SharedPtr<DataType>, infinity::Status> ParseColumnType(const Span<const std::string> tokens, const nlohmann::json &field_element) {
+Pair<SharedPtr<DataType>, hybridsearch::Status> ParseColumnType(const Span<const std::string> tokens, const nlohmann::json &field_element) {
     SharedPtr<DataType> column_type;
     if (tokens.empty()) {
-        return {nullptr, infinity::Status::ParserError("Empty column type")};
+        return {nullptr, hybridsearch::Status::ParserError("Empty column type")};
     } else if (tokens[0] == "vector" || tokens[0] == "multivector" || tokens[0] == "tensor" || tokens[0] == "tensorarray") {
         if (tokens.size() != 3) {
-            return {nullptr, infinity::Status::ParserError("vector / multivector / tensor / tensorarray type syntax error")};
+            return {nullptr, hybridsearch::Status::ParserError("vector / multivector / tensor / tensorarray type syntax error")};
         }
         const SizeT dimension = std::stoull(tokens[1]);
         const auto &etype = tokens[2];
@@ -95,7 +95,7 @@ Pair<SharedPtr<DataType>, infinity::Status> ParseColumnType(const Span<const std
         } else if (etype == "bit") {
             e_data_type = EmbeddingDataType::kElemBit;
         } else {
-            return {nullptr, infinity::Status::InvalidEmbeddingDataType(etype)};
+            return {nullptr, hybridsearch::Status::InvalidEmbeddingDataType(etype)};
         }
         auto type_info = EmbeddingInfo::Make(e_data_type, dimension);
         auto logical_type_v = LogicalType::kInvalid;
@@ -111,7 +111,7 @@ Pair<SharedPtr<DataType>, infinity::Status> ParseColumnType(const Span<const std
         column_type = std::make_shared<DataType>(logical_type_v, std::move(type_info));
     } else if (tokens[0] == "sparse") {
         if (tokens.size() != 4) {
-            return {nullptr, infinity::Status::ParserError("sparse type syntax error")};
+            return {nullptr, hybridsearch::Status::ParserError("sparse type syntax error")};
         }
         const SizeT dimension = std::stoull(tokens[1]);
         const auto &dtype = tokens[2];
@@ -125,7 +125,7 @@ Pair<SharedPtr<DataType>, infinity::Status> ParseColumnType(const Span<const std
         } else if (dtype == "double" || dtype == "float64") {
             d_data_type = EmbeddingDataType::kElemDouble;
         } else {
-            return {nullptr, infinity::Status::InvalidEmbeddingDataType(dtype)};
+            return {nullptr, hybridsearch::Status::InvalidEmbeddingDataType(dtype)};
         }
 
         if (itype == "tinyint" || itype == "int8") {
@@ -137,7 +137,7 @@ Pair<SharedPtr<DataType>, infinity::Status> ParseColumnType(const Span<const std
         } else if (itype == "bigint" || itype == "int64") {
             i_data_type = EmbeddingDataType::kElemInt64;
         } else {
-            return {nullptr, infinity::Status::InvalidEmbeddingDataType(itype)};
+            return {nullptr, hybridsearch::Status::InvalidEmbeddingDataType(itype)};
         }
         auto type_info = SparseInfo::Make(d_data_type, i_data_type, dimension, SparseStoreType::kSort);
         column_type = std::make_shared<DataType>(LogicalType::kSparse, std::move(type_info));
@@ -154,23 +154,23 @@ Pair<SharedPtr<DataType>, infinity::Status> ParseColumnType(const Span<const std
     } else if (tokens.size() == 1) {
         column_type = DataType::StringDeserialize(tokens[0]);
     } else {
-        return {nullptr, infinity::Status::ParserError(fmt::format("{} isn't supported.", tokens[0]))};
+        return {nullptr, hybridsearch::Status::ParserError(fmt::format("{} isn't supported.", tokens[0]))};
     }
-    return std::make_pair(std::move(column_type), infinity::Status::OK());
+    return std::make_pair(std::move(column_type), hybridsearch::Status::OK());
 }
 
-infinity::Status ParseColumnDefs(const nlohmann::json &fields, Vector<ColumnDef *> &column_definitions) {
+hybridsearch::Status ParseColumnDefs(const nlohmann::json &fields, Vector<ColumnDef *> &column_definitions) {
     SizeT column_count = fields.size();
     for (SizeT column_id = 0; column_id < column_count; ++column_id) {
         auto &field_element = fields[column_id];
 
         if (!field_element.contains("name") && !field_element["name"].is_string()) {
-            return infinity::Status::InvalidColumnDefinition("Name field is missing or not string");
+            return hybridsearch::Status::InvalidColumnDefinition("Name field is missing or not string");
         }
         String column_name = field_element["name"];
 
         if (!field_element.contains("type") && !field_element["type"].is_string()) {
-            return infinity::Status::InvalidColumnDefinition("Type field is missing or not string");
+            return hybridsearch::Status::InvalidColumnDefinition("Type field is missing or not string");
         }
         String value_type = field_element["type"];
         ToLower(value_type);
@@ -186,7 +186,7 @@ infinity::Status ParseColumnDefs(const nlohmann::json &fields, Vector<ColumnDef 
             }
             column_type = std::move(result_type);
         } catch (std::exception &e) {
-            return infinity::Status::ParserError("type syntax error");
+            return hybridsearch::Status::ParserError("type syntax error");
         }
 
         if (column_type) {
@@ -221,7 +221,7 @@ infinity::Status ParseColumnDefs(const nlohmann::json &fields, Vector<ColumnDef 
             ColumnDef *col_def = new ColumnDef(column_id, column_type, column_name, constraints, table_comment, default_expr);
             column_definitions.emplace_back(col_def);
         } else {
-            return infinity::Status::NotSupport(fmt::format("{} type is not supported yet.", field_element["type"]));
+            return hybridsearch::Status::NotSupport(fmt::format("{} type is not supported yet.", field_element["type"]));
         }
     }
     return Status::OK();
@@ -230,10 +230,10 @@ infinity::Status ParseColumnDefs(const nlohmann::json &fields, Vector<ColumnDef 
 class ListDatabaseHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
-        auto result = infinity->ListDatabases();
+        auto result = hybridsearch->ListDatabases();
         nlohmann::json json_response;
         HTTPStatus http_status;
         if (result.IsOk()) {
@@ -261,8 +261,8 @@ public:
 class CreateDatabaseHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         // get database name
         String database_name = request->getPathVariable("database_name");
@@ -306,7 +306,7 @@ public:
         }
 
         // create database
-        auto result = infinity->CreateDatabase(database_name, options, db_comment);
+        auto result = hybridsearch->CreateDatabase(database_name, options, db_comment);
 
         if (result.IsOk()) {
             json_response["error_code"] = 0;
@@ -323,8 +323,8 @@ public:
 class DropDatabaseHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         // get database name
         String database_name = request->getPathVariable("database_name");
@@ -359,7 +359,7 @@ public:
             }
         }
 
-        auto result = infinity->DropDatabase(database_name, options);
+        auto result = hybridsearch->DropDatabase(database_name, options);
 
         if (result.IsOk()) {
             json_response["error_code"] = 0;
@@ -376,11 +376,11 @@ public:
 class ShowDatabaseHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         auto database_name = request->getPathVariable("database_name");
-        auto result = infinity->ShowDatabase(database_name);
+        auto result = hybridsearch->ShowDatabase(database_name);
 
         nlohmann::json json_response;
         nlohmann::json json_res;
@@ -422,8 +422,8 @@ public:
 class CreateTableHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         String database_name = request->getPathVariable("database_name");
         String table_name = request->getPathVariable("table_name");
@@ -440,7 +440,7 @@ public:
         http_status = HTTPStatus::CODE_200;
 
         if (!fields.is_array()) {
-            infinity::Status status = infinity::Status::InvalidColumnDefinition("Expect json array in column definitions");
+            hybridsearch::Status status = hybridsearch::Status::InvalidColumnDefinition("Expect json array in column definitions");
             json_response["error_code"] = status.code();
             json_response["error_message"] = status.message();
             HTTPStatus http_status;
@@ -460,7 +460,7 @@ public:
                 constraint = nullptr;
             }
         });
-        if (infinity::Status status = ParseColumnDefs(fields, column_definitions); !status.ok()) {
+        if (hybridsearch::Status status = ParseColumnDefs(fields, column_definitions); !status.ok()) {
             json_response["error_code"] = status.code();
             json_response["error_message"] = status.message();
             HTTPStatus http_status;
@@ -492,7 +492,7 @@ public:
         }
 
         if (json_response["error_code"] == 0) {
-            auto result = infinity->CreateTable(database_name, table_name, column_definitions, table_constraint, options);
+            auto result = hybridsearch->CreateTable(database_name, table_name, column_definitions, table_constraint, options);
             column_definitions.clear();
             table_constraint.clear();
             if (result.IsOk()) {
@@ -511,8 +511,8 @@ public:
 class DropTableHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         String database_name = request->getPathVariable("database_name");
         String table_name = request->getPathVariable("table_name");
@@ -547,7 +547,7 @@ public:
         }
 
         if (json_response["error_code"] == 0) {
-            auto result = infinity->DropTable(database_name, table_name, options);
+            auto result = hybridsearch->DropTable(database_name, table_name, options);
             if (result.IsOk()) {
                 json_response["error_code"] = 0;
                 http_status = HTTPStatus::CODE_200;
@@ -564,11 +564,11 @@ public:
 class ListTableHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         String database_name = request->getPathVariable("database_name");
-        auto result = infinity->ShowTables(database_name);
+        auto result = hybridsearch->ShowTables(database_name);
         nlohmann::json json_response;
         HTTPStatus http_status;
         if (result.IsOk()) {
@@ -598,13 +598,13 @@ public:
 class ShowTableHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         String database_name = request->getPathVariable("database_name");
         String table_name = request->getPathVariable("table_name");
 
-        auto result = infinity->ShowTable(database_name, table_name);
+        auto result = hybridsearch->ShowTable(database_name, table_name);
         nlohmann::json json_response;
         nlohmann::json json_res;
         HTTPStatus http_status;
@@ -642,8 +642,8 @@ public:
 class ExportTableHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         String database_name = request->getPathVariable("database_name");
         String table_name = request->getPathVariable("table_name");
@@ -739,7 +739,7 @@ public:
                 }
             }
 
-            auto result = infinity->Export(database_name, table_name, export_columns, file_path, export_options);
+            auto result = hybridsearch->Export(database_name, table_name, export_columns, file_path, export_options);
 
             export_columns = nullptr;
             if (result.IsOk()) {
@@ -762,13 +762,13 @@ public:
 class ShowTableColumnsHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         String database_name = request->getPathVariable("database_name");
         String table_name = request->getPathVariable("table_name");
 
-        auto result = infinity->ShowColumns(database_name, table_name);
+        auto result = hybridsearch->ShowColumns(database_name, table_name);
         nlohmann::json json_response;
         HTTPStatus http_status;
         if (result.IsOk()) {
@@ -802,8 +802,8 @@ public:
 class ImportHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         String database_name = request->getPathVariable("database_name");
         String table_name = request->getPathVariable("table_name");
@@ -850,7 +850,7 @@ public:
             }
             String file_path = http_body_json["file_path"];
 
-            auto result = infinity->Import(database_name, table_name, file_path, import_options);
+            auto result = hybridsearch->Import(database_name, table_name, file_path, import_options);
             if (result.IsOk()) {
                 json_response["error_code"] = 0;
                 http_status = HTTPStatus::CODE_200;
@@ -871,8 +871,8 @@ public:
 class InsertHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         nlohmann::json json_response;
         HTTPStatus http_status = HTTPStatus::CODE_500;
@@ -1280,7 +1280,7 @@ public:
 
             auto database_name = request->getPathVariable("database_name");
             auto table_name = request->getPathVariable("table_name");
-            auto result = infinity->Insert(database_name, table_name, insert_rows);
+            auto result = hybridsearch->Insert(database_name, table_name, insert_rows);
             insert_rows = nullptr;
             if (result.IsOk()) {
                 json_response["error_code"] = 0;
@@ -1302,8 +1302,8 @@ public:
 class DeleteHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         nlohmann::json json_response;
         HTTPStatus http_status = HTTPStatus::CODE_500;
@@ -1325,7 +1325,7 @@ public:
 
                 auto database_name = request->getPathVariable("database_name");
                 auto table_name = request->getPathVariable("table_name");
-                const QueryResult result = infinity->Delete(database_name, table_name, expr_parsed_result->exprs_ptr_->at(0));
+                const QueryResult result = hybridsearch->Delete(database_name, table_name, expr_parsed_result->exprs_ptr_->at(0));
                 expr_parsed_result->exprs_ptr_->at(0) = nullptr;
 
                 if (result.IsOk()) {
@@ -1345,7 +1345,7 @@ public:
             } else {
                 auto database_name = request->getPathVariable("database_name");
                 auto table_name = request->getPathVariable("table_name");
-                const QueryResult result = infinity->Delete(database_name, table_name, nullptr);
+                const QueryResult result = hybridsearch->Delete(database_name, table_name, nullptr);
 
                 if (result.IsOk()) {
                     json_response["error_code"] = 0;
@@ -1374,8 +1374,8 @@ public:
 class UpdateHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         nlohmann::json json_response;
         HTTPStatus http_status = HTTPStatus::CODE_500;
@@ -1410,7 +1410,7 @@ public:
                 switch (value.type()) {
                     case nlohmann::json::value_t::boolean: {
                         // Generate constant expression
-                        infinity::ConstantExpr *const_expr = new ConstantExpr(LiteralType::kBoolean);
+                        hybridsearch::ConstantExpr *const_expr = new ConstantExpr(LiteralType::kBoolean);
                         const_expr->bool_value_ = value.template get<bool>();
                         update_expr->value = const_expr;
                         const_expr = nullptr;
@@ -1418,7 +1418,7 @@ public:
                     }
                     case nlohmann::json::value_t::number_integer: {
                         // Generate constant expression
-                        infinity::ConstantExpr *const_expr = new ConstantExpr(LiteralType::kInteger);
+                        hybridsearch::ConstantExpr *const_expr = new ConstantExpr(LiteralType::kInteger);
                         const_expr->integer_value_ = value.template get<i64>();
                         update_expr->value = const_expr;
                         const_expr = nullptr;
@@ -1426,7 +1426,7 @@ public:
                     }
                     case nlohmann::json::value_t::number_unsigned: {
                         // Generate constant expression
-                        infinity::ConstantExpr *const_expr = new ConstantExpr(LiteralType::kInteger);
+                        hybridsearch::ConstantExpr *const_expr = new ConstantExpr(LiteralType::kInteger);
                         const_expr->integer_value_ = value.template get<u64>();
                         update_expr->value = const_expr;
                         const_expr = nullptr;
@@ -1434,14 +1434,14 @@ public:
                     }
                     case nlohmann::json::value_t::number_float: {
                         // Generate constant expression
-                        infinity::ConstantExpr *const_expr = new ConstantExpr(LiteralType::kDouble);
+                        hybridsearch::ConstantExpr *const_expr = new ConstantExpr(LiteralType::kDouble);
                         const_expr->double_value_ = value.template get<f64>();
                         update_expr->value = const_expr;
                         const_expr = nullptr;
                         break;
                     }
                     case nlohmann::json::value_t::string: {
-                        infinity::ConstantExpr *const_expr = new ConstantExpr(LiteralType::kString);
+                        hybridsearch::ConstantExpr *const_expr = new ConstantExpr(LiteralType::kString);
                         String str_value = value.template get<String>();
                         const_expr->str_value_ = strdup(str_value.c_str());
                         update_expr->value = const_expr;
@@ -1462,7 +1462,7 @@ public:
                             first_elem_type == nlohmann::json::value_t::number_unsigned) {
 
                             // Generate constant expression
-                            infinity::ConstantExpr *const_expr = new ConstantExpr(LiteralType::kIntegerArray);
+                            hybridsearch::ConstantExpr *const_expr = new ConstantExpr(LiteralType::kIntegerArray);
                             DeferFn defer_free_integer_array([&]() {
                                 if (const_expr != nullptr) {
                                     delete const_expr;
@@ -1496,7 +1496,7 @@ public:
                         } else if (first_elem_type == nlohmann::json::value_t::number_float) {
 
                             // Generate constant expression
-                            infinity::ConstantExpr *const_expr = new ConstantExpr(LiteralType::kDoubleArray);
+                            hybridsearch::ConstantExpr *const_expr = new ConstantExpr(LiteralType::kDoubleArray);
                             DeferFn defer_free_double_array([&]() {
                                 if (const_expr != nullptr) {
                                     delete const_expr;
@@ -1554,7 +1554,7 @@ public:
             auto database_name = request->getPathVariable("database_name");
             auto table_name = request->getPathVariable("table_name");
 
-            const QueryResult result = infinity->Update(database_name, table_name, expr_parsed_result->exprs_ptr_->at(0), update_expr_array);
+            const QueryResult result = hybridsearch->Update(database_name, table_name, expr_parsed_result->exprs_ptr_->at(0), update_expr_array);
             expr_parsed_result->exprs_ptr_->at(0) = nullptr;
             update_expr_array = nullptr;
 
@@ -1579,8 +1579,8 @@ public:
 class SelectHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         auto database_name = request->getPathVariable("database_name");
         auto table_name = request->getPathVariable("table_name");
@@ -1589,7 +1589,7 @@ public:
         nlohmann::json json_response;
         HTTPStatus http_status;
 
-        HTTPSearch::Process(infinity.get(), database_name, table_name, data_body, http_status, json_response);
+        HTTPSearch::Process(hybridsearch.get(), database_name, table_name, data_body, http_status, json_response);
 
         return ResponseFactory::createResponse(http_status, json_response.dump());
     }
@@ -1598,8 +1598,8 @@ public:
 class ExplainHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         auto database_name = request->getPathVariable("database_name");
         auto table_name = request->getPathVariable("table_name");
@@ -1608,7 +1608,7 @@ public:
         nlohmann::json json_response;
         HTTPStatus http_status;
 
-        HTTPSearch::Explain(infinity.get(), database_name, table_name, data_body, http_status, json_response);
+        HTTPSearch::Explain(hybridsearch.get(), database_name, table_name, data_body, http_status, json_response);
 
         return ResponseFactory::createResponse(http_status, json_response.dump());
     }
@@ -1617,12 +1617,12 @@ public:
 class ListTableIndexesHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         auto database_name = request->getPathVariable("database_name");
         auto table_name = request->getPathVariable("table_name");
-        auto result = infinity->ListTableIndexes(database_name, table_name);
+        auto result = hybridsearch->ListTableIndexes(database_name, table_name);
 
         HTTPStatus http_status;
         nlohmann::json json_response;
@@ -1675,14 +1675,14 @@ public:
 class ShowTableIndexDetailHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         auto database_name = request->getPathVariable("database_name");
         auto table_name = request->getPathVariable("table_name");
         auto index_name = request->getPathVariable("index_name");
 
-        auto result = infinity->ShowIndex(database_name, table_name, index_name);
+        auto result = hybridsearch->ShowIndex(database_name, table_name, index_name);
 
         HTTPStatus http_status;
         nlohmann::json json_response;
@@ -1714,15 +1714,15 @@ public:
 class ShowTableIndexSegmentHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         auto database_name = request->getPathVariable("database_name");
         auto table_name = request->getPathVariable("table_name");
         auto index_name = request->getPathVariable("index_name");
         auto segment_id = std::strtoll(request->getPathVariable("segment_id").get()->c_str(), nullptr, 0);
 
-        auto result = infinity->ShowIndexSegment(database_name, table_name, index_name, segment_id);
+        auto result = hybridsearch->ShowIndexSegment(database_name, table_name, index_name, segment_id);
 
         HTTPStatus http_status;
         nlohmann::json json_response;
@@ -1754,15 +1754,15 @@ public:
 class ShowTableIndexChunkHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         auto database_name = request->getPathVariable("database_name");
         auto table_name = request->getPathVariable("table_name");
         auto index_name = request->getPathVariable("index_name");
         auto segment_id = std::strtoll(request->getPathVariable("segment_id").get()->c_str(), nullptr, 0);
         auto chunk_id = std::strtoll(request->getPathVariable("chunk_id").get()->c_str(), nullptr, 0);
-        auto result = infinity->ShowIndexChunk(database_name, table_name, index_name, segment_id, chunk_id);
+        auto result = hybridsearch->ShowIndexChunk(database_name, table_name, index_name, segment_id, chunk_id);
 
         HTTPStatus http_status;
         nlohmann::json json_response;
@@ -1794,8 +1794,8 @@ public:
 class DropIndexHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         auto database_name = request->getPathVariable("database_name");
         auto table_name = request->getPathVariable("table_name");
@@ -1831,7 +1831,7 @@ public:
         }
 
         if (json_response["error_code"] == 0) {
-            auto result = infinity->DropIndex(database_name, table_name, index_name, options);
+            auto result = hybridsearch->DropIndex(database_name, table_name, index_name, options);
             if (result.IsOk()) {
                 json_response["error_code"] = 0;
                 http_status = HTTPStatus::CODE_200;
@@ -1848,8 +1848,8 @@ public:
 class CreateIndexHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         auto database_name = request->getPathVariable("database_name");
         auto table_name = request->getPathVariable("table_name");
@@ -1943,7 +1943,7 @@ public:
         }
 
         if (json_response["error_code"] == 0) {
-            auto result = infinity->CreateIndex(database_name, table_name, index_name, index_comment, index_info, options);
+            auto result = hybridsearch->CreateIndex(database_name, table_name, index_name, index_comment, index_info, options);
             index_info = nullptr;
             if (result.IsOk()) {
                 json_response["error_code"] = 0;
@@ -1961,8 +1961,8 @@ public:
 class OptimizeIndexHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         auto database_name = request->getPathVariable("database_name");
         auto table_name = request->getPathVariable("table_name");
@@ -1995,7 +1995,7 @@ public:
             }
         }
 
-        const QueryResult result = infinity->Optimize(database_name, table_name, std::move(optimize_options));
+        const QueryResult result = hybridsearch->Optimize(database_name, table_name, std::move(optimize_options));
         if (result.IsOk()) {
             json_response["error_code"] = 0;
             http_status = HTTPStatus::CODE_200;
@@ -2011,8 +2011,8 @@ public:
 class AddColumnsHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         auto database_name = request->getPathVariable("database_name");
         auto table_name = request->getPathVariable("table_name");
@@ -2032,7 +2032,7 @@ public:
             }
         });
         const nlohmann::json &fields = json_body["fields"];
-        if (infinity::Status status = ParseColumnDefs(fields, column_def_ptrs); !status.ok()) {
+        if (hybridsearch::Status status = ParseColumnDefs(fields, column_def_ptrs); !status.ok()) {
             json_response["error_code"] = status.code();
             json_response["error_message"] = status.message();
             HTTPStatus http_status;
@@ -2045,7 +2045,7 @@ public:
         }
         column_def_ptrs.clear();
 
-        const QueryResult result = infinity->AddColumns(database_name, table_name, std::move(column_defs));
+        const QueryResult result = hybridsearch->AddColumns(database_name, table_name, std::move(column_defs));
         if (result.IsOk()) {
             json_response["error_code"] = 0;
             http_status = HTTPStatus::CODE_200;
@@ -2061,8 +2061,8 @@ public:
 class DropColumnsHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         auto database_name = request->getPathVariable("database_name");
         auto table_name = request->getPathVariable("table_name");
@@ -2080,7 +2080,7 @@ public:
             column_names.emplace_back(column);
         }
 
-        const QueryResult result = infinity->DropColumns(database_name, table_name, std::move(column_names));
+        const QueryResult result = hybridsearch->DropColumns(database_name, table_name, std::move(column_names));
         if (result.IsOk()) {
             json_response["error_code"] = 0;
             http_status = HTTPStatus::CODE_200;
@@ -2096,13 +2096,13 @@ public:
 class ShowSegmentDetailHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         auto database_name = request->getPathVariable("database_name");
         auto table_name = request->getPathVariable("table_name");
         auto segment_id = std::strtoll(request->getPathVariable("segment_id").get()->c_str(), nullptr, 0);
-        auto result = infinity->ShowSegment(database_name, table_name, segment_id);
+        auto result = hybridsearch->ShowSegment(database_name, table_name, segment_id);
 
         HTTPStatus http_status;
         nlohmann::json json_response;
@@ -2137,12 +2137,12 @@ public:
 class ShowSegmentsListHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         auto database_name = request->getPathVariable("database_name");
         auto table_name = request->getPathVariable("table_name");
-        auto result = infinity->ShowSegments(database_name, table_name);
+        auto result = hybridsearch->ShowSegments(database_name, table_name);
 
         HTTPStatus http_status;
         nlohmann::json json_response;
@@ -2181,13 +2181,13 @@ public:
 class ShowBlocksListHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         auto database_name = request->getPathVariable("database_name");
         auto table_name = request->getPathVariable("table_name");
         auto segment_id = std::strtoll(request->getPathVariable("segment_id").get()->c_str(), nullptr, 0);
-        auto result = infinity->ShowBlocks(database_name, table_name, segment_id);
+        auto result = hybridsearch->ShowBlocks(database_name, table_name, segment_id);
 
         HTTPStatus http_status;
         nlohmann::json json_response;
@@ -2227,14 +2227,14 @@ public:
 class ShowBlockDetailHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         auto database_name = request->getPathVariable("database_name");
         auto table_name = request->getPathVariable("table_name");
         auto segment_id = std::strtoll(request->getPathVariable("segment_id").get()->c_str(), nullptr, 0);
         auto block_id = std::strtoll(request->getPathVariable("block_id").get()->c_str(), nullptr, 0);
-        auto result = infinity->ShowBlock(database_name, table_name, segment_id, block_id);
+        auto result = hybridsearch->ShowBlock(database_name, table_name, segment_id, block_id);
 
         HTTPStatus http_status;
         nlohmann::json json_response;
@@ -2268,15 +2268,15 @@ public:
 class ShowBlockColumnHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         auto database_name = request->getPathVariable("database_name");
         auto table_name = request->getPathVariable("table_name");
         auto segment_id = std::strtoll(request->getPathVariable("segment_id").get()->c_str(), nullptr, 0);
         auto block_id = std::strtoll(request->getPathVariable("block_id").get()->c_str(), nullptr, 0);
         auto column_id = std::strtoll(request->getPathVariable("column_id").get()->c_str(), nullptr, 0);
-        auto result = infinity->ShowBlockColumn(database_name, table_name, segment_id, block_id, column_id);
+        auto result = hybridsearch->ShowBlockColumn(database_name, table_name, segment_id, block_id, column_id);
 
         nlohmann::json json_response;
         nlohmann::json json_res;
@@ -2315,10 +2315,10 @@ public:
 class ShowConfigsHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
-        auto result = infinity->ShowConfigs();
+        auto result = hybridsearch->ShowConfigs();
 
         nlohmann::json json_response;
         HTTPStatus http_status;
@@ -2349,11 +2349,11 @@ public:
 class ShowConfigHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         auto config_name = request->getPathVariable("config_name");
-        auto result = infinity->ShowConfig(config_name);
+        auto result = hybridsearch->ShowConfig(config_name);
 
         nlohmann::json json_response;
         HTTPStatus http_status;
@@ -2377,10 +2377,10 @@ public:
 class ShowGlobalVariablesHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
-        auto result = infinity->ShowVariables(SetScope::kGlobal);
+        auto result = hybridsearch->ShowVariables(SetScope::kGlobal);
 
         nlohmann::json json_response;
         HTTPStatus http_status;
@@ -2412,11 +2412,11 @@ public:
 class ShowGlobalVariableHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         auto variable_name = request->getPathVariable("variable_name");
-        auto result = infinity->ShowVariable(variable_name, SetScope::kGlobal);
+        auto result = hybridsearch->ShowVariable(variable_name, SetScope::kGlobal);
 
         nlohmann::json json_response;
         HTTPStatus http_status;
@@ -2441,8 +2441,8 @@ public:
 class SetGlobalVariableHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         nlohmann::json json_response;
         HTTPStatus http_status;
@@ -2465,27 +2465,27 @@ public:
                 switch (var_value.type()) {
                     case nlohmann::json::value_t::boolean: {
                         bool bool_value = var_value.template get<bool>();
-                        result = infinity->SetVariableOrConfig(var_name, bool_value, SetScope::kGlobal);
+                        result = hybridsearch->SetVariableOrConfig(var_name, bool_value, SetScope::kGlobal);
                         break;
                     }
                     case nlohmann::json::value_t::number_integer: {
                         i64 integer_value = var_value.template get<i64>();
-                        result = infinity->SetVariableOrConfig(var_name, integer_value, SetScope::kGlobal);
+                        result = hybridsearch->SetVariableOrConfig(var_name, integer_value, SetScope::kGlobal);
                         break;
                     }
                     case nlohmann::json::value_t::number_unsigned: {
                         i64 integer_value = var_value.template get<u64>();
-                        result = infinity->SetVariableOrConfig(var_name, integer_value, SetScope::kGlobal);
+                        result = hybridsearch->SetVariableOrConfig(var_name, integer_value, SetScope::kGlobal);
                         break;
                     }
                     case nlohmann::json::value_t::number_float: {
                         f64 double_value = var_value.template get<f64>();
-                        result = infinity->SetVariableOrConfig(var_name, double_value, SetScope::kGlobal);
+                        result = hybridsearch->SetVariableOrConfig(var_name, double_value, SetScope::kGlobal);
                         break;
                     }
                     case nlohmann::json::value_t::string: {
                         String str_value = var_value.template get<std::string>();
-                        result = infinity->SetVariableOrConfig(var_name, str_value, SetScope::kGlobal);
+                        result = hybridsearch->SetVariableOrConfig(var_name, str_value, SetScope::kGlobal);
                         break;
                     }
                     case nlohmann::json::value_t::array:
@@ -2518,10 +2518,10 @@ public:
 class ShowSessionVariablesHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
-        auto result = infinity->ShowVariables(SetScope::kSession);
+        auto result = hybridsearch->ShowVariables(SetScope::kSession);
 
         nlohmann::json json_response;
         HTTPStatus http_status;
@@ -2553,11 +2553,11 @@ public:
 class ShowSessionVariableHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         auto variable_name = request->getPathVariable("variable_name");
-        auto result = infinity->ShowVariable(variable_name, SetScope::kSession);
+        auto result = hybridsearch->ShowVariable(variable_name, SetScope::kSession);
 
         nlohmann::json json_response;
         HTTPStatus http_status;
@@ -2582,8 +2582,8 @@ public:
 class SetSessionVariableHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         nlohmann::json json_response;
         HTTPStatus http_status;
@@ -2606,27 +2606,27 @@ public:
                 switch (var_value.type()) {
                     case nlohmann::json::value_t::boolean: {
                         bool bool_value = var_value.template get<bool>();
-                        result = infinity->SetVariableOrConfig(var_name, bool_value, SetScope::kSession);
+                        result = hybridsearch->SetVariableOrConfig(var_name, bool_value, SetScope::kSession);
                         break;
                     }
                     case nlohmann::json::value_t::number_integer: {
                         i64 integer_value = var_value.template get<i64>();
-                        result = infinity->SetVariableOrConfig(var_name, integer_value, SetScope::kSession);
+                        result = hybridsearch->SetVariableOrConfig(var_name, integer_value, SetScope::kSession);
                         break;
                     }
                     case nlohmann::json::value_t::number_unsigned: {
                         i64 integer_value = var_value.template get<u64>();
-                        result = infinity->SetVariableOrConfig(var_name, integer_value, SetScope::kSession);
+                        result = hybridsearch->SetVariableOrConfig(var_name, integer_value, SetScope::kSession);
                         break;
                     }
                     case nlohmann::json::value_t::number_float: {
                         f64 double_value = var_value.template get<f64>();
-                        result = infinity->SetVariableOrConfig(var_name, double_value, SetScope::kSession);
+                        result = hybridsearch->SetVariableOrConfig(var_name, double_value, SetScope::kSession);
                         break;
                     }
                     case nlohmann::json::value_t::string: {
                         String str_value = var_value.template get<std::string>();
-                        result = infinity->SetVariableOrConfig(var_name, str_value, SetScope::kSession);
+                        result = hybridsearch->SetVariableOrConfig(var_name, str_value, SetScope::kSession);
                         break;
                     }
                     case nlohmann::json::value_t::array:
@@ -2659,8 +2659,8 @@ public:
 class SetConfigHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         nlohmann::json json_response;
         HTTPStatus http_status;
@@ -2683,27 +2683,27 @@ public:
                 switch (config_value.type()) {
                     case nlohmann::json::value_t::boolean: {
                         bool bool_value = config_value.template get<bool>();
-                        result = infinity->SetVariableOrConfig(config_name, bool_value, SetScope::kConfig);
+                        result = hybridsearch->SetVariableOrConfig(config_name, bool_value, SetScope::kConfig);
                         break;
                     }
                     case nlohmann::json::value_t::number_integer: {
                         i64 integer_value = config_value.template get<i64>();
-                        result = infinity->SetVariableOrConfig(config_name, integer_value, SetScope::kConfig);
+                        result = hybridsearch->SetVariableOrConfig(config_name, integer_value, SetScope::kConfig);
                         break;
                     }
                     case nlohmann::json::value_t::number_unsigned: {
                         i64 integer_value = config_value.template get<u64>();
-                        result = infinity->SetVariableOrConfig(config_name, integer_value, SetScope::kConfig);
+                        result = hybridsearch->SetVariableOrConfig(config_name, integer_value, SetScope::kConfig);
                         break;
                     }
                     case nlohmann::json::value_t::number_float: {
                         f64 double_value = config_value.template get<f64>();
-                        result = infinity->SetVariableOrConfig(config_name, double_value, SetScope::kConfig);
+                        result = hybridsearch->SetVariableOrConfig(config_name, double_value, SetScope::kConfig);
                         break;
                     }
                     case nlohmann::json::value_t::string: {
                         String str_value = config_value.template get<std::string>();
-                        result = infinity->SetVariableOrConfig(config_name, str_value, SetScope::kConfig);
+                        result = hybridsearch->SetVariableOrConfig(config_name, str_value, SetScope::kConfig);
                         break;
                     }
                     case nlohmann::json::value_t::array:
@@ -2736,12 +2736,12 @@ public:
 class ShowBufferHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         nlohmann::json json_response;
         HTTPStatus http_status;
-        QueryResult result = infinity->Query("show buffer");
+        QueryResult result = hybridsearch->Query("show buffer");
 
         if (result.IsOk()) {
             SizeT block_rows = result.result_table_->DataBlockCount();
@@ -2775,12 +2775,12 @@ public:
 class ShowProfilesHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         nlohmann::json json_response;
         HTTPStatus http_status;
-        QueryResult result = infinity->Query("show profiles");
+        QueryResult result = hybridsearch->Query("show profiles");
 
         if (result.IsOk()) {
             SizeT block_rows = result.result_table_->DataBlockCount();
@@ -2814,12 +2814,12 @@ public:
 class ShowMemIndexHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         nlohmann::json json_response;
         HTTPStatus http_status;
-        QueryResult result = infinity->Query("show memindex");
+        QueryResult result = hybridsearch->Query("show memindex");
 
         if (result.IsOk()) {
             SizeT block_rows = result.result_table_->DataBlockCount();
@@ -2853,12 +2853,12 @@ public:
 class ShowQueriesHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         nlohmann::json json_response;
         HTTPStatus http_status;
-        QueryResult result = infinity->Query("show queries");
+        QueryResult result = hybridsearch->Query("show queries");
 
         if (result.IsOk()) {
             SizeT block_rows = result.result_table_->DataBlockCount();
@@ -2892,12 +2892,12 @@ public:
 class ShowLogsHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         nlohmann::json json_response;
         HTTPStatus http_status;
-        QueryResult result = infinity->ShowLogs();
+        QueryResult result = hybridsearch->ShowLogs();
 
         if (result.IsOk()) {
             SizeT block_rows = result.result_table_->DataBlockCount();
@@ -2931,12 +2931,12 @@ public:
 class ShowDeltaCheckpointHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         nlohmann::json json_response;
         HTTPStatus http_status;
-        QueryResult result = infinity->ShowDeltaCheckpoint();
+        QueryResult result = hybridsearch->ShowDeltaCheckpoint();
 
         if (result.IsOk()) {
             SizeT block_rows = result.result_table_->DataBlockCount();
@@ -2970,12 +2970,12 @@ public:
 class ShowFullCheckpointHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         nlohmann::json json_response;
         HTTPStatus http_status;
-        QueryResult result = infinity->ShowFullCheckpoint();
+        QueryResult result = hybridsearch->ShowFullCheckpoint();
 
         if (result.IsOk()) {
             SizeT block_rows = result.result_table_->DataBlockCount();
@@ -3009,14 +3009,14 @@ public:
 class ShowQueryHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         nlohmann::json json_response;
         nlohmann::json json_table;
         HTTPStatus http_status;
         String query_id = request->getPathVariable("query_id");
-        QueryResult result = infinity->Query(fmt::format("show query {}", query_id));
+        QueryResult result = hybridsearch->Query(fmt::format("show query {}", query_id));
 
         if (result.IsOk()) {
             DataBlock *data_block = result.result_table_->GetDataBlockById(0).get();
@@ -3043,12 +3043,12 @@ public:
 class ShowTransactionsHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         nlohmann::json json_response;
         HTTPStatus http_status;
-        QueryResult result = infinity->Query("show transactions");
+        QueryResult result = hybridsearch->Query("show transactions");
 
         if (result.IsOk()) {
             SizeT block_rows = result.result_table_->DataBlockCount();
@@ -3082,14 +3082,14 @@ public:
 class ShowTransactionHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         nlohmann::json json_response;
         nlohmann::json json_table;
         HTTPStatus http_status;
         String transaction_id = request->getPathVariable("transaction_id");
-        QueryResult result = infinity->Query(fmt::format("show transaction {}", transaction_id));
+        QueryResult result = hybridsearch->Query(fmt::format("show transaction {}", transaction_id));
 
         if (result.IsOk()) {
             DataBlock *data_block = result.result_table_->GetDataBlockById(0).get();
@@ -3116,12 +3116,12 @@ public:
 class ShowObjectsHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         nlohmann::json json_response;
         HTTPStatus http_status;
-        QueryResult result = infinity->ShowObjects();
+        QueryResult result = hybridsearch->ShowObjects();
 
         if (result.IsOk()) {
             SizeT block_rows = result.result_table_->DataBlockCount();
@@ -3155,14 +3155,14 @@ public:
 class ShowObjectHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         nlohmann::json json_response;
         nlohmann::json json_table;
         HTTPStatus http_status;
         String object_name = request->getPathVariable("object_name");
-        QueryResult result = infinity->ShowObject(object_name);
+        QueryResult result = hybridsearch->ShowObject(object_name);
 
         if (result.IsOk()) {
             DataBlock *data_block = result.result_table_->GetDataBlockById(0).get();
@@ -3189,12 +3189,12 @@ public:
 class ShowFilesHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         nlohmann::json json_response;
         HTTPStatus http_status;
-        QueryResult result = infinity->ShowFilesInObject();
+        QueryResult result = hybridsearch->ShowFilesInObject();
 
         if (result.IsOk()) {
             SizeT block_rows = result.result_table_->DataBlockCount();
@@ -3228,12 +3228,12 @@ public:
 class ShowMemoryHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         nlohmann::json json_response;
         HTTPStatus http_status;
-        QueryResult result = infinity->ShowMemory();
+        QueryResult result = hybridsearch->ShowMemory();
 
         if (result.IsOk()) {
             json_response["error_code"] = 0;
@@ -3266,13 +3266,13 @@ public:
 class ShowMemoryObjectsHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         nlohmann::json json_response;
         HTTPStatus http_status;
 
-        QueryResult result = infinity->ShowMemoryObjects();
+        QueryResult result = hybridsearch->ShowMemoryObjects();
         if (result.IsOk()) {
             SizeT block_rows = result.result_table_->DataBlockCount();
             for (SizeT block_id = 0; block_id < block_rows; ++block_id) {
@@ -3304,12 +3304,12 @@ public:
 class ShowMemoryAllocationsHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         nlohmann::json json_response;
         HTTPStatus http_status;
-        QueryResult result = infinity->ShowMemoryAllocations();
+        QueryResult result = hybridsearch->ShowMemoryAllocations();
         if (result.IsOk()) {
             SizeT block_rows = result.result_table_->DataBlockCount();
             for (SizeT block_id = 0; block_id < block_rows; ++block_id) {
@@ -3341,12 +3341,12 @@ public:
 class ForceGlobalCheckpointHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         nlohmann::json json_response;
         HTTPStatus http_status;
-        QueryResult result = infinity->ForceCheckpoint();
+        QueryResult result = hybridsearch->ForceCheckpoint();
 
         if (result.IsOk()) {
             json_response["error_code"] = 0;
@@ -3363,8 +3363,8 @@ public:
 class CompactTableHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         String data_body = request->readBodyToString();
         nlohmann::json json_body = nlohmann::json::parse(data_body);
@@ -3373,7 +3373,7 @@ public:
 
         nlohmann::json json_response;
         HTTPStatus http_status;
-        QueryResult result = infinity->CompactTable(db_name, table_name);
+        QueryResult result = hybridsearch->CompactTable(db_name, table_name);
 
         if (result.IsOk()) {
             json_response["error_code"] = 0;
@@ -3391,10 +3391,10 @@ class AdminShowCurrentNodeHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
 
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
-        auto result = infinity->AdminShowCurrentNode();
+        auto result = hybridsearch->AdminShowCurrentNode();
 
         nlohmann::json json_response;
         nlohmann::json node_info;
@@ -3429,15 +3429,15 @@ public:
 class AdminShowNodeByNameHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         nlohmann::json json_response;
         nlohmann::json node_info;
         HTTPStatus http_status;
 
         String node_name = request->getPathVariable("node_name");
-        QueryResult result = infinity->AdminShowNode(node_name);
+        QueryResult result = hybridsearch->AdminShowNode(node_name);
 
         if (result.IsOk()) {
             SizeT block_rows = result.result_table_->DataBlockCount();
@@ -3468,14 +3468,14 @@ public:
 class AdminListAllNodesHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         HTTPStatus http_status;
         nlohmann::json json_response;
         nlohmann::json nodes_json;
 
-        QueryResult result = infinity->AdminShowNodes();
+        QueryResult result = hybridsearch->AdminShowNodes();
         if (result.IsOk()) {
             SizeT block_rows = result.result_table_->DataBlockCount();
             for (SizeT block_id = 0; block_id < block_rows; ++block_id) {
@@ -3525,12 +3525,12 @@ public:
 class AdminSetNodeRoleHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         HTTPStatus http_status;
         nlohmann::json json_response;
-        infinity::Status status;
+        hybridsearch::Status status;
 
         String data_body = request->readBodyToString();
         nlohmann::json http_body_json;
@@ -3554,15 +3554,15 @@ public:
         QueryResult result;
         ToLower(role);
         if (role == "admin") {
-            result = infinity->AdminSetAdmin();
+            result = hybridsearch->AdminSetAdmin();
         } else if (role == "standalone") {
-            result = infinity->AdminSetStandalone();
+            result = hybridsearch->AdminSetStandalone();
         } else if (role == "leader") {
-            result = infinity->AdminSetLeader(http_body_json["name"]);
+            result = hybridsearch->AdminSetLeader(http_body_json["name"]);
         } else if (role == "follower") {
-            result = infinity->AdminSetFollower(http_body_json["name"], http_body_json["address"]);
+            result = hybridsearch->AdminSetFollower(http_body_json["name"], http_body_json["address"]);
         } else if (role == "learner") {
-            result = infinity->AdminSetLearner(http_body_json["name"], http_body_json["address"]);
+            result = hybridsearch->AdminSetLearner(http_body_json["name"], http_body_json["address"]);
         } else {
             http_status = HTTPStatus::CODE_500;
             json_response["error_code"] = ErrorCode::kInvalidNodeRole;
@@ -3586,13 +3586,13 @@ public:
 class AdminShowNodeVariablesHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         HTTPStatus http_status;
         nlohmann::json json_response;
 
-        auto result = infinity->AdminShowVariables();
+        auto result = hybridsearch->AdminShowVariables();
         if (result.IsOk()) {
             json_response["error_code"] = 0;
             DataBlock *data_block =
@@ -3620,13 +3620,13 @@ public:
 class AdminShowNodeConfigsHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         HTTPStatus http_status;
         nlohmann::json json_response;
 
-        auto result = infinity->AdminShowConfigs();
+        auto result = hybridsearch->AdminShowConfigs();
         if (result.IsOk()) {
             json_response["error_code"] = 0;
             DataBlock *data_block = result.result_table_->GetDataBlockById(0).get(); // Assume the config output data only included in one data block
@@ -3653,11 +3653,11 @@ public:
 class AdminShowNodeVariableHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         String variable_name = request->getPathVariable("variable_name");
-        auto result = infinity->AdminShowVariable(variable_name);
+        auto result = hybridsearch->AdminShowVariable(variable_name);
 
         HTTPStatus http_status;
         nlohmann::json json_response;
@@ -3687,14 +3687,14 @@ public:
 class AdminShowCatalogsHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         HTTPStatus http_status;
         nlohmann::json json_response;
         nlohmann::json nodes_json;
 
-        auto result = infinity->AdminShowCatalogs();
+        auto result = hybridsearch->AdminShowCatalogs();
         if (result.IsOk()) {
             json_response["error_code"] = 0;
             if (result.result_table_->data_blocks_.empty()) {
@@ -3744,14 +3744,14 @@ public:
 class AdminShowLogsHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         HTTPStatus http_status;
         nlohmann::json json_response;
         nlohmann::json nodes_json;
 
-        auto result = infinity->AdminShowLogs();
+        auto result = hybridsearch->AdminShowLogs();
         if (result.IsOk()) {
             json_response["error_code"] = 0;
             DataBlock *data_block = result.result_table_->GetDataBlockById(0).get(); // Assume the config output data only included in one data block
@@ -3787,14 +3787,14 @@ public:
 class AdminRemoveNodeHandler final : public HttpRequestHandler {
 public:
     SharedPtr<OutgoingResponse> handle(const SharedPtr<IncomingRequest> &request) final {
-        auto infinity = Infinity::RemoteConnect();
-        DeferFn defer_fn([&]() { infinity->RemoteDisconnect(); });
+        auto hybridsearch = hybridsearch::RemoteConnect();
+        DeferFn defer_fn([&]() { hybridsearch->RemoteDisconnect(); });
 
         nlohmann::json json_response;
         HTTPStatus http_status;
 
         String node_name = request->getPathVariable("node_name");
-        auto result = infinity->AdminRemoveNode(node_name);
+        auto result = hybridsearch->AdminRemoveNode(node_name);
 
         if (result.IsOk()) {
             json_response["error_code"] = 0;
@@ -3811,7 +3811,7 @@ public:
 
 } // namespace
 
-namespace infinity {
+namespace hybridsearch {
 
 // oatpp example
 // https://github.com/oatpp/example-server-stop/blob/master/src/App_StopSimple.cpp
@@ -3967,4 +3967,4 @@ void HTTPServer::Shutdown() {
     status_.wait(HTTPServerStatus::kStopping);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

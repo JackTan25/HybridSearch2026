@@ -26,7 +26,7 @@
 #include <limits>
 #include <sstream>
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class EmbeddingDataType : int8_t {
     kElemBit,
@@ -313,4 +313,4 @@ public:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -32,7 +32,7 @@ import utility;
 import logger;
 import column_vector;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 import default_values;
 
 import expression_state;
@@ -43,7 +43,7 @@ import logical_type;
 import internal_types;
 import column_def;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalAggregate::Init(QueryContext* query_context) {}
 
@@ -437,4 +437,4 @@ Vector<HashRange> PhysicalAggregate::GetHashRanges(i64 parallel_count) const {
     return result;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

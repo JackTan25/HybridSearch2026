@@ -15,11 +15,11 @@
 #include "gtest/gtest.h"
 #include <vector>
 import base_test;
-import infinity_exception;
+import hybridsearch_exception;
 import stl;
 import index_ivf;
 import internal_types;
-import infinity_context;
+import hybridsearch_context;
 import global_resource_usage;
 import statement_common;
 import defer_op;
@@ -28,7 +28,7 @@ import data_type;
 import logical_type;
 import embedding_info;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class IndexIVFTest : public BaseTest {};
 
@@ -61,7 +61,7 @@ struct InitParameterHelper {
 };
 
 TEST_F(IndexIVFTest, testplain) {
-    using namespace infinity;
+    using namespace hybridsearch;
     Map<String, String> args_map{{"meTric", "cos"}, {"plain_storage_data_type", "f32"}};
     InitParameterHelper h;
     {
@@ -106,7 +106,7 @@ TEST_F(IndexIVFTest, testplain) {
 }
 
 TEST_F(IndexIVFTest, testsq) {
-    using namespace infinity;
+    using namespace hybridsearch;
     Map<String, String> args_map{{"metrIc", "L2"},
                                  {"centroids_num_ratio", "0.33"},
                                  {"storage_type", "Scalar_Quantization"},
@@ -144,7 +144,7 @@ TEST_F(IndexIVFTest, testsq) {
 }
 
 TEST_F(IndexIVFTest, testpq) {
-    using namespace infinity;
+    using namespace hybridsearch;
     Map<String, String> args_map{{"Metric", "ip"},
                                  {"storage_type", "product_quAntization"},
                                  {"product_quantization_subspace_num", "32"},

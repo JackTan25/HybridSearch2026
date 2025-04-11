@@ -23,7 +23,7 @@ import internal_types;
 
 export module logical_dummy_scan;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalDummyScan : public LogicalNode {
 public:
@@ -44,4 +44,4 @@ public:
     u64 table_index_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

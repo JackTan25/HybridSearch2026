@@ -59,7 +59,7 @@ class Double {
     : d64_(DiyFpToUint64(diy_fp)) {}
 
   // The value encoded by this Double must be greater or equal to +0.0.
-  // It must not be special (infinity, or NaN).
+  // It must not be special (hybridsearch, or NaN).
   DiyFp AsDiyFp() const {
     DOUBLE_CONVERSION_ASSERT(Sign() > 0);
     DOUBLE_CONVERSION_ASSERT(!IsSpecial());
@@ -88,9 +88,9 @@ class Double {
     return d64_;
   }
 
-  // Returns the next greater double. Returns +infinity on input +infinity.
+  // Returns the next greater double. Returns +hybridsearch on input +hybridsearch.
   double NextDouble() const {
-    if (d64_ == kInfinity) return Double(kInfinity).value();
+    if (d64_ == khybridsearch) return Double(khybridsearch).value();
     if (Sign() < 0 && Significand() == 0) {
       // -0.0
       return 0.0;
@@ -103,7 +103,7 @@ class Double {
   }
 
   double PreviousDouble() const {
-    if (d64_ == (kInfinity | kSignMask)) return -Infinity();
+    if (d64_ == (khybridsearch | kSignMask)) return -hybridsearch();
     if (Sign() < 0) {
       return Double(d64_ + 1).value();
     } else {
@@ -138,7 +138,7 @@ class Double {
   }
 
   // We consider denormals not to be special.
-  // Hence only Infinity and NaN are special.
+  // Hence only hybridsearch and NaN are special.
   bool IsSpecial() const {
     uint64_t d64 = AsUint64();
     return (d64 & kExponentMask) == kExponentMask;
@@ -234,8 +234,8 @@ class Double {
     return order - kDenormalExponent;
   }
 
-  static double Infinity() {
-    return Double(kInfinity).value();
+  static double hybridsearch() {
+    return Double(khybridsearch).value();
   }
 
   static double NaN() {
@@ -244,7 +244,7 @@ class Double {
 
  private:
   static const int kDenormalExponent = -kExponentBias + 1;
-  static const uint64_t kInfinity = DOUBLE_CONVERSION_UINT64_2PART_C(0x7FF00000, 00000000);
+  static const uint64_t khybridsearch = DOUBLE_CONVERSION_UINT64_2PART_C(0x7FF00000, 00000000);
 #if (defined(__mips__) && !defined(__mips_nan2008)) || defined(__hppa__)
   static const uint64_t kNaN = DOUBLE_CONVERSION_UINT64_2PART_C(0x7FF7FFFF, FFFFFFFF);
 #else
@@ -262,7 +262,7 @@ class Double {
       exponent++;
     }
     if (exponent >= kMaxExponent) {
-      return kInfinity;
+      return khybridsearch;
     }
     if (exponent < kDenormalExponent) {
       return 0;
@@ -299,7 +299,7 @@ class Single {
   explicit Single(uint32_t d32) : d32_(d32) {}
 
   // The value encoded by this Single must be greater or equal to +0.0.
-  // It must not be special (infinity, or NaN).
+  // It must not be special (hybridsearch, or NaN).
   DiyFp AsDiyFp() const {
     DOUBLE_CONVERSION_ASSERT(Sign() > 0);
     DOUBLE_CONVERSION_ASSERT(!IsSpecial());
@@ -337,7 +337,7 @@ class Single {
   }
 
   // We consider denormals not to be special.
-  // Hence only Infinity and NaN are special.
+  // Hence only hybridsearch and NaN are special.
   bool IsSpecial() const {
     uint32_t d32 = AsUint32();
     return (d32 & kExponentMask) == kExponentMask;
@@ -419,8 +419,8 @@ class Single {
 
   float value() const { return uint32_to_float(d32_); }
 
-  static float Infinity() {
-    return Single(kInfinity).value();
+  static float hybridsearch() {
+    return Single(khybridsearch).value();
   }
 
   static float NaN() {
@@ -431,7 +431,7 @@ class Single {
   static const int kExponentBias = 0x7F + kPhysicalSignificandSize;
   static const int kDenormalExponent = -kExponentBias + 1;
   static const int kMaxExponent = 0xFF - kExponentBias;
-  static const uint32_t kInfinity = 0x7F800000;
+  static const uint32_t khybridsearch = 0x7F800000;
 #if (defined(__mips__) && !defined(__mips_nan2008)) || defined(__hppa__)
   static const uint32_t kNaN = 0x7FBFFFFF;
 #else

@@ -21,7 +21,7 @@ import file_worker_type;
 
 export module buffer_obj;
 
-namespace infinity {
+namespace hybridsearch {
 
 class BufferManager;
 class VarBuffer;
@@ -167,4 +167,4 @@ private:
     u32 obj_rc_ = 0;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

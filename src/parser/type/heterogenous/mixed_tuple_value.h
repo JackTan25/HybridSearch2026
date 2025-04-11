@@ -17,11 +17,11 @@
 #include "base_mixed_type.h"
 #include "mixed_type.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 struct MixedTupleValue {
 public:
     MixedType array[0];
 };
 
-} // namespace infinity
+} // namespace hybridsearch

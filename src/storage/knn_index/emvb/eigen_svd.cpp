@@ -17,7 +17,7 @@ module;
 #include "JacobiSVD.h"
 module eigen_svd;
 
-namespace infinity {
+namespace hybridsearch {
 
 // A = U * S * V^T
 // A, U, V: dimension * dimension
@@ -28,4 +28,4 @@ void EMVBSVDSolve(const int dimension, float *A, float *U, float *V) {
     return Eigen::JacobiSVDSolve(dimension, A, U, V);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

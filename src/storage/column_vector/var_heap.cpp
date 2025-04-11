@@ -18,13 +18,13 @@ module;
 
 import stl;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 import default_values;
 import vector_heap_chunk;
 
 module var_heap;
 
-namespace infinity {
+namespace hybridsearch {
 #if 0
 Pair<u64, u64> VarHeapManager::Allocate(SizeT nbytes) {
     if (nbytes == 0) {
@@ -177,4 +177,4 @@ String VarHeapManager::Stats() const {
     return ss.str();
 }
 #endif
-} // namespace infinity
+} // namespace hybridsearch

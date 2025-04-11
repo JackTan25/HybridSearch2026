@@ -18,8 +18,8 @@ module;
 
 export module sparse_info;
 
-namespace infinity {
-export using infinity::SparseInfo;
+namespace hybridsearch {
+export using hybridsearch::SparseInfo;
 
-export using infinity::SparseStoreType;
-} // namespace infinity
+export using hybridsearch::SparseStoreType;
+} // namespace hybridsearch

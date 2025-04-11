@@ -21,7 +21,7 @@ import third_party;
 import create_index_info;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 // TODO shenyushi: use definition in knn_exprs.h
 export enum class MetricType {
@@ -44,14 +44,14 @@ protected:
                        Vector<String> column_names)
         : index_type_(index_type), index_name_(std::move(index_name)), index_comment_(std::move(index_comment)), file_name_(file_name),
           column_names_(std::move(column_names)) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("IndexBase");
 #endif
     }
 
 public:
     explicit IndexBase(SharedPtr<String> index_name) : index_name_(std::move(index_name)) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("IndexBase");
 #endif
     }
@@ -59,13 +59,13 @@ public:
     IndexBase(const IndexBase &other)
         : index_type_(other.index_type_), index_name_(other.index_name_), index_comment_(other.index_comment_), file_name_(other.file_name_),
           column_names_(other.column_names_) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("IndexBase");
 #endif
     }
 
     virtual ~IndexBase() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("IndexBase");
 #endif
     }
@@ -99,4 +99,4 @@ public:
     const String file_name_{};
     const Vector<String> column_names_{};
 };
-} // namespace infinity
+} // namespace hybridsearch

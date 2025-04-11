@@ -17,11 +17,11 @@ export module selection;
 
 import stl;
 import logger;
-import infinity_exception;
+import hybridsearch_exception;
 import global_resource_usage;
 import default_values;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct SelectionData {
     explicit SelectionData(SizeT count) : capacity_(count) {
@@ -30,13 +30,13 @@ struct SelectionData {
             UnrecoverableError(error_message);
         }
         data_ = MakeUnique<u16[]>(count);
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("SelectionData");
 #endif
     }
 
     ~SelectionData() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("SelectionData");
 #endif
     }
@@ -48,13 +48,13 @@ struct SelectionData {
 export class Selection {
 public:
     Selection() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("Selection");
 #endif
     }
 
     ~Selection() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("Selection");
 #endif
     }
@@ -128,4 +128,4 @@ private:
     SharedPtr<SelectionData> storage_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

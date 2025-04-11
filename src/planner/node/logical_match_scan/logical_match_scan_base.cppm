@@ -28,7 +28,7 @@ import data_type;
 import fast_rough_filter;
 import common_query_filter;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalMatchScanBase : public LogicalNode {
 public:
@@ -58,4 +58,4 @@ public:
     SharedPtr<CommonQueryFilter> common_query_filter_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

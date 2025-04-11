@@ -21,7 +21,7 @@ module cluster_manager;
 import stl;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 void ClusterManager::InitAsAdmin() {
     std::unique_lock<std::mutex> cluster_lock(cluster_mutex_);
@@ -33,4 +33,4 @@ Status ClusterManager::UnInitFromAdminNoLock() {
     return Status::OK();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

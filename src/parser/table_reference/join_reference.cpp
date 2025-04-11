@@ -16,7 +16,7 @@
 #include "cross_product_reference.h"
 #include "parser_assert.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 JoinReference::~JoinReference() {
     if (left_ != nullptr) {
@@ -67,4 +67,4 @@ std::string JoinReference::ToString(JoinType type) {
     ParserError("Unreachable");
 }
 
-}; // namespace infinity
+}; // namespace hybridsearch

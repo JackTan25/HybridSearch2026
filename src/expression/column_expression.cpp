@@ -24,7 +24,7 @@ import third_party;
 
 module column_expression;
 
-namespace infinity {
+namespace hybridsearch {
 
 ColumnExpression::ColumnExpression(DataType data_type,
                                    String table_name,
@@ -77,4 +77,4 @@ bool ColumnExpression::Eq(const BaseExpression &other) const {
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

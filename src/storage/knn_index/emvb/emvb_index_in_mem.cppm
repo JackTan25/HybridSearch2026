@@ -19,7 +19,7 @@ import stl;
 import internal_types;
 import roaring_bitmap;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct BlockEntry;
 class BufferManager;
@@ -80,4 +80,4 @@ public:
                                                                              f32 threshold_final) const;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

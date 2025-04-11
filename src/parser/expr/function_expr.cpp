@@ -16,7 +16,7 @@
 #include "expr/column_expr.h"
 #include <sstream>
 
-namespace infinity {
+namespace hybridsearch {
 
 FunctionExpr::~FunctionExpr() {
     if (arguments_ != nullptr) {
@@ -64,4 +64,4 @@ std::string FunctionExpr::ToString() const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

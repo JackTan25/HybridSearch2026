@@ -23,11 +23,11 @@ module index_secondary;
 import stl;
 import status;
 import base_table_ref;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 void IndexSecondary::ValidateColumnDataType(const SharedPtr<BaseTableRef> &base_table_ref, const String &column_name) {
     auto &column_names_vector = *(base_table_ref->column_names_);
@@ -45,4 +45,4 @@ void IndexSecondary::ValidateColumnDataType(const SharedPtr<BaseTableRef> &base_
 
 String IndexSecondary::BuildOtherParamsString() const { return ""; }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -14,7 +14,7 @@
 
 #include "short_string_mixed_type.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 bool ShortStrMixedType::Equal(const std::string &input) {
     if (length != (int8_t)input.length())
@@ -26,4 +26,4 @@ bool ShortStrMixedType::Equal(const std::string &input) {
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

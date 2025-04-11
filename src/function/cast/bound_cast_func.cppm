@@ -18,7 +18,7 @@ import stl;
 
 export module bound_cast_func;
 
-namespace infinity {
+namespace hybridsearch {
 
 class ColumnVector;
 
@@ -34,4 +34,4 @@ export struct BoundCastFunc {
     cast_function_t function = nullptr;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

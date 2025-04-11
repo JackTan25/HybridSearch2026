@@ -18,8 +18,8 @@ module;
 
 export module cross_product_reference;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::CrossProductReference;
+export using hybridsearch::CrossProductReference;
 
 }

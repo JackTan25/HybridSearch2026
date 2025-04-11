@@ -15,7 +15,7 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import logger;
 import column_vector;
@@ -26,16 +26,16 @@ import third_party;
 import stl;
 import selection;
 import vector_buffer;
-import infinity_context;
+import hybridsearch_context;
 import global_resource_usage;
 import internal_types;
 import logical_type;
 #if 0
-using namespace infinity;
+using namespace hybridsearch;
 class ColumnVectorBlobTest : public BaseTest {};
 
 TEST_F(ColumnVectorBlobTest, flat_blob) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kBlob);
     ColumnVector column_vector(data_type);
@@ -204,7 +204,7 @@ TEST_F(ColumnVectorBlobTest, flat_blob) {
 
 TEST_F(ColumnVectorBlobTest, contant_blob) {
 
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kBlob);
     ColumnVector column_vector(data_type);
@@ -319,7 +319,7 @@ TEST_F(ColumnVectorBlobTest, contant_blob) {
 }
 
 TEST_F(ColumnVectorBlobTest, blob_column_vector_select) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kBlob);
     ColumnVector column_vector(data_type);
@@ -382,7 +382,7 @@ TEST_F(ColumnVectorBlobTest, blob_column_vector_select) {
 }
 
 TEST_F(ColumnVectorBlobTest, blob_column_slice_init) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kBlob);
     ColumnVector column_vector(data_type);

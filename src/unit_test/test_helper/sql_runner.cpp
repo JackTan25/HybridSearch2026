@@ -23,7 +23,7 @@ import data_table;
 import logger;
 import session;
 import query_context;
-import infinity_context;
+import hybridsearch_context;
 import third_party;
 import sql_parser;
 import logical_planner;
@@ -37,7 +37,7 @@ import task_scheduler;
 import fragment_context;
 import fragment_task;
 
-import infinity_exception;
+import hybridsearch_exception;
 import singleton;
 import resource_manager;
 import storage;
@@ -47,7 +47,7 @@ import base_statement;
 import parser_result;
 import persistence_manager;
 
-namespace infinity {
+namespace hybridsearch {
 
 /**
  * @brief For testing the new push based execution engine
@@ -61,15 +61,15 @@ SharedPtr<DataTable> SQLRunner::Run(const String &sql_text, bool print) {
     //    }
 
     //    UniquePtr<SessionManager> session_manager = MakeUnique<SessionManager>();
-    SharedPtr<RemoteSession> session_ptr = InfinityContext::instance().session_manager()->CreateRemoteSession();
+    SharedPtr<RemoteSession> session_ptr = hybridsearchContext::instance().session_manager()->CreateRemoteSession();
 
     UniquePtr<QueryContext> query_context_ptr = MakeUnique<QueryContext>(session_ptr.get());
-    query_context_ptr->Init(InfinityContext::instance().config(),
-                            InfinityContext::instance().task_scheduler(),
-                            InfinityContext::instance().storage(),
-                            InfinityContext::instance().resource_manager(),
-                            InfinityContext::instance().session_manager(),
-                            InfinityContext::instance().persistence_manager());
+    query_context_ptr->Init(hybridsearchContext::instance().config(),
+                            hybridsearchContext::instance().task_scheduler(),
+                            hybridsearchContext::instance().storage(),
+                            hybridsearchContext::instance().resource_manager(),
+                            hybridsearchContext::instance().session_manager(),
+                            hybridsearchContext::instance().persistence_manager());
     query_context_ptr->set_current_schema(session_ptr->current_database());
 
     SharedPtr<SQLParser> parser = MakeShared<SQLParser>();
@@ -121,4 +121,4 @@ SharedPtr<DataTable> SQLRunner::Run(const String &sql_text, bool print) {
     return query_result.result_table_;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

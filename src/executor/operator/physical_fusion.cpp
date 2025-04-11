@@ -37,7 +37,7 @@ import fusion_expression;
 import load_meta;
 import default_values;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 import value;
 import internal_types;
 import logger;
@@ -57,7 +57,7 @@ import physical_knn_scan;
 import physical_merge_knn;
 import physical_read_cache;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct DocScore {
     RowID row_id_;
@@ -482,4 +482,4 @@ String PhysicalFusion::ToString(i64 &space) const {
     return res;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

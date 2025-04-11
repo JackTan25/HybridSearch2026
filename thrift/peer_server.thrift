@@ -1,4 +1,4 @@
-namespace cpp infinity_peer_server
+namespace cpp hybridsearch_peer_server
 
 // https://github.com/apache/thrift/blob/master/test/Recursive.thrift
 

@@ -27,7 +27,7 @@ import data_type;
 import segment_entry;
 import compact_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PhysicalCompact : public PhysicalOperator {
 public:
@@ -63,4 +63,4 @@ private:
     SharedPtr<Vector<SharedPtr<DataType>>> output_types_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

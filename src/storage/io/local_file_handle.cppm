@@ -20,14 +20,14 @@ import stl;
 import status;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class FileAccessMode { kWrite, kRead, kMmapRead, kInvalid };
 
 export class LocalFileHandle {
 public:
     LocalFileHandle(i32 fd, const String &path, FileAccessMode file_access_mode) : fd_(fd), path_(path), access_mode_(file_access_mode) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("LocalFileHandle");
 #endif
     }
@@ -57,4 +57,4 @@ private:
     FileAccessMode access_mode_{FileAccessMode::kInvalid};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

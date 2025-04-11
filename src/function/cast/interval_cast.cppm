@@ -22,13 +22,13 @@ import vector_buffer;
 import bound_cast_func;
 import column_vector_cast;
 import logical_type;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import logger;
 import internal_types;
 import data_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct IntervalTryCastToVarlen;
 
@@ -62,4 +62,4 @@ inline bool IntervalTryCastToVarlen::Run(IntervalT, VarcharT &, ColumnVector *) 
     return false;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

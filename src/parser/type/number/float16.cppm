@@ -18,8 +18,8 @@ module;
 
 export module float16;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::float16_t;
+export using hybridsearch::float16_t;
 
 }

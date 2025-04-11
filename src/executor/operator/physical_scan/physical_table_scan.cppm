@@ -33,7 +33,7 @@ import data_type;
 import fast_rough_filter;
 import physical_scan_base;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PhysicalTableScan : public PhysicalScanBase {
 public:
@@ -77,4 +77,4 @@ private:
     mutable Vector<SizeT> column_ids_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

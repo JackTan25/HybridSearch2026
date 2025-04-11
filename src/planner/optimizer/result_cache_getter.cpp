@@ -35,7 +35,7 @@ import logger;
 import base_table_ref;
 import knn_expression;
 
-namespace infinity {
+namespace hybridsearch {
 
 void ResultCacheGetter::ApplyToPlan(QueryContext *query_context_ptr, SharedPtr<LogicalNode> &logical_plan) {
     ResultCacheManager *cache_mgr = query_context_ptr->storage()->result_cache_manager();
@@ -126,4 +126,4 @@ void ResultCacheGetter::ApplyToPlan(QueryContext *query_context_ptr, SharedPtr<L
     visit_node(logical_plan);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

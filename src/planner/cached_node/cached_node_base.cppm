@@ -19,7 +19,7 @@ export module cached_node_base;
 import stl;
 import logical_node_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class CachedNodeBase {
 public:
@@ -44,4 +44,4 @@ protected:
     SharedPtr<Vector<String>> output_names_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

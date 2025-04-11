@@ -19,14 +19,14 @@ module;
 module data_file_worker;
 
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import status;
 import logger;
 import persistence_manager;
 import serialize;
 
-namespace infinity {
+namespace hybridsearch {
 
 DataFileWorker::DataFileWorker(SharedPtr<String> data_dir,
                                SharedPtr<String> temp_dir,
@@ -169,4 +169,4 @@ bool DataFileWorker::ReadFromMmapImpl(const void *p, SizeT file_size) {
 
 void DataFileWorker::FreeFromMmapImpl() {}
 
-} // namespace infinity
+} // namespace hybridsearch

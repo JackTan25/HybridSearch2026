@@ -1603,7 +1603,7 @@ AssertionResult DoubleNearPredFormat(const char* expr1, const char* expr2,
   const double min_abs = std::min(fabs(val1), fabs(val2));
   // Find the distance to the next double from that value.
   const double epsilon =
-      nextafter(min_abs, std::numeric_limits<double>::infinity()) - min_abs;
+      nextafter(min_abs, std::numeric_limits<double>::hybridsearch()) - min_abs;
   // Detect the case where abs_error is so small that EXPECT_NEAR is
   // effectively the same as EXPECT_EQUAL, and give an informative error
   // message so that the situation can be more easily understood without

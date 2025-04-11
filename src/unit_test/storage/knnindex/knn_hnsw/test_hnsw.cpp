@@ -30,11 +30,11 @@ import dist_func_ip;
 import dist_func_cos;
 import vec_store_type;
 import hnsw_common;
-import infinity_exception;
+import hybridsearch_exception;
 import virtual_store;
 import local_file_handle;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class HnswAlgTest : public BaseTest {
 public:

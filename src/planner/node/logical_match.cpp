@@ -31,7 +31,7 @@ import logical_type;
 import internal_types;
 import explain_logical_plan;
 
-namespace infinity {
+namespace hybridsearch {
 
 LogicalMatch::LogicalMatch(u64 node_id, SharedPtr<BaseTableRef> base_table_ref, SharedPtr<MatchExpression> match_expr)
     : LogicalNode(node_id, LogicalNodeType::kMatch), base_table_ref_(base_table_ref), match_expr_(std::move(match_expr)) {}
@@ -152,4 +152,4 @@ String LogicalMatch::ToString(i64 &space) const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

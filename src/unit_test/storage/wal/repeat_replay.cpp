@@ -19,11 +19,11 @@ import base_test;
 import stl;
 import global_resource_usage;
 import storage;
-import infinity_context;
+import hybridsearch_context;
 import compilation_config;
 import txn_manager;
 import extra_ddl_info;
-import infinity_exception;
+import hybridsearch_exception;
 import log_file;
 import config;
 import bg_task;
@@ -47,7 +47,7 @@ import buffer_manager;
 import physical_import;
 import txn_state;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class RepeatReplayTest : public BaseTestParamStr {
 protected:
@@ -129,9 +129,9 @@ TEST_P(RepeatReplayTest, append) {
     };
 
     {
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
-        Storage *storage = InfinityContext::instance().storage();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
+        Storage *storage = hybridsearchContext::instance().storage();
 
         TxnManager *txn_mgr = storage->txn_manager();
         {
@@ -145,23 +145,23 @@ TEST_P(RepeatReplayTest, append) {
             txn_mgr->CommitTxn(txn);
         }
         TestAppend(txn_mgr);
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
     { // replay with no checkpoint, only replay wal
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2(); // auto full checkpoint when initialize
-        Storage *storage = InfinityContext::instance().storage();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2(); // auto full checkpoint when initialize
+        Storage *storage = hybridsearchContext::instance().storage();
 
         TxnManager *txn_mgr = storage->txn_manager();
         CheckTable(txn_mgr, 1);
         TestAppend(txn_mgr);
         CheckTable(txn_mgr, 2);
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
     { // replay with full checkpoint + wal
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2(); // auto full checkpoint when initialize
-        Storage *storage = InfinityContext::instance().storage();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2(); // auto full checkpoint when initialize
+        Storage *storage = hybridsearchContext::instance().storage();
 
         TxnManager *txn_mgr = storage->txn_manager();
         CheckTable(txn_mgr, 2);
@@ -174,16 +174,16 @@ TEST_P(RepeatReplayTest, append) {
         }
         TestAppend(txn_mgr);
         CheckTable(txn_mgr, 3);
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
     for (int i = 0; i < 2; ++i) { // replay with full checkpoint + delta checkpoint + wal
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2(); // auto full checkpoint when initialize
-        Storage *storage = InfinityContext::instance().storage();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2(); // auto full checkpoint when initialize
+        Storage *storage = hybridsearchContext::instance().storage();
 
         TxnManager *txn_mgr = storage->txn_manager();
         CheckTable(txn_mgr, 3);
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
 }
 
@@ -250,9 +250,9 @@ TEST_P(RepeatReplayTest, import) {
     };
 
     {
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
-        Storage *storage = InfinityContext::instance().storage();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
+        Storage *storage = hybridsearchContext::instance().storage();
 
         TxnManager *txn_mgr = storage->txn_manager();
         BufferManager *buffer_mgr = storage->buffer_manager();
@@ -268,24 +268,24 @@ TEST_P(RepeatReplayTest, import) {
         }
         TestImport(txn_mgr, buffer_mgr);
         CheckTable(txn_mgr, 1);
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
     { // replay with no checkpoint, only replay wal
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2(); // auto full checkpoint when initialize
-        Storage *storage = InfinityContext::instance().storage();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2(); // auto full checkpoint when initialize
+        Storage *storage = hybridsearchContext::instance().storage();
 
         TxnManager *txn_mgr = storage->txn_manager();
         BufferManager *buffer_mgr = storage->buffer_manager();
         CheckTable(txn_mgr, 1);
         TestImport(txn_mgr, buffer_mgr);
         CheckTable(txn_mgr, 2);
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
     { // replay with full checkpoint + wal
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2(); // auto full checkpoint when initialize
-        Storage *storage = InfinityContext::instance().storage();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2(); // auto full checkpoint when initialize
+        Storage *storage = hybridsearchContext::instance().storage();
 
         TxnManager *txn_mgr = storage->txn_manager();
         BufferManager *buffer_mgr = storage->buffer_manager();
@@ -299,15 +299,15 @@ TEST_P(RepeatReplayTest, import) {
         }
         TestImport(txn_mgr, buffer_mgr);
         CheckTable(txn_mgr, 3);
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
     for (int i = 0; i < 2; ++i) { // replay with full checkpoint + delta checkpoint + wal
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2(); // auto full checkpoint when initialize
-        Storage *storage = InfinityContext::instance().storage();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2(); // auto full checkpoint when initialize
+        Storage *storage = hybridsearchContext::instance().storage();
 
         TxnManager *txn_mgr = storage->txn_manager();
         CheckTable(txn_mgr, 3);
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
 }

@@ -1,12 +1,12 @@
-from infinity_runner import InfinityRunner
+from hybridsearch_runner import hybridsearchRunner
 from restart_timeout import *
 
 
 def pytest_addoption(parser):
     parser.addoption(
-        "--infinity_path",
+        "--hybridsearch_path",
         action="store",
-        default="./build/Debug/src/infinity",
+        default="./build/Debug/src/hybridsearch",
     )
     parser.addoption(
         "--builder_container",
@@ -15,10 +15,10 @@ def pytest_addoption(parser):
 
 
 def pytest_generate_tests(metafunc):
-    if "infinity_runner" in metafunc.fixturenames:
-        infinity_path = metafunc.config.getoption("infinity_path")
-        runner = InfinityRunner(infinity_path)
-        metafunc.parametrize("infinity_runner", [runner])
+    if "hybridsearch_runner" in metafunc.fixturenames:
+        hybridsearch_path = metafunc.config.getoption("hybridsearch_path")
+        runner = hybridsearchRunner(hybridsearch_path)
+        metafunc.parametrize("hybridsearch_runner", [runner])
 
 
 # def pytest_collection_modifyitems(config, items):

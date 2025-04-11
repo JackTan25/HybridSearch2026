@@ -23,7 +23,7 @@ import hnsw_common;
 
 export module dist_func_lsg_wrapper;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename Dist, typename VecStoreMeta>
 class LSGDistWrapper {
@@ -98,4 +98,4 @@ concept IsLSGDistance = requires { typename Distance::LSG; };
 
 static_assert(IsLSGDistance<PlainL2LSGDist<f32>>);
 
-} // namespace infinity
+} // namespace hybridsearch

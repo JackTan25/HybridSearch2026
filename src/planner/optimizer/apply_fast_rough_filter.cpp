@@ -29,14 +29,14 @@ import logical_match;
 import logical_fusion;
 import query_context;
 import logical_node_visitor;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 import third_party;
 import filter_expression_push_down;
 import fast_rough_filter;
 import logical_match_scan_base;
 
-namespace infinity {
+namespace hybridsearch {
 
 class ApplyFastRoughFilterMethod {
 public:
@@ -100,4 +100,4 @@ public:
 
 void ApplyFastRoughFilter::ApplyToPlan(QueryContext *, SharedPtr<LogicalNode> &logical_plan) { ApplyFastRoughFilterMethod::VisitNode(logical_plan); }
 
-} // namespace infinity
+} // namespace hybridsearch

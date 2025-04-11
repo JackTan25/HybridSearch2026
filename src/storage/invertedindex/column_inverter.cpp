@@ -32,7 +32,7 @@ import radix_sort;
 import index_defines;
 import posting_writer;
 import vector_with_lock;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import status;
 import logger;
@@ -40,7 +40,7 @@ import buf_writer;
 import profiler;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 template <u32 T>
 static u32 Align(u32 unaligned) {
@@ -334,4 +334,4 @@ void ColumnInverter::SpillSortResults(FILE *spill_file, u64 &tuple_count, Unique
     fseek(spill_file, next_start_offset, SEEK_SET);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

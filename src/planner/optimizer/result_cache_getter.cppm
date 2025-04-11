@@ -21,7 +21,7 @@ import logical_node;
 import query_context;
 import optimizer_rule;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class ResultCacheGetter final : public OptimizerRule {
 public:
@@ -33,4 +33,4 @@ private:
     void VisitNode(SharedPtr<LogicalNode> &op);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

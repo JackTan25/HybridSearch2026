@@ -19,7 +19,7 @@
 #include "statement/statement_common.h"
 #include "type/complex/embedding_type.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class KnnDistanceType {
     kInvalid,
@@ -61,4 +61,4 @@ public:
     std::unique_ptr<ParsedExpr> filter_expr_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

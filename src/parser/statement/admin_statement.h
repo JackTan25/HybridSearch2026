@@ -16,7 +16,7 @@
 
 #include "base_statement.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class AdminStmtType {
     kListLogFiles,
@@ -90,4 +90,4 @@ public:
 };
 
 }
-// namespace infinity
+// namespace hybridsearch

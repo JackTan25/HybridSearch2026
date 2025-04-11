@@ -22,7 +22,7 @@ import roaring_bitmap;
 
 import segment_entry;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename LabelType>
 class BitmaskFilter final : public FilterBase<LabelType> {
@@ -63,4 +63,4 @@ private:
     const SegmentOffset max_segment_offset_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

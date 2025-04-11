@@ -13,25 +13,25 @@
 # limitations under the License.
 
 """
-This example is to connect local infinity instance, create table, insert data, search the data
+This example is to connect local hybridsearch instance, create table, insert data, search the data
 """
 
-# import infinity_embedded as infinity
+# import hybridsearch_embedded as hybridsearch
 import signal
 from multi_client import use_multi_client
 import os
 import re
 import time
-import infinity
+import hybridsearch
 import sys
-from infinity.common import SparseVector
-from infinity.common import LOCAL_HOST
+from hybridsearch.common import SparseVector
+from hybridsearch.common import LOCAL_HOST
 import pandas as pd
 from MLDR_en.search.colbert_read import load_colbert_list
 from utils import add_escape_characters
 from MLDR_en.search.vec_read import load_dense, load_sparse
 
-path_prefix = "/home/ubuntu/infinity/experiments/load_experiments/MLDR_en/search_weigthed_sum100"
+path_prefix = "/home/ubuntu/hybridsearch/experiments/load_experiments/MLDR_en/search_weigthed_sum100"
 
 def remove_extremes_and_average(lst):
     """
@@ -89,11 +89,11 @@ def extract_number(filename):
     return 0
 
 cost_time = 0
-def fulltext_dense_search(infinity_table, question):
+def fulltext_dense_search(hybridsearch_table, question):
      global cost_time
      begin_time = time.time()
      res = (
-                infinity_table.output(["docid_col","fulltext_col"])
+                hybridsearch_table.output(["docid_col","fulltext_col"])
                 .match_text("fulltext_col", question[0], 100)
                 .match_dense("dense_col", question[1], "float", "ip", 100,{"ef": "600"})
                 # .fusion(method="rrf",topn=100)
@@ -108,7 +108,7 @@ def fulltext_dense_search(infinity_table, question):
      return qb_result, extra_result
 
 def GetAllQuestions():
-    df = pd.read_csv('/home/ubuntu/infinity/experiments/load_experiments/MLDR_en/search/queries_decline_with_id.csv')
+    df = pd.read_csv('/home/ubuntu/hybridsearch/experiments/load_experiments/MLDR_en/search/queries_decline_with_id.csv')
     query_ids = []
     fulltext_questions = []
     dense_questions = []
@@ -177,12 +177,12 @@ def GetQuestions():
 def single_search(questions):
 
     try:
-        #  Use infinity module to connect a remote server
-        infinity_instance = infinity.connect(LOCAL_HOST)
+        #  Use hybridsearch module to connect a remote server
+        hybridsearch_instance = hybridsearch.connect(LOCAL_HOST)
 
         # 'default_db' is the default database
-        db_instance = infinity_instance.get_database("default_db")
-        infinity_table = db_instance.get_table("MLDR_en_Table")
+        db_instance = hybridsearch_instance.get_database("default_db")
+        hybridsearch_table = db_instance.get_table("MLDR_en_Table")
         with open(path_prefix + '/two_roads/fulltext_dense_result.txt','w') as result_file:
             id = 0
             time_cost = 0
@@ -190,7 +190,7 @@ def single_search(questions):
             for question in questions:
                 id += 1
                 begin_time = time.time()
-                qb_result, extra_result = fulltext_dense_search(infinity_table, question)
+                qb_result, extra_result = fulltext_dense_search(hybridsearch_table, question)
                 end_time = time.time()
                 time_cost += (end_time - begin_time) * 1000
                 for i in range(len(qb_result['docid_col'])):
@@ -200,7 +200,7 @@ def single_search(questions):
                     print(extra_result)
             time_cost = time_cost / len(questions)
             print(f"time_cost: {time_cost} ms")
-        infinity_instance.disconnect()
+        hybridsearch_instance.disconnect()
         return time_cost
     except Exception as e:
         print(str(e))
@@ -208,7 +208,7 @@ def single_search(questions):
 
 if __name__ == "__main__":
     # 启动服务并在适当的时候杀死它
-    service_command = "/home/ubuntu/infinity/cmake-build-release/src/infinity -f /home/ubuntu/infinity/conf/infinity_conf.toml"  # 示例命令，启动一个简单的 HTTP 服务器
+    service_command = "/home/ubuntu/hybridsearch/cmake-build-release/src/hybridsearch -f /home/ubuntu/hybridsearch/conf/hybridsearch_conf.toml"  # 示例命令，启动一个简单的 HTTP 服务器
     process = subprocess.Popen(service_command, shell=True)
     time.sleep(3)
     print(f"服务已启动，进程 ID: {process.pid}")
@@ -226,7 +226,7 @@ if __name__ == "__main__":
         tfile.write(f"{cost_time/len(questions)} ms")
         tfile.flush()
     # 读取文件内容
-    file_path = '/home/ubuntu/infinity/experiments/query_memory_file'
+    file_path = '/home/ubuntu/hybridsearch/experiments/query_memory_file'
     content = read_file_content(file_path)
     with open(current_dir + "/" + current_file_name_without_extension + ".memory",'w') as mfile:
         mfile.write(content)

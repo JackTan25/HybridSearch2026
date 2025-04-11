@@ -18,7 +18,7 @@ export module sparse_vector_distance;
 
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename DataType, typename IndexType, typename ResultType = DataType>
 ResultType SparseIPDistance(const DataType *data1, const IndexType *index1, SizeT nnz1, const DataType *data2, const IndexType *index2, SizeT nnz2) {
@@ -56,4 +56,4 @@ ResultType SparseBitIPDistance(const IndexType *idx1, SizeT nnz1, const IndexTyp
     return distance;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

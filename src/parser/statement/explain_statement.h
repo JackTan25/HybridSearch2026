@@ -18,7 +18,7 @@
 
 #include "base_statement.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class ExplainType { kAnalyze, kAst, kUnOpt, kOpt, kPhysical, kPipeline, kFragment, kInvalid };
 
@@ -35,4 +35,4 @@ public:
     BaseStatement *statement_{nullptr};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -15,7 +15,7 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import logger;
 import column_vector;
@@ -27,16 +27,16 @@ import stl;
 import selection;
 import vector_buffer;
 import global_resource_usage;
-import infinity_context;
+import hybridsearch_context;
 import internal_types;
 import logical_type;
 import data_type;
 import compilation_config;
 
-using namespace infinity;
+using namespace hybridsearch;
 class ColumnVectorVarcharTest : public BaseTest {
     void SetUp() override {
-        using namespace infinity;
+        using namespace hybridsearch;
 
         LoggerConfig logger_config;
         logger_config.log_level_ = LogLevel::kOff;
@@ -44,14 +44,14 @@ class ColumnVectorVarcharTest : public BaseTest {
     }
 
     void TearDown() override {
-        using namespace infinity;
+        using namespace hybridsearch;
 
         Logger::Shutdown();
     }
 };
 
 TEST_F(ColumnVectorVarcharTest, flat_inline_varchar) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kVarchar);
     ColumnVector column_vector(data_type);
@@ -155,7 +155,7 @@ TEST_F(ColumnVectorVarcharTest, flat_inline_varchar) {
 
 TEST_F(ColumnVectorVarcharTest, constant_inline_varchar) {
 
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kVarchar);
     ColumnVector column_vector(data_type);
@@ -235,7 +235,7 @@ TEST_F(ColumnVectorVarcharTest, constant_inline_varchar) {
 }
 
 TEST_F(ColumnVectorVarcharTest, varchar_column_vector_select) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kVarchar);
     ColumnVector column_vector(data_type);
@@ -273,7 +273,7 @@ TEST_F(ColumnVectorVarcharTest, varchar_column_vector_select) {
 }
 
 TEST_F(ColumnVectorVarcharTest, varchar_column_slice_init) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kVarchar);
     ColumnVector column_vector(data_type);
@@ -311,7 +311,7 @@ TEST_F(ColumnVectorVarcharTest, varchar_column_slice_init) {
 }
 
 TEST_F(ColumnVectorVarcharTest, flat_not_inline_varchar) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kVarchar);
     ColumnVector column_vector(data_type);
@@ -415,7 +415,7 @@ TEST_F(ColumnVectorVarcharTest, flat_not_inline_varchar) {
 }
 
 TEST_F(ColumnVectorVarcharTest, constant_not_inline_varchar) {
-    using namespace infinity;
+    using namespace hybridsearch;
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kVarchar);
     ColumnVector column_vector(data_type);
     column_vector.Initialize(ColumnVectorType::kConstant, DEFAULT_VECTOR_SIZE);
@@ -492,7 +492,7 @@ TEST_F(ColumnVectorVarcharTest, constant_not_inline_varchar) {
 }
 
 TEST_F(ColumnVectorVarcharTest, flat_mixed_inline_varchar) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kVarchar);
     ColumnVector column_vector(data_type);

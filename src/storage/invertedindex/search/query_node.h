@@ -20,7 +20,7 @@
 #include <string>
 #include <vector>
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class QueryNodeType : char {
     // may be used in test cases,
@@ -224,6 +224,6 @@ struct PrefixTermQueryNode;
 struct SuffixTermQueryNode;
 struct SubstringTermQueryNode;
 
-} // namespace infinity
+} // namespace hybridsearch
 
 #endif // QUERY_NODE_H

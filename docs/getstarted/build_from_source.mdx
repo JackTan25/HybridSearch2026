@@ -7,14 +7,14 @@ slug: /build_from_source
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Build Infinity from source, build and run unit/functional tests.
+Build hybridsearch from source, build and run unit/functional tests.
 
 ---
 
-This document provides instructions for building Infinity from source, as well as building and running unit and functional tests. 
+This document provides instructions for building hybridsearch from source, as well as building and running unit and functional tests. 
 
 :::tip NOTE
-Infinity can be natively compiled on Linux only. For non-Linux operating systems, build it using Docker.
+hybridsearch can be natively compiled on Linux only. For non-Linux operating systems, build it using Docker.
 :::
 
 - [Prerequisites](#prerequisites)
@@ -51,7 +51,7 @@ The `cmake` build type (`CMAKE_BUILD_TYPE`) can be one of the following:
   Typically ~10x slower than `RelWithDebInfo` or `Release`.  
 - `RelWithDebInfo`: Suitable for performance analysis.  
   Optimizes with `-O2`; with symbol information.  
-- `Release`: Suitable for [project releases](https://github.com/infiniflow/infinity/releases).
+- `Release`: Suitable for [project releases](https://github.com/infiniflow/hybridsearch/releases).
   Optimizes with `-O3`; without symbol information.  
   The built executables are significantly smaller than those of `RelWithDebInfo`. 
 
@@ -69,35 +69,35 @@ The following procedures set `CMAKE_BUILD_TYPE` to `Debug`. Change it as you see
   ]}>
    <TabItem value="linuxdocker">
 
-This section provides instructions for building Infinity from source on Linux using Docker.
+This section provides instructions for building hybridsearch from source on Linux using Docker.
 
 1. Download the source code:
 
 ```shell
-git clone https://github.com/infiniflow/infinity.git
+git clone https://github.com/infiniflow/hybridsearch.git
 ```
 
 2. Build the source code using Docker:
 
 ```shell
-cd infinity && mkdir cmake-build-debug
+cd hybridsearch && mkdir cmake-build-debug
 TZ=$(readlink -f /etc/localtime | awk -F '/zoneinfo/' '{print $2}')
-docker run -d --name infinity_build -e TZ=$TZ -v $PWD:/infinity -v /boot:/boot infiniflow/infinity_builder:centos7_clang18
-docker exec infinity_build bash -c "cd /infinity/cmake-build-debug && cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_VERBOSE_MAKEFILE=ON .. && cmake --build . -t  infinity"
+docker run -d --name hybridsearch_build -e TZ=$TZ -v $PWD:/hybridsearch -v /boot:/boot infiniflow/hybridsearch_builder:centos7_clang18
+docker exec hybridsearch_build bash -c "cd /hybridsearch/cmake-build-debug && cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_VERBOSE_MAKEFILE=ON .. && cmake --build . -t  hybridsearch"
 ```
 
-3. Start up the Infinity server:
+3. Start up the hybridsearch server:
 
 ```shell
-sudo mkdir -p /var/infinity && sudo chown -R $USER /var/infinity
+sudo mkdir -p /var/hybridsearch && sudo chown -R $USER /var/hybridsearch
 ulimit -n 500000
-./cmake-build-debug/src/infinity
+./cmake-build-debug/src/hybridsearch
 ```
 
   </TabItem>
   <TabItem value="ubuntu">
 
-This section provides instructions for building Infinity from source on Ubuntu.
+This section provides instructions for building hybridsearch from source on Ubuntu.
 
 1. Install necessary dependencies:
 
@@ -156,7 +156,7 @@ sudo ln -s /usr/lib/llvm-18/include/x86_64-pc-linux-gnu/c++/v1/__config_site /us
 2. Download the source code:
 
 ```shell
-git clone https://github.com/infiniflow/infinity.git
+git clone https://github.com/infiniflow/hybridsearch.git
 ```
 
 3. Build the source code:
@@ -172,20 +172,20 @@ If your installed version is below v0.7.4, download the include files directly f
 :::
 
 ```shell
-git config --global --add safe.directory infinity
-cd infinity && mkdir cmake-build-debug && cd cmake-build-debug
+git config --global --add safe.directory hybridsearch
+cd hybridsearch && mkdir cmake-build-debug && cd cmake-build-debug
 export CC=/usr/bin/clang-18
 export CXX=/usr/bin/clang++-18
 cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_VERBOSE_MAKEFILE=ON ..
-cmake --build . -t infinity
+cmake --build . -t hybridsearch
 ```
 
-4. Start up the Infinity server:
+4. Start up the hybridsearch server:
 
 ```shell
-sudo mkdir -p /var/infinity && sudo chown -R $USER /var/infinity
+sudo mkdir -p /var/hybridsearch && sudo chown -R $USER /var/hybridsearch
 ulimit -n 500000
-./cmake-build-debug/src/infinity
+./cmake-build-debug/src/hybridsearch
 ```
 
   </TabItem>
@@ -203,7 +203,7 @@ ulimit -n 500000
    <TabItem value="dockerlinux">
 
 ```shell
-docker exec infinity_build bash -c "cd /infinity/cmake-build-debug && cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_VERBOSE_MAKEFILE=ON .. && cmake --build . -t  test_main"
+docker exec hybridsearch_build bash -c "cd /hybridsearch/cmake-build-debug && cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_VERBOSE_MAKEFILE=ON .. && cmake --build . -t  test_main"
 ./cmake-build-debug/src/test_main
 ```
 
@@ -238,7 +238,7 @@ cmake --build . -t test_main
 
    ```shell
    cd ./cmake-build-debug/src/CMakeFiles/unit_test.dir
-   gcovr --gcov-executable "llvm-cov gcov" -r "YOUR_ABSOLUTE_PATH_OF_THE_PROJECT/infinity/src" --gcov-exclude-directories ${PWD}'/unit_test' . --html unit_test_html.html
+   gcovr --gcov-executable "llvm-cov gcov" -r "YOUR_ABSOLUTE_PATH_OF_THE_PROJECT/hybridsearch/src" --gcov-exclude-directories ${PWD}'/unit_test' . --html unit_test_html.html
    ```
 
   </TabItem>
@@ -255,16 +255,16 @@ cmake --build . -t test_main
   ]}>
    <TabItem value="dockerlinux">
 
-1. Build and start up the Infinity server:
+1. Build and start up the hybridsearch server:
 
    ```shell
-   docker exec infinity_build bash -c "cd /infinity/cmake-build-debug && cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_VERBOSE_MAKEFILE=ON .. && cmake --build . -t  infinity"
-   ./cmake-build-debug/src/infinity
+   docker exec hybridsearch_build bash -c "cd /hybridsearch/cmake-build-debug && cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_VERBOSE_MAKEFILE=ON .. && cmake --build . -t  hybridsearch"
+   ./cmake-build-debug/src/hybridsearch
    ```
 
-2. Install Python sdk of infinity:
+2. Install Python sdk of hybridsearch:
    ```bash
-   pip install infinity-sdk==0.6.0.dev3
+   pip install hybridsearch-sdk==0.6.0.dev3
    ```
 
 3. Run the functional tests:
@@ -276,17 +276,17 @@ cmake --build . -t test_main
   </TabItem>
   <TabItem value="ubuntu">
 
-1. Build and start up the Infinity server with code coverage enabled:
+1. Build and start up the hybridsearch server with code coverage enabled:
 
    ```shell
    cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_VERBOSE_MAKEFILE=ON ..
-   cmake --build . -t infinity
-   ./cmake-build-debug/src/infinity
+   cmake --build . -t hybridsearch
+   ./cmake-build-debug/src/hybridsearch
    ```
 
-2. Install Python sdk of infinity:
+2. Install Python sdk of hybridsearch:
    ```bash
-   pip install infinity-sdk==0.6.0.dev3
+   pip install hybridsearch-sdk==0.6.0.dev3
    ```
 
 3. Run the functional tests: 
@@ -298,18 +298,18 @@ cmake --build . -t test_main
   </TabItem>
   <TabItem value="codecoverage">
 
-1. Build and start up the Infinity server with code coverage enabled:
+1. Build and start up the hybridsearch server with code coverage enabled:
 
    ```shell
    cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_VERBOSE_MAKEFILE=ON -DCODE_COVERAGE=ON ..
-   cmake --build . -t infinity
+   cmake --build . -t hybridsearch
    find . -name "*.gcda"  | xargs rm -f
-   ./cmake-build-debug/src/infinity
+   ./cmake-build-debug/src/hybridsearch
    ```
 
-2. Install Python sdk of infinity:
+2. Install Python sdk of hybridsearch:
    ```bash
-   pip install infinity-sdk==0.6.0.dev3
+   pip install hybridsearch-sdk==0.6.0.dev3
    ```
 
 3. Run the functional tests: 
@@ -318,17 +318,17 @@ cmake --build . -t test_main
    python3 tools/run_pytest_parallel.py
    ```
 
-4. Shut down the Infinity server:
+4. Shut down the hybridsearch server:
 
    ```shell
-   kill -15 `pidof infinity`
+   kill -15 `pidof hybridsearch`
    ```
 
 5. Use Gcovr to generate summarized code coverage results:
 
    ```shell
    cd ./cmake-build-debug/src/CMakeFiles
-   gcovr --gcov-executable "llvm-cov gcov" -r "YOUR_ABSOLUTE_PATH_OF_THE_PROJECT/infinity/src" --gcov-exclude-directories ${PWD}'/unit_test' . --html function_test_html.html
+   gcovr --gcov-executable "llvm-cov gcov" -r "YOUR_ABSOLUTE_PATH_OF_THE_PROJECT/hybridsearch/src" --gcov-exclude-directories ${PWD}'/unit_test' . --html function_test_html.html
    ```
 
   </TabItem>

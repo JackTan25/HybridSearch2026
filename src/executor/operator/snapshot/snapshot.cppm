@@ -21,7 +21,7 @@ import status;
 import snapshot_info;
 import query_context;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class Snapshot {
 public:
@@ -30,4 +30,4 @@ public:
     static Status DropSnapshot(QueryContext *query_context, const String &snapshot_name);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -18,10 +18,10 @@ export module default_values;
 
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 export {
-    // infinity related constants
+    // hybridsearch related constants
     constexpr u64 MAX_IDENTIFIER_NAME_LENGTH = 65536;
 
     // hidden columns' id
@@ -202,16 +202,16 @@ export {
     constexpr std::string_view DEFAULT_RESULT_CACHE = "off";
     constexpr SizeT DEFAULT_CACHE_RESULT_CAPACITY = 10000;
 
-    constexpr std::string_view DEFAULT_SNAPSHOT_DIR = "/var/infinity/snapshot";
+    constexpr std::string_view DEFAULT_SNAPSHOT_DIR = "/var/hybridsearch/snapshot";
 
     // default persistence parameter
-    constexpr std::string_view DEFAULT_PERSISTENCE_DIR = "/var/infinity/persistence";
+    constexpr std::string_view DEFAULT_PERSISTENCE_DIR = "/var/hybridsearch/persistence";
     constexpr std::string_view DEFAULT_PERSISTENCE_OBJECT_SIZE_LIMIT_STR = "128MB";   // 128MB
     constexpr SizeT DEFAULT_PERSISTENCE_OBJECT_SIZE_LIMIT = 128 * 1024lu * 1024lu;    // 128MB
 
     constexpr std::string_view DEFAULT_STORAGE_TYPE = "local";
-    constexpr std::string_view DEFAULT_OBJECT_STORAGE_BUCKET = "infinity";
-    constexpr std::string_view DEFAULT_OBJECT_STORAGE_DISK_CACHE_DIR = "/var/infinity/localdiskcache";
+    constexpr std::string_view DEFAULT_OBJECT_STORAGE_BUCKET = "hybridsearch";
+    constexpr std::string_view DEFAULT_OBJECT_STORAGE_DISK_CACHE_DIR = "/var/hybridsearch/localdiskcache";
     constexpr std::string_view DEFAULT_OBJECT_STORAGE_DISK_CACHE_LIMIT_STR = "128GB";         // 128GB
     constexpr SizeT DEFAULT_OBJECT_STORAGE_DISK_CACHE_LIMIT = 128 * 1024lu * 1024lu * 1024lu; // 128GB
 
@@ -331,4 +331,4 @@ export {
     constexpr SizeT DEFAULT_READ_BUFFER_SIZE = 4096;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

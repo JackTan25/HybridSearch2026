@@ -26,7 +26,7 @@ import logical_node;
 
 import base_expression;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<ColumnBinding> LogicalLimit::GetColumnBindings() const { return left_node_->GetColumnBindings(); }
 
@@ -52,4 +52,4 @@ String LogicalLimit::ToString(i64 &space) const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

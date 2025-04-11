@@ -18,14 +18,14 @@ module;
 export module simd_init;
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::GetSupportedSimdTypesList;
-export using infinity::IsF16CSupported;
-export using infinity::IsSSE2Supported;
-export using infinity::IsAVX2Supported;
-export using infinity::IsAVX512Supported;
-export using infinity::IsAVX512BWSupported;
+export using hybridsearch::GetSupportedSimdTypesList;
+export using hybridsearch::IsF16CSupported;
+export using hybridsearch::IsSSE2Supported;
+export using hybridsearch::IsAVX2Supported;
+export using hybridsearch::IsAVX512Supported;
+export using hybridsearch::IsAVX512BWSupported;
 
 export using F32DistanceFuncType = f32 (*)(const f32 *, const f32 *, SizeT);
 export using I8DistanceFuncType = i32 (*)(const i8 *, const i8 *, SizeT);
@@ -87,4 +87,4 @@ export SearchTop1WithDisF32U32FuncType GetSearchTop1WithDisF32U32FuncPtr();
 // Batch BM25
 export BatchBM25FuncType GetBatchBM25FuncPtr();
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -22,7 +22,7 @@ import persistence_manager;
 
 export module buffer_manager;
 
-namespace infinity {
+namespace hybridsearch {
 
 class BufferObj;
 class BufferObjectInfo;
@@ -144,4 +144,4 @@ private:
     Atomic<u64> cache_miss_count_{0};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

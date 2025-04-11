@@ -22,12 +22,12 @@ import base_expression;
 import bind_context;
 import expression_binder;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import parsed_expr;
 import knn_expr;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 SharedPtr<BaseExpression> AggregateBinder::BuildExpression(const ParsedExpr &expr, BindContext *bind_context_ptr, i64 depth, bool root) {
     SharedPtr<BaseExpression> result = ExpressionBinder::BuildExpression(expr, bind_context_ptr, depth, root);
@@ -40,4 +40,4 @@ SharedPtr<BaseExpression> AggregateBinder::BuildKnnExpr(const KnnExpr &, BindCon
     return nullptr;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

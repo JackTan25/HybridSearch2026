@@ -28,7 +28,7 @@ import file_worker_type;
 import file_worker;
 import persistence_manager;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class HnswFileWorker : public IndexFileWorker {
 public:
@@ -64,4 +64,4 @@ private:
     SizeT index_size_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

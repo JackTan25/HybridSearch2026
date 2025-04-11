@@ -21,12 +21,12 @@ module unnest_expression;
 import logical_type;
 import internal_types;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 import array_info;
 import column_expression;
 import expression_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 UnnestExpression::UnnestExpression(SharedPtr<BaseExpression> column_expression) : BaseExpression(ExpressionType::kUnnest, {column_expression}) {}
 
@@ -47,4 +47,4 @@ String UnnestExpression::ToString() const {
     return std::move(ss).str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

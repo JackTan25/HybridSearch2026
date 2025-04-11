@@ -28,13 +28,13 @@ import logical_type;
 import internal_types;
 import data_type;
 import array_info;
-import infinity_exception;
+import hybridsearch_exception;
 import value;
 import cast_function;
 import default_values;
 import bound_cast_func;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct ArrayTryCastToArray {
     template <typename SourceT, typename TargetT>
@@ -131,4 +131,4 @@ BoundCastFunc BindArrayCast(const DataType &source, const DataType &target) {
     return BoundCastFunc(&ColumnVectorCast::TryCastColumnVectorVarlenWithType<ArrayT, ArrayT, ArrayTryCastToArray>);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

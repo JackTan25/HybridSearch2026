@@ -23,7 +23,7 @@ import column_def;
 import file_worker_type;
 import persistence_manager;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class IndexFileWorker : public FileWorker {
 protected:
@@ -50,4 +50,4 @@ public:
     void SetIndexDef(SharedPtr<IndexBase> index_base) { index_base_ = std::move(index_base); }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

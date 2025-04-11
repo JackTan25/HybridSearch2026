@@ -22,13 +22,13 @@ import txn;
 import table_function;
 import block_index;
 import internal_types;
-import infinity_exception;
+import hybridsearch_exception;
 import table_reference;
 import data_type;
 import meta_info;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class BaseTableRef : public TableRef {
 public:
@@ -93,4 +93,4 @@ private:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

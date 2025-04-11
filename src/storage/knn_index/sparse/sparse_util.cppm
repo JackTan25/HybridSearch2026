@@ -22,11 +22,11 @@ export module sparse_util;
 import stl;
 import sparse_vector_distance;
 import knn_result_handler;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import local_file_handle;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename DataT, typename IdxT>
 struct SparseVecRef {
@@ -185,4 +185,4 @@ export struct SparseVecUtil {
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

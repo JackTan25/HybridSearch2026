@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "InfinityService.h"
+#include "hybridsearchService.h"
 #include <cassert>
 #include <fstream>
 #include <functional>
@@ -35,19 +35,19 @@ import internal_types;
 using namespace apache::thrift;
 using namespace apache::thrift::protocol;
 using namespace apache::thrift::transport;
-using namespace infinity_thrift_rpc;
+using namespace hybridsearch_thrift_rpc;
 
-struct InfinityClient {
+struct hybridsearchClient {
     std::shared_ptr<TTransport> socket;
     std::shared_ptr<TTransport> transport;
     std::shared_ptr<TProtocol> protocol;
-    std::unique_ptr<InfinityServiceClient> client;
+    std::unique_ptr<hybridsearchServiceClient> client;
     int64_t session_id;
-    InfinityClient() {
+    hybridsearchClient() {
         socket.reset(new TSocket("127.0.0.1", 23817));
         transport.reset(new TBufferedTransport(socket));
         protocol.reset(new TBinaryProtocol(transport));
-        client = std::make_unique<InfinityServiceClient>(protocol);
+        client = std::make_unique<hybridsearchServiceClient>(protocol);
         transport->open();
         CommonResponse response;
         ConnectRequest request;
@@ -55,7 +55,7 @@ struct InfinityClient {
         client->Connect(response, request);
         session_id = response.session_id;
     }
-    ~InfinityClient() {
+    ~hybridsearchClient() {
         CommonResponse ret;
         CommonRequest req;
         req.session_id = session_id;
@@ -88,7 +88,7 @@ std::unique_ptr<T[]> load_data(const std::string &filename, size_t &num, int &di
 
 inline void LoopFor(size_t id_begin, size_t id_end, size_t threadId, auto fn) {
     std::cout << "threadId = " << threadId << " [" << id_begin << ", " << id_end << ")" << std::endl;
-    InfinityClient client;
+    hybridsearchClient client;
     for (auto id = id_begin; id < id_end; ++id) {
         fn(id, client, threadId);
     }
@@ -129,13 +129,13 @@ int main() {
 
     std::vector<std::string> results;
 
-    std::string sift_query_path = std::string(infinity::test_data_path()) + "/benchmark/sift_1m/sift_query.fvecs";
-    std::string sift_groundtruth_path = std::string(infinity::test_data_path()) + "/benchmark/sift_1m/sift_groundtruth.ivecs";
-    if (!infinity::VirtualStore::Exists(sift_query_path)) {
+    std::string sift_query_path = std::string(hybridsearch::test_data_path()) + "/benchmark/sift_1m/sift_query.fvecs";
+    std::string sift_groundtruth_path = std::string(hybridsearch::test_data_path()) + "/benchmark/sift_1m/sift_groundtruth.ivecs";
+    if (!hybridsearch::VirtualStore::Exists(sift_query_path)) {
         std::cerr << "File: " << sift_query_path << " doesn't exist" << std::endl;
         exit(-1);
     }
-    if (!infinity::VirtualStore::Exists(sift_groundtruth_path)) {
+    if (!hybridsearch::VirtualStore::Exists(sift_groundtruth_path)) {
         std::cerr << "File: " << sift_groundtruth_path << " doesn't exist" << std::endl;
         exit(-1);
     }
@@ -184,7 +184,7 @@ int main() {
         for (auto &v : query_results) {
             v.reserve(100);
         }
-        auto query_function = [ef, dimension, topk, queries, &query_results](size_t query_idx, InfinityClient &client, size_t threadId) {
+        auto query_function = [ef, dimension, topk, queries, &query_results](size_t query_idx, hybridsearchClient &client, size_t threadId) {
             SelectRequest req;
             SelectResponse ret;
             {
@@ -241,13 +241,13 @@ int main() {
             }
             client.client->Select(ret, req);
             {
-                auto select_result = (const infinity::RowID *)(ret.column_fields[0].column_vectors[0].data());
+                auto select_result = (const hybridsearch::RowID *)(ret.column_fields[0].column_vectors[0].data());
                 for (int64_t i = 0; i < topk; ++i) {
                     query_results[query_idx].push_back(select_result[i].ToUint64());
                 }
             }
         };
-        infinity::BaseProfiler profiler;
+        hybridsearch::BaseProfiler profiler;
         profiler.Begin();
         ParallelFor(0, query_count, thread_num, query_function);
         profiler.End();

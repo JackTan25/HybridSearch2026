@@ -25,7 +25,7 @@ import table_entry;
 import column_index_reader;
 import explain_logical_plan;
 
-namespace infinity {
+namespace hybridsearch {
 
 void FilterIterator::PrintTree(std::ostream &os, const String &prefix, const bool is_final) const {
     os << prefix;
@@ -70,4 +70,4 @@ void FilterQueryNode::PrintTree(std::ostream &os, const String &prefix, const bo
     os << filter_str << ") (filter_result_count: " << filter_result_count_ << ")\n";
 }
 
-} // namespace infinity
+} // namespace hybridsearch

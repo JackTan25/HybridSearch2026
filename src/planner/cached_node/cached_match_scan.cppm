@@ -23,7 +23,7 @@ import physical_filter_scan_base;
 import base_expression;
 import logical_match_tensor_scan;
 
-namespace infinity {
+namespace hybridsearch {
 
 class LogicalKnnScan;
 class PhysicalKnnScan;
@@ -96,4 +96,4 @@ private:
     SharedPtr<MatchTensorScanIndexOptions> index_options_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

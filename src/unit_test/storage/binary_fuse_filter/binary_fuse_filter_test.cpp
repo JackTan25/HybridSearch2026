@@ -18,11 +18,11 @@ import base_test;
 import stl;
 import binary_fuse_filter;
 
-using namespace infinity;
+using namespace hybridsearch;
 class BinaryFuseFilterTest : public BaseTest {};
 
 TEST_F(BinaryFuseFilterTest, test_2000) {
-    using namespace infinity;
+    using namespace hybridsearch;
     constexpr u64 NUM = 2000;
     std::array<u64, NUM> data;
     for (u64 i = 0; i < NUM; ++i) {

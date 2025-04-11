@@ -21,7 +21,7 @@ import data_type;
 import data_block;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class TaskResultType { kInvalid };
 
@@ -38,4 +38,4 @@ private:
     TaskResultType task_result_type_{TaskResultType::kInvalid};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

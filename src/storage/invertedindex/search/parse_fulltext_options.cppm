@@ -18,7 +18,7 @@ export module parse_fulltext_options;
 
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 // parse minimum_should_match
 struct MinimumShouldMatchCount {
@@ -59,4 +59,4 @@ export using RankFeaturesOption = Vector<RankFeatureOption>;
 
 export RankFeaturesOption ParseRankFeaturesOption(std::string_view input_str);
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -1,6 +1,6 @@
 #include "radix_sort.h"
 
-namespace infinity {
+namespace hybridsearch {
 bool RadixPrepare(size_t n, size_t last[257], size_t ptr[256], size_t cnt[256]) {
     // Accumulate cnt positions
     bool sorted = (cnt[0] == n);
@@ -13,4 +13,4 @@ bool RadixPrepare(size_t n, size_t last[257], size_t ptr[256], size_t cnt[256]) 
     last[256] = last[255] + cnt[255];
     return sorted;
 }
-} // namespace infinity
+} // namespace hybridsearch

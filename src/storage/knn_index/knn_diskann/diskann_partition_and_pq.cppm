@@ -28,7 +28,7 @@ export module diskann_partition_and_pq;
 
 import stl;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 import index_base;
 import vector_distance;
 import logger;
@@ -38,7 +38,7 @@ import default_values;
 import local_file_handle;
 import virtual_store;
 
-namespace infinity {
+namespace hybridsearch {
 
 void KmeansppSelectingPivots(f32 *data, u32 num_points, u32 dim, f32 *pivot_data, u32 num_centers);
 
@@ -584,4 +584,4 @@ export void PqDistLookup(const u8 *pq_ids, const SizeT n_pts, const SizeT pq_nch
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -30,7 +30,7 @@ import meta_info;
 import table_index_entry;
 import fast_rough_filter;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalIndexScan : public LogicalNode {
 public:
@@ -67,4 +67,4 @@ public:
     bool add_row_id_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

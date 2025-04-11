@@ -36,7 +36,7 @@ import txn;
 import snapshot_info;
 import meta_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 class TxnTableStore;
 struct TableIndexEntry;
@@ -291,4 +291,4 @@ private:
     Atomic<bool> optimizing_ = false;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -18,7 +18,7 @@ export module data_store_util;
 
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename T, bool OwnMem>
 class ArrayPtr {
@@ -73,4 +73,4 @@ private:
     const char *ptr_ = nullptr;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

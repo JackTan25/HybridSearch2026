@@ -22,7 +22,7 @@ module task_scheduler;
 import stl;
 import config;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import threadutil;
 import fragment_task;
 import logger;
@@ -40,7 +40,7 @@ import create_statement;
 import command_statement;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 Worker::Worker(u64 cpu_id, UniquePtr<FragmentTaskBlockQueue> queue, UniquePtr<Thread> thread)
     : cpu_id_(cpu_id), queue_(std::move(queue)), thread_(std::move(thread)) {}
@@ -48,13 +48,13 @@ Worker::Worker(u64 cpu_id, UniquePtr<FragmentTaskBlockQueue> queue, UniquePtr<Th
 // Non-static memory methods
 TaskScheduler::TaskScheduler(Config *config_ptr) {
     Init(config_ptr);
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::IncrObjectCount("TaskScheduler");
 #endif
 }
 
 TaskScheduler::~TaskScheduler() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::DecrObjectCount("TaskScheduler");
 #endif
 }
@@ -302,4 +302,4 @@ void TaskScheduler::DumpPlanFragment(PlanFragment *root) {
     LOG_INFO(">>> DUMP END");
 }
 
-} // namespace infinity
+} // namespace hybridsearch

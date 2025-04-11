@@ -15,7 +15,7 @@
 #include "select_statement.h"
 #include "parser_assert.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 SelectStatement::~SelectStatement() {
     if (table_ref_ != nullptr) {
@@ -106,4 +106,4 @@ std::string SelectStatement::ToString(OrderType type) {
     ParserError("Unexpected order type");
 }
 
-} // namespace infinity
+} // namespace hybridsearch

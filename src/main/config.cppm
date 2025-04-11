@@ -23,7 +23,7 @@ import command_statement;
 import virtual_store;
 
 
-namespace infinity {
+namespace hybridsearch {
 
 using namespace std::chrono;
 export constexpr std::string_view profile_history_capacity_name = "profile_history_capacity";
@@ -34,12 +34,12 @@ export constexpr std::string_view log_level = "log_level";
 export struct DefaultConfig {
     LogLevel default_log_level_{LogLevel::kInfo};
     bool default_log_to_stdout_{false};
-    String default_log_dir_ = "/var/infinity/log";
-    String default_data_dir_ = "/var/infinity/data";
-    String default_wal_dir_ = "/var/infinity/wal";
-    String default_temp_dir_ = "/var/infinity/tmp";
-    String default_resource_dir_ = "/var/infinity/resource";
-    String default_persistence_dir_ = "/var/infinity/persistence";
+    String default_log_dir_ = "/var/hybridsearch/log";
+    String default_data_dir_ = "/var/hybridsearch/data";
+    String default_wal_dir_ = "/var/hybridsearch/wal";
+    String default_temp_dir_ = "/var/hybridsearch/tmp";
+    String default_resource_dir_ = "/var/hybridsearch/resource";
+    String default_persistence_dir_ = "/var/hybridsearch/persistence";
 };
 
 export struct Config {
@@ -188,4 +188,4 @@ private:
 public:
     hours hour_offset_{};
 };
-} // namespace infinity
+} // namespace hybridsearch

@@ -20,7 +20,7 @@ import term;
 import stemmer;
 import standard_analyzer;
 import tokenizer;
-using namespace infinity;
+using namespace hybridsearch;
 
 namespace fs = std::filesystem;
 

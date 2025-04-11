@@ -24,7 +24,7 @@ import txn_state;
 import stl;
 import third_party;
 
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 import buffer_manager;
 import catalog_delta_entry;
@@ -32,21 +32,21 @@ import catalog;
 import default_values;
 import wal_manager;
 import defer_op;
-import infinity_context;
+import hybridsearch_context;
 import global_resource_usage;
 import bg_task;
 
-namespace infinity {
+namespace hybridsearch {
 
 TxnManager::TxnManager(BufferManager *buffer_mgr, WalManager *wal_mgr, TxnTimeStamp start_ts)
     : buffer_mgr_(buffer_mgr), wal_mgr_(wal_mgr), current_ts_(start_ts), max_committed_ts_(start_ts), is_running_(false) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::IncrObjectCount("TxnManager");
 #endif
 }
 
 TxnManager::~TxnManager() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::DecrObjectCount("TxnManager");
 #endif
 }
@@ -58,7 +58,7 @@ Txn *TxnManager::BeginTxn(UniquePtr<String> txn_text, TransactionType txn_type) 
         UnrecoverableError(error_message);
     }
 
-    Catalog *catalog_ptr = InfinityContext::instance().storage()->catalog();
+    Catalog *catalog_ptr = hybridsearchContext::instance().storage()->catalog();
 
     std::lock_guard guard(locker_);
 
@@ -392,7 +392,7 @@ void TxnManager::CleanupTxn(Txn *txn, bool commit) {
         }
         if (commit && add_delta_entry_task) {
             // Submit delta entry must be after max_committed_ts_ is updated
-            InfinityContext::instance().storage()->bg_processor()->Submit(std::move(add_delta_entry_task));
+            hybridsearchContext::instance().storage()->bg_processor()->Submit(std::move(add_delta_entry_task));
         }
     } else {
         // For read-only Txn only remove txn from txn_map
@@ -416,4 +416,4 @@ bool TxnManager::InCheckpointProcess(TxnTimeStamp commit_ts) {
     return false;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

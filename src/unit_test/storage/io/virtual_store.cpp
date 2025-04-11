@@ -15,7 +15,7 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import stl;
 import global_resource_usage;
@@ -24,17 +24,17 @@ import logger;
 
 import file_writer;
 import file_reader;
-import infinity_context;
+import hybridsearch_context;
 import virtual_store;
 import local_file_handle;
 import compilation_config;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class VirtualStoreTest : public BaseTest {};
 
 TEST_F(VirtualStoreTest, file_write) {
-    using namespace infinity;
+    using namespace hybridsearch;
     String path = String(GetFullTmpDir()) + "/test_file2.abc";
 
     auto [file_handle, status] = VirtualStore::Open(path, FileAccessMode::kWrite);
@@ -54,7 +54,7 @@ TEST_F(VirtualStoreTest, file_write) {
 }
 
 TEST_F(VirtualStoreTest, dir_ops) {
-    using namespace infinity;
+    using namespace hybridsearch;
     String dir = String(GetFullTmpDir()) + "/unit_test";
     String path = dir + "/test_file.test";
 
@@ -79,7 +79,7 @@ TEST_F(VirtualStoreTest, dir_ops) {
 }
 
 TEST_F(VirtualStoreTest, TestRead) {
-    using namespace infinity;
+    using namespace hybridsearch;
     String path = String(GetFullTmpDir()) + "/test_file_read.abc";
 
     auto [file_handle, open_write_status] = VirtualStore::Open(path, FileAccessMode::kWrite);
@@ -113,7 +113,7 @@ TEST_F(VirtualStoreTest, TestRead) {
 }
 
 TEST_F(VirtualStoreTest, TestRename) {
-    using namespace infinity;
+    using namespace hybridsearch;
     String old_path = String(GetFullTmpDir()) + "/test_file_old.abc";
     String new_path = String(GetFullTmpDir()) + "/test_file_new.abc";
 
@@ -140,7 +140,7 @@ TEST_F(VirtualStoreTest, TestRename) {
 }
 
 TEST_F(VirtualStoreTest, TestTruncate) {
-    using namespace infinity;
+    using namespace hybridsearch;
     String path = String(GetFullTmpDir()) + "/test_file_truncate.abc";
 
     auto [file_handle, status] = VirtualStore::Open(path, FileAccessMode::kWrite);
@@ -177,7 +177,7 @@ TEST_F(VirtualStoreTest, TestTruncate) {
 }
 
 TEST_F(VirtualStoreTest, TestAppend) {
-    using namespace infinity;
+    using namespace hybridsearch;
     String dst_path = String(GetFullTmpDir()) + "/test_file_append_dst.abc";
     String src_path = String(GetFullTmpDir()) + "/test_file_append_src.abc";
 
@@ -233,7 +233,7 @@ TEST_F(VirtualStoreTest, TestAppend) {
 }
 
 TEST_F(VirtualStoreTest, TestCleanDir) {
-    using namespace infinity;
+    using namespace hybridsearch;
     String dir = String(GetFullTmpDir()) + "/cleanup_test_dir";
     String file_path1 = dir + "/file1.txt";
     String file_path2 = dir + "/file2.txt";
@@ -273,11 +273,11 @@ TEST_F(VirtualStoreTest, TestCleanDir) {
 
 /*
 TEST_F(VirtualStoreTest, minio_upload) {
-    using namespace infinity;
+    using namespace hybridsearch;
     auto config_path = MakeShared<String>(std::string(test_data_path())+"/config/test_minio_s3_storage.toml");
-    infinity::InfinityContext::instance().InitPhase1(config_path);
-    infinity::InfinityContext::instance().InitPhase2();
-    VirtualStore::InitRemoteStore(StorageType::kMinio, "192.168.200.165:9000", false, "minioadmin", "minioadmin", "infinity");
+    hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+    hybridsearch::hybridsearchContext::instance().InitPhase2();
+    VirtualStore::InitRemoteStore(StorageType::kMinio, "192.168.200.165:9000", false, "minioadmin", "minioadmin", "hybridsearch");
 
     if(VirtualStore::BucketExists()){
         String path = String(GetFullTmpDir()) + "/test_minio_upload.abc";
@@ -306,15 +306,15 @@ TEST_F(VirtualStoreTest, minio_upload) {
     }
 
     VirtualStore::UnInitRemoteStore();
-    infinity::InfinityContext::instance().UnInit();
+    hybridsearch::hybridsearchContext::instance().UnInit();
 }
 
 TEST_F(VirtualStoreTest, minio_download) {
-    using namespace infinity;
+    using namespace hybridsearch;
     auto config_path = MakeShared<String>(std::string(test_data_path())+"/config/test_minio_s3_storage.toml");
-    infinity::InfinityContext::instance().InitPhase1(config_path);
-    infinity::InfinityContext::instance().InitPhase2();
-    VirtualStore::InitRemoteStore(StorageType::kMinio, "192.168.200.165:9000", false, "minioadmin", "minioadmin", "infinity");
+    hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+    hybridsearch::hybridsearchContext::instance().InitPhase2();
+    VirtualStore::InitRemoteStore(StorageType::kMinio, "192.168.200.165:9000", false, "minioadmin", "minioadmin", "hybridsearch");
 
     if(VirtualStore::BucketExists()){
         String path = String(GetFullTmpDir()) + "/test_minio_download.abc";
@@ -347,6 +347,6 @@ TEST_F(VirtualStoreTest, minio_download) {
     }
 
     VirtualStore::UnInitRemoteStore();
-    infinity::InfinityContext::instance().UnInit();
+    hybridsearch::hybridsearchContext::instance().UnInit();
 }
 */

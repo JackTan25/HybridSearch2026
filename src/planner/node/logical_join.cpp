@@ -26,7 +26,7 @@ import logical_node_type;
 import base_expression;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 LogicalJoin::LogicalJoin(u64 node_id,
                          JoinType join_type,
@@ -98,4 +98,4 @@ String LogicalJoin::ToString(i64 &space) const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

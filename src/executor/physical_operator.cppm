@@ -29,7 +29,7 @@ import data_type;
 import column_binding;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PhysicalOperator : public EnableSharedFromThis<PhysicalOperator> {
 
@@ -42,13 +42,13 @@ public:
                                      bool cache_result = false)
         : operator_id_(id), operator_type_(type), left_(std::move(left)), right_(std::move(right)), load_metas_(std::move(load_metas)),
           cache_result_(cache_result) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("PhysicalOperator");
 #endif
     }
 
     virtual ~PhysicalOperator() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("PhysicalOperator");
 #endif
     }
@@ -154,4 +154,4 @@ export struct OutputToDataBlockHelper {
     void OutputToDataBlock(BufferManager *buffer_mgr, const BlockIndex *block_index, const Vector<UniquePtr<DataBlock>> &output_data_blocks);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

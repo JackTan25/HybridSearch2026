@@ -18,9 +18,9 @@ module;
 
 export module update_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::UpdateStatement;
-export using infinity::UpdateExpr;
+export using hybridsearch::UpdateStatement;
+export using hybridsearch::UpdateExpr;
 
-} // namespace infinity
+} // namespace hybridsearch

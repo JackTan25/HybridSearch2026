@@ -18,7 +18,7 @@
 #include "parser_assert.h"
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 struct TimestampType : public DateTimeType {
     TimestampType() = default;
     explicit constexpr TimestampType(int32_t date_value, int32_t time_value) : DateTimeType(date_value, time_value) {};
@@ -44,4 +44,4 @@ struct TimestampType {
     int32_t time{};
 };
 */
-} // namespace infinity
+} // namespace hybridsearch

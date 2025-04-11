@@ -25,7 +25,7 @@
 #include <string>
 #include <vector>
 
-namespace infinity {
+namespace hybridsearch {
 
 class DataType;
 struct InitParameter;
@@ -137,4 +137,4 @@ public:
     bool build_bloom_filter_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

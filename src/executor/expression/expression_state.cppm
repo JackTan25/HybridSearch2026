@@ -28,7 +28,7 @@ import in_expression;
 import filter_fulltext_expression;
 import column_vector;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class AggregateFlag : i8 {
     kUninitialized = 0,
@@ -77,4 +77,4 @@ private:
     SharedPtr<ColumnVector> column_vector_{nullptr};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

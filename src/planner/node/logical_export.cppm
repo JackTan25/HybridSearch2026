@@ -26,7 +26,7 @@ import statement_common;
 import meta_info;
 import block_index;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalExport : public LogicalNode {
 public:
@@ -100,4 +100,4 @@ private:
     SharedPtr<BlockIndex> block_index_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

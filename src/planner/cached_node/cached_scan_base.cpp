@@ -21,7 +21,7 @@ module cached_scan_base;
 import base_table_ref;
 import physical_scan_base;
 
-namespace infinity {
+namespace hybridsearch {
 
 CachedScanBase::CachedScanBase(LogicalNodeType type,
                                const BaseTableRef *base_table_ref,
@@ -51,4 +51,4 @@ bool CachedScanBase::Eq(const CachedNodeBase &other_base) const {
     return *schema_name_ == *other.schema_name_ && *table_name_ == *other.table_name_ && query_ts_ == other.query_ts_;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

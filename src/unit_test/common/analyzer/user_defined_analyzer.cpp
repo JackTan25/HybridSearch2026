@@ -21,7 +21,7 @@ import compilation_config;
 import status;
 import python_instance;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class UserDefinedAnalyzerTest : public BaseTest {};
 

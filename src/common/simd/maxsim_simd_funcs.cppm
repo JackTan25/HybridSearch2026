@@ -22,7 +22,7 @@ export module maxsim_simd_funcs;
 import stl;
 import simd_common_tools;
 
-namespace infinity {
+namespace hybridsearch {
 
 export f32 maxsim_f32_bit_ip_plain(const f32 *v1, const u8 *v2, SizeT dim) {
     assert(dim % 8 == 0);
@@ -213,4 +213,4 @@ export i64 maxsim_i64_bit_ip_avx512(const i64 *v1, const u8 *v2, SizeT dim) {
 }
 #endif
 
-} // namespace infinity
+} // namespace hybridsearch

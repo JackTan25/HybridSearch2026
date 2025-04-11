@@ -25,7 +25,7 @@ import base_expression;
 import logical_type;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 String LogicalCreateCollection::ToString(i64 &space) const {
     std::stringstream ss;
@@ -54,4 +54,4 @@ SharedPtr<Vector<SharedPtr<DataType>>> LogicalCreateCollection::GetOutputTypes()
     return result_type;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

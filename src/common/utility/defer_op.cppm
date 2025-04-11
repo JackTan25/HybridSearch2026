@@ -18,7 +18,7 @@ export module defer_op;
 
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename FN>
 class DeferFn {
@@ -38,4 +38,4 @@ private:
     Optional<FN> func_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

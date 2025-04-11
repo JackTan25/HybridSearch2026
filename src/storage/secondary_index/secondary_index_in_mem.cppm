@@ -24,7 +24,7 @@ import table_index_entry;
 import base_memindex;
 import memindex_tracer;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct BlockColumnEntry;
 class BufferManager;
@@ -66,4 +66,4 @@ public:
     NewSecondaryIndexInMem(const SharedPtr<ColumnDef> &column_def, SegmentIndexEntry *segment_index_entry, RowID begin_row_id);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

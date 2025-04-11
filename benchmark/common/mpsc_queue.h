@@ -30,7 +30,7 @@
 #include <string.h>
 #include <thread>
 
-namespace infinity {
+namespace hybridsearch {
 
 #define QUEUE_PAGE_SIZE 4096
 #define CACHE_LINE_SIZE 64
@@ -306,4 +306,4 @@ public:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

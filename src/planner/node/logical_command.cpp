@@ -23,11 +23,11 @@ import column_binding;
 import logical_node_type;
 
 import logical_type;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<ColumnBinding> LogicalCommand::GetColumnBindings() const { return {}; }
 
@@ -181,4 +181,4 @@ String LogicalCommand::ToString(i64 &space) const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

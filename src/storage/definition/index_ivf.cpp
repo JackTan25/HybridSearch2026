@@ -22,7 +22,7 @@ module;
 
 module index_ivf;
 
-import infinity_exception;
+import hybridsearch_exception;
 import stl;
 import index_base;
 import status;
@@ -35,7 +35,7 @@ import internal_types;
 import data_type;
 import create_index_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 bool IndexIVF::operator==(const IndexIVF &other) const {
     return (*static_cast<const IndexBase *>(this) == static_cast<const IndexBase &>(other)) && (ivf_option_ == other.ivf_option_);
@@ -394,4 +394,4 @@ String IndexIVF::BuildOtherParamsString() const {
                        ivf_option_.storage_option_.ToString());
 }
 
-} // namespace infinity
+} // namespace hybridsearch

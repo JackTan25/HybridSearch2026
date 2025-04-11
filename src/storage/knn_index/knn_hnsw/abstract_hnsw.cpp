@@ -29,10 +29,10 @@ import memindex_tracer;
 import default_values;
 import logical_type;
 import multivector_util;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 UniquePtr<HnswIndexInMem> HnswIndexInMem::Make(RowID begin_row_id,
                                                const IndexBase *index_base,
@@ -41,7 +41,7 @@ UniquePtr<HnswIndexInMem> HnswIndexInMem::Make(RowID begin_row_id,
                                                bool trace) {
     auto memidx = MakeUnique<HnswIndexInMem>(begin_row_id, index_base, column_def, segment_index_entry, trace);
     if (trace) {
-        auto *memindex_tracer = InfinityContext::instance().storage()->memindex_tracer();
+        auto *memindex_tracer = hybridsearchContext::instance().storage()->memindex_tracer();
         std::visit(
             [&](auto &&index) {
                 using T = std::decay_t<decltype(index)>;
@@ -65,7 +65,7 @@ UniquePtr<HnswIndexInMem> HnswIndexInMem::Make(const IndexBase *index_base, cons
     RowID begin_row_id{0, 0};
     auto memidx = MakeUnique<HnswIndexInMem>(begin_row_id, index_base, column_def, nullptr, trace);
     if (trace) {
-        auto *memindex_tracer = InfinityContext::instance().storage()->memindex_tracer();
+        auto *memindex_tracer = hybridsearchContext::instance().storage()->memindex_tracer();
         std::visit(
             [&](auto &&index) {
                 using T = std::decay_t<decltype(index)>;
@@ -226,7 +226,7 @@ HnswIndexInMem::~HnswIndexInMem() {
         },
         hnsw_);
     if (trace_) {
-        auto *memindex_tracer = InfinityContext::instance().storage()->memindex_tracer();
+        auto *memindex_tracer = hybridsearchContext::instance().storage()->memindex_tracer();
         if (memindex_tracer != nullptr) {
             memindex_tracer->DecreaseMemUsed(mem_usage);
         }
@@ -416,4 +416,4 @@ MemIndexTracerInfo HnswIndexInMem::GetInfo() const {
     return MemIndexTracerInfo(index_name, table_name, db_name, mem_used, row_cnt);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

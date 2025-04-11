@@ -29,7 +29,7 @@ import logical_node_type;
 import logical_type;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<ColumnBinding> LogicalUpdate::GetColumnBindings() const { return {}; }
 
@@ -65,4 +65,4 @@ String LogicalUpdate::ToString(i64 &space) const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

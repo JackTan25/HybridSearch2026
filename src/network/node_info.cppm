@@ -19,7 +19,7 @@ export module node_info;
 import stl;
 import admin_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class NodeStatus { kAlive, kTimeout, kLostConnection, kRemoved, kInvalid };
 
@@ -80,4 +80,4 @@ private:
     // String from_{}; // Which node the information comes from.
 };
 
-} // namespace infinity
+} // namespace hybridsearch

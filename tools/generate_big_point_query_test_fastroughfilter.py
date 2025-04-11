@@ -83,6 +83,6 @@ if __name__ == "__main__":
     parser.add_argument("-g", "--generate", type=bool,
                         default=False, dest="generate_if_exists", )
     parser.add_argument("-c", "--copy", type=str,
-                        default="/var/infinity/test_data", dest="copy_dir", )
+                        default="/var/hybridsearch/test_data", dest="copy_dir", )
     args = parser.parse_args()
     generate(args.generate_if_exists, args.copy_dir)

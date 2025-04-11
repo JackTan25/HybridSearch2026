@@ -19,7 +19,7 @@ module plus;
 import stl;
 import catalog;
 import logical_type;
-import infinity_exception;
+import hybridsearch_exception;
 import scalar_function;
 import scalar_function_set;
 
@@ -28,7 +28,7 @@ import internal_types;
 import data_type;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct PlusFunction {
     template <typename TA, typename TB>
@@ -105,4 +105,4 @@ void AppendRegisterPlusFunction(const UniquePtr<Catalog> &catalog_ptr) {
     Catalog::AppendToScalarFunctionSet(catalog_ptr.get(), std::move(function_set_ptr));
 }
 
-} // namespace infinity
+} // namespace hybridsearch

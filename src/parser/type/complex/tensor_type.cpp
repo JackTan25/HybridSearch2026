@@ -16,7 +16,7 @@
 #include <iostream>
 #include <sstream>
 
-namespace infinity {
+namespace hybridsearch {
 
 std::string
 TensorType::Tensor2String(const char *tensor_p, const EmbeddingDataType type, const size_t embedding_dimension, const size_t embedding_num) {
@@ -36,4 +36,4 @@ TensorType::Tensor2String(const char *tensor_p, const EmbeddingDataType type, co
     return std::move(oss).str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

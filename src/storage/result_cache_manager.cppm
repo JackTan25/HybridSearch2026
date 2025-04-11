@@ -24,7 +24,7 @@ import data_block;
 import logical_read_cache;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 class LogicalNode;
 class PhysicalOperator;
@@ -100,12 +100,12 @@ private:
 export class ResultCacheManager {
 public:
     ResultCacheManager(SizeT cache_num_capacity) : cache_map_(cache_num_capacity) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("ResultCacheManager");
 #endif
     }
     ~ResultCacheManager() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("ResultCacheManager");
 #endif
     }
@@ -128,4 +128,4 @@ private:
     CacheResultMap cache_map_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -25,7 +25,7 @@ import physical_operator_type;
 import physical_scan_base;
 import base_expression;
 import load_meta;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import data_type;
 import base_table_ref;
@@ -39,12 +39,12 @@ import global_block_id;
 import roaring_bitmap;
 import filter_expression_push_down;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Txn;
 
 // for int range filter, x > n is equivalent to x >= n + 1
-// for float range filter, x > f is equivalent to x >= std::nextafter(f, INFINITY)
+// for float range filter, x > f is equivalent to x >= std::nextafter(f, hybridsearch)
 // we can use this to simplify the filter
 
 // output: only selected RowIDs
@@ -103,4 +103,4 @@ private:
     mutable Vector<SizeT> column_ids_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

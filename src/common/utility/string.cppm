@@ -4,7 +4,7 @@ module;
 
 export module string_ref;
 
-namespace infinity {
-export using infinity::StringRef;
-export using infinity::SmallString;
-} // namespace infinity
+namespace hybridsearch {
+export using hybridsearch::StringRef;
+export using hybridsearch::SmallString;
+} // namespace hybridsearch

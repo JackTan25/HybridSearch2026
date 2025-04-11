@@ -18,7 +18,7 @@ export module physical_operator_type;
 
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class PhysicalOperatorType : i8 {
     kInvalid = 0,
@@ -115,4 +115,4 @@ export enum class PhysicalOperatorType : i8 {
 
 export String PhysicalOperatorToString(PhysicalOperatorType type);
 
-} // namespace infinity
+} // namespace hybridsearch

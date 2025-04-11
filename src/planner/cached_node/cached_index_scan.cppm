@@ -20,7 +20,7 @@ import stl;
 import cached_scan_base;
 import base_expression;
 
-namespace infinity {
+namespace hybridsearch {
 
 class LogicalIndexScan;
 class PhysicalIndexScan;
@@ -39,4 +39,4 @@ private:
     SharedPtr<BaseExpression> filter_expression_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

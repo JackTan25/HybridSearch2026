@@ -4,7 +4,7 @@ slug: /pysdk_api_reference
 ---
 # Python API Reference
 
-A complete reference for Infinity's Python APIs.
+A complete reference for hybridsearch's Python APIs.
 
 ---
 
@@ -15,21 +15,21 @@ A complete reference for Infinity's Python APIs.
 ### connect
 
 ```python
-# Connect to the local directory and get an Infinity object
-infinity_embedded.connect(uri)
+# Connect to the local directory and get an hybridsearch object
+hybridsearch_embedded.connect(uri)
 ```
 
 Or
 
 ```python
-# Connect to the Infinity server and get an Infinity object
-infinity.connect(uri)
+# Connect to the hybridsearch server and get an hybridsearch object
+hybridsearch.connect(uri)
 ```
 
-Connects to the local directory or the Infinity server, and gets an Infinity object.
+Connects to the local directory or the hybridsearch server, and gets an hybridsearch object.
 
 :::tip NOTE
-You must have an Infinity object ready to perform database-specific operations.
+You must have an hybridsearch object ready to perform database-specific operations.
 :::
 
 #### Parameters
@@ -38,22 +38,22 @@ You must have an Infinity object ready to perform database-specific operations.
 
 The `uri` here can be either a local directory in `str` format or a `NetworkAddress` object:  
 
-- `"/absolute/path/to/save/to"`: `str` - A local directory storing the Infinity data. Used when Infinity is imported as a Python module.
-- `NetworkAddress`: Used in client-server mode, when you have deployed Infinity as a separate server and wish to connect to it remotely. A `NetworkAddress` object comprises two fields:
-  - `"<SERVER_IP_ADDRESS>"`: `str` - The IP address of the Infinity server.  
-  - `<PORT>`: `int` - The SDK port number on which the Infinity server listens. Defaults to `23817`.
+- `"/absolute/path/to/save/to"`: `str` - A local directory storing the hybridsearch data. Used when hybridsearch is imported as a Python module.
+- `NetworkAddress`: Used in client-server mode, when you have deployed hybridsearch as a separate server and wish to connect to it remotely. A `NetworkAddress` object comprises two fields:
+  - `"<SERVER_IP_ADDRESS>"`: `str` - The IP address of the hybridsearch server.  
+  - `<PORT>`: `int` - The SDK port number on which the hybridsearch server listens. Defaults to `23817`.
 
 :::tip IMPORTANT
 - When setting `uri` as `"/absolute/path/to/save/to"`, ensure you:
-  - Install the embedded SDK: `pip install infinity-embedded-sdk==<v0.4.0.dev4_OR_HIGHER>`
-  - Import the `infinity_embedded` module: `import infinity_embedded`.
+  - Install the embedded SDK: `pip install hybridsearch-embedded-sdk==<v0.4.0.dev4_OR_HIGHER>`
+  - Import the `hybridsearch_embedded` module: `import hybridsearch_embedded`.
 - When setting `uri` as `NetworkAddress`, ensure you:
-  - Install the Infinity SDK: `pip install infinity==<VERSION>`
-  - Import the `infinity` module: `import infinity`.
+  - Install the hybridsearch SDK: `pip install hybridsearch==<VERSION>`
+  - Import the `hybridsearch` module: `import hybridsearch`.
 :::
 
 :::caution IMPORTANT
-When connecting to Infinity in client-server mode, ensure that the client version *exactly* matches the server version. For example:
+When connecting to hybridsearch in client-server mode, ensure that the client version *exactly* matches the server version. For example:
 
 | **Client version** | **Server version** |
 |--------------------|--------------------|
@@ -83,30 +83,30 @@ This allows for bug fixes without requiring changes to the configuration file.
 
 #### Returns
 
-- Success: An `infinity.local_infinity.infinity.LocalInfinityConnection` object in embedded mode or an `infinity.remote_thrift.infinity.RemoteThriftInfinityConnection` object in client-server mode.
-- Failure: `InfinityException`
+- Success: An `hybridsearch.local_hybridsearch.hybridsearch.LocalhybridsearchConnection` object in embedded mode or an `hybridsearch.remote_thrift.hybridsearch.RemoteThrifthybridsearchConnection` object in client-server mode.
+- Failure: `hybridsearchException`
   - `error_code`: `int` - A non-zero value indicating a specific error condition.
   - `error_msg`: `str` - A message providing additional details about the error.
 
 #### Examples
 
-##### Connect to the local directory of Infinity
+##### Connect to the local directory of hybridsearch
 
-From v0.4.0.dev4 onwards, Infinity also gives you the option to connect to the Infinity service just like calling a Python module. If you have installed the Infinity client via `pip install infinity-embedded-sdk==<v0.4.0.dev4_OR_HIGHER>`, you can connect to Infinity and save all related data in a local directory:
+From v0.4.0.dev4 onwards, hybridsearch also gives you the option to connect to the hybridsearch service just like calling a Python module. If you have installed the hybridsearch client via `pip install hybridsearch-embedded-sdk==<v0.4.0.dev4_OR_HIGHER>`, you can connect to hybridsearch and save all related data in a local directory:
 
 ```python
-import infinity_embedded
-infinity_object = infinity_embedded.connect("/absolute/path/to/save/to")
+import hybridsearch_embedded
+hybridsearch_object = hybridsearch_embedded.connect("/absolute/path/to/save/to")
 ```
 
-##### Connect to Infinity in client-server mode
+##### Connect to hybridsearch in client-server mode
 
-If you have deployed Infinity as a separate server and installed the Infinity client via `pip install infinity==<VERSION>`, you can connect to it via its IP address. If your Infinity is running on your local machine, you can also use `infinity.common.LOCAL_HOST` to replace `"<SERVER_IP_ADDRESS>"` in the following code snippet.
+If you have deployed hybridsearch as a separate server and installed the hybridsearch client via `pip install hybridsearch==<VERSION>`, you can connect to it via its IP address. If your hybridsearch is running on your local machine, you can also use `hybridsearch.common.LOCAL_HOST` to replace `"<SERVER_IP_ADDRESS>"` in the following code snippet.
 
 ```python
-import infinity
-# If Infinity is deployed on the local machine, use infinity.LOCAL_HOST to replace <SERVER_IP_ADDRESS>
-infinity_object = infinity.connect(infinity.NetworkAddress("192.168.1.101", 23817)) 
+import hybridsearch
+# If hybridsearch is deployed on the local machine, use hybridsearch.LOCAL_HOST to replace <SERVER_IP_ADDRESS>
+hybridsearch_object = hybridsearch.connect(hybridsearch.NetworkAddress("192.168.1.101", 23817)) 
 ```
 
 ---
@@ -114,10 +114,10 @@ infinity_object = infinity.connect(infinity.NetworkAddress("192.168.1.101", 2381
 ### disconnect
 
 ```python
-infinity_object.disconnect()
+hybridsearch_object.disconnect()
 ```
 
-Disconnects the client from the Infinity server in client-server mode, or destructs the Infinity object and releases all associated resources when Infinity is imported as a Python module.
+Disconnects the client from the hybridsearch server in client-server mode, or destructs the hybridsearch object and releases all associated resources when hybridsearch is imported as a Python module.
 
 #### Returns
 
@@ -132,7 +132,7 @@ A structure containing the following attributes:
 #### Examples
 
 ```python
-infinity_object.disconnect()
+hybridsearch_object.disconnect()
 ```
 
 ---
@@ -140,7 +140,7 @@ infinity_object.disconnect()
 ### create_database
 
 ```python
-infinity_object.create_database(db_name, conflict_type = ConflictType.Error, comment = None)
+hybridsearch_object.create_database(db_name, conflict_type = ConflictType.Error, comment = None)
 ```
 
 Creates a database with a specified name.
@@ -165,10 +165,10 @@ A non-empty string indicating the name of the database, which must adhere to the
 - `Ignore`: Ignore the database creation request and keep the existing database with the same name.
 
 :::tip NOTE
-You may want to import the `infinity.common` package to set `ConflictType`:
+You may want to import the `hybridsearch.common` package to set `ConflictType`:
 
 ```python
-from infinity.common import ConflictType
+from hybridsearch.common import ConflictType
 ```
 :::
 
@@ -182,8 +182,8 @@ Additional comment for the database to create.
 
 #### Returns
 
-- Success: An `infinity.local_infinity.db.LocalDatabase` object in embedded mode or an `infinity.remote_thrift.db.RemoteDatabase` object in client-server mode.
-- Failure: `InfinityException`
+- Success: An `hybridsearch.local_hybridsearch.db.LocalDatabase` object in embedded mode or an `hybridsearch.remote_thrift.db.RemoteDatabase` object in client-server mode.
+- Failure: `hybridsearchException`
   - `error_code`: `int` - A non-zero value indicating a specific error condition.
   - `error_msg`: `str` - A message providing additional details about the error.
 
@@ -192,20 +192,20 @@ Additional comment for the database to create.
 ```python
 # Create a database named 'my_database':
 # If the specified database already exists, raise an error. 
-infinity_object.create_database("my_database")
+hybridsearch_object.create_database("my_database")
 ```
 
 ```python
 # Create a database named 'my_database':
 # If the specified database already exists, raise an error (same as above). 
-infinity_object.create_database("my_database", infinity.common.ConflictType.Error, comment="Database One")
+hybridsearch_object.create_database("my_database", hybridsearch.common.ConflictType.Error, comment="Database One")
 ```
 
 ```python
-from infinity.common import ConflictType
+from hybridsearch.common import ConflictType
 # Create a database named 'my_database':
 # If the specified database already exists, silently ignore the operation and proceed. 
-infinity_object.create_database("my_database", ConflictType.Ignore, comment="Database One")
+hybridsearch_object.create_database("my_database", ConflictType.Ignore, comment="Database One")
 ```
 
 ---
@@ -213,7 +213,7 @@ infinity_object.create_database("my_database", ConflictType.Ignore, comment="Dat
 ### drop_database
 
 ```python
-infinity_object.drop_database(db_name, conflict_type = ConflictType.Error)
+hybridsearch_object.drop_database(db_name, conflict_type = ConflictType.Error)
 ```
 
 Deletes a database by its name.
@@ -230,10 +230,10 @@ A non-empty string indicating the name of the database to delete.
 - `Ignore`: Ignore the operation and proceed regardless, if the specified database does not exist.
 
 :::tip NOTE
-You may want to import the `infinity.common` package to set `ConflictType`:
+You may want to import the `hybridsearch.common` package to set `ConflictType`:
 
 ```python
-from infinity.common import ConflictType
+from hybridsearch.common import ConflictType
 ```
 
 :::
@@ -257,20 +257,20 @@ A structure containing the following attributes:
 ```python
 # Delete a database named 'my_database':
 # If the specified database does not exist, raise an error. 
-infinity_object.drop_database("my_database")
+hybridsearch_object.drop_database("my_database")
 ```
 
 ```python
 # Delete a database named 'my_database':
 # If the specified database does not exist, raise an error (same as above). 
-infinity_object.drop_database("my_database", infinity.common.ConflictType.Error)
+hybridsearch_object.drop_database("my_database", hybridsearch.common.ConflictType.Error)
 ```
 
 ```python
-from infinity.common import ConflictType
+from hybridsearch.common import ConflictType
 # Delete a database named 'my_database':
 # If the specified database does not exist, silently ignore the operation and proceed.
-infinity_object.drop_database("my_database", ConflictType.Ignore)
+hybridsearch_object.drop_database("my_database", ConflictType.Ignore)
 ```
 
 ---
@@ -278,10 +278,10 @@ infinity_object.drop_database("my_database", ConflictType.Ignore)
 ### list_databases
 
 ```python
-infinity_object.list_databases()
+hybridsearch_object.list_databases()
 ```
 
-Retrieves a list of all available databases within the Infinity system.
+Retrieves a list of all available databases within the hybridsearch system.
 
 #### Returns
 
@@ -297,7 +297,7 @@ A structure containing the following attributes:
 #### Examples
 
 ```python
-res = infinity_object.list_databases() 
+res = hybridsearch_object.list_databases() 
 print(res.db_names) # ['my_database', 'database_1']
 ```
 
@@ -306,7 +306,7 @@ print(res.db_names) # ['my_database', 'database_1']
 ### show_database
 
 ```python
-infinity_object.show_database(database_name)
+hybridsearch_object.show_database(database_name)
 ```
 
 Shows detailed information about a database.
@@ -324,7 +324,7 @@ A structure containing the following attributes:
 #### Examples
 
 ```python
-res = infinity_object.show_database('my_database')
+res = hybridsearch_object.show_database('my_database')
 ```
 
 ---
@@ -332,7 +332,7 @@ res = infinity_object.show_database('my_database')
 ### get_database
 
 ```python
-infinity_object.get_database(database_name)
+hybridsearch_object.get_database(database_name)
 ```
 
 Retrieves a database object by its name.
@@ -345,15 +345,15 @@ A non-empty string indicating the name of the database to retrieve.
 
 #### Returns
 
-- Success: An `infinity.local_infinity.db.LocalDatabase` object in embedded mode or an `infinity.remote_thrift.db.RemoteDatabase` object in client-server mode.
-- Failure: `InfinityException`
+- Success: An `hybridsearch.local_hybridsearch.db.LocalDatabase` object in embedded mode or an `hybridsearch.remote_thrift.db.RemoteDatabase` object in client-server mode.
+- Failure: `hybridsearchException`
   - `error_code`: `int` - A non-zero value indicating a specific error condition.
   - `error_msg`: `str` - A message providing additional details about the error.
 
 #### Examples
 
 ```python
-db_object = infinity_object.get_database("my_database")
+db_object = hybridsearch_object.get_database("my_database")
 ```
 
 ---
@@ -478,10 +478,10 @@ Definitions for all table columns as a dictionary. Each key in the dictionary is
 - `Ignore`: Ignore the table creation request and keep the existing table with the same name.
 
 :::tip NOTE
-You may want to import the `infinity.common` package to set `ConflictType`:
+You may want to import the `hybridsearch.common` package to set `ConflictType`:
 
 ```python
-from infinity.common import ConflictType
+from hybridsearch.common import ConflictType
 ```
 
 :::
@@ -492,8 +492,8 @@ If `ConflictType` is not set, it defaults to `Error`.
 
 #### Returns
 
-- Success: An `infinity.local_infinity.table.LocalTable` object in embedded mode or an `infinity.remote_infinity.table.RemoteTable` object in client-server mode.
-- Failure: `InfinityException`:
+- Success: An `hybridsearch.local_hybridsearch.table.LocalTable` object in embedded mode or an `hybridsearch.remote_hybridsearch.table.RemoteTable` object in client-server mode.
+- Failure: `hybridsearchException`:
   - `error_code`: `int` - A non-zero value indicating a specific error condition.
   - `error_msg`: `str` - A message providing additional details about the error.
 
@@ -570,7 +570,7 @@ You can build a BMP index on the sparse vector column to speed up the match_spar
 :::
 
 ```python
-from infinity.common import ConflictType
+from hybridsearch.common import ConflictType
 # Create a table with a vector column only:  
 # - `sparse`: The column is a sparse vector column
 # - `128`: The sparse vector dimension
@@ -582,7 +582,7 @@ db_object.create_table("my_table", {"c1": {"type": "sparse,128,float,int"}}, Con
 ##### Create a table with a tensor column only
 
 ```python
-from infinity.common import ConflictType
+from hybridsearch.common import ConflictType
 # Create a table with a tensor column only:  
 # - `tensor`: The column is a tensor column
 # - `4`: Dimension of each vector unit in the tensor
@@ -593,7 +593,7 @@ db_object.create_table("my_table", {"c1": {"type": "tensor,4,float"}}, ConflictT
 ##### Create a table with a tensor array column only
 
 ```python
-from infinity.common import ConflictType
+from hybridsearch.common import ConflictType
 # Create a table with a tensor array column only:  
 # - `tensorarray`: The column is a tensor array column
 # - `6`: Dimension of each vector unit in the tensor arrays
@@ -623,10 +623,10 @@ A non-empty string indicating the name of the table to delete.
 - `Ignore`: Ignore the operation and proceed regardless, if the specified table does not exist.
 
 :::tip NOTE
-You may want to import the `infinity.common` package to set `ConflictType`:
+You may want to import the `hybridsearch.common` package to set `ConflictType`:
 
 ```python
-from infinity.common import ConflictType
+from hybridsearch.common import ConflictType
 ```
 
 :::
@@ -656,11 +656,11 @@ db_object.drop_table("my_table")
 ```python
 # Delete a table named 'my_table':
 # If the specified table does not exist, raise an error (same as above). 
-db_object.drop_table("my_table", infinity.common.ConflictType.Error)
+db_object.drop_table("my_table", hybridsearch.common.ConflictType.Error)
 ```
 
 ```python
-from infinity.common import ConflictType
+from hybridsearch.common import ConflictType
 # Delete a table named 'my_table':
 # If the specified table does not exist, silently ignore the operation and proceed.
 db_object.drop_table("my_table", ConflictType.Ignore)
@@ -713,7 +713,7 @@ table_obj.add_columns({"column_name1": {"type": "tensor,4,float", "default": [[1
 ##### Add a sparse column
 
 ```python
-from infinity.common import SparseVector
+from hybridsearch.common import SparseVector
 table_obj.add_columns({"column_name1": {"type": "sparse,128,float,int", "default": SparseVector([10, 20, 30], [1.1, 2.2, 3.3])}})
 ```
 
@@ -769,8 +769,8 @@ A non-empty string indicating the name of the table to retrieve.
 
 #### Returns
 
-- Success: An `infinity.local_infinity.table.LocalTable` object in embedded mode or an `infinity.remote_infinity.table.RemoteTable` object in client-server mode.
-- Failure: `InfinityException`:
+- Success: An `hybridsearch.local_hybridsearch.table.LocalTable` object in embedded mode or an `hybridsearch.remote_hybridsearch.table.RemoteTable` object in client-server mode.
+- Failure: `hybridsearchException`:
   - `error_code`: `int` - A non-zero value indicating a specific error condition.
   - `error_msg`: `str` - A message providing additional details about the error.
 
@@ -792,7 +792,7 @@ Show the column definition of the current table.
 
 #### Returns
 
-An `infinity.local_infinity.table.LocalTable` object in embedded mode or an `infinity.remote_thrift.table.RemoteTable` object in client-server mode.
+An `hybridsearch.local_hybridsearch.table.LocalTable` object in embedded mode or an `hybridsearch.remote_thrift.table.RemoteTable` object in client-server mode.
 
 :::tip NOTE
 This method specifies the projection columns for the current table but does not directly produce displayable data. To display the query results, use `output()` in conjunction with methods like `to_result()`, `to_df()`, `to_pl()`, or `to_arrow()` to materialize the data.
@@ -894,7 +894,7 @@ An `IndexInfo` structure contains three fields,`column_name`, `index_type`, and 
 - **column_name**: `str`, *Required*  
   The name of the column to build index on. Must not be empty.  
 - **index_type**: `IndexType`, *Required*  
-  Index type. You may want to import `infinity.index` to set `IndexType`: `from infinity.index import IndexType`  
+  Index type. You may want to import `hybridsearch.index` to set `IndexType`: `from hybridsearch.index import IndexType`  
   - `Hnsw`: An HNSW index. Works with dense vectors, and multivectors only.
   - `IVF`: An IVF index. Works with dense vectors and multivectors only.
   - `FullText`: A full-text index.  
@@ -957,10 +957,10 @@ An `IndexInfo` structure contains three fields,`column_name`, `index_type`, and 
       - `"raw"`: Store the block-max index without compression.
 
 :::tip NOTE
-Import the `infinity.index` package to set `IndexInfo`, and `IndexType`.
+Import the `hybridsearch.index` package to set `IndexInfo`, and `IndexType`.
 
 ```python
-from infinity.index import IndexInfo, IndexType
+from hybridsearch.index import IndexInfo, IndexType
 ```
 
 :::
@@ -971,10 +971,10 @@ from infinity.index import IndexInfo, IndexType
 - `Ignore`: Ignore the index creation request and keep the existing table with the same name.
 
 :::tip NOTE
-You may want to import the `infinity.common` package to set `ConflictType`:
+You may want to import the `hybridsearch.common` package to set `ConflictType`:
 
 ```python
-from infinity.common import ConflictType
+from hybridsearch.common import ConflictType
 ```
 
 :::
@@ -1002,7 +1002,7 @@ A structure containing these attributes:
 ##### Create an HNSW index on a dense vector column
 
 ```python {1}
-from infinity.index import IndexInfo, IndexType
+from hybridsearch.index import IndexInfo, IndexType
 # Create a table named "test_index_hnsw" with a 1024-dimensional float vector column "c1"
 table_object = db_object.create_table("test_index_hnsw", {"c1": {"type": "vector,1024,float"}})
 # Create an HNSW index named "my_index" on column "c1" with default parameter settings:
@@ -1014,7 +1014,7 @@ table_object.create_index("my_index",IndexInfo("c1", IndexType.Hnsw, {"metric": 
 ```
 
 ```python {1}
-from infinity.index import IndexInfo, IndexType
+from hybridsearch.index import IndexInfo, IndexType
 # Create a table named "test_index_hnsw" with a 1024-dimensional float vector column "c1"
 table_object = db_object.create_table("test_index_hnsw", {"c1": {"type": "vector,1024,float"}})
 # Create an HNSW index named "my_index" on column "c1"
@@ -1039,7 +1039,7 @@ table_object.create_index(
 ##### Create an HNSW index on a multi-vector column
 
 ```python
-from infinity.index import IndexInfo, IndexType
+from hybridsearch.index import IndexInfo, IndexType
 # Create a table named "test_index_hnsw" with a 4-dimensional float multivector column "c1"
 table_object = db_object.create_table("test_index_hnsw", {"c1": {"type": "multivector,4,float"}})
 # Create an HNSW index named "my_index" on column "c1" with default parameter settings:
@@ -1053,7 +1053,7 @@ table_object.create_index("my_index", IndexInfo("c1", IndexType.Hnsw, {"metric":
 ##### Create a full-text index
 
 ```python
-from infinity.index import IndexInfo, IndexType
+from hybridsearch.index import IndexInfo, IndexType
 # Create a table named "test_index_fulltext" with a varchar column "body"
 table_object = db_object.create_table("test_index_fulltext", {"body": {"type": "varchar"}})
 # Create a full-text index named "my_index" on column "body" with default parameter settings:
@@ -1069,7 +1069,7 @@ table_object.create_index(
 ```
 
 ```python
-from infinity.index import IndexInfo, IndexType
+from hybridsearch.index import IndexInfo, IndexType
 # Create a table named "test_index_fulltext" with a varchar column "body"
 table_object = db_object.create_table("test_index_fulltext", {"body": {"type": "varchar"}})
 # Create a full-text index named "my_index" on column "body"
@@ -1090,7 +1090,7 @@ table_object.create_index(
 ##### Create a secondary index
 
 ```python {11}
-from infinity.index import IndexInfo, IndexType
+from hybridsearch.index import IndexInfo, IndexType
 # Create a table named "test_index_secondary" with a varchar column "body"
 table_object = db_object.create_table("test_index_secondary", {"c1": {"type": "varchar"}})
 # Create a secondary index named "my_index" on column "c1"
@@ -1107,7 +1107,7 @@ table_object.create_index(
 ##### Create a BMP index
 
 ```python {13}
-from infinity.index import IndexInfo, IndexType
+from hybridsearch.index import IndexInfo, IndexType
 # Create a table named "test_index_bmp" with a sparse vector column "c1"
 table_object = db_object.create_table("test_index_bmp", {"c1": {"type": "sparse,30000,float,int16"}})
 # Create a BMP index named "my_index" on column "c1" with default parameter settings:
@@ -1124,7 +1124,7 @@ table_object.create_index(
 ```
 
 ```python {13,14}
-from infinity.index import IndexInfo, IndexType
+from hybridsearch.index import IndexInfo, IndexType
 # Create a table named "test_index_bmp" with a sparse vector column "c1"
 table_object = db_object.create_table("test_index_bmp", {"c1": {"type": "sparse,30000,float,int16"}})
 # Create a BMP index named "my_index" on column "c1"
@@ -1194,10 +1194,10 @@ A non-empty string indicating the name of the index to delete.
 - `Ignore`: Ignore the index creation request if the index does not exist.
 
 :::tip NOTE
-You may want to import the `infinity.common` package to set `ConflictType`:
+You may want to import the `hybridsearch.common` package to set `ConflictType`:
 
 ```python
-from infinity.common import ConflictType
+from hybridsearch.common import ConflictType
 ```
 :::
 
@@ -1280,7 +1280,7 @@ res = table_object.show_index('my_index')
 ### show_current_node
 
 ```python
-infinity.show_current_node()
+hybridsearch.show_current_node()
 ```
 
 Shows the role of the currently connected node.
@@ -1304,7 +1304,7 @@ A structure containing the following attributes:
 #### Examples
 
 ```python
-res = infinity_object.show_current_row()
+res = hybridsearch_object.show_current_row()
 ```
 
 ---
@@ -1325,7 +1325,7 @@ Inserts rows of data into the current table.
 
 ##### data: `dict[str, Any]`, *Required*
 
-Data to insert. Infinity supports inserting multiple rows to a table at one time in the form of `dict[str, Any]` (one row) or `list[dict[str, Any]]` (multiple rows), with each key-value pair corresponding to a column name and a table cell value.
+Data to insert. hybridsearch supports inserting multiple rows to a table at one time in the form of `dict[str, Any]` (one row) or `list[dict[str, Any]]` (multiple rows), with each key-value pair corresponding to a column name and a table cell value.
 
 :::tip NOTE
 - When inserting incomplete rows of data, ensure that all un-inserted columns have default values when calling `create_table()`. Otherwise, an error will occur.
@@ -1390,7 +1390,7 @@ table_object.insert([{"vector_column": [1.1, 2.2, 3.3]}, {"vector_column": [4.4,
 ##### Insert sparse vectors
 
 ```python
-from infinity.common import SparseVector
+from hybridsearch.common import SparseVector
 # Create a table with an integer column and a 100-d sparse vector column:
 table_object = db_object.create_table("sparse_vector_table", {"c1": {"type": "integer"}, "sparse_column": {"type": "sparse,100,float,int"}})
 
@@ -1421,7 +1421,7 @@ table_object.insert([{"tensor_array_column": [[[1.0, 2.0], [3.0, 4.0]], [[5.0, 6
 ##### Insert arrays
 
 ```python
-from infinity.common import Array
+from hybridsearch.common import Array
 # Creat a table with only one varchar array array column:
 table_object = db_object.create_table("varchar_array_array_table",
                                       {"varchar_array_array_column": {"type": "array,array,varchar"}})
@@ -1726,7 +1726,7 @@ The list must contain at least one element. Empty lists are not allowed.
   
 #### Returns
 
-An `infinity.local_infinity.table.LocalTable` object in embedded mode or an `infinity.remote_thrift.table.RemoteTable` object in client-server mode.
+An `hybridsearch.local_hybridsearch.table.LocalTable` object in embedded mode or an `hybridsearch.remote_thrift.table.RemoteTable` object in client-server mode.
 
 :::tip NOTE
 This method specifies the projection columns for the current table but does not directly produce displayable data. To display the query results, use `output()` in conjunction with methods like `to_result()`, `to_df()`, `to_pl()`, or `to_arrow()` to materialize the data.
@@ -1843,7 +1843,7 @@ A non-empty string representing the filter condition. It comprises one or multip
 
 ##### Returns
 
-An `infinity.local_infinity.table.LocalTable` object in embedded mode or an `infinity.remote_thrift.table.RemoteTable` object in client-server mode.
+An `hybridsearch.local_hybridsearch.table.LocalTable` object in embedded mode or an `hybridsearch.remote_thrift.table.RemoteTable` object in client-server mode.
 
 :::tip NOTE
 This method specifies a filtering condition for the rows in the current table but does not directly produce displayable data. To display the query results, use `filter()` in conjunction with methods like `to_result()`, `to_df()`, `to_pl()`, or `to_arrow()` to materialize the data.
@@ -1885,8 +1885,8 @@ An expression list defining how to sort the results.
 
 #### Returns
 
-- Success: An `infinity.local_infinity.table.LocalTable` object in embedded mode or an `infinity.remote_thrift.table.RemoteTable` object in client-server mode.
-- Failure: `InfinityException`
+- Success: An `hybridsearch.local_hybridsearch.table.LocalTable` object in embedded mode or an `hybridsearch.remote_thrift.table.RemoteTable` object in client-server mode.
+- Failure: `hybridsearchException`
   - `error_code`: `int` A non-zero value indicating a specific error condition.
   - `error_msg`: `str` A message providing additional details about the error.
 
@@ -1915,8 +1915,8 @@ A list of strings specifying the expression to group by. Each string in the list
 
 #### Returns
 
-- Success: An `infinity.local_infinity.table.LocalTable` object in embedded mode or an `infinity.remote_thrift.table.RemoteTable` object in client-server mode.
-- Failure: `InfinityException`
+- Success: An `hybridsearch.local_hybridsearch.table.LocalTable` object in embedded mode or an `hybridsearch.remote_thrift.table.RemoteTable` object in client-server mode.
+- Failure: `hybridsearchException`
   - `error_code`: `int` A non-zero value indicating a specific error condition.
   - `error_msg`: `str` A message providing additional details about the error.
 
@@ -1945,8 +1945,8 @@ A string specifying the having expression.
 
 #### Returns
 
-- Success: An `infinity.local_infinity.table.LocalTable` object in embedded mode or an `infinity.remote_thrift.table.RemoteTable` object in client-server mode.
-- Failure: `InfinityException`
+- Success: An `hybridsearch.local_hybridsearch.table.LocalTable` object in embedded mode or an `hybridsearch.remote_thrift.table.RemoteTable` object in client-server mode.
+- Failure: `hybridsearchException`
   - `error_code`: `int` A non-zero value indicating a specific error condition.
   - `error_msg`: `str` A message providing additional details about the error.
 
@@ -1974,8 +1974,8 @@ An integer specifying the maximum number of output rows.
 
 #### Returns
 
-- Success: An `infinity.local_infinity.table.LocalTable` object in embedded mode or an `infinity.remote_thrift.table.RemoteTable` object in client-server mode.
-- Failure: `InfinityException`
+- Success: An `hybridsearch.local_hybridsearch.table.LocalTable` object in embedded mode or an `hybridsearch.remote_thrift.table.RemoteTable` object in client-server mode.
+- Failure: `hybridsearchException`
   - `error_code`: `int` A non-zero value indicating a specific error condition.
   - `error_msg`: `str` A message providing additional details about the error.
 
@@ -2004,8 +2004,8 @@ An integer specifying the offset position of the limit expression.
 
 #### Returns
 
-- Success: An `infinity.local_infinity.table.LocalTable` object in embedded mode or an `infinity.remote_thrift.table.RemoteTable` object in client-server mode.
-- Failure: `InfinityException`
+- Success: An `hybridsearch.local_hybridsearch.table.LocalTable` object in embedded mode or an `hybridsearch.remote_thrift.table.RemoteTable` object in client-server mode.
+- Failure: `hybridsearchException`
   - `error_code`: `int` A non-zero value indicating a specific error condition.
   - `error_msg`: `str` A message providing additional details about the error.
 
@@ -2035,8 +2035,8 @@ A dictionary specifying the following search options:
 
 #### Returns
 
-- Success: An `infinity.local_infinity.table.LocalTable` object in embedded mode or an `infinity.remote_thrift.table.RemoteTable` object in client-server mode.
-- Failure: `InfinityException`
+- Success: An `hybridsearch.local_hybridsearch.table.LocalTable` object in embedded mode or an `hybridsearch.remote_thrift.table.RemoteTable` object in client-server mode.
+- Failure: `hybridsearchException`
   - `error_code`: `int` A non-zero value indicating a specific error condition.
   - `error_msg`: `str` A message providing additional details about the error.
 
@@ -2105,8 +2105,8 @@ A dictionary representing additional KNN or ANN search parameters.
 
 #### Returns
 
-- Success: An `infinity.local_infinity.table.LocalTable` object in embedded mode or an `infinity.remote_thrift.table.RemoteTable` object in client-server mode.
-- Failure: `InfinityException`
+- Success: An `hybridsearch.local_hybridsearch.table.LocalTable` object in embedded mode or an `hybridsearch.remote_thrift.table.RemoteTable` object in client-server mode.
+- Failure: `hybridsearchException`
   - `error_code`: `int` A non-zero value indicating a specific error condition.
   - `error_msg`: `str` A message providing additional details about the error.
 
@@ -2131,7 +2131,7 @@ table_object.output(["*"]).match_dense("vec", [0.1,0.2,0.3], "float", "l2", 100)
 2. Set the `ef` value as follows:
 
 ```python
-from infinity.index import IndexInfo, IndexType
+from hybridsearch.index import IndexInfo, IndexType
 table_object.create_index("my_index", IndexInfo("vec", IndexType.Hnsw, {"ef_construction": "50"}))
 # Find the 2 nearest neighbors using cosine distance
 # If an HNSW index is successfully built on the column being queried, then the vector search uses this index,
@@ -2141,7 +2141,7 @@ table_object.output(["*"]).match_dense("vec", [1, 2, 3], "uint8", "cosine", 2).t
 ```
 
 ```python
-from infinity.index import IndexInfo, IndexType
+from hybridsearch.index import IndexInfo, IndexType
 table_object.create_index("my_index", IndexInfo("vec", IndexType.Hnsw, {"ef_construction": "50"}))
 # Find the 2 nearest neighbors using inner product distance
 # If an HNSW index is successfully built on the column being queried, then the vector search uses this index,
@@ -2184,7 +2184,7 @@ The query sparse vector data to compare against. The `sparse_data` parameter sho
 If you have a dictionary of indices and values, you can create a SparseVector object using the `SparseVector` class. For example:
 
 ```python
-from infinity.common import SparseVector
+from hybridsearch.common import SparseVector
 dic_sparse_vector = {"indices": [0, 10, 20], "values": [0.1, 0.2, 0.3]}
 sparse_vector = SparseVector(**dic_sparse_vector)
 ```
@@ -2211,8 +2211,8 @@ A dictionary representing additional parameters for the sparse vector search. Fo
 
 #### Returns
 
-- Success: An `infinity.local_infinity.table.LocalTable` object in embedded mode or an `infinity.remote_thrift.table.RemoteTable` object in client-server mode.
-- Failure: `InfinityException`
+- Success: An `hybridsearch.local_hybridsearch.table.LocalTable` object in embedded mode or an `hybridsearch.remote_thrift.table.RemoteTable` object in client-server mode.
+- Failure: `hybridsearchException`
   - `error_code`: `int` A non-zero value indicating a specific error condition.
   - `error_msg`: `str` A message providing additional details about the error.
 
@@ -2229,7 +2229,7 @@ A dictionary representing additional parameters for the sparse vector search. Fo
 # - 20: the index of 0.3
 # If no sparse vector index is created on the column being queried, then the search defaults to a brute-force search.
 # In such case, set `opt_params` to `None` or leave it blank.
-from infinity.common import SparseVector
+from hybridsearch.common import SparseVector
 table_object.output(["*"]).match_sparse('sparse_column', SparseVector([0, 10, 20], [0.1, 0.2, 0.3]), 'ip', 100).to_df()
 ```
 
@@ -2240,24 +2240,24 @@ table_object.output(["*"]).match_sparse('sparse_column', SparseVector([0, 10, 20
 ##### Perform a sparse vector search in BMP
 
 ```python
-from infinity.index import IndexInfo, IndexType
+from hybridsearch.index import IndexInfo, IndexType
 table_object.create_index("my_index", [IndexInfo("sparse_column", IndexType.BMP)])
 # Find the 100 nearest neighbors using inner product
 # If a BMP index is successfully built on the column being queried, then the sparse vector search uses this index,
 # regardless of whether `opt_params` is set.
 # If you leave `opt_params` blank, the search takes the default settings for `"alpha"` and `"beta"`.
-from infinity.common import SparseVector
+from hybridsearch.common import SparseVector
 table_object.output(["*"]).match_sparse('sparse_column', SparseVector([0, 10, 20], [0.1, 0.2, 0.3]), 'ip', 100, {"alpha": "1.0", "beta": "1.0"}).to_df()
 ```
 
 ```python
-from infinity.index import IndexInfo, IndexType
+from hybridsearch.index import IndexInfo, IndexType
 table_object.create_index("my_index", IndexInfo("sparse_column", IndexType.BMP))
 # Find the 100 nearest neighbors using inner product
 # If a BMP index is successfully built on the column being queried, then the sparse vector search uses this index,
 # regardless of whether `opt_params` is set.
 # You can set the values of `"alpha"` or `"beta"` in `opt_params`, which overrides the default settings.
-from infinity.common import SparseVector
+from hybridsearch.common import SparseVector
 table_object.output(["*"]).match_sparse('sparse_column', SparseVector([0, 10, 20], [8, 10, 66]), 'ip', 100, {"alpha": "1.0", "beta": "1.0"}).to_df()
 ```
 
@@ -2312,7 +2312,7 @@ An optional dictionary specifying the following search options:
 - **"default_field"**: `str`, *Optional*
   - If `"fields"` is an empty string, this parameter specifies the default field to search on.
 - **"operator"**: `str`, *Optional*
-  - If not specified, the search follows Infinity's full-text search syntax, meaning that logical and arithmetic operators, quotation marks and escape characters will function as full-text search operators, such as:
+  - If not specified, the search follows hybridsearch's full-text search syntax, meaning that logical and arithmetic operators, quotation marks and escape characters will function as full-text search operators, such as:
     - AND operator: `AND`
     - OR operator: `OR`
     - NOT operator: `NOT`
@@ -2324,7 +2324,7 @@ An optional dictionary specifying the following search options:
     - DOUBLE_QUOTED_STRING: Used to search for a phrase, e.g., `"Bloom filter"`.
     - Escape characters: Used to escape reserved characters, e.g., `space\:efficient`. Starting with a backslash `\` will escape the following characters:   
       `' '`, `'('`, `')'`, `'^'`, `'"'`, `'\''`, `'~'`, `'*'`, `'?'`, `':'`, `'\\'`
-  - If specified, Infinity's full-text search syntax will not take effect, and the specified operator will be interpolated into `matching_text`.  
+  - If specified, hybridsearch's full-text search syntax will not take effect, and the specified operator will be interpolated into `matching_text`.  
     Useful for searching text including code numbers like `"A01-233:BC"`.
     - `{"operator": "or"}`: Interpolates the `OR` operator between words in `matching_text` to create a new search text.  
       For example, reinterprets `"A01-233:BC"` as `'"A01" OR "-233" OR "BC"'`.
@@ -2334,8 +2334,8 @@ An optional dictionary specifying the following search options:
 
 #### Returns
 
-- Success: An `infinity.local_infinity.table.LocalTable` object in embedded mode or an `infinity.remote_thrift.table.RemoteTable` object in client-server mode.
-- Failure: `InfinityException`
+- Success: An `hybridsearch.local_hybridsearch.table.LocalTable` object in embedded mode or an `hybridsearch.remote_thrift.table.RemoteTable` object in client-server mode.
+- Failure: `hybridsearchException`
   - `error_code`: `int` A non-zero value indicating a specific error condition.
   - `error_msg`: `str` A message providing additional details about the error.
 
@@ -2382,7 +2382,7 @@ The columns must also be the `output` clause output and also be the match_text c
 
 #### Returns
 
-An `infinity.local_infinity.table.LocalTable` object in embedded mode or an `infinity.remote_thrift.table.RemoteTable` object in client-server mode.
+An `hybridsearch.local_hybridsearch.table.LocalTable` object in embedded mode or an `hybridsearch.remote_thrift.table.RemoteTable` object in client-server mode.
 
 :::tip NOTE
 This method specifies the projection columns for the current table but does not directly produce displayable data. To display the query results, use `output()` in conjunction with methods like `to_result()`, `to_df()`, `to_pl()`, or `to_arrow()` to materialize the data.
@@ -2439,7 +2439,7 @@ A non-empty string indicating the reranking methods to use:
 - `"weighted_sum"`  
   The weighted sum approach assigns different weights to different retrieval ways, allowing you to emphasize specific ways. This is particularly useful when you are certain of each path's relative importance.  
 - `"match_tensor"`  
-  Infinity's tensor-based late interaction reranking approach.  
+  hybridsearch's tensor-based late interaction reranking approach.  
 
 ##### topn: `int`, *Required*
 
@@ -2466,8 +2466,8 @@ A dictionary representing additional options for the selected reranking method:
 
 #### Returns
 
-- Success: An `infinity.local_infinity.table.LocalTable` object in embedded mode or an `infinity.remote_thrift.table.RemoteTable` object in client-server mode.
-- Failure: `InfinityException`
+- Success: An `hybridsearch.local_hybridsearch.table.LocalTable` object in embedded mode or an `hybridsearch.remote_thrift.table.RemoteTable` object in client-server mode.
+- Failure: `hybridsearchException`
   - `error_code`: `int` A non-zero value indicating a specific error condition.
   - `error_msg`: `str` A message providing additional details about the error.
 
@@ -2478,7 +2478,7 @@ The following code snippets illustrate the use of fused reranking in a three-way
 ##### Use RRF for reranking
 
 ```python {6}
-from infinity.common import SparseVector
+from hybridsearch.common import SparseVector
 table_object.output(["num", "body", "vec", "sparse_column", "year", "tensor", "_score"])
             .match_dense("vec", [3.0, 2.8, 2.7, 3.1], "float", "cosine", 3)
             .match_sparse("sparse_column", SparseVector([0, 20, 80], [1.0, 2.0, 3.0]), "ip", 3)
@@ -2489,7 +2489,7 @@ table_object.output(["num", "body", "vec", "sparse_column", "year", "tensor", "_
 ```
 
 ```python {6}
-from infinity.common import SparseVector
+from hybridsearch.common import SparseVector
 table_object.output(["num", "body", "vec", "sparse_column", "year", "tensor", "_score"])
             .match_dense("vec", [3.0, 2.8, 2.7, 3.1], "float", "cosine", 3)
             .match_sparse("sparse_column", SparseVector([0, 20, 80], [1.0, 2.0, 3.0]), "ip", 3)
@@ -2502,7 +2502,7 @@ table_object.output(["num", "body", "vec", "sparse_column", "year", "tensor", "_
 ##### Use Weighted Sum for reranking
 
 ```python {6}
-from infinity.common import SparseVector
+from hybridsearch.common import SparseVector
 table_object.output(["num", "body", "vec", "sparse_column", "year", "tensor", "_score"])
             .match_dense("vec", [3.0, 2.8, 2.7, 3.1], "float", "cosine", 3)
             .match_sparse("sparse_column", SparseVector([0, 20, 80], [1.0, 2.0, 3.0]), "ip", 3)
@@ -2515,7 +2515,7 @@ table_object.output(["num", "body", "vec", "sparse_column", "year", "tensor", "_
 ##### Use tensor reranking
 
 ```python {8}
-from infinity.common import SparseVector
+from hybridsearch.common import SparseVector
 table_object.output(["num", "body", "vec", "sparse_column", "year", "tensor", "_score"])
             .match_dense("vec", [3.0, 2.8, 2.7, 3.1], "float", "cosine", 3)
             .match_sparse("sparse_column", SparseVector([0, 20, 80], [1.0, 2.0, 3.0]), "ip", 3)

@@ -20,7 +20,7 @@ import table_reference;
 
 export module table_ref;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class TableRef {
 public:
@@ -34,4 +34,4 @@ public:
     String alias_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

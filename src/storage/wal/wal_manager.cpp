@@ -27,14 +27,14 @@ import virtual_store;
 import third_party;
 import catalog;
 import table_entry_type;
-import infinity_context;
+import hybridsearch_context;
 import txn_store;
 import data_access_state;
 import status;
 import bg_task;
 import extra_ddl_info;
 
-import infinity_exception;
+import hybridsearch_exception;
 import block_column_entry;
 import compact_state_data;
 import build_fast_rough_filter_task;
@@ -64,7 +64,7 @@ import meta_info;
 
 module wal_manager;
 
-namespace infinity {
+namespace hybridsearch {
 
 WalManager::WalManager(Storage *storage,
                        String wal_dir,
@@ -74,7 +74,7 @@ WalManager::WalManager(Storage *storage,
     : cfg_wal_size_threshold_(wal_size_threshold), cfg_delta_checkpoint_interval_wal_bytes_(delta_checkpoint_interval_wal_bytes), wal_dir_(wal_dir),
       wal_path_(wal_dir + "/" + WalFile::TempWalFilename()), storage_(storage), running_(false), flush_option_(flush_option), last_ckp_wal_size_(0),
       checkpoint_in_progress_(false), last_ckp_ts_(UNCOMMIT_TS), last_full_ckp_ts_(UNCOMMIT_TS) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::IncrObjectCount("WalManager");
 #endif
 }
@@ -88,7 +88,7 @@ WalManager::WalManager(Storage *storage,
     : cfg_wal_size_threshold_(wal_size_threshold), cfg_delta_checkpoint_interval_wal_bytes_(delta_checkpoint_interval_wal_bytes), wal_dir_(wal_dir),
       wal_path_(wal_dir + "/" + WalFile::TempWalFilename()), data_path_(data_dir), storage_(storage), running_(false), flush_option_(flush_option),
       last_ckp_wal_size_(0), checkpoint_in_progress_(false), last_ckp_ts_(UNCOMMIT_TS), last_full_ckp_ts_(UNCOMMIT_TS) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::IncrObjectCount("WalManager");
 #endif
 }
@@ -97,7 +97,7 @@ WalManager::~WalManager() {
     if (running_.load()) {
         Stop();
     }
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::DecrObjectCount("WalManager");
 #endif
 }
@@ -340,9 +340,9 @@ void WalManager::Flush() {
             }
             ofs_.write(buf->data(), ptr - buf->data());
 
-            if (InfinityContext::instance().GetServerRole() == NodeRole::kLeader) {
+            if (hybridsearchContext::instance().GetServerRole() == NodeRole::kLeader) {
                 if (cluster_manager == nullptr) {
-                    cluster_manager = InfinityContext::instance().cluster_manager();
+                    cluster_manager = hybridsearchContext::instance().cluster_manager();
                 }
                 cluster_manager->PrepareLogs(buf);
             }
@@ -371,7 +371,7 @@ void WalManager::Flush() {
             }
         }
 
-        if (InfinityContext::instance().GetServerRole() == NodeRole::kLeader) {
+        if (hybridsearchContext::instance().GetServerRole() == NodeRole::kLeader) {
             cluster_manager->SyncLogs();
         }
 
@@ -1230,7 +1230,7 @@ WalManager::ReplaySegment(TableEntry *table_entry, const WalSegmentInfo &segment
                                                              UNCOMMIT_TS /*deprecate_ts*/,
                                                              0 /*begin_ts*/, // FIXME
                                                              txn_id);
-    auto *pm = InfinityContext::instance().persistence_manager();
+    auto *pm = hybridsearchContext::instance().persistence_manager();
     for (BlockID block_id = 0; block_id < (BlockID)segment_info.block_infos_.size(); ++block_id) {
         auto &block_info = segment_info.block_infos_[block_id];
         block_info.addr_serializer_.AddToPersistenceManager(pm);
@@ -1364,7 +1364,7 @@ void WalManager::WalCmdDumpIndexReplay(WalCmdDumpIndex &cmd, TransactionID txn_i
             segment_index_entry = segment_index_entry_ptr.get();
         }
     }
-    auto *pm = InfinityContext::instance().persistence_manager();
+    auto *pm = hybridsearchContext::instance().persistence_manager();
     for (const auto &chunk_info : cmd.chunk_infos_) {
         chunk_info.addr_serializer_.AddToPersistenceManager(pm);
         segment_index_entry->AddChunkIndexEntryReplayWal(chunk_info.chunk_id_,
@@ -1496,4 +1496,4 @@ void WalManager::WalCmdAppendReplay(const WalCmdAppend &cmd, TransactionID txn_i
 //     segment_entry->LoadFilterBinaryData(cmd.segment_filter_binary_data_, cmd.block_filter_binary_data_);
 // }
 
-} // namespace infinity
+} // namespace hybridsearch

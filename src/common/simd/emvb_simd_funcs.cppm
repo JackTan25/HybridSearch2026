@@ -19,7 +19,7 @@ export module emvb_simd_funcs;
 import stl;
 import simd_common_tools;
 
-namespace infinity {
+namespace hybridsearch {
 
 #if defined(__AVX2__)
 
@@ -105,4 +105,4 @@ export u32 *filter_scores_output_ids_common(u32 *output_id_ptr, const f32 thresh
     return output_id_ptr;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

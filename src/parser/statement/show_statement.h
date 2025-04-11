@@ -17,7 +17,7 @@
 #include "base_statement.h"
 #include <optional>
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class ShowStmtType {
     kInvalid,
@@ -87,4 +87,4 @@ public:
     std::optional<std::string> snapshot_name_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

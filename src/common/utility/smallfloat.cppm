@@ -18,7 +18,7 @@ import stl;
 
 export module smallfloat;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class SmallFloat {
 public:
@@ -129,4 +129,4 @@ public:
         return IntBitsToFloat(bits);
     }
 };
-} // namespace infinity
+} // namespace hybridsearch

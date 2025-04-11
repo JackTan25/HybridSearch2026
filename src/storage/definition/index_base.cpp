@@ -33,12 +33,12 @@ import bmp_util;
 import third_party;
 import status;
 
-import infinity_exception;
+import hybridsearch_exception;
 import create_index_info;
 import index_defines;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 String MetricTypeToString(MetricType metric_type) {
     switch (metric_type) {
@@ -68,11 +68,11 @@ MetricType StringToMetricType(const String &str) {
         return MetricType::kInvalid;
     }
 }
-} // namespace infinity
+} // namespace hybridsearch
 
 //--------------------------------------------------
 
-namespace infinity {
+namespace hybridsearch {
 
 bool IndexBase::operator==(const IndexBase &other) const { return index_type_ == other.index_type_ && column_names_ == other.column_names_; }
 
@@ -324,4 +324,4 @@ SharedPtr<IndexBase> IndexBase::Deserialize(const nlohmann::json &index_def_json
     return res;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

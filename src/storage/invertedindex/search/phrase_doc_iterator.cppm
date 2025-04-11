@@ -12,7 +12,7 @@ import column_length_io;
 import parse_fulltext_options;
 import blockmax_leaf_iterator;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PhraseDocIterator final : public BlockMaxLeafIterator {
 public:
@@ -115,4 +115,4 @@ private:
     // debug statistics
     u32 calc_score_cnt_ = 0;
 };
-} // namespace infinity
+} // namespace hybridsearch

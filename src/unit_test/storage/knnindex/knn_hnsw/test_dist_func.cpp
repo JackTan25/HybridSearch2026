@@ -24,7 +24,7 @@ import hnsw_simd_func;
 import hnsw_common;
 import stl;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class DistFuncTest : public BaseTest {};
 

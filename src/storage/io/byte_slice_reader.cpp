@@ -7,10 +7,10 @@ module byte_slice_reader;
 import stl;
 import byte_slice;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 ByteSliceReader::ByteSliceReader() : current_slice_(nullptr), current_slice_offset_(0), global_offset_(0), slice_list_(nullptr), size_(0) {}
 
@@ -158,4 +158,4 @@ SizeT ByteSliceReader::Seek(SizeT offset) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

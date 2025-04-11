@@ -22,9 +22,9 @@ import stl;
 import doc_iterator;
 import multi_doc_iterator;
 import internal_types;
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 AndIterator::AndIterator(Vector<UniquePtr<DocIterator>> iterators) : MultiDocIterator(std::move(iterators)) {
     std::sort(children_.begin(), children_.end(), [](const auto &lhs, const auto &rhs) {
@@ -126,4 +126,4 @@ u32 AndIterator::MatchCount() const {
     });
 }
 
-} // namespace infinity
+} // namespace hybridsearch

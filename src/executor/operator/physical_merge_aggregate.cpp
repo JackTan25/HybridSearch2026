@@ -28,12 +28,12 @@ import data_block;
 import logical_type;
 import physical_aggregate;
 import aggregate_expression;
-import infinity_exception;
+import hybridsearch_exception;
 import hash_table;
 import column_def;
 import column_vector;
 
-namespace infinity {
+namespace hybridsearch {
 
 template <typename T>
 using MathOperation = std::function<T(T, T)>;
@@ -287,4 +287,4 @@ void PhysicalMergeAggregate::UpdateData(MergeAggregateOperatorState *op_state,
     WriteValueAtPosition<T>(op_state, output_block_id, col_idx, output_row_id, new_value);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

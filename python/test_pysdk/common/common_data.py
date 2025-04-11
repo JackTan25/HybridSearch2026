@@ -9,12 +9,12 @@ if python_dir in sys.path:
     sys.path.remove(python_dir)
 print(sys.path)
 
-from infinity.common import ConflictType, InfinityException
-import infinity.index as index
+from hybridsearch.common import ConflictType, hybridsearchException
+import hybridsearch.index as index
 from numpy import dtype
 import ast
 from enum import Enum
-from infinity.table import ExplainType
+from hybridsearch.table import ExplainType
 from . import common_index
 import re
 

@@ -16,7 +16,7 @@
 
 #include "parsed_expr.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 class BetweenExpr : public ParsedExpr {
 public:
@@ -32,4 +32,4 @@ public:
     ParsedExpr *lower_bound_{nullptr};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

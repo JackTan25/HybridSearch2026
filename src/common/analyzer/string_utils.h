@@ -24,7 +24,7 @@
 #include <cstring>
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 [[nodiscard]] constexpr uint8_t ToUpper(uint8_t ch) noexcept { return ch >= 'a' && ch <= 'z' ? ch - 32 : ch; }
 
@@ -445,4 +445,4 @@ static inline std::string_view UTF8Substrview(const std::string_view str, const 
     return str.substr(start_byte, end_byte - start_byte);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

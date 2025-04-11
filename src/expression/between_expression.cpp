@@ -23,7 +23,7 @@ import expression_type;
 
 import logical_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 BetweenExpression::BetweenExpression(const SharedPtr<BaseExpression> &value,
                                      const SharedPtr<BaseExpression> &upper_bound,
@@ -43,4 +43,4 @@ String BetweenExpression::ToString() const {
 
 DataType BetweenExpression::Type() const { return DataType(LogicalType::kBoolean); }
 
-} // namespace infinity
+} // namespace hybridsearch

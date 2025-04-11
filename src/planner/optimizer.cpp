@@ -35,7 +35,7 @@ import global_resource_usage;
 
 module optimizer;
 
-namespace infinity {
+namespace hybridsearch {
 
 Optimizer::Optimizer(QueryContext *query_context_ptr) : query_context_ptr_(query_context_ptr) {
     // TODO: need an equivalent expression optimizer
@@ -48,7 +48,7 @@ Optimizer::Optimizer(QueryContext *query_context_ptr) : query_context_ptr_(query
         AddRule(MakeUnique<ResultCacheGetter>()); // put after column pruner, column remapper
     }
 
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::IncrObjectCount("Optimizer");
 #endif
 }
@@ -90,4 +90,4 @@ void Optimizer::optimize(SharedPtr<LogicalNode> &unoptimized_plan, StatementType
     return;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

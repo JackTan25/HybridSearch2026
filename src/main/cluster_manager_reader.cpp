@@ -21,18 +21,18 @@ module cluster_manager;
 import stl;
 import status;
 import config;
-import infinity_context;
+import hybridsearch_context;
 import storage;
 import logger;
 import wal_manager;
 import wal_entry;
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 Status ClusterManager::InitAsFollower(const String &node_name, const String &leader_ip, i64 leader_port) {
 
-    Config *config_ptr = InfinityContext::instance().config();
+    Config *config_ptr = hybridsearchContext::instance().config();
     auto now = std::chrono::system_clock::now();
     auto time_since_epoch = now.time_since_epoch();
 
@@ -62,7 +62,7 @@ Status ClusterManager::InitAsFollower(const String &node_name, const String &lea
 
 Status ClusterManager::InitAsLearner(const String &node_name, const String &leader_ip, i64 leader_port) {
 
-    Config *config_ptr = InfinityContext::instance().config();
+    Config *config_ptr = hybridsearchContext::instance().config();
     auto now = std::chrono::system_clock::now();
     auto time_since_epoch = now.time_since_epoch();
 
@@ -106,7 +106,7 @@ Status ClusterManager::RegisterToLeader() {
 
 Status ClusterManager::RegisterToLeaderNoLock() {
     // Register to leader, used by follower and learner
-    Storage *storage_ptr = InfinityContext::instance().storage();
+    Storage *storage_ptr = hybridsearchContext::instance().storage();
     SharedPtr<RegisterPeerTask> register_peer_task = nullptr;
     if (storage_ptr->reader_init_phase() == ReaderInitPhase::kPhase2) {
         register_peer_task = MakeShared<RegisterPeerTask>(this_node_->node_name(),
@@ -165,7 +165,7 @@ Status ClusterManager::UnregisterToLeaderNoLock() {
 void ClusterManager::HeartBeatToLeaderThread() {
     // Heartbeat interval
     auto hb_interval = std::chrono::milliseconds(leader_node_->heartbeat_interval());
-    Storage *storage_ptr = InfinityContext::instance().storage();
+    Storage *storage_ptr = hybridsearchContext::instance().storage();
     while (true) {
         std::unique_lock hb_lock(this->hb_mutex_);
         this->hb_cv_.wait_for(hb_lock, hb_interval, [&] { return !this->hb_running_; });
@@ -284,7 +284,7 @@ Status ClusterManager::UpdateNodeInfoNoLock(const Vector<SharedPtr<NodeInfo>> &i
 }
 
 Status ClusterManager::ApplySyncedLogNolock(const Vector<String> &synced_logs) {
-    Storage *storage_ptr = InfinityContext::instance().storage();
+    Storage *storage_ptr = hybridsearchContext::instance().storage();
     WalManager *wal_manager = storage_ptr->wal_manager();
     TransactionID last_txn_id = 0;
     TxnTimeStamp last_commit_ts = 0;
@@ -307,7 +307,7 @@ Status ClusterManager::ApplySyncedLogNolock(const Vector<String> &synced_logs) {
 }
 
 Status ClusterManager::ContinueStartup(const Vector<String> &synced_logs) {
-    Storage *storage_ptr = InfinityContext::instance().storage();
+    Storage *storage_ptr = hybridsearchContext::instance().storage();
     WalManager *wal_manager = storage_ptr->wal_manager();
     bool is_checkpoint = true;
     TxnTimeStamp last_commit_ts;
@@ -336,4 +336,4 @@ Status ClusterManager::ContinueStartup(const Vector<String> &synced_logs) {
     return Status::OK();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

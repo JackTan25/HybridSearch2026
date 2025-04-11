@@ -20,7 +20,7 @@ import stl;
 import buffer_manager;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 class EntryInterface;
@@ -30,13 +30,13 @@ class BaseEntry;
 export class CleanupInfoTracer {
 public:
     CleanupInfoTracer() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("CleanupInfoTracer");
 #endif
     }
 
     ~CleanupInfoTracer() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("CleanupInfoTracer");
 #endif
     }
@@ -78,4 +78,4 @@ private:
     Vector<Pair<SharedPtr<BaseEntry>, bool>> entries_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

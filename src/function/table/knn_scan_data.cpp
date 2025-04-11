@@ -18,7 +18,7 @@ module;
 module knn_scan_data;
 
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import logical_type;
 import merge_knn;
@@ -34,7 +34,7 @@ import status;
 import logger;
 import simd_functions;
 
-namespace infinity {
+namespace hybridsearch {
 
 namespace {
 
@@ -184,4 +184,4 @@ KnnScanFunctionData::KnnScanFunctionData(KnnScanSharedData *shared_data, u32 cur
     knn_distance_ = KnnDistanceBase1::Make(knn_scan_shared_data_->query_elem_type_, knn_scan_shared_data_->knn_distance_type_);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

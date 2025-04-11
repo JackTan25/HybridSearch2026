@@ -33,7 +33,7 @@ import internal_types;
 import data_type;
 import meta_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 LogicalTableScan::LogicalTableScan(u64 node_id, SharedPtr<BaseTableRef> base_table_ref, bool add_row_id)
     : LogicalNode(node_id, LogicalNodeType::kTableScan), base_table_ref_(std::move(base_table_ref)), add_row_id_(add_row_id) {}
@@ -94,4 +94,4 @@ String LogicalTableScan::ToString(i64 &space) const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

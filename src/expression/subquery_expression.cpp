@@ -24,7 +24,7 @@ import expression_type;
 
 import logical_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 SubqueryExpression::SubqueryExpression(UniquePtr<BoundSelectStatement> bound_select_statement, SubqueryType subquery_type)
     : BaseExpression(ExpressionType::kSubQuery, {}), bound_select_statement_ptr_(std::move(bound_select_statement)), subquery_type_(subquery_type) {}
@@ -48,4 +48,4 @@ DataType SubqueryExpression::Type() const {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

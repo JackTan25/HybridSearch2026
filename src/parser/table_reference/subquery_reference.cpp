@@ -14,7 +14,7 @@
 
 #include "subquery_reference.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 SubqueryReference::~SubqueryReference() {
     if (select_statement_ != nullptr) {
@@ -25,4 +25,4 @@ SubqueryReference::~SubqueryReference() {
 
 std::string SubqueryReference::ToString() { return "SubqueryReference"; }
 
-}; // namespace infinity
+}; // namespace hybridsearch

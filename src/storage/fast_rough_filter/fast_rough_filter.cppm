@@ -22,10 +22,10 @@ import probabilistic_data_filter;
 import min_max_data_filter;
 import logger;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 import filter_expression_push_down_helper;
 
-namespace infinity {
+namespace hybridsearch {
 
 class BuildFastRoughFilterTask;
 export class FastRoughFilterEvaluator;
@@ -141,4 +141,4 @@ public:
     virtual bool EvaluateInner(TxnTimeStamp query_ts, const FastRoughFilter &filter) const = 0;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

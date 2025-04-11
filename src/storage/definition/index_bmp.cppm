@@ -24,7 +24,7 @@ import base_table_ref;
 import create_index_info;
 import bmp_util;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class IndexBMP final : public IndexBase {
 public:
@@ -61,4 +61,4 @@ public:
     BMPCompressType compress_type_{BMPCompressType::kCompressed};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -23,8 +23,8 @@ from mldr_common_tools import QueryArgs, check_languages, check_query_types
 from mldr_common_tools import FakeJScoredDoc, get_queries_and_qids, save_result
 from mldr_common_tools import query_yields, apply_funcs
 from transformers import HfArgumentParser
-import infinity
-from infinity.common import LOCAL_HOST
+import hybridsearch
+from hybridsearch.common import LOCAL_HOST
 
 
 @dataclass
@@ -49,7 +49,7 @@ def powerset_above_2(s: list):
     return chain.from_iterable(combinations(s, r) for r in range(2, len(s) + 1))
 
 
-class InfinityClientForSearch:
+class hybridsearchClientForSearch:
     def __init__(self, with_colbert: bool):
         self.test_db_name = "default_db"
         self.test_table_name_prefix = "mldr_test_table_text_dense_sparse_"
@@ -60,24 +60,24 @@ class InfinityClientForSearch:
             self.test_table_name_prefix += "colbert_"
             self.test_table_schema["colbert_col"] = {"type": "tensor,128,float"}
             self.test_table_schema["colbert_bit_col"] = {"type": "tensor,128,bit"}
-        self.infinity_obj = infinity.connect(LOCAL_HOST)
-        self.infinity_db = self.infinity_obj.get_database(self.test_db_name)
-        self.infinity_table = None
+        self.hybridsearch_obj = hybridsearch.connect(LOCAL_HOST)
+        self.hybridsearch_db = self.hybridsearch_obj.get_database(self.test_db_name)
+        self.hybridsearch_table = None
 
     def get_test_table(self, language_suffix: str):
         table_name = self.test_table_name_prefix + language_suffix
-        self.infinity_table = self.infinity_db.get_table(table_name)
+        self.hybridsearch_table = self.hybridsearch_db.get_table(table_name)
         print(f"Get table {table_name} successfully.")
 
     def rerank_single_query_func(self, query_type: str, query_target, rerank_target, max_hits: int, rerank_option):
-        result_table = self.infinity_table.output(["docid_col", "_score"])
+        result_table = self.hybridsearch_table.output(["docid_col", "_score"])
         result_table = apply_funcs[query_type](result_table, query_target, max_hits)
         result_table = apply_colbert_rerank(result_table, rerank_target, max_hits, rerank_option)
         result = result_table.to_pl()
         return result['docid_col'], result['SCORE']
 
     def rerank_rff_query_func(self, query_targets_list, apply_funcs_list, rerank_target, max_hits: int, rerank_option):
-        result_table = self.infinity_table.output(["docid_col", "_score"])
+        result_table = self.hybridsearch_table.output(["docid_col", "_score"])
         for query_target, apply_func in zip(query_targets_list, apply_funcs_list):
             result_table = apply_func(result_table, query_target, max_hits)
         result_table = result_table.fusion(method='rrf', topn=max_hits)
@@ -175,7 +175,7 @@ if __name__ == "__main__":
         rerank_options.append(RerankOption.colbert_bit)
     if len(rerank_options) == 0:
         raise ValueError("No rerank option is enabled.")
-    infinity_client = InfinityClientForSearch(query_args.with_colbert)
+    hybridsearch_client = hybridsearchClientForSearch(query_args.with_colbert)
     for one_rerank_option in rerank_options:
-        infinity_client.main(languages=languages, query_types=query_types, model_args=model_args,
+        hybridsearch_client.main(languages=languages, query_types=query_types, model_args=model_args,
                              save_dir=query_args.query_result_dave_dir, rerank_option=one_rerank_option)

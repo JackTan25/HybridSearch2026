@@ -22,7 +22,7 @@ import stl;
 import block_entry;
 import segment_entry;
 import segment_iter;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import logical_type;
 import logger;
@@ -38,60 +38,60 @@ import fast_rough_filter;
 import filter_value_type_classification;
 
 template <>
-class std::numeric_limits<infinity::InnerMinMaxDataFilterVarcharType> {
+class std::numeric_limits<hybridsearch::InnerMinMaxDataFilterVarcharType> {
 public:
-    static constexpr infinity::InnerMinMaxDataFilterVarcharType lowest() { return infinity::InnerMinMaxDataFilterVarcharType::lowest(); };
-    static constexpr infinity::InnerMinMaxDataFilterVarcharType max() { return infinity::InnerMinMaxDataFilterVarcharType::max(); }
+    static constexpr hybridsearch::InnerMinMaxDataFilterVarcharType lowest() { return hybridsearch::InnerMinMaxDataFilterVarcharType::lowest(); };
+    static constexpr hybridsearch::InnerMinMaxDataFilterVarcharType max() { return hybridsearch::InnerMinMaxDataFilterVarcharType::max(); }
 };
 
 template <>
-class std::numeric_limits<infinity::HugeIntT> {
+class std::numeric_limits<hybridsearch::HugeIntT> {
 public:
-    static constexpr infinity::HugeIntT lowest() {
-        return infinity::HugeIntT(std::numeric_limits<infinity::i64>::lowest(), std::numeric_limits<infinity::i64>::lowest());
+    static constexpr hybridsearch::HugeIntT lowest() {
+        return hybridsearch::HugeIntT(std::numeric_limits<hybridsearch::i64>::lowest(), std::numeric_limits<hybridsearch::i64>::lowest());
     };
-    static constexpr infinity::HugeIntT max() {
-        return infinity::HugeIntT(std::numeric_limits<infinity::i64>::max(), std::numeric_limits<infinity::i64>::max());
+    static constexpr hybridsearch::HugeIntT max() {
+        return hybridsearch::HugeIntT(std::numeric_limits<hybridsearch::i64>::max(), std::numeric_limits<hybridsearch::i64>::max());
     }
 };
 
 template <>
-class std::numeric_limits<infinity::DateT> {
+class std::numeric_limits<hybridsearch::DateT> {
 public:
-    static constexpr infinity::DateT lowest() { return infinity::DateT(std::numeric_limits<infinity::i32>::lowest()); };
-    static constexpr infinity::DateT max() { return infinity::DateT(std::numeric_limits<infinity::i32>::max()); }
+    static constexpr hybridsearch::DateT lowest() { return hybridsearch::DateT(std::numeric_limits<hybridsearch::i32>::lowest()); };
+    static constexpr hybridsearch::DateT max() { return hybridsearch::DateT(std::numeric_limits<hybridsearch::i32>::max()); }
 };
 
 template <>
-class std::numeric_limits<infinity::TimeT> {
+class std::numeric_limits<hybridsearch::TimeT> {
 public:
-    static constexpr infinity::TimeT lowest() { return infinity::TimeT(std::numeric_limits<infinity::i32>::lowest()); };
-    static constexpr infinity::TimeT max() { return infinity::TimeT(std::numeric_limits<infinity::i32>::max()); }
+    static constexpr hybridsearch::TimeT lowest() { return hybridsearch::TimeT(std::numeric_limits<hybridsearch::i32>::lowest()); };
+    static constexpr hybridsearch::TimeT max() { return hybridsearch::TimeT(std::numeric_limits<hybridsearch::i32>::max()); }
 };
 
 template <>
-class std::numeric_limits<infinity::DateTimeT> {
+class std::numeric_limits<hybridsearch::DateTimeT> {
 public:
-    static constexpr infinity::DateTimeT lowest() {
-        return infinity::DateTimeT(std::numeric_limits<infinity::i32>::lowest(), std::numeric_limits<infinity::i32>::lowest());
+    static constexpr hybridsearch::DateTimeT lowest() {
+        return hybridsearch::DateTimeT(std::numeric_limits<hybridsearch::i32>::lowest(), std::numeric_limits<hybridsearch::i32>::lowest());
     };
-    static constexpr infinity::DateTimeT max() {
-        return infinity::DateTimeT(std::numeric_limits<infinity::i32>::max(), std::numeric_limits<infinity::i32>::max());
+    static constexpr hybridsearch::DateTimeT max() {
+        return hybridsearch::DateTimeT(std::numeric_limits<hybridsearch::i32>::max(), std::numeric_limits<hybridsearch::i32>::max());
     }
 };
 
 template <>
-class std::numeric_limits<infinity::TimestampT> {
+class std::numeric_limits<hybridsearch::TimestampT> {
 public:
-    static constexpr infinity::TimestampT lowest() {
-        return infinity::TimestampT(std::numeric_limits<infinity::i32>::lowest(), std::numeric_limits<infinity::i32>::lowest());
+    static constexpr hybridsearch::TimestampT lowest() {
+        return hybridsearch::TimestampT(std::numeric_limits<hybridsearch::i32>::lowest(), std::numeric_limits<hybridsearch::i32>::lowest());
     };
-    static constexpr infinity::TimestampT max() {
-        return infinity::TimestampT(std::numeric_limits<infinity::i32>::max(), std::numeric_limits<infinity::i32>::max());
+    static constexpr hybridsearch::TimestampT max() {
+        return hybridsearch::TimestampT(std::numeric_limits<hybridsearch::i32>::max(), std::numeric_limits<hybridsearch::i32>::max());
     }
 };
 
-namespace infinity {
+namespace hybridsearch {
 
 auto operator<=>(const InnerMinMaxDataFilterVarcharType &lhs, const InnerMinMaxDataFilterVarcharType &rhs) {
     return lhs.GetStringView() <=> rhs.GetStringView();
@@ -516,4 +516,4 @@ void BuildFastRoughFilterTask::ExecuteInner(SegmentEntry *segment_entry, BufferM
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

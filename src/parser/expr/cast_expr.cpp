@@ -14,7 +14,7 @@
 
 #include "cast_expr.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 CastExpr::~CastExpr() {
     if (expr_ != nullptr) {
@@ -29,4 +29,4 @@ std::string CastExpr::ToString() const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

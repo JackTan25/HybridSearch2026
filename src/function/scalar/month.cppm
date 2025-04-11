@@ -18,10 +18,10 @@ import stl;
 
 export module month;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 
 export void RegisterMonthFunction(const UniquePtr<Catalog> &catalog_ptr);
 
-} // namespace infinity
+} // namespace hybridsearch

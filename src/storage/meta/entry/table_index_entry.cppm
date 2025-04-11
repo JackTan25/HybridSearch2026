@@ -36,7 +36,7 @@ import block_entry;
 import txn;
 import meta_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 class TxnManager;
 class TableIndexMeta;
@@ -189,4 +189,4 @@ public:
     SharedPtr<TableIndexInfo> GetTableIndexInfo(Txn *txn_ptr);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

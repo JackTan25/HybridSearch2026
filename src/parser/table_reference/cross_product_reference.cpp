@@ -14,7 +14,7 @@
 
 #include "cross_product_reference.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 CrossProductReference::~CrossProductReference() {
     for (auto *table_ptr : tables_) {
@@ -24,4 +24,4 @@ CrossProductReference::~CrossProductReference() {
 
 std::string CrossProductReference::ToString() { return "CrossProductReference"; }
 
-}; // namespace infinity
+}; // namespace hybridsearch

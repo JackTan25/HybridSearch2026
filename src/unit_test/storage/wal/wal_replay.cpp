@@ -19,7 +19,7 @@ import base_test;
 import stl;
 import global_resource_usage;
 import storage;
-import infinity_context;
+import hybridsearch_context;
 
 import txn_manager;
 import table_def;
@@ -29,7 +29,7 @@ import txn_store;
 import buffer_manager;
 import meta_state;
 import wal_entry;
-import infinity_exception;
+import hybridsearch_exception;
 import status;
 import column_vector;
 import physical_import;
@@ -61,7 +61,7 @@ import compilation_config;
 import compaction_process;
 import txn_state;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class WalReplayTest : public BaseTestParamStr {
 protected:
@@ -91,14 +91,14 @@ INSTANTIATE_TEST_SUITE_P(TestWithDifferentParams,
 
 TEST_P(WalReplayTest, wal_replay_database) {
     {
-#ifdef INFINITY_DEBUG
-        infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+        hybridsearch::GlobalResourceUsage::Init();
 #endif
         std::shared_ptr<std::string> config_path = WalReplayTest::config_path();
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
 
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         TxnManager *txn_mgr = storage->txn_manager();
         BGTaskProcessor *bg_processor = storage->bg_processor();
 
@@ -140,23 +140,23 @@ TEST_P(WalReplayTest, wal_replay_database) {
             txn_mgr->CommitTxn(txn);
         }
 
-        infinity::InfinityContext::instance().UnInit();
-#ifdef INFINITY_DEBUG
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetObjectCount(), 0);
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetRawMemoryCount(), 0);
-        infinity::GlobalResourceUsage::UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
+#ifdef hybridsearch_DEBUG
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetObjectCount(), 0);
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetRawMemoryCount(), 0);
+        hybridsearch::GlobalResourceUsage::UnInit();
 #endif
     }
 
     {
-#ifdef INFINITY_DEBUG
-        infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+        hybridsearch::GlobalResourceUsage::Init();
 #endif
         std::shared_ptr<std::string> config_path = WalReplayTest::config_path();
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
 
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         TxnManager *txn_mgr = storage->txn_manager();
 
         {
@@ -172,11 +172,11 @@ TEST_P(WalReplayTest, wal_replay_database) {
             txn_mgr->CommitTxn(txn);
         }
 
-        infinity::InfinityContext::instance().UnInit();
-#ifdef INFINITY_DEBUG
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetObjectCount(), 0);
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetRawMemoryCount(), 0);
-        infinity::GlobalResourceUsage::UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
+#ifdef hybridsearch_DEBUG
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetObjectCount(), 0);
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetRawMemoryCount(), 0);
+        hybridsearch::GlobalResourceUsage::UnInit();
 #endif
     }
 }
@@ -209,14 +209,14 @@ TEST_P(WalReplayTest, wal_replay_tables) {
         }
     }
     {
-#ifdef INFINITY_DEBUG
-        infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+        hybridsearch::GlobalResourceUsage::Init();
 #endif
         std::shared_ptr<std::string> config_path = WalReplayTest::config_path();
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
 
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         TxnManager *txn_mgr = storage->txn_manager();
         BGTaskProcessor *bg_processor = storage->bg_processor();
 
@@ -255,22 +255,22 @@ TEST_P(WalReplayTest, wal_replay_tables) {
             txn_mgr->CommitTxn(txn);
         }
 
-        infinity::InfinityContext::instance().UnInit();
-#ifdef INFINITY_DEBUG
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetObjectCount(), 0);
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetRawMemoryCount(), 0);
-        infinity::GlobalResourceUsage::UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
+#ifdef hybridsearch_DEBUG
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetObjectCount(), 0);
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetRawMemoryCount(), 0);
+        hybridsearch::GlobalResourceUsage::UnInit();
 #endif
     }
     {
-#ifdef INFINITY_DEBUG
-        infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+        hybridsearch::GlobalResourceUsage::Init();
 #endif
         std::shared_ptr<std::string> config_path = WalReplayTest::config_path();
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
 
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         TxnManager *txn_mgr = storage->txn_manager();
 
         {
@@ -287,11 +287,11 @@ TEST_P(WalReplayTest, wal_replay_tables) {
             txn_mgr->CommitTxn(txn);
         }
 
-        infinity::InfinityContext::instance().UnInit();
-#ifdef INFINITY_DEBUG
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetObjectCount(), 0);
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetRawMemoryCount(), 0);
-        infinity::GlobalResourceUsage::UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
+#ifdef hybridsearch_DEBUG
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetObjectCount(), 0);
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetRawMemoryCount(), 0);
+        hybridsearch::GlobalResourceUsage::UnInit();
 #endif
     }
 }
@@ -299,14 +299,14 @@ TEST_P(WalReplayTest, wal_replay_tables) {
 TEST_P(WalReplayTest, wal_replay_append) {
     SizeT row_count = 2;
     {
-#ifdef INFINITY_DEBUG
-        infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+        hybridsearch::GlobalResourceUsage::Init();
 #endif
         std::shared_ptr<std::string> config_path = WalReplayTest::config_path();
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
 
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         TxnManager *txn_mgr = storage->txn_manager();
         BGTaskProcessor *bg_processor = storage->bg_processor();
 
@@ -394,23 +394,23 @@ TEST_P(WalReplayTest, wal_replay_append) {
             force_ckp_task->Wait();
             txn_mgr->CommitTxn(txn);
         }
-        infinity::InfinityContext::instance().UnInit();
-#ifdef INFINITY_DEBUG
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetObjectCount(), 0);
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetRawMemoryCount(), 0);
-        infinity::GlobalResourceUsage::UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
+#ifdef hybridsearch_DEBUG
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetObjectCount(), 0);
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetRawMemoryCount(), 0);
+        hybridsearch::GlobalResourceUsage::UnInit();
 #endif
     }
     // Restart the db instance
     {
-#ifdef INFINITY_DEBUG
-        infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+        hybridsearch::GlobalResourceUsage::Init();
 #endif
         std::shared_ptr<std::string> config_path = WalReplayTest::config_path();
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
 
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         TxnManager *txn_mgr = storage->txn_manager();
 
         Vector<SharedPtr<ColumnDef>> columns;
@@ -466,25 +466,25 @@ TEST_P(WalReplayTest, wal_replay_append) {
 
             txn_mgr->CommitTxn(txn);
         }
-        infinity::InfinityContext::instance().UnInit();
-#ifdef INFINITY_DEBUG
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetObjectCount(), 0);
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetRawMemoryCount(), 0);
-        infinity::GlobalResourceUsage::UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
+#ifdef hybridsearch_DEBUG
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetObjectCount(), 0);
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetRawMemoryCount(), 0);
+        hybridsearch::GlobalResourceUsage::UnInit();
 #endif
     }
 }
 
 TEST_P(WalReplayTest, wal_replay_import) {
     {
-#ifdef INFINITY_DEBUG
-        infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+        hybridsearch::GlobalResourceUsage::Init();
 #endif
         std::shared_ptr<std::string> config_path = WalReplayTest::config_path();
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
 
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         TxnManager *txn_mgr = storage->txn_manager();
         BufferManager *buffer_manager = storage->buffer_manager();
         BGTaskProcessor *bg_processor = storage->bg_processor();
@@ -611,24 +611,24 @@ TEST_P(WalReplayTest, wal_replay_import) {
             txn_mgr->CommitTxn(txn4);
         }
 
-        infinity::InfinityContext::instance().UnInit();
-#ifdef INFINITY_DEBUG
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetObjectCount(), 0);
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetRawMemoryCount(), 0);
-        infinity::GlobalResourceUsage::UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
+#ifdef hybridsearch_DEBUG
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetObjectCount(), 0);
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetRawMemoryCount(), 0);
+        hybridsearch::GlobalResourceUsage::UnInit();
 #endif
     }
     // Restart the db instance
     //    system(tree_cmd.c_str());
     {
-#ifdef INFINITY_DEBUG
-        infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+        hybridsearch::GlobalResourceUsage::Init();
 #endif
         std::shared_ptr<std::string> config_path = WalReplayTest::config_path();
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
 
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         TxnManager *txn_mgr = storage->txn_manager();
         BufferManager *buffer_manager = storage->buffer_manager();
 
@@ -665,11 +665,11 @@ TEST_P(WalReplayTest, wal_replay_import) {
             txn_mgr->CommitTxn(txn);
         }
 
-        infinity::InfinityContext::instance().UnInit();
-#ifdef INFINITY_DEBUG
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetObjectCount(), 0);
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetRawMemoryCount(), 0);
-        infinity::GlobalResourceUsage::UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
+#ifdef hybridsearch_DEBUG
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetObjectCount(), 0);
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetRawMemoryCount(), 0);
+        hybridsearch::GlobalResourceUsage::UnInit();
 #endif
     }
 }
@@ -680,13 +680,13 @@ TEST_F(WalReplayTest, wal_replay_compact) {
     std::shared_ptr<std::string> config_path = std::make_shared<std::string>(std::string(test_data_path()) + "/config/test_close_ckp.toml");
     u64 test_segment_n = 2;
     {
-#ifdef INFINITY_DEBUG
-        infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+        hybridsearch::GlobalResourceUsage::Init();
 #endif
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
 
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         BufferManager *buffer_manager = storage->buffer_manager();
         TxnManager *txn_mgr = storage->txn_manager();
         CompactionProcessor *compaction_processor = storage->compaction_processor();
@@ -751,21 +751,21 @@ TEST_F(WalReplayTest, wal_replay_compact) {
             auto commit_ts = compaction_processor->ManualDoCompact("default_db", "tbl1", false);
             EXPECT_NE(commit_ts, 0u);
         }
-        infinity::InfinityContext::instance().UnInit();
-#ifdef INFINITY_DEBUG
-        infinity::GlobalResourceUsage::UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
+#ifdef hybridsearch_DEBUG
+        hybridsearch::GlobalResourceUsage::UnInit();
 #endif
     }
     // Restart db instance
     //    system(tree_cmd.c_str());
     {
-#ifdef INFINITY_DEBUG
-        infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+        hybridsearch::GlobalResourceUsage::Init();
 #endif
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
 
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         TxnManager *txn_mgr = storage->txn_manager();
 
         {
@@ -789,23 +789,23 @@ TEST_F(WalReplayTest, wal_replay_compact) {
             EXPECT_EQ(block_entry->row_count(), test_segment_n);
             txn_mgr->CommitTxn(txn);
         }
-        infinity::InfinityContext::instance().UnInit();
-#ifdef INFINITY_DEBUG
-        infinity::GlobalResourceUsage::UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
+#ifdef hybridsearch_DEBUG
+        hybridsearch::GlobalResourceUsage::UnInit();
 #endif
     }
 }
 
 TEST_P(WalReplayTest, wal_replay_create_index_IvfFlat) {
     {
-#ifdef INFINITY_DEBUG
-        infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+        hybridsearch::GlobalResourceUsage::Init();
 #endif
         std::shared_ptr<std::string> config_path = WalReplayTest::config_path();
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
 
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         TxnManager *txn_mgr = storage->txn_manager();
 
         // CREATE TABLE test_annivfflat (col1 embedding(float,128));
@@ -860,11 +860,11 @@ TEST_P(WalReplayTest, wal_replay_create_index_IvfFlat) {
             txn_mgr->CommitTxn(txn);
         }
 
-        infinity::InfinityContext::instance().UnInit();
-#ifdef INFINITY_DEBUG
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetObjectCount(), 0);
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetRawMemoryCount(), 0);
-        infinity::GlobalResourceUsage::UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
+#ifdef hybridsearch_DEBUG
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetObjectCount(), 0);
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetRawMemoryCount(), 0);
+        hybridsearch::GlobalResourceUsage::UnInit();
 #endif
     }
     ////////////////////////////////
@@ -872,14 +872,14 @@ TEST_P(WalReplayTest, wal_replay_create_index_IvfFlat) {
     ////////////////////////////////
     //    system(tree_cmd.c_str());
     {
-#ifdef INFINITY_DEBUG
-        infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+        hybridsearch::GlobalResourceUsage::Init();
 #endif
         std::shared_ptr<std::string> config_path = WalReplayTest::config_path();
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
 
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         TxnManager *txn_mgr = storage->txn_manager();
 
         {
@@ -893,25 +893,25 @@ TEST_P(WalReplayTest, wal_replay_create_index_IvfFlat) {
             txn_mgr->CommitTxn(txn);
         }
 
-        infinity::InfinityContext::instance().UnInit();
-#ifdef INFINITY_DEBUG
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetObjectCount(), 0);
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetRawMemoryCount(), 0);
-        infinity::GlobalResourceUsage::UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
+#ifdef hybridsearch_DEBUG
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetObjectCount(), 0);
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetRawMemoryCount(), 0);
+        hybridsearch::GlobalResourceUsage::UnInit();
 #endif
     }
 }
 
 TEST_P(WalReplayTest, wal_replay_create_index_hnsw) {
     {
-#ifdef INFINITY_DEBUG
-        infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+        hybridsearch::GlobalResourceUsage::Init();
 #endif
         std::shared_ptr<std::string> config_path = WalReplayTest::config_path();
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
 
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         TxnManager *txn_mgr = storage->txn_manager();
         // BufferManager *buffer_manager = storage->buffer_manager();
 
@@ -968,11 +968,11 @@ TEST_P(WalReplayTest, wal_replay_create_index_hnsw) {
             txn_mgr->CommitTxn(txn);
         }
 
-        infinity::InfinityContext::instance().UnInit();
-#ifdef INFINITY_DEBUG
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetObjectCount(), 0);
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetRawMemoryCount(), 0);
-        infinity::GlobalResourceUsage::UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
+#ifdef hybridsearch_DEBUG
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetObjectCount(), 0);
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetRawMemoryCount(), 0);
+        hybridsearch::GlobalResourceUsage::UnInit();
 #endif
     }
     ////////////////////////////////
@@ -980,14 +980,14 @@ TEST_P(WalReplayTest, wal_replay_create_index_hnsw) {
     ////////////////////////////////
     //    system(tree_cmd.c_str());
     {
-#ifdef INFINITY_DEBUG
-        infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+        hybridsearch::GlobalResourceUsage::Init();
 #endif
         std::shared_ptr<std::string> config_path = WalReplayTest::config_path();
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
 
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         TxnManager *txn_mgr = storage->txn_manager();
 
         {
@@ -1006,11 +1006,11 @@ TEST_P(WalReplayTest, wal_replay_create_index_hnsw) {
             txn_mgr->CommitTxn(txn);
         }
 
-        infinity::InfinityContext::instance().UnInit();
-#ifdef INFINITY_DEBUG
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetObjectCount(), 0);
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetRawMemoryCount(), 0);
-        infinity::GlobalResourceUsage::UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
+#ifdef hybridsearch_DEBUG
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetObjectCount(), 0);
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetRawMemoryCount(), 0);
+        hybridsearch::GlobalResourceUsage::UnInit();
 #endif
     }
 }

@@ -21,7 +21,7 @@ import column_vector;
 import internal_types;
 import data_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 class HashTableBase {
 public:
@@ -56,4 +56,4 @@ public:
     HashMap<String, Pair<SizeT, SizeT>> hash_table_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

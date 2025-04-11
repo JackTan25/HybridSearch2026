@@ -18,8 +18,8 @@ module;
 
 export module drop_table_info;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::DropTableInfo;
+export using hybridsearch::DropTableInfo;
 
 }

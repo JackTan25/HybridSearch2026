@@ -23,7 +23,7 @@ import default_values;
 
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 class BufferManager;
 struct BlockColumnEntry;
@@ -118,4 +118,4 @@ private:
 //     ChunkId chunk_id_{0};
 // };
 
-} // namespace infinity
+} // namespace hybridsearch

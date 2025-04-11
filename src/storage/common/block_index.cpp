@@ -26,7 +26,7 @@ import table_index_entry;
 import segment_index_entry;
 import default_values;
 
-namespace infinity {
+namespace hybridsearch {
 
 void BlockIndex::Insert(SegmentEntry *segment_entry, Txn *txn) {
     if (segment_entry->CheckVisible(txn)) {
@@ -116,4 +116,4 @@ void IndexIndex::Insert(TableIndexEntry *table_index_entry, SegmentIndexEntry *s
     index_snapshot_ptr->segment_index_entries_.emplace(segment_index_entry->segment_id(), segment_index_entry);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

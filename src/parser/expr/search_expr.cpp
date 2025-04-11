@@ -9,7 +9,7 @@
 #include <sstream>
 #include <utility>
 
-namespace infinity {
+namespace hybridsearch {
 
 SearchExpr::~SearchExpr() {
     if (exprs_ != nullptr) {
@@ -44,7 +44,7 @@ std::string SearchExpr::ToString() const {
     return oss.str();
 }
 
-void SearchExpr::SetExprs(std::vector<infinity::ParsedExpr *> *exprs) {
+void SearchExpr::SetExprs(std::vector<hybridsearch::ParsedExpr *> *exprs) {
     if (exprs == nullptr) {
         ParserError("SearchExpr::SetExprs parameter is nullptr");
     }
@@ -68,7 +68,7 @@ void SearchExpr::Validate() const {
     }
 }
 
-void SearchExpr::AddExpr(infinity::ParsedExpr *expr) {
+void SearchExpr::AddExpr(hybridsearch::ParsedExpr *expr) {
     switch (expr->type_) {
         case ParsedExprType::kKnn:
         case ParsedExprType::kMatch:
@@ -84,4 +84,4 @@ void SearchExpr::AddExpr(infinity::ParsedExpr *expr) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

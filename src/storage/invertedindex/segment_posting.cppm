@@ -25,7 +25,7 @@ import file_reader;
 
 export module segment_posting;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class SegmentPosting {
 public:
@@ -83,4 +83,4 @@ private:
     u64 pos_size_ = 0;
     u64 doc_start_ = 0;
 };
-} // namespace infinity
+} // namespace hybridsearch

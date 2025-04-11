@@ -22,7 +22,7 @@ import analyzer;
 import smallfloat;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 int RankFeaturesAnalyzer::AnalyzeImpl(const Term &input, void *data, HookType func) {
     nlohmann::json line_json = nlohmann::json::parse(input.text_);
@@ -41,4 +41,4 @@ int RankFeaturesAnalyzer::AnalyzeImpl(const Term &input, void *data, HookType fu
     return 0;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

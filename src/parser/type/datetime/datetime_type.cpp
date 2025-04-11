@@ -14,7 +14,7 @@
 
 #include "datetime_type.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 void DateTimeType::FromString(const char *datetime_ptr, size_t length) {
     // NOTICE: datetime is in format "YYYY-MM-DD HH:MM:SS"
@@ -118,4 +118,4 @@ bool DateTimeType::OuterDateTime2YMD(int32_t days, std::chrono::year_month_day &
     return result;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

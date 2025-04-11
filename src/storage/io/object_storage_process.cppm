@@ -21,18 +21,18 @@ import global_resource_usage;
 
 export module object_storage_process;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class ObjectStorageProcess {
 public:
     explicit ObjectStorageProcess() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("ObjectStorageProcess");
 #endif
     }
 
     ~ObjectStorageProcess() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("ObjectStorageProcess");
 #endif
     }
@@ -58,4 +58,4 @@ private:
     String task_text_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -25,7 +25,7 @@ import bind_context;
 import logical_node;
 import query_context;
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 import status;
 import base_table_ref;
 import subquery_table_ref;
@@ -42,7 +42,7 @@ import conjunction_expression;
 import table_reference;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 SharedPtr<LogicalNode> BoundDeleteStatement::BuildPlan(QueryContext *query_context) {
     const SharedPtr<BindContext> &bind_context = this->bind_context_;
@@ -150,4 +150,4 @@ SharedPtr<BaseExpression> BoundDeleteStatement::UnnestSubquery(SharedPtr<Logical
     return return_expr;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

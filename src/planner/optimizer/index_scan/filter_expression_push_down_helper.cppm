@@ -21,7 +21,7 @@ import base_expression;
 import value;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class FilterCompareType : i8 { kEqual, kLess, kLessEqual, kGreater, kGreaterEqual, kAlwaysFalse, kAlwaysTrue, kInvalid };
 
@@ -33,4 +33,4 @@ public:
     UnwindCast(const SharedPtr<BaseExpression> &cast_expr, Value &&right_val, FilterCompareType compare_type);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

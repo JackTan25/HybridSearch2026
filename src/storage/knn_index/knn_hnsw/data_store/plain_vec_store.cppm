@@ -30,7 +30,7 @@ import hnsw_common;
 import serialize;
 import data_store_util;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename DataType>
 class PlainVecStoreMeta {
@@ -183,4 +183,4 @@ public:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

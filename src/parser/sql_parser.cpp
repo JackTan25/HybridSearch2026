@@ -18,7 +18,7 @@
 
 #include <iostream>
 
-namespace infinity {
+namespace hybridsearch {
 
 SQLParser::SQLParser() {
     scanner_ = nullptr;
@@ -43,4 +43,4 @@ void SQLParser::Parse(const std::string &sql_text, ParserResult *result) {
     sql_delete_buffer(state_, scanner_);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

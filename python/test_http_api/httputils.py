@@ -30,8 +30,8 @@ def trace_expected_exceptions(func):
 
 def get_project_path():
     current_file = os.path.abspath(__file__)
-    index = current_file.index("infinity")
-    desired_path = current_file[: index + len("infinity")]
+    index = current_file.index("hybridsearch")
+    desired_path = current_file[: index + len("hybridsearch")]
     return str(desired_path)
 
 
@@ -44,12 +44,12 @@ def read_fvecs_file(filename):
     return fvecs
 
 
-def start_infinity_service_in_subporcess():
-    shell = get_project_path() + "/cmake-build-debug/src/infinity"
+def start_hybridsearch_service_in_subporcess():
+    shell = get_project_path() + "/cmake-build-debug/src/hybridsearch"
     with open("./tmp.txt", "w") as f:
-        infinity = subprocess.Popen(shell, stdout=f)
+        hybridsearch = subprocess.Popen(shell, stdout=f)
     time.sleep(1)
-    return infinity
+    return hybridsearch
 
 
 def copy_data(file_name):

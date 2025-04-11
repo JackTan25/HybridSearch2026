@@ -24,7 +24,7 @@ import base_table_ref;
 import load_meta;
 import roaring_bitmap;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PhysicalFilterScanBase : public PhysicalScanBase {
 public:
@@ -46,4 +46,4 @@ public:
     SharedPtr<CommonQueryFilter> common_query_filter_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

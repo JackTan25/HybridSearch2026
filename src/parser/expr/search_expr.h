@@ -12,7 +12,7 @@
 #include <utility>
 #include <vector>
 
-namespace infinity {
+namespace hybridsearch {
 
 class MatchExpr;
 class QueryExpr;
@@ -29,8 +29,8 @@ public:
 
     [[nodiscard]] std::string ToString() const override;
 
-    void SetExprs(std::vector<infinity::ParsedExpr *> *exprs);
-    void AddExpr(infinity::ParsedExpr *expr);
+    void SetExprs(std::vector<hybridsearch::ParsedExpr *> *exprs);
+    void AddExpr(hybridsearch::ParsedExpr *expr);
     void Validate() const;
 
 public:
@@ -38,7 +38,7 @@ public:
     std::vector<FusionExpr *> fusion_exprs_{};
 
 private:
-    std::vector<infinity::ParsedExpr *> *exprs_{};
+    std::vector<hybridsearch::ParsedExpr *> *exprs_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

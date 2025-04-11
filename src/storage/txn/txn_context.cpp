@@ -20,7 +20,7 @@ module txn_context;
 
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 String TxnContext::ToString() {
     std::stringstream ss;

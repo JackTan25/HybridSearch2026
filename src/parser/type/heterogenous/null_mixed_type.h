@@ -16,7 +16,7 @@
 
 #include "base_mixed_type.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 struct __attribute__((packed)) NullMixedType : public BaseMixedType {
     NullMixedType() : BaseMixedType(MixedValueType::kNull) {}
@@ -27,4 +27,4 @@ struct __attribute__((packed)) NullMixedType : public BaseMixedType {
     int64_t _dummy4{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

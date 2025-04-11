@@ -15,23 +15,23 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 import status;
 
-using namespace infinity;
+using namespace hybridsearch;
 class ExceptionTest : public BaseTest {};
 
 TEST_F(ExceptionTest, all_exception_cases) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     try {
-        throw infinity::UnrecoverableException("unrecoverable error");
+        throw hybridsearch::UnrecoverableException("unrecoverable error");
     } catch (std::exception &e) {
         EXPECT_EQ(std::string(e.what()), "unrecoverable error");
     }
 
     try {
-        throw infinity::RecoverableException(Status::UnexpectedError("recoverable error"));
+        throw hybridsearch::RecoverableException(Status::UnexpectedError("recoverable error"));
     } catch (std::exception &e) {
         EXPECT_EQ(std::string(e.what()), "Unexpected error: recoverable error");
     }

@@ -4,10 +4,10 @@ export module floor;
 
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 
 export void RegisterFloorFunction(const UniquePtr<Catalog> &catalog_ptr);
 
-} // namespace infinity
+} // namespace hybridsearch

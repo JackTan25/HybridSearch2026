@@ -13,7 +13,7 @@
 // limitations under the License.
 
 module;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 export module fst:fst;
 import stl;
@@ -29,7 +29,7 @@ import :node;
 /// based only on their prefixes, except that a automaton/transducer also
 /// compresses suffixes.
 
-namespace infinity {
+namespace hybridsearch {
 
 struct Meta {
     u64 version_;
@@ -367,4 +367,4 @@ private:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

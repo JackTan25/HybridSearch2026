@@ -22,7 +22,7 @@ import column_binding;
 
 export module dependent_join_flattener;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class DependentJoinFlattener {
 public:
@@ -48,4 +48,4 @@ private:
     SizeT correlated_expression_offset_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -19,7 +19,7 @@ module like;
 import stl;
 import catalog;
 import logical_type;
-import infinity_exception;
+import hybridsearch_exception;
 import scalar_function;
 import scalar_function_set;
 
@@ -29,7 +29,7 @@ import data_type;
 import logger;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 bool LikeOperator(const ptr_t left_ptr, SizeT left_len, const ptr_t right_ptr, SizeT right_len) {
     SizeT left_idx{0}, right_idx{0};
@@ -145,4 +145,4 @@ void RegisterNotLikeFunction(const UniquePtr<Catalog> &catalog_ptr) {
     Catalog::AddFunctionSet(catalog_ptr.get(), function_set_ptr);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

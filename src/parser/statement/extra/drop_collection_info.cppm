@@ -18,8 +18,8 @@ module;
 
 export module drop_collection_info;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::DropCollectionInfo;
+export using hybridsearch::DropCollectionInfo;
 
 }

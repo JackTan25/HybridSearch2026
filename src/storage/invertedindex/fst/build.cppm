@@ -21,7 +21,7 @@ import :node;
 import :registry;
 import :writer;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct LastTransition {
     bool present_{false};
@@ -239,4 +239,4 @@ private:
     void CheckLastKey(u8 *bs_ptr, SizeT bs_len, bool check_dupe);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

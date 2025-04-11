@@ -19,7 +19,7 @@ import stl;
 import term;
 import analyzer;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class WhitespaceAnalyzer : public Analyzer {
     String delimiters_{};
@@ -33,4 +33,4 @@ protected:
     int AnalyzeImpl(const Term &input, void *data, HookType func) override;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

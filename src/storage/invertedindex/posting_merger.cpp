@@ -19,7 +19,7 @@ import segment_term_posting;
 import internal_types;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 class DocMerger {
 public:
@@ -200,4 +200,4 @@ u32 PostingMerger::GetDF() { return posting_dumper_->GetDF(); }
 
 u32 PostingMerger::GetTotalTF() { return posting_dumper_->GetTotalTF(); }
 
-} // namespace infinity
+} // namespace hybridsearch

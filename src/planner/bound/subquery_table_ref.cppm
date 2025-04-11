@@ -22,7 +22,7 @@ import table_reference;
 
 export module subquery_table_ref;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class SubqueryTableRef : public TableRef {
 public:
@@ -33,4 +33,4 @@ public:
     u64 table_index_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

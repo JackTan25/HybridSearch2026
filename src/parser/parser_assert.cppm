@@ -17,8 +17,8 @@ module;
 
 export module parser_assert;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::ParserException;
+export using hybridsearch::ParserException;
 
 }

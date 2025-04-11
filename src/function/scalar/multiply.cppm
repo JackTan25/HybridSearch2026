@@ -18,10 +18,10 @@ import stl;
 
 export module multiply;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 
 export void RegisterMulFunction(const UniquePtr<Catalog> &catalog_ptr);
 
-} // namespace infinity
+} // namespace hybridsearch

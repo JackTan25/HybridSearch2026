@@ -27,7 +27,7 @@ import internal_types;
 import select_statement;
 import data_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalTop : public LogicalNode {
 public:
@@ -60,4 +60,4 @@ public:
     bool total_hits_count_flag_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

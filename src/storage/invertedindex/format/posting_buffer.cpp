@@ -9,7 +9,7 @@ import posting_field;
 import file_writer;
 import file_reader;
 
-namespace infinity {
+namespace hybridsearch {
 
 PostingBuffer::PostingBuffer() : buffer_(nullptr), capacity_(0), size_(0), is_buffer_valid_(true), posting_fields_(nullptr) {}
 
@@ -145,4 +145,4 @@ u8 PostingBuffer::AllocatePlan(u8 cur_capacity) {
     return MAX_DOC_PER_RECORD;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

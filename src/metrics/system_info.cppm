@@ -18,7 +18,7 @@ export module system_info;
 
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class SystemInfo {
 public:
@@ -27,4 +27,4 @@ public:
     static i64 OpenFileCount();
 };
 
-} // namespace infinity
+} // namespace hybridsearch

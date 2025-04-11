@@ -22,7 +22,7 @@ import logical_node;
 import base_statement;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 class QueryContext;
 
@@ -31,7 +31,7 @@ public:
     explicit Optimizer(QueryContext *query_context_ptr);
 
     ~Optimizer() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("Optimizer");
 #endif
     }
@@ -46,4 +46,4 @@ public:
     Vector<UniquePtr<OptimizerRule>> rules_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -26,7 +26,7 @@ import bmp_util;
 import knn_result_handler;
 import serialize;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename DataType, BMPCompressType CompressType, BMPOwnMem OwnMem>
 struct BlockData {};
@@ -520,4 +520,4 @@ private:
     const DataType *max_scores_ = nullptr;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -4,7 +4,7 @@ module;
 #include <nanobind/nanobind.h>
 #include <string>
 
-module wrap_infinity;
+module wrap_hybridsearch;
 
 import stl;
 import config;
@@ -14,7 +14,7 @@ import storage;
 import status;
 import query_result;
 import query_options;
-import infinity_context;
+import hybridsearch_context;
 import session;
 import parsed_expr;
 import search_expr;
@@ -23,7 +23,7 @@ import create_index_info;
 import update_statement;
 import explain_statement;
 import command_statement;
-import infinity;
+import hybridsearch;
 import data_block;
 import value;
 import data_type;
@@ -37,7 +37,7 @@ import function_expr;
 import between_expr;
 import parsed_expr;
 import search_expr;
-import infinity_exception;
+import hybridsearch_exception;
 import column_vector;
 import internal_types;
 import table_def;
@@ -46,9 +46,9 @@ import logger;
 import query_options;
 import search_options;
 import defer_op;
-import infinity_thrift_service;
+import hybridsearch_thrift_service;
 
-namespace infinity {
+namespace hybridsearch {
 
 ParsedExpr *WrapConstantExpr::GetParsedExpr(Status &status) {
     status.code_ = ErrorCode::kOk;
@@ -608,19 +608,19 @@ InsertRowExpr *WrapInsertRowExpr::GetInsertRowExpr(Status &status) {
     return insert_row_expr.release();
 }
 
-WrapQueryResult WrapCreateDatabase(Infinity &instance, const String &db_name, const CreateDatabaseOptions &options, const String &comment) {
+WrapQueryResult WrapCreateDatabase(hybridsearch &instance, const String &db_name, const CreateDatabaseOptions &options, const String &comment) {
     auto query_result = instance.CreateDatabase(db_name, options, comment);
     WrapQueryResult result(query_result.ErrorCode(), query_result.ErrorMsg());
     return result;
 }
 
-WrapQueryResult WrapDropDatabase(Infinity &instance, const String &db_name, const DropDatabaseOptions &options) {
+WrapQueryResult WrapDropDatabase(hybridsearch &instance, const String &db_name, const DropDatabaseOptions &options) {
     auto query_result = instance.DropDatabase(db_name, options);
     WrapQueryResult result(query_result.ErrorCode(), query_result.ErrorMsg());
     return result;
 }
 
-WrapQueryResult WrapListDatabases(Infinity &instance) {
+WrapQueryResult WrapListDatabases(hybridsearch &instance) {
     auto query_result = instance.ListDatabases();
     WrapQueryResult result(query_result.ErrorCode(), query_result.ErrorMsg());
 
@@ -634,13 +634,13 @@ WrapQueryResult WrapListDatabases(Infinity &instance) {
     return result;
 }
 
-WrapQueryResult WrapGetDatabase(Infinity &instance, const String &db_name) {
+WrapQueryResult WrapGetDatabase(hybridsearch &instance, const String &db_name) {
     auto query_result = instance.GetDatabase(db_name);
     WrapQueryResult result(query_result.ErrorCode(), query_result.ErrorMsg());
     return result;
 }
 
-WrapQueryResult WrapShowDatabase(Infinity &instance, const String &db_name) {
+WrapQueryResult WrapShowDatabase(hybridsearch &instance, const String &db_name) {
     auto query_result = instance.ShowDatabase(db_name);
     WrapQueryResult result(query_result.ErrorCode(), query_result.ErrorMsg());
     if (query_result.IsOk()) {
@@ -670,57 +670,57 @@ WrapQueryResult WrapShowDatabase(Infinity &instance, const String &db_name) {
     return result;
 }
 
-WrapQueryResult WrapFlush(Infinity &instance) {
+WrapQueryResult WrapFlush(hybridsearch &instance) {
     auto query_result = instance.Flush();
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-WrapQueryResult WrapSetVariableOrConfig(Infinity &instance, const String &name, bool value, SetScope scope) {
+WrapQueryResult WrapSetVariableOrConfig(hybridsearch &instance, const String &name, bool value, SetScope scope) {
     auto query_result = instance.SetVariableOrConfig(name, value, scope);
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-WrapQueryResult WrapSetVariableOrConfig(Infinity &instance, const String &name, i64 value, SetScope scope) {
+WrapQueryResult WrapSetVariableOrConfig(hybridsearch &instance, const String &name, i64 value, SetScope scope) {
     auto query_result = instance.SetVariableOrConfig(name, value, scope);
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-WrapQueryResult WrapSetVariableOrConfig(Infinity &instance, const String &name, double value, SetScope scope) {
+WrapQueryResult WrapSetVariableOrConfig(hybridsearch &instance, const String &name, double value, SetScope scope) {
     auto query_result = instance.SetVariableOrConfig(name, value, scope);
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-WrapQueryResult WrapSetVariableOrConfig(Infinity &instance, const String &name, String value, SetScope scope) {
+WrapQueryResult WrapSetVariableOrConfig(hybridsearch &instance, const String &name, String value, SetScope scope) {
     auto query_result = instance.SetVariableOrConfig(name, value, scope);
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-WrapQueryResult WrapShowVariable(Infinity &instance, const String &variable_name, SetScope scope) {
+WrapQueryResult WrapShowVariable(hybridsearch &instance, const String &variable_name, SetScope scope) {
     auto query_result = instance.ShowVariable(variable_name, scope);
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-WrapQueryResult WrapShowVariables(Infinity &instance, SetScope scope) {
+WrapQueryResult WrapShowVariables(hybridsearch &instance, SetScope scope) {
     auto query_result = instance.ShowVariables(scope);
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-WrapQueryResult WrapShowConfig(Infinity &instance, const String &config_name) {
+WrapQueryResult WrapShowConfig(hybridsearch &instance, const String &config_name) {
     auto query_result = instance.ShowConfig(config_name);
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-WrapQueryResult WrapShowConfigs(Infinity &instance) {
+WrapQueryResult WrapShowConfigs(hybridsearch &instance) {
     auto query_result = instance.ShowConfigs();
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-WrapQueryResult WrapShowInfo(Infinity &instance, const String &info_name) {
+WrapQueryResult WrapShowInfo(hybridsearch &instance, const String &info_name) {
     auto query_result = instance.ShowFunction(info_name);
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-WrapQueryResult WrapQuery(Infinity &instance, const String &query_text) {
+WrapQueryResult WrapQuery(hybridsearch &instance, const String &query_text) {
     auto query_result = instance.Query(query_text);
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
@@ -785,7 +785,7 @@ Optional<WrapQueryResult> UnwrapColumnDefs(Vector<WrapColumnDef> &column_defs, V
 
 } // namespace
 
-WrapQueryResult WrapCreateTable(Infinity &instance,
+WrapQueryResult WrapCreateTable(hybridsearch &instance,
                                 const String &db_name,
                                 const String &table_name,
                                 Vector<WrapColumnDef> column_defs,
@@ -805,12 +805,12 @@ WrapQueryResult WrapCreateTable(Infinity &instance,
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-WrapQueryResult WrapDropTable(Infinity &instance, const String &db_name, const String &table_name, const DropTableOptions &drop_table_options) {
+WrapQueryResult WrapDropTable(hybridsearch &instance, const String &db_name, const String &table_name, const DropTableOptions &drop_table_options) {
     auto query_result = instance.DropTable(db_name, table_name, drop_table_options);
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-WrapQueryResult WrapListTables(Infinity &instance, const String &db_name) {
+WrapQueryResult WrapListTables(hybridsearch &instance, const String &db_name) {
     auto query_result = instance.ListTables(db_name);
 
     WrapQueryResult result(query_result.ErrorCode(), query_result.ErrorMsg());
@@ -825,12 +825,12 @@ WrapQueryResult WrapListTables(Infinity &instance, const String &db_name) {
     return result;
 }
 
-WrapQueryResult WrapShowTable(Infinity &instance, const String &db_name, const String &table_name) {
+WrapQueryResult WrapShowTable(hybridsearch &instance, const String &db_name, const String &table_name) {
     auto query_result = instance.ShowTable(db_name, table_name);
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-WrapQueryResult WrapListTableIndexes(Infinity &instance, const String &db_name, const String &table_name) {
+WrapQueryResult WrapListTableIndexes(hybridsearch &instance, const String &db_name, const String &table_name) {
     auto query_result = instance.ListTableIndexes(db_name, table_name);
     WrapQueryResult result(query_result.ErrorCode(), query_result.ErrorMsg());
 
@@ -844,12 +844,12 @@ WrapQueryResult WrapListTableIndexes(Infinity &instance, const String &db_name, 
     return result;
 }
 
-WrapQueryResult WrapGetTable(Infinity &instance, const String &db_name, const String &table_name) {
+WrapQueryResult WrapGetTable(hybridsearch &instance, const String &db_name, const String &table_name) {
     auto query_result = instance.GetTable(db_name, table_name);
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-WrapQueryResult WrapCreateIndex(Infinity &instance,
+WrapQueryResult WrapCreateIndex(hybridsearch &instance,
                                 const String &db_name,
                                 const String &table_name,
                                 const String &index_name,
@@ -871,7 +871,7 @@ WrapQueryResult WrapCreateIndex(Infinity &instance,
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-WrapQueryResult WrapDropIndex(Infinity &instance,
+WrapQueryResult WrapDropIndex(hybridsearch &instance,
                               const String &db_name,
                               const String &table_name,
                               const String &index_name,
@@ -880,7 +880,7 @@ WrapQueryResult WrapDropIndex(Infinity &instance,
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-WrapQueryResult WrapShowIndex(Infinity &instance, const String &db_name, const String &table_name, const String &index_name) {
+WrapQueryResult WrapShowIndex(hybridsearch &instance, const String &db_name, const String &table_name, const String &index_name) {
     auto query_result = instance.ShowIndex(db_name, table_name, index_name);
     WrapQueryResult result(query_result.ErrorCode(), query_result.ErrorMsg());
     if (query_result.IsOk()) {
@@ -914,28 +914,28 @@ WrapQueryResult WrapShowIndex(Infinity &instance, const String &db_name, const S
     return result;
 }
 
-WrapQueryResult WrapShowSegment(Infinity &instance, const String &db_name, const String &table_name, const SegmentID &segment_id) {
+WrapQueryResult WrapShowSegment(hybridsearch &instance, const String &db_name, const String &table_name, const SegmentID &segment_id) {
     auto query_result = instance.ShowSegment(db_name, table_name, segment_id);
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-WrapQueryResult WrapShowSegments(Infinity &instance, const String &db_name, const String &table_name) {
+WrapQueryResult WrapShowSegments(hybridsearch &instance, const String &db_name, const String &table_name) {
     auto query_result = instance.ShowSegments(db_name, table_name);
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
 WrapQueryResult
-WrapShowBlock(Infinity &instance, const String &db_name, const String &table_name, const SegmentID &segment_id, const BlockID &block_id) {
+WrapShowBlock(hybridsearch &instance, const String &db_name, const String &table_name, const SegmentID &segment_id, const BlockID &block_id) {
     auto query_result = instance.ShowBlock(db_name, table_name, segment_id, block_id);
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-WrapQueryResult WrapShowBlocks(Infinity &instance, const String &db_name, const String &table_name, const SegmentID &segment_id) {
+WrapQueryResult WrapShowBlocks(hybridsearch &instance, const String &db_name, const String &table_name, const SegmentID &segment_id) {
     auto query_result = instance.ShowBlocks(db_name, table_name, segment_id);
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-WrapQueryResult WrapShowBlockColumn(Infinity &instance,
+WrapQueryResult WrapShowBlockColumn(hybridsearch &instance,
                                     const String &db_name,
                                     const String &table_name,
                                     const SegmentID &segment_id,
@@ -945,12 +945,12 @@ WrapQueryResult WrapShowBlockColumn(Infinity &instance,
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-WrapQueryResult WrapShowCurrentNode(Infinity &instance) {
+WrapQueryResult WrapShowCurrentNode(hybridsearch &instance) {
     auto query_result = instance.AdminShowCurrentNode();
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-WrapQueryResult WrapInsert(Infinity &instance, const String &db_name, const String &table_name, Vector<WrapInsertRowExpr> &insert_rows) {
+WrapQueryResult WrapInsert(hybridsearch &instance, const String &db_name, const String &table_name, Vector<WrapInsertRowExpr> &insert_rows) {
     if (insert_rows.empty()) {
         return WrapQueryResult(ErrorCode::kInsertWithoutValues, "insert values is empty");
     }
@@ -978,12 +978,12 @@ WrapQueryResult WrapInsert(Infinity &instance, const String &db_name, const Stri
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-WrapQueryResult WrapImport(Infinity &instance, const String &db_name, const String &table_name, const String &path, ImportOptions import_options) {
+WrapQueryResult WrapImport(hybridsearch &instance, const String &db_name, const String &table_name, const String &path, ImportOptions import_options) {
     auto query_result = instance.Import(db_name, table_name, path, import_options);
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-WrapQueryResult WrapExport(Infinity &instance,
+WrapQueryResult WrapExport(hybridsearch &instance,
                            const String &db_name,
                            const String &table_name,
                            Vector<String> &columns,
@@ -1018,7 +1018,7 @@ WrapQueryResult WrapExport(Infinity &instance,
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-WrapQueryResult WrapDelete(Infinity &instance, const String &db_name, const String &table_name, WrapParsedExpr *wrap_filter) {
+WrapQueryResult WrapDelete(hybridsearch &instance, const String &db_name, const String &table_name, WrapParsedExpr *wrap_filter) {
     ParsedExpr *filter = nullptr;
     if (wrap_filter != nullptr) {
         Status status;
@@ -1053,7 +1053,7 @@ WrapQueryResult WrapDelete(Infinity &instance, const String &db_name, const Stri
     return wrap_query_result;
 }
 
-WrapQueryResult WrapUpdate(Infinity &instance,
+WrapQueryResult WrapUpdate(hybridsearch &instance,
                            const String &db_name,
                            const String &table_name,
                            WrapParsedExpr *wrap_filter,
@@ -1258,7 +1258,7 @@ void HandleTimeRelatedTypes(ColumnField &output_column_field, SizeT row_count, c
     output_column_field.column_vectors.emplace_back(dst.c_str(), dst.size());
 }
 
-extern template void InfinityThriftService::HandleArrayTypeRecursively<ArrayT>(String &output_str, const DataType &data_type, const ArrayT &data_value, const SharedPtr<ColumnVector> &column_vector);
+extern template void hybridsearchThriftService::HandleArrayTypeRecursively<ArrayT>(String &output_str, const DataType &data_type, const ArrayT &data_value, const SharedPtr<ColumnVector> &column_vector);
 
 void HandleArrayType(ColumnField &output_column_field, SizeT row_count, const SharedPtr<ColumnVector> &column_vector) {
     const auto &column_data_type = *column_vector->data_type();
@@ -1268,7 +1268,7 @@ void HandleArrayType(ColumnField &output_column_field, SizeT row_count, const Sh
     auto *array_data_ptr = reinterpret_cast<const ArrayT *>(column_vector->data());
     String dst;
     for (SizeT index = 0; index < row_count; ++index) {
-        InfinityThriftService::HandleArrayTypeRecursively(dst, column_data_type, array_data_ptr[index], column_vector);
+        hybridsearchThriftService::HandleArrayTypeRecursively(dst, column_data_type, array_data_ptr[index], column_vector);
     }
     output_column_field.column_vectors.emplace_back(dst.c_str(), dst.size());
     output_column_field.column_type = column_vector->data_type()->type();
@@ -1441,7 +1441,7 @@ void ProcessDataBlocks(QueryResult &query_result, WrapQueryResult &wrap_query_re
     HandleColumnDef(wrap_query_result, query_result.result_table_->ColumnCount(), query_result.result_table_->definition_ptr_, columns);
 }
 
-WrapQueryResult WrapSearch(Infinity &instance,
+WrapQueryResult WrapSearch(hybridsearch &instance,
                            const String &db_name,
                            const String &table_name,
                            Vector<WrapParsedExpr> select_list,
@@ -1659,7 +1659,7 @@ WrapQueryResult WrapSearch(Infinity &instance,
     return wrap_query_result;
 }
 
-WrapQueryResult WrapExplain(Infinity &instance,
+WrapQueryResult WrapExplain(hybridsearch &instance,
                             const String &db_name,
                             const String &table_name,
                             ExplainType explain_type,
@@ -1877,7 +1877,7 @@ WrapQueryResult WrapExplain(Infinity &instance,
     return wrap_query_result;
 }
 
-WrapQueryResult WrapShowColumns(Infinity &instance, const String &db_name, const String &table_name) {
+WrapQueryResult WrapShowColumns(hybridsearch &instance, const String &db_name, const String &table_name) {
     auto query_result = instance.ShowColumns(db_name, table_name);
     if (!query_result.IsOk()) {
         return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
@@ -1889,7 +1889,7 @@ WrapQueryResult WrapShowColumns(Infinity &instance, const String &db_name, const
     return wrap_query_result;
 }
 
-WrapQueryResult WrapShowTables(Infinity &instance, const String &db_name) {
+WrapQueryResult WrapShowTables(hybridsearch &instance, const String &db_name) {
     auto query_result = instance.ShowTables(db_name);
     if (!query_result.IsOk()) {
         return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
@@ -1901,7 +1901,7 @@ WrapQueryResult WrapShowTables(Infinity &instance, const String &db_name) {
     return wrap_query_result;
 }
 
-WrapQueryResult WrapOptimize(Infinity &instance, const String &db_name, const String &table_name, WrapOptimizeOptions optimize_options) {
+WrapQueryResult WrapOptimize(hybridsearch &instance, const String &db_name, const String &table_name, WrapOptimizeOptions optimize_options) {
     OptimizeOptions options;
     options.index_name_ = std::move(optimize_options.index_name_);
     for (auto &param : optimize_options.opt_params_) {
@@ -1911,7 +1911,7 @@ WrapQueryResult WrapOptimize(Infinity &instance, const String &db_name, const St
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-WrapQueryResult WrapAddColumns(Infinity &instance, const String &db_name, const String &table_name, Vector<WrapColumnDef> wrapped_column_defs) {
+WrapQueryResult WrapAddColumns(hybridsearch &instance, const String &db_name, const String &table_name, Vector<WrapColumnDef> wrapped_column_defs) {
     Vector<ColumnDef *> column_defs_ptr;
     auto res = UnwrapColumnDefs(wrapped_column_defs, column_defs_ptr);
     if (res.has_value()) {
@@ -1925,9 +1925,9 @@ WrapQueryResult WrapAddColumns(Infinity &instance, const String &db_name, const 
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-WrapQueryResult WrapDropColumns(Infinity &instance, const String &db_name, const String &table_name, Vector<String> column_names) {
+WrapQueryResult WrapDropColumns(hybridsearch &instance, const String &db_name, const String &table_name, Vector<String> column_names) {
     auto query_result = instance.DropColumns(db_name, table_name, std::move(column_names));
     return WrapQueryResult(query_result.ErrorCode(), query_result.ErrorMsg());
 }
 
-} // namespace infinity
+} // namespace hybridsearch

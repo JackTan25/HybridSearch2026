@@ -5,25 +5,25 @@ import os
 import pandas as pd
 import pytest
 from common import common_values
-import infinity
-import infinity.index as index
-import infinity_embedded
+import hybridsearch
+import hybridsearch.index as index
+import hybridsearch_embedded
 from numpy import dtype
-from infinity.errors import ErrorCode
-from infinity.common import ConflictType, SortType
+from hybridsearch.errors import ErrorCode
+from hybridsearch.common import ConflictType, SortType
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
-from infinity_http import infinity_http
+from hybridsearch_http import hybridsearch_http
 from common.utils import copy_data
 from datetime import date, time, datetime
 
 
 @pytest.fixture(scope="class")
-def local_infinity(request):
-    return request.config.getoption("--local-infinity")
+def local_hybridsearch(request):
+    return request.config.getoption("--local-hybridsearch")
 
 
 @pytest.fixture(scope="class")
@@ -32,33 +32,33 @@ def http(request):
 
 
 @pytest.fixture(scope="class")
-def setup_class(request, local_infinity, http):
-    if local_infinity:
-        module = importlib.import_module("infinity_embedded.index")
+def setup_class(request, local_hybridsearch, http):
+    if local_hybridsearch:
+        module = importlib.import_module("hybridsearch_embedded.index")
         globals()["index"] = module
-        module = importlib.import_module("infinity_embedded.common")
+        module = importlib.import_module("hybridsearch_embedded.common")
         func = getattr(module, 'ConflictType')
         globals()['ConflictType'] = func
-        func = getattr(module, 'InfinityException')
-        globals()['InfinityException'] = func
+        func = getattr(module, 'hybridsearchException')
+        globals()['hybridsearchException'] = func
         uri = common_values.TEST_LOCAL_PATH
-        request.cls.infinity_obj = infinity_embedded.connect(uri)
+        request.cls.hybridsearch_obj = hybridsearch_embedded.connect(uri)
     elif http:
         uri = common_values.TEST_LOCAL_HOST
-        request.cls.infinity_obj = infinity_http()
+        request.cls.hybridsearch_obj = hybridsearch_http()
     else:
         uri = common_values.TEST_LOCAL_HOST
-        request.cls.infinity_obj = infinity.connect(uri)
+        request.cls.hybridsearch_obj = hybridsearch.connect(uri)
     request.cls.uri = uri
     yield
-    request.cls.infinity_obj.disconnect()
+    request.cls.hybridsearch_obj.disconnect()
 
 
 @pytest.mark.usefixtures("setup_class")
 @pytest.mark.usefixtures("suffix")
-class TestInfinity:
+class Testhybridsearch:
     # def test_version(self):
-    #     self.test_infinity_obj._test_version()
+    #     self.test_hybridsearch_obj._test_version()
     def test_select(self, suffix):
         """
         target: test table select apis
@@ -118,9 +118,9 @@ class TestInfinity:
             - 'test_select'
         expect: all operations successfully
         """
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
 
-        # infinity
+        # hybridsearch
         db_obj.drop_table("test_select" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table(
             "test_select" + suffix, {
@@ -241,7 +241,7 @@ class TestInfinity:
 
         """
 
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_datetime" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table(
             "test_select_datetime" + suffix, {
@@ -344,9 +344,9 @@ class TestInfinity:
             - select avg(c2) from test_select_aggregate
                 - 2.387692308
         """
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
 
-        # infinity
+        # hybridsearch
         db_obj.drop_table("test_select_aggregate" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table(
             "test_select_aggregate" + suffix, {
@@ -431,7 +431,7 @@ class TestInfinity:
         expect: all operations successfully
 
         """
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_varchar" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_varchar" + suffix,
                             {"c1": {"type": "varchar", "constraints": ["primary key", "not null"]},
@@ -463,7 +463,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     def test_select_big(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         res = db_obj.drop_table("test_select_big" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_big" + suffix, {
             "c1": {"type": "varchar", "constraints": ["primary key", "not null"]},
@@ -496,7 +496,7 @@ class TestInfinity:
         test_obj.test_select_embedding()
 
         """
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
 
         db_obj.drop_table("test_select_embedding" + suffix, ConflictType.Ignore)
 
@@ -507,7 +507,7 @@ class TestInfinity:
 
         if not check_data:
             copy_data("embedding_int_dim3.csv")
-        test_dir = "/var/infinity/test_data/"
+        test_dir = "/var/hybridsearch/test_data/"
         test_csv_dir = test_dir + "embedding_int_dim3.csv"
         assert os.path.exists(test_csv_dir)
 
@@ -532,7 +532,7 @@ class TestInfinity:
     def test_select_embedding_float(self, check_data, suffix):
         """
         Method: test_select_embedding_float
-        This method performs a series of tests on the `test_select_embedding_float` table in the Infinity database.
+        This method performs a series of tests on the `test_select_embedding_float` table in the hybridsearch database.
 
         Parameters:
         None
@@ -544,7 +544,7 @@ class TestInfinity:
         test_select_embedding_float()
 
         """
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
 
         db_obj.drop_table("test_select_embedding_float" + suffix, ConflictType.Ignore)
 
@@ -553,7 +553,7 @@ class TestInfinity:
 
         table_obj = db_obj.get_table("test_select_embedding_float" + suffix)
 
-        test_dir = "/var/infinity/test_data/"
+        test_dir = "/var/hybridsearch/test_data/"
         test_csv_dir = test_dir + "embedding_float_dim4.csv"
         if not check_data:
             copy_data("embedding_float_dim4.csv")
@@ -602,7 +602,7 @@ class TestInfinity:
         Example Usage:
         test_select_big_embedding()
         """
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
 
         db_obj.drop_table("test_select_big_embedding" + suffix, ConflictType.Ignore)
 
@@ -613,7 +613,7 @@ class TestInfinity:
 
         if not check_data:
             copy_data("embedding_int_dim3.csv")
-        test_dir = "/var/infinity/test_data/"
+        test_dir = "/var/hybridsearch/test_data/"
         test_csv_dir = test_dir + "embedding_int_dim3.csv"
         assert os.path.exists(test_csv_dir)
 
@@ -627,7 +627,7 @@ class TestInfinity:
 
     @pytest.mark.usefixtures("skip_if_http")
     def test_select_same_output(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_same_output" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_same_output" + suffix, {
             "c1": {"type": "int"}, "c2": {"type": "int"}}, ConflictType.Error)
@@ -647,7 +647,7 @@ class TestInfinity:
 
     @pytest.mark.usefixtures("skip_if_http")
     def test_empty_table(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_empty_table" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_empty_table" + suffix, {
             "c1": {"type": "int"}, "c2": {"type": "int"}}, ConflictType.Error)
@@ -678,7 +678,7 @@ class TestInfinity:
     ])
     def test_valid_filter_expression(self, filter_list, suffix):
         # connect
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_valid_filter_expression" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_valid_filter_expression" + suffix, {
             "c1": {"type": "int"}, "c2": {"type": "float"}}, ConflictType.Error)
@@ -706,7 +706,7 @@ class TestInfinity:
     ])
     def test_invalid_filter_expression(self, filter_list, suffix):
         # connect
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_invalid_filter_expression" + suffix,
                           ConflictType.Ignore)
         table_obj = db_obj.create_table("test_invalid_filter_expression" + suffix, {
@@ -726,7 +726,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     def test_filter_fulltext(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_filter_fulltext" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_filter_fulltext" + suffix,
                                         {"num": {"type": "int"}, "doc": {"type": "varchar"}}, ConflictType.Error)
@@ -777,7 +777,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     def test_neg_func(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_neg_func" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_neg_func" + suffix, {"num": {"type": "float64"}}, ConflictType.Error)
         table_obj.insert([{"num": 1.0}, {"num": 2.0}, {"num": 3.0}])
@@ -789,9 +789,9 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     def test_sort(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
 
-        # infinity
+        # hybridsearch
         db_obj.drop_table("test_sort" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table(
             "test_sort" + suffix, {
@@ -829,7 +829,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     def test_select_varchar_length(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_varchar_length" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_varchar_length" + suffix,
                             {"c1": {"type": "varchar", "constraints": ["primary key", "not null"]},
@@ -856,7 +856,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     def test_select_regex(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_regex" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_regex" + suffix,
                             {"c1": {"type": "varchar", "constraints": ["primary key", "not null"]},
@@ -877,7 +877,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     def test_select_upper_lower(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_upper_lower" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_upper_lower" + suffix,
                             {"c1": {"type": "varchar", "constraints": ["primary key", "not null"]},
@@ -898,7 +898,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     def test_select_substring(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_substring" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_substring" + suffix,
                             {"c1": {"type": "varchar", "constraints": ["primary key", "not null"]},
@@ -919,7 +919,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     def test_select_trim(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_trim" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_trim" + suffix,
                             {"c1": {"type": "varchar", "constraints": ["primary key", "not null"]},
@@ -952,7 +952,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     def test_select_position(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_position" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_position" + suffix,
                             {"c1": {"type": "varchar", "constraints": ["primary key", "not null"]},
@@ -973,7 +973,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     def test_select_sqrt(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_sqrt" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_sqrt" + suffix,
                             {"c1": {"type": "integer"},
@@ -994,7 +994,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     def test_select_round(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_round" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_round" + suffix,
                             {"c1": {"type": "integer"},
@@ -1025,7 +1025,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
     
     def test_select_truncate(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_truncate" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_truncate" + suffix,
                             {"c1": {"type": "double"},
@@ -1050,7 +1050,7 @@ class TestInfinity:
 
 
     def test_select_reverse(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_reverse" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_reverse" + suffix,
                             {"c1": {"type": "varchar", "constraints": ["primary key", "not null"]},
@@ -1070,7 +1070,7 @@ class TestInfinity:
 
 
     def test_select_year(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_year" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table(
             "test_select_year" + suffix, {
@@ -1093,7 +1093,7 @@ class TestInfinity:
 
 
     def test_select_month(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_month" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table(
             "test_select_month" + suffix, {
@@ -1115,7 +1115,7 @@ class TestInfinity:
 
 
     def test_select_day(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_day" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_day" + suffix,
                             {"c1": {"type": "date"},
@@ -1135,7 +1135,7 @@ class TestInfinity:
 
     
     def test_select_hour(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_hour" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_hour" + suffix,
                             {"c1": {"type": "time"},
@@ -1155,7 +1155,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
     
     def test_select_minute(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_minute" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_minute" + suffix,
                             {"c1": {"type": "time"},
@@ -1174,7 +1174,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
     
     def test_select_second(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_second" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_second" + suffix,
                             {"c1": {"type": "time"},
@@ -1194,7 +1194,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     def test_select_day_of_month(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_day_of_month" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_day_of_month" + suffix,
                             {"c1": {"type": "date"},
@@ -1214,7 +1214,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     def test_select_day_of_year(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_day_of_year" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_day_of_year" + suffix,
                             {"c1": {"type": "date"},
@@ -1234,7 +1234,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     def test_select_day_of_week(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_day_of_week" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_day_of_week" + suffix,
                             {"c1": {"type": "date"},
@@ -1254,7 +1254,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     def test_select_weekday(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_weekday" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_weekday" + suffix,
                             {"c1": {"type": "date"},
@@ -1274,7 +1274,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     def test_select_era(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_era" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_era" + suffix,
                             {"c1": {"type": "date"},
@@ -1294,7 +1294,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     def test_select_epoch(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_epoch" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_epoch" + suffix,
                             {"c1": {"type": "date"},
@@ -1314,7 +1314,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     def test_select_quarter(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_quarter" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_quarter" + suffix,
                             {"c1": {"type": "date"},
@@ -1334,7 +1334,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     def test_select_century(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_century" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_century" + suffix,
                             {"c1": {"type": "date"},
@@ -1354,7 +1354,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     def test_select_week_of_year(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_week_of_year" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_week_of_year" + suffix,
                             {"c1": {"type": "date"},
@@ -1374,7 +1374,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     def test_select_date_part(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_date_part" + suffix, ConflictType.Ignore)
         db_obj.create_table("test_select_date_part" + suffix,
                             {"c1": {"type": "date"},

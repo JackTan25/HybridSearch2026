@@ -27,13 +27,13 @@ import data_table;
 import base_table_ref;
 import load_meta;
 import knn_expression;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import data_type;
 import logger;
 import physical_scan_base;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PhysicalMergeKnn final : public PhysicalScanBase {
 public:
@@ -76,4 +76,4 @@ public:
     SharedPtr<BaseExpression> filter_expression_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

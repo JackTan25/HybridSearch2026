@@ -21,18 +21,18 @@ import profiler;
 import status;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct QueryInfo {
     QueryInfo(u64 query_id, String query_kind, String query_text, BaseProfiler profiler)
         : query_id_(query_id), query_kind_(std::move(query_kind)), query_text_(std::move(query_text)), profiler_(std::move(profiler)) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("QueryInfo");
 #endif
     }
 
     ~QueryInfo() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("QueryInfo");
 #endif
     }
@@ -47,13 +47,13 @@ export class SessionManager {
 
 public:
     SessionManager() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("SessionManager");
 #endif
     }
 
     ~SessionManager() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("SessionManager");
 #endif
     }
@@ -147,4 +147,4 @@ private:
     Map<u64, SharedPtr<QueryInfo>> query_record_container_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

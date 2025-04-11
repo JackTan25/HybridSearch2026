@@ -13,8 +13,8 @@
 # limitations under the License.
 
 from threading import Lock
-import infinity
-from infinity.common import NetworkAddress
+import hybridsearch
+from hybridsearch.common import NetworkAddress
 import logging
 
 
@@ -31,8 +31,8 @@ class ConnectionPool(object):
         self.destroy()
 
     def _create_conn(self):
-        infinity_coon = infinity.connect(self.uri_)
-        self.free_pool_.append(infinity_coon)
+        hybridsearch_coon = hybridsearch.connect(self.uri_)
+        self.free_pool_.append(hybridsearch_coon)
 
     def get_conn(self):
         with self.lock_:

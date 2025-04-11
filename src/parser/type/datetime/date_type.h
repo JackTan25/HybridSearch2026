@@ -17,7 +17,7 @@
 #include "interval_type.h"
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 struct DateType {
     friend struct DateTimeType;
@@ -75,4 +75,4 @@ public:
     static bool OuterDate2YMD(DateType input, int32_t &year, int32_t &month, int32_t &day);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

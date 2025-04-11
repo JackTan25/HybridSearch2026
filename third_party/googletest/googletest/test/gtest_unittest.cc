@@ -2723,9 +2723,9 @@ class FloatingPointTest : public Test {
     RawType close_to_one;
     RawType further_from_one;
 
-    RawType infinity;
-    RawType close_to_infinity;
-    RawType further_from_infinity;
+    RawType hybridsearch;
+    RawType close_to_hybridsearch;
+    RawType further_from_hybridsearch;
 
     RawType nan1;
     RawType nan2;
@@ -2756,17 +2756,17 @@ class FloatingPointTest : public Test {
     values_.further_from_one =
         Floating::ReinterpretBits(one_bits + max_ulps + 1);
 
-    // +infinity.
-    values_.infinity = Floating::Infinity();
+    // +hybridsearch.
+    values_.hybridsearch = Floating::hybridsearch();
 
-    // The bits that represent +infinity.
-    const Bits infinity_bits = Floating(values_.infinity).bits();
+    // The bits that represent +hybridsearch.
+    const Bits hybridsearch_bits = Floating(values_.hybridsearch).bits();
 
-    // Makes some numbers close to infinity.
-    values_.close_to_infinity =
-        Floating::ReinterpretBits(infinity_bits - max_ulps);
-    values_.further_from_infinity =
-        Floating::ReinterpretBits(infinity_bits - max_ulps - 1);
+    // Makes some numbers close to hybridsearch.
+    values_.close_to_hybridsearch =
+        Floating::ReinterpretBits(hybridsearch_bits - max_ulps);
+    values_.further_from_hybridsearch =
+        Floating::ReinterpretBits(hybridsearch_bits - max_ulps - 1);
 
     // Makes some NAN's.  Sets the most significant bit of the fraction so that
     // our NaN's are quiet; trying to process a signaling NaN would raise an
@@ -2838,19 +2838,19 @@ TEST_F(FloatTest, LargeDiff) {
   EXPECT_NONFATAL_FAILURE(EXPECT_FLOAT_EQ(2.5, 3.0), "3.0");
 }
 
-// Tests comparing with infinity.
+// Tests comparing with hybridsearch.
 //
 // This ensures that no overflow occurs when comparing numbers whose
 // absolute value is very large.
-TEST_F(FloatTest, Infinity) {
-  EXPECT_FLOAT_EQ(values_.infinity, values_.close_to_infinity);
-  EXPECT_FLOAT_EQ(-values_.infinity, -values_.close_to_infinity);
-  EXPECT_NONFATAL_FAILURE(EXPECT_FLOAT_EQ(values_.infinity, -values_.infinity),
-                          "-values_.infinity");
+TEST_F(FloatTest, hybridsearch) {
+  EXPECT_FLOAT_EQ(values_.hybridsearch, values_.close_to_hybridsearch);
+  EXPECT_FLOAT_EQ(-values_.hybridsearch, -values_.close_to_hybridsearch);
+  EXPECT_NONFATAL_FAILURE(EXPECT_FLOAT_EQ(values_.hybridsearch, -values_.hybridsearch),
+                          "-values_.hybridsearch");
 
-  // This is interesting as the representations of infinity and nan1
+  // This is interesting as the representations of hybridsearch and nan1
   // are only 1 DLP apart.
-  EXPECT_NONFATAL_FAILURE(EXPECT_FLOAT_EQ(values_.infinity, values_.nan1),
+  EXPECT_NONFATAL_FAILURE(EXPECT_FLOAT_EQ(values_.hybridsearch, values_.nan1),
                           "values_.nan1");
 }
 
@@ -2868,14 +2868,14 @@ TEST_F(FloatTest, NaN) {
   EXPECT_NONFATAL_FAILURE(EXPECT_FLOAT_EQ(v.nan1, v.nan2), "v.nan2");
   EXPECT_NONFATAL_FAILURE(EXPECT_FLOAT_EQ(1.0, v.nan1), "v.nan1");
 
-  EXPECT_FATAL_FAILURE(ASSERT_FLOAT_EQ(v.nan1, v.infinity), "v.infinity");
+  EXPECT_FATAL_FAILURE(ASSERT_FLOAT_EQ(v.nan1, v.hybridsearch), "v.hybridsearch");
 }
 
 // Tests that *_FLOAT_EQ are reflexive.
 TEST_F(FloatTest, Reflexive) {
   EXPECT_FLOAT_EQ(0.0, 0.0);
   EXPECT_FLOAT_EQ(1.0, 1.0);
-  ASSERT_FLOAT_EQ(values_.infinity, values_.infinity);
+  ASSERT_FLOAT_EQ(values_.hybridsearch, values_.hybridsearch);
 }
 
 // Tests that *_FLOAT_EQ are commutative.
@@ -2930,14 +2930,14 @@ TEST_F(FloatTest, FloatLEFails) {
 
   EXPECT_NONFATAL_FAILURE(
       {  // NOLINT
-        EXPECT_PRED_FORMAT2(FloatLE, values_.nan1, values_.infinity);
+        EXPECT_PRED_FORMAT2(FloatLE, values_.nan1, values_.hybridsearch);
       },
-      "(values_.nan1) <= (values_.infinity)");
+      "(values_.nan1) <= (values_.hybridsearch)");
   EXPECT_NONFATAL_FAILURE(
       {  // NOLINT
-        EXPECT_PRED_FORMAT2(FloatLE, -values_.infinity, values_.nan1);
+        EXPECT_PRED_FORMAT2(FloatLE, -values_.hybridsearch, values_.nan1);
       },
-      "(-values_.infinity) <= (values_.nan1)");
+      "(-values_.hybridsearch) <= (values_.nan1)");
   EXPECT_FATAL_FAILURE(
       {  // NOLINT
         ASSERT_PRED_FORMAT2(FloatLE, values_.nan1, values_.nan1);
@@ -2996,19 +2996,19 @@ TEST_F(DoubleTest, LargeDiff) {
   EXPECT_NONFATAL_FAILURE(EXPECT_DOUBLE_EQ(2.0, 3.0), "3.0");
 }
 
-// Tests comparing with infinity.
+// Tests comparing with hybridsearch.
 //
 // This ensures that no overflow occurs when comparing numbers whose
 // absolute value is very large.
-TEST_F(DoubleTest, Infinity) {
-  EXPECT_DOUBLE_EQ(values_.infinity, values_.close_to_infinity);
-  EXPECT_DOUBLE_EQ(-values_.infinity, -values_.close_to_infinity);
-  EXPECT_NONFATAL_FAILURE(EXPECT_DOUBLE_EQ(values_.infinity, -values_.infinity),
-                          "-values_.infinity");
+TEST_F(DoubleTest, hybridsearch) {
+  EXPECT_DOUBLE_EQ(values_.hybridsearch, values_.close_to_hybridsearch);
+  EXPECT_DOUBLE_EQ(-values_.hybridsearch, -values_.close_to_hybridsearch);
+  EXPECT_NONFATAL_FAILURE(EXPECT_DOUBLE_EQ(values_.hybridsearch, -values_.hybridsearch),
+                          "-values_.hybridsearch");
 
-  // This is interesting as the representations of infinity_ and nan1_
+  // This is interesting as the representations of hybridsearch_ and nan1_
   // are only 1 DLP apart.
-  EXPECT_NONFATAL_FAILURE(EXPECT_DOUBLE_EQ(values_.infinity, values_.nan1),
+  EXPECT_NONFATAL_FAILURE(EXPECT_DOUBLE_EQ(values_.hybridsearch, values_.nan1),
                           "values_.nan1");
 }
 
@@ -3016,18 +3016,18 @@ TEST_F(DoubleTest, Infinity) {
 TEST_F(DoubleTest, NaN) {
   static const DoubleTest::TestValues& v = this->values_;
 
-  // Nokia's STLport crashes if we try to output infinity or NaN.
+  // Nokia's STLport crashes if we try to output hybridsearch or NaN.
   EXPECT_NONFATAL_FAILURE(EXPECT_DOUBLE_EQ(v.nan1, v.nan1), "v.nan1");
   EXPECT_NONFATAL_FAILURE(EXPECT_DOUBLE_EQ(v.nan1, v.nan2), "v.nan2");
   EXPECT_NONFATAL_FAILURE(EXPECT_DOUBLE_EQ(1.0, v.nan1), "v.nan1");
-  EXPECT_FATAL_FAILURE(ASSERT_DOUBLE_EQ(v.nan1, v.infinity), "v.infinity");
+  EXPECT_FATAL_FAILURE(ASSERT_DOUBLE_EQ(v.nan1, v.hybridsearch), "v.hybridsearch");
 }
 
 // Tests that *_DOUBLE_EQ are reflexive.
 TEST_F(DoubleTest, Reflexive) {
   EXPECT_DOUBLE_EQ(0.0, 0.0);
   EXPECT_DOUBLE_EQ(1.0, 1.0);
-  ASSERT_DOUBLE_EQ(values_.infinity, values_.infinity);
+  ASSERT_DOUBLE_EQ(values_.hybridsearch, values_.hybridsearch);
 }
 
 // Tests that *_DOUBLE_EQ are commutative.
@@ -3089,14 +3089,14 @@ TEST_F(DoubleTest, DoubleLEFails) {
 
   EXPECT_NONFATAL_FAILURE(
       {  // NOLINT
-        EXPECT_PRED_FORMAT2(DoubleLE, values_.nan1, values_.infinity);
+        EXPECT_PRED_FORMAT2(DoubleLE, values_.nan1, values_.hybridsearch);
       },
-      "(values_.nan1) <= (values_.infinity)");
+      "(values_.nan1) <= (values_.hybridsearch)");
   EXPECT_NONFATAL_FAILURE(
       {  // NOLINT
-        EXPECT_PRED_FORMAT2(DoubleLE, -values_.infinity, values_.nan1);
+        EXPECT_PRED_FORMAT2(DoubleLE, -values_.hybridsearch, values_.nan1);
       },
-      " (-values_.infinity) <= (values_.nan1)");
+      " (-values_.hybridsearch) <= (values_.nan1)");
   EXPECT_FATAL_FAILURE(
       {  // NOLINT
         ASSERT_PRED_FORMAT2(DoubleLE, values_.nan1, values_.nan1);

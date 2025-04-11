@@ -23,10 +23,10 @@ import bind_context;
 import function_set;
 import function;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 SharedPtr<BaseExpression> LimitBinder::BuildExpression(const ParsedExpr &expr, BindContext *bind_context_ptr, i64 depth, bool root) {
     switch (expr.type_) {
@@ -67,4 +67,4 @@ SharedPtr<BaseExpression> LimitBinder::BuildKnnExpr(const KnnExpr &, BindContext
     return nullptr;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -18,10 +18,10 @@ module;
 
 export module create_index_info;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::CreateIndexInfo;
-export using infinity::IndexInfo;
-export using infinity::IndexType;
+export using hybridsearch::CreateIndexInfo;
+export using hybridsearch::IndexInfo;
+export using hybridsearch::IndexType;
 
-} // namespace infinity
+} // namespace hybridsearch

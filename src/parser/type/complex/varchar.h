@@ -17,7 +17,7 @@
 #include <cstdint>
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 class FixHeapManager;
 
@@ -69,4 +69,4 @@ struct Varchar {
 
 #pragma pack()
 
-} // namespace infinity
+} // namespace hybridsearch

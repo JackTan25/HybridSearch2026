@@ -19,7 +19,7 @@ module count;
 import stl;
 import catalog;
 import logical_type;
-import infinity_exception;
+import hybridsearch_exception;
 import aggregate_function;
 import aggregate_function_set;
 
@@ -27,7 +27,7 @@ import third_party;
 import internal_types;
 import data_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 template <typename ValueType, typename ResultType>
 struct CountState {
@@ -225,4 +225,4 @@ void RegisterCountFunction(const UniquePtr<Catalog> &catalog_ptr) {
     Catalog::AddFunctionSet(catalog_ptr.get(), function_set_ptr);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

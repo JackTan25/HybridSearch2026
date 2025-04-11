@@ -13,22 +13,22 @@
 # limitations under the License.
 
 """
-This example is to connect local infinity instance, create table, insert data, search the data
+This example is to connect local hybridsearch instance, create table, insert data, search the data
 """
 
-# import infinity_embedded as infinity
+# import hybridsearch_embedded as hybridsearch
 from multi_client import use_multi_client
 import os
 import re
 import time
 from MLDR_en.search.colbert_read import load_colbert_list
-import infinity
+import hybridsearch
 import sys
-from infinity.common import LOCAL_HOST
+from hybridsearch.common import LOCAL_HOST
 import pandas as pd
 from utils import add_escape_characters
 
-path_prefix = "/home/ubuntu/infinity/experiments/load_experiments/MLDR_en/search"
+path_prefix = "/home/ubuntu/hybridsearch/experiments/load_experiments/MLDR_en/search"
 
 def extract_number(filename):
     match = re.search(r'(\d+)\.', filename)
@@ -86,11 +86,11 @@ def read_file_content(file_path):
     return None
 
 cost_time = 0
-def tensor_search(infinity_table, question):
+def tensor_search(hybridsearch_table, question):
      global cost_time
      begin_time = time.time()
      res = (
-                infinity_table.output(["docid_col","tensor_col"])
+                hybridsearch_table.output(["docid_col","tensor_col"])
                 .match_tensor("tensor_col", question[0], "float", 10,
                     {'emvb_centroid_nprobe': '2','emvb_threshold_first':'0.3','emvb_threshold_final':'0.4'}
                 )
@@ -105,7 +105,7 @@ def tensor_search(infinity_table, question):
 
 def GetQuestions():
     tensor_embedding_dir = "/home/ubuntu/data_download_data/embedding_reserve/mldr_en/query_tensor_embeddings/vectors"
-    df = pd.read_csv('/home/ubuntu/infinity/experiments/load_experiments/MLDR_en/search/queries_decline_with_id.csv')
+    df = pd.read_csv('/home/ubuntu/hybridsearch/experiments/load_experiments/MLDR_en/search/queries_decline_with_id.csv')
     tensor_names = [f for f in os.listdir(tensor_embedding_dir) if os.path.isfile(os.path.join(tensor_embedding_dir, f))]
     tensor_names = sorted(tensor_names, key=extract_number)
     tensor_file_idx = 0
@@ -123,12 +123,12 @@ def GetQuestions():
 def single_search(questions):
 
     try:
-        #  Use infinity module to connect a remote server
-        infinity_instance = infinity.connect(LOCAL_HOST)
+        #  Use hybridsearch module to connect a remote server
+        hybridsearch_instance = hybridsearch.connect(LOCAL_HOST)
 
         # 'default_db' is the default database
-        db_instance = infinity_instance.get_database("default_db")
-        infinity_table = db_instance.get_table("mldr_en_Table")
+        db_instance = hybridsearch_instance.get_database("default_db")
+        hybridsearch_table = db_instance.get_table("mldr_en_Table")
         with open(path_prefix + '/single_road/tensor_result_23200.txt','w') as result_file:
             id = 0
             time_cost = 0
@@ -136,7 +136,7 @@ def single_search(questions):
             for question in questions:
                 id += 1
                 begin_time = time.time()
-                qb_result, extra_result = tensor_search(infinity_table, question)
+                qb_result, extra_result = tensor_search(hybridsearch_table, question)
                 end_time = time.time()
                 time_cost += (end_time - begin_time) * 1000
                 for i in range(len(qb_result['docid_col'])):
@@ -147,7 +147,7 @@ def single_search(questions):
             print("lastid: ",id)
             time_cost = time_cost / len(questions)
             print(f"time_cost: {time_cost} ms")
-        infinity_instance.disconnect()
+        hybridsearch_instance.disconnect()
         return time_cost
     except Exception as e:
         print(str(e))
@@ -155,7 +155,7 @@ def single_search(questions):
 
 if __name__ == "__main__":
     # 启动服务并在适当的时候杀死它
-    service_command = "/home/ubuntu/infinity/cmake-build-release/src/infinity -f /home/ubuntu/infinity/conf/infinity_conf.toml"  # 示例命令，启动一个简单的 HTTP 服务器
+    service_command = "/home/ubuntu/hybridsearch/cmake-build-release/src/hybridsearch -f /home/ubuntu/hybridsearch/conf/hybridsearch_conf.toml"  # 示例命令，启动一个简单的 HTTP 服务器
     process = subprocess.Popen(service_command, shell=True)
     time.sleep(3)
     print(f"服务已启动，进程 ID: {process.pid}")
@@ -173,7 +173,7 @@ if __name__ == "__main__":
         tfile.write(f"{cost_time/len(questions)} ms")
         tfile.flush()
     # 读取文件内容
-    file_path = '/home/ubuntu/infinity/experiments/query_memory_file'
+    file_path = '/home/ubuntu/hybridsearch/experiments/query_memory_file'
     content = read_file_content(file_path)
     with open(current_dir + "/" + current_file_name_without_extension + "_23200.memory",'w') as mfile:
         mfile.write(content)

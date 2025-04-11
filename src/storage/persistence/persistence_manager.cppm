@@ -24,7 +24,7 @@ import obj_stat_accessor;
 import status;
 
 // A view means a logical plan
-namespace infinity {
+namespace hybridsearch {
 
 export struct ObjAddr {
     String obj_key_{};
@@ -167,4 +167,4 @@ export struct AddrSerializer {
     Vector<ObjStat> obj_stats_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -4,14 +4,14 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
  *  @generated
  */
-#include "infinity_types.h"
+#include "hybridsearch_types.h"
 
 #include <algorithm>
 #include <ostream>
 
 #include <thrift/TToString.h>
 
-namespace infinity_thrift_rpc {
+namespace hybridsearch_thrift_rpc {
 
 int _kLogicTypeValues[] = {
   LogicType::Boolean,

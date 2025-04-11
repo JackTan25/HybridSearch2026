@@ -18,7 +18,7 @@ export module pg_message;
 
 import stl;
 
-export namespace infinity {
+export namespace hybridsearch {
 
 // Each message has the length field to indicate the message size.
 constexpr auto LENGTH_FIELD_SIZE = 4u;
@@ -66,4 +66,4 @@ enum class TransactionStateType : unsigned char {
     kFail = 'E',  // In a failed transaction
 };
 
-} // namespace infinity
+} // namespace hybridsearch

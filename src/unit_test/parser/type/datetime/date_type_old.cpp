@@ -15,23 +15,23 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 import internal_types;
 import parser_assert;
 
-using namespace infinity;
+using namespace hybridsearch;
 class DateTypeOldTest : public BaseTest {};
 
 //
 TEST_F(DateTypeOldTest, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     DateTOld date1;
 
@@ -54,7 +54,7 @@ TEST_F(DateTypeOldTest, test1) {
 }
 
 TEST_F(DateTypeOldTest, TestEqStdChronoForward) {
-    using namespace infinity;
+    using namespace hybridsearch;
     using namespace std;
     using namespace std::chrono;
 
@@ -86,7 +86,7 @@ TEST_F(DateTypeOldTest, TestEqStdChronoForward) {
 }
 
 TEST_F(DateTypeOldTest, TestEqStdChronoBackward) {
-    using namespace infinity;
+    using namespace hybridsearch;
     using namespace std;
     using namespace std::chrono;
 

@@ -15,7 +15,7 @@
 #include "drop_table_info.h"
 #include <sstream>
 
-namespace infinity {
+namespace hybridsearch {
 
 std::string DropTableInfo::ToString() const {
     std::stringstream ss;
@@ -28,4 +28,4 @@ std::string DropTableInfo::ToString() const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

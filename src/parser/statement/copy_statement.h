@@ -18,7 +18,7 @@
 #include "expr/parsed_expr.h"
 #include "statement_common.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class CopyOptionType {
     kFormat,
@@ -62,4 +62,4 @@ public:
     std::vector<ParsedExpr *> *expr_array_{nullptr};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

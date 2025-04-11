@@ -21,7 +21,7 @@ extern "C" {
 
 export module zsv;
 
-namespace infinity {
+namespace hybridsearch {
 
 export using ZsvOpts = zsv_opts;
 
@@ -74,4 +74,4 @@ public:
 
     void SetRowHandler(void (*row_handler)(void *ctx)) { zsv_set_row_handler(parser_, row_handler); }
 };
-} // namespace infinity
+} // namespace hybridsearch

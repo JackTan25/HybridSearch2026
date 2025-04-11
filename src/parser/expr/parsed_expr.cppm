@@ -18,9 +18,9 @@ module;
 
 export module parsed_expr;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::ParsedExpr;
-export using infinity::ParsedExprType;
+export using hybridsearch::ParsedExpr;
+export using hybridsearch::ParsedExprType;
 
-} // namespace infinity
+} // namespace hybridsearch

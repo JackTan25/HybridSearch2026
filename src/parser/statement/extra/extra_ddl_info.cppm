@@ -18,11 +18,11 @@ module;
 
 export module extra_ddl_info;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::ExtraDDLInfo;
-export using infinity::DDLType;
-export using infinity::ConflictType;
-export using infinity::ConflictTypeToStr;
+export using hybridsearch::ExtraDDLInfo;
+export using hybridsearch::DDLType;
+export using hybridsearch::ConflictType;
+export using hybridsearch::ConflictTypeToStr;
 
-} // namespace infinity
+} // namespace hybridsearch

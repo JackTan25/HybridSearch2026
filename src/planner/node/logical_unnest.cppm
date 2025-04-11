@@ -24,7 +24,7 @@ import base_expression;
 import data_type;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalUnnest : public LogicalNode {
 public:
@@ -54,4 +54,4 @@ private:
     u64 unnest_idx_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

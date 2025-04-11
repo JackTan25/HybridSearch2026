@@ -27,7 +27,7 @@
 #include "type/info/sparse_info.h"
 #include <unordered_set>
 
-namespace infinity {
+namespace hybridsearch {
 
 class CreateTableInfo final : public ExtraDDLInfo {
 public:
@@ -42,9 +42,9 @@ public:
     std::vector<ColumnDef *> column_defs_{};
     std::vector<TableConstraint *> constraints_{};
 
-    std::vector<infinity::InitParameter *> properties_{};
+    std::vector<hybridsearch::InitParameter *> properties_{};
 
     SelectStatement *select_{nullptr};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

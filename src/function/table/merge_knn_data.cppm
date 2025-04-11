@@ -24,7 +24,7 @@ import merge_knn;
 import knn_expr;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class MergeKnnHeapType {
     kMaxHeap,
@@ -54,4 +54,4 @@ public:
 
     SharedPtr<MergeKnnBase> merge_knn_base_{};
 };
-} // namespace infinity
+} // namespace hybridsearch

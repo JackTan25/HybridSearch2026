@@ -24,7 +24,7 @@ import base_expression;
 import data_type;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalUnnestAggregate : public LogicalNode {
 public:
@@ -62,4 +62,4 @@ private:
     Vector<SharedPtr<BaseExpression>> unnest_expression_list_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

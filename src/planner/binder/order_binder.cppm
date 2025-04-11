@@ -24,7 +24,7 @@ import parsed_expr;
 
 export module order_binder;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class OrderBinder : public ExpressionBinder {
 public:
@@ -39,4 +39,4 @@ public:
 private:
 };
 
-} // namespace infinity
+} // namespace hybridsearch

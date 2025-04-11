@@ -23,7 +23,7 @@ import base_expression;
 import logical_node;
 import subquery_expression;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class CorrelatedExpressionsDetector final : public LogicalNodeVisitor {
 public:
@@ -43,4 +43,4 @@ private:
     bool is_correlated_{false};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -16,7 +16,7 @@
 #include "spdlog/fmt/fmt.h"
 #include "type/internal_types.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 void MatchSparseExpr::SetSearchColumn(ParsedExpr *&column_expr) {
     column_expr_.reset(column_expr);
@@ -93,4 +93,4 @@ std::string MatchSparseExpr::MetricTypeToString(SparseMetricType metric) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

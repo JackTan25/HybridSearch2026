@@ -15,10 +15,10 @@
 #ifndef SearchScannerSuffix
 #error "SearchScannerSuffix is not defined"
 #endif
-#define INFINITY_CONCAT_INNER(A, B) A##B
-#define INFINITY_CONCAT(A, B) INFINITY_CONCAT_INNER(A, B)
-#define SearchScannerDerived INFINITY_CONCAT(SearchScanner, SearchScannerSuffix)
-#define yyFlexLexer INFINITY_CONCAT(SearchScannerDerived, FlexLexer)
+#define hybridsearch_CONCAT_INNER(A, B) A##B
+#define hybridsearch_CONCAT(A, B) hybridsearch_CONCAT_INNER(A, B)
+#define SearchScannerDerived hybridsearch_CONCAT(SearchScanner, SearchScannerSuffix)
+#define yyFlexLexer hybridsearch_CONCAT(SearchScannerDerived, FlexLexer)
 // clang-format off
 // the order of these includes is important
 #include <FlexLexer.h>
@@ -26,6 +26,6 @@
 // clang-format on
 #undef yyFlexLexer
 #undef SearchScannerDerived
-#undef INFINITY_CONCAT
-#undef INFINITY_CONCAT_INNER
+#undef hybridsearch_CONCAT
+#undef hybridsearch_CONCAT_INNER
 #undef SearchScannerSuffix

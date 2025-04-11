@@ -21,7 +21,7 @@ import stl;
 import term;
 import tokenizer;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class CutGrain {
     kCoarse,
@@ -92,4 +92,4 @@ protected:
 
     bool get_char_offset_{false};
 };
-} // namespace infinity
+} // namespace hybridsearch

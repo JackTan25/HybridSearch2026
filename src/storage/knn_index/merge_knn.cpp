@@ -25,7 +25,7 @@ import status;
 import knn_expr;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 namespace {
 
@@ -99,4 +99,4 @@ Optional<f32> GetKnnThreshold(const Vector<UniquePtr<InitParameter>> &opt_params
     return knn_threshold;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

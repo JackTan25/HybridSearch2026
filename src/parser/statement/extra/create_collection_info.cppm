@@ -18,8 +18,8 @@ module;
 
 export module create_collection_info;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::CreateCollectionInfo;
+export using hybridsearch::CreateCollectionInfo;
 
 }

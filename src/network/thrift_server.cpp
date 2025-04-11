@@ -28,20 +28,20 @@ module;
 #include <thrift/transport/TSocket.h>
 #include <thrift/transport/TTransportUtils.h>
 
-// #include "infinity_thrift/InfinityService.h"
-// #include "infinity_thrift/infinity_types.h"
+// #include "hybridsearch_thrift/hybridsearchService.h"
+// #include "hybridsearch_thrift/hybridsearch_types.h"
 // #include "statement/explain_statement.h"
 // #include "statement/extra/extra_ddl_info.h"
 // #include "statement/statement_common.h"
 
 module thrift_server;
 
-import infinity_thrift_service;
-import infinity_thrift_types;
+import hybridsearch_thrift_service;
+import hybridsearch_thrift_types;
 import logger;
 import third_party;
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 
 using namespace apache::thrift;
 using namespace apache::thrift::concurrency;
@@ -49,15 +49,15 @@ using namespace apache::thrift::protocol;
 using namespace apache::thrift::transport;
 using namespace apache::thrift::server;
 
-namespace infinity {
+namespace hybridsearch {
 
-class InfinityServiceCloneFactory final : public infinity_thrift_rpc::InfinityServiceIfFactory {
+class hybridsearchServiceCloneFactory final : public hybridsearch_thrift_rpc::hybridsearchServiceIfFactory {
 public:
-    ~InfinityServiceCloneFactory() final = default;
+    ~hybridsearchServiceCloneFactory() final = default;
 
-    infinity_thrift_rpc::InfinityServiceIf *getHandler(const ::apache::thrift::TConnectionInfo &connInfo) final { return new InfinityThriftService; }
+    hybridsearch_thrift_rpc::hybridsearchServiceIf *getHandler(const ::apache::thrift::TConnectionInfo &connInfo) final { return new hybridsearchThriftService; }
 
-    void releaseHandler(infinity_thrift_rpc::InfinityServiceIf *handler) final { delete handler; }
+    void releaseHandler(hybridsearch_thrift_rpc::hybridsearchServiceIf *handler) final { delete handler; }
 };
 
 // Thrift server
@@ -71,7 +71,7 @@ void ThreadedThriftServer::Init(const String &server_address, i32 port_no) {
     //    std::cout << "API server listen on: " << server_address << ": " << port_no << std::endl;
     SharedPtr<TBinaryProtocolFactory> binary_protocol_factory = MakeShared<TBinaryProtocolFactory>();
     binary_protocol_factory->setStrict(true, true);
-    server = MakeUnique<TThreadedServer>(MakeShared<infinity_thrift_rpc::InfinityServiceProcessorFactory>(MakeShared<InfinityServiceCloneFactory>()),
+    server = MakeUnique<TThreadedServer>(MakeShared<hybridsearch_thrift_rpc::hybridsearchServiceProcessorFactory>(MakeShared<hybridsearchServiceCloneFactory>()),
                                          MakeShared<TServerSocket>(server_address, port_no),
                                          MakeShared<TBufferedTransportFactory>(),
                                          binary_protocol_factory);
@@ -107,11 +107,11 @@ void PoolThriftServer::Init(const String &server_address, i32 port_no, i32 pool_
     threadManager->threadFactory(threadFactory);
     threadManager->start();
 
-    fmt::print("API server(for Infinity-SDK) listen on {}: {}, connection limit: {}\n", server_address, port_no, pool_size);
+    fmt::print("API server(for hybridsearch-SDK) listen on {}: {}, connection limit: {}\n", server_address, port_no, pool_size);
     //    std::cout << "API server listen on: " << server_address << ": " << port_no << ", thread pool: " << pool_size << std::endl;
 
     server =
-        MakeUnique<TThreadPoolServer>(MakeShared<infinity_thrift_rpc::InfinityServiceProcessorFactory>(MakeShared<InfinityServiceCloneFactory>()),
+        MakeUnique<TThreadPoolServer>(MakeShared<hybridsearch_thrift_rpc::hybridsearchServiceProcessorFactory>(MakeShared<hybridsearchServiceCloneFactory>()),
                                       server_socket,
                                       MakeShared<TBufferedTransportFactory>(),
                                       protocol_factory,
@@ -159,9 +159,9 @@ void PoolThriftServer::Shutdown() {
 void NonBlockPoolThriftServer::Init(const String &server_address, i32 port_no, i32 pool_size) {
 
     SharedPtr<ThreadFactory> thread_factory = MakeShared<ThreadFactory>();
-    service_handler_ = MakeShared<InfinityThriftService>();
-    SharedPtr<infinity_thrift_rpc::InfinityServiceProcessor> service_processor =
-        MakeShared<infinity_thrift_rpc::InfinityServiceProcessor>(service_handler_);
+    service_handler_ = MakeShared<hybridsearchThriftService>();
+    SharedPtr<hybridsearch_thrift_rpc::hybridsearchServiceProcessor> service_processor =
+        MakeShared<hybridsearch_thrift_rpc::hybridsearchServiceProcessor>(service_handler_);
     SharedPtr<TProtocolFactory> protocol_factory = MakeShared<TBinaryProtocolFactory>();
 
     SharedPtr<ThreadManager> threadManager = ThreadManager::newSimpleThreadManager(pool_size);
@@ -178,7 +178,7 @@ void NonBlockPoolThriftServer::Init(const String &server_address, i32 port_no, i
 
     server_thread_ = thread_factory->newThread(MakeShared<TNonblockingServer>(service_processor, protocol_factory, non_block_socket, threadManager));
 
-    //    server = MakeUnique<TThreadPoolServer>(MakeShared<InfinityServiceProcessorFactory>(MakeShared<InfinityServiceCloneFactory>()),
+    //    server = MakeUnique<TThreadPoolServer>(MakeShared<hybridsearchServiceProcessorFactory>(MakeShared<hybridsearchServiceCloneFactory>()),
     //                                           MakeShared<TServerSocket>(port_no),
     //                                           MakeShared<TBufferedTransportFactory>(),
     //                                           MakeShared<TBinaryProtocolFactory>(),
@@ -202,4 +202,4 @@ void NonBlockPoolThriftServer::Shutdown() {
 
 #endif
 
-} // namespace infinity
+} // namespace hybridsearch

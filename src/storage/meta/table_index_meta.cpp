@@ -27,14 +27,14 @@ import txn_state;
 import logger;
 import third_party;
 import table_entry;
-import infinity_exception;
+import hybridsearch_exception;
 import status;
 import extra_ddl_info;
 import txn;
 import create_index_info;
 import base_entry;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct SegmentEntry;
 
@@ -196,4 +196,4 @@ void TableIndexMeta::PickCleanupBySegments(const Vector<SegmentID> &sorted_segme
                               scanner->visible_ts());
 }
 
-} // namespace infinity
+} // namespace hybridsearch

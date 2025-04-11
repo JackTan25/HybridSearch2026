@@ -14,7 +14,7 @@
 
 #include "explain_statement.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 ExplainStatement::~ExplainStatement() {
     if (statement_ != nullptr) {
@@ -25,4 +25,4 @@ ExplainStatement::~ExplainStatement() {
 
 std::string ExplainStatement::ToString() const { return "explain statement"; }
 
-} // namespace infinity
+} // namespace hybridsearch

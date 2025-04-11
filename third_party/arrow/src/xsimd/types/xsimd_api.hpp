@@ -1100,16 +1100,16 @@ namespace xsimd
     /**
      * @ingroup batch_constant
      *
-     * Return a batch of scalars representing positive infinity
-     * @return a batch of positive infinity
+     * Return a batch of scalars representing positive hybridsearch
+     * @return a batch of positive hybridsearch
      */
     template <class B>
-    XSIMD_INLINE B infinity()
+    XSIMD_INLINE B hybridsearch()
     {
         using T = typename B::value_type;
         using A = typename B::arch_type;
         detail::static_check_supported_config<T, A>();
-        return B(std::numeric_limits<T>::infinity());
+        return B(std::numeric_limits<T>::hybridsearch());
     }
 
     /**
@@ -1501,16 +1501,16 @@ namespace xsimd
     /**
      * @ingroup batch_constant
      *
-     * Return a batch of scalars representing positive infinity
-     * @return a batch of positive infinity
+     * Return a batch of scalars representing positive hybridsearch
+     * @return a batch of positive hybridsearch
      */
     template <class B>
-    XSIMD_INLINE B minusinfinity() noexcept
+    XSIMD_INLINE B minushybridsearch() noexcept
     {
         using T = typename B::value_type;
         using A = typename B::arch_type;
         detail::static_check_supported_config<T, A>();
-        return B(-std::numeric_limits<T>::infinity());
+        return B(-std::numeric_limits<T>::hybridsearch());
     }
 
     /**

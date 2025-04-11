@@ -47,7 +47,7 @@ import local_file_handle;
 import knn_filter;
 import txn;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalExport::Init(QueryContext* query_context) {}
 
@@ -1135,4 +1135,4 @@ SharedPtr<arrow::Array> BuildArrowArray(const ColumnDef *column_def, const Colum
     return array;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

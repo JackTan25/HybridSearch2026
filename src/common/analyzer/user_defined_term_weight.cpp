@@ -28,7 +28,7 @@ import status;
 import third_party;
 import defer_op;
 
-namespace infinity {
+namespace hybridsearch {
 
 Tuple<HashMap<String, double>, Status> UserDefinedTermWeight::Run(const Vector<String> &text_array) {
     HashMap<String, double> return_map;
@@ -99,6 +99,6 @@ Tuple<HashMap<String, double>, Status> UserDefinedTermWeight::Run(const Vector<S
     return {return_map, Status::OK()};
 }
 
-} // namespace infinity
+} // namespace hybridsearch
 
 #endif

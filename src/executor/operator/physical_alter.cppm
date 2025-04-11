@@ -23,7 +23,7 @@ import operator_state;
 import physical_operator;
 import physical_operator_type;
 import load_meta;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import data_type;
 import logger;
@@ -32,7 +32,7 @@ import alter_statement;
 import column_def;
 import constant_expr;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PhysicalAlter : public PhysicalOperator {
 public:
@@ -115,4 +115,4 @@ private:
     const Vector<String> &column_names_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

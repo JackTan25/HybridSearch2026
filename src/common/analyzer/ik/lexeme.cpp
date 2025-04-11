@@ -6,7 +6,7 @@ module;
 
 module lexeme;
 
-namespace infinity {
+namespace hybridsearch {
 
 Lexeme::Lexeme(int offset, int begin, int length, int lexeme_type) {
     offset_ = offset;
@@ -38,4 +38,4 @@ std::string Lexeme::ToString() const {
     return strbuf.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

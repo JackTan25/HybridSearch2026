@@ -19,11 +19,11 @@ export module embedding_unary_operator;
 import stl;
 import roaring_bitmap;
 import column_vector;
-import infinity_exception;
+import hybridsearch_exception;
 import embedding_info;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class EmbeddingUnaryOperator {
 public:
@@ -129,4 +129,4 @@ private:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

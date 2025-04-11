@@ -22,7 +22,7 @@ import meta_info;
 import internal_types;
 import data_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class BindingType { kInvalid, kTable, kSubquery, kCTE, kView };
 
@@ -80,4 +80,4 @@ public:
 //
 // };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -23,14 +23,14 @@ import stl;
 import column_vector;
 import vector_buffer;
 
-import infinity_exception;
+import hybridsearch_exception;
 import roaring_bitmap;
 import third_party;
 import internal_types;
 import status;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 template <typename LeftType, typename RightType, typename Operator>
     requires std::same_as<LeftType, RightType> // if they are not same, we need to implement a new function
@@ -948,4 +948,4 @@ private:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

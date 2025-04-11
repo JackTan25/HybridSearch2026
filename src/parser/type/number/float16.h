@@ -15,7 +15,7 @@
 #include <x86intrin.h>
 #endif
 
-namespace infinity {
+namespace hybridsearch {
 namespace detail {
 template <typename T, typename U>
 T bit_cast(const U &u) {
@@ -180,39 +180,39 @@ struct float16_t {
     float f() const { return (float)(*this); }
 };
 
-} // namespace infinity
+} // namespace hybridsearch
 
 namespace std {
 template <>
-struct is_trivial<infinity::float16_t> {
+struct is_trivial<hybridsearch::float16_t> {
     static const bool value = true;
 };
 template <>
-struct is_standard_layout<infinity::float16_t> {
-    static const bool value = true;
-};
-
-template <>
-struct is_floating_point<infinity::float16_t>
-    : std::integral_constant<bool, std::is_same<infinity::float16_t, typename std::remove_cv<infinity::float16_t>::type>::value> {};
-
-template <>
-struct is_signed<infinity::float16_t> {
+struct is_standard_layout<hybridsearch::float16_t> {
     static const bool value = true;
 };
 
 template <>
-struct is_unsigned<infinity::float16_t> {
+struct is_floating_point<hybridsearch::float16_t>
+    : std::integral_constant<bool, std::is_same<hybridsearch::float16_t, typename std::remove_cv<hybridsearch::float16_t>::type>::value> {};
+
+template <>
+struct is_signed<hybridsearch::float16_t> {
+    static const bool value = true;
+};
+
+template <>
+struct is_unsigned<hybridsearch::float16_t> {
     static const bool value = false;
 };
 
 template <>
-struct numeric_limits<infinity::float16_t> {
+struct numeric_limits<hybridsearch::float16_t> {
     static const bool is_specialized = true;
     static const bool is_signed = true;
     static const bool is_integer = false;
     static const bool is_exact = false;
-    static const bool has_infinity = true;
+    static const bool has_hybridsearch = true;
     static const bool has_quiet_NaN = true;
     static const bool has_signaling_NaN = true;
     static const float_denorm_style has_denorm = denorm_present;
@@ -232,15 +232,15 @@ struct numeric_limits<infinity::float16_t> {
     static const bool traps = true;
     static const bool tinyness_before = false;
 
-    static infinity::float16_t(min)() { return infinity::float16_t((uint16_t)0x400); }
-    static infinity::float16_t lowest() { return infinity::float16_t((uint16_t)0xfbff); }
-    static infinity::float16_t(max)() { return infinity::float16_t((uint16_t)0x7bff); }
-    static infinity::float16_t epsilon() { return infinity::float16_t((uint16_t)0x1400); }
-    static infinity::float16_t round_error() { return infinity::float16_t(0.5f); }
-    static infinity::float16_t infinity() { return infinity::float16_t((uint16_t)0x7c00); }
-    static infinity::float16_t quiet_NaN() { return infinity::float16_t((uint16_t)0x7e00); }
-    static infinity::float16_t signaling_NaN() { return infinity::float16_t((uint16_t)0x7e00); }
-    static infinity::float16_t denorm_min() { return infinity::float16_t((uint16_t)0x1); }
+    static hybridsearch::float16_t(min)() { return hybridsearch::float16_t((uint16_t)0x400); }
+    static hybridsearch::float16_t lowest() { return hybridsearch::float16_t((uint16_t)0xfbff); }
+    static hybridsearch::float16_t(max)() { return hybridsearch::float16_t((uint16_t)0x7bff); }
+    static hybridsearch::float16_t epsilon() { return hybridsearch::float16_t((uint16_t)0x1400); }
+    static hybridsearch::float16_t round_error() { return hybridsearch::float16_t(0.5f); }
+    static hybridsearch::float16_t hybridsearch() { return hybridsearch::float16_t((uint16_t)0x7c00); }
+    static hybridsearch::float16_t quiet_NaN() { return hybridsearch::float16_t((uint16_t)0x7e00); }
+    static hybridsearch::float16_t signaling_NaN() { return hybridsearch::float16_t((uint16_t)0x7e00); }
+    static hybridsearch::float16_t denorm_min() { return hybridsearch::float16_t((uint16_t)0x1); }
 };
 
 } // namespace std

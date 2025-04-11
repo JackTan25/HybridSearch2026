@@ -14,8 +14,8 @@
 
 #include "drop_statement.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 std::string DropStatement::ToString() const { return drop_info_->ToString(); }
 
-} // namespace infinity
+} // namespace hybridsearch

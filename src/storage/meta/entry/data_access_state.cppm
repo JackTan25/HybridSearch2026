@@ -22,7 +22,7 @@ import column_vector;
 
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct SegmentEntry;
 
@@ -80,4 +80,4 @@ export enum class ScanLocation {
     kGlobal,
 };
 
-} // namespace infinity
+} // namespace hybridsearch

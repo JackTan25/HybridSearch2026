@@ -18,7 +18,7 @@ import stl;
 
 export module fastpfor;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class FastPForCodec { SIMDFastPFor, SIMDNewPFor, StreamVByte, SIMDBitPacking };
 
@@ -46,4 +46,4 @@ export using SIMDNewPFor = FastPForWrapper<FastPForCodec::SIMDNewPFor>;
 export using StreamVByte = FastPForWrapper<FastPForCodec::StreamVByte>;
 export using SIMDBitPacking = FastPForWrapper<FastPForCodec::SIMDBitPacking>;
 
-} // namespace infinity
+} // namespace hybridsearch

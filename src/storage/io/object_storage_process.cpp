@@ -23,13 +23,13 @@ import stl;
 import object_storage_task;
 import logger;
 import blocking_queue;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import virtual_store;
 
 namespace fs = std::filesystem;
 
-namespace infinity {
+namespace hybridsearch {
 
 void ObjectStorageProcess::Start() {
     processor_thread_ = Thread([this] { Process(); });
@@ -125,4 +125,4 @@ void ObjectStorageProcess::Process() {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

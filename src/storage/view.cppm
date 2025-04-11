@@ -23,7 +23,7 @@ import create_view_info;
 import data_type;
 
 // A view means a logical plan
-namespace infinity {
+namespace hybridsearch {
 
 export class View {
 public:
@@ -47,4 +47,4 @@ private:
     SharedPtr<Vector<String>> column_names_{};
     SharedPtr<Vector<SharedPtr<DataType>>> column_types_{};
 };
-} // namespace infinity
+} // namespace hybridsearch

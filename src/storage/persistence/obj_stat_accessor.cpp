@@ -19,12 +19,12 @@ module;
 
 module obj_stat_accessor;
 
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 import third_party;
 import obj_status;
 
-namespace infinity {
+namespace hybridsearch {
 
 // ObjectStatMap
 
@@ -366,4 +366,4 @@ bool ObjectStatAccessor_ObjectStorage::Envict(Vector<String> &drop_keys) {
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

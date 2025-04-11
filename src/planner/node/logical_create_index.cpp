@@ -26,7 +26,7 @@ import index_base;
 import logical_type;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<ColumnBinding> LogicalCreateIndex::GetColumnBindings() const { return {}; };
 
@@ -54,4 +54,4 @@ String LogicalCreateIndex::ToString(i64 &space) const {
 
     return ss.str();
 }
-} // namespace infinity
+} // namespace hybridsearch

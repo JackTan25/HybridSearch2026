@@ -2,8 +2,8 @@ import os
 import time
 from datasets import Dataset
 import pandas as pd
-import infinity
-from infinity.common import LOCAL_HOST
+import hybridsearch
+from hybridsearch.common import LOCAL_HOST
 
 # 从 CSV 文件中读取数据
 # df = pd.read_csv('data.csv')
@@ -14,14 +14,14 @@ pd.options.display.max_rows = None
 # 设置列宽为无限制（避免字符串被截断）
 pd.options.display.max_colwidth = None
 
- #  Use infinity module to connect a remote server
-infinity_instance = infinity.connect(LOCAL_HOST)
+ #  Use hybridsearch module to connect a remote server
+hybridsearch_instance = hybridsearch.connect(LOCAL_HOST)
 
 # 'default_db' is the default database
-db_instance = infinity_instance.get_database("default_db")
-infinity_table = db_instance.get_table('mldr_en_table')
-# infinity_table.drop_index('mldr_en_tensor_index')
-print(infinity_table.show_index('mldr_en_tensor_index'))
+db_instance = hybridsearch_instance.get_database("default_db")
+hybridsearch_table = db_instance.get_table('mldr_en_table')
+# hybridsearch_table.drop_index('mldr_en_tensor_index')
+print(hybridsearch_table.show_index('mldr_en_tensor_index'))
 # print(db_instance.show_table('mldr_en_table'))
 # print(res)
 

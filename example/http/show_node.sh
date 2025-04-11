@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Define base URL for the Infinity instance
+# Define base URL for the hybridsearch instance
 BASE_URL="http://127.0.0.1:23820"
 
 # Show information about the current node

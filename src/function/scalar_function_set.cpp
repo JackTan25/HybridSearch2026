@@ -22,13 +22,13 @@ import stl;
 import base_expression;
 import scalar_function;
 
-import infinity_exception;
+import hybridsearch_exception;
 import cast_table;
 import logger;
 import status;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 ScalarFunctionSet::~ScalarFunctionSet() { functions_.clear(); }
 
@@ -107,4 +107,4 @@ i64 ScalarFunctionSet::MatchFunctionCost(const ScalarFunction &func, const Vecto
     return total_cost;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

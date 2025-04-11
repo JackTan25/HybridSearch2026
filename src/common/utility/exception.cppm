@@ -13,12 +13,12 @@
 // limitations under the License.
 module;
 
-export module infinity_exception;
+export module hybridsearch_exception;
 
 import stl;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 export void PrintStacktrace(const String &err_msg);
 export void PrintTransactionHistory();
@@ -49,7 +49,7 @@ private:
 
 #define ADD_LOG_INFO
 
-#if defined(INFINITY_DEBUG) || defined(ADD_LOG_INFO)
+#if defined(hybridsearch_DEBUG) || defined(ADD_LOG_INFO)
 
 export void RecoverableError(Status status,
                              const char *file_name = std::source_location::current().file_name(),
@@ -71,4 +71,4 @@ export std::string_view GetErrorMsg(const String &message);
 
 #endif
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -24,7 +24,7 @@ import data_type;
 import internal_types;
 import show_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
 export String ToString(ShowStmtType type);
 
@@ -97,4 +97,4 @@ private:
     Optional<String> function_name_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

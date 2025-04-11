@@ -24,9 +24,9 @@ import stl;
 import sparse_vector_distance;
 import linscan_alg;
 import sparse_util;
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename DataType, typename IdxType>
 struct SparseTestUtil {
@@ -206,4 +206,4 @@ private:
         return {std::move(indices), std::move(top_scores)};
     }
 };
-} // namespace infinity
+} // namespace hybridsearch

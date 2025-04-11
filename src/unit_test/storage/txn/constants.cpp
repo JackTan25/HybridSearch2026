@@ -15,20 +15,20 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import stl;
 import global_resource_usage;
 import third_party;
 import logger;
 import txn_state;
-import infinity_context;
+import hybridsearch_context;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class TxnContants : public BaseTest {};
 
 TEST_F(TxnContants, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
     EXPECT_EQ(TxnState2Str(TxnState::kStarted), "Started");
 }

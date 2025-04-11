@@ -32,7 +32,7 @@ import subquery_expr;
 
 export module group_binder;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class GroupBinder : public ExpressionBinder {
 public:
@@ -66,4 +66,4 @@ private:
     const SharedPtr<BindAliasProxy> &bind_alias_proxy_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

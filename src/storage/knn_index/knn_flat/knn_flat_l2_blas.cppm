@@ -21,7 +21,7 @@ import knn_result_handler;
 import deprecated_knn_distance;
 
 import logger;
-import infinity_exception;
+import hybridsearch_exception;
 import default_values;
 import vector_distance;
 import mlas_matrix_multiply;
@@ -29,7 +29,7 @@ import roaring_bitmap;
 import knn_expr;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename DistType>
 class KnnFlatL2Blas final : public KnnDistance<DistType> {
@@ -234,4 +234,4 @@ private:
 
 template class KnnFlatL2Blas<f32>;
 
-} // namespace infinity
+} // namespace hybridsearch

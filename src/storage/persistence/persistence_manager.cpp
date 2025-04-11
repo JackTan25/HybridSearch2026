@@ -21,14 +21,14 @@ import stl;
 import uuid;
 import serialize;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 import virtual_store;
 import logger;
 import global_resource_usage;
 
 namespace fs = std::filesystem;
 
-namespace infinity {
+namespace hybridsearch {
 constexpr SizeT BUFFER_SIZE = 1024 * 1024; // 1 MB
 
 nlohmann::json ObjAddr::Serialize() const {
@@ -48,16 +48,16 @@ void ObjAddr::Deserialize(const nlohmann::json &obj) {
 SizeT ObjAddr::GetSizeInBytes() const { return sizeof(int32_t) + obj_key_.size() + sizeof(SizeT) + sizeof(SizeT); }
 
 void ObjAddr::WriteBufAdv(char *&buf) const {
-    ::infinity::WriteBufAdv(buf, obj_key_);
-    ::infinity::WriteBufAdv(buf, part_offset_);
-    ::infinity::WriteBufAdv(buf, part_size_);
+    ::hybridsearch::WriteBufAdv(buf, obj_key_);
+    ::hybridsearch::WriteBufAdv(buf, part_offset_);
+    ::hybridsearch::WriteBufAdv(buf, part_size_);
 }
 
 ObjAddr ObjAddr::ReadBufAdv(const char *&buf) {
     ObjAddr ret;
-    ret.obj_key_ = ::infinity::ReadBufAdv<String>(buf);
-    ret.part_offset_ = ::infinity::ReadBufAdv<SizeT>(buf);
-    ret.part_size_ = ::infinity::ReadBufAdv<SizeT>(buf);
+    ret.obj_key_ = ::hybridsearch::ReadBufAdv<String>(buf);
+    ret.part_offset_ = ::hybridsearch::ReadBufAdv<SizeT>(buf);
+    ret.part_size_ = ::hybridsearch::ReadBufAdv<SizeT>(buf);
     return ret;
 }
 
@@ -83,13 +83,13 @@ PersistenceManager::PersistenceManager(const String &workspace, const String &da
     String read_path_empty = GetObjPath(ObjAddr::KeyEmpty);
     VirtualStore::Truncate(read_path_empty, 0);
 
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::IncrObjectCount("PersistenceManager");
 #endif
 }
 
 PersistenceManager::~PersistenceManager() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::DecrObjectCount("PersistenceManager");
 #endif
 }
@@ -677,9 +677,9 @@ SizeT AddrSerializer::GetSizeInBytes() const {
 }
 
 void AddrSerializer::WriteBufAdv(char *&buf) const {
-    ::infinity::WriteBufAdv(buf, paths_.size());
+    ::hybridsearch::WriteBufAdv(buf, paths_.size());
     for (SizeT i = 0; i < paths_.size(); ++i) {
-        ::infinity::WriteBufAdv(buf, paths_[i]);
+        ::hybridsearch::WriteBufAdv(buf, paths_[i]);
         if (!obj_addrs_[i].Valid()) {
             UnrecoverableError(fmt::format("Invalid object address for path {}", paths_[i]));
         }
@@ -689,9 +689,9 @@ void AddrSerializer::WriteBufAdv(char *&buf) const {
 }
 
 Vector<String> AddrSerializer::ReadBufAdv(const char *&ptr) {
-    SizeT path_count = ::infinity::ReadBufAdv<SizeT>(ptr);
+    SizeT path_count = ::hybridsearch::ReadBufAdv<SizeT>(ptr);
     for (SizeT i = 0; i < path_count; ++i) {
-        paths_.push_back(::infinity::ReadBufAdv<String>(ptr));
+        paths_.push_back(::hybridsearch::ReadBufAdv<String>(ptr));
         obj_addrs_.push_back(ObjAddr::ReadBufAdv(ptr));
         obj_stats_.push_back(ObjStat::ReadBufAdv(ptr));
     }
@@ -712,4 +712,4 @@ void AddrSerializer::AddToPersistenceManager(PersistenceManager *persistence_man
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

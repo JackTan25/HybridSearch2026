@@ -24,7 +24,7 @@ import stl;
 import status;
 import index_base;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 import serialize;
 import default_values;
 import index_base;
@@ -32,7 +32,7 @@ import logical_type;
 import statement_common;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 String DiskAnnEncodeTypeToString(DiskAnnEncodeType encode_type) {
     switch (encode_type) {
@@ -167,4 +167,4 @@ void IndexDiskAnn::ValidateColumnDataType(const SharedPtr<BaseTableRef> &base_ta
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

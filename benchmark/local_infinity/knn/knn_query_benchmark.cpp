@@ -24,7 +24,7 @@
 
 import compilation_config;
 
-import infinity;
+import hybridsearch;
 
 import profiler;
 import virtual_store;
@@ -39,17 +39,17 @@ import function_expr;
 import statement_common;
 import internal_types;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 template <typename Function>
 inline void LoopFor(size_t id_begin, size_t id_end, size_t thread_id, Function fn, const std::string &db_name, const std::string &table_name) {
     std::cout << "thread_id = " << thread_id << " [" << id_begin << ", " << id_end << ")" << std::endl;
-    std::shared_ptr<Infinity> infinity = Infinity::LocalConnect();
-    //    auto [data_base, status1] = infinity->GetDatabase("default_db");
+    std::shared_ptr<hybridsearch> hybridsearch = hybridsearch::LocalConnect();
+    //    auto [data_base, status1] = hybridsearch->GetDatabase("default_db");
     //    auto [table, status2] = data_base->GetTable(table_name);
     //    std::shared_ptr<Table> shared_table(std::move(table));
     for (auto id = id_begin; id < id_end; ++id) {
-        fn(id, thread_id, infinity.get(), db_name, table_name);
+        fn(id, thread_id, hybridsearch.get(), db_name, table_name);
     }
 }
 
@@ -75,8 +75,8 @@ inline void ParallelFor(size_t start, size_t end, size_t numThreads, Function fn
 
 int main(int argc, char *argv[]) {
     if (argc < 3) {
-        std::cout << "query gist/sift ef=? , with optional test_data_path (default to /infinity/test/data in docker) and optional infinity path "
-                     "(default to /var/infinity)"
+        std::cout << "query gist/sift ef=? , with optional test_data_path (default to /hybridsearch/test/data in docker) and optional hybridsearch path "
+                     "(default to /var/hybridsearch)"
                   << std::endl;
         return 1;
     }
@@ -98,7 +98,7 @@ int main(int argc, char *argv[]) {
     std::cout << "Please input total_times:" << std::endl;
     std::cin >> total_times;
 
-    std::string path = "/var/infinity";
+    std::string path = "/var/hybridsearch";
     if (argc >= 6) {
         path = std::string(argv[5]);
     }
@@ -108,7 +108,7 @@ int main(int argc, char *argv[]) {
         config_path = std::string(argv[6]);
     }
 
-    Infinity::LocalInit(path, config_path);
+    hybridsearch::LocalInit(path, config_path);
 
     std::cout << ">>> Query Benchmark Start <<<" << std::endl;
     std::cout << "Thread Num: " << thread_num << ", Times: " << total_times << std::endl;
@@ -191,7 +191,7 @@ int main(int argc, char *argv[]) {
         for (auto &v : query_results) {
             v.reserve(100);
         }
-        auto query_function = [&](size_t query_idx, size_t thread_id, Infinity *infinity, const std::string &db_name, const std::string &table_name) {
+        auto query_function = [&](size_t query_idx, size_t thread_id, hybridsearch *hybridsearch, const std::string &db_name, const std::string &table_name) {
             KnnExpr *knn_expr = new KnnExpr();
             knn_expr->dimension_ = dimension;
             knn_expr->distance_type_ = KnnDistanceType::kL2;
@@ -221,7 +221,7 @@ int main(int argc, char *argv[]) {
             auto select_rowid_expr = new FunctionExpr();
             select_rowid_expr->func_name_ = "row_id";
             output_columns->emplace_back(select_rowid_expr);
-            auto result = infinity->Search(db_name, table_name, search_expr, nullptr, nullptr, nullptr, output_columns, nullptr, nullptr, nullptr, nullptr, false);
+            auto result = hybridsearch->Search(db_name, table_name, search_expr, nullptr, nullptr, nullptr, output_columns, nullptr, nullptr, nullptr, nullptr, false);
             {
                 auto &cv = result.result_table_->GetDataBlockById(0)->column_vectors;
                 auto &column = *cv[0];
@@ -275,5 +275,5 @@ int main(int argc, char *argv[]) {
     float elapsed_s_avg = elapsed_s_sum / total_times;
     std::cout << "Average cost : " << elapsed_s_avg << " s" << std::endl;
 
-    Infinity::LocalUnInit();
+    hybridsearch::LocalUnInit();
 }

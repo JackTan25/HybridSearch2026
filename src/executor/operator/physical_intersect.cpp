@@ -19,10 +19,10 @@ import operator_state;
 
 module physical_intersect;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalIntersect::Init(QueryContext* query_context) {}
 
 bool PhysicalIntersect::Execute(QueryContext *, OperatorState *) { return true; }
 
-} // namespace infinity
+} // namespace hybridsearch

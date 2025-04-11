@@ -9,13 +9,13 @@ module;
 #include <unistd.h>
 
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 export module mmap;
 
-using namespace infinity;
+using namespace hybridsearch;
 namespace fs = std::filesystem;
 
-namespace infinity {
+namespace hybridsearch {
 
 export int MmapFile(const String &fp,
                     u8 *&data_ptr,
@@ -157,4 +157,4 @@ export struct MmapReader {
     SizeT offset_diff_{0};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -4,7 +4,7 @@ export module ik_dict_segment;
 
 import stl;
 import hit;
-namespace infinity {
+namespace hybridsearch {
 
 export class DictSegment {
 public:
@@ -56,4 +56,4 @@ private:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

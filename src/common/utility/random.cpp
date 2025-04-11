@@ -24,10 +24,10 @@ import third_party;
 import logger;
 import virtual_store;
 import default_values;
-import infinity_context;
+import hybridsearch_context;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 namespace {
 String available_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -53,7 +53,7 @@ SharedPtr<String> DetermineRandomString(const String &parent_dir, const String &
         srand(std::time(nullptr));
     }
 
-    bool use_persistence_manager = InfinityContext::instance().persistence_manager();
+    bool use_persistence_manager = hybridsearchContext::instance().persistence_manager();
     bool created = false;
     do {
         rand = RandomString(DEFAULT_RANDOM_NAME_LEN);
@@ -75,4 +75,4 @@ SharedPtr<String> DetermineRandomString(const String &parent_dir, const String &
     return MakeShared<String>(std::move(result));
 }
 
-} // namespace infinity
+} // namespace hybridsearch

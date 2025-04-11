@@ -23,13 +23,13 @@ import bound_cast_func;
 import data_type;
 import column_vector_cast;
 import logical_type;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import internal_types;
 import status;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct UuidTryCastToVarlen;
 
@@ -71,4 +71,4 @@ inline bool UuidTryCastToVarlen::Run(const UuidT &, VarcharT &, ColumnVector *) 
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

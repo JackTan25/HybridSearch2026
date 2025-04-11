@@ -45,7 +45,7 @@ module distance_simd_functions;
 import stl;
 import simd_common_tools;
 
-namespace infinity {
+namespace hybridsearch {
 
 f32 L2Distance_common(const f32 *x, const f32 *y, SizeT d) {
     float res = 0.0f;
@@ -301,4 +301,4 @@ f32 CosineDistance_avx2(const f32 *vector1, const f32 *vector2, SizeT dimension)
 }
 #endif
 
-} // namespace infinity
+} // namespace hybridsearch

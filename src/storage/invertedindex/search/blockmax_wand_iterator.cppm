@@ -22,7 +22,7 @@ import blockmax_leaf_iterator;
 import multi_doc_iterator;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 // Refers to https://engineering.nyu.edu/~suel/papers/bmw.pdf
 export class BlockMaxWandIterator : public MultiDocIterator {
@@ -65,4 +65,4 @@ private:
     Vector<SizeT> next_sum_score_bm_low_cnt_dist_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

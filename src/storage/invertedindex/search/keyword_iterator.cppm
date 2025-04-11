@@ -23,7 +23,7 @@ import multi_doc_iterator;
 import or_iterator;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class KeywordIterator final : public MultiDocIterator {
 public:
@@ -74,4 +74,4 @@ private:
     DocIteratorHeap heap_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -23,7 +23,7 @@ import wal_entry;
 import catalog;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class AdminExecutor {
 public:
@@ -71,4 +71,4 @@ private:
     LoadCatalogFiles(QueryContext *query_context, const AdminStatement *admin_statement, Vector<SharedPtr<WalEntry>> &ckp_entries);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

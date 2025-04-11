@@ -19,7 +19,7 @@ import simd_functions;
 
 export module vector_distance;
 
-namespace infinity {
+namespace hybridsearch {
 export template <typename DiffType, typename ElemType1, typename ElemType2, typename DimType = u32>
 DiffType L2Distance(const ElemType1 *vector1, const ElemType2 *vector2, const DimType dimension) {
     if constexpr (std::is_same_v<ElemType1, f32> && std::is_same_v<ElemType2, f32>) {
@@ -76,4 +76,4 @@ void L2NormsSquares(DiffType *__restrict output, const ElemType *__restrict vect
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -36,7 +36,7 @@ module chinese_analyzer;
 
 namespace fs = std::filesystem;
 
-namespace infinity {
+namespace hybridsearch {
 static const String DICT_PATH = "jieba/dict/jieba.dict.utf8";
 static const String HMM_PATH = "jieba/dict/hmm_model.utf8";
 static const String USER_DICT_PATH = "jieba/dict/user.dict.utf8";
@@ -143,4 +143,4 @@ bool ChineseAnalyzer::DoNext() {
     }
     return false;
 }
-} // namespace infinity
+} // namespace hybridsearch

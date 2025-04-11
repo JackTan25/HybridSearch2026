@@ -242,7 +242,7 @@ const FunctionDoc is_finite_doc(
     {"values"});
 
 const FunctionDoc is_inf_doc(
-    "Return true if infinity",
+    "Return true if hybridsearch",
     ("For each input value, emit true iff the value is infinite (inf or -inf)."),
     {"values"});
 

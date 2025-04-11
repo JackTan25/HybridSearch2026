@@ -23,7 +23,7 @@
 
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 class OptimizeStatement : public BaseStatement {
 public:
@@ -38,4 +38,4 @@ public:
     std::vector<std::unique_ptr<InitParameter>> opt_params_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

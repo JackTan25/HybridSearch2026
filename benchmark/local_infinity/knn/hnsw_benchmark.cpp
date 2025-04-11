@@ -23,7 +23,7 @@ import compilation_config;
 import virtual_store;
 import status;
 import hnsw_common;
-import infinity_exception;
+import hybridsearch_exception;
 import profiler;
 
 // import hnsw_lsg_builder;
@@ -35,7 +35,7 @@ import profiler;
 // import logical_type;
 // import data_type;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 enum class ModeType : i8 {
     BUILD,

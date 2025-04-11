@@ -12,7 +12,7 @@ import lexeme;
 import character_util;
 import ik_dict;
 
-namespace infinity {
+namespace hybridsearch {
 
 const std::wstring CNQuantifierSegmenter::SEGMENTER_NAME = L"QUAN_SEGMENTER";
 const std::wstring CNQuantifierSegmenter::ChnNum = L"一二两三四五六七八九十零壹贰叁肆伍陆柒捌玖拾百千万亿拾佰仟萬億兆卅廿";
@@ -138,4 +138,4 @@ void CNQuantifierSegmenter::OutputNumLexeme(AnalyzeContext *context) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

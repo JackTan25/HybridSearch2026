@@ -18,10 +18,10 @@ import stl;
 
 export module sum;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 
 export void RegisterSumFunction(const UniquePtr<Catalog> &catalog_ptr);
 
-} // namespace infinity
+} // namespace hybridsearch

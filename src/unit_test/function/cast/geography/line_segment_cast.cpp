@@ -15,14 +15,14 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 
 import function_set;
 import aggregate_function_set;
@@ -40,7 +40,7 @@ import internal_types;
 import logical_type;
 import data_type;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class LineSegCastTest : public BaseTest {
     void SetUp() override {}
@@ -49,7 +49,7 @@ class LineSegCastTest : public BaseTest {
 };
 
 TEST_F(LineSegCastTest, line_seg_cast0) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     // Try to cast line seg type to wrong type.
     {
@@ -74,7 +74,7 @@ TEST_F(LineSegCastTest, line_seg_cast0) {
 }
 
 TEST_F(LineSegCastTest, line_seg_cast1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     // Call BindGeographyCast with wrong type of parameters
     {

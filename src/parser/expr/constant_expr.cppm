@@ -18,9 +18,9 @@ module;
 
 export module constant_expr;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::ConstantExpr;
-export using infinity::LiteralType;
+export using hybridsearch::ConstantExpr;
+export using hybridsearch::LiteralType;
 
-} // namespace infinity
+} // namespace hybridsearch

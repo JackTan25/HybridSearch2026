@@ -16,7 +16,7 @@
 #include "spdlog/fmt/fmt.h"
 #include <sstream>
 
-namespace infinity {
+namespace hybridsearch {
 
 SearchOptions::SearchOptions(const std::string &options_str) {
     options_.clear();
@@ -78,4 +78,4 @@ std::pair<std::string, std::string> SearchOptions::ParseOption(const std::string
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

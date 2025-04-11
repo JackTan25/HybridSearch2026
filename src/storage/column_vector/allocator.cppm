@@ -18,12 +18,12 @@ import global_resource_usage;
 
 export module allocator;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class Allocator {
 public:
     static ptr_t allocate(SizeT bytes) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrRawMemCount("Allocator");
 #endif
         return new char[bytes];
@@ -31,10 +31,10 @@ public:
 
     static void deallocate(ptr_t ptr) {
         delete[] ptr;
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrRawMemCount("Allocator");
 #endif
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

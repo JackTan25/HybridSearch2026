@@ -25,7 +25,7 @@ import base_table_ref;
 import roaring_bitmap;
 import default_values;
 
-namespace infinity {
+namespace hybridsearch {
 
 bool PhysicalFilterScanBase::CalculateFilterBitmask(SegmentID segment_id, BlockID block_id, BlockOffset row_count, Bitmask &bitmask) const {
     bitmask = Bitmask(row_count);
@@ -57,4 +57,4 @@ bool PhysicalFilterScanBase::CalculateFilterBitmask(SegmentID segment_id, BlockI
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

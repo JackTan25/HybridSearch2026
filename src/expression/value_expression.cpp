@@ -19,7 +19,7 @@ import expression_type;
 
 module value_expression;
 
-namespace infinity {
+namespace hybridsearch {
 
 String ValueExpression::ToString() const { return value_.ToString(); }
 
@@ -33,4 +33,4 @@ bool ValueExpression::Eq(const BaseExpression &other_base) const {
     return value_ == other.value_;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

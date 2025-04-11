@@ -15,7 +15,7 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import logger;
 import column_vector;
@@ -26,18 +26,18 @@ import third_party;
 import stl;
 import selection;
 import vector_buffer;
-import infinity_context;
+import hybridsearch_context;
 import global_resource_usage;
 import internal_types;
 import logical_type;
 
 // mask the unittest because BUG1213_1
 #if 0
-using namespace infinity;
+using namespace hybridsearch;
 class ColumnVectorMixedTest : public BaseTest {};
 
 TEST_F(ColumnVectorMixedTest, mixed_integer_a) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kMixed);
     ColumnVector column_vector(data_type);
@@ -145,7 +145,7 @@ TEST_F(ColumnVectorMixedTest, mixed_integer_a) {
 }
 
 TEST_F(ColumnVectorMixedTest, mixed_integer_column_vector_select) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kMixed);
     ColumnVector column_vector(data_type);
@@ -187,7 +187,7 @@ TEST_F(ColumnVectorMixedTest, mixed_integer_column_vector_select) {
 }
 
 TEST_F(ColumnVectorMixedTest, mixed_integer_column_slice_init) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kMixed);
     ColumnVector column_vector(data_type);
@@ -228,7 +228,7 @@ TEST_F(ColumnVectorMixedTest, mixed_integer_column_slice_init) {
 }
 
 TEST_F(ColumnVectorMixedTest, mixed_float_a) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kMixed);
     ColumnVector column_vector(data_type);
@@ -336,7 +336,7 @@ TEST_F(ColumnVectorMixedTest, mixed_float_a) {
 }
 
 TEST_F(ColumnVectorMixedTest, mixed_float_column_vector_select) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kMixed);
     ColumnVector column_vector(data_type);
@@ -378,7 +378,7 @@ TEST_F(ColumnVectorMixedTest, mixed_float_column_vector_select) {
 }
 
 TEST_F(ColumnVectorMixedTest, mixed_float_column_slice_init) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kMixed);
     ColumnVector column_vector(data_type);
@@ -419,7 +419,7 @@ TEST_F(ColumnVectorMixedTest, mixed_float_column_slice_init) {
 }
 
 TEST_F(ColumnVectorMixedTest, mixed_short_str_a) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kMixed);
     ColumnVector column_vector(data_type);
@@ -536,7 +536,7 @@ TEST_F(ColumnVectorMixedTest, mixed_short_str_a) {
 }
 
 TEST_F(ColumnVectorMixedTest, mixed_short_str_column_vector_select) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kMixed);
     ColumnVector column_vector(data_type);
@@ -583,7 +583,7 @@ TEST_F(ColumnVectorMixedTest, mixed_short_str_column_vector_select) {
 }
 
 TEST_F(ColumnVectorMixedTest, mixed_short_str_column_slice_init) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kMixed);
     ColumnVector column_vector(data_type);
@@ -629,7 +629,7 @@ TEST_F(ColumnVectorMixedTest, mixed_short_str_column_slice_init) {
 }
 
 TEST_F(ColumnVectorMixedTest, mixed_long_str_a) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kMixed);
     ColumnVector column_vector(data_type);
@@ -773,7 +773,7 @@ TEST_F(ColumnVectorMixedTest, mixed_long_str_a) {
 }
 
 TEST_F(ColumnVectorMixedTest, mixed_long_str_column_vector_select) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kMixed);
     ColumnVector column_vector(data_type);
@@ -833,7 +833,7 @@ TEST_F(ColumnVectorMixedTest, mixed_long_str_column_vector_select) {
 }
 
 TEST_F(ColumnVectorMixedTest, mixed_long_str_column_slice_init) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kMixed);
     ColumnVector column_vector(data_type);
@@ -892,7 +892,7 @@ TEST_F(ColumnVectorMixedTest, mixed_long_str_column_slice_init) {
 }
 
 TEST_F(ColumnVectorMixedTest, mixed_null_a) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kMixed);
     ColumnVector column_vector(data_type);
@@ -995,7 +995,7 @@ TEST_F(ColumnVectorMixedTest, mixed_null_a) {
 }
 
 TEST_F(ColumnVectorMixedTest, mixed_null_column_vector_select) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kMixed);
     ColumnVector column_vector(data_type);
@@ -1033,7 +1033,7 @@ TEST_F(ColumnVectorMixedTest, mixed_null_column_vector_select) {
 }
 
 TEST_F(ColumnVectorMixedTest, mixed_null_column_slice_init) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kMixed);
     ColumnVector column_vector(data_type);
@@ -1070,7 +1070,7 @@ TEST_F(ColumnVectorMixedTest, mixed_null_column_slice_init) {
 }
 
 TEST_F(ColumnVectorMixedTest, mixed_missing_a) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kMixed);
     ColumnVector column_vector(data_type);
@@ -1173,7 +1173,7 @@ TEST_F(ColumnVectorMixedTest, mixed_missing_a) {
 }
 
 TEST_F(ColumnVectorMixedTest, mixed_missing_column_vector_select) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kMixed);
     ColumnVector column_vector(data_type);
@@ -1211,7 +1211,7 @@ TEST_F(ColumnVectorMixedTest, mixed_missing_column_vector_select) {
 }
 
 TEST_F(ColumnVectorMixedTest, mixed_missing_column_slice_init) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kMixed);
     ColumnVector column_vector(data_type);
@@ -1248,7 +1248,7 @@ TEST_F(ColumnVectorMixedTest, mixed_missing_column_slice_init) {
 }
 
 TEST_F(ColumnVectorMixedTest, mixed_tuple_a) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kMixed);
     ColumnVector column_vector(data_type);
@@ -1979,7 +1979,7 @@ TEST_F(ColumnVectorMixedTest, mixed_tuple_a) {
 }
 
 TEST_F(ColumnVectorMixedTest, mixed_tuple_column_vector_select) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kMixed);
     ColumnVector column_vector(data_type);
@@ -2311,7 +2311,7 @@ TEST_F(ColumnVectorMixedTest, mixed_tuple_column_vector_select) {
 }
 
 TEST_F(ColumnVectorMixedTest, mixed_tuple_column_slice_init) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kMixed);
     ColumnVector column_vector(data_type);
@@ -2642,7 +2642,7 @@ TEST_F(ColumnVectorMixedTest, mixed_tuple_column_slice_init) {
 }
 
 TEST_F(ColumnVectorMixedTest, mixed_array_a) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kMixed);
     ColumnVector column_vector(data_type);
@@ -3478,7 +3478,7 @@ TEST_F(ColumnVectorMixedTest, mixed_array_a) {
 }
 
 TEST_F(ColumnVectorMixedTest, mixed_array_column_vector_select) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kMixed);
     ColumnVector column_vector(data_type);
@@ -3861,7 +3861,7 @@ TEST_F(ColumnVectorMixedTest, mixed_array_column_vector_select) {
 }
 
 TEST_F(ColumnVectorMixedTest, mixed_array_column_slice_init) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kMixed);
     ColumnVector column_vector(data_type);

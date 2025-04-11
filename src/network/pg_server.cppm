@@ -21,7 +21,7 @@ import singleton;
 import boost;
 import connection;
 
-namespace infinity {
+namespace hybridsearch {
 
 enum struct PGServerStatus : u8 {
     kStopped = 0,
@@ -47,4 +47,4 @@ private:
     UniquePtr<boost::asio::ip::tcp::acceptor> acceptor_ptr_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

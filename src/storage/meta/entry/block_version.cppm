@@ -19,7 +19,7 @@ export module block_version;
 import stl;
 import local_file_handle;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct ColumnVector;
 
@@ -75,4 +75,4 @@ private:
     TxnTimeStamp latest_change_ts_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

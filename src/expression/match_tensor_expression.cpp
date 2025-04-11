@@ -24,12 +24,12 @@ import third_party;
 import base_expression;
 import column_expression;
 import embedding_info;
-import infinity_exception;
+import hybridsearch_exception;
 import status;
 import logger;
 import logical_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 MatchTensorExpression::MatchTensorExpression(Vector<SharedPtr<BaseExpression>> search_column,
                                              const MatchTensorSearchMethod search_method,
@@ -98,4 +98,4 @@ bool MatchTensorExpression::Eq(const BaseExpression &other_base) const {
     return eq;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

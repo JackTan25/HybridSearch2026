@@ -20,9 +20,9 @@ import stl;
 import logger;
 import third_party;
 import local_file_handle;
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct SecondaryIndexApproxPos {
     SizeT pos_{};         ///< The approximate position of the key.
@@ -187,4 +187,4 @@ inline UniquePtr<SecondaryPGMIndex> GenerateSecondaryPGMIndex() {
     return MakeUnique<SecondaryPGMIndexTemplate<IndexValueType>>();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

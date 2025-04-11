@@ -22,7 +22,7 @@ import chinese_analyzer;
 
 class OpenCC;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class TraditionalChineseAnalyzer : public ChineseAnalyzer {
 public:
@@ -41,4 +41,4 @@ private:
     OpenCC *opencc_{nullptr};
     bool own_opencc_{false};
 };
-} // namespace infinity
+} // namespace hybridsearch

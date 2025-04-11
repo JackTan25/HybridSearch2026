@@ -29,7 +29,7 @@ import internal_types;
 import extra_ddl_info;
 import data_type;
 
-namespace infinity {
+namespace hybridsearch {
 export class PhysicalCreateIndexPrepare : public PhysicalOperator {
 public:
     PhysicalCreateIndexPrepare(u64 id,
@@ -63,4 +63,4 @@ public:
     const bool prepare_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

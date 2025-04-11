@@ -23,7 +23,7 @@ import physical_operator_type;
 import operator_state;
 import logger;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import buffer_manager;
 import third_party;
 import default_values;
@@ -34,7 +34,7 @@ import cached_match_scan;
 import result_cache_manager;
 import meta_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct VectorBlockRawIndex {
     u32 left_row_cnt_ = 0;
@@ -209,4 +209,4 @@ void PhysicalMergeMatchTensor::AddCache(QueryContext *query_context,
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

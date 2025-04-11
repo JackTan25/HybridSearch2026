@@ -5,7 +5,7 @@ import random;
 import third_party;
 import loser_tree;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class LoserTreeTest : public BaseTest {
 public:
@@ -28,7 +28,7 @@ protected:
     Vector<Vector<u64>> loser;
 };
 
-void LoserTreeTest::GenerateData(infinity::SizeT num_size, infinity::SizeT loser_num, infinity::u64 max_val) {
+void LoserTreeTest::GenerateData(hybridsearch::SizeT num_size, hybridsearch::SizeT loser_num, hybridsearch::u64 max_val) {
     numbers.clear();
     loser.clear();
     num_idx.clear();
@@ -46,7 +46,7 @@ void LoserTreeTest::GenerateData(infinity::SizeT num_size, infinity::SizeT loser
     }
 }
 
-void LoserTreeTest::MultiWayMerge(infinity::SizeT num_size, infinity::SizeT loser_num, infinity::u64 max_val) {
+void LoserTreeTest::MultiWayMerge(hybridsearch::SizeT num_size, hybridsearch::SizeT loser_num, hybridsearch::u64 max_val) {
     auto loser_tree = MakeShared<LoserTree<u64, std::less<u64>>>(loser_num);
     for (SizeT i = 0; i < loser_num; ++i) {
         if (!loser[i].empty()) {

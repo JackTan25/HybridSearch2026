@@ -15,14 +15,14 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 
 import function_set;
 import aggregate_function_set;
@@ -36,11 +36,11 @@ import cast_table;
 import column_vector;
 import logical_type;
 
-using namespace infinity;
+using namespace hybridsearch;
 class CastTableTest : public BaseTest {};
 
 TEST_F(CastTableTest, casttable_boolean) {
-    using namespace infinity;
+    using namespace hybridsearch;
     for (i8 to = to_underlying_val(LogicalType::kBoolean); to < to_underlying_val(LogicalType::kInvalid); ++to) {
         switch (to) {
             case to_underlying_val(LogicalType::kBoolean): {

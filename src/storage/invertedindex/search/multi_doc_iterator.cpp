@@ -19,10 +19,10 @@ module;
 module multi_doc_iterator;
 
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 void MultiDocIterator::PrintTree(std::ostream &os, const String &prefix, bool is_final) const {
     os << prefix;
@@ -43,4 +43,4 @@ void MultiDocIterator::PrintTree(std::ostream &os, const String &prefix, bool is
     children_.back()->PrintTree(os, next_prefix, true);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

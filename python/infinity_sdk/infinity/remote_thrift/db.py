@@ -14,19 +14,19 @@
 
 from abc import ABC
 
-import infinity.remote_thrift.infinity_thrift_rpc.ttypes as ttypes
+import hybridsearch.remote_thrift.hybridsearch_thrift_rpc.ttypes as ttypes
 import numpy as np
-from infinity.db import Database
-from infinity.errors import ErrorCode
-from infinity.remote_thrift.table import RemoteTable
-from infinity.remote_thrift.utils import (
+from hybridsearch.db import Database
+from hybridsearch.errors import ErrorCode
+from hybridsearch.remote_thrift.table import RemoteTable
+from hybridsearch.remote_thrift.utils import (
     check_valid_name,
     name_validity_check,
     select_res_to_polars,
     get_ordinary_info,
 )
-from infinity.common import ConflictType
-from infinity.common import InfinityException
+from hybridsearch.common import ConflictType
+from hybridsearch.common import hybridsearchException
 
 
 class RemoteDatabase(Database, ABC):
@@ -65,7 +65,7 @@ class RemoteDatabase(Database, ABC):
         elif conflict_type == ConflictType.Replace:
             create_table_conflict = ttypes.CreateConflict.Replace
         else:
-            raise InfinityException(ErrorCode.INVALID_CONFLICT_TYPE, "Invalid conflict type")
+            raise hybridsearchException(ErrorCode.INVALID_CONFLICT_TYPE, "Invalid conflict type")
 
         res = self._conn.create_table(db_name=self._db_name, table_name=table_name,
                                       column_defs=column_defs,
@@ -74,7 +74,7 @@ class RemoteDatabase(Database, ABC):
         if res.error_code == ErrorCode.OK:
             return RemoteTable(self._conn, self._db_name, table_name)
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     @name_validity_check("table_name", "Table")
     def drop_table(self, table_name, conflict_type: ConflictType = ConflictType.Error):
@@ -85,14 +85,14 @@ class RemoteDatabase(Database, ABC):
             return self._conn.drop_table(db_name=self._db_name, table_name=table_name,
                                          conflict_type=ttypes.DropConflict.Ignore)
         else:
-            raise InfinityException(ErrorCode.INVALID_CONFLICT_TYPE, "Invalid conflict type")
+            raise hybridsearchException(ErrorCode.INVALID_CONFLICT_TYPE, "Invalid conflict type")
 
     def list_tables(self):
         res = self._conn.list_tables(self._db_name)
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     @name_validity_check("table_name", "Table")
     def show_table(self, table_name):
@@ -101,7 +101,7 @@ class RemoteDatabase(Database, ABC):
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     @name_validity_check("table_name", "Table")
     def get_table(self, table_name):
@@ -110,11 +110,11 @@ class RemoteDatabase(Database, ABC):
         if res.error_code == ErrorCode.OK:
             return RemoteTable(self._conn, self._db_name, table_name)
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def show_tables(self):
         res = self._conn.show_tables(self._db_name)
         if res.error_code == ErrorCode.OK:
             return select_res_to_polars(res)
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)

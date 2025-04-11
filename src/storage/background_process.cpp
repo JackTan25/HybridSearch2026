@@ -24,15 +24,15 @@ import bg_task;
 import update_segment_bloom_filter_task;
 import logger;
 import blocking_queue;
-import infinity_exception;
+import hybridsearch_exception;
 import wal_manager;
 import catalog;
 import third_party;
 import buffer_manager;
 import periodic_trigger;
-import infinity_context;
+import hybridsearch_context;
 
-namespace infinity {
+namespace hybridsearch {
 
 void BGTaskProcessor::SetCleanupTrigger(SharedPtr<CleanupPeriodicTrigger> cleanup_trigger) { cleanup_trigger_ = cleanup_trigger; }
 
@@ -73,7 +73,7 @@ void BGTaskProcessor::Process() {
                     break;
                 }
                 case BGTaskType::kForceCheckpoint: {
-                    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+                    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
                     if (storage_mode == StorageMode::kUnInitialized) {
                         UnrecoverableError("Uninitialized storage mode");
                     }
@@ -100,7 +100,7 @@ void BGTaskProcessor::Process() {
                     break;
                 }
                 case BGTaskType::kAddDeltaEntry: {
-                    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+                    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
                     if (storage_mode == StorageMode::kUnInitialized) {
                         UnrecoverableError("Uninitialized storage mode");
                     }
@@ -115,7 +115,7 @@ void BGTaskProcessor::Process() {
                     break;
                 }
                 case BGTaskType::kCheckpoint: {
-                    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+                    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
                     if (storage_mode == StorageMode::kUnInitialized) {
                         UnrecoverableError("Uninitialized storage mode");
                     }
@@ -153,7 +153,7 @@ void BGTaskProcessor::Process() {
                     break;
                 }
                 case BGTaskType::kCleanup: {
-                    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+                    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
                     if (storage_mode == StorageMode::kUnInitialized) {
                         UnrecoverableError("Uninitialized storage mode");
                     }
@@ -170,7 +170,7 @@ void BGTaskProcessor::Process() {
                     break;
                 }
                 case BGTaskType::kUpdateSegmentBloomFilterData: {
-                    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+                    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
                     if (storage_mode == StorageMode::kUnInitialized) {
                         UnrecoverableError("Uninitialized storage mode");
                     }
@@ -200,4 +200,4 @@ void BGTaskProcessor::Process() {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -21,9 +21,9 @@ import value;
 import binary_fuse_filter;
 import logger;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 export u64 ConvertValueToU64(const Value &value);
 
@@ -129,4 +129,4 @@ u64 ConvertValueToU64<String>(const String &value) {
     return std::hash<String>{}(value);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

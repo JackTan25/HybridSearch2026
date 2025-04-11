@@ -4,7 +4,7 @@ import stl;
 
 export module flush_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class FlushInfo {
 private:
@@ -48,4 +48,4 @@ public:
     Atomic<u64> flush_info_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

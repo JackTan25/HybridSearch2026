@@ -23,22 +23,22 @@ module file_worker;
 
 import stl;
 import utility;
-import infinity_exception;
+import hybridsearch_exception;
 import local_file_handle;
 import third_party;
 import defer_op;
 import status;
 import virtual_store;
 import persistence_manager;
-import infinity_context;
+import hybridsearch_context;
 import logger;
 import persist_result_handler;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 FileWorker::~FileWorker() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::DecrObjectCount("FileWorker");
 #endif
 }
@@ -249,4 +249,4 @@ void FileWorker::Munmap() {
 
 void FileWorker::MmapNotNeed() {}
 
-} // namespace infinity
+} // namespace hybridsearch

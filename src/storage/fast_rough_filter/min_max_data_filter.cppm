@@ -19,12 +19,12 @@ import stl;
 import value;
 import logger;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 import filter_expression_push_down_helper;
 import internal_types;
 import filter_value_type_classification;
 
-namespace infinity {
+namespace hybridsearch {
 
 // min: empty string
 // max: 16 * max char
@@ -207,4 +207,4 @@ public:
     bool LoadFromJsonFile(const nlohmann::json &entry_json);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

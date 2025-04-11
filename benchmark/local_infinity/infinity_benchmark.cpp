@@ -22,7 +22,7 @@
 import compilation_config;
 
 import stl;
-import infinity;
+import hybridsearch;
 
 import profiler;
 import third_party;
@@ -45,12 +45,12 @@ import data_type;
 import virtual_store;
 import insert_row_expr;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 constexpr u64 second_unit = 1000 * 1000 * 1000;
 
-double Measurement(String name, SizeT thread_num, SizeT times, const std::function<void(SizeT, SharedPtr<Infinity>, std::thread::id)> &closure) {
-    infinity::BaseProfiler profiler(name);
+double Measurement(String name, SizeT thread_num, SizeT times, const std::function<void(SizeT, SharedPtr<hybridsearch>, std::thread::id)> &closure) {
+    hybridsearch::BaseProfiler profiler(name);
     Vector<std::thread> threads;
     threads.reserve(thread_num);
 
@@ -62,9 +62,9 @@ double Measurement(String name, SizeT thread_num, SizeT times, const std::functi
             std::thread::id thread_id = std::this_thread::get_id();
             std::cout << ">>> Thread ID: " << thread_id << " <<<" << std::endl;
             for (SizeT j = 0; j < shared_size; ++j) {
-                SharedPtr<Infinity> infinity = Infinity::LocalConnect();
-                closure(i * shared_size + j, infinity, thread_id);
-                infinity->LocalDisconnect();
+                SharedPtr<hybridsearch> hybridsearch = hybridsearch::LocalConnect();
+                closure(i * shared_size + j, hybridsearch, thread_id);
+                hybridsearch->LocalDisconnect();
             }
         });
     }
@@ -83,36 +83,36 @@ int main() {
     // For Sift1M
     SizeT total_times = 100 * 100;
 
-    String path = "/var/infinity";
+    String path = "/var/hybridsearch";
 
     VirtualStore::CleanupDirectory(path);
 
-    Infinity::LocalInit(path);
+    hybridsearch::LocalInit(path);
 
-    std::cout << ">>> Infinity Benchmark Start <<<" << std::endl;
+    std::cout << ">>> hybridsearch Benchmark Start <<<" << std::endl;
     std::cout << "Thread Num: " << thread_num << ", Times: " << total_times << std::endl;
 
     Vector<String> results;
     // Database
     {
         auto tims_costing_second =
-            Measurement("Get Database", thread_num, total_times, [&](SizeT i, SharedPtr<Infinity> infinity, std::thread::id thread_id) {
-                __attribute__((unused)) auto ignored = infinity->GetDatabase("default_db");
+            Measurement("Get Database", thread_num, total_times, [&](SizeT i, SharedPtr<hybridsearch> hybridsearch, std::thread::id thread_id) {
+                __attribute__((unused)) auto ignored = hybridsearch->GetDatabase("default_db");
             });
         results.push_back(fmt::format("-> Get Database QPS: {}", total_times / tims_costing_second));
     }
     {
         auto tims_costing_second =
-            Measurement("List Databases", thread_num, total_times, [&](SizeT i, SharedPtr<Infinity> infinity, std::thread::id thread_id) {
-                __attribute__((unused)) auto ignored = infinity->ListDatabases();
+            Measurement("List Databases", thread_num, total_times, [&](SizeT i, SharedPtr<hybridsearch> hybridsearch, std::thread::id thread_id) {
+                __attribute__((unused)) auto ignored = hybridsearch->ListDatabases();
             });
         results.push_back(fmt::format("-> List Databases QPS: {}", total_times / tims_costing_second));
     }
     {
         CreateDatabaseOptions create_db_opts;
         auto tims_costing_second =
-            Measurement("Create Database", thread_num, total_times, [&](SizeT i, SharedPtr<Infinity> infinity, std::thread::id thread_id) {
-                __attribute__((unused)) auto ignored = infinity->CreateDatabase(std::to_string(i), create_db_opts, "");
+            Measurement("Create Database", thread_num, total_times, [&](SizeT i, SharedPtr<hybridsearch> hybridsearch, std::thread::id thread_id) {
+                __attribute__((unused)) auto ignored = hybridsearch->CreateDatabase(std::to_string(i), create_db_opts, "");
             });
         results.push_back(fmt::format("-> Create Database QPS: {}", total_times / tims_costing_second));
     }
@@ -120,8 +120,8 @@ int main() {
     {
         DropDatabaseOptions drop_db_opts;
         auto tims_costing_second =
-            Measurement("Drop Database", thread_num, total_times, [&](SizeT i, SharedPtr<Infinity> infinity, std::thread::id thread_id) {
-                __attribute__((unused)) auto ignored = infinity->DropDatabase(std::to_string(i), drop_db_opts);
+            Measurement("Drop Database", thread_num, total_times, [&](SizeT i, SharedPtr<hybridsearch> hybridsearch, std::thread::id thread_id) {
+                __attribute__((unused)) auto ignored = hybridsearch->DropDatabase(std::to_string(i), drop_db_opts);
             });
         results.push_back(fmt::format("-> Drop Database QPS: {}", total_times / tims_costing_second));
     }
@@ -145,38 +145,38 @@ int main() {
         column_defs.emplace_back(col_def_2);
         {
             // Init Table
-            SharedPtr<Infinity> infinity = Infinity::LocalConnect();
-            //            auto [ database, status ] = infinity->GetDatabase("default_db");
+            SharedPtr<hybridsearch> hybridsearch = hybridsearch::LocalConnect();
+            //            auto [ database, status ] = hybridsearch->GetDatabase("default_db");
             __attribute__((unused)) auto ignored =
-                infinity->CreateTable("default_db", "benchmark_test", column_defs, Vector<TableConstraint *>(), create_table_opts);
-            infinity->LocalDisconnect();
+                hybridsearch->CreateTable("default_db", "benchmark_test", column_defs, Vector<TableConstraint *>(), create_table_opts);
+            hybridsearch->LocalDisconnect();
         }
         // {
-        //     auto tims_costing_second = Measurement(thread_num, total_times, [&](SizeT i, SharedPtr<Infinity> infinity, std::thread::id
+        //     auto tims_costing_second = Measurement(thread_num, total_times, [&](SizeT i, SharedPtr<hybridsearch> hybridsearch, std::thread::id
         // thread_id) {
-        //         __attribute__((unused)) auto ignored = infinity->GetDatabase("default_db")->ListTables();
+        //         __attribute__((unused)) auto ignored = hybridsearch->GetDatabase("default_db")->ListTables();
         //     });
         //     results.push_back(fmt::format("-> List Tables QPS: {}", total_times / tims_costing_second));
         // }
         {
             auto tims_costing_second =
-                Measurement("Get Tables", thread_num, total_times, [&](SizeT i, SharedPtr<Infinity> infinity, std::thread::id thread_id) {
-                    //                auto [ database, status ] = infinity->GetDatabase("default_db");
-                    __attribute__((unused)) auto ignored = infinity->GetTable("default_db", "benchmark_test");
+                Measurement("Get Tables", thread_num, total_times, [&](SizeT i, SharedPtr<hybridsearch> hybridsearch, std::thread::id thread_id) {
+                    //                auto [ database, status ] = hybridsearch->GetDatabase("default_db");
+                    __attribute__((unused)) auto ignored = hybridsearch->GetTable("default_db", "benchmark_test");
                 });
             results.push_back(fmt::format("-> Get Tables QPS: {}", total_times / tims_costing_second));
         }
         {
             auto tims_costing_second =
-                Measurement("Describe Tables", thread_num, total_times, [&](SizeT i, SharedPtr<Infinity> infinity, std::thread::id thread_id) {
-                    //                auto [ database, status ] = infinity->GetDatabase("default_db");
-                    __attribute__((unused)) auto ignored = infinity->ShowTable("default_db", "benchmark_test");
+                Measurement("Describe Tables", thread_num, total_times, [&](SizeT i, SharedPtr<hybridsearch> hybridsearch, std::thread::id thread_id) {
+                    //                auto [ database, status ] = hybridsearch->GetDatabase("default_db");
+                    __attribute__((unused)) auto ignored = hybridsearch->ShowTable("default_db", "benchmark_test");
                 });
             results.push_back(fmt::format("-> Describe Tables QPS: {}", total_times / tims_costing_second));
         }
         {
             auto tims_costing_second =
-                Measurement("Create Tables", thread_num, total_times, [&](SizeT i, SharedPtr<Infinity> infinity, std::thread::id thread_id) {
+                Measurement("Create Tables", thread_num, total_times, [&](SizeT i, SharedPtr<hybridsearch> hybridsearch, std::thread::id thread_id) {
                     SizeT column_count = 2;
                     Vector<ColumnDef *> column_definitions;
                     column_definitions.reserve(column_count);
@@ -191,23 +191,23 @@ int main() {
                     auto col_def_2 = new ColumnDef(1, col_type, col_name_2, std::set<ConstraintType>());
                     column_definitions.emplace_back(col_def_2);
 
-                    //                    auto [database, status] = infinity->GetDatabase("default_db");
+                    //                    auto [database, status] = hybridsearch->GetDatabase("default_db");
                     __attribute__((unused)) auto ignored =
-                        infinity->CreateTable("default_db", std::to_string(i), column_definitions, Vector<TableConstraint *>(), create_table_opts);
+                        hybridsearch->CreateTable("default_db", std::to_string(i), column_definitions, Vector<TableConstraint *>(), create_table_opts);
                 });
             results.push_back(fmt::format("-> Create Table QPS: {}", total_times / tims_costing_second));
         }
         {
             auto tims_costing_second =
-                Measurement("Drop Table", thread_num, total_times, [&](SizeT i, SharedPtr<Infinity> infinity, std::thread::id thread_id) {
-                    __attribute__((unused)) auto ignored = infinity->DropTable("default_db", std::to_string(i), drop_table_options);
+                Measurement("Drop Table", thread_num, total_times, [&](SizeT i, SharedPtr<hybridsearch> hybridsearch, std::thread::id thread_id) {
+                    __attribute__((unused)) auto ignored = hybridsearch->DropTable("default_db", std::to_string(i), drop_table_options);
                 });
             results.push_back(fmt::format("-> Drop Table QPS: {}", total_times / tims_costing_second));
         }
         {
             {
                 auto tims_costing_second =
-                    Measurement("Select", thread_num, total_times, [&](SizeT i, SharedPtr<Infinity> infinity, std::thread::id thread_id) {
+                    Measurement("Select", thread_num, total_times, [&](SizeT i, SharedPtr<hybridsearch> hybridsearch, std::thread::id thread_id) {
                         Vector<ParsedExpr *> *output_columns = new Vector<ParsedExpr *>();
                         ColumnExpr *col1 = new ColumnExpr();
                         col1->names_.emplace_back("col1");
@@ -217,7 +217,7 @@ int main() {
                         col2->names_.emplace_back("col2");
                         output_columns->emplace_back(col2);
 
-                        [[maybe_unused]] auto ignored = infinity->Search("default_db",
+                        [[maybe_unused]] auto ignored = hybridsearch->Search("default_db",
                                                                          "benchmark_test",
                                                                          nullptr,
                                                                          nullptr,
@@ -234,7 +234,7 @@ int main() {
             }
             {
                 auto tims_costing_second =
-                    Measurement("Insert", thread_num, total_times, [&](SizeT i, SharedPtr<Infinity> infinity, std::thread::id thread_id) {
+                    Measurement("Insert", thread_num, total_times, [&](SizeT i, SharedPtr<hybridsearch> hybridsearch, std::thread::id thread_id) {
                         auto insert_row = MakeUnique<InsertRowExpr>();
                         insert_row->columns_ = {col_name_1, col_name_2};
                         auto value1 = MakeUnique<ConstantExpr>(LiteralType::kInteger);
@@ -244,13 +244,13 @@ int main() {
                         value2->integer_value_ = i;
                         insert_row->values_.emplace_back(std::move(value2));
                         auto insert_rows = new Vector<InsertRowExpr *>({insert_row.release()});
-                        [[maybe_unused]] auto ignored = infinity->Insert("default_db", "benchmark_test", insert_rows);
+                        [[maybe_unused]] auto ignored = hybridsearch->Insert("default_db", "benchmark_test", insert_rows);
                     });
                 results.push_back(fmt::format("-> Insert QPS: {}", total_times / tims_costing_second));
             }
             {
                 auto tims_costing_second =
-                    Measurement("Update", thread_num, total_times, [&](SizeT i, SharedPtr<Infinity> infinity, std::thread::id thread_id) {
+                    Measurement("Update", thread_num, total_times, [&](SizeT i, SharedPtr<hybridsearch> hybridsearch, std::thread::id thread_id) {
                         Vector<UpdateExpr *> *values = new Vector<UpdateExpr *>();
 
                         Vector<String> *columns = new Vector<String>();
@@ -272,14 +272,14 @@ int main() {
                         values->push_back(update_expr1);
                         values->push_back(update_expr2);
 
-                        __attribute__((unused)) auto ignored = infinity->Update("default_db", "benchmark_test", nullptr, values);
+                        __attribute__((unused)) auto ignored = hybridsearch->Update("default_db", "benchmark_test", nullptr, values);
                     });
                 results.push_back(fmt::format("-> Update QPS: {}", total_times / tims_costing_second));
             }
             {
                 auto tims_costing_second =
-                    Measurement("Delete", thread_num, total_times, [&](SizeT i, SharedPtr<Infinity> infinity, std::thread::id thread_id) {
-                        __attribute__((unused)) auto ignored = infinity->Delete("default_db", "benchmark_test", nullptr);
+                    Measurement("Delete", thread_num, total_times, [&](SizeT i, SharedPtr<hybridsearch> hybridsearch, std::thread::id thread_id) {
+                        __attribute__((unused)) auto ignored = hybridsearch->Delete("default_db", "benchmark_test", nullptr);
                     });
                 results.push_back(fmt::format("-> Delete QPS: {}", total_times / tims_costing_second));
             }
@@ -308,14 +308,14 @@ int main() {
             auto col_def_2 = new ColumnDef(1, col_type, col_name_2, std::set<ConstraintType>());
             column_definitions.emplace_back(col_def_2);
 
-            SharedPtr<Infinity> infinity = Infinity::LocalConnect();
+            SharedPtr<hybridsearch> hybridsearch = hybridsearch::LocalConnect();
             __attribute__((unused)) auto ignored =
-                infinity->CreateTable("default_db", "benchmark_test", column_definitions, Vector<TableConstraint *>(), create_table_opts);
-            infinity->LocalDisconnect();
+                hybridsearch->CreateTable("default_db", "benchmark_test", column_definitions, Vector<TableConstraint *>(), create_table_opts);
+            hybridsearch->LocalDisconnect();
         }
         {
             auto tims_costing_second =
-                Measurement("Insert for Select Sort", thread_num, sort_row, [&](SizeT i, SharedPtr<Infinity> infinity, std::thread::id thread_id) {
+                Measurement("Insert for Select Sort", thread_num, sort_row, [&](SizeT i, SharedPtr<hybridsearch> hybridsearch, std::thread::id thread_id) {
                     auto insert_row = MakeUnique<InsertRowExpr>();
                     insert_row->columns_ = {col_name_1, col_name_2};
                     auto value1 = MakeUnique<ConstantExpr>(LiteralType::kInteger);
@@ -325,13 +325,13 @@ int main() {
                     value2->integer_value_ = std::rand();
                     insert_row->values_.emplace_back(std::move(value2));
                     auto insert_rows = new Vector<InsertRowExpr *>({insert_row.release()});
-                    [[maybe_unused]] auto ignored = infinity->Insert("default_db", "benchmark_test", insert_rows);
+                    [[maybe_unused]] auto ignored = hybridsearch->Insert("default_db", "benchmark_test", insert_rows);
                 });
             results.push_back(fmt::format("-> Insert for Sort Time: {}s", tims_costing_second));
         }
         {
             auto tims_costing_second =
-                Measurement("Select Sort", thread_num, sort_times, [&](SizeT i, SharedPtr<Infinity> infinity, std::thread::id thread_id) {
+                Measurement("Select Sort", thread_num, sort_times, [&](SizeT i, SharedPtr<hybridsearch> hybridsearch, std::thread::id thread_id) {
                     Vector<ParsedExpr *> *output_columns = new Vector<ParsedExpr *>();
                     ColumnExpr *col1 = new ColumnExpr();
                     col1->names_.emplace_back("col1");
@@ -341,7 +341,7 @@ int main() {
                     col2->names_.emplace_back("col2");
                     output_columns->emplace_back(col2);
 
-                    __attribute__((unused)) auto ignored = infinity->Query("select c1, c2 from benchmark_sort order by c1");
+                    __attribute__((unused)) auto ignored = hybridsearch->Query("select c1, c2 from benchmark_sort order by c1");
                 });
             results.push_back(fmt::format("-> Select Sort Time QPS: {}", sort_times / tims_costing_second));
         }
@@ -362,14 +362,14 @@ int main() {
         std::string table_name = "knn_benchmark";
         std::string index_name = "hnsw_index";
 
-        std::shared_ptr<Infinity> infinity = Infinity::LocalConnect();
+        std::shared_ptr<hybridsearch> hybridsearch = hybridsearch::LocalConnect();
         CreateDatabaseOptions create_db_options;
         create_db_options.conflict_type_ = ConflictType::kIgnore;
-        auto r1 = infinity->CreateDatabase(db_name, std::move(create_db_options), "");
+        auto r1 = hybridsearch->CreateDatabase(db_name, std::move(create_db_options), "");
 
         CreateTableOptions create_tb_options;
         create_tb_options.conflict_type_ = ConflictType::kIgnore;
-        auto r2 = infinity->CreateTable(db_name, table_name, std::move(column_defs), std::vector<TableConstraint *>{}, std::move(create_tb_options));
+        auto r2 = hybridsearch->CreateTable(db_name, table_name, std::move(column_defs), std::vector<TableConstraint *>{}, std::move(create_tb_options));
 
         std::string sift_base_path = std::string(test_data_path()) + "/benchmark/sift/base.fvecs";
         if (!VirtualStore::Exists(sift_base_path)) {
@@ -379,7 +379,7 @@ int main() {
 
         ImportOptions import_options;
         import_options.copy_file_type_ = CopyFileType::kFVECS;
-        auto r3 = infinity->Import(db_name, table_name, sift_base_path, import_options);
+        auto r3 = hybridsearch->Import(db_name, table_name, sift_base_path, import_options);
 
         auto index_info = new IndexInfo();
         index_info->index_type_ = IndexType::kHnsw;
@@ -395,23 +395,23 @@ int main() {
         }
 
         String index_comment = "";
-        infinity->CreateIndex(db_name, table_name, index_name, index_comment, index_info, CreateIndexOptions());
+        hybridsearch->CreateIndex(db_name, table_name, index_name, index_comment, index_info, CreateIndexOptions());
     } while (false);
 
     //    {
     //        std::cout << "--- Start to run search benchmark: ";
-    //        auto tims_costing_second = Measurement(thread_num, total_times, [&](size_t i, std::shared_ptr<Infinity> infinity,
+    //        auto tims_costing_second = Measurement(thread_num, total_times, [&](size_t i, std::shared_ptr<hybridsearch> hybridsearch,
     //        std::thread::id thread_id) {
-    //            __attribute__((unused)) auto ignored = infinity->GetDatabase("default_db")->GetTable("benchmark_test")->Search(nullptr, nullptr,
+    //            __attribute__((unused)) auto ignored = hybridsearch->GetDatabase("default_db")->GetTable("benchmark_test")->Search(nullptr, nullptr,
     //            nullptr);
     //        });
     //        results.push_back(fmt::format("-> SEARCH QPS: {}", total_times / tims_costing_second));
     //        std::cout << "OK"  << std::endl;
     //    }
 
-    std::cout << ">>> Infinity Benchmark End <<<" << std::endl;
+    std::cout << ">>> hybridsearch Benchmark End <<<" << std::endl;
     for (const auto &item : results) {
         std::cout << item << std::endl;
     }
-    Infinity::LocalUnInit();
+    hybridsearch::LocalUnInit();
 }

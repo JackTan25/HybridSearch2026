@@ -22,14 +22,14 @@ import third_party;
 import pg_message;
 import ring_buffer_iterator;
 
-import infinity_exception;
+import hybridsearch_exception;
 import default_values;
 import status;
 import logger;
 
 module buffer_reader;
 
-namespace infinity {
+namespace hybridsearch {
 
 SizeT BufferReader::size() const {
     const auto current_size = RingBufferIterator::Distance(start_pos_, current_pos_);
@@ -188,4 +188,4 @@ void BufferReader::receive_more(SizeT bytes) {
     current_pos_.increment(bytes_read);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

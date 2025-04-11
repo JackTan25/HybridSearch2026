@@ -19,11 +19,11 @@ import simd_functions;
 import mlas_matrix_multiply;
 import search_top_1;
 import diskann_simd_func;
-import infinity_exception;
+import hybridsearch_exception;
 
 export module diskann_dist_func;
 
-namespace infinity {
+namespace hybridsearch {
 export enum class DiskAnnMetricType { L2, Cosine, IP, Invalid };
 
 export template <typename DiffType, typename ElemType1, typename ElemType2, typename DimType = u32>
@@ -147,4 +147,4 @@ protected:
     SizeT alignment_factor_ = 8;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

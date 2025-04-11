@@ -26,13 +26,13 @@ import expression_state;
 import data_block;
 import column_vector;
 
-import infinity_exception;
+import hybridsearch_exception;
 import analyzer_pool;
 import value;
 
 module physical_project;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalProject::Init(QueryContext* query_context) {
     //    executor.Init(expressions_);
@@ -180,4 +180,4 @@ SharedPtr<Vector<SharedPtr<DataType>>> PhysicalProject::GetOutputTypes() const {
     return result;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

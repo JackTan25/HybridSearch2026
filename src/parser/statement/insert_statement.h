@@ -18,7 +18,7 @@
 #include "expr/insert_row_expr.h"
 #include "statement/select_statement.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 class InsertStatement final : public BaseStatement {
 public:
@@ -37,4 +37,4 @@ public:
     std::unique_ptr<SelectStatement> select_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

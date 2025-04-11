@@ -14,7 +14,7 @@
 
 #include "command_statement.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 std::string UseCmd::ToString() const { return "Use Command"; }
 std::string SetCmd::ToString() const { return "Set Command"; }
@@ -27,4 +27,4 @@ std::string CleanupCmd::ToString() const { return "Cleanup Command"; }
 std::string TestCmd::ToString() const { return "Test Command: " + command_content_; }
 std::string SnapshotCmd::ToString() const { return "Snapshot command"; }
 
-} // namespace infinity
+} // namespace hybridsearch

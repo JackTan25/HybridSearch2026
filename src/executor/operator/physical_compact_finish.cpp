@@ -30,16 +30,16 @@ import wal_entry;
 import logger;
 import txn;
 import internal_types;
-import infinity_context;
-import infinity_exception;
+import hybridsearch_context;
+import hybridsearch_exception;
 import status;
 import txn_store;
 import segment_index_entry;
 
-namespace infinity {
+namespace hybridsearch {
 
 bool PhysicalCompactFinish::Execute(QueryContext *query_context, OperatorState *operator_state) {
-    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
     if (storage_mode == StorageMode::kUnInitialized) {
         UnrecoverableError("Uninitialized storage mode");
     }
@@ -137,4 +137,4 @@ bool PhysicalCompactFinish::ApplyDeletes(QueryContext *query_context, const Comp
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

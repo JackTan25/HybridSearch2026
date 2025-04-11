@@ -26,7 +26,7 @@ import stl;
 
 module threadutil;
 
-namespace infinity {
+namespace hybridsearch {
 
 #ifdef __APPLE__
 
@@ -97,4 +97,4 @@ bool ThreadUtil::pin(Thread &thread, const u16 cpu_id) {
 #endif
 }
 
-} // namespace infinity
+} // namespace hybridsearch

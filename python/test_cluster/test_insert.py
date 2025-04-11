@@ -1,16 +1,16 @@
 from numpy import dtype
 import pandas as pd
-from infinity_cluster import InfinityCluster
+from hybridsearch_cluster import hybridsearchCluster
 import pytest
 import time
-from infinity.errors import ErrorCode
-from infinity.common import ConflictType
+from hybridsearch.errors import ErrorCode
+from hybridsearch.common import ConflictType
 import timeout_decorator
-from mocked_infinity_cluster import MockInfinityCluster
+from mocked_hybridsearch_cluster import MockhybridsearchCluster
 
 
 class TestInsert:
-    def __test_inner_1(self, cluster: InfinityCluster):
+    def __test_inner_1(self, cluster: hybridsearchCluster):
         with cluster:
             cluster.add_node("node1", "conf/leader.toml")
             cluster.add_node("node2", "conf/follower.toml")
@@ -23,11 +23,11 @@ class TestInsert:
             time.sleep(1)
             print("insert in node1")
 
-            infinity1 = cluster.client("node1")
-            r = infinity1.list_databases()
+            hybridsearch1 = cluster.client("node1")
+            r = hybridsearch1.list_databases()
 
             table_name = "table1"
-            db1 = infinity1.get_database("default_db")
+            db1 = hybridsearch1.get_database("default_db")
             res = db1.drop_table(table_name, ConflictType.Ignore)
             table1 = db1.create_table(
                 table_name, {"c1": {"type": "int"}, "c2": {"type": "vector,4,float"}}
@@ -47,8 +47,8 @@ class TestInsert:
             time.sleep(1)
             print("select in node2")
 
-            infinity2 = cluster.client("node2")
-            db2 = infinity2.get_database("default_db")
+            hybridsearch2 = cluster.client("node2")
+            db2 = hybridsearch2.get_database("default_db")
             table2 = db2.get_table(table_name)
             res, extra_result = table2.output(["*"]).to_df()
             pd.testing.assert_frame_equal(res, res_gt)
@@ -56,14 +56,14 @@ class TestInsert:
             res = db1.drop_table(table_name)
             assert res.error_code == ErrorCode.OK
 
-    def test_insert_11(self, cluster: InfinityCluster):
+    def test_insert_11(self, cluster: hybridsearchCluster):
         self.__test_inner_1(cluster)
 
-    # def test_insert_12(self, mock_cluster: MockInfinityCluster):
+    # def test_insert_12(self, mock_cluster: MockhybridsearchCluster):
     #     self.__test_inner_1(mock_cluster)
 
     # read/write when leader/follower is disconnected
-    # def test_insert_2(self, mock_cluster: MockInfinityCluster):
+    # def test_insert_2(self, mock_cluster: MockhybridsearchCluster):
     #     with mock_cluster:
     #         mock_cluster.add_node("node1", "conf/leader.toml")
     #         mock_cluster.add_node("node2", "conf/follower.toml")
@@ -75,10 +75,10 @@ class TestInsert:
     #         time.sleep(1)
     #         print("insert in node1")
 
-    #         infinity1 = mock_cluster.client("node1")
+    #         hybridsearch1 = mock_cluster.client("node1")
 
     #         table_name = "table2"
-    #         db1 = infinity1.get_database("default_db")
+    #         db1 = hybridsearch1.get_database("default_db")
     #         db1.drop_table(table_name, ConflictType.Ignore)
     #         table1 = db1.create_table(
     #             table_name, {"c1": {"type": "int"}, "c2": {"type": "vector,4,float"}}
@@ -95,8 +95,8 @@ class TestInsert:
     #         time.sleep(1)
     #         print("select in node2")
 
-    #         infinity2 = mock_cluster.client("node2")
-    #         db2 = infinity2.get_database("default_db")
+    #         hybridsearch2 = mock_cluster.client("node2")
+    #         db2 = hybridsearch2.get_database("default_db")
     #         table2 = db2.get_table(table_name)
     #         res, extra_result = table2.output(["*"]).to_df()
     #         pd.testing.assert_frame_equal(res, res_gt)
@@ -121,7 +121,7 @@ class TestInsert:
 
     #         db1.drop_table(table_name)
 
-    # def test_insert_3(self, mock_cluster: MockInfinityCluster):
+    # def test_insert_3(self, mock_cluster: MockhybridsearchCluster):
     #     try:
     #         mock_cluster.add_node("node1", "conf/leader.toml")
     #         mock_cluster.add_node("node2", "conf/follower.toml")
@@ -133,10 +133,10 @@ class TestInsert:
     #         time.sleep(1)
     #         print("insert in node1")
 
-    #         infinity1 = mock_cluster.client("node1")
+    #         hybridsearch1 = mock_cluster.client("node1")
 
     #         table_name = "table2"
-    #         db1 = infinity1.get_database("default_db")
+    #         db1 = hybridsearch1.get_database("default_db")
     #         db1.drop_table(table_name, ConflictType.Ignore)
     #         table1 = db1.create_table(
     #             table_name, {"c1": {"type": "int"}, "c2": {"type": "vector,4,float"}}
@@ -158,8 +158,8 @@ class TestInsert:
     #             }
     #         ).astype({"c1": dtype("int32"), "c2": dtype("object")})
 
-    #         infinity2 = mock_cluster.client("node2")
-    #         db2 = infinity2.get_database("default_db")
+    #         hybridsearch2 = mock_cluster.client("node2")
+    #         db2 = hybridsearch2.get_database("default_db")
     #         table2 = db2.get_table(table_name)
     #         res, extra_result = table2.output(["*"]).to_df()
     #         pd.testing.assert_frame_equal(res, res_gt)

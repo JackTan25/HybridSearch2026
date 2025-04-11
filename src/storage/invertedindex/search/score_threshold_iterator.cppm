@@ -19,7 +19,7 @@ import stl;
 import doc_iterator;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class ScoreThresholdIterator final : public DocIterator {
     UniquePtr<DocIterator> query_iterator_{};
@@ -38,4 +38,4 @@ public:
     void PrintTree(std::ostream &os, const String &prefix, bool is_final) const override;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

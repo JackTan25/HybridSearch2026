@@ -19,7 +19,7 @@ import logger;
 
 import skiplist;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class SkiplistTest : public BaseTest {};
 #if 0

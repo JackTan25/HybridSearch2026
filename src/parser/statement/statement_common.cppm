@@ -18,10 +18,10 @@ module;
 
 export module statement_common;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::InitParameter;
-export using infinity::CopyFileType;
-export using infinity::CopyFileTypeToStr;
+export using hybridsearch::InitParameter;
+export using hybridsearch::CopyFileType;
+export using hybridsearch::CopyFileTypeToStr;
 
-} // namespace infinity
+} // namespace hybridsearch

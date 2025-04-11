@@ -17,14 +17,14 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 import sql_parser;
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 import base_statement;
 import create_statement;
 import drop_statement;
@@ -45,11 +45,11 @@ import table_reference;
 import parser_result;
 import statement_common;
 
-using namespace infinity;
+using namespace hybridsearch;
 class StatementParsingTest : public BaseTest {};
 
 TEST_F(StatementParsingTest, good_test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
     SharedPtr<SQLParser> parser = MakeShared<SQLParser>();
     SharedPtr<ParserResult> result = MakeShared<ParserResult>();
 

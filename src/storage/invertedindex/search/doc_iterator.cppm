@@ -21,7 +21,7 @@ import stl;
 import index_defines;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class EarlyTermAlgo {
     kAuto,    // choose between kNaive, kBatch, kBMW
@@ -109,4 +109,4 @@ protected:
     float bm25_score_upper_bound_ = std::numeric_limits<float>::max();
     DocIteratorEstimateIterateCost estimate_iterate_cost_ = {};
 };
-} // namespace infinity
+} // namespace hybridsearch

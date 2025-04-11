@@ -24,7 +24,7 @@ import analyzer;
 import tokenizer;
 module common_analyzer;
 
-namespace infinity {
+namespace hybridsearch {
 constexpr int MAX_TUPLE_LENGTH = 1024;
 
 CommonLanguageAnalyzer::CommonLanguageAnalyzer()
@@ -115,4 +115,4 @@ int CommonLanguageAnalyzer::AnalyzeImpl(const Term &input, void *data, HookType 
     return temp_offset + 1;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

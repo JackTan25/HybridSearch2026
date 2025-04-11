@@ -21,13 +21,13 @@ import vec_store_type;
 import hnsw_common;
 import sparse_util;
 import compilation_config;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import sparse_test_util;
 import virtual_store;
 import local_file_handle;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class HnswSparseTest : public BaseTest {
 protected:

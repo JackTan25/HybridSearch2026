@@ -17,7 +17,7 @@
 
 import stl;
 import base_test;
-import infinity_exception;
+import hybridsearch_exception;
 import knn_diskann;
 import internal_types;
 import virtual_store;
@@ -27,7 +27,7 @@ import local_file_handle;
 import pq_flash_index;
 import diskann_dist_func;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class DiskAnnTest : public BaseTest {
 public:

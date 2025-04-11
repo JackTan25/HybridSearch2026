@@ -20,7 +20,7 @@
 #include <string>
 #include <utility>
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class CommandType {
     kInvalid,
@@ -269,4 +269,4 @@ private:
     std::optional<std::string> object_name_{std::nullopt};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

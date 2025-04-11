@@ -14,7 +14,7 @@
 
 #include "create_view_info.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 CreateViewInfo::~CreateViewInfo() {
     if (select_ != nullptr) {
@@ -29,4 +29,4 @@ CreateViewInfo::~CreateViewInfo() {
 
 std::string CreateViewInfo::ToString() const { return "Create view info"; }
 
-} // namespace infinity
+} // namespace hybridsearch

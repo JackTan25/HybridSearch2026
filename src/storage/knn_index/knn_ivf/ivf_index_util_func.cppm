@@ -20,7 +20,7 @@ import stl;
 import internal_types;
 import column_vector;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <IsAnyOf<u8, i8, f64, f32, Float16T, BFloat16T> ColumnEmbeddingElementT>
 Pair<const f32 *, UniquePtr<f32[]>> GetF32Ptr(const ColumnEmbeddingElementT *src_data_ptr, const u32 src_data_cnt) {
@@ -88,4 +88,4 @@ struct EmbeddingDataTypeToCppType<EmbeddingDataType::kElemBFloat16> {
 export template <EmbeddingDataType t>
 using EmbeddingDataTypeToCppTypeT = typename EmbeddingDataTypeToCppType<t>::type;
 
-} // namespace infinity
+} // namespace hybridsearch

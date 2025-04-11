@@ -31,18 +31,18 @@ module virtual_store;
 import stl;
 import third_party;
 import logger;
-import infinity_exception;
+import hybridsearch_exception;
 import default_values;
 import stream_reader;
 import s3_client_minio;
-import infinity_context;
+import hybridsearch_context;
 import object_storage_task;
 import admin_statement;
 import utility;
 
 namespace fs = std::filesystem;
 
-namespace infinity {
+namespace hybridsearch {
 
 StorageType String2StorageType(const String &storage_type) {
     if (storage_type == "local") {
@@ -200,7 +200,7 @@ Status VirtualStore::DeleteFileBG(const String &path) {
     switch (VirtualStore::storage_type_) {
         case StorageType::kMinio: {
             auto drop_task = MakeShared<LocalDropTask>(path);
-            auto object_storage_processor = infinity::InfinityContext::instance().storage()->object_storage_processor();
+            auto object_storage_processor = hybridsearch::hybridsearchContext::instance().storage()->object_storage_processor();
             object_storage_processor->Submit(drop_task);
             drop_task->Wait();
             break;
@@ -550,7 +550,7 @@ i32 VirtualStore::MunmapFilePart(u8 *data_ptr, SizeT offset, SizeT length) {
 
 // Remote storage
 StorageType VirtualStore::storage_type_ = StorageType::kInvalid;
-String VirtualStore::bucket_ = "infinity";
+String VirtualStore::bucket_ = "hybridsearch";
 UniquePtr<S3Client> VirtualStore::s3_client_ = nullptr;
 Atomic<u64> VirtualStore::total_request_count_ = 0;
 Atomic<u64> VirtualStore::cache_miss_count_ = 0;
@@ -603,7 +603,7 @@ Status VirtualStore::DownloadObject(const String &file_path, const String &objec
     switch (VirtualStore::storage_type_) {
         case StorageType::kMinio: {
             auto download_task = MakeShared<DownloadTask>(file_path, object_name);
-            auto object_storage_processor = infinity::InfinityContext::instance().storage()->object_storage_processor();
+            auto object_storage_processor = hybridsearch::hybridsearchContext::instance().storage()->object_storage_processor();
             object_storage_processor->Submit(download_task);
             download_task->Wait();
             break;
@@ -623,7 +623,7 @@ Status VirtualStore::UploadObject(const String &file_path, const String &object_
     switch (VirtualStore::storage_type_) {
         case StorageType::kMinio: {
             auto upload_task = MakeShared<UploadTask>(file_path, object_name);
-            auto object_storage_processor = infinity::InfinityContext::instance().storage()->object_storage_processor();
+            auto object_storage_processor = hybridsearch::hybridsearchContext::instance().storage()->object_storage_processor();
             object_storage_processor->Submit(upload_task);
             upload_task->Wait();
             break;
@@ -643,7 +643,7 @@ Status VirtualStore::RemoveObject(const String &object_name) {
     switch (VirtualStore::storage_type_) {
         case StorageType::kMinio: {
             auto remove_task = MakeShared<RemoveTask>(object_name);
-            auto object_storage_processor = infinity::InfinityContext::instance().storage()->object_storage_processor();
+            auto object_storage_processor = hybridsearch::hybridsearchContext::instance().storage()->object_storage_processor();
             object_storage_processor->Submit(remove_task);
             remove_task->Wait();
             break;
@@ -662,7 +662,7 @@ Status VirtualStore::CopyObject(const String &src_object_name, const String &dst
     switch (VirtualStore::storage_type_) {
         case StorageType::kMinio: {
             auto copy_task = MakeShared<CopyTask>(src_object_name, dst_object_name);
-            auto object_storage_processor = infinity::InfinityContext::instance().storage()->object_storage_processor();
+            auto object_storage_processor = hybridsearch::hybridsearchContext::instance().storage()->object_storage_processor();
             object_storage_processor->Submit(copy_task);
             copy_task->Wait();
             break;
@@ -689,4 +689,4 @@ Status VirtualStore::BucketExists() {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

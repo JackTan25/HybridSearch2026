@@ -28,20 +28,20 @@ import internal_types;
 import data_type;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PlanFragment {
 public:
     PlanFragment() = default;
 
     explicit inline PlanFragment(u64 fragment_id) : fragment_id_(fragment_id) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("PlanFragment");
 #endif
     }
 
     virtual ~PlanFragment() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("PlanFragment");
 #endif
     }
@@ -111,4 +111,4 @@ private:
     FragmentType fragment_type_{FragmentType::kSerialMaterialize};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

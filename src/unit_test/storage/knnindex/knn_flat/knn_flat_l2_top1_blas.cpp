@@ -15,7 +15,7 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import stl;
 import global_resource_usage;
@@ -23,17 +23,17 @@ import third_party;
 import logger;
 
 import deprecated_knn_flat_l2_top1_blas;
-import infinity_context;
+import hybridsearch_context;
 import roaring_bitmap;
 import knn_expr;
 import internal_types;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class KnnFlatL2Top1BlasTest : public BaseTest {};
 
 TEST_F(KnnFlatL2Top1BlasTest, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     i64 dimension = 4;
     i64 base_embedding_count = 4;

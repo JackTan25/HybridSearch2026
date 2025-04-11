@@ -15,7 +15,7 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import stl;
 import global_resource_usage;
@@ -23,16 +23,16 @@ import third_party;
 import logger;
 
 import deprecated_knn_flat_ip_reservoir;
-import infinity_context;
+import hybridsearch_context;
 import knn_expr;
 import internal_types;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class KnnFlatIpReservoirTest : public BaseTest {};
 
 TEST_F(KnnFlatIpReservoirTest, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     i64 dimension = 4;
     i64 top_k = 4;

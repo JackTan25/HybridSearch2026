@@ -20,7 +20,7 @@
 #include "type/type_info.h"
 #include <memory>
 
-namespace infinity {
+namespace hybridsearch {
 
 class CastExpr final : public ParsedExpr {
 public:
@@ -35,4 +35,4 @@ public:
     ParsedExpr *expr_{nullptr};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

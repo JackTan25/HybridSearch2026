@@ -16,7 +16,7 @@
 #include "parser_assert.h"
 #include "spdlog/fmt/fmt.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 std::string IntervalType::ToString() const {
     switch (unit) {
@@ -45,4 +45,4 @@ std::string IntervalType::ToString() const {
     return std::string();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

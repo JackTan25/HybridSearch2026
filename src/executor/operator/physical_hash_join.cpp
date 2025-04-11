@@ -21,7 +21,7 @@ import stl;
 
 module physical_hash_join;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalHashJoin::Init(QueryContext* query_context) {}
 
@@ -61,4 +61,4 @@ SharedPtr<Vector<SharedPtr<DataType>>> PhysicalHashJoin::GetOutputTypes() const 
     return result;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

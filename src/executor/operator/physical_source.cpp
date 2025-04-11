@@ -26,10 +26,10 @@ import operator_state;
 import data_block;
 import fragment_data;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 String ToString(SourceType source_type) {
     switch (source_type) {
@@ -87,4 +87,4 @@ bool PhysicalSource::Execute(QueryContext *, SourceState *source_state) {
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -4,7 +4,7 @@ export module segmenter;
 
 import analyze_context;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class Segmenter {
 public:
@@ -15,4 +15,4 @@ public:
     virtual ~Segmenter() = default;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

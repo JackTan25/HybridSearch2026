@@ -22,13 +22,13 @@ import roaring_bitmap;
 import deprecated_knn_distance;
 import logger;
 
-import infinity_exception;
+import hybridsearch_exception;
 import default_values;
 import vector_distance;
 import knn_expr;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename DistType>
 class KnnFlatIPReservoir final : public KnnDistance<DistType> {
@@ -148,4 +148,4 @@ private:
 
 template class KnnFlatIPReservoir<f32>;
 
-} // namespace infinity
+} // namespace hybridsearch

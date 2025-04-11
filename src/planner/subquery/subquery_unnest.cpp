@@ -53,12 +53,12 @@ import cast_table;
 import catalog;
 import third_party;
 import subquery_expr;
-import infinity_exception;
+import hybridsearch_exception;
 import join_reference;
 import data_type;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 void SubqueryUnnest::UnnestSubqueries(SharedPtr<BaseExpression> &expr_ptr,
                                       SharedPtr<LogicalNode> &root,
@@ -450,4 +450,4 @@ void SubqueryUnnest::GenerateJoinConditions(QueryContext *query_context,
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

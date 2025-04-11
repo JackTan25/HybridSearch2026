@@ -16,7 +16,7 @@
 
 #include "base_mixed_type.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 struct __attribute__((packed)) FloatMixedType : public BaseMixedType {
     FloatMixedType() : BaseMixedType(MixedValueType::kFloat) {}
@@ -27,4 +27,4 @@ struct __attribute__((packed)) FloatMixedType : public BaseMixedType {
     double value{0};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

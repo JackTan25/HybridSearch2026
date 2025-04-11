@@ -15,7 +15,7 @@
 #include "create_table_info.h"
 #include <sstream>
 
-namespace infinity {
+namespace hybridsearch {
 
 CreateTableInfo::~CreateTableInfo() {
     for (auto *&column_def : column_defs_) {
@@ -78,4 +78,4 @@ std::string TableConstraint::ToString() const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -27,9 +27,9 @@ import logger;
 import txn_manager;
 import extra_ddl_info;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 class TableMeta;
 class DBMeta;
@@ -219,4 +219,4 @@ void MetaMap<Meta>::Cleanup(CleanupInfoTracer *info_tracer, bool dropped) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

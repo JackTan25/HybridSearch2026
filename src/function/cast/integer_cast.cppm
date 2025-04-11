@@ -20,7 +20,7 @@ import stl;
 import bound_cast_func;
 import column_vector_cast;
 import logical_type;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import column_vector;
 import vector_buffer;
@@ -29,7 +29,7 @@ import data_type;
 import status;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct IntegerTryCastToFixlen;
 export struct IntegerTryCastToVarlen;
@@ -619,4 +619,4 @@ inline bool IntegerTryCastToVarlen::Run(HugeIntT, VarcharT &, ColumnVector *) {
     return false;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -25,7 +25,7 @@ import knn_expr;
 
 export module join_binder;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class JoinBinder final : public ExpressionBinder {
 public:
@@ -42,4 +42,4 @@ public:
 private:
 };
 
-} // namespace infinity
+} // namespace hybridsearch

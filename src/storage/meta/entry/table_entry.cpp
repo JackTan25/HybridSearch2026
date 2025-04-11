@@ -33,7 +33,7 @@ import internal_types;
 import logger;
 import txn_store;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import txn_manager;
 import index_base;
 import index_full_text;
@@ -54,7 +54,7 @@ import cleanup_scanner;
 import column_index_merger;
 import parsed_expr;
 import constant_expr;
-import infinity_context;
+import hybridsearch_context;
 import persistence_manager;
 import bg_task;
 import defer_op;
@@ -70,10 +70,10 @@ import column_vector;
 import expression_state;
 import snapshot_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 SharedPtr<String> TableEntry::DetermineTableDir(const String &parent_dir, const String &table_name) {
-    auto abs_parent_dir = Path(InfinityContext::instance().config()->DataDir()) / parent_dir;
+    auto abs_parent_dir = Path(hybridsearchContext::instance().config()->DataDir()) / parent_dir;
     SharedPtr<String> temp_dir = DetermineRandomString(abs_parent_dir, fmt::format("table_{}", table_name));
     return MakeShared<String>(Path(parent_dir) / *temp_dir);
 }
@@ -256,7 +256,7 @@ SharedPtr<TableInfo> TableEntry::GetTableInfo(Txn *txn) {
     SharedPtr<TableInfo> table_info = MakeShared<TableInfo>();
     table_info->db_name_ = this->GetDBName();
     table_info->table_name_ = this->table_name_;
-    table_info->table_full_dir_ = MakeShared<String>(Path(InfinityContext::instance().config()->DataDir()) / *this->TableEntryDir());
+    table_info->table_full_dir_ = MakeShared<String>(Path(hybridsearchContext::instance().config()->DataDir()) / *this->TableEntryDir());
     table_info->column_count_ = this->ColumnCount();
     table_info->row_count_ = this->row_count();
     table_info->table_comment_ = this->GetTableComment();
@@ -859,7 +859,7 @@ void TableEntry::MemIndexInsertInner(TableIndexEntry *table_index_entry, Txn *tx
         AppendRange &range = append_ranges[i];
         SharedPtr<BlockEntry> block_entry = block_entries[i];
         segment_index_entry->MemIndexInsert(block_entry, range.start_offset_, range.row_count_, txn->CommitTS(), txn->buffer_mgr(), txn->txn_store());
-        if ((i == dump_idx && segment_index_entry->MemIndexRowCount() >= infinity::InfinityContext::instance().config()->MemIndexCapacity()) ||
+        if ((i == dump_idx && segment_index_entry->MemIndexRowCount() >= hybridsearch::hybridsearchContext::instance().config()->MemIndexCapacity()) ||
             (i == num_ranges - 1 && segment_entry->Room() <= 0)) {
             SharedPtr<ChunkIndexEntry> chunk_index_entry = segment_index_entry->MemIndexDump();
             String *index_name = index_base->index_name_.get();
@@ -871,7 +871,7 @@ void TableEntry::MemIndexInsertInner(TableIndexEntry *table_index_entry, Txn *tx
                 TxnTableStore *txn_table_store = txn->GetTxnTableStore(this);
                 txn_table_store->AddChunkIndexStore(table_index_entry, chunk_index_entry.get());
 
-                auto *compaction_process = InfinityContext::instance().storage()->compaction_processor();
+                auto *compaction_process = hybridsearchContext::instance().storage()->compaction_processor();
 
                 compaction_process->Submit(
                     MakeShared<DumpIndexBylineTask>(GetDBName(), GetTableName(), table_index_entry->GetIndexName(), seg_id, chunk_index_entry));
@@ -993,7 +993,7 @@ void TableEntry::MemIndexRecover(BufferManager *buffer_manager, TxnTimeStamp ts)
                                                         nullptr);
                 }
                 //segment_index_entry->MemIndexWaitInflightTasks();
-                InfinityContext::instance().storage()->catalog()->all_memindex_recover_segment_.push_back(segment_index_entry);
+                hybridsearchContext::instance().storage()->catalog()->all_memindex_recover_segment_.push_back(segment_index_entry);
                 message = fmt::format("Table {}.{} index {} segment {} MemIndex recovered.", *GetDBName(), *table_name_, index_name, segment_id);
                 LOG_INFO(message);
             }
@@ -1553,7 +1553,7 @@ void TableEntry::Cleanup(CleanupInfoTracer *info_tracer, bool dropped) {
     index_meta_map_.Cleanup(info_tracer);
 
     if (dropped) {
-        String full_table_dir = Path(InfinityContext::instance().config()->DataDir()) / *table_entry_dir_;
+        String full_table_dir = Path(hybridsearchContext::instance().config()->DataDir()) / *table_entry_dir_;
         LOG_DEBUG(fmt::format("Cleaning up dir: {}", full_table_dir));
         CleanupScanner::CleanupDir(full_table_dir);
         LOG_DEBUG(fmt::format("Cleaned dir: {}", full_table_dir));
@@ -1829,4 +1829,4 @@ SharedPtr<TableSnapshotInfo> TableEntry::GetSnapshotInfo(Txn *txn_ptr) const {
     return table_snapshot_info;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

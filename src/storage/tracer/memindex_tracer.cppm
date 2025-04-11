@@ -22,7 +22,7 @@ import third_party;
 import logger;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 class BaseMemIndex;
 class Txn;
@@ -106,13 +106,13 @@ export class BGMemIndexTracer : public MemIndexTracer {
 public:
     BGMemIndexTracer(SizeT index_memory_limit, Catalog *catalog, TxnManager *txn_mgr)
         : MemIndexTracer(index_memory_limit), catalog_(catalog), txn_mgr_(txn_mgr) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("BGMemIndexTracer");
 #endif
     }
 
     ~BGMemIndexTracer() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("BGMemIndexTracer");
 #endif
     }
@@ -129,4 +129,4 @@ private:
     TxnManager *txn_mgr_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

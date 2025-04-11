@@ -26,7 +26,7 @@ import internal_types;
 import data_type;
 import meta_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalDelete final : public LogicalNode {
 
@@ -47,4 +47,4 @@ public:
     SharedPtr<TableInfo> table_info_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

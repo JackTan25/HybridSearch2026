@@ -21,7 +21,7 @@ import stl;
 import term;
 module tokenizer;
 
-namespace infinity {
+namespace hybridsearch {
 
 const CharType ALLOW_CHR = 0;     /// < regular term
 const CharType DELIMITER_CHR = 1; /// < delimiter
@@ -320,4 +320,4 @@ bool Tokenizer::TokenizeWhite(const String &input_string, TermList &raw_terms) {
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

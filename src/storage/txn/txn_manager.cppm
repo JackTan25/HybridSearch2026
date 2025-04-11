@@ -24,7 +24,7 @@ import wal_entry;
 import default_values;
 import txn_context;
 
-namespace infinity {
+namespace hybridsearch {
 
 class BGTaskProcessor;
 class WalManager;
@@ -139,4 +139,4 @@ private:
     Atomic<u64> total_rollbacked_txn_count_{0};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

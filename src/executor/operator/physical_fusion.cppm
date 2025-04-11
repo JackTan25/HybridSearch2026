@@ -25,12 +25,12 @@ import physical_operator_type;
 import base_expression;
 import fusion_expression;
 import load_meta;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import data_type;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 struct DataBlock;
 
 export enum class FusionMethod { kRRF, kWeightedSum, kMatchTensor };
@@ -92,4 +92,4 @@ export struct MatchTensorRerankDoc {
         : row_id_(row_id), from_input_data_block_id_(from_input_data_block_id), from_block_idx_(from_block_idx), from_row_idx_(from_row_idx) {}
 };
 
-} // namespace infinity
+} // namespace hybridsearch

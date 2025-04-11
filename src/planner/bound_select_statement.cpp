@@ -62,7 +62,7 @@ import logical_unnest;
 
 import subquery_unnest;
 
-import infinity_exception;
+import hybridsearch_exception;
 import expression_transformer;
 import expression_type;
 
@@ -91,7 +91,7 @@ import data_type;
 import internal_types;
 import txn;
 
-namespace infinity {
+namespace hybridsearch {
 
 SharedPtr<LogicalNode> BoundSelectStatement::BuildPlan(QueryContext *query_context) {
     const SharedPtr<BindContext> &bind_context = this->bind_context_;
@@ -261,7 +261,7 @@ SharedPtr<LogicalNode> BoundSelectStatement::BuildPlan(QueryContext *query_conte
                         match_node->top_n_ = DEFAULT_MATCH_TEXT_OPTION_TOP_N;
                     }
 
-                    auto query_operator_option = FulltextQueryOperatorOption::kInfinitySyntax;
+                    auto query_operator_option = FulltextQueryOperatorOption::khybridsearchSyntax;
                     // option: operator
                     if (iter = search_ops.options_.find("operator"); iter != search_ops.options_.end()) {
                         ToLower(iter->second);
@@ -684,4 +684,4 @@ SharedPtr<BaseExpression> BoundSelectStatement::UnnestSubquery(SharedPtr<Logical
     return return_expr;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

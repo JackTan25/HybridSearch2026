@@ -17,8 +17,8 @@
 
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 std::string RowID::ToString() const { return std::to_string(ToUint64()); }
 
-} // namespace infinity
+} // namespace hybridsearch

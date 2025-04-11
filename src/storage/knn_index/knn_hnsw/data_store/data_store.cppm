@@ -25,11 +25,11 @@ import hnsw_common;
 import local_file_handle;
 import vec_store_type;
 import graph_store;
-import infinity_exception;
+import hybridsearch_exception;
 import serialize;
 import data_store_util;
 
-namespace infinity {
+namespace hybridsearch {
 
 template <typename VecStoreT, typename LabelType, bool OwnMem>
 class DataStoreInner;
@@ -819,4 +819,4 @@ DataStore<CompressVecStoreType, LabelType, OwnMem> DataStore<VecStoreT, LabelTyp
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

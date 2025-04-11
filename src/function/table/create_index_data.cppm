@@ -20,10 +20,10 @@ import stl;
 import segment_entry;
 import block_index;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct CreateIndexSharedData {
     CreateIndexSharedData() = default;
@@ -43,4 +43,4 @@ export struct CreateIndexSharedData {
     HashMap<u32, atomic_u64> create_index_idxes_{};
 };
 
-}; // namespace infinity
+}; // namespace hybridsearch

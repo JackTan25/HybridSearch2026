@@ -95,7 +95,7 @@ def trace_unhandled_exceptions(func):
 
 @trace_unhandled_exceptions
 def work(queries, topk, metric_type, column_name, data_type, ef: int, remote: bool, table_name="sift_benchmark"):
-    infinity_obj = None
+    hybridsearch_obj = None
     if remote:
         client = MilvusClient(
             uri="http://localhost:19530"
@@ -168,7 +168,7 @@ def one_thread(rounds, query_path, ground_truth_path, ef: int, limit: int, remot
     results = []
     queries = fvecs_read_all(query_path)
 
-    infinity_obj = None
+    hybridsearch_obj = None
     if remote:
         client = MilvusClient(
             uri="http://localhost:19530"
@@ -268,7 +268,7 @@ def str2bool(value):
 if __name__ == '__main__':
     current_path = os.getcwd()
 
-    parser = argparse.ArgumentParser(description="Benchmark Infinity")
+    parser = argparse.ArgumentParser(description="Benchmark hybridsearch")
 
     parser.add_argument(
         "-t",

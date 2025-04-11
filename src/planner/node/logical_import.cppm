@@ -26,7 +26,7 @@ import statement_common;
 import data_type;
 import meta_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalImport : public LogicalNode {
 public:
@@ -67,4 +67,4 @@ private:
     char delimiter_{','};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

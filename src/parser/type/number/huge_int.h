@@ -16,7 +16,7 @@
 
 #include "parser_assert.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 struct HugeInt {
 public:
@@ -71,4 +71,4 @@ std::string HugeInt::ToString() const {
     return std::string();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

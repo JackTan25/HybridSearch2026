@@ -29,7 +29,7 @@ import logical_node_type;
 
 export module column_pruner;
 
-namespace infinity {
+namespace hybridsearch {
 
 class RemoveUnusedColumns : public LogicalNodeVisitor {
 public:
@@ -60,4 +60,4 @@ private:
     RemoveUnusedColumns remove_visitor{true};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

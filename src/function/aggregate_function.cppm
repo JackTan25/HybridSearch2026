@@ -23,14 +23,14 @@ import function;
 import function_data;
 import column_vector;
 import vector_buffer;
-import infinity_exception;
+import hybridsearch_exception;
 import base_expression;
 import data_type;
 import logical_type;
 import internal_types;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 using AggregateInitializeFuncType = std::function<void(ptr_t)>;
 using AggregateUpdateFuncType = std::function<void(ptr_t, const SharedPtr<ColumnVector> &)>;
@@ -151,4 +151,4 @@ inline AggregateFunction UnaryAggregate(const String &name, const DataType &inpu
                              AggregateOperation::StateFinalize<AggregateState, ResultType>);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

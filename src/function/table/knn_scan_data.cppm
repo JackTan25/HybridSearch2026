@@ -34,7 +34,7 @@ import statement_common;
 import base_table_ref;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class KnnScanSharedData {
 public:
@@ -148,4 +148,4 @@ public:
     SharedPtr<ColumnVector> bool_column_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

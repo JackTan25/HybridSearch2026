@@ -18,7 +18,7 @@ import stl;
 import crc;
 export module fst:writer;
 
-export namespace infinity {
+export namespace hybridsearch {
 
 class Writer {
 public:
@@ -88,4 +88,4 @@ public:
     Writer &GetRef() { return wtr_; }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

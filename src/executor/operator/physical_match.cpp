@@ -37,7 +37,7 @@ import expression_state;
 import base_expression;
 import match_expression;
 import default_values;
-import infinity_exception;
+import hybridsearch_exception;
 import value;
 import third_party;
 import base_table_ref;
@@ -72,7 +72,7 @@ import cached_match;
 import filter_iterator;
 import score_threshold_iterator;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct QueryIterators {
     UniquePtr<DocIterator> query_iter{};
@@ -423,4 +423,4 @@ void PhysicalMatch::AddCache(QueryContext *query_context, ResultCacheManager *ca
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

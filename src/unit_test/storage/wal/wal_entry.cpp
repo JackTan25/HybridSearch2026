@@ -14,8 +14,8 @@
 
 #include "gtest/gtest.h"
 import base_test;
-import infinity_context;
-import infinity_exception;
+import hybridsearch_context;
+import hybridsearch_exception;
 
 import stl;
 import global_resource_usage;
@@ -38,7 +38,7 @@ import data_type;
 import persistence_manager;
 import embedding_info;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class WalEntryTest : public BaseTest {};
 
@@ -198,8 +198,8 @@ void MockWalFile(const String &wal_file_path, const String &ckp_file_path, const
 
 TEST_F(WalEntryTest, ReadWrite) {
     RemoveDbDirs();
-    infinity::InfinityContext::instance().InitPhase1(nullptr);
-    infinity::InfinityContext::instance().InitPhase2();
+    hybridsearch::hybridsearchContext::instance().InitPhase1(nullptr);
+    hybridsearch::hybridsearchContext::instance().InitPhase2();
     SharedPtr<WalEntry> entry = MakeShared<WalEntry>();
     entry->cmds_.push_back(MakeShared<WalCmdCreateDatabase>("db1", "default2_comment", "AAA_db1"));
     entry->cmds_.push_back(MakeShared<WalCmdDropDatabase>("db1"));
@@ -289,7 +289,7 @@ TEST_F(WalEntryTest, ReadWrite) {
     EXPECT_NE(entry2, nullptr);
     EXPECT_EQ(*entry == *entry2, true);
     EXPECT_EQ(ptr_r - buf_beg, exp_size);
-    infinity::InfinityContext::instance().UnInit();
+    hybridsearch::hybridsearchContext::instance().UnInit();
 }
 
 TEST_F(WalEntryTest, ReadWriteVFS) {
@@ -326,7 +326,7 @@ TEST_F(WalEntryTest, ReadWriteVFS) {
 void Println(const String &message1, const String &message2) { std::cout << message1 << message2 << std::endl; }
 
 TEST_F(WalEntryTest, WalEntryIterator) {
-    using namespace infinity;
+    using namespace hybridsearch;
     RemoveDbDirs();
     std::filesystem::create_directories(GetFullWalDir());
     String wal_file_path = String(GetFullWalDir()) + "/wal.log";
@@ -399,7 +399,7 @@ TEST_F(WalEntryTest, WalEntryIterator) {
 }
 
 TEST_F(WalEntryTest, WalListIterator) {
-    using namespace infinity;
+    using namespace hybridsearch;
     RemoveDbDirs();
     std::filesystem::create_directories(GetFullWalDir());
     String wal_file_path1 = String(GetFullWalDir()) + "/wal.log";

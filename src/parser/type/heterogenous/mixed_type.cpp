@@ -19,7 +19,7 @@
 #include <cmath>
 #include <cstring>
 
-namespace infinity {
+namespace hybridsearch {
 
 // static member method for non-nested data
 MixedType MixedType::MakeInteger(int64_t input) {
@@ -599,4 +599,4 @@ void MixedType::Reset(bool in_constructor) {
     this->type = MixedValueType::kInvalid;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

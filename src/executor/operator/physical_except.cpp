@@ -19,10 +19,10 @@ import operator_state;
 
 module physical_except;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalExcept::Init(QueryContext* query_context) {}
 
 bool PhysicalExcept::Execute(QueryContext *, OperatorState *) { return true; }
 
-} // namespace infinity
+} // namespace hybridsearch

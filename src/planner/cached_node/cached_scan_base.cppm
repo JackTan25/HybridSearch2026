@@ -20,7 +20,7 @@ import stl;
 import cached_node_base;
 import logical_node_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 class BaseTableRef;
 class PhysicalScanBase;
@@ -45,4 +45,4 @@ protected:
     TxnTimeStamp query_ts_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

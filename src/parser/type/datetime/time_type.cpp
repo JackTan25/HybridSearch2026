@@ -15,7 +15,7 @@
 #include "time_type.h"
 #include <format>
 
-namespace infinity {
+namespace hybridsearch {
 // min time: 00:00:00.000
 constexpr static int32_t MIN_TIME_HOUR = 0;
 constexpr static int32_t MIN_TIME_MINUTE = 0;
@@ -247,4 +247,4 @@ bool TimeType::IsTimeValid(int32_t hour, int32_t minute, int32_t second) {
            second <= MAX_TIME_SECOND;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

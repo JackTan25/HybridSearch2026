@@ -16,7 +16,7 @@
 #include "tensor_type.h"
 #include <sstream>
 
-namespace infinity {
+namespace hybridsearch {
 std::string TensorArrayType::TensorArray2String(const std::vector<std::pair<std::span<const char>, uint64_t>> &raw_data,
                                                 EmbeddingDataType type,
                                                 size_t embedding_dimension) {
@@ -33,4 +33,4 @@ std::string TensorArrayType::TensorArray2String(const std::vector<std::pair<std:
     oss << ']';
     return std::move(oss).str();
 }
-} // namespace infinity
+} // namespace hybridsearch

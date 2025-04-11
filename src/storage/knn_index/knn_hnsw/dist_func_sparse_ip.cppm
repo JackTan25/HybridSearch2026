@@ -22,7 +22,7 @@ import sparse_vector_distance;
 import sparse_util;
 import hnsw_common;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename DataType, typename IdxType>
 class SparseIPDist {
@@ -51,4 +51,4 @@ private:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

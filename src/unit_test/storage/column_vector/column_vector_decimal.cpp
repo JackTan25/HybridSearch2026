@@ -15,7 +15,7 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import logger;
 import column_vector;
@@ -27,18 +27,18 @@ import stl;
 import selection;
 import vector_buffer;
 import global_resource_usage;
-import infinity_context;
+import hybridsearch_context;
 import internal_types;
 import logical_type;
 import decimal_info;
 import data_type;
 import compilation_config;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class ColumnVectorDecimalTest : public BaseTest {
     void SetUp() override {
-        using namespace infinity;
+        using namespace hybridsearch;
 
         LoggerConfig logger_config;
         logger_config.log_level_ = LogLevel::kOff;
@@ -46,14 +46,14 @@ class ColumnVectorDecimalTest : public BaseTest {
     }
 
     void TearDown() override {
-        using namespace infinity;
+        using namespace hybridsearch;
 
         Logger::Shutdown();
     }
 };
 
 TEST_F(ColumnVectorDecimalTest, flat_decimal) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     auto decimal_info = DecimalInfo::Make(38, 38);
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kDecimal, decimal_info);
@@ -153,7 +153,7 @@ TEST_F(ColumnVectorDecimalTest, flat_decimal) {
 
 TEST_F(ColumnVectorDecimalTest, contant_decimal) {
 
-    using namespace infinity;
+    using namespace hybridsearch;
 
     auto decimal_info = DecimalInfo::Make(38, 38);
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kDecimal, decimal_info);
@@ -232,7 +232,7 @@ TEST_F(ColumnVectorDecimalTest, contant_decimal) {
 }
 
 TEST_F(ColumnVectorDecimalTest, decimal_column_vector_select) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     auto decimal_info = DecimalInfo::Make(38, 38);
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kDecimal, decimal_info);
@@ -269,7 +269,7 @@ TEST_F(ColumnVectorDecimalTest, decimal_column_vector_select) {
 }
 
 TEST_F(ColumnVectorDecimalTest, decimal_column_slice_init) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     auto decimal_info = DecimalInfo::Make(38, 38);
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kDecimal, decimal_info);

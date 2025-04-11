@@ -42,7 +42,7 @@ if __name__ == "__main__":
     print("Note: this script must be run under root directory of the project.")
     current_path = os.getcwd()
     python_test_dir = current_path + "/python/"
-    parser = argparse.ArgumentParser(description="Python SDK Test For Infinity")
+    parser = argparse.ArgumentParser(description="Python SDK Test For hybridsearch")
     parser.add_argument(
         "-m",
         "--pytest_mark",

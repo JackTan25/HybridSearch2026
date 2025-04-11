@@ -23,7 +23,7 @@ import query_context;
 import internal_types;
 import data_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct BoundStatement {
 public:
@@ -34,4 +34,4 @@ public:
     virtual ~BoundStatement() = default;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

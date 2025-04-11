@@ -23,12 +23,12 @@ import mlas_matrix_multiply;
 import roaring_bitmap;
 import logger;
 
-import infinity_exception;
+import hybridsearch_exception;
 import default_values;
 import knn_expr;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename DistType>
 class KnnFlatIPBlasReservoir final : public KnnDistance<DistType> {
@@ -180,4 +180,4 @@ private:
 
 template class KnnFlatIPBlasReservoir<f32>;
 
-} // namespace infinity
+} // namespace hybridsearch

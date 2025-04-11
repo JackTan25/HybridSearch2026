@@ -25,7 +25,7 @@ import file_worker_type;
 import sparse_info;
 import persistence_manager;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class BMPIndexFileWorker final : public IndexFileWorker {
 public:
@@ -62,4 +62,4 @@ private:
     SizeT index_size_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

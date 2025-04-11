@@ -33,7 +33,7 @@ import doc_iterator;
 import query_node;
 import parse_fulltext_options;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalMatch : public LogicalNode {
 public:
@@ -72,4 +72,4 @@ public:
     BM25Params bm25_params_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

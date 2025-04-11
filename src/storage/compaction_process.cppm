@@ -22,7 +22,7 @@ import bg_task;
 import blocking_queue;
 import base_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 class TxnManager;
@@ -98,4 +98,4 @@ private:
     TestCommander test_commander_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

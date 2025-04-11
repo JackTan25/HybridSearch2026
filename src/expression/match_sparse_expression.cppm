@@ -28,7 +28,7 @@ import column_expression;
 import constant_expr;
 import base_expression;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class MatchSparseExpression final : public BaseExpression {
 public:
@@ -69,4 +69,4 @@ public:
     bool ignore_index_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

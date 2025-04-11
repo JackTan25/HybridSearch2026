@@ -30,12 +30,12 @@ import buffer_manager;
 import catalog_delta_entry;
 import third_party;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import column_def;
 import block_index;
-import infinity_context;
+import hybridsearch_context;
 
-namespace infinity {
+namespace hybridsearch {
 
 UniquePtr<TableMeta> TableMeta::NewTableMeta(const SharedPtr<String> &db_entry_dir, const SharedPtr<String> &table_name, DBEntry *db_entry) {
     auto table_meta = MakeUnique<TableMeta>(db_entry_dir, table_name, db_entry);
@@ -233,4 +233,4 @@ bool TableMeta::PickCleanup(CleanupScanner *scanner) {
     return table_entry_list_.PickCleanup(scanner);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

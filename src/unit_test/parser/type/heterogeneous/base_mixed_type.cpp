@@ -15,21 +15,21 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 import internal_types;
 
-using namespace infinity;
+using namespace hybridsearch;
 class BaseMixedTypeTest : public BaseTest {};
 
 TEST_F(BaseMixedTypeTest, GetTypeName) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     EXPECT_STREQ(BaseMixedType::GetTypeName(MixedValueType::kInvalid).c_str(), "Invalid");
     EXPECT_STREQ(BaseMixedType::GetTypeName(MixedValueType::kInteger).c_str(), "Integer");

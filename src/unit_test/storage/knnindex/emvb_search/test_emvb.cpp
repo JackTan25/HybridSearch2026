@@ -15,14 +15,14 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 import stl;
 import emvb_search;
 import emvb_product_quantization;
 import emvb_shared_vec;
 import local_file_handle;
 
-namespace infinity {
+namespace hybridsearch {
 extern template class EMVBSharedVec<u32>;
 extern template class EMVBSearch<32>;
 extern template class EMVBSearch<64>;
@@ -32,9 +32,9 @@ extern template class EMVBSearch<160>;
 extern template class EMVBSearch<192>;
 extern template class EMVBSearch<224>;
 extern template class EMVBSearch<256>;
-} // namespace infinity
+} // namespace hybridsearch
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class FakePQ final : public EMVBProductQuantizer {
 public:

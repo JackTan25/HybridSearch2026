@@ -19,14 +19,14 @@ module;
 module var_file_worker;
 
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 import var_buffer;
 import third_party;
 import local_file_handle;
 import persistence_manager;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 VarFileWorker::VarFileWorker(SharedPtr<String> data_dir,
                              SharedPtr<String> temp_dir,
@@ -135,4 +135,4 @@ void VarFileWorker::FreeFromMmapImpl() {
     mmap_data_ = nullptr;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

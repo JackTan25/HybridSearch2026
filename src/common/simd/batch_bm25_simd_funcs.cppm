@@ -20,7 +20,7 @@ export module batch_bm25_simd_funcs;
 import stl;
 import simd_common_tools;
 
-namespace infinity {
+namespace hybridsearch {
 
 #if defined(__AVX2__)
 
@@ -99,4 +99,4 @@ export void BatchBM25Simple(const u32 batch_len,
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

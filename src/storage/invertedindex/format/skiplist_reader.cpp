@@ -7,11 +7,11 @@ import byte_slice;
 import status;
 import posting_field;
 import flush_info;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 bool SkipListReader::SkipTo(u32 query_doc_id, u32 &doc_id, u32 &prev_doc_id, u32 &offset, u32 &delta) {
     u32 current_doc_id = current_doc_id_;
@@ -243,4 +243,4 @@ Pair<int, bool> SkipListReaderPostingByteSlice::LoadBuffer() {
     return MakePair(0, true);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

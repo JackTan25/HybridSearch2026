@@ -18,9 +18,9 @@ from collections import defaultdict
 from typing import Any
 import numpy as np
 from numpy import dtype
-from infinity_embedded.common import VEC, SparseVector, InfinityException
-from infinity_embedded.embedded_infinity_ext import *
-from infinity_embedded.errors import ErrorCode
+from hybridsearch_embedded.common import VEC, SparseVector, hybridsearchException
+from hybridsearch_embedded.embedded_hybridsearch_ext import *
+from hybridsearch_embedded.errors import ErrorCode
 from datetime import date, time, datetime, timedelta
 
 def logic_type_to_dtype(ttype: WrapDataType):
@@ -491,7 +491,7 @@ def make_match_tensor_expr(vector_column_name: str, embedding_data: VEC, embeddi
     data = EmbeddingData()
     elem_type = EmbeddingDataType.kElemFloat
     if embedding_data_type == 'bit':
-        raise InfinityException(ErrorCode.INVALID_EMBEDDING_DATA_TYPE, f"Invalid embedding {embedding_data[0]} type")
+        raise hybridsearchException(ErrorCode.INVALID_EMBEDDING_DATA_TYPE, f"Invalid embedding {embedding_data[0]} type")
     elif embedding_data_type in ['unsigned tinyint', 'uint8', 'u8']:
         elem_type = EmbeddingDataType.kElemUInt8
         data.u8_array_value = np.asarray(embedding_data, dtype=np.uint8).flatten()
@@ -520,7 +520,7 @@ def make_match_tensor_expr(vector_column_name: str, embedding_data: VEC, embeddi
         elem_type = EmbeddingDataType.kElemBFloat16
         data.bf16_array_value = np.asarray(embedding_data, dtype=np.float32).flatten()
     else:
-        raise InfinityException(ErrorCode.INVALID_EMBEDDING_DATA_TYPE, f"Invalid embedding {embedding_data[0]} type")
+        raise hybridsearchException(ErrorCode.INVALID_EMBEDDING_DATA_TYPE, f"Invalid embedding {embedding_data[0]} type")
 
     match_tensor_expr.embedding_data_type = elem_type
     match_tensor_expr.embedding_data = data

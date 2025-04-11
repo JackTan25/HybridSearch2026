@@ -14,8 +14,8 @@
 
 #include "optimize_statement.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 std::string OptimizeStatement::ToString() const { return "optimize statement"; }
 
-} // namespace infinity
+} // namespace hybridsearch

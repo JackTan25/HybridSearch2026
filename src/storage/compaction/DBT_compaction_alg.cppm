@@ -21,13 +21,13 @@ export module DBT_compaction_alg;
 
 import stl;
 import segment_entry;
-import infinity_exception;
+import hybridsearch_exception;
 import txn;
 import compaction_alg;
 import table_entry;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 class DBTConfig {
 public:
@@ -114,4 +114,4 @@ private:
     HashMap<TransactionID, i32> txn_2_layer_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

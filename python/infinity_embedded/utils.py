@@ -13,8 +13,8 @@
 # limitations under the License.
 
 import warnings
-from infinity_embedded.common import InfinityException
-from infinity_embedded.errors import ErrorCode
+from hybridsearch_embedded.common import hybridsearchException
+from hybridsearch_embedded.errors import ErrorCode
 
 
 def binary_exp_to_paser_exp(binary_expr_key) -> str:
@@ -47,7 +47,7 @@ def binary_exp_to_paser_exp(binary_expr_key) -> str:
     elif binary_expr_key == "trunc":
         return binary_expr_key
     else:
-        raise InfinityException(ErrorCode.INVALID_EXPRESSION, f"unknown binary expression: {binary_expr_key}")
+        raise hybridsearchException(ErrorCode.INVALID_EXPRESSION, f"unknown binary expression: {binary_expr_key}")
 
 
 def deprecated_api(message):

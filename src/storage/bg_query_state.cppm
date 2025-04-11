@@ -22,12 +22,12 @@ import physical_operator;
 import plan_fragment;
 import fragment_context;
 import query_context;
-import infinity_context;
+import hybridsearch_context;
 import session_manager;
 import session;
 import txn;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct BGQueryState {
     Vector<SharedPtr<LogicalNode>> logical_plans{};
@@ -47,15 +47,15 @@ export struct BGQueryContextWrapper {
         other.session_mgr_ = nullptr;
     }
 
-    BGQueryContextWrapper(Txn *txn) : session_mgr_(InfinityContext::instance().session_manager()) {
+    BGQueryContextWrapper(Txn *txn) : session_mgr_(hybridsearchContext::instance().session_manager()) {
         session_ = session_mgr_->CreateLocalSession();
         query_context_ = MakeUnique<QueryContext>(session_.get());
-        query_context_->Init(InfinityContext::instance().config(),
-                             InfinityContext::instance().task_scheduler(),
-                             InfinityContext::instance().storage(),
-                             InfinityContext::instance().resource_manager(),
-                             InfinityContext::instance().session_manager(),
-                             InfinityContext::instance().persistence_manager());
+        query_context_->Init(hybridsearchContext::instance().config(),
+                             hybridsearchContext::instance().task_scheduler(),
+                             hybridsearchContext::instance().storage(),
+                             hybridsearchContext::instance().resource_manager(),
+                             hybridsearchContext::instance().session_manager(),
+                             hybridsearchContext::instance().persistence_manager());
         query_context_->SetTxn(txn);
     }
 
@@ -67,4 +67,4 @@ export struct BGQueryContextWrapper {
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

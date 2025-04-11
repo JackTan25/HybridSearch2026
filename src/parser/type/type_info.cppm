@@ -17,9 +17,9 @@ module;
 #include "type_info.h"
 
 export module type_info;
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::TypeInfo;
+export using hybridsearch::TypeInfo;
 export using TypeInfoType = TypeInfoType;
 
-} // namespace infinity
+} // namespace hybridsearch

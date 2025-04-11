@@ -32,7 +32,7 @@ import profiler;
 import logger;
 import blocking_queue;
 
-namespace infinity {
+namespace hybridsearch {
 
 #define IASSERT(exp)                                                                                                                                 \
     {                                                                                                                                                \
@@ -566,4 +566,4 @@ void SortMergerTermTuple<KeyType, LenType>::Run(Vector<UniquePtr<Thread>> &threa
 template class SortMerger<u32, u8>;
 template class SortMerger<TermTuple, u32>;
 template class SortMergerTermTuple<TermTuple, u32>;
-} // namespace infinity
+} // namespace hybridsearch

@@ -19,7 +19,7 @@
 #include <string>
 #include <vector>
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class IndexType {
     kIVF,
@@ -57,4 +57,4 @@ public:
     IndexInfo *index_info_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

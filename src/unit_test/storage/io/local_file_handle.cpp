@@ -19,12 +19,12 @@ import stl;
 import virtual_store;
 import local_file_handle;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class LocalFileTest : public BaseTest {};
 
 TEST_F(LocalFileTest, TestAppend) {
-    using namespace infinity;
+    using namespace hybridsearch;
     String path = String(GetFullTmpDir()) + "/test_file2.abc";
 
     auto [local_file_handle, status] = VirtualStore::Open(path, FileAccessMode::kWrite);
@@ -45,7 +45,7 @@ TEST_F(LocalFileTest, TestAppend) {
 }
 
 TEST_F(LocalFileTest, TestDir) {
-    using namespace infinity;
+    using namespace hybridsearch;
     String dir = String(GetFullTmpDir()) + "/unit_test";
     String path = dir + "/test_file.test";
 
@@ -73,7 +73,7 @@ TEST_F(LocalFileTest, TestDir) {
 }
 
 TEST_F(LocalFileTest, TestRead) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     String path = String(GetFullTmpDir()) + "/test_file_read.abc";
 
@@ -110,7 +110,7 @@ TEST_F(LocalFileTest, TestRead) {
 }
 
 TEST_F(LocalFileTest, TestRename) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     String old_path = String(GetFullTmpDir()) + "/test_file_old.abc";
     String new_path = String(GetFullTmpDir()) + "/test_file_new.abc";
@@ -138,7 +138,7 @@ TEST_F(LocalFileTest, TestRename) {
 }
 
 TEST_F(LocalFileTest, TestTruncate) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     String path = String(GetFullTmpDir()) + "/test_file_truncate.abc";
 
@@ -177,7 +177,7 @@ TEST_F(LocalFileTest, TestTruncate) {
 }
 
 TEST_F(LocalFileTest, TestMerge) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     String dst_path = String(GetFullTmpDir()) + "/test_file_append_dst.abc";
     String src_path = String(GetFullTmpDir()) + "/test_file_append_src.abc";
@@ -231,7 +231,7 @@ TEST_F(LocalFileTest, TestMerge) {
 }
 
 TEST_F(LocalFileTest, TestCleanDir) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     String dir = String(GetFullTmpDir()) + "/cleanup_test_dir";
     String file_path1 = dir + "/file1.txt";

@@ -43,7 +43,7 @@ namespace double_conversion {
 const DoubleToStringConverter& DoubleToStringConverter::EcmaScriptConverter() {
   int flags = UNIQUE_ZERO | EMIT_POSITIVE_EXPONENT_SIGN;
   static DoubleToStringConverter converter(flags,
-                                           "Infinity",
+                                           "hybridsearch",
                                            "NaN",
                                            'e',
                                            -6, 21,
@@ -57,11 +57,11 @@ bool DoubleToStringConverter::HandleSpecialValues(
     StringBuilder* result_builder) const {
   Double double_inspect(value);
   if (double_inspect.IsInfinite()) {
-    if (infinity_symbol_ == DOUBLE_CONVERSION_NULLPTR) return false;
+    if (hybridsearch_symbol_ == DOUBLE_CONVERSION_NULLPTR) return false;
     if (value < 0) {
       result_builder->AddCharacter('-');
     }
-    result_builder->AddString(infinity_symbol_);
+    result_builder->AddString(hybridsearch_symbol_);
     return true;
   }
   if (double_inspect.IsNan()) {

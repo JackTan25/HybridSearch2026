@@ -25,7 +25,7 @@ import base_expression;
 import column_expression;
 import match_tensor_expr;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class MatchTensorExpression final : public BaseExpression {
 public:
@@ -63,4 +63,4 @@ public:
     bool ignore_index_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

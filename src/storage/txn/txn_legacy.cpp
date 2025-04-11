@@ -16,7 +16,7 @@
 //
 //module txn;
 //
-//namespace infinity {
+//namespace hybridsearch {
 //
 //Status Txn::CreateDatabaseInternalLegacy(const SharedPtr<String> &db_name, ConflictType conflict_type, const SharedPtr<String> &comment) {
 //    return Status::OK();
@@ -26,4 +26,4 @@
 //Tuple<SharedPtr<DatabaseInfo>, Status> GetDatabaseInfoInternalLegacy(const String &db_name) { return {nullptr, Status::OK()}; }
 //Vector<DatabaseDetail> ListDatabasesInternalLegacy() { return {}; }
 //
-//} // namespace infinity
+//} // namespace hybridsearch

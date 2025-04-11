@@ -18,8 +18,8 @@ module;
 
 export module decimal_info;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::DecimalInfo;
+export using hybridsearch::DecimalInfo;
 
 }

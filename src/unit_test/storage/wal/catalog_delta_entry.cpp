@@ -16,7 +16,7 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 import index_base;
 import logger;
 import third_party;
@@ -25,12 +25,12 @@ import catalog_delta_entry;
 import column_def;
 import segment_entry;
 import index_secondary;
-import infinity_context;
+import hybridsearch_context;
 import data_type;
 import logical_type;
 import constant_expr;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class CatalogDeltaEntryTest : public BaseTestParamStr {};
 
@@ -168,7 +168,7 @@ TEST_P(CatalogDeltaEntryTest, test_DeltaOpEntry) {
             EXPECT_EQ(op1, op2);
         }
     }
-    //    infinity::InfinityContext::instance().UnInit();
+    //    hybridsearch::hybridsearchContext::instance().UnInit();
 }
 
 TEST_P(CatalogDeltaEntryTest, MergeEntries) {

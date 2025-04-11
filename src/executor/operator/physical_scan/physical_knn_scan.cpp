@@ -41,7 +41,7 @@ import knn_scan_data;
 import knn_filter;
 import third_party;
 import txn;
-import infinity_exception;
+import hybridsearch_exception;
 import default_values;
 import column_expression;
 import embedding_info;
@@ -65,7 +65,7 @@ import ivf_index_data_in_mem;
 import ivf_index_data;
 import ivf_index_search;
 
-namespace infinity {
+namespace hybridsearch {
 
 auto GetKnnExprForCalculation(const KnnExpression &src_knn_expr, const EmbeddingDataType column_embedding_type) {
     // check column basic embedding data type and query embedding data type
@@ -905,4 +905,4 @@ void MultiVectorSearchOneLine(MergeKnn<QueryDataType, C, DistanceDataType> *merg
     merge_heap->Search(0, &result_dist, &db_row_id, 1);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

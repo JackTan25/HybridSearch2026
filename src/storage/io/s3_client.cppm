@@ -6,7 +6,7 @@ import stl;
 import status;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class S3Client {
 public:
@@ -36,4 +36,4 @@ protected:
     String access_key;
     String secret_key;
 };
-} // namespace infinity
+} // namespace hybridsearch

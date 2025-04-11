@@ -23,17 +23,17 @@ import data_table;
 import physical_operator_type;
 import operator_state;
 import wal_manager;
-import infinity_context;
+import hybridsearch_context;
 import status;
 
 module physical_create_view;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalCreateView::Init(QueryContext* query_context) {}
 
 bool PhysicalCreateView::Execute(QueryContext *, OperatorState *operator_state) {
-    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
     if (storage_mode == StorageMode::kUnInitialized) {
         UnrecoverableError("Uninitialized storage mode");
     }
@@ -48,4 +48,4 @@ bool PhysicalCreateView::Execute(QueryContext *, OperatorState *operator_state) 
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

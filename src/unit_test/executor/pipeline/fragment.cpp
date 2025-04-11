@@ -15,42 +15,42 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 import sql_runner;
 
-using namespace infinity;
+using namespace hybridsearch;
 class FragmentTest : public BaseTest {
     void SetUp() override {
         BaseTest::SetUp();
         BaseTest::RemoveDbDirs();
-#ifdef INFINITY_DEBUG
-        infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+        hybridsearch::GlobalResourceUsage::Init();
 #endif
         std::shared_ptr<std::string> config_path = nullptr;
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
     }
 
     void TearDown() override {
-        infinity::InfinityContext::instance().UnInit();
-#ifdef INFINITY_DEBUG
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetObjectCount(), 0);
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetRawMemoryCount(), 0);
-        infinity::GlobalResourceUsage::UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
+#ifdef hybridsearch_DEBUG
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetObjectCount(), 0);
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetRawMemoryCount(), 0);
+        hybridsearch::GlobalResourceUsage::UnInit();
 #endif
         BaseTest::TearDown();
     }
 };
 
 TEST_F(FragmentTest, test_build_fragment) {
-    using namespace infinity;
+    using namespace hybridsearch;
     /// DDL
     auto result0 = SQLRunner::Run("create table t1(a bigint)", true);
     EXPECT_EQ(result0->definition_ptr_.get()->columns()[0]->name_, "OK");

@@ -7,7 +7,7 @@ def save_to_csv(corpus : datasets.arrow_dataset.Dataset):
     df.to_csv(f'queries_decline_with_id.csv', index=False)
 
 # 从 JSON 文件流式加载，只保留 text 字段
-json_file = "/home/ubuntu/infinity/experiments/small_embedding/CQADupStack_en/english/queries.jsonl"
+json_file = "/home/ubuntu/hybridsearch/experiments/small_embedding/CQADupStack_en/english/queries.jsonl"
 
 # 流式加载 JSON 数据，只提取需要的字段
 def filter_columns(example):

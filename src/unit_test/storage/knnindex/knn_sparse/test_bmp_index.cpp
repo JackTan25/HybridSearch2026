@@ -24,11 +24,11 @@ import sparse_util;
 import third_party;
 import compilation_config;
 import sparse_test_util;
-import infinity_exception;
+import hybridsearch_exception;
 import virtual_store;
 import local_file_handle;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class BMPIndexTest : public BaseTest {
 protected:

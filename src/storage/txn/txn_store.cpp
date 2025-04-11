@@ -24,7 +24,7 @@ import stl;
 import third_party;
 
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import data_block;
 import logger;
 import data_access_state;
@@ -41,10 +41,10 @@ import compact_statement;
 import build_fast_rough_filter_task;
 import create_index_info;
 import persistence_manager;
-import infinity_context;
+import hybridsearch_context;
 import persist_result_handler;
 
-namespace infinity {
+namespace hybridsearch {
 
 TxnSegmentStore TxnSegmentStore::AddSegmentStore(SegmentEntry *segment_entry) {
     TxnSegmentStore txn_segment_store(segment_entry);
@@ -725,7 +725,7 @@ void TxnStore::PrepareCommit1() {
         table_store->PrepareCommit1(segment_infos);
     }
     if (!segment_infos.empty()) {
-        PersistenceManager *pm = InfinityContext::instance().persistence_manager();
+        PersistenceManager *pm = hybridsearchContext::instance().persistence_manager();
         if (pm != nullptr) {
             PersistResultHandler handler(pm);
             PersistWriteResult result = pm->CurrentObjFinalize(true);
@@ -770,7 +770,7 @@ void TxnStore::Rollback(TransactionID txn_id, TxnTimeStamp abort_ts) {
         Catalog::RemoveTableEntry(table_entry, txn_id);
     }
 
-    Catalog *catalog_ptr = InfinityContext::instance().storage()->catalog();
+    Catalog *catalog_ptr = hybridsearchContext::instance().storage()->catalog();
     for (auto [db_entry, ptr_seq_n] : txn_dbs_) {
         db_entry->Cleanup();
 
@@ -811,4 +811,4 @@ void TxnStore::SetCompacting(TableEntry *table_entry) { GetTxnTableStore(table_e
 
 void TxnStore::SetCreatingIndex(TableEntry *table_entry) { GetTxnTableStore(table_entry)->SetCreatingIndex(); }
 
-} // namespace infinity
+} // namespace hybridsearch

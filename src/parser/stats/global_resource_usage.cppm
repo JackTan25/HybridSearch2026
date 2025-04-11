@@ -18,8 +18,8 @@ module;
 
 export module global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::GlobalResourceUsage;
+export using hybridsearch::GlobalResourceUsage;
 
-} // namespace infinity
+} // namespace hybridsearch

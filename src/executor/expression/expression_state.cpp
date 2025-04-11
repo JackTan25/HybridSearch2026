@@ -18,7 +18,7 @@ module;
 
 module expression_state;
 
-import infinity_exception;
+import hybridsearch_exception;
 import stl;
 import third_party;
 import column_vector;
@@ -41,7 +41,7 @@ import internal_types;
 import data_type;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 SharedPtr<ExpressionState> ExpressionState::CreateState(const SharedPtr<BaseExpression> &expression, char *agg_state) {
 
@@ -208,4 +208,4 @@ SharedPtr<ExpressionState> ExpressionState::CreateState(const SharedPtr<FilterFu
 
 void ExpressionState::AddChild(const SharedPtr<BaseExpression> &expression) { children_.emplace_back(CreateState(expression)); }
 
-} // namespace infinity
+} // namespace hybridsearch

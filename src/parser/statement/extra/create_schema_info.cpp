@@ -15,7 +15,7 @@
 #include "create_schema_info.h"
 #include <sstream>
 
-namespace infinity {
+namespace hybridsearch {
 
 std::string CreateSchemaInfo::ToString() const {
     std::stringstream ss;
@@ -28,4 +28,4 @@ std::string CreateSchemaInfo::ToString() const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

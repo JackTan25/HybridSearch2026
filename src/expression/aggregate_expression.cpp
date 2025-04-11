@@ -21,7 +21,7 @@ import aggregate_function;
 
 module aggregate_expression;
 
-namespace infinity {
+namespace hybridsearch {
 
 AggregateExpression::AggregateExpression(AggregateFunction aggregate_function, Vector<SharedPtr<BaseExpression>> arguments)
     : BaseExpression(ExpressionType::kAggregate, std::move(arguments)), aggregate_function_(std::move(aggregate_function)) {}
@@ -46,4 +46,4 @@ String AggregateExpression::ToString() const {
 
 DataType AggregateExpression::Type() const { return aggregate_function_.return_type(); }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -24,20 +24,20 @@ import txn_manager;
 import wal_manager;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 class CleanupTask;
 
 export class PeriodicTrigger {
 public:
     explicit PeriodicTrigger(i64 interval) : interval_(interval), last_check_(std::chrono::system_clock::now()) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("PeriodicTrigger");
 #endif
     }
 
     virtual ~PeriodicTrigger() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("PeriodicTrigger");
 #endif
     }
@@ -108,4 +108,4 @@ private:
     CompactionProcessor *const compact_processor_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

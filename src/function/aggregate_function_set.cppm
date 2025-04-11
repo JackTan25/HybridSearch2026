@@ -22,7 +22,7 @@ import function_set;
 
 export module aggregate_function_set;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class AggregateFunctionSet final : public FunctionSet {
 public:
@@ -40,4 +40,4 @@ private:
     Vector<AggregateFunction> functions_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

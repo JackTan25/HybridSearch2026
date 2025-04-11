@@ -15,7 +15,7 @@
 #include "match_tensor_expr.h"
 #include "spdlog/fmt/fmt.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 std::string MatchTensorExpr::SearchMethodToString(MatchTensorSearchMethod method) {
     switch (method) {
@@ -388,4 +388,4 @@ GetConcatenatedTensorData(const ConstantExpr *tensor_expr_, const uint32_t tenso
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

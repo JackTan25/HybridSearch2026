@@ -23,7 +23,7 @@
 
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class FlushType {
     kDelta,
@@ -43,4 +43,4 @@ public:
     FlushType type_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

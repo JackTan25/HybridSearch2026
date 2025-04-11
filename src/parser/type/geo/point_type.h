@@ -18,7 +18,7 @@
 #include <cmath>
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 struct PointType {
     PointType() = default;
@@ -47,4 +47,4 @@ struct PointType {
     double y{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

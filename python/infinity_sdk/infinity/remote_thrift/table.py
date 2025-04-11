@@ -19,13 +19,13 @@ from typing import Optional, Union, List, Any
 
 from sqlglot import condition
 
-import infinity.remote_thrift.infinity_thrift_rpc.ttypes as ttypes
-from infinity.common import INSERT_DATA, VEC, InfinityException, SparseVector
-from infinity.errors import ErrorCode
-from infinity.index import IndexInfo
-from infinity.remote_thrift.query_builder import Query, InfinityThriftQueryBuilder, ExplainQuery
-from infinity.remote_thrift.types import build_result
-from infinity.remote_thrift.utils import (
+import hybridsearch.remote_thrift.hybridsearch_thrift_rpc.ttypes as ttypes
+from hybridsearch.common import INSERT_DATA, VEC, hybridsearchException, SparseVector
+from hybridsearch.errors import ErrorCode
+from hybridsearch.index import IndexInfo
+from hybridsearch.remote_thrift.query_builder import Query, hybridsearchThriftQueryBuilder, ExplainQuery
+from hybridsearch.remote_thrift.types import build_result
+from hybridsearch.remote_thrift.utils import (
     traverse_conditions,
     name_validity_check,
     select_res_to_polars,
@@ -35,9 +35,9 @@ from infinity.remote_thrift.utils import (
     parsed_expression_to_string,
     search_to_string
 )
-from infinity.table import ExplainType
-from infinity.common import ConflictType, DEFAULT_MATCH_VECTOR_TOPN, SortType
-from infinity.utils import deprecated_api
+from hybridsearch.table import ExplainType
+from hybridsearch.common import ConflictType, DEFAULT_MATCH_VECTOR_TOPN, SortType
+from hybridsearch.utils import deprecated_api
 
 
 class RemoteTable():
@@ -46,7 +46,7 @@ class RemoteTable():
         self._conn = conn
         self._db_name = db_name
         self._table_name = table_name
-        self.query_builder = InfinityThriftQueryBuilder(table=self)
+        self.query_builder = hybridsearchThriftQueryBuilder(table=self)
 
     def params_type_check(func):
         @functools.wraps(func)
@@ -79,7 +79,7 @@ class RemoteTable():
         elif conflict_type == ConflictType.Replace:
             create_index_conflict = ttypes.CreateConflict.Replace
         else:
-            raise InfinityException(ErrorCode.INVALID_CONFLICT_TYPE, "Invalid conflict type")
+            raise hybridsearchException(ErrorCode.INVALID_CONFLICT_TYPE, "Invalid conflict type")
 
         res = self._conn.create_index(db_name=self._db_name,
                                       table_name=self._table_name,
@@ -91,7 +91,7 @@ class RemoteTable():
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     @name_validity_check("index_name", "Index")
     def drop_index(self, index_name: str, conflict_type: ConflictType = ConflictType.Error):
@@ -101,14 +101,14 @@ class RemoteTable():
         elif conflict_type == ConflictType.Ignore:
             drop_index_conflict = ttypes.DropConflict.Ignore
         else:
-            raise InfinityException(ErrorCode.INVALID_CONFLICT_TYPE, "Invalid conflict type")
+            raise hybridsearchException(ErrorCode.INVALID_CONFLICT_TYPE, "Invalid conflict type")
 
         res = self._conn.drop_index(db_name=self._db_name, table_name=self._table_name,
                                     index_name=index_name, conflict_type=drop_index_conflict)
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     @name_validity_check("index_name", "Index")
     def show_index(self, index_name: str):
@@ -117,42 +117,42 @@ class RemoteTable():
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def list_indexes(self):
         res = self._conn.list_indexes(db_name=self._db_name, table_name=self._table_name)
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def show_columns(self):
         res = self._conn.show_columns(db_name=self._db_name, table_name=self._table_name)
         if res.error_code == ErrorCode.OK:
             return select_res_to_polars(res)
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def show_segments(self):
         res = self._conn.show_segments(db_name=self._db_name, table_name=self._table_name)
         if res.error_code == ErrorCode.OK:
             return select_res_to_polars(res)
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def show_segment(self, segment_id: int):
         res = self._conn.show_segment(db_name=self._db_name, table_name=self._table_name, segment_id=segment_id)
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def show_blocks(self, segment_id: int):
         res = self._conn.show_blocks(db_name=self._db_name, table_name=self._table_name, segment_id=segment_id)
         if res.error_code == ErrorCode.OK:
             return select_res_to_polars(res)
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def show_block(self, segment_id: int, block_id: int):
         res = self._conn.show_block(db_name=self._db_name, table_name=self._table_name, segment_id=segment_id,
@@ -160,7 +160,7 @@ class RemoteTable():
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def show_block_column(self, segment_id: int, block_id: int, column_id: int):
         res = self._conn.show_block_column(db_name=self._db_name, table_name=self._table_name, segment_id=segment_id,
@@ -168,7 +168,7 @@ class RemoteTable():
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def insert(self, data: Union[INSERT_DATA, list[INSERT_DATA]]):
         # [{"c1": 1, "c2": 1.1}, {"c1": 2, "c2": 2.2}]
@@ -196,7 +196,7 @@ class RemoteTable():
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def import_data(self, file_path: str, import_options: {} = None):
         options = ttypes.ImportOption()
@@ -221,22 +221,22 @@ class RemoteTable():
                     elif file_type == 'bvecs':
                         options.copy_file_type = ttypes.CopyFileType.BVECS
                     else:
-                        raise InfinityException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
+                        raise hybridsearchException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
                                                 f"Unrecognized export file type: {file_type}")
                 elif key == 'delimiter':
                     delimiter = v.lower()
                     if len(delimiter) != 1:
-                        raise InfinityException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
+                        raise hybridsearchException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
                                                 f"Unrecognized export file delimiter: {delimiter}")
                     options.delimiter = delimiter[0]
                 elif key == 'header':
                     if isinstance(v, bool):
                         options.has_header = v
                     else:
-                        raise InfinityException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
+                        raise hybridsearchException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
                                                 "Boolean value is expected in header field")
                 else:
-                    raise InfinityException(ErrorCode.IMPORT_FILE_FORMAT_ERROR, f"Unknown export parameter: {k}")
+                    raise hybridsearchException(ErrorCode.IMPORT_FILE_FORMAT_ERROR, f"Unknown export parameter: {k}")
 
         res = self._conn.import_data(db_name=self._db_name,
                                      table_name=self._table_name,
@@ -245,7 +245,7 @@ class RemoteTable():
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def export_data(self, file_path: str, export_options: {} = None, columns: [str] = None):
         options = ttypes.ExportOption()
@@ -268,40 +268,40 @@ class RemoteTable():
                     elif file_type == 'fvecs':
                         options.copy_file_type = ttypes.CopyFileType.FVECS
                     else:
-                        raise InfinityException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
+                        raise hybridsearchException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
                                                 f"Unrecognized export file type: {file_type}")
                 elif key == 'delimiter':
                     delimiter = v.lower()
                     if len(delimiter) != 1:
-                        raise InfinityException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
+                        raise hybridsearchException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
                                                 f"Unrecognized export file delimiter: {delimiter}")
                     options.delimiter = delimiter[0]
                 elif key == 'header':
                     if isinstance(v, bool):
                         options.has_header = v
                     else:
-                        raise InfinityException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
+                        raise hybridsearchException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
                                                 "Boolean value is expected in header field")
                 elif key == 'offset':
                     if isinstance(v, int):
                         options.offset = v
                     else:
-                        raise InfinityException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
+                        raise hybridsearchException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
                                                 "Integer value is expected in 'offset' field")
                 elif key == 'limit':
                     if isinstance(v, int):
                         options.limit = v
                     else:
-                        raise InfinityException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
+                        raise hybridsearchException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
                                                 "Integer value is expected in 'limit' field")
                 elif key == 'row_limit':
                     if isinstance(v, int):
                         options.row_limit = v
                     else:
-                        raise InfinityException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
+                        raise hybridsearchException(ErrorCode.IMPORT_FILE_FORMAT_ERROR,
                                                 "Integer value is expected in 'row_limit' field")
                 else:
-                    raise InfinityException(ErrorCode.IMPORT_FILE_FORMAT_ERROR, f"Unknown export parameter: {k}")
+                    raise hybridsearchException(ErrorCode.IMPORT_FILE_FORMAT_ERROR, f"Unknown export parameter: {k}")
 
         res = self._conn.export_data(db_name=self._db_name,
                                      table_name=self._table_name,
@@ -311,7 +311,7 @@ class RemoteTable():
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def delete(self, cond: Optional[str] = None):
         match cond:
@@ -324,7 +324,7 @@ class RemoteTable():
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def update(self, cond: str, data: dict[str, Any]):
         # {"c1": 1, "c2": 1.1}
@@ -341,7 +341,7 @@ class RemoteTable():
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def match_dense(self, vector_column_name: str, embedding_data: VEC, embedding_data_type: str, distance_type: str,
                     topn: int = DEFAULT_MATCH_VECTOR_TOPN, knn_params: {} = None):
@@ -411,10 +411,10 @@ class RemoteTable():
     def sort(self, order_by_expr_list: Optional[List[list[str, SortType]]]):
         for order_by_expr in order_by_expr_list:
             if len(order_by_expr) != 2:
-                raise InfinityException(ErrorCode.INVALID_PARAMETER_VALUE,
+                raise hybridsearchException(ErrorCode.INVALID_PARAMETER_VALUE,
                                         "order_by_expr_list must be a list of [column_name, sort_type]")
             if order_by_expr[1] not in [SortType.Asc, SortType.Desc]:
-                raise InfinityException(ErrorCode.INVALID_PARAMETER_VALUE,
+                raise hybridsearchException(ErrorCode.INVALID_PARAMETER_VALUE,
                                         "sort_type must be SortType.Asc or SortType.Desc")
         self.query_builder.sort(order_by_expr_list)
         return self
@@ -521,7 +521,7 @@ class RemoteTable():
         if res.error_code == ErrorCode.OK:
             return build_result(res)
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def _explain_query(self, query: ExplainQuery) -> Any:
         res = self._conn.explain(db_name=self._db_name,
@@ -537,4 +537,4 @@ class RemoteTable():
         if res.error_code == ErrorCode.OK:
             return select_res_to_polars(res)
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)

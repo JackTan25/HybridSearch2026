@@ -25,7 +25,7 @@ import local_file_handle;
 import data_store_util;
 import serialize;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct VertexL0 {
     LayerSize layer_n_;
@@ -470,4 +470,4 @@ public:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

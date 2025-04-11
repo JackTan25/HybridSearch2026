@@ -28,7 +28,7 @@ import data_block;
 import operator_state;
 import default_values;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 import block_entry;
 import block_column_entry;
 import logger;
@@ -48,7 +48,7 @@ import physical_index_scan;
 import meta_info;
 import result_cache_manager;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<SharedPtr<Vector<GlobalBlockID>>> PhysicalScanBase::PlanBlockEntries(i64 parallel_count) const {
     BlockIndex *block_index = base_table_ref_->block_index_.get();
@@ -201,4 +201,4 @@ void PhysicalScanBase::AddCache(QueryContext *query_context,
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

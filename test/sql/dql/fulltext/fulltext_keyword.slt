@@ -7,7 +7,7 @@ CREATE TABLE ft_keyword(num int, doc varchar, doc2 varchar DEFAULT 'default text
 
 # copy data from csv file
 statement ok
-COPY ft_keyword FROM '/var/infinity/test_data/fulltext_delete.csv' WITH ( DELIMITER '\t', FORMAT CSV );
+COPY ft_keyword FROM '/var/hybridsearch/test_data/fulltext_delete.csv' WITH ( DELIMITER '\t', FORMAT CSV );
 
 statement ok
 INSERT INTO ft_keyword VALUES (4, 'another second text xxx', 'not default'), (5, 'another multiple', 'another not');

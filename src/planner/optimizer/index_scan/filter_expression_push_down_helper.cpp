@@ -28,7 +28,7 @@ import value_expression;
 import column_expression;
 import column_vector;
 import function_expression;
-import infinity_exception;
+import hybridsearch_exception;
 import value;
 import third_party;
 import internal_types;
@@ -37,7 +37,7 @@ import logical_type;
 import secondary_index_data;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 template <typename T>
 inline void FindPrevT(T &right_val) {
@@ -492,4 +492,4 @@ Value FilterExpressionPushDownHelper::CalcValueResult(const SharedPtr<BaseExpres
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

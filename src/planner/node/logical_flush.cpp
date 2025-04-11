@@ -23,7 +23,7 @@ import stl;
 import column_binding;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<ColumnBinding> LogicalFlush::GetColumnBindings() const { return {}; }
 
@@ -62,4 +62,4 @@ String LogicalFlush::ToString(i64 &space) const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

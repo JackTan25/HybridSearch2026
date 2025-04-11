@@ -24,7 +24,7 @@ import physical_operator_type;
 import operator_state;
 import logger;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import merge_knn_data;
 import knn_result_handler;
 import merge_knn;
@@ -38,7 +38,7 @@ import knn_expression;
 import value;
 import column_vector;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalMergeKnn::Init(QueryContext* query_context) { left()->Init(query_context); }
 
@@ -133,4 +133,4 @@ void PhysicalMergeKnn::ExecuteInner(QueryContext *query_context, MergeKnnOperato
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

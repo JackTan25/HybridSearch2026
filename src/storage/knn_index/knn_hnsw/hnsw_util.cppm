@@ -20,10 +20,10 @@ export module hnsw_util;
 
 import stl;
 import statement_common;
-import infinity_exception;
+import hybridsearch_exception;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct HnswOptimizeOptions {
     bool compress_to_lvq = false;
@@ -50,4 +50,4 @@ export struct HnswUtil {
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

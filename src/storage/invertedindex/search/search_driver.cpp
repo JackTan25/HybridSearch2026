@@ -20,20 +20,20 @@
 #include "query_node.h"
 #include "search_driver.h"
 #include "search_parser.h"
-#define SearchScannerSuffix InfinitySyntax
+#define SearchScannerSuffix hybridsearchSyntax
 #include "search_scanner_derived_helper.h"
 #undef SearchScannerSuffix
 
 import stl;
 import term;
-import infinity_exception;
+import hybridsearch_exception;
 import status;
 import logger;
 import third_party;
 import analyzer;
 import analyzer_pool;
 
-namespace infinity {
+namespace hybridsearch {
 
 std::pair<std::string, float> ParseField(const std::string_view &field) {
     size_t cap_idx = field.find_first_of('^', 0);
@@ -94,7 +94,7 @@ std::unique_ptr<QueryNode> SearchDriver::ParseSingleWithFields(const std::string
             static_cast<OrQueryNode *>(parsed_query_tree.get())->children_ = std::move(or_children);
         }
     }
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     {
         OStringStream oss;
         oss << "Query tree (without filter):\n";
@@ -166,10 +166,10 @@ std::unique_ptr<QueryNode> SearchDriver::ParseSingle(const std::string &query, c
     const auto &default_field = *default_field_ptr;
     const auto default_analyzer_name = GetAnalyzerName(default_field, field2analyzer_);
     if (const auto default_analyzer_name_int = AnalyzerPool::AnalyzerNameToInt(default_analyzer_name.c_str());
-        default_analyzer_name_int != keyword_analyzer_name_int && operator_option_ == FulltextQueryOperatorOption::kInfinitySyntax) {
+        default_analyzer_name_int != keyword_analyzer_name_int && operator_option_ == FulltextQueryOperatorOption::khybridsearchSyntax) {
         // use parser
         std::unique_ptr<QueryNode> result;
-        const auto scanner = std::make_unique<SearchScannerInfinitySyntax>(&iss);
+        const auto scanner = std::make_unique<SearchScannerhybridsearchSyntax>(&iss);
         const auto parser = std::make_unique<SearchParser>(*scanner, *this, *default_field_ptr, result);
         if (constexpr int accept = 0; parser->parse() != accept) {
             return nullptr;
@@ -211,7 +211,7 @@ std::unique_ptr<QueryNode> SearchDriver::ParseSingle(const std::string &query, c
 
 std::unique_ptr<QueryNode>
 SearchDriver::AnalyzeAndBuildQueryNode(const std::string &field, const std::string &text, const bool from_quoted, const unsigned long slop) const {
-    assert(operator_option_ == FulltextQueryOperatorOption::kInfinitySyntax);
+    assert(operator_option_ == FulltextQueryOperatorOption::khybridsearchSyntax);
     if (text.empty()) {
         LOG_TRACE(std::format("{} : Empty query text: {}", __func__, text));
         return nullptr;
@@ -304,4 +304,4 @@ std::string SearchDriver::Unescape(const std::string &text) {
     return result;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

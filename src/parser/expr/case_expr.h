@@ -18,7 +18,7 @@
 #include <string>
 #include <vector>
 
-namespace infinity {
+namespace hybridsearch {
 
 struct WhenThen {
     ~WhenThen();
@@ -41,4 +41,4 @@ public:
     std::vector<WhenThen *> *case_check_array_{nullptr};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

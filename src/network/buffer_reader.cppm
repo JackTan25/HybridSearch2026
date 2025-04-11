@@ -23,7 +23,7 @@ import global_resource_usage;
 
 export module buffer_reader;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class BufferReader {
 public:
@@ -63,4 +63,4 @@ private:
     SharedPtr<boost::asio::ip::tcp::socket> socket_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

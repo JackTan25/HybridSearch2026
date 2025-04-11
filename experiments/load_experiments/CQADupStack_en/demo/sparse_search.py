@@ -13,23 +13,23 @@
 # limitations under the License.
 
 """
-This example is to connect local infinity instance, create table, insert data, search the data
+This example is to connect local hybridsearch instance, create table, insert data, search the data
 """
 
-# import infinity_embedded as infinity
+# import hybridsearch_embedded as hybridsearch
 from multi_client import use_multi_client
 import os
 import time
 from CQADupStack_en.vec_read import load_sparse
-import infinity
+import hybridsearch
 import sys
-from infinity.common import SparseVector
-from infinity.common import LOCAL_HOST
+from hybridsearch.common import SparseVector
+from hybridsearch.common import LOCAL_HOST
 from numpy import float16
 import pandas as pd
 from utils import add_escape_characters
 
-path_prefix = "/home/ubuntu/infinity/experiments/load_experiments/CQADupStack_en/search"
+path_prefix = "/home/ubuntu/hybridsearch/experiments/load_experiments/CQADupStack_en/search"
 
 def remove_extremes_and_average(lst):
     """
@@ -56,11 +56,11 @@ def remove_extremes_and_average(lst):
     return sum(filtered) / len(filtered)
 
 cost_time = 0
-def sparse_search(infinity_table, question):
+def sparse_search(hybridsearch_table, question):
      global cost_time
      begin_time = time.time()
      res = (
-                infinity_table.output(["docid_col","sparse_col"])
+                hybridsearch_table.output(["docid_col","sparse_col"])
                 .match_sparse("sparse_col", question, "ip", 10)
                 # .to_pl()
             )
@@ -94,12 +94,12 @@ def GetQuestions():
 
 def single_search(questions):
     try:
-        #  Use infinity module to connect a remote server
-        infinity_instance = infinity.connect(LOCAL_HOST)
+        #  Use hybridsearch module to connect a remote server
+        hybridsearch_instance = hybridsearch.connect(LOCAL_HOST)
 
         # 'default_db' is the default database
-        db_instance = infinity_instance.get_database("default_db_demo")
-        infinity_table = db_instance.get_table("CQADupStack_en_Table_demo")
+        db_instance = hybridsearch_instance.get_database("default_db_demo")
+        hybridsearch_table = db_instance.get_table("CQADupStack_en_Table_demo")
         with open(path_prefix + '/single_road/sparse_result.txt','w') as result_file:
             id = 0
             time_cost = 0
@@ -108,7 +108,7 @@ def single_search(questions):
                 id += 1
                 begin_time = time.time()
                 print(f"question: {question[0]}")
-                qb_result, extra_result = sparse_search(infinity_table, question[0])
+                qb_result, extra_result = sparse_search(hybridsearch_table, question[0])
                 end_time = time.time()
                 time_cost += (end_time - begin_time) * 1000
                 for i in range(len(qb_result['docid_col'])):
@@ -119,7 +119,7 @@ def single_search(questions):
             print("lastid: ",id)
             time_cost = time_cost / len(questions)
             print(f"time_cost: {time_cost} ms")
-        infinity_instance.disconnect()
+        hybridsearch_instance.disconnect()
         return time_cost
     except Exception as e:
         print(str(e))

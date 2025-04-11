@@ -24,7 +24,7 @@ import buffer_manager;
 import third_party;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class BGTaskType {
     kStopProcessor,
@@ -46,13 +46,13 @@ struct ChunkIndexEntry;
 
 export struct BGTask {
     BGTask(BGTaskType type, bool async) : type_(type), async_(async) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("BGTask");
 #endif
     }
 
     virtual ~BGTask() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("BGTask");
 #endif
     }
@@ -221,4 +221,4 @@ public:
     String command_content_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

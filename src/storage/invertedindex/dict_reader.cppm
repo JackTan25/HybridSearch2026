@@ -20,7 +20,7 @@ import posting_list_format;
 import fst;
 export module dict_reader;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class DictionaryReader {
 private:
@@ -44,4 +44,4 @@ public:
 
     bool Next(String &term, TermMeta &term_meta);
 };
-} // namespace infinity
+} // namespace hybridsearch

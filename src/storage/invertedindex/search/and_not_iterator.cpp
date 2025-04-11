@@ -22,7 +22,7 @@ import multi_doc_iterator;
 import doc_iterator;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 AndNotIterator::AndNotIterator(Vector<UniquePtr<DocIterator>> iterators) : MultiDocIterator(std::move(iterators)) {
     std::sort(children_.begin() + 1, children_.end(), [](const auto &lhs, const auto &rhs) {
@@ -61,4 +61,4 @@ void AndNotIterator::UpdateScoreThreshold(float threshold) { children_[0]->Updat
 
 u32 AndNotIterator::MatchCount() const { return children_[0]->MatchCount(); }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -15,8 +15,8 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity;
-import infinity_exception;
+import hybridsearch;
+import hybridsearch_exception;
 
 import stl;
 import logger;
@@ -25,7 +25,7 @@ import buffer_handle;
 import buffer_obj;
 import data_file_worker;
 import global_resource_usage;
-import infinity_context;
+import hybridsearch_context;
 import storage;
 import column_def;
 import logical_type;
@@ -57,7 +57,7 @@ import persistence_manager;
 import default_values;
 import txn_state;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class BufferObjTest : public BaseTest {
     void SetUp() override { BaseTest::SetUp(); }
@@ -89,8 +89,8 @@ TEST_F(BufferObjTest, test1) {
     RemoveDbDirs();
     std::shared_ptr<std::string> config_path = std::make_shared<std::string>(std::string(test_data_path()) + "/config/test_buffer_obj.toml");
     //    RemoveDbDirs();
-    infinity::InfinityContext::instance().InitPhase1(config_path);
-    infinity::InfinityContext::instance().InitPhase2();
+    hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+    hybridsearch::hybridsearchContext::instance().InitPhase2();
 
     SizeT memory_limit = 1024;
     String data_dir(GetFullDataDir());
@@ -287,7 +287,7 @@ TEST_F(BufferObjTest, test1) {
     EXPECT_EQ(buf1->status(), BufferStatus::kUnloaded);
     EXPECT_EQ(buf1->type(), BufferType::kPersistent);
     buf1->CheckState();
-    infinity::InfinityContext::instance().UnInit();
+    hybridsearch::hybridsearchContext::instance().UnInit();
 }
 
 // unit test for BufferStatus::kClean transformation
@@ -500,21 +500,21 @@ TEST_F(BufferObjTest, test1) {
 TEST_F(BufferObjTest, test_hnsw_index_buffer_obj_shutdown) {
     // GTEST_SKIP(); // FIXME
     RemoveDbDirs();
-#ifdef INFINITY_DEBUG
-    EXPECT_EQ(infinity::GlobalResourceUsage::GetObjectCount(), 0);
-    EXPECT_EQ(infinity::GlobalResourceUsage::GetRawMemoryCount(), 0);
-    infinity::GlobalResourceUsage::UnInit();
-    infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+    EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetObjectCount(), 0);
+    EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetRawMemoryCount(), 0);
+    hybridsearch::GlobalResourceUsage::UnInit();
+    hybridsearch::GlobalResourceUsage::Init();
 #endif
     std::shared_ptr<std::string> config_path = std::make_shared<std::string>(std::string(test_data_path()) + "/config/test_buffer_obj_2.toml");
     //    RemoveDbDirs();
-    infinity::InfinityContext::instance().InitPhase1(config_path);
-    infinity::InfinityContext::instance().InitPhase2();
+    hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+    hybridsearch::hybridsearchContext::instance().InitPhase2();
 
     constexpr u64 kInsertN = 2;
     constexpr u64 kImportSize = 8192;
 
-    Storage *storage = InfinityContext::instance().storage();
+    Storage *storage = hybridsearchContext::instance().storage();
     EXPECT_NE(storage, nullptr);
     EXPECT_EQ(storage->buffer_manager()->memory_limit(), (u64)8 * 4 * 128 * 8192);
 
@@ -671,19 +671,19 @@ TEST_F(BufferObjTest, test_hnsw_index_buffer_obj_shutdown) {
     }
     WaitCleanup(storage);
 
-    infinity::InfinityContext::instance().UnInit();
+    hybridsearch::hybridsearchContext::instance().UnInit();
 }
 
 TEST_F(BufferObjTest, test_big_with_gc_and_cleanup) {
     std::shared_ptr<std::string> config_path = std::make_shared<std::string>(std::string(test_data_path()) + "/config/test_buffer_obj.toml");
     RemoveDbDirs();
-    infinity::InfinityContext::instance().InitPhase1(config_path);
-    infinity::InfinityContext::instance().InitPhase2();
+    hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+    hybridsearch::hybridsearchContext::instance().InitPhase2();
 
     constexpr u64 kInsertN = 256;
     constexpr u64 kImportSize = 8192;
 
-    Storage *storage = InfinityContext::instance().storage();
+    Storage *storage = hybridsearchContext::instance().storage();
     EXPECT_NE(storage, nullptr);
     EXPECT_EQ(storage->buffer_manager()->memory_limit(), (u64)512 * 1024);
 
@@ -765,20 +765,20 @@ TEST_F(BufferObjTest, test_big_with_gc_and_cleanup) {
         txn_mgr->CommitTxn(txn);
     }
 
-    infinity::InfinityContext::instance().UnInit();
+    hybridsearch::hybridsearchContext::instance().UnInit();
 }
 
 TEST_F(BufferObjTest, test_multiple_threads_read) {
     std::shared_ptr<std::string> config_path = std::make_shared<std::string>(std::string(test_data_path()) + "/config/test_buffer_obj.toml");
     RemoveDbDirs();
-    infinity::InfinityContext::instance().InitPhase1(config_path);
-    infinity::InfinityContext::instance().InitPhase2();
+    hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+    hybridsearch::hybridsearchContext::instance().InitPhase2();
 
     constexpr u64 kInsertN = 256;
     constexpr u64 kImportSize = 8192;
     constexpr u64 kThreadN = 4;
 
-    Storage *storage = InfinityContext::instance().storage();
+    Storage *storage = hybridsearchContext::instance().storage();
     EXPECT_NE(storage, nullptr);
     EXPECT_EQ(storage->buffer_manager()->memory_limit(), (u64)512 * 1024);
 
@@ -867,5 +867,5 @@ TEST_F(BufferObjTest, test_multiple_threads_read) {
         txn_mgr->CommitTxn(txn);
     }
 
-    infinity::InfinityContext::instance().UnInit();
+    hybridsearch::hybridsearchContext::instance().UnInit();
 }

@@ -19,8 +19,8 @@ import config;
 import catalog;
 import status;
 import logical_type;
-import infinity_context;
-import infinity_exception;
+import hybridsearch_context;
+import hybridsearch_exception;
 import scalar_function;
 import scalar_function_set;
 import third_party;
@@ -29,7 +29,7 @@ import data_type;
 import column_vector;
 import singleton;
 
-namespace infinity {
+namespace hybridsearch {
 using namespace std::chrono;
 struct CurrentDateFunction {
     template <typename TB>
@@ -42,8 +42,8 @@ struct CurrentDateFunction {
 
 template <>
 inline void CurrentDateFunction::Run(DateT &result) {
-    InfinityContext& infinityContext = InfinityContext::instance();
-    Config* config = infinityContext.config();
+    hybridsearchContext& hybridsearchContext = hybridsearchContext::instance();
+    Config* config = hybridsearchContext.config();
     auto now = system_clock::now() + config->hour_offset_;
     auto sys_days = std::chrono::floor<std::chrono::days>(now);
     result.value = sys_days.time_since_epoch().count();
@@ -60,4 +60,4 @@ void RegisterCurrentDateFunction(const UniquePtr<Catalog> &catalog_ptr) {
     Catalog::AddFunctionSet(catalog_ptr.get(), function_set_ptr);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

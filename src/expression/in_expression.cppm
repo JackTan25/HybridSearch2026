@@ -19,12 +19,12 @@ import column_binding;
 import base_expression;
 import data_type;
 import value;
-import infinity_exception;
+import hybridsearch_exception;
 import stl;
 import logical_type;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 // in_expression supported types
 // kBoolean = 0,
@@ -156,4 +156,4 @@ private:
     ValueSet set_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -16,7 +16,7 @@ import third_party;
 
 export module posting_iterator;
 
-namespace infinity {
+namespace hybridsearch {
 export class PostingIterator {
 public:
     PostingIterator(optionflag_t flag);
@@ -139,4 +139,4 @@ private:
     InDocPositionIterator *in_doc_pos_iterator_ = nullptr;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

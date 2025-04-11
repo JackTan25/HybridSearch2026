@@ -24,7 +24,7 @@ import tokenizer;
 import third_party;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 export class UserDefinedTermWeight {
 public:
     UserDefinedTermWeight(const String &tw_path) : tw_path_(tw_path) {}
@@ -39,5 +39,5 @@ private:
 
 
 };
-} // namespace infinityz
+} // namespace hybridsearchz
 #endif

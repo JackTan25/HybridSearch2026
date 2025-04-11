@@ -21,7 +21,7 @@ import stl;
 import binding;
 import third_party;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import base_expression;
 import column_expression;
 import column_identifer;
@@ -34,11 +34,11 @@ import match_sparse_expr;
 import global_resource_usage;
 import meta_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 BindContext::~BindContext() {
     Destroy();
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::DecrObjectCount("BindContext");
 #endif
 }
@@ -452,4 +452,4 @@ void BindContext::BoundSearch(ParsedExpr *expr) {
 //     children_.emplace_back(child);
 // }
 
-} // namespace infinity
+} // namespace hybridsearch

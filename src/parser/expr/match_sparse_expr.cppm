@@ -18,10 +18,10 @@ module;
 
 export module match_sparse_expr;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::MatchSparseExpr;
+export using hybridsearch::MatchSparseExpr;
 
-export using infinity::SparseMetricType;
+export using hybridsearch::SparseMetricType;
 
-} // namespace infinity
+} // namespace hybridsearch

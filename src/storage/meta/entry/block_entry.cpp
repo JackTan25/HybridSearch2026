@@ -26,7 +26,7 @@ import defer_op;
 import serialize;
 import catalog_delta_entry;
 import internal_types;
-import infinity_exception;
+import hybridsearch_exception;
 import data_type;
 import segment_entry;
 import version_file_worker;
@@ -37,11 +37,11 @@ import cleanup_scanner;
 import buffer_manager;
 import buffer_obj;
 import logical_type;
-import infinity_context;
+import hybridsearch_context;
 import virtual_store;
 import snapshot_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<std::string_view> BlockEntry::DecodeIndex(std::string_view encode) {
     SizeT delimiter_i = encode.rfind('#');
@@ -107,8 +107,8 @@ BlockEntry::NewBlockEntry(const SegmentEntry *segment_entry, BlockID block_id, T
     }
 
     auto *buffer_mgr = txn->buffer_mgr();
-    auto version_file_worker = MakeUnique<VersionFileWorker>(MakeShared<String>(InfinityContext::instance().config()->DataDir()),
-                                                             MakeShared<String>(InfinityContext::instance().config()->TempDir()),
+    auto version_file_worker = MakeUnique<VersionFileWorker>(MakeShared<String>(hybridsearchContext::instance().config()->DataDir()),
+                                                             MakeShared<String>(hybridsearchContext::instance().config()->TempDir()),
                                                              block_entry->block_dir(),
                                                              BlockVersion::FileName(),
                                                              block_entry->row_capacity_,
@@ -143,8 +143,8 @@ UniquePtr<BlockEntry> BlockEntry::NewReplayBlockEntry(const SegmentEntry *segmen
     block_entry->commit_ts_ = commit_ts;
     block_entry->block_dir_ = BlockEntry::DetermineDir(*segment_entry->segment_dir(), block_id);
 
-    auto version_file_worker = MakeUnique<VersionFileWorker>(MakeShared<String>(InfinityContext::instance().config()->DataDir()),
-                                                             MakeShared<String>(InfinityContext::instance().config()->TempDir()),
+    auto version_file_worker = MakeUnique<VersionFileWorker>(MakeShared<String>(hybridsearchContext::instance().config()->DataDir()),
+                                                             MakeShared<String>(hybridsearchContext::instance().config()->TempDir()),
                                                              block_entry->block_dir(),
                                                              BlockVersion::FileName(),
                                                              row_capacity,
@@ -452,7 +452,7 @@ void BlockEntry::CommitFlushed(TxnTimeStamp commit_ts, WalBlockInfo *block_info)
     max_row_ts_ = commit_ts;
 
     FlushVersionNoLock(commit_ts, false);
-    auto *pm = InfinityContext::instance().persistence_manager();
+    auto *pm = hybridsearchContext::instance().persistence_manager();
     block_info->addr_serializer_.InitializeValid(pm);
 }
 
@@ -633,7 +633,7 @@ void BlockEntry::Cleanup(CleanupInfoTracer *info_tracer, bool dropped) {
     }
 
     if (dropped) {
-        String full_block_dir = Path(InfinityContext::instance().config()->DataDir()) / *block_dir_;
+        String full_block_dir = Path(hybridsearchContext::instance().config()->DataDir()) / *block_dir_;
         LOG_DEBUG(fmt::format("Cleaning up block dir: {}", full_block_dir));
         CleanupScanner::CleanupDir(full_block_dir);
         LOG_DEBUG(fmt::format("Cleaned block dir: {}", full_block_dir));
@@ -731,8 +731,8 @@ i32 BlockEntry::GetAvailableCapacity() {
 
 SharedPtr<String> BlockEntry::DetermineDir(const String &parent_dir, BlockID block_id) {
     SharedPtr<String> relative_dir = MakeShared<String>(fmt::format("{}/blk_{}", parent_dir, block_id));
-    String full_dir = Path(InfinityContext::instance().config()->DataDir()) / *relative_dir;
-    if (InfinityContext::instance().persistence_manager() == nullptr) {
+    String full_dir = Path(hybridsearchContext::instance().config()->DataDir()) / *relative_dir;
+    if (hybridsearchContext::instance().persistence_manager() == nullptr) {
         VirtualStore::MakeDirectory(full_dir);
     }
     return relative_dir;
@@ -789,4 +789,4 @@ SizeT BlockEntry::GetStorageSize() const {
     return result;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

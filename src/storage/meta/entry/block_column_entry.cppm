@@ -32,7 +32,7 @@ import cleanup_scanner;
 import snapshot_info;
 import meta_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct BlockEntry;
 struct TableEntry;
@@ -160,4 +160,4 @@ private:
     u64 last_chunk_offset_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

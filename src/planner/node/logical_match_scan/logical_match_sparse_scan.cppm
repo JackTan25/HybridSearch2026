@@ -30,7 +30,7 @@ import data_type;
 import fast_rough_filter;
 import common_query_filter;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalMatchSparseScan final : public LogicalMatchScanBase {
 public:
@@ -41,4 +41,4 @@ public:
 
 public:
 };
-} // namespace infinity
+} // namespace hybridsearch

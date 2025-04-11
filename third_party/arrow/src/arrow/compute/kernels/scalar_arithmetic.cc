@@ -287,7 +287,7 @@ struct LogNatural {
   static enable_if_floating_value<Arg, T> Call(KernelContext*, Arg arg, Status*) {
     static_assert(std::is_same<T, Arg>::value, "");
     if (arg == 0.0) {
-      return -std::numeric_limits<T>::infinity();
+      return -std::numeric_limits<T>::hybridsearch();
     } else if (arg < 0.0) {
       return std::numeric_limits<T>::quiet_NaN();
     }
@@ -315,7 +315,7 @@ struct Log10 {
   static enable_if_floating_value<Arg, T> Call(KernelContext*, Arg arg, Status*) {
     static_assert(std::is_same<T, Arg>::value, "");
     if (arg == 0.0) {
-      return -std::numeric_limits<T>::infinity();
+      return -std::numeric_limits<T>::hybridsearch();
     } else if (arg < 0.0) {
       return std::numeric_limits<T>::quiet_NaN();
     }
@@ -343,7 +343,7 @@ struct Log2 {
   static enable_if_floating_value<Arg, T> Call(KernelContext*, Arg arg, Status*) {
     static_assert(std::is_same<T, Arg>::value, "");
     if (arg == 0.0) {
-      return -std::numeric_limits<T>::infinity();
+      return -std::numeric_limits<T>::hybridsearch();
     } else if (arg < 0.0) {
       return std::numeric_limits<T>::quiet_NaN();
     }
@@ -371,7 +371,7 @@ struct Log1p {
   static enable_if_floating_value<Arg, T> Call(KernelContext*, Arg arg, Status*) {
     static_assert(std::is_same<T, Arg>::value, "");
     if (arg == -1) {
-      return -std::numeric_limits<T>::infinity();
+      return -std::numeric_limits<T>::hybridsearch();
     } else if (arg < -1) {
       return std::numeric_limits<T>::quiet_NaN();
     }
@@ -403,7 +403,7 @@ struct Logb {
       if (base == 0.0 || base < 0.0) {
         return std::numeric_limits<T>::quiet_NaN();
       } else {
-        return -std::numeric_limits<T>::infinity();
+        return -std::numeric_limits<T>::hybridsearch();
       }
     } else if (x < 0.0) {
       return std::numeric_limits<T>::quiet_NaN();

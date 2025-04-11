@@ -16,7 +16,7 @@
 import base_test;
 import croaring;
 
-class CRoaringTest : public infinity::BaseTest {};
+class CRoaringTest : public hybridsearch::BaseTest {};
 
 TEST_F(CRoaringTest, test_size) {
     {

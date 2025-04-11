@@ -16,7 +16,7 @@
 
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class DDLType {
     kInvalid,
@@ -46,4 +46,4 @@ public:
     std::string comment_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -17,7 +17,7 @@ module;
 export module vector_with_lock;
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename ValueType>
 class VectorWithLock {
@@ -71,4 +71,4 @@ public:
         vec_.clear();
     }
 };
-} // namespace infinity
+} // namespace hybridsearch

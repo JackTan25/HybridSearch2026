@@ -25,7 +25,7 @@ import base_expression;
 import view;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<ColumnBinding> LogicalViewScan::GetColumnBindings() const { return left_node_->GetColumnBindings(); }
 
@@ -46,4 +46,4 @@ String LogicalViewScan::ToString(i64 &space) const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

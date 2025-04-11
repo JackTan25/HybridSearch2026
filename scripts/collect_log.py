@@ -47,7 +47,7 @@ def collect_log(
                 print(line.strip())
 
     if not os.path.isfile(log_path):
-        print("Error: /var/infinity/log/infinity.log not found")
+        print("Error: /var/hybridsearch/log/hybridsearch.log not found")
     else:
         if failure:
             shutil.copy(log_path, f"{output_dir}/{random_name}.log")
@@ -76,7 +76,7 @@ def collect_log(
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Collect and copy log files.")
     parser.add_argument(
-        "--log_path", type=str, required=True, help="Path to the infinity log file"
+        "--log_path", type=str, required=True, help="Path to the hybridsearch log file"
     )
     parser.add_argument(
         "--stdout_path",

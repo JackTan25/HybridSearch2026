@@ -18,7 +18,7 @@
 #include <utility>
 #include <vector>
 
-namespace infinity {
+namespace hybridsearch {
 
 class FusionExpr : public ParsedExpr {
 public:
@@ -37,4 +37,4 @@ public:
     std::unique_ptr<MatchTensorExpr> match_tensor_expr_{nullptr};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

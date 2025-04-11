@@ -4,10 +4,10 @@ import stl;
 
 export module md5;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 
 export void RegisterMd5Function(const UniquePtr<Catalog> &catalog_ptr);
 
-} // namespace infinity
+} // namespace hybridsearch

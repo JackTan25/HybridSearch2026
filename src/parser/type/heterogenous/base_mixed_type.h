@@ -17,7 +17,7 @@
 #include "mixed_value_type.h"
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 struct BaseMixedType {
 
@@ -39,4 +39,4 @@ public:
     MixedValueType type{MixedValueType::kInvalid};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

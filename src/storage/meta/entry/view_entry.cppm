@@ -24,7 +24,7 @@ import select_statement;
 import create_view_info;
 import txn;
 
-namespace infinity {
+namespace hybridsearch {
 
 class ViewMeta;
 
@@ -67,4 +67,4 @@ private:
     ViewMeta *view_meta_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

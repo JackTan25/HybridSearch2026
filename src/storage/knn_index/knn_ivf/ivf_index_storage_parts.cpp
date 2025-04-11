@@ -21,7 +21,7 @@ module;
 module ivf_index_storage;
 
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 import status;
 import logger;
 import third_party;
@@ -41,7 +41,7 @@ import vector_distance;
 import index_base;
 import knn_expr;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct SearchIndexPartsReuseContext {
     UniquePtr<f32[]> pq_query_ip_table_;
@@ -1343,4 +1343,4 @@ UniquePtr<IVF_Part_Storage> IVF_Part_Storage::Make(const u32 part_id,
     return {};
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -23,7 +23,7 @@ import table_entry;
 import txn;
 import txn_manager;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class UpdateSegmentBloomFilterTask final : public BGTask {
 public:
@@ -44,4 +44,4 @@ private:
     TxnManager *txn_mgr_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -18,11 +18,11 @@ export module file_reader;
 
 import stl;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import local_file_handle;
 import virtual_store;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class FileReader {
 public:
@@ -106,4 +106,4 @@ inline i64 FileReader::ReadVLong() {
     return i;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

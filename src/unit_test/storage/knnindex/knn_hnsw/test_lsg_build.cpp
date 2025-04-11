@@ -28,10 +28,10 @@ import logical_type;
 import index_base;
 import internal_types;
 import abstract_hnsw;
-import infinity_exception;
+import hybridsearch_exception;
 import hnsw_alg;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class LSGBuildTest : public BaseTest {
 protected:

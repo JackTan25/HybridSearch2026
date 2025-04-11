@@ -24,7 +24,7 @@ import segment_entry;
 import block_iter;
 import buffer_manager;
 import default_values;
-import infinity_exception;
+import hybridsearch_exception;
 import block_entry;
 import logger;
 import sparse_util;
@@ -34,7 +34,7 @@ import column_vector;
 import fix_heap;
 import block_column_iter;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class BlockEntryIter {
 public:
@@ -245,4 +245,4 @@ private:
     SizeT cap_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -24,9 +24,9 @@ import internal_types;
 import logical_type;
 import data_type;
 import ivf_index_util_func;
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 class LocalFileHandle;
 class KnnDistanceBase1;
@@ -176,4 +176,4 @@ inline auto ApplyEmbeddingDataTypeToFunc(const EmbeddingDataType embedding_data_
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

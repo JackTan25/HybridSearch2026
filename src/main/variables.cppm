@@ -19,7 +19,7 @@ export module variables;
 import stl;
 import command_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
 // Variable has two scopes: global and session
 export enum class GlobalVariable {
@@ -73,4 +73,4 @@ export struct VarUtil {
     static SessionVariable GetSessionVarByName(const String &variable_name);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

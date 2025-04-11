@@ -22,7 +22,7 @@ import file_worker_type;
 
 module buffer_handle;
 
-namespace infinity {
+namespace hybridsearch {
 BufferHandle::BufferHandle(BufferObj *buffer_obj, void *data) : buffer_obj_(buffer_obj), data_(data) {}
 
 BufferHandle::BufferHandle(const BufferHandle &other) : buffer_obj_(other.buffer_obj_), data_(other.data_) { buffer_obj_->LoadInner(); }
@@ -75,4 +75,4 @@ FileWorker *BufferHandle::GetFileWorkerMut() {
     return buffer_obj_->file_worker();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

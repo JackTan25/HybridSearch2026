@@ -33,7 +33,7 @@ import segment_index_entry;
 import vector_with_lock;
 import persistence_manager;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class ColumnInverterTest : public BaseTest {
 protected:

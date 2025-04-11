@@ -23,13 +23,13 @@ import bind_context;
 import column_expression;
 import function;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import function_set;
 import bind_alias_proxy;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 SharedPtr<BaseExpression> HavingBinder::BuildExpression(const ParsedExpr &expr, BindContext *bind_context_ptr, i64 depth, bool) {
 
@@ -142,4 +142,4 @@ SharedPtr<BaseExpression> HavingBinder::BuildKnnExpr(const KnnExpr &, BindContex
     return nullptr;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

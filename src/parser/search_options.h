@@ -16,7 +16,7 @@
 #include <map>
 #include <string>
 #include <utility>
-namespace infinity {
+namespace hybridsearch {
 
 class SearchOptions {
 public:
@@ -32,4 +32,4 @@ private:
     static std::pair<std::string, std::string> ParseOption(const std::string_view &option);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

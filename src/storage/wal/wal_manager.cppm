@@ -24,7 +24,7 @@ import catalog_delta_entry;
 import blocking_queue;
 import log_file;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Storage;
 class BGTaskProcessor;
@@ -190,4 +190,4 @@ private:
     TxnTimeStamp last_full_ckp_ts_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

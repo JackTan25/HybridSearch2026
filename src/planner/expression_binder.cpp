@@ -21,7 +21,7 @@ module expression_binder;
 import stl;
 import default_values;
 import type_info;
-import infinity_exception;
+import hybridsearch_exception;
 import bind_context;
 import third_party;
 import value;
@@ -87,7 +87,7 @@ import catalog;
 import meta_info;
 import column_vector;
 
-namespace infinity {
+namespace hybridsearch {
 
 template <typename T>
 ptr_t GetConcatenatedTensorData(const ConstantExpr *tensor_expr_, const u32 tensor_column_basic_embedding_dim, u32 &query_total_dimension);
@@ -1320,4 +1320,4 @@ ptr_t GetConcatenatedTensorData(const ConstantExpr *tensor_expr_, const u32 tens
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

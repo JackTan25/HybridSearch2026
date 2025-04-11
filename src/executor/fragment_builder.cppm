@@ -22,18 +22,18 @@ import global_resource_usage;
 
 export module fragment_builder;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class FragmentBuilder {
 public:
     explicit FragmentBuilder(QueryContext *query_context_ptr) : query_context_ptr_(query_context_ptr) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("FragmentBuilder");
 #endif
     }
 
     ~FragmentBuilder() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("FragmentBuilder");
 #endif
     }
@@ -52,4 +52,4 @@ private:
     idx_t fragment_id_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

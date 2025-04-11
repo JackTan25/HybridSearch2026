@@ -23,14 +23,14 @@ import bind_context;
 import column_expression;
 import third_party;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import parsed_expr;
 import constant_expr;
 import knn_expr;
 import function_expr;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 void OrderBinder::PushExtraExprToSelectList(ParsedExpr *expr, const SharedPtr<BindContext> &bind_context_ptr) {
     if (expr->type_ == ParsedExprType::kConstant) {
@@ -162,4 +162,4 @@ SharedPtr<BaseExpression> OrderBinder::BuildExpression(const ParsedExpr &expr, B
     return result;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

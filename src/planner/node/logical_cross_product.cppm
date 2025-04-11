@@ -23,7 +23,7 @@ import logical_node;
 import data_type;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalCrossProduct : public LogicalNode {
 public:
@@ -42,4 +42,4 @@ public:
     String alias_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -18,14 +18,14 @@ module periodic_trigger;
 
 import stl;
 import logger;
-import infinity_exception;
+import hybridsearch_exception;
 import background_process;
 import bg_task;
 import catalog;
 import txn_manager;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 bool PeriodicTrigger::Check() {
     if (interval_ == 0) {
@@ -92,4 +92,4 @@ void OptimizeIndexPeriodicTrigger::Trigger() {
     compact_processor_->Submit(std::move(optimize_task));
 }
 
-} // namespace infinity
+} // namespace hybridsearch

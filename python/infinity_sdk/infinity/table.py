@@ -16,10 +16,10 @@ from abc import ABC, abstractmethod
 from enum import Enum
 from typing import Optional, Union, Any
 
-import infinity.remote_thrift.infinity_thrift_rpc.ttypes as ttypes
-from infinity.index import IndexInfo
-from infinity.common import InfinityException, INSERT_DATA
-from infinity.errors import ErrorCode
+import hybridsearch.remote_thrift.hybridsearch_thrift_rpc.ttypes as ttypes
+from hybridsearch.index import IndexInfo
+from hybridsearch.common import hybridsearchException, INSERT_DATA
+from hybridsearch.errors import ErrorCode
 
 
 class ExplainType(Enum):
@@ -47,4 +47,4 @@ class ExplainType(Enum):
         elif self is ExplainType.Fragment:
             return ttypes.ExplainType.Fragment
         else:
-            raise InfinityException(ErrorCode.INVALID_EXPLAIN_TYPE, "Unknown explain type")
+            raise hybridsearchException(ErrorCode.INVALID_EXPLAIN_TYPE, "Unknown explain type")

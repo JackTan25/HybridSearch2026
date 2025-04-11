@@ -25,7 +25,7 @@ import load_meta;
 import data_type;
 import base_table_ref;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PhysicalCompactIndexDo : public PhysicalOperator {
 public:
@@ -58,4 +58,4 @@ private:
     SharedPtr<Vector<SharedPtr<DataType>>> output_types_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -9,7 +9,7 @@ export module loser_tree;
 import stl;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename ValueType, typename Comparator = std::greater<ValueType>>
 class LoserTreeBase {
@@ -145,4 +145,4 @@ public:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -18,8 +18,8 @@ module;
 
 export module delete_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::DeleteStatement;
+export using hybridsearch::DeleteStatement;
 
 }

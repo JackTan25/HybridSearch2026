@@ -19,10 +19,10 @@ export module index_filter_expression_info_tree;
 import stl;
 import logical_type;
 import base_expression;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename T>
 struct ExpressionInfoTree {
@@ -92,4 +92,4 @@ void CommonCheckCast(const T *src_info, ExpressionInfoTree<T> &tree, const Share
 export constexpr std::array CompareFunctionNames{"<", ">", "<=", ">=", "="};
 export constexpr std::array LogicalFunctionNames{"AND", "OR"};
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -15,7 +15,7 @@
 #include "in_expr.h"
 #include <sstream>
 
-namespace infinity {
+namespace hybridsearch {
 
 InExpr::~InExpr() {
     if (left_ != nullptr) {
@@ -49,4 +49,4 @@ std::string InExpr::ToString() const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

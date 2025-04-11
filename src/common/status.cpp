@@ -22,7 +22,7 @@ import stl;
 import third_party;
 import default_values;
 
-namespace infinity {
+namespace hybridsearch {
 
 Status::Status(ErrorCode code, const char *msg) : code_(code) { msg_ = MakeUnique<String>(msg); }
 
@@ -80,7 +80,7 @@ Status Status::EmptyConfigParameter() { return Status(ErrorCode::kEmptyConfigPar
 
 Status Status::MismatchVersion(const String &current_version, const String &expected_version) {
     return Status(ErrorCode::kMismatchVersion,
-                  MakeUnique<String>(fmt::format("Current infinity version: {}, expected version: {}", current_version, expected_version)));
+                  MakeUnique<String>(fmt::format("Current hybridsearch version: {}, expected version: {}", current_version, expected_version)));
 }
 
 Status Status::InvalidTimezone(const String &timezone) {
@@ -131,9 +131,9 @@ Status Status::NotSupportInMaintenanceMode() {
     return Status(ErrorCode::kAdminOnlySupportInMaintenanceMode, MakeUnique<String>("Not support in maintenance mode"));
 }
 
-Status Status::InfinityIsStarting() { return Status(ErrorCode::kInfinityIsStarting, MakeUnique<String>("Infinity is starting")); }
+Status Status::hybridsearchIsStarting() { return Status(ErrorCode::khybridsearchIsStarting, MakeUnique<String>("hybridsearch is starting")); }
 
-Status Status::InfinityIsIniting() { return Status(ErrorCode::kInfinityIsIniting, MakeUnique<String>("Infinity is initing")); }
+Status Status::hybridsearchIsIniting() { return Status(ErrorCode::khybridsearchIsIniting, MakeUnique<String>("hybridsearch is initing")); }
 
 // 3. Syntax error or access rule violation
 Status Status::InvalidUserName(const String &user_name) {
@@ -277,11 +277,11 @@ Status Status::FunctionArgsError(const String &func_name) {
     return Status(ErrorCode::kFunctionArgsError, MakeUnique<String>(fmt::format("{} arguments have errors", func_name)));
 }
 
-Status Status::ImportFileFormatError(const infinity::String &detailed_info) {
+Status Status::ImportFileFormatError(const hybridsearch::String &detailed_info) {
     return Status(ErrorCode::kImportFileFormatError, MakeUnique<String>(fmt::format("Import file format error: {}", detailed_info)));
 }
 
-Status Status::DataNotExist(const infinity::String &detailed_info) {
+Status Status::DataNotExist(const hybridsearch::String &detailed_info) {
     return Status(ErrorCode::kImportFileFormatError, MakeUnique<String>(fmt::format("Data not exist: {}", detailed_info)));
 }
 
@@ -313,7 +313,7 @@ Status Status::ExceedIndexNameLength(u64 index_name_length) {
                   MakeUnique<String>(fmt::format("Given index name length exceeds {}", MAX_IDENTIFIER_NAME_LENGTH)));
 }
 
-Status Status::NoColumnDefined(const infinity::String &table_name) {
+Status Status::NoColumnDefined(const hybridsearch::String &table_name) {
     return Status(ErrorCode::kNoColumnDefined, MakeUnique<String>(fmt::format("Try to define Table {} without any column.", table_name)));
 }
 
@@ -609,7 +609,7 @@ Status Status::NotRegistered(const String &node_info) {
 
 Status Status::CantSwitchRole(const String &detailed_info) { return Status(ErrorCode::kCantSwitchRole, MakeUnique<String>(detailed_info)); }
 
-Status Status::TooManyFollower(infinity::u8 follower_limit) {
+Status Status::TooManyFollower(hybridsearch::u8 follower_limit) {
     return Status(ErrorCode::kTooManyFollower, MakeUnique<String>(fmt::format("Too many followers, limit: {}", follower_limit)));
 }
 
@@ -644,4 +644,4 @@ Status Status::NodeNameMismatch(const String &actual_node_name, const String &ex
                   MakeUnique<String>(fmt::format("Expect node name: {}, actual node name: {}", expected_node_name, actual_node_name)));
 }
 
-} // namespace infinity
+} // namespace hybridsearch

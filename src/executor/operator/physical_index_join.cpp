@@ -21,7 +21,7 @@ import operator_state;
 
 module physical_index_join;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalIndexJoin::Init(QueryContext* query_context) {}
 
@@ -61,4 +61,4 @@ SharedPtr<Vector<SharedPtr<DataType>>> PhysicalIndexJoin::GetOutputTypes() const
     return result;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

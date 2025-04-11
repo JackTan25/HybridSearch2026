@@ -31,7 +31,7 @@ import match_sparse_expr;
 import physical_filter_scan_base;
 import global_block_id;
 
-namespace infinity {
+namespace hybridsearch {
 struct LoadMeta;
 struct BlockIndex;
 class ColumnVector;
@@ -88,4 +88,4 @@ private:
     ColumnID search_column_id_ = 0;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

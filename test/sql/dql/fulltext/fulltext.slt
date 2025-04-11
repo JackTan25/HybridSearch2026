@@ -10,7 +10,7 @@ CREATE TABLE sqllogic_test_enwiki(doctitle varchar DEFAULT '', docdate varchar D
 
 # copy data from csv file
 query I
-COPY sqllogic_test_enwiki FROM '/var/infinity/test_data/enwiki_99.csv' WITH ( DELIMITER '\t', FORMAT CSV );
+COPY sqllogic_test_enwiki FROM '/var/hybridsearch/test_data/enwiki_99.csv' WITH ( DELIMITER '\t', FORMAT CSV );
 ----
 
 statement error
@@ -104,7 +104,7 @@ Anarchism 30-APR-2012 03:25:17.000 6 27.133215
 
 # copy data from csv file
 query I
-COPY sqllogic_test_enwiki FROM '/var/infinity/test_data/enwiki_99.csv' WITH ( DELIMITER '\t', FORMAT CSV );
+COPY sqllogic_test_enwiki FROM '/var/hybridsearch/test_data/enwiki_99.csv' WITH ( DELIMITER '\t', FORMAT CSV );
 ----
 
 query TTIR rowsort
@@ -115,7 +115,7 @@ Anarchism 30-APR-2012 03:25:17.000 4294967296 23.241112
 
 # copy data from csv file
 query I
-COPY sqllogic_test_enwiki FROM '/var/infinity/test_data/enwiki_99.csv' WITH ( DELIMITER '\t', FORMAT CSV );
+COPY sqllogic_test_enwiki FROM '/var/hybridsearch/test_data/enwiki_99.csv' WITH ( DELIMITER '\t', FORMAT CSV );
 ----
 
 query TTIR rowsort

@@ -29,11 +29,11 @@ import internal_types;
 import third_party;
 import explain_logical_plan;
 import search_options;
-import infinity_exception;
+import hybridsearch_exception;
 import status;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 void LogicalMatchTensorScan::InitExtraOptions() {
     static const std::set<String> valid_options = {"topn",
@@ -111,4 +111,4 @@ void LogicalMatchTensorScan::InitExtraOptions() {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

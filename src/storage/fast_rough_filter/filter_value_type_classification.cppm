@@ -19,7 +19,7 @@ import stl;
 import internal_types;
 import column_vector;
 
-namespace infinity {
+namespace hybridsearch {
 
 // for std::visit
 export template <class... Fs>
@@ -103,4 +103,4 @@ concept IsMinMaxInnerValUnchanged = IsAnyOfList<T, TypeListMinMaxInnerValUnchang
 export template <typename T>
 concept IsMinMaxFilterAcceptedTypes = IsAnyOfList<T, TypeListMinMaxFilterAcceptedTypes>;
 
-} // namespace infinity
+} // namespace hybridsearch

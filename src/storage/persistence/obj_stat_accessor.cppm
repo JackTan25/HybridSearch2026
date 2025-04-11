@@ -20,7 +20,7 @@ import stl;
 import obj_status;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct LRUListEntry {
     LRUListEntry(String key, ObjStat obj_stat) : key_(std::move(key)), obj_stat_(std::move(obj_stat)) {}
@@ -167,4 +167,4 @@ private:
     SizeT disk_used_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

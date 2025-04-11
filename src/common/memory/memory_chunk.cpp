@@ -17,7 +17,7 @@ import stl;
 // #include <thread>
 // using namespace std;
 
-namespace infinity {
+namespace hybridsearch {
 
 // inline size_t getProcessPeakRSS() {
 //     struct rusage rusage;
@@ -150,4 +150,4 @@ void ChunkAllocator::Clear() {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

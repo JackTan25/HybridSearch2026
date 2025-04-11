@@ -23,7 +23,7 @@ import column_binding;
 import data_type;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<ColumnBinding> LogicalDummyScan::GetColumnBindings() const { return {}; }
 
@@ -45,4 +45,4 @@ String LogicalDummyScan::ToString(i64 &space) const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

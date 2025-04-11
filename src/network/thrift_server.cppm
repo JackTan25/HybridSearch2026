@@ -20,14 +20,14 @@ module;
 export module thrift_server;
 
 import stl;
-import infinity;
-import infinity_thrift_service;
+import hybridsearch;
+import hybridsearch_thrift_service;
 import query_options;
 import thrift;
 
 using namespace std;
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class ThriftServerStatus : u8 {
     kStopped,
@@ -77,7 +77,7 @@ public:
 
 private:
     //    UniquePtr<TServer> server{nullptr};
-    SharedPtr<InfinityThriftService> service_handler_{};
+    SharedPtr<hybridsearchThriftService> service_handler_{};
     SharedPtr<apache::thrift::concurrency::Thread> server_thread_{};
 
     atomic_bool started_{false};
@@ -85,4 +85,4 @@ private:
 
 #endif
 
-} // namespace infinity
+} // namespace hybridsearch

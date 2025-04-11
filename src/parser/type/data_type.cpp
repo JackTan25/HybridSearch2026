@@ -29,7 +29,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-namespace infinity {
+namespace hybridsearch {
 
 DataType::DataType(LogicalType logical_type, std::shared_ptr<TypeInfo> type_info_ptr) : type_(logical_type), type_info_(std::move(type_info_ptr)) {
     switch (logical_type) {
@@ -809,4 +809,4 @@ BFloat16T DataType::StringToValue<BFloat16T>(const std::string_view &str) {
     return static_cast<BFloat16T>(float_value);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

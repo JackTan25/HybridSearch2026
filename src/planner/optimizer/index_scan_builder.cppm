@@ -21,7 +21,7 @@ import logical_node;
 import query_context;
 import optimizer_rule;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class IndexScanBuilder final : public OptimizerRule {
 public:
@@ -32,4 +32,4 @@ public:
     String name() const final { return "Build SecondaryIndexScan"; }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

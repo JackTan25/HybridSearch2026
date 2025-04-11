@@ -47,7 +47,7 @@ import txn_store;
 import buffer_handle;
 import data_file_worker;
 
-import infinity_exception;
+import hybridsearch_exception;
 import zsv;
 import status;
 import column_vector;
@@ -68,9 +68,9 @@ import parser_assert;
 import virtual_store;
 import local_file_handle;
 import wal_manager;
-import infinity_context;
+import hybridsearch_context;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalImport::Init(QueryContext *query_context) {}
 
@@ -81,7 +81,7 @@ void PhysicalImport::Init(QueryContext *query_context) {}
  * @param output_state
  */
 bool PhysicalImport::Execute(QueryContext *query_context, OperatorState *operator_state) {
-    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
     if (storage_mode == StorageMode::kUnInitialized) {
         UnrecoverableError("Uninitialized storage mode");
     }
@@ -2312,4 +2312,4 @@ void PhysicalImport::SaveSegmentData(TableInfo *table_info, Txn *txn, SharedPtr<
     txn->Import(*table_info->db_name_, *table_info->table_name_, std::move(segment_entry));
 }
 
-} // namespace infinity
+} // namespace hybridsearch

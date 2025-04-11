@@ -9682,8 +9682,8 @@ TOML_NAMESPACE_START
 		static constexpr impl::formatter_constants constants = {
 			format_flags::quote_dates_and_times,										  // mandatory
 			format_flags::allow_literal_strings | format_flags::allow_multi_line_strings, // ignored
-			"Infinity"sv,
-			"-Infinity"sv,
+			"hybridsearch"sv,
+			"-hybridsearch"sv,
 			"NaN"sv,
 			"true"sv,
 			"false"sv
@@ -13947,7 +13947,7 @@ TOML_IMPL_NAMESPACE_START
 			if (cp && !is_value_terminator(*cp))
 				set_error_and_return_default("expected value-terminator, saw '"sv, to_sv(*cp), "'"sv);
 
-			return inf ? (negative ? -std::numeric_limits<double>::infinity() : std::numeric_limits<double>::infinity())
+			return inf ? (negative ? -std::numeric_limits<double>::hybridsearch() : std::numeric_limits<double>::hybridsearch())
 					   : std::numeric_limits<double>::quiet_NaN();
 		}
 
@@ -14967,7 +14967,7 @@ TOML_IMPL_NAMESPACE_START
 					if (is_decimal_digit(chars[1]) && chars[2] == U'.')
 						val.reset(new value{ parse_float() });
 
-					// signed infinity or nan
+					// signed hybridsearch or nan
 					else if (is_match(chars[1], U'i', U'n', U'I', U'N'))
 						val.reset(new value{ parse_inf_or_nan() });
 				}

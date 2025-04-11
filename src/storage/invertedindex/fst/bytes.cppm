@@ -19,7 +19,7 @@ import third_party;
 export module fst:bytes;
 import :writer;
 
-namespace infinity {
+namespace hybridsearch {
 
 /// Read a u32 in little endian format from the beginning of the given slice.
 /// Refers to https://www.kernel.org/doc/html/latest/core-api/unaligned-memory-access.html
@@ -194,4 +194,4 @@ int CompareBytes(u8 *bs1_data, SizeT bs1_len, u8 *bs2_data, SizeT bs2_len) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

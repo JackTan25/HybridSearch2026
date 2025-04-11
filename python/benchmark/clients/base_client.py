@@ -16,7 +16,7 @@ from .utils import csr_read_all, gt_read_all, calculate_recall
 
 class BaseClient:
     """
-    Base class for all clients(Qdrant, ES, infinity).
+    Base class for all clients(Qdrant, ES, hybridsearch).
     mode is a string that corresponds to a JSON file's address in the configurations.
     Each client reads the required parameters from the JSON configuration file.
     """
@@ -393,7 +393,7 @@ class BaseClient:
                         if self.data["app"] == "qdrant" :
                             for ScoredPoint in result[1:]:
                                 ids.append(((ScoredPoint.id >> 32) << 23) + (ScoredPoint.id & 0xFFFFFFFF))
-                        else :#elasticsearch & infinity
+                        else :#elasticsearch & hybridsearch
                             ids = [((x >> 32) << 23) + (x & 0xFFFFFFFF) for x in result[1:]]
                         precision = (
                             len(set(ids).intersection(expected_result[i][1:]))
@@ -409,7 +409,7 @@ class BaseClient:
                     for query_id, result in enumerate(results):
                         for res in result[1:]:
                             query_results[query_id].append(res.id)
-                elif self.data["app"] == "infinity":
+                elif self.data["app"] == "hybridsearch":
                     for query_id, result in enumerate(results):
                         for res in result[1:]:
                             query_results[query_id].append(res)

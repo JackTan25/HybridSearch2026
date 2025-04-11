@@ -21,7 +21,7 @@ import index_base;
 import column_def;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class TableDef {
 
@@ -40,13 +40,13 @@ public:
             column_name2id_[columns_[idx]->name()] = idx;
         }
 
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("BaseResult");
 #endif
     }
 
     virtual ~TableDef() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("BaseResult");
 #endif
     }
@@ -96,4 +96,4 @@ private:
     Vector<IndexBase> indexes_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

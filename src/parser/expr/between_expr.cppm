@@ -18,8 +18,8 @@ module;
 
 export module between_expr;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::BetweenExpr;
+export using hybridsearch::BetweenExpr;
 
 }

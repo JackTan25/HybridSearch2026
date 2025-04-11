@@ -18,7 +18,7 @@ import base_test;
 import statement_common;
 import internal_types;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 import storage;
 import column_def;
 import logical_type;
@@ -47,14 +47,14 @@ import index_base;
 import index_full_text;
 import bg_task;
 import logger;
-import infinity_exception;
+import hybridsearch_exception;
 import default_values;
 import block_index;
 import wal_manager;
 import compaction_process;
 import txn_state;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class CatalogDeltaReplayTest : public BaseTestParamStr {
 public:
@@ -119,9 +119,9 @@ TEST_P(CatalogDeltaReplayTest, replay_db_entry) {
     auto db_name3 = std::make_shared<std::string>("db3");
 
     {
-        InfinityContext::instance().InitPhase1(config_path);
-        InfinityContext::instance().InitPhase2();
-        Storage *storage = InfinityContext::instance().storage();
+        hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearchContext::instance().InitPhase2();
+        Storage *storage = hybridsearchContext::instance().storage();
 
         TxnManager *txn_mgr = storage->txn_manager();
 
@@ -143,12 +143,12 @@ TEST_P(CatalogDeltaReplayTest, replay_db_entry) {
         }
         WaitFlushDeltaOp(storage);
 
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
     {
-        InfinityContext::instance().InitPhase1(config_path);
-        InfinityContext::instance().InitPhase2();
-        Storage *storage = InfinityContext::instance().storage();
+        hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearchContext::instance().InitPhase2();
+        Storage *storage = hybridsearchContext::instance().storage();
 
         TxnManager *txn_mgr = storage->txn_manager();
 
@@ -169,7 +169,7 @@ TEST_P(CatalogDeltaReplayTest, replay_db_entry) {
             txn_mgr->CommitTxn(txn);
         }
 
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
 }
 
@@ -187,9 +187,9 @@ TEST_P(CatalogDeltaReplayTest, replay_table_entry) {
 
     std::shared_ptr<std::string> table_entry_dir1;
     {
-        InfinityContext::instance().InitPhase1(config_path);
-        InfinityContext::instance().InitPhase2();
-        Storage *storage = InfinityContext::instance().storage();
+        hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearchContext::instance().InitPhase2();
+        Storage *storage = hybridsearchContext::instance().storage();
 
         TxnManager *txn_mgr = storage->txn_manager();
 
@@ -214,12 +214,12 @@ TEST_P(CatalogDeltaReplayTest, replay_table_entry) {
         }
         WaitFlushDeltaOp(storage);
 
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
     {
-        InfinityContext::instance().InitPhase1(config_path);
-        InfinityContext::instance().InitPhase2();
-        Storage *storage = InfinityContext::instance().storage();
+        hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearchContext::instance().InitPhase2();
+        Storage *storage = hybridsearchContext::instance().storage();
 
         TxnManager *txn_mgr = storage->txn_manager();
 
@@ -242,7 +242,7 @@ TEST_P(CatalogDeltaReplayTest, replay_table_entry) {
             txn_mgr->CommitTxn(txn);
         }
 
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
 }
 
@@ -255,9 +255,9 @@ TEST_P(CatalogDeltaReplayTest, replay_import) {
     auto table_def = TableDef::Make(db_name, table_name, MakeShared<String>(), {column_def1, column_def2});
 
     {
-        InfinityContext::instance().InitPhase1(config_path);
-        InfinityContext::instance().InitPhase2();
-        Storage *storage = InfinityContext::instance().storage();
+        hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearchContext::instance().InitPhase2();
+        Storage *storage = hybridsearchContext::instance().storage();
 
         TxnManager *txn_mgr = storage->txn_manager();
         {
@@ -308,12 +308,12 @@ TEST_P(CatalogDeltaReplayTest, replay_import) {
         }
         WaitFlushDeltaOp(storage);
 
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
     {
-        InfinityContext::instance().InitPhase1(config_path);
-        InfinityContext::instance().InitPhase2();
-        Storage *storage = InfinityContext::instance().storage();
+        hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearchContext::instance().InitPhase2();
+        Storage *storage = hybridsearchContext::instance().storage();
 
         TxnManager *txn_mgr = storage->txn_manager();
 
@@ -343,7 +343,7 @@ TEST_P(CatalogDeltaReplayTest, replay_import) {
             txn_mgr->CommitTxn(txn);
         }
 
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
 }
 
@@ -356,9 +356,9 @@ TEST_P(CatalogDeltaReplayTest, replay_append) {
     auto table_name = std::make_shared<std::string>("tb1");
     auto table_def = TableDef::Make(db_name, table_name, MakeShared<String>(), {column_def1, column_def2});
     {
-        InfinityContext::instance().InitPhase1(config_path);
-        InfinityContext::instance().InitPhase2();
-        Storage *storage = InfinityContext::instance().storage();
+        hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearchContext::instance().InitPhase2();
+        Storage *storage = hybridsearchContext::instance().storage();
 
         TxnManager *txn_mgr = storage->txn_manager();
         {
@@ -392,12 +392,12 @@ TEST_P(CatalogDeltaReplayTest, replay_append) {
         }
         WaitFlushDeltaOp(storage);
 
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
     {
-        InfinityContext::instance().InitPhase1(config_path);
-        InfinityContext::instance().InitPhase2();
-        Storage *storage = InfinityContext::instance().storage();
+        hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearchContext::instance().InitPhase2();
+        Storage *storage = hybridsearchContext::instance().storage();
 
         TxnManager *txn_mgr = storage->txn_manager();
 
@@ -425,7 +425,7 @@ TEST_P(CatalogDeltaReplayTest, replay_append) {
         }
         txn_mgr->CommitTxn(txn);
     }
-    infinity::InfinityContext::instance().UnInit();
+    hybridsearch::hybridsearchContext::instance().UnInit();
 }
 
 TEST_P(CatalogDeltaReplayTest, replay_delete) {
@@ -439,9 +439,9 @@ TEST_P(CatalogDeltaReplayTest, replay_delete) {
 
     std::shared_ptr<std::string> table_entry_dir1;
     {
-        InfinityContext::instance().InitPhase1(config_path);
-        InfinityContext::instance().InitPhase2();
-        Storage *storage = InfinityContext::instance().storage();
+        hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearchContext::instance().InitPhase2();
+        Storage *storage = hybridsearchContext::instance().storage();
 
         TxnManager *txn_mgr = storage->txn_manager();
         {
@@ -483,9 +483,9 @@ TEST_P(CatalogDeltaReplayTest, replay_delete) {
 
             auto [table_entry, status] = txn->GetTableByName(*db_name, *table_name);
             EXPECT_TRUE(status.ok());
-            auto del_row = infinity::RowID(uint64_t(table_def->columns().size() - 1));
+            auto del_row = hybridsearch::RowID(uint64_t(table_def->columns().size() - 1));
 
-            Vector<infinity::RowID> del_row_ids{};
+            Vector<hybridsearch::RowID> del_row_ids{};
             del_row_ids.push_back(del_row);
             status = txn->Delete(*db_name, *table_name, del_row_ids, true);
             EXPECT_TRUE(status.ok());
@@ -493,7 +493,7 @@ TEST_P(CatalogDeltaReplayTest, replay_delete) {
         }
 
         WaitFlushDeltaOp(storage);
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
 }
 
@@ -510,9 +510,9 @@ TEST_P(CatalogDeltaReplayTest, replay_with_full_checkpoint) {
     auto table_def_uncommitted = TableDef::Make(db_name, table_name_uncommitted, MakeShared<String>(), {column_def1, column_def2});
 
     {
-        InfinityContext::instance().InitPhase1(config_path);
-        InfinityContext::instance().InitPhase2();
-        Storage *storage = InfinityContext::instance().storage();
+        hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearchContext::instance().InitPhase2();
+        Storage *storage = hybridsearchContext::instance().storage();
 
         TxnManager *txn_mgr = storage->txn_manager();
         // create table and insert two records
@@ -638,14 +638,14 @@ TEST_P(CatalogDeltaReplayTest, replay_with_full_checkpoint) {
             EXPECT_EQ(table_entry->row_count(), 3ul);
             txn_mgr->CommitTxn(txn);
         }
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
 
     // now restart and the table `tb_uncommitted` should exist
     {
-        InfinityContext::instance().InitPhase1(config_path);
-        InfinityContext::instance().InitPhase2();
-        Storage *storage = InfinityContext::instance().storage();
+        hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearchContext::instance().InitPhase2();
+        Storage *storage = hybridsearchContext::instance().storage();
 
         TxnManager *txn_mgr = storage->txn_manager();
 
@@ -680,7 +680,7 @@ TEST_P(CatalogDeltaReplayTest, replay_with_full_checkpoint) {
             }
             txn_mgr->CommitTxn(txn);
         }
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
 }
 
@@ -688,10 +688,10 @@ TEST_P(CatalogDeltaReplayTest, replay_compact_to_single_rollback) {
     String table_name = "tb1";
     config_path = nullptr;
     RemoveDbDirs();
-    infinity::InfinityContext::instance().InitPhase1(config_path);
-    infinity::InfinityContext::instance().InitPhase2();
+    hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+    hybridsearch::hybridsearchContext::instance().InitPhase2();
 
-    Storage *storage = infinity::InfinityContext::instance().storage();
+    Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
     BufferManager *buffer_manager = storage->buffer_manager();
     CompactionProcessor *compaction_processor = storage->compaction_processor();
     TxnManager *txn_mgr = storage->txn_manager();
@@ -745,7 +745,7 @@ TEST_P(CatalogDeltaReplayTest, replay_compact_to_single_rollback) {
 
         txn_mgr->CommitTxn(txn5);
     }
-    infinity::InfinityContext::instance().UnInit();
+    hybridsearch::hybridsearchContext::instance().UnInit();
 }
 
 TEST_P(CatalogDeltaReplayTest, replay_table_single_index) {
@@ -758,9 +758,9 @@ TEST_P(CatalogDeltaReplayTest, replay_table_single_index) {
     auto table_def = TableDef::Make(db_name, table_name, MakeShared<String>(), {column_def1, column_def2});
 
     {
-        InfinityContext::instance().InitPhase1(config_path);
-        InfinityContext::instance().InitPhase2();
-        Storage *storage = InfinityContext::instance().storage();
+        hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearchContext::instance().InitPhase2();
+        Storage *storage = hybridsearchContext::instance().storage();
 
         TxnManager *txn_mgr = storage->txn_manager();
         {
@@ -903,7 +903,7 @@ TEST_P(CatalogDeltaReplayTest, replay_table_single_index) {
             }
             WaitFlushDeltaOp(storage);
         }
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
 }
 
@@ -917,9 +917,9 @@ TEST_P(CatalogDeltaReplayTest, replay_table_single_index_named_db) {
     auto table_def = TableDef::Make(db_name, table_name, MakeShared<String>(), {column_def1, column_def2});
 
     {
-        InfinityContext::instance().InitPhase1(config_path);
-        InfinityContext::instance().InitPhase2();
-        Storage *storage = InfinityContext::instance().storage();
+        hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearchContext::instance().InitPhase2();
+        Storage *storage = hybridsearchContext::instance().storage();
 
         TxnManager *txn_mgr = storage->txn_manager();
         {
@@ -1067,7 +1067,7 @@ TEST_P(CatalogDeltaReplayTest, replay_table_single_index_named_db) {
             }
         }
         WaitFlushDeltaOp(storage);
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
 }
 
@@ -1083,9 +1083,9 @@ TEST_P(CatalogDeltaReplayTest, replay_table_single_index_and_compact) {
     auto table_def = TableDef::Make(db_name, table_name, MakeShared<String>(), {column_def1});
 
     {
-        InfinityContext::instance().InitPhase1(config_path);
-        InfinityContext::instance().InitPhase2();
-        Storage *storage = InfinityContext::instance().storage();
+        hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearchContext::instance().InitPhase2();
+        Storage *storage = hybridsearchContext::instance().storage();
         BufferManager *buffer_manager = storage->buffer_manager();
         CompactionProcessor *compaction_processor = storage->compaction_processor();
 
@@ -1227,6 +1227,6 @@ TEST_P(CatalogDeltaReplayTest, replay_table_single_index_and_compact) {
             }
         }
         WaitFlushDeltaOp(storage);
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
 }

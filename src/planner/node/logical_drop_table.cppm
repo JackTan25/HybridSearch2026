@@ -24,7 +24,7 @@ import data_type;
 import internal_types;
 import extra_ddl_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalDropTable : public LogicalNode {
 public:
@@ -54,4 +54,4 @@ private:
     ConflictType conflict_type_{ConflictType::kInvalid};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

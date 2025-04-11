@@ -22,7 +22,7 @@ import stl;
 import column_length_io;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 TermDocIterator::TermDocIterator(UniquePtr<PostingIterator> &&iter, const u64 column_id, const float weight, const FulltextSimilarity ft_similarity)
     : column_id_(column_id), iter_(std::move(iter)), weight_(weight), ft_similarity_(ft_similarity) {
@@ -162,4 +162,4 @@ void TermDocIterator::BatchDecodeTo(const RowID buffer_start_doc_id, const RowID
     doc_id_ = iter_doc_id;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

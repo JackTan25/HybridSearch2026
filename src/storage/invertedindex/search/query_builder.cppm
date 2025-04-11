@@ -26,7 +26,7 @@ import base_table_ref;
 import parse_fulltext_options;
 import query_node;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Txn;
 
@@ -68,4 +68,4 @@ private:
     SharedPtr<TableInfo> table_info_{nullptr};
     SharedPtr<IndexReader> index_reader_{};
 };
-} // namespace infinity
+} // namespace hybridsearch

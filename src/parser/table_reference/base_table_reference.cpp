@@ -14,7 +14,7 @@
 
 #include "base_table_reference.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 TableAlias::~TableAlias() {
 
@@ -36,4 +36,4 @@ BaseTableReference::~BaseTableReference() {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

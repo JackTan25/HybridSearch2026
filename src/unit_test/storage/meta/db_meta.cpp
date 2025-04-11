@@ -1,9 +1,9 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity;
-import infinity_context;
-import infinity_exception;
+import hybridsearch;
+import hybridsearch_context;
+import hybridsearch_exception;
 
 import stl;
 import global_resource_usage;
@@ -20,7 +20,7 @@ import txn;
 import txn_state;
 import catalog;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class DBMetaTest : public BaseTestParamStr {};
 
@@ -29,8 +29,8 @@ INSTANTIATE_TEST_SUITE_P(TestWithDifferentParams,
                          ::testing::Values(BaseTestParamStr::NULL_CONFIG_PATH, BaseTestParamStr::VFS_OFF_CONFIG_PATH));
 
 TEST_P(DBMetaTest, to_string_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
-    Catalog *catalog = infinity::InfinityContext::instance().storage()->catalog();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
+    Catalog *catalog = hybridsearch::hybridsearchContext::instance().storage()->catalog();
 
     // start txn1
     auto *txn1 = txn_mgr->BeginTxn(MakeUnique<String>("create db"), TransactionType::kNormal);
@@ -55,8 +55,8 @@ TEST_P(DBMetaTest, to_string_test) {
 }
 
 TEST_P(DBMetaTest, empty_db_entry_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
-    Catalog *catalog = infinity::InfinityContext::instance().storage()->catalog();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
+    Catalog *catalog = hybridsearch::hybridsearchContext::instance().storage()->catalog();
 
     // start txn1
     auto *txn1 = txn_mgr->BeginTxn(MakeUnique<String>("create db"), TransactionType::kNormal);
@@ -81,8 +81,8 @@ TEST_P(DBMetaTest, empty_db_entry_test) {
 }
 
 TEST_P(DBMetaTest, get_all_db_entry_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
-    Catalog *catalog = infinity::InfinityContext::instance().storage()->catalog();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
+    Catalog *catalog = hybridsearch::hybridsearchContext::instance().storage()->catalog();
 
     // start txn1
     auto *txn1 = txn_mgr->BeginTxn(MakeUnique<String>("create db"), TransactionType::kNormal);

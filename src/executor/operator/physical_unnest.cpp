@@ -32,7 +32,7 @@ import data_block;
 import logger;
 import third_party;
 
-import infinity_exception;
+import hybridsearch_exception;
 import array_info;
 import column_vector;
 import logical_type;
@@ -42,7 +42,7 @@ import unnest_expression;
 import reference_expression;
 import expression_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalUnnest::Init(QueryContext* query_context) {}
 
@@ -205,4 +205,4 @@ SizeT PhysicalUnnest::GetUnnestIdx() const {
     return unnest_idx;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -5,7 +5,7 @@
 #include "parser.h"
 #include "lexer.h"
 
-void yyerror(YYLTYPE * llocp, void* lexer, infinity::ParserResult* result, const char* msg);
+void yyerror(YYLTYPE * llocp, void* lexer, hybridsearch::ParserResult* result, const char* msg);
 %}
 
 %code requires {
@@ -81,7 +81,7 @@ struct SQL_LTYPE {
 %define api.prefix {sql}
 
 %lex-param {void *scanner}
-%parse-param {void *scanner} {infinity::ParserResult* result}
+%parse-param {void *scanner} {hybridsearch::ParserResult* result}
 
 %locations
 %initial-action {
@@ -107,75 +107,75 @@ struct SQL_LTYPE {
     double  double_value;
     int64_t long_value;
 
-    infinity::BaseStatement*   base_stmt;
-    infinity::SelectStatement* select_stmt;
-    infinity::CopyStatement*   copy_stmt;
-    infinity::InsertStatement* insert_stmt;
-    infinity::UpdateStatement* update_stmt;
-    infinity::DeleteStatement* delete_stmt;
-    infinity::CreateStatement* create_stmt;
-    infinity::DropStatement*   drop_stmt;
-    infinity::PrepareStatement* prepare_stmt;
-    infinity::ExecuteStatement* execute_stmt;
-    infinity::AlterStatement*   alter_stmt;
-    infinity::ShowStatement*    show_stmt;
-    infinity::ExplainStatement* explain_stmt;
-    infinity::FlushStatement*  flush_stmt;
-    infinity::OptimizeStatement*  optimize_stmt;
-    infinity::CommandStatement* command_stmt;
-    infinity::CompactStatement* compact_stmt;
-    infinity::AdminStatement* admin_stmt;
+    hybridsearch::BaseStatement*   base_stmt;
+    hybridsearch::SelectStatement* select_stmt;
+    hybridsearch::CopyStatement*   copy_stmt;
+    hybridsearch::InsertStatement* insert_stmt;
+    hybridsearch::UpdateStatement* update_stmt;
+    hybridsearch::DeleteStatement* delete_stmt;
+    hybridsearch::CreateStatement* create_stmt;
+    hybridsearch::DropStatement*   drop_stmt;
+    hybridsearch::PrepareStatement* prepare_stmt;
+    hybridsearch::ExecuteStatement* execute_stmt;
+    hybridsearch::AlterStatement*   alter_stmt;
+    hybridsearch::ShowStatement*    show_stmt;
+    hybridsearch::ExplainStatement* explain_stmt;
+    hybridsearch::FlushStatement*  flush_stmt;
+    hybridsearch::OptimizeStatement*  optimize_stmt;
+    hybridsearch::CommandStatement* command_stmt;
+    hybridsearch::CompactStatement* compact_stmt;
+    hybridsearch::AdminStatement* admin_stmt;
 
-    std::vector<infinity::BaseStatement*>* stmt_array;
+    std::vector<hybridsearch::BaseStatement*>* stmt_array;
 
-    std::vector<infinity::TableElement*>*  table_element_array_t;
-    std::vector<infinity::ColumnDef*>*     column_def_array_t;
-    infinity::TableElement*           table_element_t;
-    infinity::ColumnDef*              table_column_t;
-    infinity::ColumnType*              column_type_t;
-    std::vector<std::unique_ptr<infinity::ColumnType>>*     column_type_array_t;
-    infinity::ConstraintType          column_constraint_t;
-    std::set<infinity::ConstraintType>* column_constraints_t;
+    std::vector<hybridsearch::TableElement*>*  table_element_array_t;
+    std::vector<hybridsearch::ColumnDef*>*     column_def_array_t;
+    hybridsearch::TableElement*           table_element_t;
+    hybridsearch::ColumnDef*              table_column_t;
+    hybridsearch::ColumnType*              column_type_t;
+    std::vector<std::unique_ptr<hybridsearch::ColumnType>>*     column_type_array_t;
+    hybridsearch::ConstraintType          column_constraint_t;
+    std::set<hybridsearch::ConstraintType>* column_constraints_t;
     std::vector<std::string>*         identifier_array_t;
-    infinity::TableConstraint*        table_constraint_t;
+    hybridsearch::TableConstraint*        table_constraint_t;
 
-    infinity::BaseTableReference*     table_reference_t;
-    infinity::TableAlias *            table_alias_t;
-    infinity::JoinType                join_type_t;
+    hybridsearch::BaseTableReference*     table_reference_t;
+    hybridsearch::TableAlias *            table_alias_t;
+    hybridsearch::JoinType                join_type_t;
 
-    infinity::OrderByExpr*            order_by_expr_t;
-    std::vector<infinity::OrderByExpr*>*   order_by_expr_list_t;
-    infinity::OrderType               order_by_type_t;
+    hybridsearch::OrderByExpr*            order_by_expr_t;
+    std::vector<hybridsearch::OrderByExpr*>*   order_by_expr_list_t;
+    hybridsearch::OrderType               order_by_type_t;
 
-    infinity::WithExpr*               with_expr_t;
-    std::vector<infinity::WithExpr*>*      with_expr_list_t;
+    hybridsearch::WithExpr*               with_expr_t;
+    std::vector<hybridsearch::WithExpr*>*      with_expr_list_t;
 
-    infinity::SetOperatorType         set_operator_t;
+    hybridsearch::SetOperatorType         set_operator_t;
 
-    infinity::ExplainType             explain_type_t;
+    hybridsearch::ExplainType             explain_type_t;
 
-    infinity::ParsedExpr*             expr_t;
-    infinity::ConstantExpr*           const_expr_t;
-    std::vector<infinity::ParsedExpr*>*    expr_array_t;
-    std::vector<infinity::InsertRowExpr*>*    insert_row_list_t;
+    hybridsearch::ParsedExpr*             expr_t;
+    hybridsearch::ConstantExpr*           const_expr_t;
+    std::vector<hybridsearch::ParsedExpr*>*    expr_array_t;
+    std::vector<hybridsearch::InsertRowExpr*>*    insert_row_list_t;
 
-    std::vector<infinity::WhenThen*>*     case_check_array_t;
+    std::vector<hybridsearch::WhenThen*>*     case_check_array_t;
 
-    infinity::UpdateExpr*             update_expr_t;
-    std::vector<infinity::UpdateExpr*>*    update_expr_array_t;
+    hybridsearch::UpdateExpr*             update_expr_t;
+    std::vector<hybridsearch::UpdateExpr*>*    update_expr_array_t;
 
-    infinity::TableName* table_name_t;
-    infinity::CopyOption* copy_option_t;
-    std::vector<infinity::CopyOption*>* copy_option_array;
+    hybridsearch::TableName* table_name_t;
+    hybridsearch::CopyOption* copy_option_t;
+    std::vector<hybridsearch::CopyOption*>* copy_option_array;
 
-    infinity::InitParameter*        index_param_t;
-    std::vector<infinity::InitParameter*>* index_param_list_t;
-    std::vector<infinity::InitParameter*>* with_index_param_list_t;
+    hybridsearch::InitParameter*        index_param_t;
+    std::vector<hybridsearch::InitParameter*>* index_param_list_t;
+    std::vector<hybridsearch::InitParameter*>* with_index_param_list_t;
 
-    infinity::IndexInfo* index_info_t;
+    hybridsearch::IndexInfo* index_info_t;
 
-    // infinity::IfExistsInfo*        if_exists_info_t;
-    infinity::IfNotExistsInfo*     if_not_exists_info_t;
+    // hybridsearch::IfExistsInfo*        if_exists_info_t;
+    hybridsearch::IfNotExistsInfo*     if_not_exists_info_t;
 
     std::pair<int64_t, int64_t>*    int_sparse_ele_t;
     std::pair<int64_t, double>*     float_sparse_ele_t;
@@ -521,7 +521,7 @@ input_pattern : statement_list semicolon {
 statement_list : statement {
     $1->stmt_length_ = yylloc.string_length;
     yylloc.string_length = 0;
-    $$ = new std::vector<infinity::BaseStatement*>();
+    $$ = new std::vector<hybridsearch::BaseStatement*>();
     $$->push_back($1);
 }
 | statement_list ';' statement {
@@ -566,8 +566,8 @@ explainable_statement : create_statement { $$ = $1; }
 
 /* CREATE DATABASE schema_name; */
 create_statement : CREATE DATABASE if_not_exists IDENTIFIER COMMENT STRING {
-    $$ = new infinity::CreateStatement();
-    std::shared_ptr<infinity::CreateSchemaInfo> create_schema_info = std::make_shared<infinity::CreateSchemaInfo>();
+    $$ = new hybridsearch::CreateStatement();
+    std::shared_ptr<hybridsearch::CreateSchemaInfo> create_schema_info = std::make_shared<hybridsearch::CreateSchemaInfo>();
 
     ParserHelper::ToLower($4);
     create_schema_info->schema_name_ = $4;
@@ -578,13 +578,13 @@ create_statement : CREATE DATABASE if_not_exists IDENTIFIER COMMENT STRING {
     }
 
     $$->create_info_ = create_schema_info;
-    $$->create_info_->conflict_type_ = $3 ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+    $$->create_info_->conflict_type_ = $3 ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
     $$->create_info_->comment_ = $6;
     free($6);
 }
 | CREATE DATABASE if_not_exists IDENTIFIER {
-    $$ = new infinity::CreateStatement();
-    std::shared_ptr<infinity::CreateSchemaInfo> create_schema_info = std::make_shared<infinity::CreateSchemaInfo>();
+    $$ = new hybridsearch::CreateStatement();
+    std::shared_ptr<hybridsearch::CreateSchemaInfo> create_schema_info = std::make_shared<hybridsearch::CreateSchemaInfo>();
 
     ParserHelper::ToLower($4);
     create_schema_info->schema_name_ = $4;
@@ -595,13 +595,13 @@ create_statement : CREATE DATABASE if_not_exists IDENTIFIER COMMENT STRING {
     }
 
     $$->create_info_ = create_schema_info;
-    $$->create_info_->conflict_type_ = $3 ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+    $$->create_info_->conflict_type_ = $3 ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
 }
 
 /* CREATE COLLECTION collection_name; */
 | CREATE COLLECTION if_not_exists table_name {
-    $$ = new infinity::CreateStatement();
-    std::shared_ptr<infinity::CreateCollectionInfo> create_collection_info = std::make_shared<infinity::CreateCollectionInfo>();
+    $$ = new hybridsearch::CreateStatement();
+    std::shared_ptr<hybridsearch::CreateCollectionInfo> create_collection_info = std::make_shared<hybridsearch::CreateCollectionInfo>();
     if($4->schema_name_ptr_ != nullptr) {
         create_collection_info->schema_name_ = $4->schema_name_ptr_;
         free($4->schema_name_ptr_);
@@ -609,15 +609,15 @@ create_statement : CREATE DATABASE if_not_exists IDENTIFIER COMMENT STRING {
     create_collection_info->collection_name_ = $4->table_name_ptr_;
     free($4->table_name_ptr_);
     $$->create_info_ = create_collection_info;
-    $$->create_info_->conflict_type_ = $3 ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+    $$->create_info_->conflict_type_ = $3 ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
     delete $4;
 }
 
 /* CREATE TABLE table_name ( column list ); */
 /* CREATE TABLE table_name ( column list ) PROPERTIES ("p1"="111", "p2"="xxx", ...); */
 | CREATE TABLE if_not_exists table_name '(' table_element_array ')' optional_table_properties_list {
-    $$ = new infinity::CreateStatement();
-    std::shared_ptr<infinity::CreateTableInfo> create_table_info = std::make_shared<infinity::CreateTableInfo>();
+    $$ = new hybridsearch::CreateStatement();
+    std::shared_ptr<hybridsearch::CreateTableInfo> create_table_info = std::make_shared<hybridsearch::CreateTableInfo>();
     if($4->schema_name_ptr_ != nullptr) {
         create_table_info->schema_name_ = $4->schema_name_ptr_;
         free($4->schema_name_ptr_);
@@ -626,11 +626,11 @@ create_statement : CREATE DATABASE if_not_exists IDENTIFIER COMMENT STRING {
     free($4->table_name_ptr_);
     delete $4;
 
-    for (infinity::TableElement*& element : *$6) {
-        if(element->type_ == infinity::TableElementType::kColumn) {
-            create_table_info->column_defs_.emplace_back((infinity::ColumnDef*)element);
+    for (hybridsearch::TableElement*& element : *$6) {
+        if(element->type_ == hybridsearch::TableElementType::kColumn) {
+            create_table_info->column_defs_.emplace_back((hybridsearch::ColumnDef*)element);
         } else {
-            create_table_info->constraints_.emplace_back((infinity::TableConstraint*)element);
+            create_table_info->constraints_.emplace_back((hybridsearch::TableConstraint*)element);
         }
     }
     delete $6;
@@ -641,12 +641,12 @@ create_statement : CREATE DATABASE if_not_exists IDENTIFIER COMMENT STRING {
     }
 
     $$->create_info_ = create_table_info;
-    $$->create_info_->conflict_type_ = $3 ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+    $$->create_info_->conflict_type_ = $3 ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
 }
 /* CREATE TABLE table_name AS SELECT .... ; */
 | CREATE TABLE if_not_exists table_name AS select_statement {
-    $$ = new infinity::CreateStatement();
-    std::shared_ptr<infinity::CreateTableInfo> create_table_info = std::make_shared<infinity::CreateTableInfo>();
+    $$ = new hybridsearch::CreateStatement();
+    std::shared_ptr<hybridsearch::CreateTableInfo> create_table_info = std::make_shared<hybridsearch::CreateTableInfo>();
     if($4->schema_name_ptr_ != nullptr) {
         create_table_info->schema_name_ = $4->schema_name_ptr_;
         free($4->schema_name_ptr_);
@@ -655,13 +655,13 @@ create_statement : CREATE DATABASE if_not_exists IDENTIFIER COMMENT STRING {
     free($4->table_name_ptr_);
     delete $4;
 
-    create_table_info->conflict_type_ = $3 ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+    create_table_info->conflict_type_ = $3 ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
     create_table_info->select_ = $6;
     $$->create_info_ = create_table_info;
 }
 | CREATE TABLE if_not_exists table_name '(' table_element_array ')' optional_table_properties_list COMMENT STRING {
-    $$ = new infinity::CreateStatement();
-    std::shared_ptr<infinity::CreateTableInfo> create_table_info = std::make_shared<infinity::CreateTableInfo>();
+    $$ = new hybridsearch::CreateStatement();
+    std::shared_ptr<hybridsearch::CreateTableInfo> create_table_info = std::make_shared<hybridsearch::CreateTableInfo>();
     if($4->schema_name_ptr_ != nullptr) {
         create_table_info->schema_name_ = $4->schema_name_ptr_;
         free($4->schema_name_ptr_);
@@ -670,11 +670,11 @@ create_statement : CREATE DATABASE if_not_exists IDENTIFIER COMMENT STRING {
     free($4->table_name_ptr_);
     delete $4;
 
-    for (infinity::TableElement*& element : *$6) {
-        if(element->type_ == infinity::TableElementType::kColumn) {
-            create_table_info->column_defs_.emplace_back((infinity::ColumnDef*)element);
+    for (hybridsearch::TableElement*& element : *$6) {
+        if(element->type_ == hybridsearch::TableElementType::kColumn) {
+            create_table_info->column_defs_.emplace_back((hybridsearch::ColumnDef*)element);
         } else {
-            create_table_info->constraints_.emplace_back((infinity::TableConstraint*)element);
+            create_table_info->constraints_.emplace_back((hybridsearch::TableConstraint*)element);
         }
     }
     delete $6;
@@ -688,12 +688,12 @@ create_statement : CREATE DATABASE if_not_exists IDENTIFIER COMMENT STRING {
     free($10);
 
     $$->create_info_ = create_table_info;
-    $$->create_info_->conflict_type_ = $3 ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+    $$->create_info_->conflict_type_ = $3 ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
 }
 /* CREATE TABLE table_name AS SELECT .... ; */
 | CREATE TABLE if_not_exists table_name AS select_statement COMMENT STRING {
-    $$ = new infinity::CreateStatement();
-    std::shared_ptr<infinity::CreateTableInfo> create_table_info = std::make_shared<infinity::CreateTableInfo>();
+    $$ = new hybridsearch::CreateStatement();
+    std::shared_ptr<hybridsearch::CreateTableInfo> create_table_info = std::make_shared<hybridsearch::CreateTableInfo>();
     if($4->schema_name_ptr_ != nullptr) {
         create_table_info->schema_name_ = $4->schema_name_ptr_;
         free($4->schema_name_ptr_);
@@ -702,7 +702,7 @@ create_statement : CREATE DATABASE if_not_exists IDENTIFIER COMMENT STRING {
     free($4->table_name_ptr_);
     delete $4;
 
-    create_table_info->conflict_type_ = $3 ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+    create_table_info->conflict_type_ = $3 ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
     create_table_info->select_ = $6;
     create_table_info->comment_ = $8;
     free($8);
@@ -710,8 +710,8 @@ create_statement : CREATE DATABASE if_not_exists IDENTIFIER COMMENT STRING {
 }
 /* CREATE VIEW table_name AS SELECT .... ; */
 | CREATE VIEW if_not_exists table_name optional_identifier_array AS select_statement {
-    $$ = new infinity::CreateStatement();
-    std::shared_ptr<infinity::CreateViewInfo> create_view_info = std::make_shared<infinity::CreateViewInfo>();
+    $$ = new hybridsearch::CreateStatement();
+    std::shared_ptr<hybridsearch::CreateViewInfo> create_view_info = std::make_shared<hybridsearch::CreateViewInfo>();
     if($4->schema_name_ptr_ != nullptr) {
         create_view_info->schema_name_ = $4->schema_name_ptr_;
         free($4->schema_name_ptr_);
@@ -722,13 +722,13 @@ create_statement : CREATE DATABASE if_not_exists IDENTIFIER COMMENT STRING {
 
     create_view_info->view_columns_ = $5;
     create_view_info->select_ = $7;
-    create_view_info->conflict_type_ = $3 ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+    create_view_info->conflict_type_ = $3 ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
     $$->create_info_ = create_view_info;
 }
 // TODO shenyushi 4: should support default index name if the name does not exist
 /* CREATE INDEX [[IF NOT EXISTS] index_name] ON table_name (column1[, ...column2]) USING method [WITH (param[, ...param])]; */
 | CREATE INDEX if_not_exists_info ON table_name index_info {
-    std::shared_ptr<infinity::CreateIndexInfo> create_index_info = std::make_shared<infinity::CreateIndexInfo>();
+    std::shared_ptr<hybridsearch::CreateIndexInfo> create_index_info = std::make_shared<hybridsearch::CreateIndexInfo>();
     if($5->schema_name_ptr_ != nullptr) {
         create_index_info->schema_name_ = $5->schema_name_ptr_;
         free($5->schema_name_ptr_);
@@ -739,9 +739,9 @@ create_statement : CREATE DATABASE if_not_exists IDENTIFIER COMMENT STRING {
 
     create_index_info->index_name_ = $3->info_;
     if ($3->exists_) {
-        create_index_info->conflict_type_ = $3->if_not_exists_ ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+        create_index_info->conflict_type_ = $3->if_not_exists_ ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
     } else {
-        create_index_info->conflict_type_ = infinity::ConflictType::kIgnore;
+        create_index_info->conflict_type_ = hybridsearch::ConflictType::kIgnore;
     }
     delete $3;
 
@@ -752,11 +752,11 @@ create_statement : CREATE DATABASE if_not_exists IDENTIFIER COMMENT STRING {
         YYERROR;
     }
 
-    $$ = new infinity::CreateStatement();
+    $$ = new hybridsearch::CreateStatement();
     $$->create_info_ = create_index_info;
 }
 | CREATE INDEX if_not_exists_info ON table_name index_info COMMENT STRING {
-    std::shared_ptr<infinity::CreateIndexInfo> create_index_info = std::make_shared<infinity::CreateIndexInfo>();
+    std::shared_ptr<hybridsearch::CreateIndexInfo> create_index_info = std::make_shared<hybridsearch::CreateIndexInfo>();
     if($5->schema_name_ptr_ != nullptr) {
         create_index_info->schema_name_ = $5->schema_name_ptr_;
         free($5->schema_name_ptr_);
@@ -767,9 +767,9 @@ create_statement : CREATE DATABASE if_not_exists IDENTIFIER COMMENT STRING {
 
     create_index_info->index_name_ = $3->info_;
     if ($3->exists_) {
-        create_index_info->conflict_type_ = $3->if_not_exists_ ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+        create_index_info->conflict_type_ = $3->if_not_exists_ ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
     } else {
-        create_index_info->conflict_type_ = infinity::ConflictType::kIgnore;
+        create_index_info->conflict_type_ = hybridsearch::ConflictType::kIgnore;
     }
     delete $3;
 
@@ -782,12 +782,12 @@ create_statement : CREATE DATABASE if_not_exists IDENTIFIER COMMENT STRING {
         YYERROR;
     }
 
-    $$ = new infinity::CreateStatement();
+    $$ = new hybridsearch::CreateStatement();
     $$->create_info_ = create_index_info;
 };
 
 table_element_array : table_element {
-    $$ = new std::vector<infinity::TableElement*>();
+    $$ = new std::vector<hybridsearch::TableElement*>();
     $$->push_back($1);
 }
 | table_element_array ',' table_element {
@@ -796,7 +796,7 @@ table_element_array : table_element {
 };
 
 column_def_array : table_column {
-    $$ = new std::vector<infinity::ColumnDef*>();
+    $$ = new std::vector<hybridsearch::ColumnDef*>();
     $$->push_back($1);
 }
 | column_def_array ',' table_column {
@@ -816,16 +816,16 @@ table_element : table_column {
 table_column :
 //   1          2              3                  4
 IDENTIFIER column_type with_index_param_list default_expr {
-    std::shared_ptr<infinity::ParsedExpr> default_expr($4);
-    std::vector<std::unique_ptr<infinity::InitParameter>> index_param_list = infinity::InitParameter::MakeInitParameterList($3);
-    auto [data_type_result, fail_reason] = infinity::ColumnType::GetDataTypeFromColumnType(*($2), index_param_list);
+    std::shared_ptr<hybridsearch::ParsedExpr> default_expr($4);
+    std::vector<std::unique_ptr<hybridsearch::InitParameter>> index_param_list = hybridsearch::InitParameter::MakeInitParameterList($3);
+    auto [data_type_result, fail_reason] = hybridsearch::ColumnType::GetDataTypeFromColumnType(*($2), index_param_list);
     delete $2;
     if (!data_type_result) {
         yyerror(&yyloc, scanner, result, fail_reason.c_str());
         free($1);
         YYERROR;
     }
-    $$ = new infinity::ColumnDef(std::move(data_type_result), "", std::move(default_expr));
+    $$ = new hybridsearch::ColumnDef(std::move(data_type_result), "", std::move(default_expr));
     ParserHelper::ToLower($1);
     $$->name_ = $1;
     free($1);
@@ -836,8 +836,8 @@ IDENTIFIER column_type with_index_param_list default_expr {
     */
 }
 | IDENTIFIER column_type column_constraints default_expr {
-    std::shared_ptr<infinity::ParsedExpr> default_expr($4);
-    auto [data_type_result, fail_reason] = infinity::ColumnType::GetDataTypeFromColumnType(*($2), std::vector<std::unique_ptr<infinity::InitParameter>>{});
+    std::shared_ptr<hybridsearch::ParsedExpr> default_expr($4);
+    auto [data_type_result, fail_reason] = hybridsearch::ColumnType::GetDataTypeFromColumnType(*($2), std::vector<std::unique_ptr<hybridsearch::InitParameter>>{});
     delete $2;
     if (!data_type_result) {
         yyerror(&yyloc, scanner, result, fail_reason.c_str());
@@ -845,7 +845,7 @@ IDENTIFIER column_type with_index_param_list default_expr {
         delete $3;
         YYERROR;
     }
-    $$ = new infinity::ColumnDef(std::move(data_type_result), "", std::move(default_expr));
+    $$ = new hybridsearch::ColumnDef(std::move(data_type_result), "", std::move(default_expr));
     ParserHelper::ToLower($1);
     $$->name_ = $1;
     free($1);
@@ -858,9 +858,9 @@ IDENTIFIER column_type with_index_param_list default_expr {
     */
 }
 | IDENTIFIER column_type with_index_param_list default_expr COMMENT STRING {
-    std::shared_ptr<infinity::ParsedExpr> default_expr($4);
-    std::vector<std::unique_ptr<infinity::InitParameter>> index_param_list = infinity::InitParameter::MakeInitParameterList($3);
-    auto [data_type_result, fail_reason] = infinity::ColumnType::GetDataTypeFromColumnType(*($2), index_param_list);
+    std::shared_ptr<hybridsearch::ParsedExpr> default_expr($4);
+    std::vector<std::unique_ptr<hybridsearch::InitParameter>> index_param_list = hybridsearch::InitParameter::MakeInitParameterList($3);
+    auto [data_type_result, fail_reason] = hybridsearch::ColumnType::GetDataTypeFromColumnType(*($2), index_param_list);
     delete $2;
     if (!data_type_result) {
         yyerror(&yyloc, scanner, result, fail_reason.c_str());
@@ -869,7 +869,7 @@ IDENTIFIER column_type with_index_param_list default_expr {
         YYERROR;
     }
 
-    $$ = new infinity::ColumnDef(std::move(data_type_result), $6, std::move(default_expr));
+    $$ = new hybridsearch::ColumnDef(std::move(data_type_result), $6, std::move(default_expr));
     free($6);
 
     ParserHelper::ToLower($1);
@@ -882,8 +882,8 @@ IDENTIFIER column_type with_index_param_list default_expr {
     */
 }
 | IDENTIFIER column_type column_constraints default_expr COMMENT STRING {
-    std::shared_ptr<infinity::ParsedExpr> default_expr($4);
-    auto [data_type_result, fail_reason] = infinity::ColumnType::GetDataTypeFromColumnType(*($2), std::vector<std::unique_ptr<infinity::InitParameter>>{});
+    std::shared_ptr<hybridsearch::ParsedExpr> default_expr($4);
+    auto [data_type_result, fail_reason] = hybridsearch::ColumnType::GetDataTypeFromColumnType(*($2), std::vector<std::unique_ptr<hybridsearch::InitParameter>>{});
     delete $2;
     if (!data_type_result) {
         yyerror(&yyloc, scanner, result, fail_reason.c_str());
@@ -892,7 +892,7 @@ IDENTIFIER column_type with_index_param_list default_expr {
         delete $3;
         YYERROR;
     }
-    $$ = new infinity::ColumnDef(std::move(data_type_result), $6, std::move(default_expr));
+    $$ = new hybridsearch::ColumnDef(std::move(data_type_result), $6, std::move(default_expr));
     free($6);
 
     ParserHelper::ToLower($1);
@@ -908,7 +908,7 @@ IDENTIFIER column_type with_index_param_list default_expr {
 };
 
 column_type_array : column_type {
-    $$ = new std::vector<std::unique_ptr<infinity::ColumnType>>();
+    $$ = new std::vector<std::unique_ptr<hybridsearch::ColumnType>>();
     $$->emplace_back($1);
 }
 | column_type_array ',' column_type {
@@ -917,121 +917,121 @@ column_type_array : column_type {
 };
 
 column_type :
-BOOLEAN { $$ = new infinity::ColumnType{infinity::LogicalType::kBoolean, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
-| TINYINT { $$ = new infinity::ColumnType{infinity::LogicalType::kTinyInt, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
-| SMALLINT { $$ = new infinity::ColumnType{infinity::LogicalType::kSmallInt, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
-| INTEGER { $$ = new infinity::ColumnType{infinity::LogicalType::kInteger, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
-| INT { $$ = new infinity::ColumnType{infinity::LogicalType::kInteger, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
-| BIGINT { $$ = new infinity::ColumnType{infinity::LogicalType::kBigInt, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
-| HUGEINT { $$ = new infinity::ColumnType{infinity::LogicalType::kHugeInt, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
-| FLOAT { $$ = new infinity::ColumnType{infinity::LogicalType::kFloat, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
-| REAL  { $$ = new infinity::ColumnType{infinity::LogicalType::kFloat, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
-| DOUBLE { $$ = new infinity::ColumnType{infinity::LogicalType::kDouble, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
-| FLOAT16 { $$ = new infinity::ColumnType{infinity::LogicalType::kFloat16, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
-| BFLOAT16 { $$ = new infinity::ColumnType{infinity::LogicalType::kBFloat16, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
-| DATE { $$ = new infinity::ColumnType{infinity::LogicalType::kDate, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
-| TIME { $$ = new infinity::ColumnType{infinity::LogicalType::kTime, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
-| DATETIME { $$ = new infinity::ColumnType{infinity::LogicalType::kDateTime, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
-| TIMESTAMP { $$ = new infinity::ColumnType{infinity::LogicalType::kTimestamp, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
-| UUID { $$ = new infinity::ColumnType{infinity::LogicalType::kUuid, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
-| POINT { $$ = new infinity::ColumnType{infinity::LogicalType::kPoint, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
-| LINE { $$ = new infinity::ColumnType{infinity::LogicalType::kLine, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
-| LSEG { $$ = new infinity::ColumnType{infinity::LogicalType::kLineSeg, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
-| BOX { $$ = new infinity::ColumnType{infinity::LogicalType::kBox, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
-// | PATH { $$ = new infinity::ColumnType{infinity::LogicalType::kPath, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
-// | POLYGON { $$ = new infinity::ColumnType{infinity::LogicalType::kPolygon, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
-| CIRCLE { $$ = new infinity::ColumnType{infinity::LogicalType::kCircle, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
+BOOLEAN { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kBoolean, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+| TINYINT { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTinyInt, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+| SMALLINT { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kSmallInt, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+| INTEGER { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kInteger, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+| INT { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kInteger, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+| BIGINT { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kBigInt, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+| HUGEINT { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kHugeInt, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+| FLOAT { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kFloat, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+| REAL  { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kFloat, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+| DOUBLE { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kDouble, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+| FLOAT16 { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kFloat16, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+| BFLOAT16 { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kBFloat16, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+| DATE { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kDate, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+| TIME { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTime, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+| DATETIME { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kDateTime, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+| TIMESTAMP { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTimestamp, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+| UUID { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kUuid, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+| POINT { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kPoint, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+| LINE { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kLine, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+| LSEG { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kLineSeg, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+| BOX { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kBox, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+// | PATH { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kPath, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+// | POLYGON { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kPolygon, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+| CIRCLE { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kCircle, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
 // Variable types
-| VARCHAR { $$ = new infinity::ColumnType{infinity::LogicalType::kVarchar, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
-| DECIMAL '(' LONG_VALUE ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kDecimal, 0, $3, $5, infinity::EmbeddingDataType::kElemInvalid}; }
-| DECIMAL '(' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kDecimal, 0, $3, 0, infinity::EmbeddingDataType::kElemInvalid}; }
-| DECIMAL { $$ = new infinity::ColumnType{infinity::LogicalType::kDecimal, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid}; }
-// | BLOB '(' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kBlob, $3}; }
-// | BITMAP '(' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kBitmap, $3}; }
-| EMBEDDING '(' BIT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kEmbedding, $5, 0, 0, infinity::EmbeddingDataType::kElemBit}; }
-| EMBEDDING '(' TINYINT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kEmbedding, $5, 0, 0, infinity::EmbeddingDataType::kElemInt8}; }
-| EMBEDDING '(' SMALLINT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kEmbedding, $5, 0, 0, infinity::EmbeddingDataType::kElemInt16}; }
-| EMBEDDING '(' INTEGER ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kEmbedding, $5, 0, 0, infinity::EmbeddingDataType::kElemInt32}; }
-| EMBEDDING '(' INT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kEmbedding, $5, 0, 0, infinity::EmbeddingDataType::kElemInt32}; }
-| EMBEDDING '(' BIGINT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kEmbedding, $5, 0, 0, infinity::EmbeddingDataType::kElemInt64}; }
-| EMBEDDING '(' FLOAT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kEmbedding, $5, 0, 0, infinity::EmbeddingDataType::kElemFloat}; }
-| EMBEDDING '(' DOUBLE ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kEmbedding, $5, 0, 0, infinity::EmbeddingDataType::kElemDouble}; }
-| EMBEDDING '(' FLOAT16 ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kEmbedding, $5, 0, 0, infinity::EmbeddingDataType::kElemFloat16}; }
-| EMBEDDING '(' BFLOAT16 ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kEmbedding, $5, 0, 0, infinity::EmbeddingDataType::kElemBFloat16}; }
-| EMBEDDING '(' UNSIGNED TINYINT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kEmbedding, $6, 0, 0, infinity::EmbeddingDataType::kElemUInt8}; }
-| MULTIVECTOR '(' BIT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kMultiVector, $5, 0, 0, infinity::EmbeddingDataType::kElemBit}; }
-| MULTIVECTOR '(' TINYINT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kMultiVector, $5, 0, 0, infinity::EmbeddingDataType::kElemInt8}; }
-| MULTIVECTOR '(' SMALLINT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kMultiVector, $5, 0, 0, infinity::EmbeddingDataType::kElemInt16}; }
-| MULTIVECTOR '(' INTEGER ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kMultiVector, $5, 0, 0, infinity::EmbeddingDataType::kElemInt32}; }
-| MULTIVECTOR '(' INT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kMultiVector, $5, 0, 0, infinity::EmbeddingDataType::kElemInt32}; }
-| MULTIVECTOR '(' BIGINT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kMultiVector, $5, 0, 0, infinity::EmbeddingDataType::kElemInt64}; }
-| MULTIVECTOR '(' FLOAT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kMultiVector, $5, 0, 0, infinity::EmbeddingDataType::kElemFloat}; }
-| MULTIVECTOR '(' DOUBLE ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kMultiVector, $5, 0, 0, infinity::EmbeddingDataType::kElemDouble}; }
-| MULTIVECTOR '(' FLOAT16 ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kMultiVector, $5, 0, 0, infinity::EmbeddingDataType::kElemFloat16}; }
-| MULTIVECTOR '(' BFLOAT16 ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kMultiVector, $5, 0, 0, infinity::EmbeddingDataType::kElemBFloat16}; }
-| MULTIVECTOR '(' UNSIGNED TINYINT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kMultiVector, $6, 0, 0, infinity::EmbeddingDataType::kElemUInt8}; }
-| TENSOR '(' BIT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kTensor, $5, 0, 0, infinity::EmbeddingDataType::kElemBit}; }
-| TENSOR '(' TINYINT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kTensor, $5, 0, 0, infinity::EmbeddingDataType::kElemInt8}; }
-| TENSOR '(' SMALLINT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kTensor, $5, 0, 0, infinity::EmbeddingDataType::kElemInt16}; }
-| TENSOR '(' INTEGER ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kTensor, $5, 0, 0, infinity::EmbeddingDataType::kElemInt32}; }
-| TENSOR '(' INT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kTensor, $5, 0, 0, infinity::EmbeddingDataType::kElemInt32}; }
-| TENSOR '(' BIGINT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kTensor, $5, 0, 0, infinity::EmbeddingDataType::kElemInt64}; }
-| TENSOR '(' FLOAT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kTensor, $5, 0, 0, infinity::EmbeddingDataType::kElemFloat}; }
-| TENSOR '(' DOUBLE ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kTensor, $5, 0, 0, infinity::EmbeddingDataType::kElemDouble}; }
-| TENSOR '(' FLOAT16 ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kTensor, $5, 0, 0, infinity::EmbeddingDataType::kElemFloat16}; }
-| TENSOR '(' BFLOAT16 ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kTensor, $5, 0, 0, infinity::EmbeddingDataType::kElemBFloat16}; }
-| TENSOR '(' UNSIGNED TINYINT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kTensor, $6, 0, 0, infinity::EmbeddingDataType::kElemUInt8}; }
-| TENSORARRAY '(' BIT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kTensorArray, $5, 0, 0, infinity::EmbeddingDataType::kElemBit}; }
-| TENSORARRAY '(' TINYINT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kTensorArray, $5, 0, 0, infinity::EmbeddingDataType::kElemInt8}; }
-| TENSORARRAY '(' SMALLINT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kTensorArray, $5, 0, 0, infinity::EmbeddingDataType::kElemInt16}; }
-| TENSORARRAY '(' INTEGER ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kTensorArray, $5, 0, 0, infinity::EmbeddingDataType::kElemInt32}; }
-| TENSORARRAY '(' INT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kTensorArray, $5, 0, 0, infinity::EmbeddingDataType::kElemInt32}; }
-| TENSORARRAY '(' BIGINT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kTensorArray, $5, 0, 0, infinity::EmbeddingDataType::kElemInt64}; }
-| TENSORARRAY '(' FLOAT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kTensorArray, $5, 0, 0, infinity::EmbeddingDataType::kElemFloat}; }
-| TENSORARRAY '(' DOUBLE ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kTensorArray, $5, 0, 0, infinity::EmbeddingDataType::kElemDouble}; }
-| TENSORARRAY '(' FLOAT16 ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kTensorArray, $5, 0, 0, infinity::EmbeddingDataType::kElemFloat16}; }
-| TENSORARRAY '(' BFLOAT16 ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kTensorArray, $5, 0, 0, infinity::EmbeddingDataType::kElemBFloat16}; }
-| TENSORARRAY '(' UNSIGNED TINYINT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kTensorArray, $6, 0, 0, infinity::EmbeddingDataType::kElemUInt8}; }
-| VECTOR '(' BIT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kEmbedding, $5, 0, 0, infinity::EmbeddingDataType::kElemBit}; }
-| VECTOR '(' TINYINT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kEmbedding, $5, 0, 0, infinity::EmbeddingDataType::kElemInt8}; }
-| VECTOR '(' SMALLINT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kEmbedding, $5, 0, 0, infinity::EmbeddingDataType::kElemInt16}; }
-| VECTOR '(' INTEGER ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kEmbedding, $5, 0, 0, infinity::EmbeddingDataType::kElemInt32}; }
-| VECTOR '(' INT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kEmbedding, $5, 0, 0, infinity::EmbeddingDataType::kElemInt32}; }
-| VECTOR '(' BIGINT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kEmbedding, $5, 0, 0, infinity::EmbeddingDataType::kElemInt64}; }
-| VECTOR '(' FLOAT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kEmbedding, $5, 0, 0, infinity::EmbeddingDataType::kElemFloat}; }
-| VECTOR '(' DOUBLE ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kEmbedding, $5, 0, 0, infinity::EmbeddingDataType::kElemDouble}; }
-| VECTOR '(' FLOAT16 ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kEmbedding, $5, 0, 0, infinity::EmbeddingDataType::kElemFloat16}; }
-| VECTOR '(' BFLOAT16 ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kEmbedding, $5, 0, 0, infinity::EmbeddingDataType::kElemBFloat16}; }
-| VECTOR '(' UNSIGNED TINYINT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kEmbedding, $6, 0, 0, infinity::EmbeddingDataType::kElemUInt8}; }
-| SPARSE '(' BIT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kSparse, $5, 0, 0, infinity::EmbeddingDataType::kElemBit}; }
-| SPARSE '(' TINYINT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kSparse, $5, 0, 0, infinity::EmbeddingDataType::kElemInt8}; }
-| SPARSE '(' SMALLINT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kSparse, $5, 0, 0, infinity::EmbeddingDataType::kElemInt16}; }
-| SPARSE '(' INTEGER ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kSparse, $5, 0, 0, infinity::EmbeddingDataType::kElemInt32}; }
-| SPARSE '(' INT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kSparse, $5, 0, 0, infinity::EmbeddingDataType::kElemInt32}; }
-| SPARSE '(' BIGINT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kSparse, $5, 0, 0, infinity::EmbeddingDataType::kElemInt64}; }
-| SPARSE '(' FLOAT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kSparse, $5, 0, 0, infinity::EmbeddingDataType::kElemFloat}; }
-| SPARSE '(' DOUBLE ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kSparse, $5, 0, 0, infinity::EmbeddingDataType::kElemDouble}; }
-| SPARSE '(' FLOAT16 ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kSparse, $5, 0, 0, infinity::EmbeddingDataType::kElemFloat16}; }
-| SPARSE '(' BFLOAT16 ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kSparse, $5, 0, 0, infinity::EmbeddingDataType::kElemBFloat16}; }
-| SPARSE '(' UNSIGNED TINYINT ',' LONG_VALUE ')' { $$ = new infinity::ColumnType{infinity::LogicalType::kSparse, $6, 0, 0, infinity::EmbeddingDataType::kElemUInt8}; }
+| VARCHAR { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kVarchar, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+| DECIMAL '(' LONG_VALUE ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kDecimal, 0, $3, $5, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+| DECIMAL '(' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kDecimal, 0, $3, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+| DECIMAL { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kDecimal, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid}; }
+// | BLOB '(' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kBlob, $3}; }
+// | BITMAP '(' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kBitmap, $3}; }
+| EMBEDDING '(' BIT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemBit}; }
+| EMBEDDING '(' TINYINT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt8}; }
+| EMBEDDING '(' SMALLINT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt16}; }
+| EMBEDDING '(' INTEGER ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt32}; }
+| EMBEDDING '(' INT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt32}; }
+| EMBEDDING '(' BIGINT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt64}; }
+| EMBEDDING '(' FLOAT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemFloat}; }
+| EMBEDDING '(' DOUBLE ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemDouble}; }
+| EMBEDDING '(' FLOAT16 ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemFloat16}; }
+| EMBEDDING '(' BFLOAT16 ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemBFloat16}; }
+| EMBEDDING '(' UNSIGNED TINYINT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, $6, 0, 0, hybridsearch::EmbeddingDataType::kElemUInt8}; }
+| MULTIVECTOR '(' BIT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kMultiVector, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemBit}; }
+| MULTIVECTOR '(' TINYINT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kMultiVector, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt8}; }
+| MULTIVECTOR '(' SMALLINT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kMultiVector, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt16}; }
+| MULTIVECTOR '(' INTEGER ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kMultiVector, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt32}; }
+| MULTIVECTOR '(' INT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kMultiVector, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt32}; }
+| MULTIVECTOR '(' BIGINT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kMultiVector, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt64}; }
+| MULTIVECTOR '(' FLOAT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kMultiVector, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemFloat}; }
+| MULTIVECTOR '(' DOUBLE ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kMultiVector, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemDouble}; }
+| MULTIVECTOR '(' FLOAT16 ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kMultiVector, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemFloat16}; }
+| MULTIVECTOR '(' BFLOAT16 ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kMultiVector, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemBFloat16}; }
+| MULTIVECTOR '(' UNSIGNED TINYINT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kMultiVector, $6, 0, 0, hybridsearch::EmbeddingDataType::kElemUInt8}; }
+| TENSOR '(' BIT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensor, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemBit}; }
+| TENSOR '(' TINYINT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensor, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt8}; }
+| TENSOR '(' SMALLINT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensor, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt16}; }
+| TENSOR '(' INTEGER ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensor, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt32}; }
+| TENSOR '(' INT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensor, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt32}; }
+| TENSOR '(' BIGINT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensor, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt64}; }
+| TENSOR '(' FLOAT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensor, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemFloat}; }
+| TENSOR '(' DOUBLE ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensor, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemDouble}; }
+| TENSOR '(' FLOAT16 ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensor, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemFloat16}; }
+| TENSOR '(' BFLOAT16 ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensor, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemBFloat16}; }
+| TENSOR '(' UNSIGNED TINYINT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensor, $6, 0, 0, hybridsearch::EmbeddingDataType::kElemUInt8}; }
+| TENSORARRAY '(' BIT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensorArray, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemBit}; }
+| TENSORARRAY '(' TINYINT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensorArray, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt8}; }
+| TENSORARRAY '(' SMALLINT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensorArray, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt16}; }
+| TENSORARRAY '(' INTEGER ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensorArray, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt32}; }
+| TENSORARRAY '(' INT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensorArray, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt32}; }
+| TENSORARRAY '(' BIGINT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensorArray, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt64}; }
+| TENSORARRAY '(' FLOAT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensorArray, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemFloat}; }
+| TENSORARRAY '(' DOUBLE ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensorArray, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemDouble}; }
+| TENSORARRAY '(' FLOAT16 ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensorArray, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemFloat16}; }
+| TENSORARRAY '(' BFLOAT16 ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensorArray, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemBFloat16}; }
+| TENSORARRAY '(' UNSIGNED TINYINT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTensorArray, $6, 0, 0, hybridsearch::EmbeddingDataType::kElemUInt8}; }
+| VECTOR '(' BIT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemBit}; }
+| VECTOR '(' TINYINT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt8}; }
+| VECTOR '(' SMALLINT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt16}; }
+| VECTOR '(' INTEGER ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt32}; }
+| VECTOR '(' INT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt32}; }
+| VECTOR '(' BIGINT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt64}; }
+| VECTOR '(' FLOAT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemFloat}; }
+| VECTOR '(' DOUBLE ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemDouble}; }
+| VECTOR '(' FLOAT16 ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemFloat16}; }
+| VECTOR '(' BFLOAT16 ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemBFloat16}; }
+| VECTOR '(' UNSIGNED TINYINT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kEmbedding, $6, 0, 0, hybridsearch::EmbeddingDataType::kElemUInt8}; }
+| SPARSE '(' BIT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kSparse, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemBit}; }
+| SPARSE '(' TINYINT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kSparse, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt8}; }
+| SPARSE '(' SMALLINT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kSparse, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt16}; }
+| SPARSE '(' INTEGER ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kSparse, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt32}; }
+| SPARSE '(' INT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kSparse, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt32}; }
+| SPARSE '(' BIGINT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kSparse, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemInt64}; }
+| SPARSE '(' FLOAT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kSparse, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemFloat}; }
+| SPARSE '(' DOUBLE ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kSparse, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemDouble}; }
+| SPARSE '(' FLOAT16 ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kSparse, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemFloat16}; }
+| SPARSE '(' BFLOAT16 ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kSparse, $5, 0, 0, hybridsearch::EmbeddingDataType::kElemBFloat16}; }
+| SPARSE '(' UNSIGNED TINYINT ',' LONG_VALUE ')' { $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kSparse, $6, 0, 0, hybridsearch::EmbeddingDataType::kElemUInt8}; }
 | ARRAY '(' column_type ')' {
-  $$ = new infinity::ColumnType{infinity::LogicalType::kArray, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid};
+  $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kArray, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid};
   $$->element_types_.emplace_back($3);
 }
 | TUPLE '(' column_type_array ')' {
-  $$ = new infinity::ColumnType{infinity::LogicalType::kTuple, 0, 0, 0, infinity::EmbeddingDataType::kElemInvalid};
+  $$ = new hybridsearch::ColumnType{hybridsearch::LogicalType::kTuple, 0, 0, 0, hybridsearch::EmbeddingDataType::kElemInvalid};
   $$->element_types_ = std::move(*($3));
   delete $3;
 }
 /*
 | DECIMAL opt_decimal_specification {
-  $$ = infinity::ColumnType{DataType::DECIMAL, 0, $2->first, $2->second};
+  $$ = hybridsearch::ColumnType{DataType::DECIMAL, 0, $2->first, $2->second};
   delete $2;
 }
-| TEXT { $$ = infinity::ColumnType{DataType::TEXT}; }
-| TIME opt_time_precision { $$ = infinity::ColumnType{DataType::TIME, 0, $2}; }
-| TIMESTAMP { $$ = infinity::ColumnType{DataType::DATETIME}; }
-| VARCHAR '(' INTVAL ')' { $$ = infinity::ColumnType{DataType::VARCHAR, $3}; }
+| TEXT { $$ = hybridsearch::ColumnType{DataType::TEXT}; }
+| TIME opt_time_precision { $$ = hybridsearch::ColumnType{DataType::TIME, 0, $2}; }
+| TIMESTAMP { $$ = hybridsearch::ColumnType{DataType::DATETIME}; }
+| VARCHAR '(' INTVAL ')' { $$ = hybridsearch::ColumnType{DataType::VARCHAR, $3}; }
 
 opt_time_precision : '(' INTVAL ')' { $$ = $2; }
 | { $$ = 0; };
@@ -1042,7 +1042,7 @@ opt_decimal_specification : '(' INTVAL ',' INTVAL ')' { $$ = new std::pair<int64
 */
 
 column_constraints : column_constraint {
-    $$ = new std::set<infinity::ConstraintType>();
+    $$ = new std::set<hybridsearch::ConstraintType>();
     $$->insert($1);
 }
 | column_constraints column_constraint {
@@ -1056,16 +1056,16 @@ column_constraints : column_constraint {
 }
 
 column_constraint : PRIMARY KEY {
-    $$ = infinity::ConstraintType::kPrimaryKey;
+    $$ = hybridsearch::ConstraintType::kPrimaryKey;
 }
 | UNIQUE {
-    $$ = infinity::ConstraintType::kUnique;
+    $$ = hybridsearch::ConstraintType::kUnique;
 }
 | NULLABLE {
-    $$ = infinity::ConstraintType::kNull;
+    $$ = hybridsearch::ConstraintType::kNull;
 }
 | NOT NULLABLE {
-    $$ = infinity::ConstraintType::kNotNull;
+    $$ = hybridsearch::ConstraintType::kNotNull;
 };
 
 default_expr : DEFAULT constant_expr {
@@ -1077,14 +1077,14 @@ default_expr : DEFAULT constant_expr {
 
 
 table_constraint : PRIMARY KEY '(' identifier_array ')' {
-    $$ = new infinity::TableConstraint();
+    $$ = new hybridsearch::TableConstraint();
     $$->names_ptr_ = $4;
-    $$->constraint_ = infinity::ConstraintType::kPrimaryKey;
+    $$->constraint_ = hybridsearch::ConstraintType::kPrimaryKey;
 }
 | UNIQUE '(' identifier_array ')' {
-    $$ = new infinity::TableConstraint();
+    $$ = new hybridsearch::TableConstraint();
     $$->names_ptr_ = $3;
-    $$->constraint_ = infinity::ConstraintType::kUnique;
+    $$->constraint_ = hybridsearch::ConstraintType::kUnique;
 };
 
 
@@ -1105,7 +1105,7 @@ identifier_array : IDENTIFIER {
  * DELETE STATEMENT
  */
 delete_statement : DELETE FROM table_name where_clause {
-    $$ = new infinity::DeleteStatement();
+    $$ = new hybridsearch::DeleteStatement();
 
     if($3->schema_name_ptr_ != nullptr) {
         $$->schema_name_ = $3->schema_name_ptr_;
@@ -1124,7 +1124,7 @@ insert_statement: INSERT INTO table_name optional_identifier_array VALUES insert
     bool is_error{false};
     for (auto expr_array : *$6) {
         for (const auto &expr : expr_array->values_) {
-            if(expr->type_ != infinity::ParsedExprType::kConstant) {
+            if(expr->type_ != hybridsearch::ParsedExprType::kConstant) {
                 yyerror(&yyloc, scanner, result, ("Value list has non-constant expression: " + expr->ToString()).c_str());
                 is_error = true;
             }
@@ -1140,7 +1140,7 @@ insert_statement: INSERT INTO table_name optional_identifier_array VALUES insert
         YYERROR;
     }
 
-    $$ = new infinity::InsertStatement();
+    $$ = new hybridsearch::InsertStatement();
     if($3->schema_name_ptr_ != nullptr) {
         $$->schema_name_ = $3->schema_name_ptr_;
         free($3->schema_name_ptr_);
@@ -1148,7 +1148,7 @@ insert_statement: INSERT INTO table_name optional_identifier_array VALUES insert
     $$->table_name_ = $3->table_name_ptr_;
     free($3->table_name_ptr_);
     delete $3;
-    for (infinity::InsertRowExpr* &expr_ptr : *$6) {
+    for (hybridsearch::InsertRowExpr* &expr_ptr : *$6) {
         if ($4) {
             expr_ptr->columns_ = *($4);
         }
@@ -1159,7 +1159,7 @@ insert_statement: INSERT INTO table_name optional_identifier_array VALUES insert
     delete $6;
 }
 | INSERT INTO table_name optional_identifier_array select_without_paren {
-    $$ = new infinity::InsertStatement();
+    $$ = new hybridsearch::InsertStatement();
     if($3->schema_name_ptr_ != nullptr) {
         $$->schema_name_ = $3->schema_name_ptr_;
         free($3->schema_name_ptr_);
@@ -1185,20 +1185,20 @@ optional_identifier_array: '(' identifier_array ')' {
  * EXPLAIN STATEMENT
  */
 explain_statement : EXPLAIN IDENTIFIER explainable_statement {
-    $$ = new infinity::ExplainStatement();
+    $$ = new hybridsearch::ExplainStatement();
     ParserHelper::ToLower($2);
-    if(!strcmp($2, "analyze")) $$->type_ = infinity::ExplainType::kAnalyze;
-    else if(!strcmp($2, "ast")) $$->type_ =infinity::ExplainType::kAst;
-    else if(!strcmp($2, "raw")) $$->type_ =infinity::ExplainType::kUnOpt;
-    else if(!strcmp($2, "logical")) $$->type_ =infinity::ExplainType::kOpt;
-    else if(!strcmp($2, "physical")) $$->type_ =infinity::ExplainType::kPhysical;
-    else if(!strcmp($2, "pipeline")) $$->type_ =infinity::ExplainType::kPipeline;
-    else if(!strcmp($2, "fragment")) $$->type_ =infinity::ExplainType::kFragment;
+    if(!strcmp($2, "analyze")) $$->type_ = hybridsearch::ExplainType::kAnalyze;
+    else if(!strcmp($2, "ast")) $$->type_ =hybridsearch::ExplainType::kAst;
+    else if(!strcmp($2, "raw")) $$->type_ =hybridsearch::ExplainType::kUnOpt;
+    else if(!strcmp($2, "logical")) $$->type_ =hybridsearch::ExplainType::kOpt;
+    else if(!strcmp($2, "physical")) $$->type_ =hybridsearch::ExplainType::kPhysical;
+    else if(!strcmp($2, "pipeline")) $$->type_ =hybridsearch::ExplainType::kPipeline;
+    else if(!strcmp($2, "fragment")) $$->type_ =hybridsearch::ExplainType::kFragment;
     free($2);
     $$->statement_ = $3;
 } | EXPLAIN explainable_statement {
-    $$ = new infinity::ExplainStatement();
-    $$->type_ =infinity::ExplainType::kPhysical;
+    $$ = new hybridsearch::ExplainStatement();
+    $$->type_ =hybridsearch::ExplainType::kPhysical;
     $$->statement_ = $2;
 }
 
@@ -1206,7 +1206,7 @@ explain_statement : EXPLAIN IDENTIFIER explainable_statement {
  * UPDATE STATEMENT
  */
 update_statement: UPDATE table_name SET update_expr_array where_clause {
-    $$ = new infinity::UpdateStatement();
+    $$ = new hybridsearch::UpdateStatement();
     if($2->schema_name_ptr_ != nullptr) {
         $$->schema_name_ = $2->schema_name_ptr_;
         free($2->schema_name_ptr_);
@@ -1219,7 +1219,7 @@ update_statement: UPDATE table_name SET update_expr_array where_clause {
 }
 
 update_expr_array: update_expr {
-    $$ = new std::vector<infinity::UpdateExpr*>();
+    $$ = new std::vector<hybridsearch::UpdateExpr*>();
     $$->emplace_back($1);
 }
 | update_expr_array ',' update_expr {
@@ -1228,7 +1228,7 @@ update_expr_array: update_expr {
 }
 
 update_expr : IDENTIFIER '=' expr {
-    $$ = new infinity::UpdateExpr();
+    $$ = new hybridsearch::UpdateExpr();
     ParserHelper::ToLower($1);
     $$->column_name = $1;
     free($1);
@@ -1241,21 +1241,21 @@ update_expr : IDENTIFIER '=' expr {
 
 /* DROP DATABASE schema_name; */
 drop_statement: DROP DATABASE if_exists IDENTIFIER {
-    $$ = new infinity::DropStatement();
-    std::shared_ptr<infinity::DropSchemaInfo> drop_schema_info = std::make_shared<infinity::DropSchemaInfo>();
+    $$ = new hybridsearch::DropStatement();
+    std::shared_ptr<hybridsearch::DropSchemaInfo> drop_schema_info = std::make_shared<hybridsearch::DropSchemaInfo>();
 
     ParserHelper::ToLower($4);
     drop_schema_info->schema_name_ = $4;
     free($4);
 
     $$->drop_info_ = drop_schema_info;
-    $$->drop_info_->conflict_type_ = $3 ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+    $$->drop_info_->conflict_type_ = $3 ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
 };
 
 /* DROP COLLECTION collection_name; */
 | DROP COLLECTION if_exists table_name {
-    $$ = new infinity::DropStatement();
-    std::shared_ptr<infinity::DropCollectionInfo> drop_collection_info = std::make_unique<infinity::DropCollectionInfo>();
+    $$ = new hybridsearch::DropStatement();
+    std::shared_ptr<hybridsearch::DropCollectionInfo> drop_collection_info = std::make_unique<hybridsearch::DropCollectionInfo>();
     if($4->schema_name_ptr_ != nullptr) {
         drop_collection_info->schema_name_ = $4->schema_name_ptr_;
         free($4->schema_name_ptr_);
@@ -1263,14 +1263,14 @@ drop_statement: DROP DATABASE if_exists IDENTIFIER {
     drop_collection_info->collection_name_ = $4->table_name_ptr_;
     free($4->table_name_ptr_);
     $$->drop_info_ = drop_collection_info;
-    $$->drop_info_->conflict_type_ = $3 ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+    $$->drop_info_->conflict_type_ = $3 ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
     delete $4;
 }
 
 /* DROP TABLE table_name; */
 | DROP TABLE if_exists table_name {
-    $$ = new infinity::DropStatement();
-    std::shared_ptr<infinity::DropTableInfo> drop_table_info = std::make_unique<infinity::DropTableInfo>();
+    $$ = new hybridsearch::DropStatement();
+    std::shared_ptr<hybridsearch::DropTableInfo> drop_table_info = std::make_unique<hybridsearch::DropTableInfo>();
     if($4->schema_name_ptr_ != nullptr) {
         drop_table_info->schema_name_ = $4->schema_name_ptr_;
         free($4->schema_name_ptr_);
@@ -1278,14 +1278,14 @@ drop_statement: DROP DATABASE if_exists IDENTIFIER {
     drop_table_info->table_name_ = $4->table_name_ptr_;
     free($4->table_name_ptr_);
     $$->drop_info_ = drop_table_info;
-    $$->drop_info_->conflict_type_ = $3 ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+    $$->drop_info_->conflict_type_ = $3 ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
     delete $4;
 }
 
 /* DROP VIEW view_name; */
 | DROP VIEW if_exists table_name {
-    $$ = new infinity::DropStatement();
-    std::shared_ptr<infinity::DropViewInfo> drop_view_info = std::make_unique<infinity::DropViewInfo>();
+    $$ = new hybridsearch::DropStatement();
+    std::shared_ptr<hybridsearch::DropViewInfo> drop_view_info = std::make_unique<hybridsearch::DropViewInfo>();
     if($4->schema_name_ptr_ != nullptr) {
         drop_view_info->schema_name_ = $4->schema_name_ptr_;
         free($4->schema_name_ptr_);
@@ -1293,17 +1293,17 @@ drop_statement: DROP DATABASE if_exists IDENTIFIER {
     drop_view_info->view_name_ = $4->table_name_ptr_;
     free($4->table_name_ptr_);
     $$->drop_info_ = drop_view_info;
-    $$->drop_info_->conflict_type_ = $3 ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+    $$->drop_info_->conflict_type_ = $3 ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
     delete $4;
 }
 
 /* DROP INDEX index_name ON table_name; */
 | DROP INDEX if_exists IDENTIFIER ON table_name {
-    $$ = new infinity::DropStatement();
-    std::shared_ptr<infinity::DropIndexInfo> drop_index_info = std::make_shared<infinity::DropIndexInfo>();
+    $$ = new hybridsearch::DropStatement();
+    std::shared_ptr<hybridsearch::DropIndexInfo> drop_index_info = std::make_shared<hybridsearch::DropIndexInfo>();
 
     $$->drop_info_ = drop_index_info;
-    $$->drop_info_->conflict_type_ = $3 ? infinity::ConflictType::kIgnore : infinity::ConflictType::kError;
+    $$->drop_info_->conflict_type_ = $3 ? hybridsearch::ConflictType::kIgnore : hybridsearch::ConflictType::kError;
 
     drop_index_info->index_name_ = $4;
     free($4);
@@ -1322,7 +1322,7 @@ drop_statement: DROP DATABASE if_exists IDENTIFIER {
  */
 // COPY database.table TO file_path WITH (FORMAT csv, DELIMITER ',', HEADER)
 copy_statement: COPY table_name TO file_path WITH '(' copy_option_list ')' {
-    $$ = new infinity::CopyStatement();
+    $$ = new hybridsearch::CopyStatement();
 
     // Copy To
     $$->copy_from_ = false;
@@ -1343,29 +1343,29 @@ copy_statement: COPY table_name TO file_path WITH '(' copy_option_list ')' {
     // copy options
     size_t option_count = (*$7).size();
     for(size_t idx = 0; idx < option_count; ++ idx) {
-        infinity::CopyOption* option_ptr = (*$7)[idx];
+        hybridsearch::CopyOption* option_ptr = (*$7)[idx];
         switch(option_ptr->option_type_) {
-            case infinity::CopyOptionType::kFormat: {
+            case hybridsearch::CopyOptionType::kFormat: {
                 $$->copy_file_type_ = option_ptr->file_type_;
                 break;
             }
-            case infinity::CopyOptionType::kDelimiter: {
+            case hybridsearch::CopyOptionType::kDelimiter: {
                 $$->delimiter_ = option_ptr->delimiter_;
                 break;
             }
-            case infinity::CopyOptionType::kHeader: {
+            case hybridsearch::CopyOptionType::kHeader: {
                 $$->header_ = option_ptr->header_;
                 break;
             }
-            case infinity::CopyOptionType::kOffset: {
+            case hybridsearch::CopyOptionType::kOffset: {
                 $$->offset_ = option_ptr->offset_;
                 break;
             }
-            case infinity::CopyOptionType::kLimit: {
+            case hybridsearch::CopyOptionType::kLimit: {
                 $$->limit_ = option_ptr->limit_;
                 break;
             }
-            case infinity::CopyOptionType::kRowLimit: {
+            case hybridsearch::CopyOptionType::kRowLimit: {
                 $$->row_limit_ = option_ptr->row_limit_;
                 break;
             }
@@ -1375,7 +1375,7 @@ copy_statement: COPY table_name TO file_path WITH '(' copy_option_list ')' {
     delete $7;
 }
 | COPY table_name '(' expr_array ')' TO file_path WITH '(' copy_option_list ')' {
-    $$ = new infinity::CopyStatement();
+    $$ = new hybridsearch::CopyStatement();
 
     // Copy To
     $$->copy_from_ = false;
@@ -1398,29 +1398,29 @@ copy_statement: COPY table_name TO file_path WITH '(' copy_option_list ')' {
     // copy options
     size_t option_count = (*$10).size();
     for(size_t idx = 0; idx < option_count; ++ idx) {
-        infinity::CopyOption* option_ptr = (*$10)[idx];
+        hybridsearch::CopyOption* option_ptr = (*$10)[idx];
         switch(option_ptr->option_type_) {
-            case infinity::CopyOptionType::kFormat: {
+            case hybridsearch::CopyOptionType::kFormat: {
                 $$->copy_file_type_ = option_ptr->file_type_;
                 break;
             }
-            case infinity::CopyOptionType::kDelimiter: {
+            case hybridsearch::CopyOptionType::kDelimiter: {
                 $$->delimiter_ = option_ptr->delimiter_;
                 break;
             }
-            case infinity::CopyOptionType::kHeader: {
+            case hybridsearch::CopyOptionType::kHeader: {
                 $$->header_ = option_ptr->header_;
                 break;
             }
-            case infinity::CopyOptionType::kOffset: {
+            case hybridsearch::CopyOptionType::kOffset: {
                 $$->offset_ = option_ptr->offset_;
                 break;
             }
-            case infinity::CopyOptionType::kLimit: {
+            case hybridsearch::CopyOptionType::kLimit: {
                 $$->limit_ = option_ptr->limit_;
                 break;
             }
-            case infinity::CopyOptionType::kRowLimit: {
+            case hybridsearch::CopyOptionType::kRowLimit: {
                 $$->row_limit_ = option_ptr->row_limit_;
                 break;
             }
@@ -1430,7 +1430,7 @@ copy_statement: COPY table_name TO file_path WITH '(' copy_option_list ')' {
     delete $10;
 }
 | COPY table_name FROM file_path WITH '(' copy_option_list ')' {
-    $$ = new infinity::CopyStatement();
+    $$ = new hybridsearch::CopyStatement();
 
     // Copy From
     $$->copy_from_ = true;
@@ -1451,17 +1451,17 @@ copy_statement: COPY table_name TO file_path WITH '(' copy_option_list ')' {
     // copy options
     size_t option_count = (*$7).size();
     for(size_t idx = 0; idx < option_count; ++ idx) {
-        infinity::CopyOption* option_ptr = (*$7)[idx];
+        hybridsearch::CopyOption* option_ptr = (*$7)[idx];
         switch(option_ptr->option_type_) {
-            case infinity::CopyOptionType::kFormat: {
+            case hybridsearch::CopyOptionType::kFormat: {
                 $$->copy_file_type_ = option_ptr->file_type_;
                 break;
             }
-            case infinity::CopyOptionType::kDelimiter: {
+            case hybridsearch::CopyOptionType::kDelimiter: {
                 $$->delimiter_ = option_ptr->delimiter_;
                 break;
             }
-            case infinity::CopyOptionType::kHeader: {
+            case hybridsearch::CopyOptionType::kHeader: {
                 $$->header_ = option_ptr->header_;
                 break;
             }
@@ -1487,7 +1487,7 @@ select_statement : select_without_paren {
     $$ = $1;
 }
 | select_statement set_operator select_clause_without_modifier_paren {
-    infinity::SelectStatement* node = $1;
+    hybridsearch::SelectStatement* node = $1;
     while(node->nested_select_ != nullptr) {
         node = node->nested_select_;
     }
@@ -1496,7 +1496,7 @@ select_statement : select_without_paren {
     $$ = $1;
 }
 | select_statement set_operator select_clause_without_modifier {
-    infinity::SelectStatement* node = $1;
+    hybridsearch::SelectStatement* node = $1;
     while(node->nested_select_ != nullptr) {
         node = node->nested_select_;
     }
@@ -1553,7 +1553,7 @@ select_clause_without_modifier_paren: '(' select_clause_without_modifier ')' {
 
 select_clause_without_modifier:
 SELECT distinct expr_array highlight_clause from_clause search_clause where_clause group_by_clause having_clause {
-    $$ = new infinity::SelectStatement();
+    $$ = new hybridsearch::SelectStatement();
     $$->select_distinct_ = $2;
     $$->select_list_ = $3;
     $$->highlight_list_ = $4;
@@ -1577,7 +1577,7 @@ order_by_clause : ORDER BY order_by_expr_list {
 };
 
 order_by_expr_list: order_by_expr {
-    $$ = new std::vector<infinity::OrderByExpr*>();
+    $$ = new std::vector<hybridsearch::OrderByExpr*>();
     $$->emplace_back($1);
 }
 | order_by_expr_list ',' order_by_expr {
@@ -1586,19 +1586,19 @@ order_by_expr_list: order_by_expr {
 }
 
 order_by_expr : expr order_by_type {
-    $$ = new infinity::OrderByExpr();
+    $$ = new hybridsearch::OrderByExpr();
     $$->expr_ = $1;
     $$->type_ = $2;
 };
 
 order_by_type: ASC {
-    $$ = infinity::kAsc;
+    $$ = hybridsearch::kAsc;
 }
 | DESC {
-    $$ = infinity::kDesc;
+    $$ = hybridsearch::kDesc;
 }
 | {
-    $$ = infinity::kAsc;
+    $$ = hybridsearch::kAsc;
 }
 
 limit_expr: LIMIT expr {
@@ -1635,7 +1635,7 @@ from_clause: FROM table_reference {
 }
 
 search_clause: SEARCH sub_search_array {
-    infinity::SearchExpr* search_expr = new infinity::SearchExpr();
+    hybridsearch::SearchExpr* search_expr = new hybridsearch::SearchExpr();
     search_expr->SetExprs($2);
     $$ = search_expr;
 }
@@ -1672,16 +1672,16 @@ group_by_clause: GROUP BY expr_array {
 }
 
 set_operator : UNION {
-    $$ = infinity::SetOperatorType::kUnion;
+    $$ = hybridsearch::SetOperatorType::kUnion;
 }
 | UNION ALL {
-    $$ = infinity::SetOperatorType::kUnionAll;
+    $$ = hybridsearch::SetOperatorType::kUnionAll;
 }
 | INTERSECT {
-    $$ = infinity::SetOperatorType::kIntersect;
+    $$ = hybridsearch::SetOperatorType::kIntersect;
 }
 | EXCEPT {
-    $$ = infinity::SetOperatorType::kExcept;
+    $$ = hybridsearch::SetOperatorType::kExcept;
 };
 
 /*
@@ -1692,12 +1692,12 @@ table_reference : table_reference_unit {
     $$ = $1;
 }
 | table_reference ',' table_reference_unit {
-    infinity::CrossProductReference* cross_product_ref = nullptr;
-    if($1->type_ == infinity::TableRefType::kCrossProduct) {
-        cross_product_ref = (infinity::CrossProductReference*)$1;
+    hybridsearch::CrossProductReference* cross_product_ref = nullptr;
+    if($1->type_ == hybridsearch::TableRefType::kCrossProduct) {
+        cross_product_ref = (hybridsearch::CrossProductReference*)$1;
         cross_product_ref->tables_.emplace_back($3);
     } else {
-        cross_product_ref = new infinity::CrossProductReference();
+        cross_product_ref = new hybridsearch::CrossProductReference();
         cross_product_ref->tables_.emplace_back($1);
         cross_product_ref->tables_.emplace_back($3);
     }
@@ -1709,7 +1709,7 @@ table_reference : table_reference_unit {
 table_reference_unit : table_reference_name | join_clause;
 
 table_reference_name : table_name table_alias {
-    infinity::TableReference* table_ref = new infinity::TableReference();
+    hybridsearch::TableReference* table_ref = new hybridsearch::TableReference();
     if($1->schema_name_ptr_ != nullptr) {
         table_ref->db_name_ = $1->schema_name_ptr_;
         free($1->schema_name_ptr_);
@@ -1723,7 +1723,7 @@ table_reference_name : table_name table_alias {
 }
 /* FROM (select * from t1) AS t2 */
 | '(' select_statement ')' table_alias {
-    infinity::SubqueryReference* subquery_reference = new infinity::SubqueryReference();
+    hybridsearch::SubqueryReference* subquery_reference = new hybridsearch::SubqueryReference();
     subquery_reference->select_statement_ = $2;
     subquery_reference->alias_ = $4;
     $$ = subquery_reference;
@@ -1732,12 +1732,12 @@ table_reference_name : table_name table_alias {
 
 /* 'table_name' or 'schema_name.table_name' */
 table_name : IDENTIFIER {
-    $$ = new infinity::TableName();
+    $$ = new hybridsearch::TableName();
     ParserHelper::ToLower($1);
     $$->table_name_ptr_ = $1;
 }
 | IDENTIFIER '.' IDENTIFIER {
-    $$ = new infinity::TableName();
+    $$ = new hybridsearch::TableName();
     ParserHelper::ToLower($1);
     ParserHelper::ToLower($3);
     $$->schema_name_ptr_ = $1;
@@ -1746,17 +1746,17 @@ table_name : IDENTIFIER {
 
 /* AS 'table_alias' or AS 'table_alias(col1_alias, col2_alias ... )' */
 table_alias : AS IDENTIFIER {
-    $$ = new infinity::TableAlias();
+    $$ = new hybridsearch::TableAlias();
     ParserHelper::ToLower($2);
     $$->alias_ = $2;
 }
 | IDENTIFIER {
-    $$ = new infinity::TableAlias();
+    $$ = new hybridsearch::TableAlias();
     ParserHelper::ToLower($1);
     $$->alias_ = $1;
 }
 | AS IDENTIFIER '(' identifier_array ')' {
-    $$ = new infinity::TableAlias();
+    $$ = new hybridsearch::TableAlias();
     ParserHelper::ToLower($2);
     $$->alias_ = $2;
     $$->column_alias_array_ = $4;
@@ -1776,7 +1776,7 @@ with_clause : WITH with_expr_list {
 }
 
 with_expr_list: with_expr {
-    $$ = new std::vector<infinity::WithExpr*>();
+    $$ = new std::vector<hybridsearch::WithExpr*>();
     $$->emplace_back($1);
 } | with_expr_list ',' with_expr {
     $1->emplace_back($3);
@@ -1784,7 +1784,7 @@ with_expr_list: with_expr {
 }
 
 with_expr: IDENTIFIER AS '(' select_clause_with_modifier ')' {
-    $$ = new infinity::WithExpr();
+    $$ = new hybridsearch::WithExpr();
     ParserHelper::ToLower($1);
     $$->alias_ = $1;
     free($1);
@@ -1796,14 +1796,14 @@ with_expr: IDENTIFIER AS '(' select_clause_with_modifier ')' {
  */
 
 join_clause: table_reference_unit NATURAL JOIN table_reference_name {
-    infinity::JoinReference* join_reference = new infinity::JoinReference();
+    hybridsearch::JoinReference* join_reference = new hybridsearch::JoinReference();
     join_reference->left_ = $1;
     join_reference->right_ = $4;
-    join_reference->join_type_ = infinity::JoinType::kNatural;
+    join_reference->join_type_ = hybridsearch::JoinType::kNatural;
     $$ = join_reference;
 }
 | table_reference_unit join_type JOIN table_reference_name ON expr {
-    infinity::JoinReference* join_reference = new infinity::JoinReference();
+    hybridsearch::JoinReference* join_reference = new hybridsearch::JoinReference();
     join_reference->left_ = $1;
     join_reference->right_ = $4;
     join_reference->join_type_ = $2;
@@ -1817,22 +1817,22 @@ join_clause: table_reference_unit NATURAL JOIN table_reference_name {
 
 
 join_type : INNER {
-    $$ = infinity::JoinType::kInner;
+    $$ = hybridsearch::JoinType::kInner;
 }
 | LEFT {
-    $$ = infinity::JoinType::kLeft;
+    $$ = hybridsearch::JoinType::kLeft;
 }
 | RIGHT {
-    $$ = infinity::JoinType::kRight;
+    $$ = hybridsearch::JoinType::kRight;
 }
 | OUTER {
-    $$ = infinity::JoinType::kFull;
+    $$ = hybridsearch::JoinType::kFull;
 }
 | FULL {
-    $$ = infinity::JoinType::kFull;
+    $$ = hybridsearch::JoinType::kFull;
 }
 | CROSS {
-    $$ = infinity::JoinType::kCross;
+    $$ = hybridsearch::JoinType::kCross;
 }
 | /* default */ {
 };
@@ -1841,91 +1841,91 @@ join_type : INNER {
  * SHOW STATEMENT
  */
 show_statement: SHOW DATABASES {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kDatabases;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kDatabases;
 }
 | SHOW TABLES {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kTables;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kTables;
 }
 | SHOW VIEWS {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kViews;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kViews;
 }
 | SHOW CONFIGS {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kConfigs;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kConfigs;
 }
 | SHOW CONFIG IDENTIFIER {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kConfig;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kConfig;
     ParserHelper::ToLower($3);
     $$->var_name_ = std::string($3);
     free($3);
 }
 | SHOW PROFILES {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kProfiles;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kProfiles;
 }
 | SHOW BUFFER {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kBuffer;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kBuffer;
 }
 | SHOW MEMINDEX {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kMemIndex;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kMemIndex;
 }
 | SHOW QUERIES {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kQueries;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kQueries;
 }
 | SHOW QUERY LONG_VALUE {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kQuery;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kQuery;
     $$->session_id_ = $3;
 }
 | SHOW TRANSACTIONS {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kTransactions;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kTransactions;
 }
 | SHOW TRANSACTION LONG_VALUE {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kTransaction;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kTransaction;
     $$->txn_id_ = $3;
 }
 | SHOW TRANSACTION HISTORY {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kTransactionHistory;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kTransactionHistory;
 }
 | SHOW SESSION VARIABLES {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kSessionVariables;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kSessionVariables;
 }
 | SHOW GLOBAL VARIABLES {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kGlobalVariables;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kGlobalVariables;
 }
 | SHOW SESSION VARIABLE IDENTIFIER {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kSessionVariable;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kSessionVariable;
     $$->var_name_ = std::string($4);
     free($4);
 }
 | SHOW GLOBAL VARIABLE IDENTIFIER {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kGlobalVariable;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kGlobalVariable;
     $$->var_name_ = std::string($4);
     free($4);
 }
 | SHOW DATABASE IDENTIFIER {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kDatabase;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kDatabase;
     $$->schema_name_ = $3;
     free($3);
 }
 | SHOW TABLE table_name {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kTable;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kTable;
     if($3->schema_name_ptr_ != nullptr) {
         $$->schema_name_ = $3->schema_name_ptr_;
         free($3->schema_name_ptr_);
@@ -1935,8 +1935,8 @@ show_statement: SHOW DATABASES {
     delete $3;
 }
 | SHOW TABLE table_name COLUMNS {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kColumns;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kColumns;
     if($3->schema_name_ptr_ != nullptr) {
         $$->schema_name_ = $3->schema_name_ptr_;
         free($3->schema_name_ptr_);
@@ -1946,8 +1946,8 @@ show_statement: SHOW DATABASES {
     delete $3;
 }
 | SHOW TABLE table_name SEGMENTS {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kSegments;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kSegments;
     if($3->schema_name_ptr_ != nullptr) {
         $$->schema_name_ = $3->schema_name_ptr_;
         free($3->schema_name_ptr_);
@@ -1957,8 +1957,8 @@ show_statement: SHOW DATABASES {
     delete $3;
 }
 | SHOW TABLE table_name SEGMENT LONG_VALUE {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kSegment;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kSegment;
     if($3->schema_name_ptr_ != nullptr) {
         $$->schema_name_ = $3->schema_name_ptr_;
         free($3->schema_name_ptr_);
@@ -1969,8 +1969,8 @@ show_statement: SHOW DATABASES {
     delete $3;
 }
 | SHOW TABLE table_name SEGMENT LONG_VALUE BLOCKS {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kBlocks;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kBlocks;
     if($3->schema_name_ptr_ != nullptr) {
         $$->schema_name_ = $3->schema_name_ptr_;
         free($3->schema_name_ptr_);
@@ -1981,8 +1981,8 @@ show_statement: SHOW DATABASES {
     delete $3;
 }
 | SHOW TABLE table_name SEGMENT LONG_VALUE BLOCK LONG_VALUE {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kBlock;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kBlock;
     if($3->schema_name_ptr_ != nullptr) {
         $$->schema_name_ = $3->schema_name_ptr_;
         free($3->schema_name_ptr_);
@@ -1994,8 +1994,8 @@ show_statement: SHOW DATABASES {
     delete $3;
 }
 | SHOW TABLE table_name SEGMENT LONG_VALUE BLOCK LONG_VALUE COLUMN LONG_VALUE {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kBlockColumn;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kBlockColumn;
     if($3->schema_name_ptr_ != nullptr) {
         $$->schema_name_ = $3->schema_name_ptr_;
         free($3->schema_name_ptr_);
@@ -2008,8 +2008,8 @@ show_statement: SHOW DATABASES {
     delete $3;
 }
 | SHOW TABLE table_name INDEXES {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kIndexes;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kIndexes;
     if($3->schema_name_ptr_ != nullptr) {
         $$->schema_name_ = $3->schema_name_ptr_;
         free($3->schema_name_ptr_);
@@ -2019,8 +2019,8 @@ show_statement: SHOW DATABASES {
     delete $3;
 }
 | SHOW TABLE table_name INDEX IDENTIFIER {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kIndex;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kIndex;
     if($3->schema_name_ptr_ != nullptr) {
         $$->schema_name_ = $3->schema_name_ptr_;
         free($3->schema_name_ptr_);
@@ -2033,8 +2033,8 @@ show_statement: SHOW DATABASES {
     free($5);
 }
 | SHOW TABLE table_name INDEX IDENTIFIER SEGMENT LONG_VALUE {
-    $$ = new infinity::ShowStatement();
-    $$->show_type_ = infinity::ShowStmtType::kIndexSegment;
+    $$ = new hybridsearch::ShowStatement();
+    $$->show_type_ = hybridsearch::ShowStmtType::kIndexSegment;
     if($3->schema_name_ptr_ != nullptr) {
         $$->schema_name_ = $3->schema_name_ptr_;
         free($3->schema_name_ptr_);
@@ -2049,8 +2049,8 @@ show_statement: SHOW DATABASES {
     $$->segment_id_ = $7;
 }
 | SHOW TABLE table_name INDEX IDENTIFIER SEGMENT LONG_VALUE CHUNK LONG_VALUE {
-      $$ = new infinity::ShowStatement();
-      $$->show_type_ = infinity::ShowStmtType::kIndexChunk;
+      $$ = new hybridsearch::ShowStatement();
+      $$->show_type_ = hybridsearch::ShowStmtType::kIndexChunk;
       if($3->schema_name_ptr_ != nullptr) {
           $$->schema_name_ = $3->schema_name_ptr_;
           free($3->schema_name_ptr_);
@@ -2066,56 +2066,56 @@ show_statement: SHOW DATABASES {
       $$->chunk_id_ = $9;
 }
 | SHOW LOGS {
-      $$ = new infinity::ShowStatement();
-      $$->show_type_ = infinity::ShowStmtType::kLogs;
+      $$ = new hybridsearch::ShowStatement();
+      $$->show_type_ = hybridsearch::ShowStmtType::kLogs;
 }
 | SHOW DELTA LOGS {
-      $$ = new infinity::ShowStatement();
-      $$->show_type_ = infinity::ShowStmtType::kDeltaLogs;
+      $$ = new hybridsearch::ShowStatement();
+      $$->show_type_ = hybridsearch::ShowStmtType::kDeltaLogs;
 }
 | SHOW CATALOGS {
-      $$ = new infinity::ShowStatement();
-      $$->show_type_ = infinity::ShowStmtType::kCatalogs;
+      $$ = new hybridsearch::ShowStatement();
+      $$->show_type_ = hybridsearch::ShowStmtType::kCatalogs;
 }
 | SHOW PERSISTENCE FILES {
-      $$ = new infinity::ShowStatement();
-      $$->show_type_ = infinity::ShowStmtType::kPersistenceFiles;
+      $$ = new hybridsearch::ShowStatement();
+      $$->show_type_ = hybridsearch::ShowStmtType::kPersistenceFiles;
 }
 | SHOW PERSISTENCE OBJECTS {
-      $$ = new infinity::ShowStatement();
-      $$->show_type_ = infinity::ShowStmtType::kPersistenceObjects;
+      $$ = new hybridsearch::ShowStatement();
+      $$->show_type_ = hybridsearch::ShowStmtType::kPersistenceObjects;
 }
 | SHOW PERSISTENCE OBJECT STRING {
-      $$ = new infinity::ShowStatement();
-      $$->show_type_ = infinity::ShowStmtType::kPersistenceObject;
+      $$ = new hybridsearch::ShowStatement();
+      $$->show_type_ = hybridsearch::ShowStmtType::kPersistenceObject;
       $$->file_name_ = $4;
       free($4);
 }
 | SHOW MEMORY {
-      $$ = new infinity::ShowStatement();
-      $$->show_type_ = infinity::ShowStmtType::kMemory;
+      $$ = new hybridsearch::ShowStatement();
+      $$->show_type_ = hybridsearch::ShowStmtType::kMemory;
 }
 | SHOW MEMORY OBJECTS {
-      $$ = new infinity::ShowStatement();
-      $$->show_type_ = infinity::ShowStmtType::kMemoryObjects;
+      $$ = new hybridsearch::ShowStatement();
+      $$->show_type_ = hybridsearch::ShowStmtType::kMemoryObjects;
 }
 | SHOW MEMORY ALLOCATION {
-      $$ = new infinity::ShowStatement();
-      $$->show_type_ = infinity::ShowStmtType::kMemoryAllocation;
+      $$ = new hybridsearch::ShowStatement();
+      $$->show_type_ = hybridsearch::ShowStmtType::kMemoryAllocation;
 }
 | SHOW IDENTIFIER '(' ')' {
-      $$ = new infinity::ShowStatement();
-      $$->show_type_ = infinity::ShowStmtType::kFunction;
+      $$ = new hybridsearch::ShowStatement();
+      $$->show_type_ = hybridsearch::ShowStmtType::kFunction;
       $$->function_name_ = $2;
       free($2);
 }
 | SHOW SNAPSHOTS {
-     $$ = new infinity::ShowStatement();
-     $$->show_type_ = infinity::ShowStmtType::kListSnapshots;
+     $$ = new hybridsearch::ShowStatement();
+     $$->show_type_ = hybridsearch::ShowStmtType::kListSnapshots;
 }
 | SHOW SNAPSHOT IDENTIFIER {
-     $$ = new infinity::ShowStatement();
-     $$->show_type_ = infinity::ShowStmtType::kShowSnapshot;
+     $$ = new hybridsearch::ShowStatement();
+     $$->show_type_ = hybridsearch::ShowStmtType::kShowSnapshot;
      $$->snapshot_name_ = $3;
      free($3);
 }
@@ -2124,23 +2124,23 @@ show_statement: SHOW DATABASES {
  * FLUSH STATEMENT
  */
 flush_statement: FLUSH DATA {
-    $$ = new infinity::FlushStatement();
-    $$->type_ = infinity::FlushType::kData;
+    $$ = new hybridsearch::FlushStatement();
+    $$->type_ = hybridsearch::FlushType::kData;
 }
 | FLUSH LOG {
-    $$ = new infinity::FlushStatement();
-    $$->type_ = infinity::FlushType::kLog;
+    $$ = new hybridsearch::FlushStatement();
+    $$->type_ = hybridsearch::FlushType::kLog;
 }
 | FLUSH BUFFER {
-    $$ = new infinity::FlushStatement();
-    $$->type_ = infinity::FlushType::kBuffer;
+    $$ = new hybridsearch::FlushStatement();
+    $$->type_ = hybridsearch::FlushType::kBuffer;
 };
 
 /*
  * OPTIMIZE STATEMENT
  */
 optimize_statement: OPTIMIZE table_name {
-    $$ = new infinity::OptimizeStatement();
+    $$ = new hybridsearch::OptimizeStatement();
     if($2->schema_name_ptr_ != nullptr) {
         $$->schema_name_ = $2->schema_name_ptr_;
         free($2->schema_name_ptr_);
@@ -2151,7 +2151,7 @@ optimize_statement: OPTIMIZE table_name {
 }
 //   1         2      3        4            5
 | OPTIMIZE IDENTIFIER ON table_name with_index_param_list{
-    $$ = new infinity::OptimizeStatement();
+    $$ = new hybridsearch::OptimizeStatement();
     if($4->schema_name_ptr_ != nullptr) {
         $$->schema_name_ = $4->schema_name_ptr_;
         free($4->schema_name_ptr_);
@@ -2164,7 +2164,7 @@ optimize_statement: OPTIMIZE table_name {
     free($2);
 
     for (auto *&index_param : *$5) {
-        $$->opt_params_.emplace_back(std::unique_ptr<infinity::InitParameter>(index_param));
+        $$->opt_params_.emplace_back(std::unique_ptr<hybridsearch::InitParameter>(index_param));
         index_param = nullptr;
     }
     delete $5;
@@ -2174,126 +2174,126 @@ optimize_statement: OPTIMIZE table_name {
  * Command
  */
 command_statement: USE IDENTIFIER {
-    $$ = new infinity::CommandStatement();
+    $$ = new hybridsearch::CommandStatement();
     ParserHelper::ToLower($2);
-    $$->command_info_ = std::make_shared<infinity::UseCmd>($2);
+    $$->command_info_ = std::make_shared<hybridsearch::UseCmd>($2);
     free($2);
 }
 | EXPORT PROFILES LONG_VALUE file_path {
-    $$ = new infinity::CommandStatement();
-    $$->command_info_ = std::make_shared<infinity::ExportCmd>($4, infinity::ExportType::kProfileRecord, $3);
+    $$ = new hybridsearch::CommandStatement();
+    $$->command_info_ = std::make_shared<hybridsearch::ExportCmd>($4, hybridsearch::ExportType::kProfileRecord, $3);
     free($4);
 }
 | SET SESSION IDENTIFIER ON {
     ParserHelper::ToLower($3);
-    $$ = new infinity::CommandStatement();
-    $$->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kSession, infinity::SetVarType::kBool, $3, true);
+    $$ = new hybridsearch::CommandStatement();
+    $$->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kSession, hybridsearch::SetVarType::kBool, $3, true);
     free($3);
 }
 | SET SESSION IDENTIFIER OFF {
     ParserHelper::ToLower($3);
-    $$ = new infinity::CommandStatement();
-    $$->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kSession, infinity::SetVarType::kBool, $3, false);
+    $$ = new hybridsearch::CommandStatement();
+    $$->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kSession, hybridsearch::SetVarType::kBool, $3, false);
     free($3);
 }
 | SET SESSION IDENTIFIER IDENTIFIER {
     ParserHelper::ToLower($3);
     ParserHelper::ToLower($4);
-    $$ = new infinity::CommandStatement();
-    $$->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kSession, infinity::SetVarType::kString, $3, $4);
+    $$ = new hybridsearch::CommandStatement();
+    $$->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kSession, hybridsearch::SetVarType::kString, $3, $4);
     free($3);
     free($4);
 }
 | SET SESSION IDENTIFIER LONG_VALUE {
     ParserHelper::ToLower($3);
-    $$ = new infinity::CommandStatement();
-    $$->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kSession, infinity::SetVarType::kInteger, $3, $4);
+    $$ = new hybridsearch::CommandStatement();
+    $$->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kSession, hybridsearch::SetVarType::kInteger, $3, $4);
     free($3);
 }
 | SET SESSION IDENTIFIER DOUBLE_VALUE {
     ParserHelper::ToLower($3);
-    $$ = new infinity::CommandStatement();
-    $$->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kSession, infinity::SetVarType::kDouble, $3, $4);
+    $$ = new hybridsearch::CommandStatement();
+    $$->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kSession, hybridsearch::SetVarType::kDouble, $3, $4);
     free($3);
 };
 | SET GLOBAL IDENTIFIER ON {
     ParserHelper::ToLower($3);
-    $$ = new infinity::CommandStatement();
-    $$->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kGlobal, infinity::SetVarType::kBool, $3, true);
+    $$ = new hybridsearch::CommandStatement();
+    $$->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kGlobal, hybridsearch::SetVarType::kBool, $3, true);
     free($3);
 }
 | SET GLOBAL IDENTIFIER OFF {
     ParserHelper::ToLower($3);
-    $$ = new infinity::CommandStatement();
-    $$->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kGlobal, infinity::SetVarType::kBool, $3, false);
+    $$ = new hybridsearch::CommandStatement();
+    $$->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kGlobal, hybridsearch::SetVarType::kBool, $3, false);
     free($3);
 }
 | SET GLOBAL IDENTIFIER IDENTIFIER {
     ParserHelper::ToLower($3);
     ParserHelper::ToLower($4);
-    $$ = new infinity::CommandStatement();
-    $$->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kGlobal, infinity::SetVarType::kString, $3, $4);
+    $$ = new hybridsearch::CommandStatement();
+    $$->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kGlobal, hybridsearch::SetVarType::kString, $3, $4);
     free($3);
     free($4);
 }
 | SET GLOBAL IDENTIFIER LONG_VALUE {
     ParserHelper::ToLower($3);
-    $$ = new infinity::CommandStatement();
-    $$->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kGlobal, infinity::SetVarType::kInteger, $3, $4);
+    $$ = new hybridsearch::CommandStatement();
+    $$->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kGlobal, hybridsearch::SetVarType::kInteger, $3, $4);
     free($3);
 }
 | SET GLOBAL IDENTIFIER DOUBLE_VALUE {
     ParserHelper::ToLower($3);
-    $$ = new infinity::CommandStatement();
-    $$->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kGlobal, infinity::SetVarType::kDouble, $3, $4);
+    $$ = new hybridsearch::CommandStatement();
+    $$->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kGlobal, hybridsearch::SetVarType::kDouble, $3, $4);
     free($3);
 }
 | SET CONFIG IDENTIFIER ON {
     ParserHelper::ToLower($3);
-    $$ = new infinity::CommandStatement();
-    $$->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kConfig, infinity::SetVarType::kBool, $3, true);
+    $$ = new hybridsearch::CommandStatement();
+    $$->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kConfig, hybridsearch::SetVarType::kBool, $3, true);
     free($3);
 }
 | SET CONFIG IDENTIFIER OFF {
     ParserHelper::ToLower($3);
-    $$ = new infinity::CommandStatement();
-    $$->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kConfig, infinity::SetVarType::kBool, $3, false);
+    $$ = new hybridsearch::CommandStatement();
+    $$->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kConfig, hybridsearch::SetVarType::kBool, $3, false);
     free($3);
 }
 | SET CONFIG IDENTIFIER IDENTIFIER {
     ParserHelper::ToLower($3);
     ParserHelper::ToLower($4);
-    $$ = new infinity::CommandStatement();
-    $$->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kConfig, infinity::SetVarType::kString, $3, $4);
+    $$ = new hybridsearch::CommandStatement();
+    $$->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kConfig, hybridsearch::SetVarType::kString, $3, $4);
     free($3);
     free($4);
 }
 | SET CONFIG IDENTIFIER LONG_VALUE {
     ParserHelper::ToLower($3);
-    $$ = new infinity::CommandStatement();
-    $$->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kConfig, infinity::SetVarType::kInteger, $3, $4);
+    $$ = new hybridsearch::CommandStatement();
+    $$->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kConfig, hybridsearch::SetVarType::kInteger, $3, $4);
     free($3);
 }
 | SET CONFIG IDENTIFIER DOUBLE_VALUE {
     ParserHelper::ToLower($3);
-    $$ = new infinity::CommandStatement();
-    $$->command_info_ = std::make_shared<infinity::SetCmd>(infinity::SetScope::kConfig, infinity::SetVarType::kDouble, $3, $4);
+    $$ = new hybridsearch::CommandStatement();
+    $$->command_info_ = std::make_shared<hybridsearch::SetCmd>(hybridsearch::SetScope::kConfig, hybridsearch::SetVarType::kDouble, $3, $4);
     free($3);
 }
 | LOCK TABLE table_name {
-    $$ = new infinity::CommandStatement();
+    $$ = new hybridsearch::CommandStatement();
     ParserHelper::ToLower($3->schema_name_ptr_);
     ParserHelper::ToLower($3->table_name_ptr_);
-    $$->command_info_ = std::make_shared<infinity::LockCmd>($3->schema_name_ptr_, $3->table_name_ptr_);
+    $$->command_info_ = std::make_shared<hybridsearch::LockCmd>($3->schema_name_ptr_, $3->table_name_ptr_);
     free($3->schema_name_ptr_);
     free($3->table_name_ptr_);
     delete $3;
 }
 | UNLOCK TABLE table_name {
-    $$ = new infinity::CommandStatement();
+    $$ = new hybridsearch::CommandStatement();
     ParserHelper::ToLower($3->schema_name_ptr_);
     ParserHelper::ToLower($3->table_name_ptr_);
-    $$->command_info_ = std::make_shared<infinity::UnlockCmd>($3->schema_name_ptr_, $3->table_name_ptr_);
+    $$->command_info_ = std::make_shared<hybridsearch::UnlockCmd>($3->schema_name_ptr_, $3->table_name_ptr_);
     free($3->schema_name_ptr_);
     free($3->table_name_ptr_);
     delete $3;
@@ -2301,41 +2301,41 @@ command_statement: USE IDENTIFIER {
 | CREATE SNAPSHOT IDENTIFIER ON TABLE IDENTIFIER {
     ParserHelper::ToLower($3);
     ParserHelper::ToLower($6);
-    $$ = new infinity::CommandStatement();
-    $$->command_info_ = std::make_shared<infinity::SnapshotCmd>($3, infinity::SnapshotOp::kCreate, infinity::SnapshotScope::kTable, $6);
+    $$ = new hybridsearch::CommandStatement();
+    $$->command_info_ = std::make_shared<hybridsearch::SnapshotCmd>($3, hybridsearch::SnapshotOp::kCreate, hybridsearch::SnapshotScope::kTable, $6);
     free($3);
     free($6);
 }
 | CREATE SNAPSHOT IDENTIFIER ON DATABASE IDENTIFIER {
     ParserHelper::ToLower($3);
     ParserHelper::ToLower($6);
-    $$ = new infinity::CommandStatement();
-    $$->command_info_ = std::make_shared<infinity::SnapshotCmd>($3, infinity::SnapshotOp::kCreate, infinity::SnapshotScope::kDatabase, $6);
+    $$ = new hybridsearch::CommandStatement();
+    $$->command_info_ = std::make_shared<hybridsearch::SnapshotCmd>($3, hybridsearch::SnapshotOp::kCreate, hybridsearch::SnapshotScope::kDatabase, $6);
     free($3);
     free($6);
 }
 | CREATE SNAPSHOT IDENTIFIER ON SYSTEM {
     ParserHelper::ToLower($3);
-    $$ = new infinity::CommandStatement();
-    $$->command_info_ = std::make_shared<infinity::SnapshotCmd>($3, infinity::SnapshotOp::kCreate, infinity::SnapshotScope::kSystem);
+    $$ = new hybridsearch::CommandStatement();
+    $$->command_info_ = std::make_shared<hybridsearch::SnapshotCmd>($3, hybridsearch::SnapshotOp::kCreate, hybridsearch::SnapshotScope::kSystem);
     free($3);
 }
 | DROP SNAPSHOT IDENTIFIER {
     ParserHelper::ToLower($3);
-    $$ = new infinity::CommandStatement();
-    $$->command_info_ = std::make_shared<infinity::SnapshotCmd>($3, infinity::SnapshotOp::kDrop, infinity::SnapshotScope::kIgnore);
+    $$ = new hybridsearch::CommandStatement();
+    $$->command_info_ = std::make_shared<hybridsearch::SnapshotCmd>($3, hybridsearch::SnapshotOp::kDrop, hybridsearch::SnapshotScope::kIgnore);
     free($3);
 }
 | RESTORE DATABASE SNAPSHOT IDENTIFIER {
     ParserHelper::ToLower($4);
-    $$ = new infinity::CommandStatement();
-    $$->command_info_ = std::make_shared<infinity::SnapshotCmd>($4, infinity::SnapshotOp::kRestore, infinity::SnapshotScope::kDatabase);
+    $$ = new hybridsearch::CommandStatement();
+    $$->command_info_ = std::make_shared<hybridsearch::SnapshotCmd>($4, hybridsearch::SnapshotOp::kRestore, hybridsearch::SnapshotScope::kDatabase);
     free($4);
 }
 | RESTORE TABLE SNAPSHOT IDENTIFIER {
     ParserHelper::ToLower($4);
-    $$ = new infinity::CommandStatement();
-    $$->command_info_ = std::make_shared<infinity::SnapshotCmd>($4, infinity::SnapshotOp::kRestore, infinity::SnapshotScope::kTable);
+    $$ = new hybridsearch::CommandStatement();
+    $$->command_info_ = std::make_shared<hybridsearch::SnapshotCmd>($4, hybridsearch::SnapshotOp::kRestore, hybridsearch::SnapshotScope::kTable);
     free($4);
 }
 
@@ -2348,43 +2348,43 @@ compact_statement: COMPACT TABLE table_name {
     std::string table_name = std::string($3->table_name_ptr_);
     free($3->table_name_ptr_);
 
-    $$ = new infinity::ManualCompactStatement(std::move(schema_name), std::move(table_name));
+    $$ = new hybridsearch::ManualCompactStatement(std::move(schema_name), std::move(table_name));
     delete $3;
 }
 
 admin_statement: ADMIN SHOW CATALOGS {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kListCatalogs;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kListCatalogs;
 }
 | ADMIN SHOW CATALOG LONG_VALUE {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kShowCatalog;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kShowCatalog;
      $$->catalog_file_index_ = $4;
 }
 | ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASES {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kListDatabases;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kListDatabases;
      $$->catalog_file_start_index_ = $4;
      $$->catalog_file_end_index_ = $5;
 }
 | ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASE LONG_VALUE {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kShowDatabase;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kShowDatabase;
      $$->catalog_file_start_index_ = $4;
      $$->catalog_file_end_index_ = $5;
      $$->database_meta_index_ = $7;
 }
 | ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASE LONG_VALUE LONG_VALUE TABLES {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kListTables;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kListTables;
      $$->catalog_file_start_index_ = $4;
      $$->catalog_file_end_index_ = $5;
      $$->database_meta_index_ = $7;
      $$->database_entry_index_ = $8;
 }
 | ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASE LONG_VALUE LONG_VALUE TABLE LONG_VALUE {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kShowTable;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kShowTable;
      $$->catalog_file_start_index_ = $4;
      $$->catalog_file_end_index_ = $5;
      $$->database_meta_index_ = $7;
@@ -2392,8 +2392,8 @@ admin_statement: ADMIN SHOW CATALOGS {
      $$->table_meta_index_ = $10;
 }
 | ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASE LONG_VALUE LONG_VALUE TABLE LONG_VALUE LONG_VALUE COLUMNS {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kShowColumn;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kShowColumn;
      $$->catalog_file_start_index_ = $4;
      $$->catalog_file_end_index_ = $5;
      $$->database_meta_index_ = $7;
@@ -2402,8 +2402,8 @@ admin_statement: ADMIN SHOW CATALOGS {
      $$->table_entry_index_ = $11;
 }
 | ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASE LONG_VALUE LONG_VALUE TABLE LONG_VALUE LONG_VALUE SEGMENTS {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kListSegments;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kListSegments;
      $$->catalog_file_start_index_ = $4;
      $$->catalog_file_end_index_ = $5;
      $$->database_meta_index_ = $7;
@@ -2412,8 +2412,8 @@ admin_statement: ADMIN SHOW CATALOGS {
      $$->table_entry_index_ = $11;
 }
 | ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASE LONG_VALUE LONG_VALUE TABLE LONG_VALUE LONG_VALUE SEGMENT LONG_VALUE {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kShowSegment;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kShowSegment;
      $$->catalog_file_start_index_ = $4;
      $$->catalog_file_end_index_ = $5;
      $$->database_meta_index_ = $7;
@@ -2423,8 +2423,8 @@ admin_statement: ADMIN SHOW CATALOGS {
      $$->segment_index_ = $13;
 }
 | ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASE LONG_VALUE LONG_VALUE TABLE LONG_VALUE LONG_VALUE SEGMENT LONG_VALUE BLOCKS {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kListBlocks;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kListBlocks;
      $$->catalog_file_start_index_ = $4;
      $$->catalog_file_end_index_ = $5;
      $$->database_meta_index_ = $7;
@@ -2434,8 +2434,8 @@ admin_statement: ADMIN SHOW CATALOGS {
      $$->segment_index_ = $13;
 }
 | ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASE LONG_VALUE LONG_VALUE TABLE LONG_VALUE LONG_VALUE SEGMENT LONG_VALUE BLOCK LONG_VALUE {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kShowBlock;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kShowBlock;
      $$->catalog_file_start_index_ = $4;
      $$->catalog_file_end_index_ = $5;
      $$->database_meta_index_ = $7;
@@ -2446,8 +2446,8 @@ admin_statement: ADMIN SHOW CATALOGS {
      $$->block_index_ = $15;
 }
 | ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASE LONG_VALUE LONG_VALUE TABLE LONG_VALUE LONG_VALUE SEGMENT LONG_VALUE BLOCK LONG_VALUE COLUMNS {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kListColumns;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kListColumns;
      $$->catalog_file_start_index_ = $4;
      $$->catalog_file_end_index_ = $5;
      $$->database_meta_index_ = $7;
@@ -2458,8 +2458,8 @@ admin_statement: ADMIN SHOW CATALOGS {
      $$->block_index_ = $15;
 }
 | ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASE LONG_VALUE LONG_VALUE TABLE LONG_VALUE LONG_VALUE INDEXES {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kListIndexes;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kListIndexes;
      $$->catalog_file_start_index_ = $4;
      $$->catalog_file_end_index_ = $5;
      $$->database_meta_index_ = $7;
@@ -2468,8 +2468,8 @@ admin_statement: ADMIN SHOW CATALOGS {
      $$->table_entry_index_ = $11;
 }
 | ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASE LONG_VALUE LONG_VALUE TABLE LONG_VALUE LONG_VALUE INDEX LONG_VALUE {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kShowIndex;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kShowIndex;
      $$->catalog_file_start_index_ = $4;
      $$->catalog_file_end_index_ = $5;
      $$->database_meta_index_ = $7;
@@ -2479,8 +2479,8 @@ admin_statement: ADMIN SHOW CATALOGS {
      $$->index_meta_index_ = $13;
 }
 | ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASE LONG_VALUE LONG_VALUE TABLE LONG_VALUE LONG_VALUE INDEX LONG_VALUE LONG_VALUE SEGMENTS {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kListIndexSegments;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kListIndexSegments;
      $$->catalog_file_start_index_ = $4;
      $$->catalog_file_end_index_ = $5;
      $$->database_meta_index_ = $7;
@@ -2491,8 +2491,8 @@ admin_statement: ADMIN SHOW CATALOGS {
      $$->index_entry_index_ = $14;
 }
 | ADMIN SHOW CATALOG LONG_VALUE LONG_VALUE DATABASE LONG_VALUE LONG_VALUE TABLE LONG_VALUE LONG_VALUE INDEX LONG_VALUE LONG_VALUE SEGMENT LONG_VALUE {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kShowIndexSegment;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kShowIndexSegment;
      $$->catalog_file_start_index_ = $4;
      $$->catalog_file_end_index_ = $5;
      $$->database_meta_index_ = $7;
@@ -2504,123 +2504,123 @@ admin_statement: ADMIN SHOW CATALOGS {
      $$->segment_index_ = $16;
 }
 | ADMIN SHOW LOGS {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kListLogFiles;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kListLogFiles;
 }
 | ADMIN SHOW LOG LONG_VALUE {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kShowLogFile;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kShowLogFile;
      $$->log_file_index_ = $4;
 }
 | ADMIN SHOW LOG LONG_VALUE INDEXES {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kListLogIndexes;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kListLogIndexes;
      $$->log_file_index_ = $4;
 }
 | ADMIN SHOW LOG LONG_VALUE INDEX LONG_VALUE {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kShowLogIndex;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kShowLogIndex;
      $$->log_file_index_ = $4;
      $$->log_index_in_file_ = $6;
 }
 | ADMIN SHOW CONFIGS {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kListConfigs;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kListConfigs;
 }
 | ADMIN SHOW VARIABLES {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kListVariables;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kListVariables;
 }
 | ADMIN SHOW VARIABLE IDENTIFIER {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kShowVariable;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kShowVariable;
      $$->variable_name_ = $4;
      free($4);
 }
 | ADMIN CREATE SNAPSHOT {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kCreateSnapshot;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kCreateSnapshot;
 }
 | ADMIN SHOW SNAPSHOTS {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kListSnapshots;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kListSnapshots;
 }
 | ADMIN SHOW SNAPSHOT IDENTIFIER {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kShowSnapshot;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kShowSnapshot;
      $$->snapshot_name_ = $4;
      free($4);
 }
 | ADMIN DELETE SNAPSHOT STRING {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kDeleteSnapshot;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kDeleteSnapshot;
      $$->snapshot_name_ = $4;
      free($4);
 }
 | ADMIN EXPORT SNAPSHOT STRING TO STRING {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kExportSnapshot;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kExportSnapshot;
      $$->snapshot_name_ = $4;
      $$->export_path_ = $6;
      free($4);
      free($6);
 }
 | ADMIN RECOVER FROM SNAPSHOT STRING {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kRecoverFromSnapshot;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kRecoverFromSnapshot;
      $$->snapshot_name_ = $5;
      free($5);
 }
 | ADMIN SHOW NODES {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kListNodes;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kListNodes;
 }
 | ADMIN SHOW NODE STRING {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kShowNode;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kShowNode;
      $$->node_name_ = $4;
      free($4);
 }
 | ADMIN SHOW NODE {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kShowCurrentNode;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kShowCurrentNode;
 }
 | ADMIN REMOVE NODE STRING {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kRemoveNode;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kRemoveNode;
      $$->node_name_ = $4;
      free($4);
 }
 | ADMIN SET ADMIN {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kSetRole;
-     $$->node_role_ = infinity::NodeRole::kAdmin;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kSetRole;
+     $$->node_role_ = hybridsearch::NodeRole::kAdmin;
 }
 | ADMIN SET STANDALONE {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kSetRole;
-     $$->node_role_ = infinity::NodeRole::kStandalone;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kSetRole;
+     $$->node_role_ = hybridsearch::NodeRole::kStandalone;
 }
 | ADMIN SET LEADER USING STRING {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kSetRole;
-     $$->node_role_ = infinity::NodeRole::kLeader;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kSetRole;
+     $$->node_role_ = hybridsearch::NodeRole::kLeader;
      $$->node_name_ = $5;
      free($5);
 }
 | ADMIN CONNECT STRING AS FOLLOWER USING STRING {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kSetRole;
-     $$->node_role_ = infinity::NodeRole::kFollower;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kSetRole;
+     $$->node_role_ = hybridsearch::NodeRole::kFollower;
      $$->leader_address_ = $3;
      $$->node_name_ = $7;
      free($3);
      free($7);
 }
 | ADMIN CONNECT STRING AS LEARNER USING STRING {
-     $$ = new infinity::AdminStatement();
-     $$->admin_type_ = infinity::AdminStmtType::kSetRole;
-     $$->node_role_ = infinity::NodeRole::kLearner;
+     $$ = new hybridsearch::AdminStatement();
+     $$->admin_type_ = hybridsearch::AdminStmtType::kSetRole;
+     $$->node_role_ = hybridsearch::NodeRole::kLearner;
      $$->leader_address_ = $3;
      $$->node_name_ = $7;
      free($3);
@@ -2628,7 +2628,7 @@ admin_statement: ADMIN SHOW CATALOGS {
 }
 
 alter_statement : ALTER TABLE table_name RENAME TO IDENTIFIER {
-    auto *ret = new infinity::RenameTableStatement($3->schema_name_ptr_, $3->table_name_ptr_);
+    auto *ret = new hybridsearch::RenameTableStatement($3->schema_name_ptr_, $3->table_name_ptr_);
     $$ = ret;
     ret->new_table_name_ = $6;
     free($6);
@@ -2637,10 +2637,10 @@ alter_statement : ALTER TABLE table_name RENAME TO IDENTIFIER {
     delete $3;
 }
 | ALTER TABLE table_name ADD COLUMN '(' column_def_array ')' {
-    auto *ret = new infinity::AddColumnsStatement($3->schema_name_ptr_, $3->table_name_ptr_);
+    auto *ret = new hybridsearch::AddColumnsStatement($3->schema_name_ptr_, $3->table_name_ptr_);
     $$ = ret;
 
-    for (infinity::ColumnDef*& column_def : *$7) {
+    for (hybridsearch::ColumnDef*& column_def : *$7) {
         ret->column_defs_.emplace_back(column_def);
     }
     delete $7;
@@ -2649,7 +2649,7 @@ alter_statement : ALTER TABLE table_name RENAME TO IDENTIFIER {
     delete $3;
 }
 | ALTER TABLE table_name DROP COLUMN '(' identifier_array ')' {
-    auto *ret = new infinity::DropColumnsStatement($3->schema_name_ptr_, $3->table_name_ptr_);
+    auto *ret = new hybridsearch::DropColumnsStatement($3->schema_name_ptr_, $3->table_name_ptr_);
     $$ = ret;
     for (std::string &column_name : *$7) {
         ret->column_names_.emplace_back(std::move(column_name));
@@ -2665,7 +2665,7 @@ alter_statement : ALTER TABLE table_name RENAME TO IDENTIFIER {
  */
 
 expr_array : expr_alias {
-    $$ = new std::vector<infinity::ParsedExpr*>();
+    $$ = new std::vector<hybridsearch::ParsedExpr*>();
     $$->emplace_back($1);
 }
 | expr_array ',' expr_alias {
@@ -2674,18 +2674,18 @@ expr_array : expr_alias {
 };
 
 insert_row_list : '(' expr_array ')' {
-    auto res = std::make_unique<infinity::InsertRowExpr>();
+    auto res = std::make_unique<hybridsearch::InsertRowExpr>();
     for (auto* &expr : *$2) {
         res->values_.emplace_back(expr);
         expr = nullptr;
     }
     delete $2;
-    $$ = new std::vector<infinity::InsertRowExpr*>();
+    $$ = new std::vector<hybridsearch::InsertRowExpr*>();
     $$->emplace_back(res.release());
 }
 | insert_row_list ',' '(' expr_array ')' {
     $$ = $1;
-    auto res = std::make_unique<infinity::InsertRowExpr>();
+    auto res = std::make_unique<hybridsearch::InsertRowExpr>();
     for (auto* &expr : *$4) {
         res->values_.emplace_back(expr);
         expr = nullptr;
@@ -2696,7 +2696,7 @@ insert_row_list : '(' expr_array ')' {
 
 /*
 constant_expr_array: constant_expr {
-    $$ = new std::vector<infinity::ParsedExpr*>();
+    $$ = new std::vector<hybridsearch::ParsedExpr*>();
     $$->emplace_back($1);
 }
 | constant_expr_array ',' constant_expr {
@@ -2725,8 +2725,8 @@ operand: '(' expr ')' {
     $$ = $2;
 }
 | '(' select_without_paren ')' {
-    infinity::SubqueryExpr* subquery_expr = new infinity::SubqueryExpr();
-    subquery_expr->subquery_type_ = infinity::SubqueryType::kScalar;
+    hybridsearch::SubqueryExpr* subquery_expr = new hybridsearch::SubqueryExpr();
+    subquery_expr->subquery_type_ = hybridsearch::SubqueryType::kScalar;
     subquery_expr->select_ = $2;
     $$ = subquery_expr;
 }
@@ -2747,7 +2747,7 @@ operand: '(' expr ')' {
 //                                       4                 6                 8          10         12                                          13
 //                  MATCH TENSOR  (  column_name, search_tensor, tensor_data_type, search_method, extra_match_tensor_option(including topn) optional_filter)
 match_tensor_expr : MATCH TENSOR '(' column_expr ',' common_array_expr ',' STRING ',' STRING ',' STRING optional_search_filter_expr ')' {
-    auto match_tensor_expr = std::make_unique<infinity::MatchTensorExpr>();
+    auto match_tensor_expr = std::make_unique<hybridsearch::MatchTensorExpr>();
     // search column
     match_tensor_expr->SetSearchColumn($4);
     // search tensor
@@ -2763,7 +2763,7 @@ match_tensor_expr : MATCH TENSOR '(' column_expr ',' common_array_expr ',' STRIN
 }
 | //1   2     3       4       5        6            7     8    9     10   11   12          13                   14    15   16   17     18
 MATCH TENSOR '(' column_expr ',' common_array_expr ',' STRING ',' STRING ',' STRING optional_search_filter_expr ')' USING INDEX '(' IDENTIFIER ')' {
-    auto match_tensor_expr = std::make_unique<infinity::MatchTensorExpr>();
+    auto match_tensor_expr = std::make_unique<hybridsearch::MatchTensorExpr>();
     // search column
     match_tensor_expr->SetSearchColumn($4);
     // search tensor
@@ -2780,7 +2780,7 @@ MATCH TENSOR '(' column_expr ',' common_array_expr ',' STRING ',' STRING ',' STR
 }
 | //1   2     3       4       5        6            7     8    9     10   11   12          13                   14
 MATCH TENSOR '(' column_expr ',' common_array_expr ',' STRING ',' STRING ',' STRING optional_search_filter_expr ')' IGNORE INDEX {
-    auto match_tensor_expr = std::make_unique<infinity::MatchTensorExpr>();
+    auto match_tensor_expr = std::make_unique<hybridsearch::MatchTensorExpr>();
     // search column
     match_tensor_expr->SetSearchColumn($4);
     // search tensor
@@ -2798,7 +2798,7 @@ MATCH TENSOR '(' column_expr ',' common_array_expr ',' STRING ',' STRING ',' STR
 //                  MATCH VECTOR (column_name, query_vec, data_type, metric_type, topn             optional_filter          ) USING INDEX ( index_name )  extra options
 //                   1      2         4         6              8          10           12                13                                        18             20
 match_vector_expr : MATCH VECTOR '(' expr ',' array_expr ',' STRING ',' STRING ',' LONG_VALUE optional_search_filter_expr ')' USING INDEX '(' IDENTIFIER ')' with_index_param_list {
-    infinity::KnnExpr* match_vector_expr = new infinity::KnnExpr();
+    hybridsearch::KnnExpr* match_vector_expr = new hybridsearch::KnnExpr();
     $$ = match_vector_expr;
 
     // vector search column
@@ -2844,7 +2844,7 @@ Return1:
 }
 |
 MATCH VECTOR '(' expr ',' array_expr ',' STRING ',' STRING ',' LONG_VALUE optional_search_filter_expr ')' IGNORE INDEX {
-    infinity::KnnExpr* match_vector_expr = new infinity::KnnExpr();
+    hybridsearch::KnnExpr* match_vector_expr = new hybridsearch::KnnExpr();
     $$ = match_vector_expr;
 
     // vector search column
@@ -2883,7 +2883,7 @@ Return2:
 }
 |
 MATCH VECTOR '(' expr ',' array_expr ',' STRING ',' STRING ',' LONG_VALUE optional_search_filter_expr ')' with_index_param_list {
-    infinity::KnnExpr* match_vector_expr = new infinity::KnnExpr();
+    hybridsearch::KnnExpr* match_vector_expr = new hybridsearch::KnnExpr();
     $$ = match_vector_expr;
 
     // vector search column
@@ -2926,7 +2926,7 @@ Return3:
 }
 |
 MATCH VECTOR '(' expr ',' array_expr ',' STRING ',' STRING optional_search_filter_expr ')' with_index_param_list {
-    infinity::KnnExpr* match_vector_expr = new infinity::KnnExpr();
+    hybridsearch::KnnExpr* match_vector_expr = new hybridsearch::KnnExpr();
     $$ = match_vector_expr;
 
     // vector search search column
@@ -2949,7 +2949,7 @@ MATCH VECTOR '(' expr ',' array_expr ',' STRING ',' STRING optional_search_filte
     free($10);
     delete $6;
 
-    match_vector_expr->topn_ = infinity::DEFAULT_MATCH_VECTOR_TOP_N;
+    match_vector_expr->topn_ = hybridsearch::DEFAULT_MATCH_VECTOR_TOP_N;
     match_vector_expr->filter_expr_.reset($11);
     match_vector_expr->opt_params_ = $13;
     goto Return4;
@@ -2973,7 +2973,7 @@ Return4:
 //                 MATCH SPARSE (column_name,       query_sparse,      metric_type,     topn,         optional_filter)                                             extra options
 //                   1      2         4                  6                   8           10                  11                                     16                  18
 match_sparse_expr: MATCH SPARSE '(' expr ',' common_sparse_array_expr ',' STRING ',' LONG_VALUE optional_search_filter_expr ')' USING INDEX '(' IDENTIFIER ')' with_index_param_list {
-    auto match_sparse_expr = new infinity::MatchSparseExpr();
+    auto match_sparse_expr = new hybridsearch::MatchSparseExpr();
     $$ = match_sparse_expr;
 
     // search column
@@ -2997,7 +2997,7 @@ match_sparse_expr: MATCH SPARSE '(' expr ',' common_sparse_array_expr ',' STRING
 }
 |
 MATCH SPARSE '(' expr ',' common_sparse_array_expr ',' STRING ',' LONG_VALUE optional_search_filter_expr ')' IGNORE INDEX {
-    auto match_sparse_expr = new infinity::MatchSparseExpr();
+    auto match_sparse_expr = new hybridsearch::MatchSparseExpr();
     $$ = match_sparse_expr;
 
     // search column
@@ -3020,7 +3020,7 @@ MATCH SPARSE '(' expr ',' common_sparse_array_expr ',' STRING ',' LONG_VALUE opt
 }
 |
 MATCH SPARSE '(' expr ',' common_sparse_array_expr ',' STRING ',' LONG_VALUE optional_search_filter_expr ')' with_index_param_list {
-    auto match_sparse_expr = new infinity::MatchSparseExpr();
+    auto match_sparse_expr = new hybridsearch::MatchSparseExpr();
     $$ = match_sparse_expr;
 
     // search column
@@ -3041,7 +3041,7 @@ MATCH SPARSE '(' expr ',' common_sparse_array_expr ',' STRING ',' LONG_VALUE opt
 }
 |
 MATCH SPARSE '(' expr ',' common_sparse_array_expr ',' STRING optional_search_filter_expr ')' with_index_param_list {
-    auto match_sparse_expr = new infinity::MatchSparseExpr();
+    auto match_sparse_expr = new hybridsearch::MatchSparseExpr();
     $$ = match_sparse_expr;
 
     // search column
@@ -3058,11 +3058,11 @@ MATCH SPARSE '(' expr ',' common_sparse_array_expr ',' STRING optional_search_fi
     match_sparse_expr->SetOptionalFilter($9);
 
     // topn and options
-    match_sparse_expr->SetOptParams(infinity::DEFAULT_MATCH_SPARSE_TOP_N, $11);
+    match_sparse_expr->SetOptParams(hybridsearch::DEFAULT_MATCH_SPARSE_TOP_N, $11);
 }
 
 match_text_expr : MATCH TEXT '(' STRING ',' STRING optional_search_filter_expr ')' {
-    infinity::MatchExpr* match_text_expr = new infinity::MatchExpr();
+    hybridsearch::MatchExpr* match_text_expr = new hybridsearch::MatchExpr();
     match_text_expr->fields_ = std::string($4);
     match_text_expr->matching_text_ = std::string($6);
     match_text_expr->filter_expr_.reset($7);
@@ -3071,7 +3071,7 @@ match_text_expr : MATCH TEXT '(' STRING ',' STRING optional_search_filter_expr '
     $$ = match_text_expr;
 }
 | MATCH TEXT '(' STRING ',' STRING ',' STRING optional_search_filter_expr ')' {
-    infinity::MatchExpr* match_text_expr = new infinity::MatchExpr();
+    hybridsearch::MatchExpr* match_text_expr = new hybridsearch::MatchExpr();
     match_text_expr->fields_ = std::string($4);
     match_text_expr->matching_text_ = std::string($6);
     match_text_expr->options_text_ = std::string($8);
@@ -3082,7 +3082,7 @@ match_text_expr : MATCH TEXT '(' STRING ',' STRING optional_search_filter_expr '
     $$ = match_text_expr;
 }
 | MATCH TEXT '(' STRING ',' STRING optional_search_filter_expr ')' USING INDEXES '(' STRING ')' {
-    infinity::MatchExpr* match_text_expr = new infinity::MatchExpr();
+    hybridsearch::MatchExpr* match_text_expr = new hybridsearch::MatchExpr();
     match_text_expr->fields_ = std::string($4);
     match_text_expr->matching_text_ = std::string($6);
     match_text_expr->filter_expr_.reset($7);
@@ -3093,7 +3093,7 @@ match_text_expr : MATCH TEXT '(' STRING ',' STRING optional_search_filter_expr '
     $$ = match_text_expr;
 }
 | MATCH TEXT '(' STRING ',' STRING ',' STRING optional_search_filter_expr ')' USING INDEXES '(' STRING ')' {
-    infinity::MatchExpr* match_text_expr = new infinity::MatchExpr();
+    hybridsearch::MatchExpr* match_text_expr = new hybridsearch::MatchExpr();
     match_text_expr->fields_ = std::string($4);
     match_text_expr->matching_text_ = std::string($6);
     match_text_expr->options_text_ = std::string($8);
@@ -3107,14 +3107,14 @@ match_text_expr : MATCH TEXT '(' STRING ',' STRING optional_search_filter_expr '
 }
 
 query_expr : QUERY '(' STRING optional_search_filter_expr ')' {
-    infinity::MatchExpr* match_text_expr = new infinity::MatchExpr();
+    hybridsearch::MatchExpr* match_text_expr = new hybridsearch::MatchExpr();
     match_text_expr->matching_text_ = std::string($3);
     match_text_expr->filter_expr_.reset($4);
     free($3);
     $$ = match_text_expr;
 }
 | QUERY '(' STRING ',' STRING optional_search_filter_expr ')' {
-    infinity::MatchExpr* match_text_expr = new infinity::MatchExpr();
+    hybridsearch::MatchExpr* match_text_expr = new hybridsearch::MatchExpr();
     match_text_expr->matching_text_ = std::string($3);
     match_text_expr->options_text_ = std::string($5);
     match_text_expr->filter_expr_.reset($6);
@@ -3124,13 +3124,13 @@ query_expr : QUERY '(' STRING optional_search_filter_expr ')' {
 }
 
 fusion_expr : FUSION '(' STRING ')' {
-    infinity::FusionExpr* fusion_expr = new infinity::FusionExpr();
+    hybridsearch::FusionExpr* fusion_expr = new hybridsearch::FusionExpr();
     fusion_expr->method_ = std::string($3);
     free($3);
     $$ = fusion_expr;
 }
 | FUSION '(' STRING ',' STRING ')' {
-    auto fusion_expr = std::make_unique<infinity::FusionExpr>();
+    auto fusion_expr = std::make_unique<hybridsearch::FusionExpr>();
     fusion_expr->method_ = std::string($3);
     free($3);
     $3 = nullptr;
@@ -3161,7 +3161,7 @@ sub_search : match_vector_expr {
 }
 
 sub_search_array : sub_search {
-    $$ = new std::vector<infinity::ParsedExpr*>();
+    $$ = new std::vector<hybridsearch::ParsedExpr*>();
     $$->emplace_back($1);
 }
 | sub_search_array ',' sub_search {
@@ -3170,7 +3170,7 @@ sub_search_array : sub_search {
 };
 
 function_expr : IDENTIFIER '(' ')' {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     ParserHelper::ToLower($1);
     func_expr->func_name_ = $1;
     free($1);
@@ -3178,7 +3178,7 @@ function_expr : IDENTIFIER '(' ')' {
     $$ = func_expr;
 }
 | IDENTIFIER '(' expr_array ')' {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     ParserHelper::ToLower($1);
     func_expr->func_name_ = $1;
     free($1);
@@ -3186,7 +3186,7 @@ function_expr : IDENTIFIER '(' ')' {
     $$ = func_expr;
 }
 | IDENTIFIER '(' DISTINCT expr_array ')' {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     ParserHelper::ToLower($1);
     func_expr->func_name_ = $1;
     free($1);
@@ -3195,199 +3195,199 @@ function_expr : IDENTIFIER '(' ')' {
     $$ = func_expr;
 }
 | YEAR '(' expr ')' {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "year";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | MONTH '(' expr ')' {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "month";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | DAY '(' expr ')' {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "day";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | HOUR '(' expr ')' {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "hour";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | MINUTE '(' expr ')' {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "minute";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | SECOND '(' expr ')' {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "second";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | operand IS NOT NULLABLE {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "is_not_null";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     $$ = func_expr;
 }
 | operand IS NULLABLE {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "is_null";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     $$ = func_expr;
 }
 | NOT operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "not";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($2);
     $$ = func_expr;
 }
 | '-' operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "-";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($2);
     $$ = func_expr;
 }
 | '+' operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "+";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($2);
     $$ = func_expr;
 }
 | operand '-' operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "-";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | operand '+' operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "+";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | operand '*' operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "*";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | operand '/' operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "/";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | operand '%' operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "%";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | operand '=' operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "=";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | operand EQUAL operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "=";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | operand NOT_EQ operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "<>";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | operand '<' operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "<";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | operand '>' operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = ">";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | operand LESS_EQ operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "<=";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | operand GREATER_EQ operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = ">=";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | EXTRACT '(' STRING FROM operand ')' {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     ParserHelper::ToLower($3);
     if(strcmp($3, "year") == 0) {
         func_expr->func_name_ = "extract_year";
-        func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+        func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     } else if(strcmp($3, "month") == 0) {
         func_expr->func_name_ = "extract_month";
-        func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+        func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     } else if(strcmp($3, "day") == 0) {
         func_expr->func_name_ = "extract_day";
-        func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+        func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     } else if(strcmp($3, "hour") == 0) {
         func_expr->func_name_ = "extract_hour";
-        func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+        func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     } else if(strcmp($3, "minute") == 0) {
         func_expr->func_name_ = "extract_minute";
-        func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+        func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     } else if(strcmp($3, "second") == 0) {
         func_expr->func_name_ = "extract_second";
-        func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+        func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     } else {
         delete func_expr;
         yyerror(&yyloc, scanner, result, "Invalid column expression format");
@@ -3398,41 +3398,41 @@ function_expr : IDENTIFIER '(' ')' {
     $$ = func_expr;
 }
 | operand LIKE operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "like";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | operand NOT LIKE operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "not_like";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($4);
     $$ = func_expr;
 };
 
 conjunction_expr: expr AND expr {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "and";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | expr OR expr {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "or";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 };
 
 between_expr: operand BETWEEN operand AND operand {
-    infinity::BetweenExpr* between_expr = new infinity::BetweenExpr();
+    hybridsearch::BetweenExpr* between_expr = new hybridsearch::BetweenExpr();
     between_expr->value_ = $1;
     between_expr->lower_bound_ = $3;
     between_expr->upper_bound_ = $5;
@@ -3440,52 +3440,52 @@ between_expr: operand BETWEEN operand AND operand {
 }
 
 in_expr: operand IN '(' expr_array ')' {
-    infinity::InExpr* in_expr = new infinity::InExpr(true);
+    hybridsearch::InExpr* in_expr = new hybridsearch::InExpr(true);
     in_expr->left_ = $1;
     in_expr->arguments_ = $4;
     $$ = in_expr;
 }
 | operand NOT IN '(' expr_array ')' {
-    infinity::InExpr* in_expr = new infinity::InExpr(false);
+    hybridsearch::InExpr* in_expr = new hybridsearch::InExpr(false);
     in_expr->left_ = $1;
     in_expr->arguments_ = $5;
     $$ = in_expr;
 };
 
 case_expr: CASE expr case_check_array END {
-    infinity::CaseExpr* case_expr = new infinity::CaseExpr();
+    hybridsearch::CaseExpr* case_expr = new hybridsearch::CaseExpr();
     case_expr->expr_ = $2;
     case_expr->case_check_array_ = $3;
     $$ = case_expr;
 }
 | CASE expr case_check_array ELSE expr END {
-    infinity::CaseExpr* case_expr = new infinity::CaseExpr();
+    hybridsearch::CaseExpr* case_expr = new hybridsearch::CaseExpr();
     case_expr->expr_ = $2;
     case_expr->case_check_array_ = $3;
     case_expr->else_expr_ = $5;
     $$ = case_expr;
 }
 | CASE case_check_array END {
-    infinity::CaseExpr* case_expr = new infinity::CaseExpr();
+    hybridsearch::CaseExpr* case_expr = new hybridsearch::CaseExpr();
     case_expr->case_check_array_ = $2;
     $$ = case_expr;
 }
 | CASE case_check_array ELSE expr END {
-    infinity::CaseExpr* case_expr = new infinity::CaseExpr();
+    hybridsearch::CaseExpr* case_expr = new hybridsearch::CaseExpr();
     case_expr->case_check_array_ = $2;
     case_expr->else_expr_ = $4;
     $$ = case_expr;
 };
 
 case_check_array: WHEN expr THEN expr {
-    $$ = new std::vector<infinity::WhenThen*>();
-    infinity::WhenThen* when_then_ptr = new infinity::WhenThen();
+    $$ = new std::vector<hybridsearch::WhenThen*>();
+    hybridsearch::WhenThen* when_then_ptr = new hybridsearch::WhenThen();
     when_then_ptr->when_ = $2;
     when_then_ptr->then_ = $4;
     $$->emplace_back(when_then_ptr);
 }
 | case_check_array WHEN expr THEN expr {
-    infinity::WhenThen* when_then_ptr = new infinity::WhenThen();
+    hybridsearch::WhenThen* when_then_ptr = new hybridsearch::WhenThen();
     when_then_ptr->when_ = $3;
     when_then_ptr->then_ = $5;
     $1->emplace_back(when_then_ptr);
@@ -3493,66 +3493,66 @@ case_check_array: WHEN expr THEN expr {
 };
 
 cast_expr: CAST '(' expr AS column_type ')' {
-    auto [data_type_result, fail_reason] = infinity::ColumnType::GetDataTypeFromColumnType(*($5), std::vector<std::unique_ptr<infinity::InitParameter>>{});
+    auto [data_type_result, fail_reason] = hybridsearch::ColumnType::GetDataTypeFromColumnType(*($5), std::vector<std::unique_ptr<hybridsearch::InitParameter>>{});
     delete $5;
     if (!data_type_result) {
         yyerror(&yyloc, scanner, result, fail_reason.c_str());
         delete $3;
         YYERROR;
     }
-    infinity::CastExpr* cast_expr = new infinity::CastExpr(std::move(*data_type_result));
+    hybridsearch::CastExpr* cast_expr = new hybridsearch::CastExpr(std::move(*data_type_result));
     cast_expr->expr_ = $3;
     $$ = cast_expr;
 };
 
 subquery_expr: EXISTS '(' select_without_paren ')' {
-    infinity::SubqueryExpr* subquery_expr = new infinity::SubqueryExpr();
-    subquery_expr->subquery_type_ = infinity::SubqueryType::kExists;
+    hybridsearch::SubqueryExpr* subquery_expr = new hybridsearch::SubqueryExpr();
+    subquery_expr->subquery_type_ = hybridsearch::SubqueryType::kExists;
     subquery_expr->select_ = $3;
     $$ = subquery_expr;
 }
 | NOT EXISTS '(' select_without_paren ')' {
-    infinity::SubqueryExpr* subquery_expr = new infinity::SubqueryExpr();
-    subquery_expr->subquery_type_ = infinity::SubqueryType::kNotExists;
+    hybridsearch::SubqueryExpr* subquery_expr = new hybridsearch::SubqueryExpr();
+    subquery_expr->subquery_type_ = hybridsearch::SubqueryType::kNotExists;
     subquery_expr->select_ = $4;
     $$ = subquery_expr;
 }
 | operand IN '(' select_without_paren ')' {
-    infinity::SubqueryExpr* subquery_expr = new infinity::SubqueryExpr();
-    subquery_expr->subquery_type_ = infinity::SubqueryType::kIn;
+    hybridsearch::SubqueryExpr* subquery_expr = new hybridsearch::SubqueryExpr();
+    subquery_expr->subquery_type_ = hybridsearch::SubqueryType::kIn;
     subquery_expr->left_ = $1;
     subquery_expr->select_ = $4;
     $$ = subquery_expr;
 }
 | operand NOT IN '(' select_without_paren ')' {
-    infinity::SubqueryExpr* subquery_expr = new infinity::SubqueryExpr();
-    subquery_expr->subquery_type_ = infinity::SubqueryType::kNotIn;
+    hybridsearch::SubqueryExpr* subquery_expr = new hybridsearch::SubqueryExpr();
+    subquery_expr->subquery_type_ = hybridsearch::SubqueryType::kNotIn;
     subquery_expr->left_ = $1;
     subquery_expr->select_ = $5;
     $$ = subquery_expr;
 };
 
 column_expr : IDENTIFIER {
-    infinity::ColumnExpr* column_expr = new infinity::ColumnExpr();
+    hybridsearch::ColumnExpr* column_expr = new hybridsearch::ColumnExpr();
     ParserHelper::ToLower($1);
     column_expr->names_.emplace_back($1);
     free($1);
     $$ = column_expr;
 }
 | column_expr '.' IDENTIFIER {
-    infinity::ColumnExpr* column_expr = (infinity::ColumnExpr*)$1;
+    hybridsearch::ColumnExpr* column_expr = (hybridsearch::ColumnExpr*)$1;
     ParserHelper::ToLower($3);
     column_expr->names_.emplace_back($3);
     free($3);
     $$ = column_expr;
 }
 | '*' {
-    infinity::ColumnExpr* column_expr = new infinity::ColumnExpr();
+    hybridsearch::ColumnExpr* column_expr = new hybridsearch::ColumnExpr();
     column_expr->star_ = true;
     $$ = column_expr;
 }
 | column_expr '.' '*' {
-    infinity::ColumnExpr* column_expr = (infinity::ColumnExpr*)$1;
+    hybridsearch::ColumnExpr* column_expr = (hybridsearch::ColumnExpr*)$1;
     if(column_expr->star_) {
         yyerror(&yyloc, scanner, result, "Invalid column expression format");
         YYERROR;
@@ -3562,47 +3562,47 @@ column_expr : IDENTIFIER {
 };
 
 constant_expr: STRING {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kString);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kString);
     const_expr->str_value_ = $1;
     $$ = const_expr;
 }
 | TRUE {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kBoolean);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kBoolean);
     const_expr->bool_value_ = true;
     $$ = const_expr;
 }
 | FALSE {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kBoolean);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kBoolean);
     const_expr->bool_value_ = false;
     $$ = const_expr;
 }
 | DOUBLE_VALUE {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kDouble);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kDouble);
     const_expr->double_value_ = $1;
     $$ = const_expr;
 }
 | LONG_VALUE {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInteger);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInteger);
     const_expr->integer_value_ = $1;
     $$ = const_expr;
 }
 | DATE STRING {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kDate);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kDate);
     const_expr->date_value_ = $2;
     $$ = const_expr;
 }
 | TIME STRING {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kTime);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kTime);
     const_expr->date_value_ = $2;
     $$ = const_expr;
 }
 | DATETIME STRING {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kDateTime);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kDateTime);
     const_expr->date_value_ = $2;
     $$ = const_expr;
 }
 | TIMESTAMP STRING {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kTimestamp);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kTimestamp);
     const_expr->date_value_ = $2;
     $$ = const_expr;
 }
@@ -3647,7 +3647,7 @@ subarray_array_expr: unclosed_subarray_array_expr ']' {
 };
 
 unclosed_subarray_array_expr: '[' common_array_expr {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kSubArrayArray);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kSubArrayArray);
     const_expr->sub_array_array_.emplace_back($2);
     $$ = const_expr;
 }
@@ -3668,7 +3668,7 @@ long_sparse_array_expr: unclosed_long_sparse_array_expr ']' {
 }
 
 unclosed_long_sparse_array_expr: '[' int_sparse_ele {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kLongSparseArray);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kLongSparseArray);
     const_expr->long_sparse_array_.first.emplace_back($2->first);
     const_expr->long_sparse_array_.second.emplace_back($2->second);
     delete $2;
@@ -3686,7 +3686,7 @@ double_sparse_array_expr: unclosed_double_sparse_array_expr ']' {
 }
 
 unclosed_double_sparse_array_expr: '[' float_sparse_ele {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kDoubleSparseArray);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kDoubleSparseArray);
     const_expr->double_sparse_array_.first.emplace_back($2->first);
     const_expr->double_sparse_array_.second.emplace_back($2->second);
     delete $2;
@@ -3700,18 +3700,18 @@ unclosed_double_sparse_array_expr: '[' float_sparse_ele {
 }
 
 empty_array_expr: '[' ']' {
-    $$ = new infinity::ConstantExpr(infinity::LiteralType::kEmptyArray);
+    $$ = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kEmptyArray);
 }
 
 curly_brackets_expr: unclosed_curly_brackets_expr '}' {
     $$ = $1;
 }
 | '{' '}' {
-    $$ = new infinity::ConstantExpr(infinity::LiteralType::kCurlyBracketsArray);
+    $$ = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kCurlyBracketsArray);
 }
 
 unclosed_curly_brackets_expr: '{' constant_expr {
-    $$ = new infinity::ConstantExpr(infinity::LiteralType::kCurlyBracketsArray);
+    $$ = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kCurlyBracketsArray);
     $$->curly_brackets_array_.emplace_back($2);
 }
 | unclosed_curly_brackets_expr ',' constant_expr {
@@ -3739,7 +3739,7 @@ long_array_expr: unclosed_long_array_expr ']' {
 };
 
 unclosed_long_array_expr: '[' LONG_VALUE {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kIntegerArray);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kIntegerArray);
     const_expr->long_array_.emplace_back($2);
     $$ = const_expr;
 }
@@ -3753,7 +3753,7 @@ double_array_expr: unclosed_double_array_expr ']' {
 };
 
 unclosed_double_array_expr: '[' DOUBLE_VALUE {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kDoubleArray);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kDoubleArray);
     const_expr->double_array_.emplace_back($2);
     $$ = const_expr;
 }
@@ -3763,74 +3763,74 @@ unclosed_double_array_expr: '[' DOUBLE_VALUE {
 }
 
 interval_expr: LONG_VALUE SECONDS {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kSecond;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kSecond;
     const_expr->integer_value_ = $1;
     $$ = const_expr;
 }
 | LONG_VALUE SECOND {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kSecond;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kSecond;
     const_expr->integer_value_ = $1;
     $$ = const_expr;
 }
 | LONG_VALUE MINUTES {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kMinute;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kMinute;
     const_expr->integer_value_ = $1;
     $$ = const_expr;
 }
 | LONG_VALUE MINUTE {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kMinute;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kMinute;
     const_expr->integer_value_ = $1;
     $$ = const_expr;
 }
 | LONG_VALUE HOURS {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kHour;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kHour;
     const_expr->integer_value_ = $1;
     $$ = const_expr;
 }
 | LONG_VALUE HOUR {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kHour;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kHour;
     const_expr->integer_value_ = $1;
     $$ = const_expr;
 }
 | LONG_VALUE DAYS {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kDay;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kDay;
     const_expr->integer_value_ = $1;
     $$ = const_expr;
 }
 | LONG_VALUE DAY {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kDay;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kDay;
     const_expr->integer_value_ = $1;
     $$ = const_expr;
 }
 | LONG_VALUE MONTHS {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kMonth;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kMonth;
     const_expr->integer_value_ = $1;
     $$ = const_expr;
 }
 | LONG_VALUE MONTH {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kMonth;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kMonth;
     const_expr->integer_value_ = $1;
     $$ = const_expr;
 }
 | LONG_VALUE YEARS {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kYear;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kYear;
     const_expr->integer_value_ = $1;
     $$ = const_expr;
 }
 | LONG_VALUE YEAR {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kYear;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kYear;
     const_expr->integer_value_ = $1;
     $$ = const_expr;
 };
@@ -3840,7 +3840,7 @@ interval_expr: LONG_VALUE SECONDS {
  */
 
 copy_option_list : copy_option {
-    $$ = new std::vector<infinity::CopyOption*>();
+    $$ = new std::vector<hybridsearch::CopyOption*>();
     $$->push_back($1);
 }
 | copy_option_list ',' copy_option {
@@ -3849,28 +3849,28 @@ copy_option_list : copy_option {
 };
 
 copy_option : FORMAT IDENTIFIER {
-    $$ = new infinity::CopyOption();
-    $$->option_type_ = infinity::CopyOptionType::kFormat;
+    $$ = new hybridsearch::CopyOption();
+    $$->option_type_ = hybridsearch::CopyOptionType::kFormat;
     if (strcasecmp($2, "csv") == 0) {
-        $$->file_type_ = infinity::CopyFileType::kCSV;
+        $$->file_type_ = hybridsearch::CopyFileType::kCSV;
         free($2);
     } else if (strcasecmp($2, "json") == 0) {
-        $$->file_type_ = infinity::CopyFileType::kJSON;
+        $$->file_type_ = hybridsearch::CopyFileType::kJSON;
         free($2);
     } else if (strcasecmp($2, "jsonl") == 0) {
-        $$->file_type_ = infinity::CopyFileType::kJSONL;
+        $$->file_type_ = hybridsearch::CopyFileType::kJSONL;
         free($2);
     } else if (strcasecmp($2, "fvecs") == 0) {
-        $$->file_type_ = infinity::CopyFileType::kFVECS;
+        $$->file_type_ = hybridsearch::CopyFileType::kFVECS;
         free($2);
     } else if (strcasecmp($2, "csr") == 0) {
-        $$->file_type_ = infinity::CopyFileType::kCSR;
+        $$->file_type_ = hybridsearch::CopyFileType::kCSR;
         free($2);
     } else if (strcasecmp($2, "bvecs") == 0) {
-        $$->file_type_ = infinity::CopyFileType::kBVECS;
+        $$->file_type_ = hybridsearch::CopyFileType::kBVECS;
         free($2);
     } else if (strcasecmp($2, "parquet") == 0) {
-        $$->file_type_ = infinity::CopyFileType::kPARQUET;
+        $$->file_type_ = hybridsearch::CopyFileType::kPARQUET;
         free($2);
     } else {
         free($2);
@@ -3880,8 +3880,8 @@ copy_option : FORMAT IDENTIFIER {
     }
 }
 | DELIMITER STRING {
-    $$ = new infinity::CopyOption();
-    $$->option_type_ = infinity::CopyOptionType::kDelimiter;
+    $$ = new hybridsearch::CopyOption();
+    $$->option_type_ = hybridsearch::CopyOptionType::kDelimiter;
     if(strlen($2) > 1 && $2[0] == '\\') {
         if($2[1] == 't') $$->delimiter_ = '\t';
     }else {
@@ -3890,23 +3890,23 @@ copy_option : FORMAT IDENTIFIER {
     free($2);
 }
 | HEADER {
-    $$ = new infinity::CopyOption();
-    $$->option_type_ = infinity::CopyOptionType::kHeader;
+    $$ = new hybridsearch::CopyOption();
+    $$->option_type_ = hybridsearch::CopyOptionType::kHeader;
     $$->header_ = true;
 };
 | OFFSET LONG_VALUE {
-    $$ = new infinity::CopyOption();
-    $$->option_type_ = infinity::CopyOptionType::kOffset;
+    $$ = new hybridsearch::CopyOption();
+    $$->option_type_ = hybridsearch::CopyOptionType::kOffset;
     $$->offset_ = $2;
 }
 | LIMIT LONG_VALUE {
-    $$ = new infinity::CopyOption();
-    $$->option_type_ = infinity::CopyOptionType::kLimit;
+    $$ = new hybridsearch::CopyOption();
+    $$->option_type_ = hybridsearch::CopyOptionType::kLimit;
     $$->limit_ = $2;
 }
 | ROWLIMIT LONG_VALUE {
-    $$ = new infinity::CopyOption();
-    $$->option_type_ = infinity::CopyOptionType::kRowLimit;
+    $$ = new hybridsearch::CopyOption();
+    $$->option_type_ = hybridsearch::CopyOptionType::kRowLimit;
     $$->row_limit_ = $2;
 }
 
@@ -3925,7 +3925,7 @@ semicolon : ';'
 ;
 
 /* if_exists_info : if_exists IDENTIFIER {
-    $$ = new infinity::IfExistsInfo();
+    $$ = new hybridsearch::IfExistsInfo();
     $$->exists_ = true;
     $$->if_exists_ = $1;
     ParserHelper::ToLower($2);
@@ -3934,7 +3934,7 @@ semicolon : ';'
 } */
 
 if_not_exists_info : if_not_exists IDENTIFIER {
-    $$ = new infinity::IfNotExistsInfo();
+    $$ = new hybridsearch::IfNotExistsInfo();
     $$->exists_ = true;
     $$->if_not_exists_ = $1;
     ParserHelper::ToLower($2);
@@ -3942,14 +3942,14 @@ if_not_exists_info : if_not_exists IDENTIFIER {
     free($2);
 }
 | {
-    $$ = new infinity::IfNotExistsInfo();
+    $$ = new hybridsearch::IfNotExistsInfo();
 }
 
 with_index_param_list : WITH '(' index_param_list ')' {
     $$ = $3;
 }
 | {
-    $$ = new std::vector<infinity::InitParameter*>();
+    $$ = new std::vector<hybridsearch::InitParameter*>();
 }
 
 optional_table_properties_list : PROPERTIES '(' index_param_list ')' {
@@ -3960,7 +3960,7 @@ optional_table_properties_list : PROPERTIES '(' index_param_list ')' {
 }
 
 index_param_list : index_param {
-    $$ = new std::vector<infinity::InitParameter*>();
+    $$ = new std::vector<hybridsearch::InitParameter*>();
     $$->push_back($1);
 }
 | index_param_list ',' index_param {
@@ -3970,14 +3970,14 @@ index_param_list : index_param {
 
 index_param : IDENTIFIER {
     ParserHelper::ToLower($1);
-    $$ = new infinity::InitParameter();
+    $$ = new hybridsearch::InitParameter();
     $$->param_name_ = $1;
     free($1);
 }
 | IDENTIFIER '=' IDENTIFIER {
     ParserHelper::ToLower($1);
     ParserHelper::ToLower($3);
-    $$ = new infinity::InitParameter();
+    $$ = new hybridsearch::InitParameter();
     $$->param_name_ = $1;
     free($1);
 
@@ -3987,7 +3987,7 @@ index_param : IDENTIFIER {
 | IDENTIFIER '=' STRING {
     ParserHelper::ToLower($1);
     ParserHelper::ToLower($3);
-    $$ = new infinity::InitParameter();
+    $$ = new hybridsearch::InitParameter();
     $$->param_name_ = $1;
     free($1);
 
@@ -3996,7 +3996,7 @@ index_param : IDENTIFIER {
 }
 | IDENTIFIER '=' LONG_VALUE {
     ParserHelper::ToLower($1);
-    $$ = new infinity::InitParameter();
+    $$ = new hybridsearch::InitParameter();
     $$->param_name_ = $1;
     free($1);
 
@@ -4004,7 +4004,7 @@ index_param : IDENTIFIER {
 }
 | IDENTIFIER '=' DOUBLE_VALUE {
     ParserHelper::ToLower($1);
-    $$ = new infinity::InitParameter();
+    $$ = new hybridsearch::InitParameter();
     $$->param_name_ = $1;
     free($1);
 
@@ -4015,19 +4015,19 @@ index_param : IDENTIFIER {
 (column1[, ...column2]) USING method [WITH (param[, ...param])] (column1[, ...column2]) USING method [WITH (param[, ...param])]; */
 index_info : '(' IDENTIFIER ')' USING IDENTIFIER with_index_param_list {
     ParserHelper::ToLower($5);
-    infinity::IndexType index_type = infinity::IndexType::kInvalid;
+    hybridsearch::IndexType index_type = hybridsearch::IndexType::kInvalid;
     if(strcmp($5, "fulltext") == 0) {
-        index_type = infinity::IndexType::kFullText;
+        index_type = hybridsearch::IndexType::kFullText;
     } else if (strcmp($5, "hnsw") == 0) {
-        index_type = infinity::IndexType::kHnsw;
+        index_type = hybridsearch::IndexType::kHnsw;
     } else if (strcmp($5, "bmp") == 0) {
-        index_type = infinity::IndexType::kBMP;
+        index_type = hybridsearch::IndexType::kBMP;
     } else if (strcmp($5, "ivf") == 0) {
-        index_type = infinity::IndexType::kIVF;
+        index_type = hybridsearch::IndexType::kIVF;
     } else if (strcmp($5, "emvb") == 0) {
-        index_type = infinity::IndexType::kEMVB;
+        index_type = hybridsearch::IndexType::kEMVB;
     } else if(strcmp($5, "diskann") == 0){
-        index_type = infinity::IndexType::kDiskAnn;
+        index_type = hybridsearch::IndexType::kDiskAnn;
     } else {
         free($5);
         free($2);
@@ -4037,7 +4037,7 @@ index_info : '(' IDENTIFIER ')' USING IDENTIFIER with_index_param_list {
     }
     free($5);
 
-    $$ = new infinity::IndexInfo();
+    $$ = new hybridsearch::IndexInfo();
 
     $$->index_type_ = index_type;
     $$->column_name_ = $2;
@@ -4045,8 +4045,8 @@ index_info : '(' IDENTIFIER ')' USING IDENTIFIER with_index_param_list {
     free($2);
 }
 | '(' IDENTIFIER ')' {
-    $$ = new infinity::IndexInfo();
-    $$->index_type_ = infinity::IndexType::kSecondary;
+    $$ = new hybridsearch::IndexInfo();
+    $$->index_type_ = hybridsearch::IndexType::kSecondary;
     $$->column_name_ = $2;
     free($2);
 }
@@ -4054,7 +4054,7 @@ index_info : '(' IDENTIFIER ')' USING IDENTIFIER with_index_param_list {
 %%
 
 void
-yyerror(YYLTYPE * llocp, void* lexer, infinity::ParserResult* result, const char* msg) {
+yyerror(YYLTYPE * llocp, void* lexer, hybridsearch::ParserResult* result, const char* msg) {
     if(result->IsError()) return ;
 
     result->error_message_ = std::string(msg) + ", " + std::to_string(llocp->first_column);

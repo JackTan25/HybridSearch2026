@@ -27,7 +27,7 @@ import buffer_obj;
 import buffer_handle;
 import column_index_reader;
 
-namespace infinity {
+namespace hybridsearch {
 class FileSystem;
 
 export class FullTextColumnLengthReader {
@@ -65,4 +65,4 @@ private:
     BufferHandle current_chunk_buffer_handle_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

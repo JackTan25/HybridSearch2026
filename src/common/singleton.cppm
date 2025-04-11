@@ -13,7 +13,7 @@
 // limitations under the License.
 export module singleton;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename T>
 class Singleton {
@@ -26,4 +26,4 @@ public:
     virtual ~Singleton() = default;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -21,14 +21,14 @@ import stl;
 import function;
 
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import data_block;
 import base_expression;
 import column_vector;
 import third_party;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 ScalarFunction::ScalarFunction(String name, Vector<DataType> argument_types, DataType return_type, ScalarFunctionTypePtr function)
     : Function(std::move(name), FunctionType::kScalar), parameter_types_(std::move(argument_types)), return_type_(std::move(return_type)),
@@ -80,4 +80,4 @@ u64 ScalarFunction::Hash() const { return std::hash<SizeT>()(reinterpret_cast<Si
 
 bool ScalarFunction::Eq(const ScalarFunction &other) const { return function_ == other.function_; }
 
-} // namespace infinity
+} // namespace hybridsearch

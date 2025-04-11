@@ -25,13 +25,13 @@ import physical_operator_type;
 import base_expression;
 import data_table;
 import load_meta;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import join_reference;
 import data_type;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PhysicalNestedLoopJoin : public PhysicalOperator {
 public:
@@ -63,4 +63,4 @@ private:
     Vector<SharedPtr<BaseExpression>> conditions_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

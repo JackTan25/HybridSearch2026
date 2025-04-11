@@ -26,7 +26,7 @@ import simd_functions;
 
 export module dist_func_cos;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename DataType, typename CompressType>
 class LVQCosDist;
@@ -191,4 +191,4 @@ LVQCosDist<DataType, i8> PlainCosDist<DataType>::ToLVQDistance(SizeT dim) && {
     return LVQCosDist<DataType, i8>(dim);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

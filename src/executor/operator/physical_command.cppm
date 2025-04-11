@@ -24,13 +24,13 @@ import query_context;
 
 import operator_state;
 import load_meta;
-import infinity_exception;
+import hybridsearch_exception;
 import table_entry;
 import command_statement;
 import data_type;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PhysicalCommand final : public PhysicalOperator {
 public:
@@ -58,4 +58,4 @@ public:
     const SharedPtr<Vector<String>> output_names_{};
     const SharedPtr<Vector<SharedPtr<DataType>>> output_types_{};
 };
-} // namespace infinity
+} // namespace hybridsearch

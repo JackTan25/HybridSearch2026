@@ -23,7 +23,7 @@ import base_expression;
 import function_expr;
 //
 
-namespace infinity {
+namespace hybridsearch {
 
 struct Catalog;
 
@@ -46,4 +46,4 @@ public:
     FunctionType type_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

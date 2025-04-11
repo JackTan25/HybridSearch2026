@@ -7,7 +7,7 @@ module rtrim;
 import stl;
 import catalog;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import scalar_function;
 import scalar_function_set;
 
@@ -18,7 +18,7 @@ import data_type;
 import logger;
 import column_vector;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct RtrimFunction {
     template <typename TA, typename TB, typename TC, typename TD>
@@ -58,4 +58,4 @@ void RegisterRtrimFunction(const UniquePtr<Catalog> &catalog_ptr) {
     Catalog::AddFunctionSet(catalog_ptr.get(), function_set_ptr);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

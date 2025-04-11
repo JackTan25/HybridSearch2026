@@ -8,7 +8,7 @@ module aho_corasick;
 import stl;
 import darts;
 
-namespace infinity {
+namespace hybridsearch {
 
 int AhoCorasick::Build(const Vector<String> &patterns) {
     Vector<const char *> keys;
@@ -181,4 +181,4 @@ std::size_t AhoCorasick::FindFailureLinks(std::size_t *buf, std::size_t parent_n
     return 0;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

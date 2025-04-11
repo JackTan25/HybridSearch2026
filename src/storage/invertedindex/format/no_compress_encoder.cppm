@@ -6,7 +6,7 @@ import byte_slice_writer;
 
 export module no_compress_encoder;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename T>
 class NoCompressIntEncoder {
@@ -35,4 +35,4 @@ u32 NoCompressIntEncoder<T>::Decode(T *dest, u32 dest_len, ByteSliceReader &slic
     return read_count;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

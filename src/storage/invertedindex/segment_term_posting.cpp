@@ -9,7 +9,7 @@ import posting_decoder;
 import term_meta;
 import column_index_iterator;
 
-namespace infinity {
+namespace hybridsearch {
 
 SegmentTermPosting::SegmentTermPosting(const String &index_dir, const String &base_name, RowID base_row_id, optionflag_t flag)
     : base_row_id_(base_row_id) {
@@ -74,4 +74,4 @@ void SegmentTermPostingQueue::MoveToNextTerm() {
     merging_term_postings_.clear();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

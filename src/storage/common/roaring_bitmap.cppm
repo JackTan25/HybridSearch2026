@@ -17,12 +17,12 @@ module;
 export module roaring_bitmap;
 import stl;
 import croaring;
-import infinity_exception;
+import hybridsearch_exception;
 import serialize;
 import logger;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 template <bool init_all_true>
 struct OptionalAllTrueFlag;
@@ -362,4 +362,4 @@ private:
 export using Bitmask = RoaringBitmap<true>;
 // export using Bitmap = RoaringBitmap<false>;
 
-} // namespace infinity
+} // namespace hybridsearch

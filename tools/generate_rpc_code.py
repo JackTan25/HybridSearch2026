@@ -17,8 +17,8 @@ def create_dir(paths: list):
 
 
 def fix_python_import_path(filename: str):
-    # from  import infinity_brpc_pb2 as infinity__brpc__pb2
-    # to    from . import infinity_brpc_pb2 as infinity__brpc__pb2
+    # from  import hybridsearch_brpc_pb2 as hybridsearch__brpc__pb2
+    # to    from . import hybridsearch_brpc_pb2 as hybridsearch__brpc__pb2
     # replace with your actual file path
     # Read the file
     with open(filename, "r") as file:
@@ -28,9 +28,9 @@ def fix_python_import_path(filename: str):
         line = lines[i]
         words = line.split()
         if len(words) == 4 and words[0] == "import":
-            import_module, infinity_brpc_pb2, alias, infinity__brpc__pb2 = words
+            import_module, hybridsearch_brpc_pb2, alias, hybridsearch__brpc__pb2 = words
             # Construct the new import line.
-            new_line = f"from . {import_module} {infinity_brpc_pb2} {alias} {infinity__brpc__pb2}\n"
+            new_line = f"from . {import_module} {hybridsearch_brpc_pb2} {alias} {hybridsearch__brpc__pb2}\n"
             lines[i] = new_line  # replace the line
 
         # Write back to the file
@@ -39,17 +39,17 @@ def fix_python_import_path(filename: str):
 
 
 def generate_thrift():
-    infinity_proj_dir = os.getcwd()
-    python_dir = infinity_proj_dir + "/python/infinity_sdk/infinity/remote_thrift"
-    cpp_dir = infinity_proj_dir + "/src/network/infinity_thrift"
-    peer_server_cpp_dir = infinity_proj_dir + "/src/network/peer_server_thrift"
+    hybridsearch_proj_dir = os.getcwd()
+    python_dir = hybridsearch_proj_dir + "/python/hybridsearch_sdk/hybridsearch/remote_thrift"
+    cpp_dir = hybridsearch_proj_dir + "/src/network/hybridsearch_thrift"
+    peer_server_cpp_dir = hybridsearch_proj_dir + "/src/network/peer_server_thrift"
     create_dir([python_dir, cpp_dir, peer_server_cpp_dir])
-    infinity_thrift_file = infinity_proj_dir + "/thrift/infinity.thrift"
-    peer_server_file = infinity_proj_dir + "/thrift/peer_server.thrift"
+    hybridsearch_thrift_file = hybridsearch_proj_dir + "/thrift/hybridsearch.thrift"
+    peer_server_file = hybridsearch_proj_dir + "/thrift/peer_server.thrift"
     cmds = [
         "thrift --version",
-        f"thrift --out {python_dir} --gen py {infinity_thrift_file}",
-        f"thrift -r --out {cpp_dir} --gen cpp:no_skeleton {infinity_thrift_file}",
+        f"thrift --out {python_dir} --gen py {hybridsearch_thrift_file}",
+        f"thrift -r --out {cpp_dir} --gen cpp:no_skeleton {hybridsearch_thrift_file}",
         f"thrift -r --out {peer_server_cpp_dir} --gen cpp:no_skeleton {peer_server_file}",
     ]
     for cmd in cmds:

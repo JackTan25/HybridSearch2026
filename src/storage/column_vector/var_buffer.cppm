@@ -21,7 +21,7 @@ import buffer_obj;
 import buffer_handle;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct BlockColumnEntry;
 class BufferManager;
@@ -98,4 +98,4 @@ private:
     BufferManager *buffer_mgr_ = nullptr;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

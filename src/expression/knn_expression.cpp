@@ -20,13 +20,13 @@ import expression_type;
 
 import scalar_function;
 import logger;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import statement_common;
 
 module knn_expression;
 
-namespace infinity {
+namespace hybridsearch {
 
 String KnnExpression::KnnDistanceType2Str(KnnDistanceType type) {
     switch (type) {
@@ -119,4 +119,4 @@ bool KnnExpression::Eq(const BaseExpression &other_base) const {
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

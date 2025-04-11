@@ -18,8 +18,8 @@ module;
 
 export module create_schema_info;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::CreateSchemaInfo;
+export using hybridsearch::CreateSchemaInfo;
 
 }

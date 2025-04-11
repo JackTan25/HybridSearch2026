@@ -15,7 +15,7 @@
 #include "polygon_type.h"
 #include <cstring>
 
-namespace infinity {
+namespace hybridsearch {
 
 PolygonType::PolygonType(const PolygonType &other) {
     this->point_count = other.point_count;
@@ -63,5 +63,5 @@ PolygonType &PolygonType::operator=(PolygonType &&other) noexcept {
     return *this;
 }
 
-} // namespace infinity
+} // namespace hybridsearch
 #endif

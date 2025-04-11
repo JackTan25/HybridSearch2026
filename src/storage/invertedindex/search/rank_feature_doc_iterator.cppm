@@ -25,7 +25,7 @@ import internal_types;
 import doc_iterator;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class RankFeatureDocIterator final : public DocIterator {
 public:
@@ -60,4 +60,4 @@ private:
     UniquePtr<PostingIterator> iter_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

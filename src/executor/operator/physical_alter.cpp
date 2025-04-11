@@ -23,13 +23,13 @@ import operator_state;
 import third_party;
 import txn;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import value;
 import defer_op;
 import wal_manager;
-import infinity_context;
+import hybridsearch_context;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalRenameTable::Init(QueryContext* query_context) {}
 
@@ -42,7 +42,7 @@ bool PhysicalRenameTable::Execute(QueryContext *query_context, OperatorState *op
 void PhysicalAddColumns::Init(QueryContext* query_context) {}
 
 bool PhysicalAddColumns::Execute(QueryContext *query_context, OperatorState *operator_state) {
-    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
     if (storage_mode == StorageMode::kUnInitialized) {
         UnrecoverableError("Uninitialized storage mode");
     }
@@ -70,7 +70,7 @@ bool PhysicalAddColumns::Execute(QueryContext *query_context, OperatorState *ope
 void PhysicalDropColumns::Init(QueryContext* query_context) {}
 
 bool PhysicalDropColumns::Execute(QueryContext *query_context, OperatorState *operator_state) {
-    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
     if (storage_mode == StorageMode::kUnInitialized) {
         UnrecoverableError("Uninitialized storage mode");
     }
@@ -96,4 +96,4 @@ bool PhysicalDropColumns::Execute(QueryContext *query_context, OperatorState *op
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

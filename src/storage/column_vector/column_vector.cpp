@@ -24,7 +24,7 @@ import stl;
 import selection;
 
 import type_info;
-import infinity_exception;
+import hybridsearch_exception;
 import default_values;
 import roaring_bitmap;
 import vector_buffer;
@@ -52,7 +52,7 @@ import sparse_info;
 
 import block_column_entry;
 
-namespace infinity {
+namespace hybridsearch {
 
 VectorBufferType ColumnVector::InitializeHelper(ColumnVectorType vector_type, SizeT capacity) {
     if (initialized) {
@@ -2774,4 +2774,4 @@ void CopyArray(ArrayT &dst_array,
     UnrecoverableError(fmt::format("{}: Unhandled element type: {}", __func__, elem_type.ToString()));
 }
 
-} // namespace infinity
+} // namespace hybridsearch

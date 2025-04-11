@@ -37,7 +37,7 @@ import search_expr;
 import subquery_expr;
 import cast_expr;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct ExprBindResult {
     SharedPtr<BaseExpression> bound_expression_ptr_{};
@@ -104,4 +104,4 @@ protected:
     QueryContext *query_context_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -23,16 +23,16 @@ import table_def;
 import data_table;
 
 import wal_manager;
-import infinity_context;
+import hybridsearch_context;
 import status;
 import operator_state;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalDropView::Init(QueryContext* query_context) {}
 
 bool PhysicalDropView::Execute(QueryContext *, OperatorState *operator_state) {
-    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
     if (storage_mode == StorageMode::kUnInitialized) {
         UnrecoverableError("Uninitialized storage mode");
     }
@@ -44,4 +44,4 @@ bool PhysicalDropView::Execute(QueryContext *, OperatorState *operator_state) {
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

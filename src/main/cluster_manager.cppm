@@ -26,7 +26,7 @@ import storage;
 import admin_statement;
 import node_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class UpdateNodeOp { kRemove, kLostConnection };
 
@@ -78,9 +78,9 @@ public:
     Status UpdateNodeByLeader(const String &node_name, UpdateNodeOp update_node_op);
     // Used by leader when get HB request
     Status UpdateNodeInfoByHeartBeat(const SharedPtr<NodeInfo> &non_leader_node,
-                                     Vector<infinity_peer_server::NodeInfo> &other_nodes,
+                                     Vector<hybridsearch_peer_server::NodeInfo> &other_nodes,
                                      i64 &leader_term,
-                                     infinity_peer_server::NodeStatus::type &sender_status);
+                                     hybridsearch_peer_server::NodeStatus::type &sender_status);
 
     // Used by leader to notify leader to synchronize logs to the follower and learner, during registration
     Status SyncLogsOnRegistration(const SharedPtr<NodeInfo> &non_leader_node, const SharedPtr<PeerClient> &peer_client);
@@ -131,4 +131,4 @@ private:
     Atomic<bool> hb_running_{false};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

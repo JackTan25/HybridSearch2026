@@ -16,7 +16,7 @@
 
 #include "extra_ddl_info.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 class CreateCollectionInfo final : public ExtraDDLInfo {
 public:
@@ -28,4 +28,4 @@ public:
     std::string collection_name_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

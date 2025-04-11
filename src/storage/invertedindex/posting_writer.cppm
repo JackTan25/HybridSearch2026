@@ -15,7 +15,7 @@ import term_meta;
 import vector_with_lock;
 import mem_usage_change;
 
-namespace infinity {
+namespace hybridsearch {
 export class PostingWriter {
 public:
     PostingWriter(const PostingFormat &posting_format, VectorWithLock<u32> &column_lengths);
@@ -62,4 +62,4 @@ private:
 
 export using PostingWriterProvider = std::function<SharedPtr<PostingWriter>(const String &)>;
 
-} // namespace infinity
+} // namespace hybridsearch

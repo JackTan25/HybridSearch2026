@@ -16,7 +16,7 @@
 #include <arrow/type.h>
 #include <limits>
 
-namespace infinity {
+namespace hybridsearch {
 
 SparseStoreType SparseInfo::ParseStoreType(const std::vector<std::unique_ptr<InitParameter>> &options) {
     auto store_type = SparseStoreType::kSort; // default
@@ -106,4 +106,4 @@ std::unique_ptr<SparseInfo> SparseInfo::Deserialize(const nlohmann::json &json) 
     return std::make_unique<SparseInfo>(json["data_type"], json["index_type"], json["dimension"], store_type);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

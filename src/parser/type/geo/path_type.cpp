@@ -16,7 +16,7 @@
 #include "path_type.h"
 #include <cstring>
 
-namespace infinity {
+namespace hybridsearch {
 PathType::PathType(const PathType &other) {
     this->point_count = other.point_count;
     this->closed = other.closed;
@@ -61,5 +61,5 @@ PathType &PathType::operator=(PathType &&other) noexcept {
     return *this;
 }
 
-} // namespace infinity
+} // namespace hybridsearch
 #endif

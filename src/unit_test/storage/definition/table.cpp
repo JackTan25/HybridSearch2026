@@ -15,7 +15,7 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import stl;
 import global_resource_usage;
@@ -28,17 +28,17 @@ import value;
 import data_block;
 import default_values;
 import column_vector;
-import infinity_context;
+import hybridsearch_context;
 import internal_types;
 import logical_type;
 import column_def;
 import data_type;
 
-using namespace infinity;
+using namespace hybridsearch;
 class TableTest : public BaseTest {};
 
 TEST_F(TableTest, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SizeT column_count = 2;
     SizeT block_count = 3;

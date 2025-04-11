@@ -25,10 +25,10 @@ import local_file_handle;
 import bmp_util;
 import knn_result_handler;
 import serialize;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 template <typename DataType, typename IdxType, BMPOwnMem OwnMem>
 class BlockTermsIter;
@@ -598,4 +598,4 @@ private:
     const char *data_ = nullptr;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -219,7 +219,7 @@ namespace xsimd
             auto test = x > constants::oneosqrteps<batch_type>();
             batch_type z = select(test, x - batch_type(1.), x + x * x / (batch_type(1.) + hypot(batch_type(1.), x)));
 #ifndef XSIMD_NO_INFINITIES
-            z = select(x == constants::infinity<batch_type>(), x, z);
+            z = select(x == constants::hybridsearch<batch_type>(), x, z);
 #endif
             batch_type l1pz = log1p(z);
             z = select(test, l1pz + constants::log_2<batch_type>(), l1pz);
@@ -311,7 +311,7 @@ namespace xsimd
             real_batch den = y - one;
             den = x2 + den * den;
             batch_type res = select((x == real_batch(0.)) && (y == real_batch(1.)),
-                                    batch_type(real_batch(0.), constants::infinity<real_batch>()),
+                                    batch_type(real_batch(0.), constants::hybridsearch<real_batch>()),
                                     batch_type(w, 0.25 * log(num / den)));
             return res;
         }
@@ -583,7 +583,7 @@ namespace xsimd
                         for (std::size_t i = 0; i < size; ++i)
                         {
                             double arg = args[i];
-                            if (arg == std::numeric_limits<value_type>::infinity())
+                            if (arg == std::numeric_limits<value_type>::hybridsearch())
                             {
                                 tmp[i] = 0.;
                                 txr[i] = std::numeric_limits<value_type>::quiet_NaN();
@@ -841,7 +841,7 @@ namespace xsimd
             using batch_type = batch<std::complex<T>, A>;
             using real_batch = typename batch_type::real_batch;
             real_batch d = cos(2 * z.real()) + cosh(2 * z.imag());
-            batch_type winf(constants::infinity<real_batch>(), constants::infinity<real_batch>());
+            batch_type winf(constants::hybridsearch<real_batch>(), constants::hybridsearch<real_batch>());
             real_batch wreal = sin(2 * z.real()) / d;
             real_batch wimag = sinh(2 * z.imag());
             batch_type wres = select(isinf(wimag), batch_type(wreal, real_batch(1.)), batch_type(wreal, wimag / d));

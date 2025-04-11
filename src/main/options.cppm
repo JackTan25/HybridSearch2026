@@ -21,7 +21,7 @@ import third_party;
 import status;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class BaseOptionDataType {
     kInteger,
@@ -190,4 +190,4 @@ export struct GlobalOptions {
     HashMap<String, GlobalOptionIndex> name2index_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

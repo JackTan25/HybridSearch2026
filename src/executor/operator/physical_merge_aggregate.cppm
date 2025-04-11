@@ -23,7 +23,7 @@ import operator_state;
 import physical_operator;
 import physical_operator_type;
 
-import infinity_exception;
+import hybridsearch_exception;
 import value;
 import data_block;
 import stl;
@@ -32,7 +32,7 @@ import internal_types;
 import data_type;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PhysicalMergeAggregate final : public PhysicalOperator {
 public:
@@ -153,4 +153,4 @@ public:
     SharedPtr<BaseTableRef> table_ref_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

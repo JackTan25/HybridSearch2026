@@ -25,21 +25,21 @@ module;
 export module base_test;
 
 import stl;
-import infinity_context;
+import hybridsearch_context;
 import global_resource_usage;
 
 namespace fs = std::filesystem;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename T>
 class BaseTestWithParam : public std::conditional_t<std::is_same_v<T, void>, ::testing::Test, ::testing::TestWithParam<T>> {
 public:
     BaseTestWithParam() {
-        const char *infinity_home_ = GetHomeDir();
-        bool ok = ValidateDirPermission(infinity_home_);
+        const char *hybridsearch_home_ = GetHomeDir();
+        bool ok = ValidateDirPermission(hybridsearch_home_);
         if (!ok) {
-            std::cerr << "Please create directory " << infinity_home_ << " and ensure current user has RWX permission of it." << std::endl;
+            std::cerr << "Please create directory " << hybridsearch_home_ << " and ensure current user has RWX permission of it." << std::endl;
             abort();
         }
         CleanupTmpDir();
@@ -58,23 +58,23 @@ public:
     static constexpr const char *VFS_OFF_CONFIG_PATH = "test/data/config/test_vfs_off.toml";
 
 protected:
-    const char *GetHomeDir() { return "/var/infinity"; }
+    const char *GetHomeDir() { return "/var/hybridsearch"; }
 
-    const char *GetFullDataDir() { return "/var/infinity/data"; }
+    const char *GetFullDataDir() { return "/var/hybridsearch/data"; }
 
-    const char *GetFullWalDir() { return "/var/infinity/wal"; }
+    const char *GetFullWalDir() { return "/var/hybridsearch/wal"; }
 
-    const char *GetFullLogDir() { return "/var/infinity/log"; }
+    const char *GetFullLogDir() { return "/var/hybridsearch/log"; }
 
-    const char *GetFullTmpDir() { return "/var/infinity/tmp"; }
+    const char *GetFullTmpDir() { return "/var/hybridsearch/tmp"; }
 
-    const char *GetFullPersistDir() { return "/var/infinity/persistence"; }
+    const char *GetFullPersistDir() { return "/var/hybridsearch/persistence"; }
 
     const char *GetTmpDir() { return "tmp"; }
 
     void CleanupDbDirs() {
-        const char *infinity_db_dirs[] = {GetFullDataDir(), GetFullWalDir(), GetFullLogDir(), GetFullTmpDir(), GetFullPersistDir()};
-        for (auto &dir : infinity_db_dirs) {
+        const char *hybridsearch_db_dirs[] = {GetFullDataDir(), GetFullWalDir(), GetFullLogDir(), GetFullTmpDir(), GetFullPersistDir()};
+        for (auto &dir : hybridsearch_db_dirs) {
             CleanupDirectory(dir);
         }
     }
@@ -82,8 +82,8 @@ protected:
     void CleanupTmpDir() { CleanupDirectory(GetFullTmpDir()); }
 
     void RemoveDbDirs() {
-        const char *infinity_db_dirs[] = {GetFullDataDir(), GetFullWalDir(), GetFullLogDir(), GetFullTmpDir(), GetFullPersistDir()};
-        for (auto &dir : infinity_db_dirs) {
+        const char *hybridsearch_db_dirs[] = {GetFullDataDir(), GetFullWalDir(), GetFullLogDir(), GetFullTmpDir(), GetFullPersistDir()};
+        for (auto &dir : hybridsearch_db_dirs) {
             RemoveDirectory(dir);
         }
     }
@@ -158,26 +158,26 @@ export class BaseTestParamStr : public BaseTestWithParam<std::string> {
 public:
     void SetUp() override {
         CleanupDbDirs();
-#ifdef INFINITY_DEBUG
-        infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+        hybridsearch::GlobalResourceUsage::Init();
 #endif
         std::string config_path_str = GetParam();
         std::shared_ptr<std::string> config_path = nullptr;
         if (config_path_str != BaseTestParamStr::NULL_CONFIG_PATH) {
             config_path = std::make_shared<std::string>(std::filesystem::absolute(config_path_str));
         }
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
     }
 
     void TearDown() override {
-        infinity::InfinityContext::instance().UnInit();
-#ifdef INFINITY_DEBUG
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetObjectCount(), 0);
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetRawMemoryCount(), 0);
-        infinity::GlobalResourceUsage::UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
+#ifdef hybridsearch_DEBUG
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetObjectCount(), 0);
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetRawMemoryCount(), 0);
+        hybridsearch::GlobalResourceUsage::UnInit();
 #endif
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

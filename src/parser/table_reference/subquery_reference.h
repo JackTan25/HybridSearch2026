@@ -17,7 +17,7 @@
 #include "base_table_reference.h"
 #include "statement/select_statement.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 class SelectStatement;
 
@@ -33,4 +33,4 @@ public:
     SelectStatement *select_statement_{nullptr};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

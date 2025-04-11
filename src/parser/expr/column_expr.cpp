@@ -16,7 +16,7 @@
 #include "parser_assert.h"
 #include <sstream>
 
-namespace infinity {
+namespace hybridsearch {
 
 ColumnExpr::~ColumnExpr() = default;
 
@@ -41,4 +41,4 @@ std::string ColumnExpr::ToString() const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

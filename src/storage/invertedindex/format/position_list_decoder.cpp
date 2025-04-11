@@ -16,7 +16,7 @@ import third_party;
 
 module position_list_decoder;
 
-namespace infinity {
+namespace hybridsearch {
 
 PositionListDecoder::PositionListDecoder(const PostingFormatOption &option)
     : pos_skiplist_reader_(nullptr), pos_encoder_(nullptr), total_tf_(0), decoded_pos_count_(0), record_offset_(0), pre_record_ttf_(0),
@@ -168,4 +168,4 @@ u32 PositionListDecoder::DecodeRecord(pos_t *pos_buffer, u32 pos_buffer_len) {
     return pos_count;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

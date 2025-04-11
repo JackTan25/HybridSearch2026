@@ -24,12 +24,12 @@ import physical_operator;
 import physical_operator_type;
 import base_expression;
 import load_meta;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import data_type;
 import highlighter;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PhysicalProject : public PhysicalOperator {
 public:
@@ -64,4 +64,4 @@ private:
     Map<SizeT, SharedPtr<HighlightInfo>> highlight_columns_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

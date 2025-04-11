@@ -27,7 +27,7 @@ import embedding_info;
 import internal_types;
 import segment_entry;
 import buffer_manager;
-import infinity_exception;
+import hybridsearch_exception;
 import status;
 import block_entry;
 import data_type;
@@ -38,7 +38,7 @@ import kmeans_partition;
 import logical_type;
 import ivf_index_util_func;
 
-namespace infinity {
+namespace hybridsearch {
 
 class IVFDataAccessor : public IVFDataAccessorBase {
 public:
@@ -283,4 +283,4 @@ IVFIndexInChunk *IVFIndexInChunk::GetNewIVFIndexInChunk(const IndexBase *ivf_ind
     return new IVFIndexInChunk(ivf_index_ptr->ivf_option_, logical_type, embedding_info_ptr->Type(), embedding_info_ptr->Dimension());
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -41,7 +41,7 @@ import cross_product_reference;
 
 export module query_binder;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class QueryBinder {
 public:
@@ -108,4 +108,4 @@ private:
     static void CheckKnnAndOrderBy(KnnDistanceType distance_type, OrderType order_type);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

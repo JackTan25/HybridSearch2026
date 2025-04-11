@@ -10,7 +10,7 @@ import vbyte_compress_encoder;
 
 export module posting_field;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct PostingField {
     enum ValueType {
@@ -145,4 +145,4 @@ export struct PostingFields {
     Vector<PostingField *> values_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

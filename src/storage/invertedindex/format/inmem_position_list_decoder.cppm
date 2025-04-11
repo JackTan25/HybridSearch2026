@@ -12,7 +12,7 @@ import posting_list_format;
 import position_list_format_option;
 import index_defines;
 
-namespace infinity {
+namespace hybridsearch {
 
 class PostingByteSlice;
 
@@ -35,4 +35,4 @@ private:
     PostingByteSliceReader pos_list_reader_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

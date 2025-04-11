@@ -29,7 +29,7 @@ import expression_state;
 import data_block;
 import value_expression;
 import column_vector;
-import infinity_exception;
+import hybridsearch_exception;
 import expression_evaluator;
 import default_values;
 import expression_type;
@@ -38,7 +38,7 @@ import status;
 import logical_type;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 class TopSolver {
 public:
@@ -442,4 +442,4 @@ Vector<Vector<SharedPtr<ColumnVector>>> PhysicalTop::GetEvalColumns(const Vector
     return eval_columns;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

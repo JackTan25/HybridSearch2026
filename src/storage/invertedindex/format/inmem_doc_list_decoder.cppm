@@ -11,7 +11,7 @@ import skiplist_reader;
 import index_defines;
 import doc_list_format_option;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class InMemDocListDecoder : public IndexDecoder {
 public:
@@ -56,4 +56,4 @@ private:
     SizeT decode_count_ = 0;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

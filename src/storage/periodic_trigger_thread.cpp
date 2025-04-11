@@ -22,7 +22,7 @@ module periodic_trigger_thread;
 import stl;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 PeriodicTriggerThread::~PeriodicTriggerThread() {
     if (running_) {
@@ -76,4 +76,4 @@ void PeriodicTriggerThread::Run() {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

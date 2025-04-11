@@ -15,7 +15,7 @@
 #include "between_expr.h"
 #include <sstream>
 
-namespace infinity {
+namespace hybridsearch {
 
 BetweenExpr::~BetweenExpr() {
     delete value_;
@@ -29,4 +29,4 @@ std::string BetweenExpr::ToString() const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -23,7 +23,7 @@
 #include "type/info/sparse_info.h"
 #include "type/serialize.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 std::pair<std::shared_ptr<DataType>, std::string>
 ColumnType::GetDataTypeFromColumnType(const ColumnType &column_type, const std::vector<std::unique_ptr<InitParameter>> &index_param_list) {
@@ -217,4 +217,4 @@ std::string ColumnDef::ToString() const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

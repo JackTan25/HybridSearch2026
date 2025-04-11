@@ -25,7 +25,7 @@ class FixedSizeListType;
 class ListType;
 } // namespace arrow
 
-namespace infinity {
+namespace hybridsearch {
 
 class EmbeddingInfo : public TypeInfo {
 public:
@@ -64,4 +64,4 @@ private:
     size_t dimension_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

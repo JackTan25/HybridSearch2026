@@ -18,14 +18,14 @@ import stl;
 
 import column_vector_cast;
 
-import infinity_exception;
+import hybridsearch_exception;
 import bound_cast_func;
 import column_vector;
 import third_party;
 
 export module bitmap_cast;
 #if 0
-namespace infinity {
+namespace hybridsearch {
 
 export struct BitmapTryCastToVarlen;
 
@@ -57,5 +57,5 @@ inline bool BitmapTryCastToVarlen::Run(const BitmapT &source, VarcharT &target, 
     return false;
 }
 
-} // namespace infinity
+} // namespace hybridsearch
 #endif

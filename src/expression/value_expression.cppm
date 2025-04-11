@@ -26,7 +26,7 @@ import data_type;
 
 export module value_expression;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class ValueExpression : public BaseExpression {
 public:
@@ -48,4 +48,4 @@ private:
     Value value_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

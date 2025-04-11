@@ -20,7 +20,7 @@ import stl;
 import command_statement;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct SnapshotBrief {
     String snapshot_name_; // snapshot_name_
@@ -32,4 +32,4 @@ export struct SnapshotBrief {
     static Vector<SnapshotBrief> GetSnapshots(const String& dir);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

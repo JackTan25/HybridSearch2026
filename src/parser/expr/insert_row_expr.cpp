@@ -15,7 +15,7 @@
 #include "insert_row_expr.h"
 #include <sstream>
 
-namespace infinity {
+namespace hybridsearch {
 
 std::string InsertRowExpr::ToString() const {
     std::ostringstream oss;
@@ -37,4 +37,4 @@ std::string InsertRowExpr::ToString() const {
     return std::move(oss).str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

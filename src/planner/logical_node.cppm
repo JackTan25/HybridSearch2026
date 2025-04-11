@@ -22,7 +22,7 @@ import load_meta;
 import data_type;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalNode {
 public:
@@ -94,4 +94,4 @@ export struct LogicalCommonFunctionUsingLoadMeta {
     static SharedPtr<Vector<SharedPtr<DataType>>> GetOutputTypes(const LogicalNode &op);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

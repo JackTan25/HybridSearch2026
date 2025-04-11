@@ -18,11 +18,11 @@ module;
 
 export module admin_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::AdminStatement;
-export using infinity::NodeRole;
-export using infinity::AdminStmtType;
-export using infinity::ToString;
+export using hybridsearch::AdminStatement;
+export using hybridsearch::NodeRole;
+export using hybridsearch::AdminStmtType;
+export using hybridsearch::ToString;
 
-} // namespace infinity
+} // namespace hybridsearch

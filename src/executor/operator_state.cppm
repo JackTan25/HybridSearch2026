@@ -39,7 +39,7 @@ import data_type;
 import segment_entry;
 import hash_table;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct OperatorState {
     inline explicit OperatorState(PhysicalOperatorType operator_type) : operator_type_(operator_type) {}
@@ -626,4 +626,4 @@ export struct SummarySinkState : public SinkState {
     u64 sum_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

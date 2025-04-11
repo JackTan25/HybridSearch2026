@@ -23,10 +23,10 @@ import data_type;
 import column_vector;
 import value;
 import internal_types;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 // Intermediate data structure transferred between operator.
 export struct DataBlock {
@@ -138,4 +138,4 @@ private:
     bool initialized = false;
     bool finalized = false;
 };
-} // namespace infinity
+} // namespace hybridsearch

@@ -19,10 +19,10 @@ import operator_state;
 
 module physical_prepared_plan;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalPreparedPlan::Init(QueryContext* query_context) {}
 
 bool PhysicalPreparedPlan::Execute(QueryContext *, OperatorState *) { return true; }
 
-} // namespace infinity
+} // namespace hybridsearch

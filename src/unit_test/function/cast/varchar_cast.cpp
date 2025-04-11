@@ -15,15 +15,15 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 
 import logger;
 import stl;
-import infinity_context;
-import infinity_exception;
+import hybridsearch_context;
+import hybridsearch_exception;
 import column_vector;
 
 import function_set;
@@ -40,10 +40,10 @@ import logical_type;
 import data_type;
 import logical_type;
 
-using namespace infinity;
+using namespace hybridsearch;
 class VarcharTest : public BaseTest {};
 
-using namespace infinity;
+using namespace hybridsearch;
 
 void InitVarcharAsInline(VarcharT &varchar, const std::string_view sv) {
     varchar.length_ = sv.size();
@@ -157,7 +157,7 @@ TEST_F(VarcharTest, varchar_cast0) {
 }
 
 TEST_F(VarcharTest, varchar_cast1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     {
         SharedPtr<DataType> source_type = MakeShared<DataType>(LogicalType::kVarchar);

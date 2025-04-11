@@ -19,7 +19,7 @@ export module periodic_trigger_thread;
 import stl;
 import periodic_trigger;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PeriodicTriggerThread {
 public:
@@ -47,4 +47,4 @@ private:
     bool running_{false};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -15,14 +15,14 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 
 import first;
 import function_set;
@@ -36,7 +36,7 @@ import data_block;
 import internal_types;
 import logical_type;
 #if 0
-using namespace infinity;
+using namespace hybridsearch;
 class FirstFunctionTest : public BaseTestParamStr {};
 
 INSTANTIATE_TEST_SUITE_P(TestWithDifferentParams,
@@ -45,7 +45,7 @@ INSTANTIATE_TEST_SUITE_P(TestWithDifferentParams,
 
 
 TEST_P(FirstFunctionTest, first_func) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     UniquePtr<Catalog> catalog_ptr = MakeUnique<Catalog>();
 

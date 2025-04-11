@@ -24,7 +24,7 @@ import stl;
 import index_defines;
 import multi_doc_iterator;
 import doc_iterator;
-namespace infinity {
+namespace hybridsearch {
 
 void DocIteratorHeap::BuildHeap() {
     for (SizeT i = (1 + iterator_heap_.size()) / 2; i > 0; --i) {
@@ -122,4 +122,4 @@ u32 OrIterator::MatchCount() const {
     return count;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -16,7 +16,7 @@
 
 #include "base_table_reference.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 class TableReference : public BaseTableReference {
 
@@ -33,4 +33,4 @@ public:
     [[nodiscard]] std::string GetTableName() const;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

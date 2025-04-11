@@ -18,9 +18,9 @@ module;
 
 export module knn_expr;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::KnnExpr;
-export using infinity::KnnDistanceType;
+export using hybridsearch::KnnExpr;
+export using hybridsearch::KnnDistanceType;
 
-} // namespace infinity
+} // namespace hybridsearch

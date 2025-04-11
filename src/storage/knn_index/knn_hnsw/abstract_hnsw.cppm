@@ -16,7 +16,7 @@ module;
 
 #include <future>
 
-namespace infinity {
+namespace hybridsearch {
 struct SegmentEntry;
 }
 
@@ -31,19 +31,19 @@ import dist_func_ip;
 import hnsw_common;
 import column_def;
 import index_hnsw;
-import infinity_exception;
+import hybridsearch_exception;
 import index_base;
 import logger;
 import internal_types;
 import embedding_info;
-import infinity_context;
+import hybridsearch_context;
 import logger;
 import base_memindex;
 import memindex_tracer;
 import table_index_entry;
 import buffer_handle;
 
-namespace infinity {
+namespace hybridsearch {
 
 class BufferManager;
 struct ChunkIndexEntry;
@@ -110,7 +110,7 @@ public:
 private:
     template <typename Iter, typename Index>
     static void InsertVecs(Index &index, Iter &&iter, const HnswInsertConfig &config, SizeT &mem_usage) {
-        auto &thread_pool = InfinityContext::instance().GetHnswBuildThreadPool();
+        auto &thread_pool = hybridsearchContext::instance().GetHnswBuildThreadPool();
         if (thread_pool.size() == 0) {
             UnrecoverableError("Hnsw build thread pool is not initialized.");
         }
@@ -219,4 +219,4 @@ private:
     BufferHandle chunk_handle_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

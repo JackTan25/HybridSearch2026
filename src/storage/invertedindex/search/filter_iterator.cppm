@@ -26,7 +26,7 @@ import roaring_bitmap;
 import table_entry;
 import column_index_reader;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class FilterIterator final : public DocIterator {
 public:
@@ -95,4 +95,4 @@ export struct FilterQueryNode final : public QueryNode {
     void GetQueryColumnsTerms(Vector<String> &columns, Vector<String> &terms) const override {}
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -18,8 +18,8 @@ module;
 
 export module drop_index_info;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::DropIndexInfo;
+export using hybridsearch::DropIndexInfo;
 
 }

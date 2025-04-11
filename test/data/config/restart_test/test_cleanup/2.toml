@@ -9,7 +9,7 @@ log_level = "trace"
 
 [storage]
 persistence_dir = ""
-data_dir = "/var/infinity/data"
+data_dir = "/var/hybridsearch/data"
 optimize_interval = "0s"
 cleanup_interval = "1s"
 compact_interval = "1s"

@@ -21,7 +21,7 @@ import stl;
 import simd_init;
 import search_top_k_sgemm;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename TypeX, typename TypeY, typename ID, typename DistType>
 void search_top_k_with_dis(u32 k, u32 dimension, u32 nx, const TypeX *x, u32 ny, const TypeY *y, ID *labels, DistType *distances, bool sort_) {
@@ -40,4 +40,4 @@ void search_top_k_with_dis(u32 k, u32 dimension, u32 nx, const TypeX *x, u32 ny,
     return search_top_k_simple_with_dis(k, dimension, nx, x, ny, y, labels, distances, sort_);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

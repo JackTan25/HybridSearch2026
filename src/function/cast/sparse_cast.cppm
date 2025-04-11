@@ -21,7 +21,7 @@ import bound_cast_func;
 import data_type;
 import logical_type;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import sparse_info;
 import column_vector_cast;
 import internal_types;
@@ -34,7 +34,7 @@ import embedding_cast;
 import logger;
 import sparse_util;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct SparseTryCastToSparse;
 
@@ -415,4 +415,4 @@ bool SparseTryCastToSparse::Run(const SparseT &source,
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

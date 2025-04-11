@@ -1,21 +1,21 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 import float16;
 
-using namespace infinity;
+using namespace hybridsearch;
 class FP16TypeTest : public BaseTest {};
 
 TEST_F(FP16TypeTest, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     const uint16_t min_po2_f16 = UINT16_C(0x0400);
     const uint16_t eighths_f16 = UINT16_C(0x3000);

@@ -18,10 +18,10 @@ import stl;
 
 export module greater;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 
 export void RegisterGreaterFunction(const UniquePtr<Catalog> &catalog_ptr);
 
-} // namespace infinity
+} // namespace hybridsearch

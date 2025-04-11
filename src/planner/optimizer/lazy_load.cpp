@@ -34,10 +34,10 @@ import logical_unnest;
 import base_table_ref;
 import load_meta;
 import special_function;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 Optional<BaseTableRef *> GetScanTableRef(LogicalNode &op) {
     switch (op.operator_type()) {
@@ -306,4 +306,4 @@ void CleanScan::VisitNode(LogicalNode &op) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

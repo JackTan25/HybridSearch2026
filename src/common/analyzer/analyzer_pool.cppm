@@ -22,7 +22,7 @@ import third_party;
 import analyzer;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class AnalyzerPool : public Singleton<AnalyzerPool> {
 public:
@@ -51,4 +51,4 @@ private:
     CacheType cache_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

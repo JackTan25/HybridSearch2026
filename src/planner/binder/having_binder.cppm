@@ -28,7 +28,7 @@ import column_expr;
 import function_expr;
 import knn_expr;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class HavingBinder final : public ExpressionBinder {
 public:
@@ -49,4 +49,4 @@ private:
     bool binding_agg_func_ = false;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

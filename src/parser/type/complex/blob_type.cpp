@@ -15,7 +15,7 @@
 #include "blob_type.h"
 #include <cstring>
 
-namespace infinity {
+namespace hybridsearch {
 
 BlobType::BlobType(const BlobType &other) { this->Copy(other.ptr, other.size); }
 
@@ -68,5 +68,5 @@ void BlobType::std::move(char *blob_ptr, uint64_t blob_size) {
     this->size = blob_size;
 }
 
-} // namespace infinity
+} // namespace hybridsearch
 #endif

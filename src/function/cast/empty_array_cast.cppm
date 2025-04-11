@@ -20,12 +20,12 @@ import stl;
 import data_type;
 import bound_cast_func;
 import column_vector_cast;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import logical_type;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct EmptyTryCastToFixlen;
 
@@ -56,4 +56,4 @@ bool EmptyTryCastToFixlen::Run(EmptyArrayT, SparseT &target) {
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

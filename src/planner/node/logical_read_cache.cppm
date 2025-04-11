@@ -24,7 +24,7 @@ import data_type;
 import base_table_ref;
 import logical_node_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct CacheContent;
 
@@ -56,4 +56,4 @@ public:
     bool is_min_heap_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

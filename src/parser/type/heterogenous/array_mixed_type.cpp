@@ -16,7 +16,7 @@
 #include "mixed_array_value.h"
 #include "mixed_type.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 void ArrayMixedType::Reset(bool in_constructor) {
     if (in_constructor) {
@@ -40,4 +40,4 @@ void ArrayMixedType::Reset(bool in_constructor) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -15,14 +15,14 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 import default_values;
 import data_table;
 import table_def;
@@ -35,11 +35,11 @@ import logical_type;
 import internal_types;
 import data_type;
 
-using namespace infinity;
+using namespace hybridsearch;
 class ExpressionExecutorSelectTest : public BaseTest {};
 
 TEST_F(ExpressionExecutorSelectTest, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kBoolean);
     ColumnVector column_vector(data_type);
@@ -73,7 +73,7 @@ TEST_F(ExpressionExecutorSelectTest, test1) {
 }
 
 TEST_F(ExpressionExecutorSelectTest, test2) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kBoolean);
     ColumnVector column_vector(data_type);
@@ -107,7 +107,7 @@ TEST_F(ExpressionExecutorSelectTest, test2) {
 }
 
 TEST_F(ExpressionExecutorSelectTest, test3) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kBoolean);
     ColumnVector column_vector(data_type);

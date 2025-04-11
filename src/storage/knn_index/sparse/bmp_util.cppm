@@ -19,7 +19,7 @@ export module bmp_util;
 import stl;
 import statement_common;
 
-namespace infinity {
+namespace hybridsearch {
 
 export using BMPBlockID = i32;
 export using BMPBlockOffset = u8;
@@ -117,4 +117,4 @@ public:
     static Optional<BMPOptimizeOptions> ParseBMPOptimizeOptions(const Vector<UniquePtr<InitParameter>> &opt_params);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

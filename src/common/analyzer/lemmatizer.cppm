@@ -19,7 +19,7 @@ export module lemmatizer;
 import stl;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class Lemmatizer {
 public:
@@ -53,4 +53,4 @@ private:
     Vector<String> POS_LIST;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

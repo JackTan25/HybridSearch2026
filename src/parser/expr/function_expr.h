@@ -18,7 +18,7 @@
 #include <string>
 #include <vector>
 
-namespace infinity {
+namespace hybridsearch {
 
 class FunctionExpr : public ParsedExpr {
 public:
@@ -34,4 +34,4 @@ public:
     bool distinct_{false};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

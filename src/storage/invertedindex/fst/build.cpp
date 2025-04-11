@@ -15,7 +15,7 @@
 module;
 #include <cassert>
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 module fst;
 import :bytes;
@@ -23,7 +23,7 @@ import :node;
 import :registry;
 import :writer;
 
-namespace infinity {
+namespace hybridsearch {
 
 void FstBuilder::Finish() {
     CompileFrom(0);
@@ -117,4 +117,4 @@ void FstBuilder::CheckLastKey(u8 *bs_ptr, SizeT bs_len, bool check_dupe) {
     last_.insert(last_.end(), bs_ptr, bs_ptr + bs_len);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

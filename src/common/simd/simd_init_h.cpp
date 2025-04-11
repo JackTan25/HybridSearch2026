@@ -15,7 +15,7 @@
 #include "simd_init_h.h"
 #include "NGT_CpuInfo_SimdType.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 struct SupportedSimdTypes {
     std::vector<char const *> types_strs_ = NGT::CpuInfo::getSupportedSimdTypes();
@@ -43,4 +43,4 @@ bool IsAVX512Supported() { return GetSupportedSimdTypes().is_avx512_; }
 
 bool IsAVX512BWSupported() { return GetSupportedSimdTypes().is_avx512bw_; }
 
-} // namespace infinity
+} // namespace hybridsearch

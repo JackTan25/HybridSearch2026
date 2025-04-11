@@ -15,14 +15,14 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 
 import function_set;
 import aggregate_function_set;
@@ -40,7 +40,7 @@ import internal_types;
 import logical_type;
 import data_type;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class DecimalCastTest : public BaseTest {
     void SetUp() override { BaseTest::SetUp(); }
@@ -49,7 +49,7 @@ class DecimalCastTest : public BaseTest {
 };
 
 TEST_F(DecimalCastTest, decimal_cast0) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     // DecimalT to TinyIntT, throw exception
     {
@@ -116,7 +116,7 @@ TEST_F(DecimalCastTest, decimal_cast0) {
 }
 
 TEST_F(DecimalCastTest, decimal_cast1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     // cast decimal column vector to tiny int column vector
     {

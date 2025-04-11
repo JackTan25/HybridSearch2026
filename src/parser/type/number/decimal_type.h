@@ -17,7 +17,7 @@
 #include "parser_assert.h"
 #include "type/logical_type.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 struct DecimalType {
 public:
@@ -47,4 +47,4 @@ public:
     int64_t lower{0};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

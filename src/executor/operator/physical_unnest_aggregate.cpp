@@ -30,9 +30,9 @@ import data_block;
 import logger;
 import third_party;
 
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalUnnestAggregate::Init(QueryContext* query_context) {}
 
@@ -44,4 +44,4 @@ bool PhysicalUnnestAggregate::Execute(QueryContext *, OperatorState *operator_st
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

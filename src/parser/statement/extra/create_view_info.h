@@ -17,7 +17,7 @@
 #include "extra_ddl_info.h"
 #include "statement/select_statement.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 class CreateViewInfo final : public ExtraDDLInfo {
 public:
@@ -33,4 +33,4 @@ public:
     SelectStatement *select_{nullptr};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

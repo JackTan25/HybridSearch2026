@@ -20,7 +20,7 @@ import stemmer;
 import analyzer;
 export module common_analyzer;
 
-namespace infinity {
+namespace hybridsearch {
 export class CommonLanguageAnalyzer : public Analyzer {
 public:
     CommonLanguageAnalyzer();
@@ -91,4 +91,4 @@ protected:
     bool stem_only_{false};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

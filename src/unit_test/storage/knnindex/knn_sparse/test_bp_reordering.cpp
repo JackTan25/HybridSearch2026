@@ -19,13 +19,13 @@ import base_test;
 import stl;
 import bp_reordering;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 import virtual_store;
 import compilation_config;
 import sparse_util;
 import local_file_handle;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class BPReorderingTest : public BaseTest {
 protected:

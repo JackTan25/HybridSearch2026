@@ -17,7 +17,7 @@ module;
 export module compact_state_data;
 
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 import global_block_id;
 import internal_types;
 import default_values;
@@ -29,7 +29,7 @@ import base_table_ref;
 import block_index;
 import txn;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class RowIDRemap {
     using RowIDMap = HashMap<GlobalBlockID, Map<BlockOffset, RowID>, GlobalBlockIDHash>;
@@ -97,4 +97,4 @@ private:
     SharedPtr<BaseTableRef> new_table_ref_{}; // table ref after compact
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -18,7 +18,7 @@ module logical_alter;
 
 import logical_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<ColumnBinding> LogicalAlter::GetColumnBindings() const { return {}; }
 
@@ -49,4 +49,4 @@ String LogicalDropColumns::ToString(i64 &space) const {
     return "";
 }
 
-} // namespace infinity
+} // namespace hybridsearch

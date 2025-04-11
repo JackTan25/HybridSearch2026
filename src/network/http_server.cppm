@@ -19,7 +19,7 @@ export module http_server;
 import stl;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 enum struct HTTPServerStatus : u8 {
     kStopped = 0,
@@ -42,4 +42,4 @@ private:
     SharedPtr<HttpConnectionHandler> connection_handler_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

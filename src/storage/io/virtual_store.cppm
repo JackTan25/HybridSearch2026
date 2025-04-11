@@ -24,7 +24,7 @@ import stream_reader;
 import s3_client;
 import object_storage_process;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class StorageType {
     kInvalid,
@@ -86,7 +86,7 @@ public:
                                   bool HTTPS = false,
                                   const String &access_key = "minioadmin",
                                   const String &secret_key = "minioadmin",
-                                  const String &bucket = "infinity");
+                                  const String &bucket = "hybridsearch");
 
     static Status UnInitRemoteStore();
 
@@ -118,4 +118,4 @@ private:
     friend class ObjectStorageProcess;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

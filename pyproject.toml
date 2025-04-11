@@ -10,7 +10,7 @@ requires = ["scikit-build-core", "nanobind"]
 build-backend = "scikit_build_core.build"
 
 [project]
-name = "infinity_embedded_sdk"
+name = "hybridsearch_embedded_sdk"
 version = "0.6.0.dev3"
 requires-python = ">=3.10"
 dependencies = [
@@ -26,17 +26,17 @@ dependencies = [
     "openpyxl~=3.1.0",
     "requests~=2.32.0"
 ]
-description = "infinity"
+description = "hybridsearch"
 readme = "README.md"
 
 [tool.scikit-build]
 minimum-version = "0.4"
-cmake.targets = ["embedded_infinity_ext"]
+cmake.targets = ["embedded_hybridsearch_ext"]
 cmake.build-type = "Release"
 build-dir = "build/{build_type}"
 
 wheel.py-api = "cp310"
-wheel.packages = ["python/infinity_embedded"]
+wheel.packages = ["python/hybridsearch_embedded"]
 
 [tool.pytest.ini_options]
 addopts = "--strict-markers"

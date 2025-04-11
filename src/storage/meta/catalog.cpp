@@ -29,7 +29,7 @@ import txn_manager;
 import logger;
 import third_party;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import function_set;
 import scalar_function_set;
 import table_function;
@@ -47,7 +47,7 @@ import catalog_delta_entry;
 import file_writer;
 import extra_ddl_info;
 import index_defines;
-import infinity_context;
+import hybridsearch_context;
 import create_index_info;
 import persistence_manager;
 
@@ -65,7 +65,7 @@ import admin_statement;
 import global_resource_usage;
 import snapshot_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 void ProfileHistory::Resize(SizeT new_size) {
     std::unique_lock<std::mutex> lk(lock_);
@@ -112,14 +112,14 @@ Vector<SharedPtr<QueryProfiler>> ProfileHistory::GetElements() {
 
 // TODO Consider letting it commit as a transaction.
 Catalog::Catalog() : catalog_dir_(MakeShared<String>(CATALOG_FILE_DIR)), running_(true) {
-    String abs_catalog_dir = Path(InfinityContext::instance().config()->DataDir()) / String(CATALOG_FILE_DIR);
+    String abs_catalog_dir = Path(hybridsearchContext::instance().config()->DataDir()) / String(CATALOG_FILE_DIR);
     if (!VirtualStore::Exists(abs_catalog_dir)) {
         VirtualStore::MakeDirectory(abs_catalog_dir);
     }
 
     ResizeProfileHistory(DEFAULT_PROFILER_HISTORY_SIZE);
 
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::IncrObjectCount("Catalog");
 #endif
 }
@@ -137,7 +137,7 @@ Catalog::~Catalog() {
         mem_index_commit_thread_.reset();
     }
 
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::DecrObjectCount("Catalog");
 #endif
 }
@@ -642,7 +642,7 @@ nlohmann::json Catalog::Serialize(TxnTimeStamp max_commit_ts) {
         }
     }
 
-    PersistenceManager *pm = InfinityContext::instance().persistence_manager();
+    PersistenceManager *pm = hybridsearchContext::instance().persistence_manager();
     if (pm != nullptr) {
         PersistResultHandler handler(pm);
         // Finalize current object to ensure PersistenceManager be in a consistent state
@@ -677,9 +677,9 @@ Catalog::LoadFromFiles(const FullCatalogFileInfo &full_ckp_info, const Vector<De
     return catalog;
 }
 void Catalog::AttachDeltaCheckpoint(const String &file_name) {
-    const auto &catalog_path = Path(InfinityContext::instance().config()->DataDir()) / file_name;
+    const auto &catalog_path = Path(hybridsearchContext::instance().config()->DataDir()) / file_name;
     UniquePtr<CatalogDeltaEntry> catalog_delta_entry = Catalog::LoadFromFileDelta(catalog_path);
-    BufferManager *buffer_mgr = InfinityContext::instance().storage()->buffer_manager();
+    BufferManager *buffer_mgr = hybridsearchContext::instance().storage()->buffer_manager();
     this->LoadFromEntryDelta(std::move(catalog_delta_entry), buffer_mgr);
 }
 
@@ -718,7 +718,7 @@ UniquePtr<CatalogDeltaEntry> Catalog::LoadFromFileDelta(const String &catalog_pa
 
 void Catalog::LoadFromEntryDelta(UniquePtr<CatalogDeltaEntry> delta_entry, BufferManager *buffer_mgr) {
     Vector<UniquePtr<CatalogDeltaOperation>> &delta_ops = delta_entry->operations();
-    auto *pm = InfinityContext::instance().persistence_manager();
+    auto *pm = hybridsearchContext::instance().persistence_manager();
     for (auto &op : delta_ops) {
         auto type = op->GetType();
         // LOG_INFO(fmt::format("Load delta op {}", op->ToString()));
@@ -1102,7 +1102,7 @@ void Catalog::LoadFromEntryDelta(UniquePtr<CatalogDeltaEntry> delta_entry, Buffe
 }
 
 UniquePtr<Catalog> Catalog::LoadFullCheckpoint(const String &file_name) {
-    const auto &catalog_path = Path(InfinityContext::instance().config()->DataDir()) / file_name;
+    const auto &catalog_path = Path(hybridsearchContext::instance().config()->DataDir()) / file_name;
     String dst_dir = catalog_path.parent_path().string();
     String dst_file_name = catalog_path.filename().string();
 
@@ -1134,7 +1134,7 @@ UniquePtr<Catalog> Catalog::LoadFullCheckpoint(const String &file_name) {
 
     nlohmann::json catalog_json = nlohmann::json::parse(json_str);
 
-    BufferManager *buffer_mgr = InfinityContext::instance().storage()->buffer_manager();
+    BufferManager *buffer_mgr = hybridsearchContext::instance().storage()->buffer_manager();
     return Deserialize(catalog_json, buffer_mgr);
 }
 
@@ -1150,7 +1150,7 @@ UniquePtr<Catalog> Catalog::Deserialize(const nlohmann::json &catalog_json, Buff
         }
     }
     if (catalog_json.contains("obj_addr_map")) {
-        PersistenceManager *pm = InfinityContext::instance().persistence_manager();
+        PersistenceManager *pm = hybridsearchContext::instance().persistence_manager();
         if (pm != nullptr) {
             pm->Deserialize(catalog_json["obj_addr_map"]);
         }
@@ -1161,9 +1161,9 @@ UniquePtr<Catalog> Catalog::Deserialize(const nlohmann::json &catalog_json, Buff
 void Catalog::SaveFullCatalog(TxnTimeStamp max_commit_ts, String &full_catalog_path, String &full_catalog_name) {
     full_catalog_path = *catalog_dir_;
     full_catalog_name = CatalogFile::FullCheckpointFilename(max_commit_ts);
-    String full_path = Path(InfinityContext::instance().config()->DataDir()) / *catalog_dir_ / full_catalog_name;
+    String full_path = Path(hybridsearchContext::instance().config()->DataDir()) / *catalog_dir_ / full_catalog_name;
     String catalog_tmp_path =
-        Path(InfinityContext::instance().config()->DataDir()) / *catalog_dir_ / CatalogFile::TempFullCheckpointFilename(max_commit_ts);
+        Path(hybridsearchContext::instance().config()->DataDir()) / *catalog_dir_ / CatalogFile::TempFullCheckpointFilename(max_commit_ts);
 
     // Serialize catalog to string
     full_ckp_commit_ts_ = max_commit_ts;
@@ -1185,7 +1185,7 @@ void Catalog::SaveFullCatalog(TxnTimeStamp max_commit_ts, String &full_catalog_p
 
     // Rename temp file to regular catalog file
     VirtualStore::Rename(catalog_tmp_path, full_path);
-    if (InfinityContext::instance().GetServerRole() == NodeRole::kLeader or InfinityContext::instance().GetServerRole() == NodeRole::kStandalone) {
+    if (hybridsearchContext::instance().GetServerRole() == NodeRole::kLeader or hybridsearchContext::instance().GetServerRole() == NodeRole::kStandalone) {
         VirtualStore::UploadObject(full_path, full_catalog_name);
     }
 
@@ -1204,7 +1204,7 @@ bool Catalog::SaveDeltaCatalog(TxnTimeStamp last_ckp_ts, TxnTimeStamp &max_commi
 
     delta_catalog_path = *catalog_dir_;
     delta_catalog_name = CatalogFile::DeltaCheckpointFilename(max_commit_ts);
-    String delta_path = fmt::format("{}/{}/{}", InfinityContext::instance().config()->DataDir(), *catalog_dir_, delta_catalog_name);
+    String delta_path = fmt::format("{}/{}/{}", hybridsearchContext::instance().config()->DataDir(), *catalog_dir_, delta_catalog_name);
 
     if (flush_delta_entry->commit_ts() != max_commit_ts) {
         String error_message = "Expect flush_delta_entry->commit_ts() == max_commit_ts";
@@ -1243,7 +1243,7 @@ bool Catalog::SaveDeltaCatalog(TxnTimeStamp last_ckp_ts, TxnTimeStamp &max_commi
     }
 
     // Finalize current object to ensure PersistenceManager be in a consistent state
-    PersistenceManager *pm = InfinityContext::instance().persistence_manager();
+    PersistenceManager *pm = hybridsearchContext::instance().persistence_manager();
     if (pm != nullptr) {
         PersistResultHandler handler(pm);
         PersistWriteResult result = pm->CurrentObjFinalize(true);
@@ -1272,7 +1272,7 @@ bool Catalog::SaveDeltaCatalog(TxnTimeStamp last_ckp_ts, TxnTimeStamp &max_commi
 
     out_file_handle->Append((reinterpret_cast<const char *>(buf.data())), act_size);
     out_file_handle->Sync();
-    if (InfinityContext::instance().GetServerRole() == NodeRole::kLeader or InfinityContext::instance().GetServerRole() == NodeRole::kStandalone) {
+    if (hybridsearchContext::instance().GetServerRole() == NodeRole::kLeader or hybridsearchContext::instance().GetServerRole() == NodeRole::kStandalone) {
         VirtualStore::UploadObject(delta_path, delta_catalog_name);
     }
     // {
@@ -1350,4 +1350,4 @@ SizeT Catalog::GetDeltaLogCount() const { return global_catalog_delta_entry_->Op
 
 Vector<CatalogDeltaOpBrief> Catalog::GetDeltaLogBriefs() const { return global_catalog_delta_entry_->GetOperationBriefs(); }
 
-} // namespace infinity
+} // namespace hybridsearch

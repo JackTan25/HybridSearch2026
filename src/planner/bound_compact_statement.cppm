@@ -30,7 +30,7 @@ import third_party;
 import table_entry;
 import compact_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct BoundCompactStatement final {
 public:
@@ -90,4 +90,4 @@ private:
     CompactStatementType compact_type_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

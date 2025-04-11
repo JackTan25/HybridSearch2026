@@ -36,7 +36,7 @@ import logical_type;
 import match_sparse_scan_function_data;
 import block_entry;
 import logger;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import buffer_manager;
 import expression_evaluator;
@@ -63,7 +63,7 @@ import segment_entry;
 import abstract_bmp;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 PhysicalMatchSparseScan::PhysicalMatchSparseScan(u64 id,
                                                  u64 table_index,
@@ -581,4 +581,4 @@ void PhysicalMatchSparseScan::ExecuteInnerT(DistFunc *dist_func,
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

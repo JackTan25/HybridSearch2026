@@ -18,8 +18,8 @@ module;
 
 export module create_table_info;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::CreateTableInfo;
+export using hybridsearch::CreateTableInfo;
 
 }

@@ -25,7 +25,7 @@ import base_table_ref;
 import create_index_info;
 import statement_common;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class HnswEncodeType {
     kPlain,
@@ -117,4 +117,4 @@ public:
     Optional<LSGConfig> lsg_config_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

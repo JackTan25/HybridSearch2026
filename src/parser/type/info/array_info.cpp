@@ -15,7 +15,7 @@
 #include "array_info.h"
 #include "type/complex/array_type.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 bool ArrayInfo::operator==(const TypeInfo &other) const {
     if (other.type() != TypeInfoType::kArray) {
@@ -31,4 +31,4 @@ std::string ArrayInfo::ToString() const { return elem_type_.ToString(); }
 
 nlohmann::json ArrayInfo::Serialize() const { return elem_type_.Serialize(); }
 
-} // namespace infinity
+} // namespace hybridsearch

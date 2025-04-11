@@ -30,7 +30,7 @@ import internal_types;
 import data_type;
 import base_table_ref;
 
-namespace infinity {
+namespace hybridsearch {
 
 class RefencecColumnCollection : public LogicalNodeVisitor {
 public:
@@ -92,4 +92,4 @@ private:
 
 export Optional<BaseTableRef *> GetScanTableRef(LogicalNode &op);
 
-} // namespace infinity
+} // namespace hybridsearch

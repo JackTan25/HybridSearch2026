@@ -22,7 +22,7 @@ import bg_task;
 import stl;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 class CleanupPeriodicTrigger;
@@ -30,12 +30,12 @@ class CleanupPeriodicTrigger;
 export class BGTaskProcessor {
 public:
     explicit BGTaskProcessor(WalManager *wal_manager, Catalog *catalog) : wal_manager_(wal_manager), catalog_(catalog) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("BGTaskProcessor");
 #endif
     }
     ~BGTaskProcessor() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("BGTaskProcessor");
 #endif
     }
@@ -73,4 +73,4 @@ private:
     String task_text_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

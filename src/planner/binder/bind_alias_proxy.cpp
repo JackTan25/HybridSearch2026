@@ -22,12 +22,12 @@ import base_expression;
 import bind_context;
 import expression_binder;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import parsed_expr;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 SharedPtr<BaseExpression>
 BindAliasProxy::BindAlias(ExpressionBinder &expression_binder, const ParsedExpr &expr, BindContext *bind_context_ptr, i64 depth, bool root) {
@@ -52,4 +52,4 @@ BindAliasProxy::BindAlias(ExpressionBinder &expression_binder, const ParsedExpr 
     return bound_alias_expr;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

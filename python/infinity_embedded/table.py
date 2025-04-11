@@ -14,9 +14,9 @@
 
 from enum import Enum
 
-from infinity_embedded.common import InfinityException, INSERT_DATA
-from infinity_embedded.embedded_infinity_ext import ExplainType as LocalExplainType
-from infinity_embedded.errors import ErrorCode
+from hybridsearch_embedded.common import hybridsearchException, INSERT_DATA
+from hybridsearch_embedded.embedded_hybridsearch_ext import ExplainType as LocalExplainType
+from hybridsearch_embedded.errors import ErrorCode
 
 
 class ExplainType(Enum):
@@ -44,4 +44,4 @@ class ExplainType(Enum):
         elif self is ExplainType.Fragment:
             return LocalExplainType.kFragment
         else:
-            raise InfinityException(ErrorCode.INVALID_EXPLAIN_TYPE, "Unknown explain type")
+            raise hybridsearchException(ErrorCode.INVALID_EXPLAIN_TYPE, "Unknown explain type")

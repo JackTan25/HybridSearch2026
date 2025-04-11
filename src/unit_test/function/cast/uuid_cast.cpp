@@ -15,14 +15,14 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 
 import function_set;
 import aggregate_function_set;
@@ -38,11 +38,11 @@ import bound_cast_func;
 import internal_types;
 import logical_type;
 #if 0
-using namespace infinity;
+using namespace hybridsearch;
 class UuidCastTest : public BaseTest {};
 
 TEST_F(UuidCastTest, uuid_cast0) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     // Try to cast uuid type to wrong type.
     {
@@ -70,7 +70,7 @@ TEST_F(UuidCastTest, uuid_cast0) {
 }
 
 TEST_F(UuidCastTest, uuid_cast1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     // Call BindUuidCast with wrong type of parameters
     {

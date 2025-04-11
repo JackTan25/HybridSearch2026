@@ -20,7 +20,7 @@
 #include <cstdint>
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 struct BitmapType {
 public:
@@ -72,6 +72,6 @@ public:
     [[nodiscard]] inline std::string ToString() const { ParserError("ToString() isn't implemented"); return std::string(); }
 };
 
-} // namespace infinity
+} // namespace hybridsearch
 
 #endif

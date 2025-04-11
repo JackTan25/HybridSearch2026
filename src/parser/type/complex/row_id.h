@@ -18,7 +18,7 @@
 #include <numeric>
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 constexpr uint32_t INVALID_SEGMENT = std::numeric_limits<uint32_t>::max();
 constexpr uint32_t INVALID_SEGMENT_OFFSET = std::numeric_limits<uint32_t>::max();
@@ -93,11 +93,11 @@ struct RowID {
     static inline RowID FromUint64(uint64_t row_id) { return RowID(row_id); }
 };
 
-} // namespace infinity
+} // namespace hybridsearch
 
 namespace std {
 template <>
-struct std::hash<infinity::RowID> {
-    std::size_t operator()(const infinity::RowID &row_id) const noexcept { return std::hash<uint64_t>{}(row_id.ToUint64()); }
+struct std::hash<hybridsearch::RowID> {
+    std::size_t operator()(const hybridsearch::RowID &row_id) const noexcept { return std::hash<uint64_t>{}(row_id.ToUint64()); }
 };
 } // namespace std

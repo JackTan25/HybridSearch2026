@@ -18,7 +18,7 @@
 #include "expr/parsed_expr.h"
 #include <vector>
 
-namespace infinity {
+namespace hybridsearch {
 
 struct UpdateExpr {
     inline ~UpdateExpr() {
@@ -48,4 +48,4 @@ public:
     std::vector<UpdateExpr *> *update_expr_array_{nullptr};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

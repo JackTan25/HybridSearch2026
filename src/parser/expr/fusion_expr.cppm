@@ -18,8 +18,8 @@ module;
 
 export module fusion_expr;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::FusionExpr;
+export using hybridsearch::FusionExpr;
 
 }

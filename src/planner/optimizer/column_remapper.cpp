@@ -24,11 +24,11 @@ import special_function;
 import default_values;
 import third_party;
 import logger;
-import infinity_exception;
+import hybridsearch_exception;
 
 module column_remapper;
 
-namespace infinity {
+namespace hybridsearch {
 
 void BindingRemapper::VisitNode(LogicalNode &op) {
     auto load_func = [&]() {
@@ -136,4 +136,4 @@ SharedPtr<BaseExpression> BindingRemapper::VisitReplace(const SharedPtr<ColumnEx
     return nullptr;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

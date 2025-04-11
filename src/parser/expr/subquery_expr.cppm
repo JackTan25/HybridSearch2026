@@ -18,9 +18,9 @@ module;
 
 export module subquery_expr;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::SubqueryExpr;
-export using infinity::SubqueryType;
+export using hybridsearch::SubqueryExpr;
+export using hybridsearch::SubqueryType;
 
-} // namespace infinity
+} // namespace hybridsearch

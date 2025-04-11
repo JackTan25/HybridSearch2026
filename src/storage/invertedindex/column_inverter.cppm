@@ -30,7 +30,7 @@ import vector_with_lock;
 import buf_writer;
 import mem_usage_change;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class ColumnInverter {
 public:
@@ -131,4 +131,4 @@ private:
     VectorWithLock<u32> &column_lengths_;
     Vector<std::binary_semaphore *> semas_{};
 };
-} // namespace infinity
+} // namespace hybridsearch

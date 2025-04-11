@@ -15,14 +15,14 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 import sql_parser;
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 import logical_type;
 import internal_types;
 import base_statement;
@@ -45,11 +45,11 @@ import cross_product_reference;
 import subquery_reference;
 import parser_result;
 
-using namespace infinity;
+using namespace hybridsearch;
 class SelectStatementParsingTest : public BaseTest {};
 
 TEST_F(SelectStatementParsingTest, good_test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
     SharedPtr<SQLParser> parser = MakeShared<SQLParser>();
     SharedPtr<ParserResult> result = MakeShared<ParserResult>();
 
@@ -87,7 +87,7 @@ TEST_F(SelectStatementParsingTest, good_test1) {
 }
 
 TEST_F(SelectStatementParsingTest, good_test2) {
-    using namespace infinity;
+    using namespace hybridsearch;
     SharedPtr<SQLParser> parser = MakeShared<SQLParser>();
     SharedPtr<ParserResult> result = MakeShared<ParserResult>();
 
@@ -983,7 +983,7 @@ TEST_F(SelectStatementParsingTest, good_test2) {
 }
 
 TEST_F(SelectStatementParsingTest, good_test3) {
-    using namespace infinity;
+    using namespace hybridsearch;
     SharedPtr<SQLParser> parser = MakeShared<SQLParser>();
     SharedPtr<ParserResult> result = MakeShared<ParserResult>();
 
@@ -1261,7 +1261,7 @@ TEST_F(SelectStatementParsingTest, good_test3) {
 }
 
 TEST_F(SelectStatementParsingTest, good_test4) {
-    using namespace infinity;
+    using namespace hybridsearch;
     SharedPtr<SQLParser> parser = MakeShared<SQLParser>();
     SharedPtr<ParserResult> result = MakeShared<ParserResult>();
 
@@ -1294,7 +1294,7 @@ TEST_F(SelectStatementParsingTest, good_test4) {
 
 TEST_F(SelectStatementParsingTest, bad_test1) {
 
-    using namespace infinity;
+    using namespace hybridsearch;
     SharedPtr<SQLParser> parser = MakeShared<SQLParser>();
     SharedPtr<ParserResult> result = MakeShared<ParserResult>();
 
@@ -1309,7 +1309,7 @@ TEST_F(SelectStatementParsingTest, bad_test1) {
 
 TEST_F(SelectStatementParsingTest, bad_knn_test) {
 
-    using namespace infinity;
+    using namespace hybridsearch;
     SharedPtr<SQLParser> parser = MakeShared<SQLParser>();
     SharedPtr<ParserResult> result = MakeShared<ParserResult>();
 
@@ -1341,7 +1341,7 @@ TEST_F(SelectStatementParsingTest, bad_knn_test) {
 
 TEST_F(SelectStatementParsingTest, bad_search_test) {
 
-    using namespace infinity;
+    using namespace hybridsearch;
     SharedPtr<SQLParser> parser = MakeShared<SQLParser>();
     SharedPtr<ParserResult> result = MakeShared<ParserResult>();
 
@@ -1373,7 +1373,7 @@ TEST_F(SelectStatementParsingTest, bad_search_test) {
 
 TEST_F(SelectStatementParsingTest, good_search_test) {
 
-    using namespace infinity;
+    using namespace hybridsearch;
     SharedPtr<SQLParser> parser = MakeShared<SQLParser>();
     SharedPtr<ParserResult> result = MakeShared<ParserResult>();
 

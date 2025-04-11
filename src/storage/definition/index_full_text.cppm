@@ -26,7 +26,7 @@ import statement_common;
 import base_table_ref;
 import index_defines;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class IndexFullText final : public IndexBase {
 public:
@@ -75,4 +75,4 @@ public:
     optionflag_t flag_{OPTION_FLAG_ALL};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

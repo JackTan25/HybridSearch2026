@@ -27,7 +27,7 @@ import stemmer;
 import analyzer;
 
 class OpenCC;
-namespace infinity {
+namespace hybridsearch {
 
 // C++ reimplementation of
 // https://github.com/infiniflow/ragflow/blob/main/rag/nlp/rag_tokenizer.py
@@ -130,4 +130,4 @@ public:
 
     RE2 replace_space_pattern_{R"#(([ ]+))#"};
 };
-} // namespace infinity
+} // namespace hybridsearch

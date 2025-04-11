@@ -25,13 +25,13 @@ import physical_operator_type;
 import index_base;
 import table_def;
 import load_meta;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import extra_ddl_info;
 import data_type;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PhysicalCreateTable final : public PhysicalOperator {
 public:
@@ -81,4 +81,4 @@ private:
     SharedPtr<Vector<SharedPtr<DataType>>> output_types_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

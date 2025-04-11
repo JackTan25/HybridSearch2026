@@ -13,7 +13,7 @@ import file_writer;
 import file_reader;
 import virtual_store;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class PositionListEncoderTest : public BaseTest {
 public:

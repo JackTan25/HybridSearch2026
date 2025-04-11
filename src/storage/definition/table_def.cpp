@@ -22,12 +22,12 @@ import stl;
 import data_type;
 import serialize;
 import internal_types;
-import infinity_exception;
+import hybridsearch_exception;
 import parsed_expr;
 import constant_expr;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 String TableDef::ToString() const {
     std::stringstream ss;
@@ -125,4 +125,4 @@ SharedPtr<TableDef> TableDef::ReadAdv(const char *&ptr, i32 maxbytes) {
     return TableDef::Make(MakeShared<String>(schema_name), MakeShared<String>(table_name), MakeShared<String>(table_comment), columns);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

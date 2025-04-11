@@ -18,10 +18,10 @@ import stl;
 
 export module year;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 
 export void RegisterYearFunction(const UniquePtr<Catalog> &catalog_ptr);
 
-} // namespace infinity
+} // namespace hybridsearch

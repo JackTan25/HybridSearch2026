@@ -19,13 +19,13 @@ import stl;
 import logical_type;
 import column_vector;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import internal_types;
 
 module hash_table;
 
-namespace infinity {
+namespace hybridsearch {
 
 
 void HashTableBase::Init(Vector<SharedPtr<DataType>> types) {
@@ -139,4 +139,4 @@ bool MergeHashTable::GetOrInsert(const Vector<SharedPtr<ColumnVector>> &columns,
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

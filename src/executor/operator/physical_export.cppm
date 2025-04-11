@@ -23,7 +23,7 @@ import operator_state;
 import physical_operator;
 import physical_operator_type;
 import load_meta;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import statement_common;
 import data_type;
@@ -35,7 +35,7 @@ import column_def;
 import column_vector;
 import knn_filter;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PhysicalExport : public PhysicalOperator {
 public:
@@ -106,4 +106,4 @@ private:
     SharedPtr<BlockIndex> block_index_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

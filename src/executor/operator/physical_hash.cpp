@@ -19,10 +19,10 @@ import operator_state;
 
 module physical_hash;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalHash::Init(QueryContext* query_context) {}
 
 bool PhysicalHash::Execute(QueryContext *, OperatorState *) { return true; }
 
-} // namespace infinity
+} // namespace hybridsearch

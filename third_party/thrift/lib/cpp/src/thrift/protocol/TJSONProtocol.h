@@ -43,8 +43,8 @@ class TJSONContext;
  * 2. Thrift doubles are represented as JSON numbers. Some special values are
  *    represented as strings:
  *    a. "NaN" for not-a-number values
- *    b. "Infinity" for positive infinity
- *    c. "-Infinity" for negative infinity
+ *    b. "hybridsearch" for positive hybridsearch
+ *    c. "-hybridsearch" for negative hybridsearch
  *
  * 3. Thrift string values are emitted as JSON strings, with appropriate
  *    escaping.

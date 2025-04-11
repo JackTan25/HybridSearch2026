@@ -16,12 +16,12 @@ import argparse
 import os
 import time
 
-import infinity
-from infinity import index
-from infinity.common import LOCAL_HOST, LOCAL_INFINITY_PATH
-from infinity.errors import ErrorCode
-from infinity.remote_thrift.client import ThriftInfinityClient
-from infinity.remote_thrift.table import RemoteTable
+import hybridsearch
+from hybridsearch import index
+from hybridsearch.common import LOCAL_HOST, LOCAL_hybridsearch_PATH
+from hybridsearch.errors import ErrorCode
+from hybridsearch.remote_thrift.client import ThrifthybridsearchClient
+from hybridsearch.remote_thrift.table import RemoteTable
 
 
 def import_data(path, dataset: str, m: int, ef_construction: int, remote: bool):
@@ -37,14 +37,14 @@ def import_data(path, dataset: str, m: int, ef_construction: int, remote: bool):
 
 
 def import_sift_1m(path, m: int, ef_construction: int, remote: bool):
-    infinity_obj = None
+    hybridsearch_obj = None
     if remote:
-        infinity_obj = infinity.connect(LOCAL_HOST)
+        hybridsearch_obj = hybridsearch.connect(LOCAL_HOST)
     else:
-        infinity_obj = infinity.connect(LOCAL_INFINITY_PATH)
-    assert infinity_obj
+        hybridsearch_obj = hybridsearch.connect(LOCAL_hybridsearch_PATH)
+    assert hybridsearch_obj
 
-    db_obj = infinity_obj.get_database("default_db")
+    db_obj = hybridsearch_obj.get_database("default_db")
     assert db_obj
     db_obj.drop_table("sift_benchmark")
     db_obj.create_table("sift_benchmark", {"col1": {"type": "vector,128,float"}})
@@ -69,14 +69,14 @@ def import_sift_1m(path, m: int, ef_construction: int, remote: bool):
 
 
 def import_gist_1m(path, m: int, ef_construction: int, remote: bool):
-    infinity_obj = None
+    hybridsearch_obj = None
     if remote:
-        infinity_obj = infinity.connect(LOCAL_HOST)
+        hybridsearch_obj = hybridsearch.connect(LOCAL_HOST)
     else:
-        infinity_obj = infinity.connect(LOCAL_INFINITY_PATH)
-    assert infinity_obj
+        hybridsearch_obj = hybridsearch.connect(LOCAL_hybridsearch_PATH)
+    assert hybridsearch_obj
 
-    db_obj = infinity_obj.get_database("default_db")
+    db_obj = hybridsearch_obj.get_database("default_db")
     assert db_obj
     db_obj.drop_table("gist_benchmark")
     db_obj.create_table("gist_benchmark", {"col1": {"type": "vector,960,float"}})
@@ -132,7 +132,7 @@ def str2bool(value):
 if __name__ == "__main__":
     current_path = os.getcwd()
 
-    parser = argparse.ArgumentParser(description="Benchmark Infinity")
+    parser = argparse.ArgumentParser(description="Benchmark hybridsearch")
 
     parser.add_argument(
         "-d",

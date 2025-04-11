@@ -30,7 +30,7 @@ import index_ivf;
 import embedding_info;
 import logical_type;
 import data_type;
-import infinity_exception;
+import hybridsearch_exception;
 import status;
 import logger;
 import kmeans_partition;
@@ -43,10 +43,10 @@ import ivf_index_util_func;
 import base_memindex;
 import memindex_tracer;
 import table_index_entry;
-import infinity_context;
+import hybridsearch_context;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 IVFIndexInMem::IVFIndexInMem(const RowID begin_row_id,
                              const IndexIVFOption &ivf_option,
@@ -392,4 +392,4 @@ void IVFIndexInMem::SearchIndex(const KnnDistanceBase1 *knn_distance,
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

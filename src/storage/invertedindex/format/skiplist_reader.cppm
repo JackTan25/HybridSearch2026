@@ -25,7 +25,7 @@ import posting_byte_slice;
 import posting_byte_slice_reader;
 import position_list_format_option;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class SkipListReader {
 public:
@@ -135,4 +135,4 @@ private:
     PostingByteSliceReader skiplist_reader_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

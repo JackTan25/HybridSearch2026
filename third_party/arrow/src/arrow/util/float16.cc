@@ -90,14 +90,14 @@ uint16_t BinaryConverter<T>::ToBinary16(T f_bits) {
     if (f_exp == kExpMask && f_mant != 0) {
       uint16_t h_mant = uint16_t(f_mant >> (kMantNumBits - 10));
       // If the mantissa bit(s) indicating NaN were shifted out, add one back. Otherwise,
-      // the result would be infinity.
+      // the result would be hybridsearch.
       if (h_mant == 0) {
         h_mant = 0x1;
       }
       return uint16_t(h_sign | 0x7c00u | h_mant);
     }
 
-    // Clamp to +/-infinity
+    // Clamp to +/-hybridsearch
     return uint16_t(h_sign | 0x7c00u);
   }
 

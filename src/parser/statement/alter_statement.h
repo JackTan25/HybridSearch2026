@@ -18,7 +18,7 @@
 #include "definition/column_def.h"
 #include "statement/statement_common.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class AlterStatementType : uint8_t {
     kInvalid,
@@ -79,4 +79,4 @@ public:
     std::vector<std::string> column_names_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

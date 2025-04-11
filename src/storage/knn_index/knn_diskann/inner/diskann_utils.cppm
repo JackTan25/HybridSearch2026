@@ -21,7 +21,7 @@ module;
 import stl;
 import third_party;
 import default_values;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 import status;
 import third_party;
@@ -31,7 +31,7 @@ import diskann_dist_func;
 
 export module diskann_utils;
 
-namespace infinity {
+namespace hybridsearch {
 export struct QueryStats {
     f32 total_us_ = 0;
     f32 io_us_ = 0;
@@ -530,4 +530,4 @@ private:
     ConcurrentQueue<T *> &scratch_pool_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

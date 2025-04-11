@@ -21,7 +21,7 @@ import function;
 import function_data;
 import column_vector;
 import internal_types;
-import infinity_exception;
+import hybridsearch_exception;
 import data_type;
 import data_block;
 import roaring_bitmap;
@@ -34,7 +34,7 @@ import null_value;
 import logger;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct ScalarFunctionData {
     explicit ScalarFunctionData(ColumnVector *column_vector_ptr) : column_vector_ptr_(column_vector_ptr) {}
@@ -624,4 +624,4 @@ public:
                                                                                                                              true);
     }
 };
-} // namespace infinity
+} // namespace hybridsearch

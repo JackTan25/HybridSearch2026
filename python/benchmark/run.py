@@ -4,12 +4,12 @@ import logging
 import sys
 
 from clients.elasticsearch_client import ElasticsearchClient
-from clients.infinity_client import InfinityClient
+from clients.hybridsearch_client import hybridsearchClient
 from clients.qdrant_client import QdrantClient
 from clients.quickwit_client import QuickwitClient
 from generate_queries import generate_query_txt
 
-ENGINES = ["infinity", "qdrant", "elasticsearch", "quickwit"]
+ENGINES = ["hybridsearch", "qdrant", "elasticsearch", "quickwit"]
 DATA_SETS = ["gist", "sift", "geonames", "enwiki", "tantivy", "splade"]
 
 
@@ -54,7 +54,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--engine",
         type=str,
-        default="infinity",
+        default="hybridsearch",
         dest="engine",
         help="Choose database engine to benchmark, one of: " + ", ".join(ENGINES),
     )
@@ -72,8 +72,8 @@ def get_client(engine: str, conf_path: str):
         return QdrantClient(conf_path)
     elif engine == "elasticsearch":
         return ElasticsearchClient(conf_path)
-    elif engine == "infinity":
-        return InfinityClient(conf_path)
+    elif engine == "hybridsearch":
+        return hybridsearchClient(conf_path)
     elif engine == "quickwit":
         return QuickwitClient(conf_path)
     else:

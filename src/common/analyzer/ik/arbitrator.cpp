@@ -11,7 +11,7 @@ import lexeme_path;
 import quick_sort_set;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 void IKArbitrator::Process(AnalyzeContext *context, bool use_smart) {
     QuickSortSet *org_lexemes = context->GetOrgLexemes();
@@ -87,4 +87,4 @@ void IKArbitrator::BackPath(Lexeme *l, LexemePath *option) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

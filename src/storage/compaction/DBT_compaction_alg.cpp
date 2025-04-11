@@ -21,14 +21,14 @@ module DBT_compaction_alg;
 
 import stl;
 import segment_entry;
-import infinity_exception;
+import hybridsearch_exception;
 import txn;
 import compaction_alg;
 import third_party;
 import logger;
 import table_entry;
 
-namespace infinity {
+namespace hybridsearch {
 
 void SegmentLayer::AddSegment(SegmentEntry *segment_entry) {
     SegmentID segment_id = segment_entry->segment_id();
@@ -265,4 +265,4 @@ Pair<SegmentEntry *, int> DBTCompactionAlg::FindSegmentAndLayer(SegmentID segmen
     return {nullptr, -1};
 }
 
-} // namespace infinity
+} // namespace hybridsearch

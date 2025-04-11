@@ -15,8 +15,8 @@ module;
 
 module doc_iterator;
 
-namespace infinity {
+namespace hybridsearch {
 
 DocIterator::~DocIterator() {}
 
-} // namespace infinity
+} // namespace hybridsearch

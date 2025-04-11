@@ -25,7 +25,7 @@ import index_base;
 import extra_ddl_info;
 import wal_entry;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Txn;
 struct Catalog;
@@ -277,4 +277,4 @@ private:
     Vector<UniquePtr<std::binary_semaphore>> semas_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

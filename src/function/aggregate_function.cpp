@@ -19,11 +19,11 @@ module;
 module aggregate_function;
 
 import base_expression;
-import infinity_exception;
+import hybridsearch_exception;
 import status;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 void AggregateFunction::CastArgumentTypes(BaseExpression &) {
     // Check and add a cast function to cast the input arguments expression type to target type
@@ -42,4 +42,4 @@ std::string AggregateFunction::ToString() const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

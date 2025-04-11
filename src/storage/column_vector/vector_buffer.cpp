@@ -21,7 +21,7 @@ import fix_heap;
 import buffer_obj;
 import buffer_manager;
 import buffer_handle;
-import infinity_exception;
+import hybridsearch_exception;
 import block_column_entry;
 import default_values;
 import logger;
@@ -30,7 +30,7 @@ import serialize;
 import internal_types;
 import logical_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 SharedPtr<VectorBuffer> VectorBuffer::Make(const SizeT data_type_size, const SizeT capacity, VectorBufferType buffer_type) {
     SharedPtr<VectorBuffer> buffer_ptr = MakeShared<VectorBuffer>();
@@ -399,4 +399,4 @@ const char *VectorBuffer::GetArrayRaw(SizeT offset, SizeT size) const { return v
 
 SizeT VectorBuffer::AppendArrayRaw(const char *raw_data, SizeT size) const { return var_buffer_mgr_->Append(raw_data, size); }
 
-} // namespace infinity
+} // namespace hybridsearch

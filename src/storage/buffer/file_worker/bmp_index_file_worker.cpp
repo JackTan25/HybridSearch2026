@@ -20,7 +20,7 @@ module bmp_index_file_worker;
 
 import index_bmp;
 import logger;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import internal_types;
 import bmp_util;
@@ -30,7 +30,7 @@ import virtual_store;
 import persistence_manager;
 import local_file_handle;
 
-namespace infinity {
+namespace hybridsearch {
 
 BMPIndexFileWorker::BMPIndexFileWorker(SharedPtr<String> data_dir,
                                        SharedPtr<String> temp_dir,
@@ -195,4 +195,4 @@ void BMPIndexFileWorker::FreeFromMmapImpl() {
     mmap_data_ = nullptr;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

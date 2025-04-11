@@ -22,7 +22,7 @@ import stl;
 
 import fragment_task;
 
-import infinity_exception;
+import hybridsearch_exception;
 import operator_state;
 import physical_operator;
 import physical_operator_type;
@@ -73,7 +73,7 @@ import table_entry;
 import segment_entry;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 template <typename OperatorStateType>
 UniquePtr<OperatorState> MakeTaskStateTemplate(PhysicalOperator *physical_op) {
@@ -646,13 +646,13 @@ void FragmentContext::BuildTask(QueryContext *query_context, FragmentContext *pa
 FragmentContext::FragmentContext(PlanFragment *plan_fragment_ptr, QueryContext *query_context, Notifier *notifier)
     : notifier_(notifier), plan_fragment_ptr_(plan_fragment_ptr), query_context_(query_context), fragment_type_(plan_fragment_ptr->GetFragmentType()),
       unfinished_child_n_(plan_fragment_ptr->Children().size()) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::IncrObjectCount("FragmentContext");
 #endif
 }
 
 FragmentContext::~FragmentContext() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::DecrObjectCount("FragmentContext");
 #endif
 }
@@ -1636,4 +1636,4 @@ void FragmentContext::DumpFragmentCtx() {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

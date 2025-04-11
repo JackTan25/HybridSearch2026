@@ -21,7 +21,7 @@ import base_test;
 import stl;
 import storage;
 import global_resource_usage;
-import infinity_context;
+import hybridsearch_context;
 import status;
 import catalog;
 import txn;
@@ -33,7 +33,7 @@ import table_def;
 import value;
 import physical_import;
 import default_values;
-import infinity_exception;
+import hybridsearch_exception;
 import base_table_ref;
 import logical_type;
 import internal_types;
@@ -48,7 +48,7 @@ import logger;
 import third_party;
 import txn_state;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class CompactTaskTest : public BaseTestParamStr {
 protected:
@@ -100,16 +100,16 @@ class SilentLogTestCompactTaskTest : public CompactTaskTest {
         system(("mkdir -p " + String(GetFullPersistDir())).c_str());
         system(("mkdir -p " + String(GetFullDataDir())).c_str());
         system(("mkdir -p " + String(GetFullDataDir())).c_str());
-#ifdef INFINITY_DEBUG
-        infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+        hybridsearch::GlobalResourceUsage::Init();
 #endif
         std::string config_path_str = GetParam();
         std::shared_ptr<std::string> config_path = nullptr;
         if (config_path_str != BaseTestParamStr::NULL_CONFIG_PATH) {
-            config_path = infinity::MakeShared<std::string>(config_path_str);
+            config_path = hybridsearch::MakeShared<std::string>(config_path_str);
         }
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
     }
 };
 
@@ -122,7 +122,7 @@ TEST_P(CompactTaskTest, compact_to_single_segment) {
     {
         String table_name = "tbl1";
 
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         BufferManager *buffer_manager = storage->buffer_manager();
         TxnManager *txn_mgr = storage->txn_manager();
         CompactionProcessor *compaction_process = storage->compaction_processor();
@@ -183,7 +183,7 @@ TEST_P(CompactTaskTest, compact_to_two_segment) {
     {
         String table_name = "tbl1";
 
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         BufferManager *buffer_manager = storage->buffer_manager();
         TxnManager *txn_mgr = storage->txn_manager();
         CompactionProcessor *compaction_process = storage->compaction_processor();
@@ -248,7 +248,7 @@ TEST_P(CompactTaskTest, compact_with_delete) {
     {
         String table_name = "tbl1";
 
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         BufferManager *buffer_manager = storage->buffer_manager();
         TxnManager *txn_mgr = storage->txn_manager();
         CompactionProcessor *compaction_process = storage->compaction_processor();
@@ -334,7 +334,7 @@ TEST_P(SilentLogTestCompactTaskTest, delete_in_compact_process) {
     {
         String table_name = "tbl1";
 
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         BufferManager *buffer_manager = storage->buffer_manager();
         TxnManager *txn_mgr = storage->txn_manager();
         CompactionProcessor *compaction_processor = storage->compaction_processor();
@@ -448,7 +448,7 @@ TEST_P(CompactTaskTest, uncommit_delete_in_compact_process) {
         LOG_INFO(fmt::format("Test {}", task_i));
         String table_name = fmt::format("tbl{}", task_i);
 
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         BufferManager *buffer_manager = storage->buffer_manager();
         TxnManager *txn_mgr = storage->txn_manager();
         CompactionProcessor *compaction_processor = storage->compaction_processor();
@@ -598,7 +598,7 @@ TEST_P(CompactTaskTest, uncommit_delete_in_compact_process) {
 }
 
 TEST_P(CompactTaskTest, compact_not_exist_table) {
-    Storage *storage = infinity::InfinityContext::instance().storage();
+    Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
     BufferManager *buffer_mgr = storage->buffer_manager();
     TxnManager *txn_mgr = storage->txn_manager();
     CompactionProcessor *compaction_process = storage->compaction_processor();

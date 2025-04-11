@@ -19,9 +19,9 @@ module;
 module simd_common_tools;
 
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct U8MaskArray {
     alignas(64) u32 masks[256][8] = {};
@@ -39,4 +39,4 @@ U8MaskPtr GetU8MasksForAVX2() {
     return u8_mask_array.masks;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

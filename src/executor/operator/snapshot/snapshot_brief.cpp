@@ -25,11 +25,11 @@ import stl;
 import status;
 import virtual_store;
 import local_file_handle;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<String> find_files_with_suffix(const String &path, const String &suffix) {
     Vector<String> files;
@@ -92,4 +92,4 @@ Vector<SnapshotBrief> SnapshotBrief::GetSnapshots(const String &dir) {
     return briefs;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

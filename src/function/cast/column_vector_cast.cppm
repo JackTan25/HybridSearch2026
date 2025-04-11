@@ -28,7 +28,7 @@ import logical_type;
 import internal_types;
 import data_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct ColumnVectorCastData {
     explicit ColumnVectorCastData(bool strict,
@@ -264,4 +264,4 @@ export struct ColumnVectorCast {
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

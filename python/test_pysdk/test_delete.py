@@ -7,49 +7,49 @@ import pandas as pd
 import pytest
 from numpy import dtype
 from common import common_values
-import infinity
-import infinity_embedded
-from infinity.errors import ErrorCode
-from infinity.common import ConflictType, InfinityException
+import hybridsearch
+import hybridsearch_embedded
+from hybridsearch.errors import ErrorCode
+from hybridsearch.common import ConflictType, hybridsearchException
 from common.utils import trace_expected_exceptions
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
-from infinity_http import infinity_http
+from hybridsearch_http import hybridsearch_http
 
 
 @pytest.fixture(scope="class")
-def local_infinity(request):
-    return request.config.getoption("--local-infinity")
+def local_hybridsearch(request):
+    return request.config.getoption("--local-hybridsearch")
 
 @pytest.fixture(scope="class")
 def http(request):
     return request.config.getoption("--http")
 
 @pytest.fixture(scope="class")
-def setup_class(request, local_infinity, http):
-    if local_infinity:
-        module = importlib.import_module("infinity_embedded.common")
+def setup_class(request, local_hybridsearch, http):
+    if local_hybridsearch:
+        module = importlib.import_module("hybridsearch_embedded.common")
         func = getattr(module, 'ConflictType')
         globals()['ConflictType'] = func
-        func = getattr(module, 'InfinityException')
-        globals()['InfinityException'] = func
+        func = getattr(module, 'hybridsearchException')
+        globals()['hybridsearchException'] = func
         uri = common_values.TEST_LOCAL_PATH
-        request.cls.infinity_obj = infinity_embedded.connect(uri)
+        request.cls.hybridsearch_obj = hybridsearch_embedded.connect(uri)
     elif http:
         uri = common_values.TEST_LOCAL_HOST
-        request.cls.infinity_obj = infinity_http()
+        request.cls.hybridsearch_obj = hybridsearch_http()
     else:
         uri = common_values.TEST_LOCAL_HOST
-        request.cls.infinity_obj = infinity.connect(uri)
+        request.cls.hybridsearch_obj = hybridsearch.connect(uri)
     request.cls.uri = uri
     yield
-    request.cls.infinity_obj.disconnect()
+    request.cls.hybridsearch_obj.disconnect()
 
 @pytest.mark.usefixtures("setup_class")
 @pytest.mark.usefixtures("suffix")
-class TestInfinity:
+class Testhybridsearch:
     @pytest.fixture
     def skip_setup_marker(self, request):
         request.node.skip_setup = True
@@ -80,9 +80,9 @@ class TestInfinity:
             - 'table_3'
         expect: all operations successfully
         """
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
 
-        # infinity
+        # hybridsearch
         db_obj.drop_table(table_name="test_delete"+suffix, conflict_type=ConflictType.Ignore)
         res = db_obj.create_table(
             "test_delete"+suffix,
@@ -117,7 +117,7 @@ class TestInfinity:
 
     def test_delete_empty_table(self, suffix):
         # connect
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
 
         tb = db_obj.drop_table("test_delete_empty_table"+suffix, ConflictType.Ignore)
         assert tb
@@ -136,22 +136,22 @@ class TestInfinity:
 
     def test_delete_non_existent_table(self, suffix):
         # connect
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
 
         table_obj = db_obj.drop_table("test_delete_non_existent_table"+suffix, ConflictType.Ignore)
         assert table_obj
 
-        with pytest.raises(InfinityException) as e:
+        with pytest.raises(hybridsearchException) as e:
             db_obj.get_table("test_delete_non_existent_table"+suffix).delete()
 
-        assert e.type == InfinityException
+        assert e.type == hybridsearchException
         assert e.value.args[0] == ErrorCode.TABLE_NOT_EXIST
 
     @trace_expected_exceptions
     @pytest.mark.parametrize('column_types', common_values.types_array)
     @pytest.mark.parametrize('column_types_example', common_values.types_example_array)
     def test_delete_table_all_row_met_the_condition(self, column_types, column_types_example, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_delete_table_all_row_met_the_condition"+suffix, ConflictType.Ignore)
         db_obj.create_table("test_delete_table_all_row_met_the_condition"+suffix, {"c1": {"type": column_types}},
                             ConflictType.Error)
@@ -171,7 +171,7 @@ class TestInfinity:
 
     def test_delete_table_no_rows_met_condition(self,suffix):
         # connect
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         for i in range(len(common_values.types_array)):
             db_obj.drop_table("test_delete_table_no_rows_met_condition" + str(i)+suffix, ConflictType.Ignore)
 
@@ -200,7 +200,7 @@ class TestInfinity:
             db_obj.drop_table("test_delete_table_no_rows_met_condition" + str(i)+suffix, ConflictType.Error)
 
     def test_delete_table_with_one_block(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_delete_table_with_one_block"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_delete_table_with_one_block"+suffix, {"c1": {"type": "int"}}, ConflictType.Error)
 
@@ -221,7 +221,7 @@ class TestInfinity:
 
     def test_delete_table_with_one_segment(self, suffix):
         # connect
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_delete_table_with_one_segment"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_delete_table_with_one_segment"+suffix, {"c1": {"type": "int"}},
                                         ConflictType.Error)
@@ -242,7 +242,7 @@ class TestInfinity:
         print(delete_res)
 
     def test_select_before_after_delete(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_select_before_after_delete"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_select_before_after_delete"+suffix, {"c1": {"type": "int"}}, ConflictType.Error)
 
@@ -264,7 +264,7 @@ class TestInfinity:
 
     def test_delete_insert_data(self, suffix):
         # connect
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_delete_insert_data"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_delete_insert_data"+suffix, {"c1": {"type": "int"}}, ConflictType.Error)
 
@@ -284,7 +284,7 @@ class TestInfinity:
     @pytest.mark.slow
     def test_delete_inserted_long_before_data(self, suffix):
         # connect
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_delete_inserted_long_before_data"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_delete_inserted_long_before_data"+suffix, {"c1": {"type": "int"}},
                                         ConflictType.Error)
@@ -307,16 +307,16 @@ class TestInfinity:
 
     def test_delete_dropped_table(self, suffix):
         # connect
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
 
-        with pytest.raises(InfinityException) as e:
+        with pytest.raises(hybridsearchException) as e:
             db_obj.drop_table("test_delete_dropped_table"+suffix)
             table_obj = db_obj.get_table("test_delete_dropped_table"+suffix)
             table_obj.delete("c1 = 0")
             assert table_obj
             db_obj.drop_table("test_delete_dropped_table"+suffix)
 
-        assert e.type == InfinityException
+        assert e.type == hybridsearchException
         assert e.value.args[0] == ErrorCode.TABLE_NOT_EXIST
 
     @trace_expected_exceptions
@@ -335,7 +335,7 @@ class TestInfinity:
         if column_types == "vector, 3, float" and column_types_example == [1, 2, 3] and http:
             pytest.skip(reason = "bus error, core dumped")
         # connect
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_various_expression_in_where_clause"+suffix, ConflictType.Ignore)
         db_obj.create_table("test_various_expression_in_where_clause"+suffix, {"c1": {"type": column_types}},
                             ConflictType.Error)
@@ -360,7 +360,7 @@ class TestInfinity:
 
     def test_delete_one_block_without_expression(self, suffix):
         # connect
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_delete_one_block_without_expression"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_delete_one_block_without_expression"+suffix, {"c1": {"type": "int"}},
                                         ConflictType.Error)
@@ -383,7 +383,7 @@ class TestInfinity:
 
     def test_delete_one_segment_without_expression(self,suffix):
         # connect
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_delete_one_segment_without_expression"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_delete_one_segment_without_expression"+suffix, {"c1": {"type": "int"}},
                                         ConflictType.Error)
@@ -415,7 +415,7 @@ class TestInfinity:
     ])
     def test_filter_with_valid_expression(self, filter_list, suffix):
         # connect
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_filter_expression"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_filter_expression"+suffix, {"c1": {"type": "int"}, "c2": {"type": "float"}},
                                         ConflictType.Error)
@@ -446,7 +446,7 @@ class TestInfinity:
     ])
     def test_filter_with_invalid_expression(self, filter_list, suffix):
         # connect
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_filter_expression"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_filter_expression"+suffix, {"c1": {"type": "int"}, "c2": {"type": "float"}},
                                         ConflictType.Error)

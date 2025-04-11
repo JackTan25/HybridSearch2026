@@ -27,7 +27,7 @@ import base_expression;
 import internal_types;
 import select_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
 // consider load_meta
 Vector<ColumnBinding> LogicalSort::GetColumnBindings() const { return LogicalCommonFunctionUsingLoadMeta::GetColumnBindings(*this); }
@@ -55,4 +55,4 @@ String LogicalSort::ToString(i64 &space) const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -24,20 +24,20 @@ import logger;
 import peer_server_thrift_types;
 import status;
 import thrift;
-import infinity_exception;
+import hybridsearch_exception;
 import peer_task;
-import infinity_context;
+import hybridsearch_context;
 import cluster_manager;
 import admin_statement;
 import node_info;
 import config;
 
-namespace infinity {
+namespace hybridsearch {
 
 PeerClient::~PeerClient() {
     UnInit(true);
     server_connected_ = false;
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::DecrObjectCount("PeerClient");
 #endif
 }
@@ -79,7 +79,7 @@ Status PeerClient::Reconnect() {
     }
 
     try {
-        Config *config_ptr = InfinityContext::instance().config();
+        Config *config_ptr = hybridsearchContext::instance().config();
 
         socket_ = MakeShared<TSocket>(ip_address_, port_);
 
@@ -189,7 +189,7 @@ void PeerClient::Process() {
 #define RETRY_IF_FAIL
 
 void PeerClient::Call(std::function<void()> call_func) {
-    Config *config_ptr = InfinityContext::instance().config();
+    Config *config_ptr = hybridsearchContext::instance().config();
     i64 retry_num = config_ptr->PeerRetryCount();
     i64 retry_delay = config_ptr->PeerRetryDelay();
     Optional<apache::thrift::transport::TTransportException> exception;
@@ -353,25 +353,25 @@ void PeerClient::HeartBeat(HeartBeatPeerTask *peer_task) {
         // Error
         peer_task->error_code_ = response.error_code;
         peer_task->error_message_ = response.error_message;
-        if (response.sender_status == infinity_peer_server::NodeStatus::type::kLostConnection) {
+        if (response.sender_status == hybridsearch_peer_server::NodeStatus::type::kLostConnection) {
             peer_task->leader_term_ = response.leader_term;
             peer_task->sender_status_ = NodeStatus::kLostConnection;
         }
     } else {
         switch (response.sender_status) {
-            case infinity_peer_server::NodeStatus::type::kAlive: {
+            case hybridsearch_peer_server::NodeStatus::type::kAlive: {
                 peer_task->sender_status_ = NodeStatus::kAlive;
                 break;
             }
-            case infinity_peer_server::NodeStatus::type::kTimeout: {
+            case hybridsearch_peer_server::NodeStatus::type::kTimeout: {
                 peer_task->sender_status_ = NodeStatus::kTimeout;
                 break;
             }
-            case infinity_peer_server::NodeStatus::type::kLostConnection: {
+            case hybridsearch_peer_server::NodeStatus::type::kLostConnection: {
                 peer_task->sender_status_ = NodeStatus::kLostConnection;
                 break;
             }
-            case infinity_peer_server::NodeStatus::type::kRemoved: {
+            case hybridsearch_peer_server::NodeStatus::type::kRemoved: {
                 peer_task->sender_status_ = NodeStatus::kRemoved;
                 break;
             }
@@ -392,15 +392,15 @@ void PeerClient::HeartBeat(HeartBeatPeerTask *peer_task) {
             }
             NodeRole node_role = NodeRole::kUnInitialized;
             switch (other_node.node_type) {
-                case infinity_peer_server::NodeType::type::kLeader: {
+                case hybridsearch_peer_server::NodeType::type::kLeader: {
                     node_role = NodeRole::kLeader;
                     break;
                 }
-                case infinity_peer_server::NodeType::type::kFollower: {
+                case hybridsearch_peer_server::NodeType::type::kFollower: {
                     node_role = NodeRole::kFollower;
                     break;
                 }
-                case infinity_peer_server::NodeType::type::kLearner: {
+                case hybridsearch_peer_server::NodeType::type::kLearner: {
                     node_role = NodeRole::kLearner;
                     break;
                 }
@@ -412,11 +412,11 @@ void PeerClient::HeartBeat(HeartBeatPeerTask *peer_task) {
 
             NodeStatus node_status = NodeStatus::kInvalid;
             switch (other_node.node_status) {
-                case infinity_peer_server::NodeStatus::type::kAlive: {
+                case hybridsearch_peer_server::NodeStatus::type::kAlive: {
                     node_status = NodeStatus::kAlive;
                     break;
                 }
-                case infinity_peer_server::NodeStatus::type::kTimeout: {
+                case hybridsearch_peer_server::NodeStatus::type::kTimeout: {
                     node_status = NodeStatus::kTimeout;
                     break;
                 }
@@ -466,7 +466,7 @@ void PeerClient::SyncLogs(SyncLogTask *peer_task) {
         peer_task->error_message_ = fmt::format("Sync log to node, transport error: {}, error: {}", peer_task->node_name_, thrift_exception.what());
         peer_task->error_code_ = static_cast<i64>(ErrorCode::kCantConnectServer);
         LOG_ERROR(peer_task->error_message_);
-        Status status = InfinityContext::instance().cluster_manager()->UpdateNodeByLeader(peer_task->node_name_, UpdateNodeOp::kLostConnection);
+        Status status = hybridsearchContext::instance().cluster_manager()->UpdateNodeByLeader(peer_task->node_name_, UpdateNodeOp::kLostConnection);
         if (!status.ok()) {
             LOG_ERROR(status.message());
         }
@@ -474,7 +474,7 @@ void PeerClient::SyncLogs(SyncLogTask *peer_task) {
         peer_task->error_message_ = fmt::format("Sync log to node, application: {}, error: {}", peer_task->node_name_, application_exception.what());
         peer_task->error_code_ = static_cast<i64>(ErrorCode::kCantConnectServer);
         LOG_ERROR(peer_task->error_message_);
-        Status status = InfinityContext::instance().cluster_manager()->UpdateNodeByLeader(peer_task->node_name_, UpdateNodeOp::kLostConnection);
+        Status status = hybridsearchContext::instance().cluster_manager()->UpdateNodeByLeader(peer_task->node_name_, UpdateNodeOp::kLostConnection);
         if (!status.ok()) {
             LOG_ERROR(status.message());
         }
@@ -487,10 +487,10 @@ void PeerClient::ChangeRole(ChangeRoleTask *change_role_task) {
     ChangeRoleRequest request;
     ChangeRoleResponse response;
     request.node_name = change_role_task->node_name_;
-    request.node_type = infinity_peer_server::NodeType::kInvalid;
+    request.node_type = hybridsearch_peer_server::NodeType::kInvalid;
     ToLower(change_role_task->role_name_);
     if (IsEqual(change_role_task->role_name_, "admin")) {
-        request.node_type = infinity_peer_server::NodeType::kAdmin;
+        request.node_type = hybridsearch_peer_server::NodeType::kAdmin;
     }
     try {
 #ifdef RETRY_IF_FAIL
@@ -510,7 +510,7 @@ void PeerClient::ChangeRole(ChangeRoleTask *change_role_task) {
         change_role_task->error_code_ = static_cast<i64>(ErrorCode::kCantConnectServer);
         LOG_ERROR(change_role_task->error_message_);
         Status status =
-            InfinityContext::instance().cluster_manager()->UpdateNodeByLeader(change_role_task->node_name_, UpdateNodeOp::kLostConnection);
+            hybridsearchContext::instance().cluster_manager()->UpdateNodeByLeader(change_role_task->node_name_, UpdateNodeOp::kLostConnection);
         if (!status.ok()) {
             LOG_ERROR(status.message());
         }
@@ -520,7 +520,7 @@ void PeerClient::ChangeRole(ChangeRoleTask *change_role_task) {
         change_role_task->error_code_ = static_cast<i64>(ErrorCode::kCantConnectServer);
         LOG_ERROR(change_role_task->error_message_);
         Status status =
-            InfinityContext::instance().cluster_manager()->UpdateNodeByLeader(change_role_task->node_name_, UpdateNodeOp::kLostConnection);
+            hybridsearchContext::instance().cluster_manager()->UpdateNodeByLeader(change_role_task->node_name_, UpdateNodeOp::kLostConnection);
         if (!status.ok()) {
             LOG_ERROR(status.message());
         }
@@ -529,4 +529,4 @@ void PeerClient::ChangeRole(ChangeRoleTask *change_role_task) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

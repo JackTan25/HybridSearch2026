@@ -22,14 +22,14 @@ import stl;
 import deprecated_knn_distance;
 import logger;
 import knn_result_handler;
-import infinity_exception;
+import hybridsearch_exception;
 import default_values;
 import vector_distance;
 import roaring_bitmap;
 import knn_expr;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename DistType>
 class KnnFlatCOS final : public KnnDistance<DistType> {
@@ -153,4 +153,4 @@ private:
 
 template class KnnFlatCOS<f32>;
 
-} // namespace infinity
+} // namespace hybridsearch

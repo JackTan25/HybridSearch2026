@@ -21,7 +21,7 @@ export module stream_reader;
 import stl;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class StreamReader {
 
@@ -37,4 +37,4 @@ private:
     std::ifstream file_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

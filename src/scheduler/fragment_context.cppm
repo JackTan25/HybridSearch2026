@@ -28,11 +28,11 @@ import create_index_data;
 import logger;
 import third_party;
 import compact_state_data;
-import infinity_context;
+import hybridsearch_context;
 
 export module fragment_context;
 
-namespace infinity {
+namespace hybridsearch {
 
 class PlanFragment;
 export class FragmentContext;
@@ -111,7 +111,7 @@ public:
     inline void IncreaseTask() { unfinished_task_n_.fetch_add(1); }
 
     inline void FlushProfiler(TaskProfiler &profiler) {
-        if (!InfinityContext::instance().storage()->catalog()->GetProfile()) {
+        if (!hybridsearchContext::instance().storage()->catalog()->GetProfile()) {
             return;
         }
         query_context_->FlushProfiler(std::move(profiler));
@@ -239,4 +239,4 @@ protected:
     HashMap<u64, Vector<SharedPtr<DataBlock>>> task_results_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

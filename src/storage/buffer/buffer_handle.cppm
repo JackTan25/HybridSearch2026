@@ -19,7 +19,7 @@ import third_party;
 
 export module buffer_handle;
 
-namespace infinity {
+namespace hybridsearch {
 
 class BufferObj;
 class FileWorker;
@@ -56,4 +56,4 @@ private:
     void *data_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

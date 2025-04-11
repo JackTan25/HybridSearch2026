@@ -19,7 +19,7 @@
 #include "type/type_info.h"
 #include <memory>
 
-namespace infinity {
+namespace hybridsearch {
 
 class DecimalInfo : public TypeInfo {
 public:
@@ -52,4 +52,4 @@ private:
     int64_t scale_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

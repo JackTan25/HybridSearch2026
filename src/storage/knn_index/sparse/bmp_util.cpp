@@ -22,7 +22,7 @@ module bmp_util;
 import logger;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 BmpSearchOptions BMPUtil::ParseBmpSearchOptions(const Vector<UniquePtr<InitParameter>> &opt_params) {
     BmpSearchOptions options;
@@ -80,4 +80,4 @@ Optional<BMPOptimizeOptions> BMPUtil::ParseBMPOptimizeOptions(const Vector<Uniqu
     return options;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

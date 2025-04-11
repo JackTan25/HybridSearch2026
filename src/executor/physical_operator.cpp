@@ -26,7 +26,7 @@ import query_context;
 
 import base_table_ref;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 import block_entry;
 import block_column_entry;
 import logical_type;
@@ -40,7 +40,7 @@ import cached_match;
 import buffer_manager;
 import block_index;
 
-namespace infinity {
+namespace hybridsearch {
 
 SizeT PhysicalOperator::TaskletCount() { return 1; }
 
@@ -147,4 +147,4 @@ void OutputToDataBlockHelper::OutputToDataBlock(BufferManager *buffer_mgr,
     output_job_infos.clear();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

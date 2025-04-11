@@ -21,9 +21,9 @@ import global_resource_usage;
 import allocator;
 import buffer_obj;
 import buffer_handle;
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 export using ChunkId = i64;
 export constexpr ChunkId INVALID_CHUNK_ID = -1;
@@ -31,13 +31,13 @@ export constexpr ChunkId INVALID_CHUNK_ID = -1;
 export struct VectorHeapChunk {
 public:
     explicit VectorHeapChunk(BufferObj *buffer_obj) : ptr_(buffer_obj->Load()) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("VectorHeapChunk");
 #endif
     }
 
     explicit VectorHeapChunk(u64 capacity) : ptr_(MakeUniqueForOverwrite<char[]>(capacity)) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("VectorHeapChunk");
 #endif
     }
@@ -45,7 +45,7 @@ public:
     VectorHeapChunk(const VectorHeapChunk &) = delete;
 
     VectorHeapChunk(VectorHeapChunk &&other) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("VectorHeapChunk");
 #endif
         if (std::holds_alternative<UniquePtr<char[]>>(other.ptr_)) {
@@ -60,7 +60,7 @@ public:
     VectorHeapChunk &operator=(VectorHeapChunk &&) = delete;
 
     ~VectorHeapChunk() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("VectorHeapChunk");
 #endif
     }
@@ -85,4 +85,4 @@ private:
     std::variant<UniquePtr<char[]>, BufferHandle> ptr_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

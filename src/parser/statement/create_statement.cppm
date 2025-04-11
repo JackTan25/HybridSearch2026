@@ -18,8 +18,8 @@ module;
 
 export module create_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::CreateStatement;
+export using hybridsearch::CreateStatement;
 
 }

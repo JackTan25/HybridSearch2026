@@ -21,13 +21,13 @@ import polars as pl
 from sqlglot import condition
 import sqlglot.expressions as exp
 import numpy as np
-from infinity_embedded.errors import ErrorCode
-from infinity_embedded.common import InfinityException, SparseVector, Array
-from infinity_embedded.local_infinity.types import build_result, logic_type_to_dtype
-from infinity_embedded.utils import binary_exp_to_paser_exp
-from infinity_embedded.embedded_infinity_ext import WrapInExpr, WrapParsedExpr, WrapFunctionExpr, \
+from hybridsearch_embedded.errors import ErrorCode
+from hybridsearch_embedded.common import hybridsearchException, SparseVector, Array
+from hybridsearch_embedded.local_hybridsearch.types import build_result, logic_type_to_dtype
+from hybridsearch_embedded.utils import binary_exp_to_paser_exp
+from hybridsearch_embedded.embedded_hybridsearch_ext import WrapInExpr, WrapParsedExpr, WrapFunctionExpr, \
     WrapColumnExpr, WrapConstantExpr, ParsedExprType, LiteralType
-from infinity_embedded.embedded_infinity_ext import WrapEmbeddingType, WrapColumnDef, WrapDataType, LogicalType, \
+from hybridsearch_embedded.embedded_hybridsearch_ext import WrapEmbeddingType, WrapColumnDef, WrapDataType, LogicalType, \
     EmbeddingDataType, WrapSparseType, ConstraintType
 
 
@@ -216,10 +216,10 @@ def get_search_optional_filter_from_opt_params(opt_params: dict):
     for k, v in opt_params.items():
         if k.lower() == "filter":
             if optional_filter is not None:
-                raise InfinityException(ErrorCode.INVALID_EXPRESSION,
+                raise hybridsearchException(ErrorCode.INVALID_EXPRESSION,
                                         "Only one filter is allowed in search optional parameters")
             if not isinstance(v, str):
-                raise InfinityException(ErrorCode.INVALID_EXPRESSION,
+                raise hybridsearchException(ErrorCode.INVALID_EXPRESSION,
                                         f"Invalid filter expression '{v}', type should be string, but get {type(v)}")
             optional_filter = traverse_conditions(condition(v))
             k_to_pop.append(k)
@@ -238,13 +238,13 @@ def get_local_constant_expr_from_python_value(value) -> WrapConstantExpr:
         if value[0].ndim <= 2:
             value = [x.tolist() for x in value]
         else:
-            raise InfinityException(ErrorCode.INVALID_EXPRESSION,
+            raise hybridsearchException(ErrorCode.INVALID_EXPRESSION,
                                     f"Invalid list member type: {type(value[0])}, ndarray dimension > 2")
     elif isinstance(value, np.ndarray):
         if value.ndim <= 2:
             value = value.tolist()
         else:
-            raise InfinityException(ErrorCode.INVALID_EXPRESSION,
+            raise hybridsearchException(ErrorCode.INVALID_EXPRESSION,
                                     f"Invalid list type: {type(value)}, ndarray dimension > 2")
     # match ConstantExpr
     constant_expression = WrapConstantExpr()
@@ -289,7 +289,7 @@ def get_local_constant_expr_from_python_value(value) -> WrapConstantExpr:
             constant_expression.f64_array_value = values
         case dict():
             if len(value) == 0:
-                raise InfinityException(ErrorCode.INVALID_EXPRESSION, "Empty sparse vector")
+                raise hybridsearchException(ErrorCode.INVALID_EXPRESSION, "Empty sparse vector")
             match next(iter(value.values())):
                 case int():
                     constant_expression.literal_type = LiteralType.kLongSparseArray
@@ -300,14 +300,14 @@ def get_local_constant_expr_from_python_value(value) -> WrapConstantExpr:
                     constant_expression.i64_array_idx = [int(k) for k in value.keys()]
                     constant_expression.f64_array_value = [float(v) for v in value.values()]
                 case _:
-                    raise InfinityException(ErrorCode.INVALID_EXPRESSION,
+                    raise hybridsearchException(ErrorCode.INVALID_EXPRESSION,
                                             f"Invalid sparse vector value type: {type(next(iter(value.values())))}")
         case Array():
             constant_expression.literal_type = LiteralType.kCurlyBracketsArray
             constant_expression.curly_brackets_array = [get_local_constant_expr_from_python_value(child) for child in
                                                         value.elements]
         case _:
-            raise InfinityException(ErrorCode.INVALID_EXPRESSION, f"Invalid constant type: {type(value)}")
+            raise hybridsearchException(ErrorCode.INVALID_EXPRESSION, f"Invalid constant type: {type(value)}")
     return constant_expression
 
 
@@ -331,25 +331,25 @@ identifier_limit = 65536
 
 def check_valid_name(name, name_type: str = "Table"):
     if not isinstance(name, str):
-        raise InfinityException(ErrorCode.INVALID_IDENTIFIER_NAME,
+        raise hybridsearchException(ErrorCode.INVALID_IDENTIFIER_NAME,
                                 f"{name_type} name must be a string, got {type(name)}")
     if not re.match(r"^[a-zA-Z][a-zA-Z0-9_]*$", name):
-        raise InfinityException(ErrorCode.INVALID_IDENTIFIER_NAME,
+        raise hybridsearchException(ErrorCode.INVALID_IDENTIFIER_NAME,
                                 f"{name_type} name '{name}' is not valid. It should start with a letter and can contain only letters, numbers and underscores")
     if len(name) > identifier_limit:
-        raise InfinityException(ErrorCode.INVALID_IDENTIFIER_NAME,
+        raise hybridsearchException(ErrorCode.INVALID_IDENTIFIER_NAME,
                                 f"{name_type} name '{name}' is not of appropriate length")
     if name is None:
-        raise InfinityException(ErrorCode.INVALID_IDENTIFIER_NAME, f"invalid name: {name}")
+        raise hybridsearchException(ErrorCode.INVALID_IDENTIFIER_NAME, f"invalid name: {name}")
     if name.isspace():
-        raise InfinityException(ErrorCode.INVALID_IDENTIFIER_NAME,
+        raise hybridsearchException(ErrorCode.INVALID_IDENTIFIER_NAME,
                                 f"{name_type} name cannot be composed of whitespace characters only")
     if name == '':
-        raise InfinityException(ErrorCode.INVALID_IDENTIFIER_NAME, f"invalid name: {name}")
+        raise hybridsearchException(ErrorCode.INVALID_IDENTIFIER_NAME, f"invalid name: {name}")
     if name == ' ':
-        raise InfinityException(ErrorCode.INVALID_IDENTIFIER_NAME, f"invalid name: {name}")
+        raise hybridsearchException(ErrorCode.INVALID_IDENTIFIER_NAME, f"invalid name: {name}")
     if name.isdigit():
-        raise InfinityException(ErrorCode.INVALID_IDENTIFIER_NAME, f"invalid name: {name}")
+        raise hybridsearchException(ErrorCode.INVALID_IDENTIFIER_NAME, f"invalid name: {name}")
 
 
 def name_validity_check(arg_name: str, name_type: str = "Table"):
@@ -409,24 +409,24 @@ def get_constraints(column_info: dict) -> list[ConstraintType]:
                 if ConstraintType.kNull not in res:
                     res.append(ConstraintType.kNull)
                 else:
-                    raise InfinityException(ErrorCode.INVALID_CONSTRAINT_TYPE, f"Duplicated constraint: {constraint}")
+                    raise hybridsearchException(ErrorCode.INVALID_CONSTRAINT_TYPE, f"Duplicated constraint: {constraint}")
             case "not null":
                 if ConstraintType.kNotNull not in res:
                     res.append(ConstraintType.kNotNull)
                 else:
-                    raise InfinityException(ErrorCode.INVALID_CONSTRAINT_TYPE, f"Duplicated constraint: {constraint}")
+                    raise hybridsearchException(ErrorCode.INVALID_CONSTRAINT_TYPE, f"Duplicated constraint: {constraint}")
             case "primary key":
                 if ConstraintType.kPrimaryKey not in res:
                     res.append(ConstraintType.kPrimaryKey)
                 else:
-                    raise InfinityException(ErrorCode.INVALID_CONSTRAINT_TYPE, f"Duplicated constraint: {constraint}")
+                    raise hybridsearchException(ErrorCode.INVALID_CONSTRAINT_TYPE, f"Duplicated constraint: {constraint}")
             case "unique":
                 if ConstraintType.kUnique not in res:
                     res.append(ConstraintType.kUnique)
                 else:
-                    raise InfinityException(ErrorCode.INVALID_CONSTRAINT_TYPE, f"Duplicated constraint: {constraint}")
+                    raise hybridsearchException(ErrorCode.INVALID_CONSTRAINT_TYPE, f"Duplicated constraint: {constraint}")
             case _:
-                raise InfinityException(ErrorCode.INVALID_CONSTRAINT_TYPE, f"Unknown constraint: {constraint}")
+                raise hybridsearchException(ErrorCode.INVALID_CONSTRAINT_TYPE, f"Unknown constraint: {constraint}")
     return res
 
 
@@ -453,7 +453,7 @@ def get_embedding_element_type(element_type):
         case "int64" | "i64":
             return EmbeddingDataType.kElemInt64
         case _:
-            raise InfinityException(ErrorCode.INVALID_EMBEDDING_DATA_TYPE, f"Unknown element type: {element_type}")
+            raise hybridsearchException(ErrorCode.INVALID_EMBEDDING_DATA_TYPE, f"Unknown element type: {element_type}")
 
 
 def get_embedding_type(column_big_info: list[str]) -> WrapDataType:
@@ -468,7 +468,7 @@ def get_embedding_type(column_big_info: list[str]) -> WrapDataType:
         case "tensorarray":
             column_type.logical_type = LogicalType.kTensorArray
         case _:
-            raise InfinityException(ErrorCode.INVALID_DATA_TYPE, f"Unknown data type: {column_big_info[0]}")
+            raise hybridsearchException(ErrorCode.INVALID_DATA_TYPE, f"Unknown data type: {column_big_info[0]}")
 
     length = column_big_info[1]
     element_type = column_big_info[2]
@@ -502,7 +502,7 @@ def get_sparse_type(column_big_info: list[str]) -> WrapDataType:
     elif index_type == "int64":
         sparse_type.index_type = EmbeddingDataType.kElemInt64
     else:
-        raise InfinityException(ErrorCode.INVALID_EMBEDDING_DATA_TYPE, f"Unknown index type: {index_type}")
+        raise hybridsearchException(ErrorCode.INVALID_EMBEDDING_DATA_TYPE, f"Unknown index type: {index_type}")
     sparse_type.dimension = int(length)
 
     column_type.sparse_type = sparse_type
@@ -511,7 +511,7 @@ def get_sparse_type(column_big_info: list[str]) -> WrapDataType:
 
 def get_data_type(column_info: dict) -> WrapDataType:
     if "type" not in column_info:
-        raise InfinityException(ErrorCode.NO_COLUMN_DEFINED, f"Column definition without data type")
+        raise hybridsearchException(ErrorCode.NO_COLUMN_DEFINED, f"Column definition without data type")
     datatype = column_info["type"].lower()
     column_big_info = [item.strip() for item in datatype.split(",")]
     return get_data_type_from_column_big_info(column_big_info)
@@ -530,14 +530,14 @@ def get_data_type_from_column_big_info(column_big_info: list) -> WrapDataType:
             # return get_sparse_info(column_info, column_defs, column_name, index)
         case "array":
             if len(column_big_info) < 2:
-                raise InfinityException(ErrorCode.INVALID_DATA_TYPE, f"No element type for array!")
+                raise hybridsearchException(ErrorCode.INVALID_DATA_TYPE, f"No element type for array!")
             proto_column_type = WrapDataType()
             proto_column_type.logical_type = LogicalType.kArray
             proto_column_type.array_type = get_data_type_from_column_big_info(column_big_info[1:])
             return proto_column_type
         case _:
             if len(column_big_info) > 1:
-                raise InfinityException(ErrorCode.INVALID_DATA_TYPE,
+                raise hybridsearchException(ErrorCode.INVALID_DATA_TYPE,
                                         f"Unknown datatype: {column_big_info}, too many arguments")
             proto_column_type = WrapDataType()
             match column_big_info_first_str:
@@ -572,7 +572,7 @@ def get_data_type_from_column_big_info(column_big_info: list) -> WrapDataType:
                 case "timestamp":
                     proto_column_type.logical_type = LogicalType.kTimestamp
                 case _:
-                    raise InfinityException(ErrorCode.INVALID_DATA_TYPE, f"Unknown datatype: {column_big_info_first_str}")
+                    raise hybridsearchException(ErrorCode.INVALID_DATA_TYPE, f"Unknown datatype: {column_big_info_first_str}")
             return proto_column_type
 
 

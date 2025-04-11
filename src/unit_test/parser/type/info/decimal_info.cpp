@@ -17,22 +17,22 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 import decimal_info;
 import parser_assert;
 
-using namespace infinity;
+using namespace hybridsearch;
 class DecimalInfoTest : public BaseTest {};
 
 TEST_F(DecimalInfoTest, decimal_info_A) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     EXPECT_THROW(DecimalInfo::Make(39, 39), ParserException);
     EXPECT_THROW(DecimalInfo::Make(38, 39), ParserException);

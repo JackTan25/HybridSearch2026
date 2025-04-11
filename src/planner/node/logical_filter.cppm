@@ -24,7 +24,7 @@ import base_expression;
 import data_type;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalFilter : public LogicalNode {
 public:
@@ -49,4 +49,4 @@ private:
     SharedPtr<BaseExpression> expression_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

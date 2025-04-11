@@ -27,7 +27,7 @@ import function_expr;
 import column_expr;
 import knn_expr;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LimitBinder final : public ExpressionBinder {
 public:
@@ -45,4 +45,4 @@ public:
 private:
 };
 
-} // namespace infinity
+} // namespace hybridsearch

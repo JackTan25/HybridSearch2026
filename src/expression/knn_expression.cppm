@@ -24,7 +24,7 @@ import internal_types;
 import knn_expr;
 import statement_common;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class KnnExpression : public BaseExpression {
 public:
@@ -76,4 +76,4 @@ public:
     SharedPtr<BaseExpression> optional_filter_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

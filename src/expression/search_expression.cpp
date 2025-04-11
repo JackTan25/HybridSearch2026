@@ -24,7 +24,7 @@ import knn_expression;
 import match_tensor_expression;
 import fusion_expression;
 
-namespace infinity {
+namespace hybridsearch {
 
 SearchExpression::SearchExpression(Vector<SharedPtr<BaseExpression>> &match_exprs, Vector<SharedPtr<FusionExpression>> &fusion_exprs)
     : BaseExpression(ExpressionType::kSearch, Vector<SharedPtr<BaseExpression>>()), match_exprs_(match_exprs), fusion_exprs_(fusion_exprs) {}
@@ -53,4 +53,4 @@ String SearchExpression::ToString() const {
     return oss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

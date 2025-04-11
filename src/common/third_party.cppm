@@ -251,7 +251,7 @@ OpenFile(std::shared_ptr<::arrow::RandomAccessFile> file, ::arrow::MemoryPool *p
 }
 } // namespace parquet
 
-namespace infinity {
+namespace hybridsearch {
 
 // spdlog
 export enum class LogLevel {
@@ -385,4 +385,4 @@ export void monitorMemoryUsage(int &status,string file_path){
     outFile.close();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

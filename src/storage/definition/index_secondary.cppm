@@ -22,7 +22,7 @@ import index_base;
 import base_table_ref;
 import create_index_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 // Does not need any extra member.
 export class IndexSecondary final : public IndexBase {
@@ -42,4 +42,4 @@ public:
     static void ValidateColumnDataType(const SharedPtr<BaseTableRef> &base_table_ref, const String &column_name);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

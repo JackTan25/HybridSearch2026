@@ -22,7 +22,7 @@ import data_type;
 import stl;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class BetweenExpression : public BaseExpression {
 public:
@@ -41,4 +41,4 @@ private:
     bool upper_inclusive_{false};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -21,7 +21,7 @@ import specific_concurrent_queue;
 
 export module hnsw_mem_pool;
 
-namespace infinity {
+namespace hybridsearch {
 
 // use concept for zero cost polymorphism
 template <typename F, typename... Args>
@@ -125,4 +125,4 @@ export using VisitedMemPool = MemPool<PooledVectorBoolFunctor, SizeT, SizeT>;
 export template <typename T, typename C>
 using MaxHeapMemPool = MemPool<PooledMaxHeapFunctor<T, C>>;
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -4,7 +4,7 @@
 // https://github.com/ClickHouse/ClickHouse/blob/master/src/Functions/CRC.cpp
 // https://www.boost.org/doc/libs/1_83_0/doc/html/crc/crc_samples.html
 
-namespace infinity {
+namespace hybridsearch {
 
 #include <cstddef>
 #include <cstdint>
@@ -40,4 +40,4 @@ struct CRCImpl {
 constexpr uint32_t CRC32_IEEE = 0xEDB88320;
 using CRC32IEEE = CRCImpl<uint32_t, CRC32_IEEE, 0xFFFFFFFF, 0xFFFFFFFF>;
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -1,13 +1,13 @@
 import pytest
-from infinity_cluster import InfinityCluster
-from mocked_infinity_cluster import MockInfinityCluster
+from hybridsearch_cluster import hybridsearchCluster
+from mocked_hybridsearch_cluster import MockhybridsearchCluster
 
 
 def pytest_addoption(parser):
     parser.addoption(
-        "--infinity_path",
+        "--hybridsearch_path",
         action="store",
-        default="cmake-build-debug/src/infinity",
+        default="cmake-build-debug/src/hybridsearch",
     )
     parser.addoption(
         "--use_sudo",
@@ -18,19 +18,19 @@ def pytest_addoption(parser):
 
 
 def pytest_generate_tests(metafunc):
-    infinity_path = metafunc.config.getoption("infinity_path")
+    hybridsearch_path = metafunc.config.getoption("hybridsearch_path")
 
     use_sudo = metafunc.config.getoption("use_sudo")
 
     test_name = metafunc.function.__name__
 
     if "cluster" in metafunc.fixturenames:
-        infinity_cluster = InfinityCluster(infinity_path, test_name=test_name)
-        metafunc.parametrize("cluster", [infinity_cluster])
+        hybridsearch_cluster = hybridsearchCluster(hybridsearch_path, test_name=test_name)
+        metafunc.parametrize("cluster", [hybridsearch_cluster])
     elif "mock_cluster" in metafunc.fixturenames:
-        mock_infinity_cluster = MockInfinityCluster(
-            infinity_path,
+        mock_hybridsearch_cluster = MockhybridsearchCluster(
+            hybridsearch_path,
             test_name=test_name,
             use_sudo=use_sudo,
         )
-        metafunc.parametrize("mock_cluster", [mock_infinity_cluster])
+        metafunc.parametrize("mock_cluster", [mock_hybridsearch_cluster])

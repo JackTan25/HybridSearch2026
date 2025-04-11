@@ -19,7 +19,7 @@
 #include <string>
 #include <vector>
 
-namespace infinity {
+namespace hybridsearch {
 
 constexpr size_t DEFAULT_MATCH_VECTOR_TOP_N = 10;
 constexpr size_t DEFAULT_MATCH_SPARSE_TOP_N = 10;
@@ -104,4 +104,4 @@ struct IfNotExistsInfo {
     bool if_not_exists_{false};
     std::string info_{};
 };
-} // namespace infinity
+} // namespace hybridsearch

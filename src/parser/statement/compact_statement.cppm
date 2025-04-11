@@ -18,9 +18,9 @@ module;
 
 export module compact_statement;
 
-namespace infinity {
-export using infinity::CompactStatementType;
-export using infinity::CompactStatement;
-export using infinity::ManualCompactStatement;
-export using infinity::AutoCompactStatement;
-}; // namespace infinity
+namespace hybridsearch {
+export using hybridsearch::CompactStatementType;
+export using hybridsearch::CompactStatement;
+export using hybridsearch::ManualCompactStatement;
+export using hybridsearch::AutoCompactStatement;
+}; // namespace hybridsearch

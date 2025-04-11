@@ -17,11 +17,11 @@ module;
 export module multivector_result_handler;
 
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 // true: 1 sort after 2
 inline bool CompareDistanceIdPair(const auto d1, const auto d2, const auto id1, const auto id2) { return (d1 > d2) || ((d1 == d2) && (id1 > id2)); }
@@ -132,4 +132,4 @@ public:
 template <typename DistanceType, typename LabelType>
 class MultiVectorResultHandler<DistanceType, LabelType, void>;
 
-} // namespace infinity
+} // namespace hybridsearch

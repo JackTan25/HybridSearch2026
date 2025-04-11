@@ -52,12 +52,12 @@ import dict_reader;
 import file_reader;
 import logger;
 import vector_with_lock;
-import infinity_exception;
+import hybridsearch_exception;
 import mmap;
 import buf_writer;
 import profiler;
 import third_party;
-import infinity_context;
+import hybridsearch_context;
 import defer_op;
 import blocking_queue;
 import segment_index_entry;
@@ -68,7 +68,7 @@ import virtual_store;
 import local_file_handle;
 import mem_usage_change;
 
-namespace infinity {
+namespace hybridsearch {
 constexpr int MAX_TUPLE_LENGTH = 1024; // we assume that analyzed term, together with docid/offset info, will never exceed such length
 bool MemoryIndexer::KeyComp::operator()(const String &lhs, const String &rhs) const {
     int ret = strcmp(lhs.c_str(), rhs.c_str());
@@ -84,14 +84,14 @@ MemoryIndexer::MemoryIndexer(const String &index_dir,
                              const String &analyzer,
                              SegmentIndexEntry *segment_index_entry)
     : index_dir_(index_dir), base_name_(base_name), base_row_id_(base_row_id), flag_(flag), posting_format_(PostingFormatOption(flag_)),
-      analyzer_(analyzer), inverting_thread_pool_(infinity::InfinityContext::instance().GetFulltextInvertingThreadPool()),
-      commiting_thread_pool_(infinity::InfinityContext::instance().GetFulltextCommitingThreadPool()), ring_inverted_(15UL), ring_sorted_(13UL),
+      analyzer_(analyzer), inverting_thread_pool_(hybridsearch::hybridsearchContext::instance().GetFulltextInvertingThreadPool()),
+      commiting_thread_pool_(hybridsearch::hybridsearchContext::instance().GetFulltextCommitingThreadPool()), ring_inverted_(15UL), ring_sorted_(13UL),
       segment_index_entry_(segment_index_entry) {
     assert(std::filesystem::path(index_dir).is_absolute());
     posting_table_ = MakeShared<PostingTable>();
     prepared_posting_ = MakeShared<PostingWriter>(posting_format_, column_lengths_);
     spill_full_path_ = Path(index_dir) / (base_name + ".tmp.merge");
-    spill_full_path_ = Path(InfinityContext::instance().config()->TempDir()) / StringTransform(spill_full_path_, "/", "_");
+    spill_full_path_ = Path(hybridsearchContext::instance().config()->TempDir()) / StringTransform(spill_full_path_, "/", "_");
 }
 
 MemoryIndexer::~MemoryIndexer() {
@@ -341,10 +341,10 @@ void MemoryIndexer::Dump(bool offline, bool spill) {
     String tmp_dict_file(dict_file);
     String tmp_column_length_file(column_length_file);
 
-    PersistenceManager *pm = InfinityContext::instance().persistence_manager();
+    PersistenceManager *pm = hybridsearchContext::instance().persistence_manager();
     bool use_object_cache = pm != nullptr && !spill;
     if (use_object_cache) {
-        Path tmp_dir = Path(InfinityContext::instance().config()->TempDir());
+        Path tmp_dir = Path(hybridsearchContext::instance().config()->TempDir());
         tmp_posting_file = tmp_dir / StringTransform(tmp_posting_file, "/", "_");
         tmp_dict_file = tmp_dir / StringTransform(tmp_dict_file, "/", "_");
         tmp_column_length_file = tmp_dir / StringTransform(tmp_column_length_file, "/", "_");
@@ -501,7 +501,7 @@ void MemoryIndexer::TupleListToIndexFile(UniquePtr<SortMergerTermTuple<TermTuple
     Path path = Path(index_dir_) / base_name_;
     String index_prefix = path.string();
 
-    PersistenceManager *pm = InfinityContext::instance().persistence_manager();
+    PersistenceManager *pm = hybridsearchContext::instance().persistence_manager();
     bool use_object_cache = pm != nullptr;
     String posting_file = index_prefix + POSTING_SUFFIX;
     String dict_file = index_prefix + DICT_SUFFIX;
@@ -511,7 +511,7 @@ void MemoryIndexer::TupleListToIndexFile(UniquePtr<SortMergerTermTuple<TermTuple
     String tmp_column_length_file(column_length_file);
 
     if (use_object_cache) {
-        Path tmp_dir = Path(InfinityContext::instance().config()->TempDir());
+        Path tmp_dir = Path(hybridsearchContext::instance().config()->TempDir());
         tmp_posting_file = tmp_dir / StringTransform(tmp_posting_file, "/", "_");
         tmp_dict_file = tmp_dir / StringTransform(tmp_dict_file, "/", "_");
         tmp_column_length_file = tmp_dir / StringTransform(tmp_column_length_file, "/", "_");
@@ -661,4 +661,4 @@ void MemoryIndexer::PrepareSpillFile() {
     buf_writer_ = MakeUnique<BufWriter>(spill_file_handle_, write_buf_size);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

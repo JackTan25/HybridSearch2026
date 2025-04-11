@@ -23,7 +23,7 @@ import query_context;
 import operator_state;
 import default_values;
 import buffer_handle;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 import third_party;
 import txn;
@@ -40,7 +40,7 @@ import filter_value_type_classification;
 import physical_scan_base;
 import result_cache_manager;
 
-namespace infinity {
+namespace hybridsearch {
 
 PhysicalIndexScan::PhysicalIndexScan(const u64 id,
                                      SharedPtr<BaseTableRef> base_table_ref,
@@ -212,4 +212,4 @@ void PhysicalIndexScan::ExecuteInternal(QueryContext *query_context, IndexScanOp
     LOG_TRACE(fmt::format("IndexScan: job number: {}, segment_ids.size(): {}, finished", next_idx, segment_ids.size()));
 }
 
-} // namespace infinity
+} // namespace hybridsearch

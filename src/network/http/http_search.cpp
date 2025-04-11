@@ -45,9 +45,9 @@ import internal_types;
 import select_statement;
 import logical_type;
 
-namespace infinity {
+namespace hybridsearch {
 
-void HTTPSearch::Process(Infinity *infinity_ptr,
+void HTTPSearch::Process(hybridsearch *hybridsearch_ptr,
                          const String &db_name,
                          const String &table_name,
                          const String &input_json_str,
@@ -255,7 +255,7 @@ void HTTPSearch::Process(Infinity *infinity_ptr,
             }
         }
 
-        const QueryResult result = infinity_ptr->Search(db_name,
+        const QueryResult result = hybridsearch_ptr->Search(db_name,
                                                         table_name,
                                                         search_expr.release(),
                                                         filter.release(),
@@ -330,7 +330,7 @@ void HTTPSearch::Process(Infinity *infinity_ptr,
     return;
 }
 
-void HTTPSearch::Explain(Infinity *infinity_ptr,
+void HTTPSearch::Explain(hybridsearch *hybridsearch_ptr,
                          const String &db_name,
                          const String &table_name,
                          const String &input_json_str,
@@ -523,7 +523,7 @@ void HTTPSearch::Explain(Infinity *infinity_ptr,
             }
         }
 
-        const QueryResult result = infinity_ptr->Explain(db_name,
+        const QueryResult result = hybridsearch_ptr->Explain(db_name,
                                                          table_name,
                                                          explain_type,
                                                          search_expr.release(),
@@ -1658,4 +1658,4 @@ HTTPSearch::ParseVector(const nlohmann::json &json_object, EmbeddingDataType ele
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

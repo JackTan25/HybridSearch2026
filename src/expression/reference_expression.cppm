@@ -22,7 +22,7 @@ import base_expression;
 import data_type;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class ReferenceExpression : public BaseExpression {
 public:
@@ -55,4 +55,4 @@ private:
     SizeT column_index_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

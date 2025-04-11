@@ -19,7 +19,7 @@
 #include <sstream>
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 #pragma pack(1)
 
@@ -107,4 +107,4 @@ struct SparseType {
 
 #pragma pack()
 
-} // namespace infinity
+} // namespace hybridsearch

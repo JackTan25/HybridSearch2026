@@ -25,7 +25,7 @@ import base_expression;
 import internal_types;
 import base_table_ref;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalLimit : public LogicalNode {
 public:
@@ -54,4 +54,4 @@ public:
     bool total_hits_count_flag_{false};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

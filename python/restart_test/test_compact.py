@@ -1,57 +1,57 @@
-from infinity_runner import InfinityRunner, infinity_runner_decorator_factory
+from hybridsearch_runner import hybridsearchRunner, hybridsearch_runner_decorator_factory
 from common import common_values
 from restart_util import *
-from infinity.common import ConflictType
+from hybridsearch.common import ConflictType
 
 
 class TestCompact:
-    def test_restart_after_compact_and_cleanup(self, infinity_runner: InfinityRunner):
+    def test_restart_after_compact_and_cleanup(self, hybridsearch_runner: hybridsearchRunner):
         config = "test/data/config/restart_test/test_compact/1.toml"
         uri = common_values.TEST_LOCAL_HOST
-        infinity_runner.clear()
+        hybridsearch_runner.clear()
 
-        decorator = infinity_runner_decorator_factory(config, uri, infinity_runner)
+        decorator = hybridsearch_runner_decorator_factory(config, uri, hybridsearch_runner)
 
         columns = LChYDataGenerato.columns()
         indexes = LChYDataGenerato.index()
         import_file = LChYDataGenerato.import_file()
 
         @decorator
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.drop_table("test_compact", ConflictType.Ignore)
             table_obj = db_obj.create_table("test_compact", columns)
             table_obj.import_data(import_file, {"file_type": "jsonl"})
             table_obj.import_data(import_file, {"file_type": "jsonl"})
-            infinity_obj.flush_delta()
+            hybridsearch_obj.flush_delta()
             table_obj.compact()
             for index_info in indexes:
                 table_obj.create_index(f"idx_{index_info.column_name}", index_info)
 
-            infinity_obj.cleanup()
+            hybridsearch_obj.cleanup()
 
         part1()
 
         @decorator
-        def part2(infinity_obj):
+        def part2(hybridsearch_obj):
             pass
 
         part2()
 
-    def test_restart_compact_index(self, infinity_runner: InfinityRunner):
+    def test_restart_compact_index(self, hybridsearch_runner: hybridsearchRunner):
         config = "test/data/config/restart_test/test_compact/1.toml"
         uri = common_values.TEST_LOCAL_HOST
-        infinity_runner.clear()
+        hybridsearch_runner.clear()
 
-        decorator = infinity_runner_decorator_factory(config, uri, infinity_runner)
+        decorator = hybridsearch_runner_decorator_factory(config, uri, hybridsearch_runner)
 
         table_name = "test_compact1"
         dataset_path = "test/data/csv/enwiki_9.csv"
         import_options = {"delimiter": "\t", "file_type": "csv"}
 
         @decorator
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.drop_table(table_name, ConflictType.Ignore)
             table_obj = db_obj.create_table(
                 table_name,
@@ -68,11 +68,11 @@ class TestCompact:
             table_obj.import_data(dataset_path, import_options)
             table_obj.compact()
 
-            infinity_obj.flush_data()
+            hybridsearch_obj.flush_data()
 
             table_obj.import_data(dataset_path, import_options)
             table_obj.compact()
-            infinity_obj.flush_delta()
+            hybridsearch_obj.flush_delta()
 
             table_obj.import_data(dataset_path, import_options)
             table_obj.compact()
@@ -81,23 +81,23 @@ class TestCompact:
         import_time = 4
 
         @decorator
-        def part2(infinity_obj):
-            table_obj = infinity_obj.get_database("default_db").get_table(table_name)
+        def part2(hybridsearch_obj):
+            table_obj = hybridsearch_obj.get_database("default_db").get_table(table_name)
             data_dict, data_type_dict, _ = table_obj.output(["count(*)"]).to_result()
             count_star = data_dict["count(star)"][0]
             assert count_star == 9 * import_time
 
         part2()
 
-    def test_compact_restart_repeatedly(self, infinity_runner: InfinityRunner):
+    def test_compact_restart_repeatedly(self, hybridsearch_runner: hybridsearchRunner):
         config1 = "test/data/config/restart_test/test_compact/1.toml"
         config2 = "test/data/config/restart_test/test_compact/2.toml"
 
         uri = common_values.TEST_LOCAL_HOST
-        infinity_runner.clear()
+        hybridsearch_runner.clear()
 
-        decorator1 = infinity_runner_decorator_factory(config1, uri, infinity_runner)
-        decorator2 = infinity_runner_decorator_factory(config2, uri, infinity_runner)
+        decorator1 = hybridsearch_runner_decorator_factory(config1, uri, hybridsearch_runner)
+        decorator2 = hybridsearch_runner_decorator_factory(config2, uri, hybridsearch_runner)
 
         table_name = "test_compact2"
         import_path = "test/data/csv/embedding_int_dim3.csv"
@@ -107,8 +107,8 @@ class TestCompact:
         file_lines = 3
 
         @decorator1
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.drop_table(table_name, ConflictType.Ignore)
             table_obj = db_obj.create_table(
                 table_name,
@@ -123,9 +123,9 @@ class TestCompact:
         import_n = 0
 
         @decorator2
-        def part2(infinity_obj):
+        def part2(hybridsearch_obj):
             nonlocal import_n
-            table_obj = infinity_obj.get_database("default_db").get_table(table_name)
+            table_obj = hybridsearch_obj.get_database("default_db").get_table(table_name)
             data_dict, _, _ = table_obj.output(["count(*)"]).to_result()
             count_star = data_dict["count(star)"][0]
             assert count_star == import_n * file_lines
@@ -138,8 +138,8 @@ class TestCompact:
             part2()
 
         @decorator1
-        def part3(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part3(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.drop_table(table_name)
 
         part3()

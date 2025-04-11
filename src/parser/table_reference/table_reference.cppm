@@ -18,9 +18,9 @@ module;
 
 export module table_reference;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::TableReference;
-export using infinity::TableRefType;
+export using hybridsearch::TableReference;
+export using hybridsearch::TableRefType;
 
-} // namespace infinity
+} // namespace hybridsearch

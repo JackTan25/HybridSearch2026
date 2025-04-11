@@ -15,7 +15,7 @@
 #include "drop_index_info.h"
 #include <sstream>
 
-namespace infinity {
+namespace hybridsearch {
 
 std::string DropIndexInfo::ToString() const {
     std::stringstream ss;
@@ -28,4 +28,4 @@ std::string DropIndexInfo::ToString() const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

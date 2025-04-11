@@ -21,12 +21,12 @@ import config;
 import third_party;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 static SharedPtr<spdlog::sinks::stdout_color_sink_mt> stdout_sinker = nullptr;
 static SharedPtr<spdlog::sinks::rotating_file_sink_mt> rotating_file_sinker = nullptr;
 
-SharedPtr<spdlog::logger> infinity_logger = nullptr;
+SharedPtr<spdlog::logger> hybridsearch_logger = nullptr;
 
 Status Logger::Initialize(Config *config_ptr) {
 
@@ -52,16 +52,16 @@ Status Logger::Initialize(Config *config_ptr) {
         }
         Vector<spdlog::sink_ptr> sinks{stdout_sinker, rotating_file_sinker};
 
-        infinity_logger = MakeShared<spdlog::logger>("infinity", sinks.begin(), sinks.end()); // NOLINT
-        infinity_logger->set_pattern("[%H:%M:%S.%e] [%t] [%^%l%$] %v");
-        infinity_logger->flush_on(spdlog::level::warn);
-        spdlog::details::registry::instance().register_logger(infinity_logger);
+        hybridsearch_logger = MakeShared<spdlog::logger>("hybridsearch", sinks.begin(), sinks.end()); // NOLINT
+        hybridsearch_logger->set_pattern("[%H:%M:%S.%e] [%t] [%^%l%$] %v");
+        hybridsearch_logger->flush_on(spdlog::level::warn);
+        spdlog::details::registry::instance().register_logger(hybridsearch_logger);
     } else {
         Vector<spdlog::sink_ptr> sinks{rotating_file_sinker};
-        infinity_logger = MakeShared<spdlog::logger>("infinity", sinks.begin(), sinks.end()); // NOLINT
-        infinity_logger->set_pattern("[%H:%M:%S.%e] [%t] [%^%l%$] %v");
-        infinity_logger->flush_on(spdlog::level::warn);
-        spdlog::details::registry::instance().register_logger(infinity_logger);
+        hybridsearch_logger = MakeShared<spdlog::logger>("hybridsearch", sinks.begin(), sinks.end()); // NOLINT
+        hybridsearch_logger->set_pattern("[%H:%M:%S.%e] [%t] [%^%l%$] %v");
+        hybridsearch_logger->flush_on(spdlog::level::warn);
+        spdlog::details::registry::instance().register_logger(hybridsearch_logger);
     }
 
     SetLogLevel(config_ptr->GetLogLevel());
@@ -84,21 +84,21 @@ void Logger::Initialize(const LoggerConfig &config) {
         }
         Vector<spdlog::sink_ptr> sinks{stdout_sinker, rotating_file_sinker};
 
-        infinity_logger = MakeShared<spdlog::logger>("infinity", sinks.begin(), sinks.end()); // NOLINT
-        infinity_logger->set_pattern("[%H:%M:%S.%e] [%t] [%^%l%$] %v");
-        spdlog::details::registry::instance().register_logger(infinity_logger);
+        hybridsearch_logger = MakeShared<spdlog::logger>("hybridsearch", sinks.begin(), sinks.end()); // NOLINT
+        hybridsearch_logger->set_pattern("[%H:%M:%S.%e] [%t] [%^%l%$] %v");
+        spdlog::details::registry::instance().register_logger(hybridsearch_logger);
     } else {
         Vector<spdlog::sink_ptr> sinks{rotating_file_sinker};
-        infinity_logger = MakeShared<spdlog::logger>("infinity", sinks.begin(), sinks.end()); // NOLINT
-        infinity_logger->set_pattern("[%H:%M:%S.%e] [%t] [%^%l%$] %v");
-        spdlog::details::registry::instance().register_logger(infinity_logger);
+        hybridsearch_logger = MakeShared<spdlog::logger>("hybridsearch", sinks.begin(), sinks.end()); // NOLINT
+        hybridsearch_logger->set_pattern("[%H:%M:%S.%e] [%t] [%^%l%$] %v");
+        spdlog::details::registry::instance().register_logger(hybridsearch_logger);
     }
     SetLogLevel(config.log_level_);
 }
 
 void Logger::Flush() {
     if (IS_LOGGER_INITIALIZED()) {
-        infinity_logger->flush();
+        hybridsearch_logger->flush();
     }
 }
 
@@ -107,8 +107,8 @@ void Logger::Shutdown() {
         spdlog::shutdown();
         stdout_sinker = nullptr;
         rotating_file_sinker = nullptr;
-        infinity_logger = nullptr;
+        hybridsearch_logger = nullptr;
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

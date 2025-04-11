@@ -20,7 +20,7 @@ import pg_message;
 module pg_protocol_handler;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 PGProtocolHandler::PGProtocolHandler(const SharedPtr<boost::asio::ip::tcp::socket> &socket) : buffer_reader_(socket), buffer_writer_(socket) {}
 
@@ -166,4 +166,4 @@ void PGProtocolHandler::SendComplete(const String &complete_message) {
     buffer_writer_.send_string(complete_message);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

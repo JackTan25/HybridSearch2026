@@ -8,7 +8,7 @@ import stl;
 import segmenter;
 import analyze_context;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LetterSegmenter : public Segmenter {
 public:
@@ -45,4 +45,4 @@ public:
     bool IsNumConnector(wchar_t input);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

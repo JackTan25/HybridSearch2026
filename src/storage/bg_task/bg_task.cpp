@@ -19,13 +19,13 @@ module bg_task;
 import base_memindex;
 import chunk_index_entry;
 import cleanup_scanner;
-import infinity_context;
+import hybridsearch_context;
 import storage;
 
-namespace infinity {
+namespace hybridsearch {
 
 void CleanupTask::Execute() {
-    auto *storage = InfinityContext::instance().storage();
+    auto *storage = hybridsearchContext::instance().storage();
     CleanupScanner scanner(catalog_, visible_ts_, buffer_mgr_);
     scanner.Scan();
 
@@ -46,4 +46,4 @@ DumpIndexBylineTask::DumpIndexBylineTask(SharedPtr<String> db_name,
 
 TestCommandTask::TestCommandTask(String command_content) : BGTask(BGTaskType::kTestCommand, true), command_content_(std::move(command_content)) {}
 
-} // namespace infinity
+} // namespace hybridsearch

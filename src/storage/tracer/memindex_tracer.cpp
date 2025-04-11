@@ -21,8 +21,8 @@ module memindex_tracer;
 import stl;
 import base_memindex;
 import bg_task;
-import infinity_context;
-import infinity_exception;
+import hybridsearch_context;
+import hybridsearch_exception;
 import logger;
 import third_party;
 import catalog;
@@ -32,7 +32,7 @@ import table_index_entry;
 import txn_manager;
 import txn_state;
 
-namespace infinity {
+namespace hybridsearch {
 
 void MemIndexTracer::DecreaseMemUsed(SizeT mem_used) {
     SizeT old_index_memory = cur_index_memory_.fetch_sub(mem_used);
@@ -124,7 +124,7 @@ SizeT MemIndexTracer::ChooseDump(const Vector<BaseMemIndex *> &mem_indexes) {
 }
 
 void BGMemIndexTracer::TriggerDump(UniquePtr<DumpIndexTask> dump_task) {
-    auto *compaction_process = InfinityContext::instance().storage()->compaction_processor();
+    auto *compaction_process = hybridsearchContext::instance().storage()->compaction_processor();
 
     LOG_INFO(fmt::format("Submit dump task: {}", dump_task->ToString()));
     compaction_process->Submit(std::move(dump_task));
@@ -153,4 +153,4 @@ Vector<BaseMemIndex *> BGMemIndexTracer::GetAllMemIndexes(Txn *scan_txn) {
     return mem_indexes;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

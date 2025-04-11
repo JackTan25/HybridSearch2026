@@ -19,7 +19,7 @@ import base_test;
 import statement_common;
 import internal_types;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 import storage;
 import column_def;
 import logical_type;
@@ -47,16 +47,16 @@ import index_base;
 import index_full_text;
 import bg_task;
 import logger;
-import infinity_exception;
+import hybridsearch_exception;
 import default_values;
 import global_resource_usage;
-import infinity;
+import hybridsearch;
 import background_process;
 import compaction_process;
 import wal_manager;
 import txn_state;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class CheckpointTest : public BaseTestParamStr {
 protected:
@@ -135,14 +135,14 @@ TEST_P(CheckpointTest, test_cleanup_and_checkpoint) {
     auto table_name = MakeShared<String>("test_cleanup_and_checkpoint");
     auto column_name = MakeShared<String>("col1");
 
-#ifdef INFINITY_DEBUG
-    infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+    hybridsearch::GlobalResourceUsage::Init();
 #endif
     std::shared_ptr<std::string> config_path = CheckpointTest::config_path();
-    infinity::InfinityContext::instance().InitPhase1(config_path);
-    infinity::InfinityContext::instance().InitPhase2();
+    hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+    hybridsearch::hybridsearchContext::instance().InitPhase2();
 
-    Storage *storage = infinity::InfinityContext::instance().storage();
+    Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
     BufferManager *buffer_manager = storage->buffer_manager();
     TxnManager *txn_mgr = storage->txn_manager();
     CompactionProcessor *compaction_processor = storage->compaction_processor();
@@ -196,17 +196,17 @@ TEST_P(CheckpointTest, test_cleanup_and_checkpoint) {
         txn_mgr->CommitTxn(txn5);
     }
     WaitCleanup(storage);
-    infinity::InfinityContext::instance().UnInit();
-#ifdef INFINITY_DEBUG
-    EXPECT_EQ(infinity::GlobalResourceUsage::GetObjectCount(), 0);
-    EXPECT_EQ(infinity::GlobalResourceUsage::GetRawMemoryCount(), 0);
-    infinity::GlobalResourceUsage::UnInit();
+    hybridsearch::hybridsearchContext::instance().UnInit();
+#ifdef hybridsearch_DEBUG
+    EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetObjectCount(), 0);
+    EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetRawMemoryCount(), 0);
+    hybridsearch::GlobalResourceUsage::UnInit();
 #endif
 }
 
 TEST_P(CheckpointTest, test_index_replay_with_full_and_delta_checkpoint1) {
-#ifdef INFINITY_DEBUG
-    infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+    hybridsearch::GlobalResourceUsage::Init();
 #endif
     auto config_path = std::make_shared<std::string>(std::string(test_data_path()) + "/config/test_catalog_delta.toml");
 
@@ -218,9 +218,9 @@ TEST_P(CheckpointTest, test_index_replay_with_full_and_delta_checkpoint1) {
 
     // create table and shutdown
     {
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         TxnManager *txn_mgr = storage->txn_manager();
         {
             i64 column_id = 0;
@@ -238,13 +238,13 @@ TEST_P(CheckpointTest, test_index_replay_with_full_and_delta_checkpoint1) {
             EXPECT_TRUE(status.ok());
             txn_mgr->CommitTxn(txn);
         }
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
     // create index and shutdown
     {
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         TxnManager *txn_mgr = storage->txn_manager();
 
         auto *txn = txn_mgr->BeginTxn(MakeUnique<String>("get db"), TransactionType::kRead);
@@ -262,13 +262,13 @@ TEST_P(CheckpointTest, test_index_replay_with_full_and_delta_checkpoint1) {
 
         txn_mgr->CommitTxn(txn);
 
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
     // drop index and shutdown
     {
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         TxnManager *txn_mgr = storage->txn_manager();
 
         auto *txn = txn_mgr->BeginTxn(MakeUnique<String>("drop index"), TransactionType::kNormal);
@@ -282,13 +282,13 @@ TEST_P(CheckpointTest, test_index_replay_with_full_and_delta_checkpoint1) {
 
         WaitFlushDeltaOp(storage);
 
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
     // now restart and recreate index should be ok
     {
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         TxnManager *txn_mgr = storage->txn_manager();
 
         auto *txn = txn_mgr->BeginTxn(MakeUnique<String>("get db"), TransactionType::kRead);
@@ -306,12 +306,12 @@ TEST_P(CheckpointTest, test_index_replay_with_full_and_delta_checkpoint1) {
 
         txn_mgr->CommitTxn(txn);
 
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
-#ifdef INFINITY_DEBUG
-    EXPECT_EQ(infinity::GlobalResourceUsage::GetObjectCount(), 0);
-    EXPECT_EQ(infinity::GlobalResourceUsage::GetRawMemoryCount(), 0);
-    infinity::GlobalResourceUsage::UnInit();
+#ifdef hybridsearch_DEBUG
+    EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetObjectCount(), 0);
+    EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetRawMemoryCount(), 0);
+    hybridsearch::GlobalResourceUsage::UnInit();
 #endif
 }
 
@@ -319,8 +319,8 @@ TEST_P(CheckpointTest, test_index_replay_with_full_and_delta_checkpoint2) {
     constexpr u64 kInsertN = 10;
     constexpr u64 kInsertSize = 8192;
 
-#ifdef INFINITY_DEBUG
-    infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+    hybridsearch::GlobalResourceUsage::Init();
 #endif
     auto config_path = std::make_shared<std::string>(std::string(test_data_path()) + "/config/test_catalog_delta.toml");
 
@@ -335,9 +335,9 @@ TEST_P(CheckpointTest, test_index_replay_with_full_and_delta_checkpoint2) {
     // create table
     // create index, insert data and shutdown
     {
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         TxnManager *txn_mgr = storage->txn_manager();
         BGTaskProcessor *bg_processor = storage->bg_processor();
 
@@ -408,13 +408,13 @@ TEST_P(CheckpointTest, test_index_replay_with_full_and_delta_checkpoint2) {
 
         WaitFlushDeltaOp(storage);
 
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
     // now restart and recreate index should be ok
     {
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         TxnManager *txn_mgr = storage->txn_manager();
 
         auto *txn = txn_mgr->BeginTxn(MakeUnique<String>("get db"), TransactionType::kRead);
@@ -425,18 +425,18 @@ TEST_P(CheckpointTest, test_index_replay_with_full_and_delta_checkpoint2) {
 
         txn_mgr->CommitTxn(txn);
 
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
-#ifdef INFINITY_DEBUG
-    EXPECT_EQ(infinity::GlobalResourceUsage::GetObjectCount(), 0);
-    EXPECT_EQ(infinity::GlobalResourceUsage::GetRawMemoryCount(), 0);
-    infinity::GlobalResourceUsage::UnInit();
+#ifdef hybridsearch_DEBUG
+    EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetObjectCount(), 0);
+    EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetRawMemoryCount(), 0);
+    hybridsearch::GlobalResourceUsage::UnInit();
 #endif
 }
 
 TEST_P(CheckpointTest, test_fullcheckpoint_withsmallest_walfile) {
-#ifdef INFINITY_DEBUG
-    infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+    hybridsearch::GlobalResourceUsage::Init();
 #endif
 
     auto db_name = MakeShared<String>("default_db");
@@ -453,9 +453,9 @@ TEST_P(CheckpointTest, test_fullcheckpoint_withsmallest_walfile) {
     String wal_dir;
     int insert_n = 100;
     {
-        infinity::InfinityContext::instance().InitPhase1(nullptr /*config_path*/);
-        infinity::InfinityContext::instance().InitPhase2();
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(nullptr /*config_path*/);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         TxnManager *txn_mgr = storage->txn_manager();
 
         {
@@ -496,13 +496,13 @@ TEST_P(CheckpointTest, test_fullcheckpoint_withsmallest_walfile) {
         }
         wal_dir = storage->wal_manager()->wal_dir();
 
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
 //    RemoveOldWal(wal_dir);
     {
-        infinity::InfinityContext::instance().InitPhase1(nullptr /*config_path*/);
-        infinity::InfinityContext::instance().InitPhase2();
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(nullptr /*config_path*/);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         auto *txn_mgr = storage->txn_manager();
 
         {
@@ -522,12 +522,12 @@ TEST_P(CheckpointTest, test_fullcheckpoint_withsmallest_walfile) {
             EXPECT_EQ(int(end - start), insert_n * 2);
         }
 
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
     }
 
-#ifdef INFINITY_DEBUG
-    EXPECT_EQ(infinity::GlobalResourceUsage::GetObjectCount(), 0);
-    EXPECT_EQ(infinity::GlobalResourceUsage::GetRawMemoryCount(), 0);
-    infinity::GlobalResourceUsage::UnInit();
+#ifdef hybridsearch_DEBUG
+    EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetObjectCount(), 0);
+    EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetRawMemoryCount(), 0);
+    hybridsearch::GlobalResourceUsage::UnInit();
 #endif
 }

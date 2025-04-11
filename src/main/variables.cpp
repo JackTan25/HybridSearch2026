@@ -19,7 +19,7 @@ module variables;
 import stl;
 import default_values;
 
-namespace infinity {
+namespace hybridsearch {
 
 void VarUtil::InitVariablesMap() {
     global_name_map_[QUERY_COUNT_VAR_NAME.data()] = GlobalVariable::kQueryCount;
@@ -77,4 +77,4 @@ SessionVariable VarUtil::GetSessionVarByName(const String &variable_name) {
     return SessionVariable::kInvalid;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

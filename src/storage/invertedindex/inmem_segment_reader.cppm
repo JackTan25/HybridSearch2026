@@ -25,7 +25,7 @@ import posting_writer;
 import memory_indexer;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 export class InMemIndexSegmentReader : public IndexSegmentReader {
 public:
     InMemIndexSegmentReader(SegmentID segment_id, MemoryIndexer *memory_indexer);
@@ -38,4 +38,4 @@ private:
     RowID base_row_id_{INVALID_ROWID};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

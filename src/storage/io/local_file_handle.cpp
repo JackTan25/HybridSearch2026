@@ -25,10 +25,10 @@ module local_file_handle;
 import third_party;
 import status;
 import virtual_store;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 LocalFileHandle::~LocalFileHandle() {
     Status status = Sync();
@@ -51,7 +51,7 @@ LocalFileHandle::~LocalFileHandle() {
     path_.clear();
     access_mode_ = FileAccessMode::kInvalid;
 
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::DecrObjectCount("LocalFileHandle");
 #endif
 }
@@ -161,4 +161,4 @@ Status LocalFileHandle::Sync() {
     return Status::OK();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

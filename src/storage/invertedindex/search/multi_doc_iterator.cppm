@@ -22,7 +22,7 @@ import index_defines;
 import doc_iterator;
 import term_doc_iterator;
 
-namespace infinity {
+namespace hybridsearch {
 export class MultiDocIterator : public DocIterator {
 public:
     explicit MultiDocIterator(Vector<UniquePtr<DocIterator>> &&children) : children_(std::move(children)) {}
@@ -34,4 +34,4 @@ public:
 protected:
     Vector<UniquePtr<DocIterator>> children_;
 };
-} // namespace infinity
+} // namespace hybridsearch

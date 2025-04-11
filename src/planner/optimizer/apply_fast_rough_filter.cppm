@@ -21,7 +21,7 @@ import logical_node;
 import query_context;
 import optimizer_rule;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class ApplyFastRoughFilter final : public OptimizerRule {
 public:
@@ -32,4 +32,4 @@ public:
     String name() const final { return "Apply FastRoughFilter"; }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

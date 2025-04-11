@@ -24,13 +24,13 @@ import physical_operator;
 import physical_operator_type;
 import base_expression;
 import load_meta;
-import infinity_exception;
+import hybridsearch_exception;
 import meta_info;
 import internal_types;
 import data_type;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PhysicalInsert : public PhysicalOperator {
 public:
@@ -66,4 +66,4 @@ private:
     SharedPtr<Vector<SharedPtr<DataType>>> output_types_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -21,7 +21,7 @@
 #include <type_traits>
 #include <vector>
 
-namespace infinity {
+namespace hybridsearch {
 // using String = std::string;
 
 template <typename T>
@@ -185,4 +185,4 @@ void WriteBufVecAdvAligned(char *&buf, const T *data, size_t size) {
     WriteBufVecAdv(buf, data, size);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

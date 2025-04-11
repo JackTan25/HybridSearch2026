@@ -14,7 +14,7 @@ import term;
 import ik_dict;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class IKAnalyzer : public Analyzer {
 public:
@@ -55,4 +55,4 @@ private:
 
     UniquePtr<IKArbitrator> arbitrator_;
 };
-} // namespace infinity
+} // namespace hybridsearch

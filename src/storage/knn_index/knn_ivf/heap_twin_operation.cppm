@@ -16,7 +16,7 @@ module;
 
 import stl;
 export module heap_twin_operation;
-namespace infinity {
+namespace hybridsearch {
 
 // assume that distances have been initialized
 // the 1st element may not be the largest / smallest when heap is not full
@@ -183,4 +183,4 @@ public:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

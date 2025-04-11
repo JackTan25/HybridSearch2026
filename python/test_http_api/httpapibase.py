@@ -436,8 +436,8 @@ class HttpTest:
 
     def get_project_path(self):
         current_file = os.path.abspath(__file__)
-        index = current_file.index("infinity")
-        desired_path = current_file[: index + len("infinity")]
+        index = current_file.index("hybridsearch")
+        desired_path = current_file[: index + len("hybridsearch")]
         return str(desired_path)
 
     # url: str

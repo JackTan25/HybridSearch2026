@@ -24,7 +24,7 @@ import logical_node;
 import query_context;
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct BoundUpdateStatement final : public BoundStatement {
 public:
@@ -73,4 +73,4 @@ public:
     bool building_subquery_{false};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

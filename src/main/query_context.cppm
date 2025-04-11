@@ -34,7 +34,7 @@ import admin_statement;
 
 export module query_context;
 
-namespace infinity {
+namespace hybridsearch {
 
 class LogicalPlanner;
 class PhysicalPlanner;
@@ -178,4 +178,4 @@ private:
     bool initialized_{false};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

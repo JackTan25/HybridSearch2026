@@ -24,7 +24,7 @@ import data_type;
 import view;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalViewScan : public LogicalNode {
 
@@ -48,4 +48,4 @@ private:
     SharedPtr<View> view_ptr_{nullptr};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

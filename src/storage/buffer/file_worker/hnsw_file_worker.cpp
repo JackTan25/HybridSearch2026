@@ -18,7 +18,7 @@ module;
 
 module hnsw_file_worker;
 
-import infinity_exception;
+import hybridsearch_exception;
 import stl;
 import index_file_worker;
 import hnsw_alg;
@@ -37,7 +37,7 @@ import virtual_store;
 import persistence_manager;
 import local_file_handle;
 
-namespace infinity {
+namespace hybridsearch {
 
 HnswFileWorker::HnswFileWorker(SharedPtr<String> data_dir,
                                SharedPtr<String> temp_dir,
@@ -195,4 +195,4 @@ void HnswFileWorker::FreeFromMmapImpl() {
     mmap_data_ = nullptr;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

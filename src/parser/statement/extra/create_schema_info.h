@@ -16,7 +16,7 @@
 
 #include "extra_ddl_info.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 class CreateSchemaInfo final : public ExtraDDLInfo {
 public:
@@ -25,4 +25,4 @@ public:
     [[nodiscard]] std::string ToString() const final;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

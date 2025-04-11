@@ -18,12 +18,12 @@
 #include <memory>
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 struct QueryNode;
 
 enum class FulltextQueryOperatorOption {
-    kInfinitySyntax, // use parser's syntax
+    khybridsearchSyntax, // use parser's syntax
     kAnd,            // combine all terms with AND
     kOr,             // combine all terms with OR
 };
@@ -35,7 +35,7 @@ class SearchDriver {
 public:
     SearchDriver(const std::map<std::string, std::string> &field2analyzer,
                  const std::string &default_field,
-                 const FulltextQueryOperatorOption operator_option = FulltextQueryOperatorOption::kInfinitySyntax)
+                 const FulltextQueryOperatorOption operator_option = FulltextQueryOperatorOption::khybridsearchSyntax)
         : field2analyzer_{field2analyzer}, default_field_{SearchDriver::Unescape(default_field)}, operator_option_(operator_option) {}
 
     // used in PhysicalMatch
@@ -55,7 +55,7 @@ public:
      */
     const std::map<std::string, std::string> &field2analyzer_;
     const std::string default_field_;
-    const FulltextQueryOperatorOption operator_option_ = FulltextQueryOperatorOption::kInfinitySyntax;
+    const FulltextQueryOperatorOption operator_option_ = FulltextQueryOperatorOption::khybridsearchSyntax;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

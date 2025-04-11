@@ -25,7 +25,7 @@ import logical_node_type;
 import logical_type;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<ColumnBinding> LogicalDropTable::GetColumnBindings() const { return {}; }
 
@@ -54,4 +54,4 @@ String LogicalDropTable::ToString(i64 &space) const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

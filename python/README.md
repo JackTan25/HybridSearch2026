@@ -1,4 +1,4 @@
-# python-infinity
+# python-hybridsearch
 
 # update python client
 
@@ -7,17 +7,17 @@
 - upload to pypi.org
 - install new python SDK
 
-Please see [releases.yml](https://github.com/infiniflow/infinity/blob/main/.github/workflows/release.yml) for details.
+Please see [releases.yml](https://github.com/infiniflow/hybridsearch/blob/main/.github/workflows/release.yml) for details.
 
 # using
 
 ```python
-import infinity
-from infinity.common import LOCAL_HOST
-from infinity.common import ConflictType
+import hybridsearch
+from hybridsearch.common import LOCAL_HOST
+from hybridsearch.common import ConflictType
 
-infinity_obj = infinity.connect(LOCAL_HOST)
-db = infinity_obj.get_database("default_db")
+hybridsearch_obj = hybridsearch.connect(LOCAL_HOST)
+db = hybridsearch_obj.get_database("default_db")
 db.drop_table("my_table", ConflictType.Ignore)
 table = db.create_table("my_table", {"num": {"type": "integer"}, "body": {"type": "varchar"}, "vec": {"type": "vector,5,float"}}, ConflictType.Error)
 table.insert([{"num": 1, "body": "undesirable, unnecessary, and harmful", "vec": [1.0] * 5}])
@@ -33,15 +33,15 @@ print(res)
 ```shell
 pip install -e .
 ```
-Build infinity-sdk 
+Build hybridsearch-sdk 
 ```shell
-pip install ./python/infinity_sdk 
+pip install ./python/hybridsearch_sdk 
 ```
-Build the release version of infinity-embedded-sdk in the target location `cmake-build-release`
+Build the release version of hybridsearch-embedded-sdk in the target location `cmake-build-release`
 ```shell
 pip install . -v --config-settings=cmake.build-type="Release"  --config-settings=build-dir="cmake-build-release"
 ```
-Build the debug version of infinity-embedded-sdk in the target location `cmake-build-debug`
+Build the debug version of hybridsearch-embedded-sdk in the target location `cmake-build-debug`
 ```shell
 pip install . -v --config-settings=cmake.build-type="Debug"  --config-settings=build-dir="cmake-build-debug"
 ```
@@ -53,17 +53,17 @@ Note: If you run with the debug version, you must set the **libasan** environmen
 ```shell
 LD_PRELOAD=$(find $(clang-18 -print-resource-dir) -name "libclang_rt.asan-x86_64.so") python3 example/simple_example.py
 ```
-Note: When running with the debug version infinity_embedded-sdk, you may find some memory leaks caused by arrow. You can use `ASAN_OPTIONS=detect_leaks=0` to disable memory leak detection, for example
+Note: When running with the debug version hybridsearch_embedded-sdk, you may find some memory leaks caused by arrow. You can use `ASAN_OPTIONS=detect_leaks=0` to disable memory leak detection, for example
 ```shell
 LD_PRELOAD=$(find $(clang-18 -print-resource-dir) -name "libclang_rt.asan-x86_64.so") ASAN_OPTIONS=detect_leaks=0 python3 example/simple_example.py
 ```
 
 # run pysdk test
-Run a local infinity test in project root directory
+Run a local hybridsearch test in project root directory
 ```shell
-pytest --local-infinity python/test/cases/test_basic.py::TestInfinity::test_basic
+pytest --local-hybridsearch python/test/cases/test_basic.py::Testhybridsearch::test_basic
 ```
-Run a remote infinity test in project root directory
+Run a remote hybridsearch test in project root directory
 ```shell
-pytest python/test/cases/test_basic.py::TestInfinity::test_basic
+pytest python/test/cases/test_basic.py::Testhybridsearch::test_basic
 ```

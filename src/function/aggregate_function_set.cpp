@@ -21,11 +21,11 @@ import aggregate_function;
 import cast_table;
 import logger;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 
 module aggregate_function_set;
 
-namespace infinity {
+namespace hybridsearch {
 
 AggregateFunctionSet::~AggregateFunctionSet() { functions_.clear(); }
 
@@ -93,4 +93,4 @@ i64 AggregateFunctionSet::MatchFunctionCost(const AggregateFunction &func, const
     return cost;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

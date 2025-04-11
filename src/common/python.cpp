@@ -17,7 +17,7 @@ module;
 module python_instance;
 #if 0
 #include "Python.h"
-namespace infinity {
+namespace hybridsearch {
 
 static PyThreadState *saved_state = nullptr;
 

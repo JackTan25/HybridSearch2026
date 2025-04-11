@@ -38,9 +38,9 @@ import function;
 import column_binding;
 import logger;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 void RemoveUnusedColumns::VisitNode(LogicalNode &op) {
     switch (op.operator_type()) {
@@ -227,4 +227,4 @@ Vector<T> RemoveUnusedColumns::ClearUnusedBaseTableColumns(const Vector<T> &col_
     return items;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

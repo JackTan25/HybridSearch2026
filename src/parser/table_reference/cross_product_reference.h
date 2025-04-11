@@ -16,7 +16,7 @@
 
 #include "base_table_reference.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 class CrossProductReference : public BaseTableReference {
 
@@ -30,4 +30,4 @@ public:
     std::vector<BaseTableReference *> tables_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

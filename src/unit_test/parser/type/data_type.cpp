@@ -15,14 +15,14 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 import internal_types;
 import logical_type;
 import type_info;
@@ -33,11 +33,11 @@ import knn_expr;
 import internal_types;
 import data_type;
 
-using namespace infinity;
+using namespace hybridsearch;
 class DataTypeTest : public BaseTest {};
 
 TEST_F(DataTypeTest, GetTypeName) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     DataType bool_type(LogicalType::kBoolean);
     EXPECT_EQ(bool_type.ToString(), "Boolean");
@@ -104,7 +104,7 @@ TEST_F(DataTypeTest, GetTypeName) {
 }
 
 TEST_F(DataTypeTest, TypeToString) {
-    //    using namespace infinity;
+    //    using namespace hybridsearch;
     //
     //    EXPECT_STREQ(DataType::TypeToString<BooleanT>().c_str(), "Boolean");
     //    EXPECT_STREQ(DataType::TypeToString<TinyIntT>().c_str(), "TinyInt");
@@ -138,7 +138,7 @@ TEST_F(DataTypeTest, TypeToString) {
 }
 
 TEST_F(DataTypeTest, Serialize) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     DataType bool_type(LogicalType::kBoolean);
     String bool_type_str = bool_type.Serialize().dump();
@@ -146,7 +146,7 @@ TEST_F(DataTypeTest, Serialize) {
 }
 
 TEST_F(DataTypeTest, ReadWrite) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<TypeInfo> type_info_bitmap = BitmapInfo::Make(1024);
     SharedPtr<TypeInfo> type_info_decimal = DecimalInfo::Make(i64(38), i64(3));

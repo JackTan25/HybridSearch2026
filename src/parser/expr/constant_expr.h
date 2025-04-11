@@ -23,7 +23,7 @@
 #include <memory>
 #include <vector>
 
-namespace infinity {
+namespace hybridsearch {
 
 class ColumnDef;
 
@@ -86,4 +86,4 @@ public:
     std::vector<std::shared_ptr<ConstantExpr>> curly_brackets_array_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

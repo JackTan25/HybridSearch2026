@@ -25,13 +25,13 @@ import physical_operator;
 import physical_limit;
 import physical_operator_type;
 import load_meta;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import data_type;
 import logger;
 import base_table_ref;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PhysicalMergeLimit final : public PhysicalOperator {
 public:
@@ -69,4 +69,4 @@ private:
     bool total_hits_count_flag_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

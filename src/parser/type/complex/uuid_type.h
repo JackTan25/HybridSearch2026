@@ -17,7 +17,7 @@
 #include <cstring>
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 struct UuidType {
 public:
@@ -50,4 +50,4 @@ public:
     char body[UuidType::LENGTH];
 };
 
-} // namespace infinity
+} // namespace hybridsearch

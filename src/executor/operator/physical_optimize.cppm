@@ -24,14 +24,14 @@ import physical_operator;
 import physical_operator_type;
 import base_expression;
 import load_meta;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import optimize_statement;
 import data_type;
 import logger;
 import statement_common;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PhysicalOptimize final : public PhysicalOperator {
 public:
@@ -69,4 +69,4 @@ private:
     SharedPtr<Vector<SharedPtr<DataType>>> output_types_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

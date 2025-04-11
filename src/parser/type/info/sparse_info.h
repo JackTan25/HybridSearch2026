@@ -24,7 +24,7 @@ namespace arrow {
 class StructType;
 }
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class SparseStoreType : int8_t {
     kSort,
@@ -107,4 +107,4 @@ private:
     SparseStoreType store_type_{SparseStoreType::kSort};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

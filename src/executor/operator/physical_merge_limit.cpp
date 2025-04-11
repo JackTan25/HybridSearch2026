@@ -25,7 +25,7 @@ import value_expression;
 import physical_limit;
 import operator_state;
 
-namespace infinity {
+namespace hybridsearch {
 
 PhysicalMergeLimit::PhysicalMergeLimit(u64 id,
                                        UniquePtr<PhysicalOperator> left,
@@ -65,4 +65,4 @@ bool PhysicalMergeLimit::Execute(QueryContext *query_context, OperatorState *ope
     return result;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

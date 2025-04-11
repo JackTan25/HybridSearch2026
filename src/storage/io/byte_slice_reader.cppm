@@ -5,9 +5,9 @@ export module byte_slice_reader;
 import stl;
 import byte_slice;
 
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class ByteSliceReader {
 public:
@@ -181,4 +181,4 @@ inline T ByteSliceReader::ReadInt() {
     return *((T *)buffer);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

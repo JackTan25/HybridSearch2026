@@ -23,7 +23,7 @@ import base_table_ref;
 import statement_common;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 // always use float for centroids
 export struct IndexIVFCentroidOption {
@@ -96,4 +96,4 @@ public:
     IndexIVFOption ivf_option_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

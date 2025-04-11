@@ -15,20 +15,20 @@
 from abc import ABC
 import logging
 
-import infinity.remote_thrift.infinity_thrift_rpc.ttypes as ttypes
-from infinity import InfinityConnection
-from infinity.errors import ErrorCode
-from infinity.remote_thrift.client import ThriftInfinityClient
-from infinity.remote_thrift.db import RemoteDatabase
-from infinity.remote_thrift.utils import name_validity_check, select_res_to_polars
-from infinity.common import ConflictType, InfinityException
+import hybridsearch.remote_thrift.hybridsearch_thrift_rpc.ttypes as ttypes
+from hybridsearch import hybridsearchConnection
+from hybridsearch.errors import ErrorCode
+from hybridsearch.remote_thrift.client import ThrifthybridsearchClient
+from hybridsearch.remote_thrift.db import RemoteDatabase
+from hybridsearch.remote_thrift.utils import name_validity_check, select_res_to_polars
+from hybridsearch.common import ConflictType, hybridsearchException
 
 
-class RemoteThriftInfinityConnection(InfinityConnection, ABC):
+class RemoteThrifthybridsearchConnection(hybridsearchConnection, ABC):
     def __init__(self, uri, logger: logging.Logger = None):
         super().__init__(uri)
         self.db_name = "default_db"
-        self._client = ThriftInfinityClient(uri, logger=logger)
+        self._client = ThrifthybridsearchClient(uri, logger=logger)
         self._is_connected = True
 
     def __del__(self):
@@ -45,20 +45,20 @@ class RemoteThriftInfinityConnection(InfinityConnection, ABC):
         elif conflict_type == ConflictType.Replace:
             create_database_conflict = ttypes.CreateConflict.Replace
         else:
-            raise InfinityException(ErrorCode.INVALID_CONFLICT_TYPE, "Invalid conflict type")
+            raise hybridsearchException(ErrorCode.INVALID_CONFLICT_TYPE, "Invalid conflict type")
 
         res = self._client.create_database(db_name=db_name, conflict_type=create_database_conflict, comment=comment)
         if res.error_code == ErrorCode.OK:
             return RemoteDatabase(self._client, db_name)
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def list_databases(self):
         res = self._client.list_databases()
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     @name_validity_check("db_name", "DB")
     def show_database(self, db_name: str):
@@ -66,7 +66,7 @@ class RemoteThriftInfinityConnection(InfinityConnection, ABC):
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     @name_validity_check("db_name", "DB")
     def drop_database(self, db_name: str, conflict_type: ConflictType = ConflictType.Error):
@@ -76,13 +76,13 @@ class RemoteThriftInfinityConnection(InfinityConnection, ABC):
         elif conflict_type == ConflictType.Ignore:
             drop_database_conflict = ttypes.DropConflict.Ignore
         else:
-            raise InfinityException(ErrorCode.INVALID_CONFLICT_TYPE, "Invalid conflict type")
+            raise hybridsearchException(ErrorCode.INVALID_CONFLICT_TYPE, "Invalid conflict type")
 
         res = self._client.drop_database(db_name=db_name, conflict_type=drop_database_conflict)
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     @name_validity_check("db_name", "DB")
     def get_database(self, db_name: str):
@@ -90,28 +90,28 @@ class RemoteThriftInfinityConnection(InfinityConnection, ABC):
         if res.error_code == ErrorCode.OK:
             return RemoteDatabase(self._client, db_name)
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def show_current_node(self):
         res = self._client.show_current_node()
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def cleanup(self):
         res = self._client.cleanup()
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
         
     def optimize(self, db_name: str, table_name: str, optimize_opt: ttypes.OptimizeOptions):
         res = self._client.optimize(db_name, table_name, optimize_opt)
         if res.error_code == ErrorCode.OK:
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     def test_command(self, command_content: str):
         command = ttypes.CommandRequest()
@@ -135,7 +135,7 @@ class RemoteThriftInfinityConnection(InfinityConnection, ABC):
             self._is_connected = False
             return res
         else:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
 
     @property
     def client(self):

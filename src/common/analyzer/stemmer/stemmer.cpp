@@ -38,7 +38,7 @@ import stl;
 
 module stemmer;
 
-namespace infinity {
+namespace hybridsearch {
 
 #ifdef __cplusplus
 
@@ -157,4 +157,4 @@ bool Stemmer::Stem(const String &term, String &resultWord) {
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

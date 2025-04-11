@@ -24,9 +24,9 @@ import blockmax_leaf_iterator;
 import multi_doc_iterator;
 import internal_types;
 import logger;
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 BlockMaxWandIterator::~BlockMaxWandIterator() {
     if (SHOULD_LOG_TRACE()) {
@@ -274,4 +274,4 @@ u32 BlockMaxWandIterator::MatchCount() const {
     return count;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

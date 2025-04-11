@@ -18,7 +18,7 @@
 #include <cmath>
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 // ax + by + c = 0 to represent a line
 struct LineType {
@@ -50,4 +50,4 @@ struct LineType {
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

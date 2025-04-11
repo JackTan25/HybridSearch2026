@@ -21,12 +21,12 @@ import base_expression;
 
 import bind_context;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import parsed_expr;
 import knn_expr;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 SharedPtr<BaseExpression> JoinBinder::BuildExpression(const ParsedExpr &expr, BindContext *bind_context_ptr, i64 depth, bool root) {
     SharedPtr<BaseExpression> result;
@@ -49,4 +49,4 @@ SharedPtr<BaseExpression> JoinBinder::BuildKnnExpr(const KnnExpr &, BindContext 
     return nullptr;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

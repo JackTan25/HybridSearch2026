@@ -19,7 +19,7 @@
 #include "expr/constant_expr.h"
 #include "table_reference/base_table_reference.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 class SelectStatement;
 
@@ -71,4 +71,4 @@ public:
     bool total_hits_count_flag_{false};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

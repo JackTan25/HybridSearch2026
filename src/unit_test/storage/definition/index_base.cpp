@@ -24,11 +24,11 @@ import index_full_text;
 
 import statement_common;
 
-using namespace infinity;
+using namespace hybridsearch;
 class IndexBaseTest : public BaseTest {};
 
 TEST_F(IndexBaseTest, ivf_readwrite) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     Vector<String> columns{"col1"};
     Vector<InitParameter *> parameters;
@@ -59,7 +59,7 @@ TEST_F(IndexBaseTest, ivf_readwrite) {
 }
 
 TEST_F(IndexBaseTest, hnsw_readwrite) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     Vector<String> columns{"col1", "col2"};
     Vector<InitParameter *> parameters;
@@ -92,7 +92,7 @@ TEST_F(IndexBaseTest, hnsw_readwrite) {
 }
 
 TEST_F(IndexBaseTest, full_text_readwrite) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     Vector<String> columns{"col1", "col2"};
     Vector<InitParameter *> parameters;

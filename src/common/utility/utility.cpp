@@ -25,7 +25,7 @@ import stl;
 import third_party;
 import default_values;
 
-namespace infinity::Utility {
+namespace hybridsearch::Utility {
 
 SizeT NextPowerOfTwo(SizeT input) {
     --input;
@@ -71,9 +71,9 @@ String FormatTimeInfo(u64 seconds) {
     return fmt::format("{}h", seconds);
 }
 
-} // namespace infinity::Utility
+} // namespace hybridsearch::Utility
 
-namespace infinity {
+namespace hybridsearch {
 
 IdentifierValidationStatus IdentifierValidation(const String &identifier) {
     if (identifier.empty()) {
@@ -153,4 +153,4 @@ String CalcMD5(const String& input_file) {
     return md5;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

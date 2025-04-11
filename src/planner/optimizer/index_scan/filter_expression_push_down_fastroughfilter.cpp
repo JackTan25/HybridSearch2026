@@ -26,11 +26,11 @@ import logical_type;
 import internal_types;
 import function_expression;
 import filter_expression_push_down_helper;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import column_expression;
 
-namespace infinity {
+namespace hybridsearch {
 
 class FastRoughFilterEvaluatorTrue final : public FastRoughFilterEvaluator {
 public:
@@ -413,4 +413,4 @@ UniquePtr<FastRoughFilterEvaluator> FilterExpressionPushDown::PushDownToFastRoug
     return FastRoughFilterExpressionPushDownMethod::GetFastRoughFilter(expression);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

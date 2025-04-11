@@ -19,7 +19,7 @@ module extract;
 import stl;
 import catalog;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import scalar_function;
 import scalar_function_set;
 
@@ -29,7 +29,7 @@ import internal_types;
 import data_type;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct ExtractYearFunction {
     template <typename TA, typename TB>
@@ -297,4 +297,4 @@ void RegisterExtractFunction(const UniquePtr<Catalog> &catalog_ptr) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

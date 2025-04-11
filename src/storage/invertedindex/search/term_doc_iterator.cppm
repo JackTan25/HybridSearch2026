@@ -29,7 +29,7 @@ import third_party;
 import parse_fulltext_options;
 import blockmax_leaf_iterator;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class TermDocIterator final : public BlockMaxLeafIterator {
 public:
@@ -130,4 +130,4 @@ private:
     u32 block_skip_cnt_inner_ = 0;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

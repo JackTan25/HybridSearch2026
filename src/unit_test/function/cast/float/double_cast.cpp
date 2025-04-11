@@ -15,14 +15,14 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 
 import function_set;
 import aggregate_function_set;
@@ -40,7 +40,7 @@ import internal_types;
 import logical_type;
 import data_type;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class DoubleCastTest : public BaseTest {
     void SetUp() override {}
@@ -49,7 +49,7 @@ class DoubleCastTest : public BaseTest {
 };
 
 TEST_F(DoubleCastTest, double_cast0) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     // DoubleT to DoubleT, throw exception
     {
@@ -255,7 +255,7 @@ TEST_F(DoubleCastTest, double_cast0) {
 }
 
 TEST_F(DoubleCastTest, double_cast1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> source_type = MakeShared<DataType>(LogicalType::kDouble);
     SharedPtr<ColumnVector> col_source = MakeShared<ColumnVector>(source_type);

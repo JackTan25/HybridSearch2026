@@ -1,16 +1,16 @@
 import os
 import pandas as pd
-import infinity
-import infinity.index as index
+import hybridsearch
+import hybridsearch.index as index
 from numpy import dtype
-from infinity.errors import ErrorCode
-from infinity.common import ConflictType, SortType
+from hybridsearch.errors import ErrorCode
+from hybridsearch.common import ConflictType, SortType
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 
 
-infinity_obj = infinity.connect(infinity.common.NetworkAddress("127.0.0.1", 23817))
-db_obj = infinity_obj.get_database("default_db")
+hybridsearch_obj = hybridsearch.connect(hybridsearch.common.NetworkAddress("127.0.0.1", 23817))
+db_obj = hybridsearch_obj.get_database("default_db")
 db_obj.drop_table("function_example", ConflictType.Ignore)
 db_obj.create_table("function_example",
                     {"c1": {"type": "varchar", "constraints": ["primary key", "not null"]},
@@ -153,4 +153,4 @@ if extra_result is not None:
 
 res = db_obj.drop_table("function_example")
 
-infinity_obj.disconnect()
+hybridsearch_obj.disconnect()

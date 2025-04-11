@@ -28,7 +28,7 @@ import default_values;
 import buffer_manager;
 import block_column_entry;
 import block_column_iter;
-import infinity_exception;
+import hybridsearch_exception;
 import secondary_index_data;
 import chunk_index_entry;
 import segment_index_entry;
@@ -38,7 +38,7 @@ import logger;
 import base_memindex;
 import memindex_tracer;
 
-namespace infinity {
+namespace hybridsearch {
 
 constexpr u32 map_memory_bloat_factor = 3;
 
@@ -188,4 +188,4 @@ SecondaryIndexInMem::NewSecondaryIndexInMem(const SharedPtr<ColumnDef> &column_d
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

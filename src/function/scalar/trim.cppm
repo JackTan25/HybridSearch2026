@@ -4,10 +4,10 @@ import stl;
 
 export module trim;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 
 export void RegisterTrimFunction(const UniquePtr<Catalog> &catalog_ptr);
 
-} // namespace infinity
+} // namespace hybridsearch

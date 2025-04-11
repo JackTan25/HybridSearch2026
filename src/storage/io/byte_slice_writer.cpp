@@ -7,9 +7,9 @@ import stl;
 import byte_slice;
 import file_writer;
 import file_reader;
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 ByteSliceWriter::ByteSliceWriter(u32 min_slice_size)
     : last_slice_size_(min_slice_size - ByteSlice::GetHeadSize()), is_own_slice_list_(true), allocated_size_(0) {
@@ -119,4 +119,4 @@ void ByteSliceWriter::SnapShot(ByteSliceWriter &byte_slice_writer) const {
     byte_slice_writer.allocated_size_ = allocated_size_;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

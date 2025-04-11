@@ -28,7 +28,7 @@ import unnest_expression;
 import reference_expression;
 import column_expression;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<ColumnBinding> LogicalUnnest::GetColumnBindings() const {
     Vector<ColumnBinding> result = LogicalCommonFunctionUsingLoadMeta::GetColumnBindings(*this);
@@ -94,4 +94,4 @@ String LogicalUnnest::ToString(i64 &space) const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

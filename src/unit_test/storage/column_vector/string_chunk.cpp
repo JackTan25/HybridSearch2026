@@ -15,22 +15,22 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import logger;
 import heap_chunk;
 import third_party;
 import stl;
 import global_resource_usage;
-import infinity_context;
+import hybridsearch_context;
 import default_values;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class StringChunkTest : public BaseTest {};
 
 TEST_F(StringChunkTest, string_chunk_a) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     StringHeapMgr string_chunk_mgr;
 

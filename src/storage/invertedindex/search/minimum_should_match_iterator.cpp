@@ -23,9 +23,9 @@ import index_defines;
 import multi_doc_iterator;
 import internal_types;
 import logger;
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 MinimumShouldMatchIterator::MinimumShouldMatchIterator(Vector<UniquePtr<DocIterator>> &&iterators, const u32 minimum_should_match)
     : MultiDocIterator(std::move(iterators)), minimum_should_match_(minimum_should_match) {
@@ -200,4 +200,4 @@ u32 MinimumShouldMatchIterator::PopFromTailHeap() {
     return tail_heap_[--tail_size_];
 }
 
-} // namespace infinity
+} // namespace hybridsearch

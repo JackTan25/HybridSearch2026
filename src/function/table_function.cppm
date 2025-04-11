@@ -24,7 +24,7 @@ import function_data;
 import data_block;
 import logical_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 class QueryContext;
 
@@ -46,4 +46,4 @@ public:
 private:
     Vector<LogicalType> parameter_types_;
 };
-} // namespace infinity
+} // namespace hybridsearch

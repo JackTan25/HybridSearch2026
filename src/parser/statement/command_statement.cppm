@@ -18,24 +18,24 @@ module;
 
 export module command_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::CommandStatement;
-export using infinity::CommandInfo;
-export using infinity::CommandType;
-export using infinity::SetVarType;
-export using infinity::ExportType;
-export using infinity::SetScope;
-export using infinity::SetCmd;
-export using infinity::UseCmd;
-export using infinity::CheckTable;
-export using infinity::ExportCmd;
-export using infinity::LockCmd;
-export using infinity::UnlockCmd;
-export using infinity::CleanupCmd;
-export using infinity::TestCmd;
-export using infinity::SnapshotCmd;
-export using infinity::SnapshotOp;
-export using infinity::SnapshotScope;
+export using hybridsearch::CommandStatement;
+export using hybridsearch::CommandInfo;
+export using hybridsearch::CommandType;
+export using hybridsearch::SetVarType;
+export using hybridsearch::ExportType;
+export using hybridsearch::SetScope;
+export using hybridsearch::SetCmd;
+export using hybridsearch::UseCmd;
+export using hybridsearch::CheckTable;
+export using hybridsearch::ExportCmd;
+export using hybridsearch::LockCmd;
+export using hybridsearch::UnlockCmd;
+export using hybridsearch::CleanupCmd;
+export using hybridsearch::TestCmd;
+export using hybridsearch::SnapshotCmd;
+export using hybridsearch::SnapshotOp;
+export using hybridsearch::SnapshotScope;
 
-} // namespace infinity
+} // namespace hybridsearch

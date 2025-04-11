@@ -22,7 +22,7 @@ import stl;
 import index_defines;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 constexpr float k1 = 1.2F;
 constexpr float b = 0.75F;
@@ -41,4 +41,4 @@ void BM25Ranker::AddPhraseParam(float tf, u64 df, float avg_column_len, u32 colu
     score_ += smooth_idf * smooth_tf * weight;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

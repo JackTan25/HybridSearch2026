@@ -14,11 +14,11 @@
 
 from enum import Enum
 
-from infinity_embedded.common import InfinityException
+from hybridsearch_embedded.common import hybridsearchException
 
-from infinity_embedded.embedded_infinity_ext import IndexType as LocalIndexType, WrapIndexInfo
-from infinity_embedded.embedded_infinity_ext import InitParameter as LocalInitParameter
-from infinity_embedded.errors import ErrorCode
+from hybridsearch_embedded.embedded_hybridsearch_ext import IndexType as LocalIndexType, WrapIndexInfo
+from hybridsearch_embedded.embedded_hybridsearch_ext import InitParameter as LocalInitParameter
+from hybridsearch_embedded.errors import ErrorCode
 
 
 class IndexType(Enum):
@@ -47,7 +47,7 @@ class IndexType(Enum):
             case IndexType.DiskAnn:
                 return LocalIndexType.kDiskAnn
             case _:
-                raise InfinityException(ErrorCode.INVALID_INDEX_TYPE, "Unknown index type")
+                raise hybridsearchException(ErrorCode.INVALID_INDEX_TYPE, "Unknown index type")
 
 
 class InitParameter:
@@ -76,7 +76,7 @@ class IndexInfo:
             if isinstance(params, dict):
                 self.params = params
             else:
-                raise InfinityException(ErrorCode.INVALID_INDEX_PARAM, f"{params} should be dictionary type")
+                raise hybridsearchException(ErrorCode.INVALID_INDEX_PARAM, f"{params} should be dictionary type")
         else:
             self.params = None
 
@@ -106,7 +106,7 @@ class IndexInfo:
                     local_init_parameter.param_value = value
                     index_param_list.append(local_init_parameter)
                 else:
-                    raise InfinityException(ErrorCode.INVALID_INDEX_PARAM, f"{value} should be string type")
+                    raise hybridsearchException(ErrorCode.INVALID_INDEX_PARAM, f"{value} should be string type")
 
         index_info_to_use.index_param_list = index_param_list
         return index_info_to_use

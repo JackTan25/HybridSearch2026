@@ -25,7 +25,7 @@ import query_context;
 
 module plan_fragment;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PlanFragment::SetSourceNode(QueryContext *query_context,
                                  SourceType source_type,
@@ -88,4 +88,4 @@ SizeT PlanFragment::GetStartFragments(Vector<PlanFragment *> &leaf_fragments) {
     return all_fragment_n;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

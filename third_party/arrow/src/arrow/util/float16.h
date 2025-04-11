@@ -78,8 +78,8 @@ class ARROW_EXPORT Float16 {
 
   /// \brief Return true if the value is NaN
   constexpr bool is_nan() const { return (bits_ & 0x7fff) > 0x7c00; }
-  /// \brief Return true if the value is positive/negative infinity
-  constexpr bool is_infinity() const { return (bits_ & 0x7fff) == 0x7c00; }
+  /// \brief Return true if the value is positive/negative hybridsearch
+  constexpr bool is_hybridsearch() const { return (bits_ & 0x7fff) == 0x7c00; }
   /// \brief Return true if the value is finite and not NaN
   constexpr bool is_finite() const { return (bits_ & 0x7c00) != 0x7c00; }
   /// \brief Return true if the value is positive/negative zero
@@ -196,14 +196,14 @@ class std::numeric_limits<arrow::util::Float16> {
  public:
   static constexpr bool is_specialized = true;
   static constexpr bool is_signed = true;
-  static constexpr bool has_infinity = true;
+  static constexpr bool has_hybridsearch = true;
   static constexpr bool has_quiet_NaN = true;
 
   static constexpr T min() { return T::FromBits(0b0000010000000000); }
   static constexpr T max() { return T::FromBits(0b0111101111111111); }
   static constexpr T lowest() { return -max(); }
 
-  static constexpr T infinity() { return T::FromBits(0b0111110000000000); }
+  static constexpr T hybridsearch() { return T::FromBits(0b0111110000000000); }
 
   static constexpr T quiet_NaN() { return T::FromBits(0b0111111111111111); }
 };

@@ -21,18 +21,18 @@ module cluster_manager;
 import stl;
 import status;
 import config;
-import infinity_context;
+import hybridsearch_context;
 import storage;
 import logger;
-import infinity_exception;
+import hybridsearch_exception;
 import wal_manager;
 import admin_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
 Status ClusterManager::InitAsLeader(const String &node_name) {
 
-    Config *config_ptr = InfinityContext::instance().config();
+    Config *config_ptr = hybridsearchContext::instance().config();
     auto now = std::chrono::system_clock::now();
     auto time_since_epoch = now.time_since_epoch();
 
@@ -204,7 +204,7 @@ Status ClusterManager::RemoveNodeInfo(const String &node_name) {
         return Status::InvalidNodeRole(fmt::format("Can't remove current node: {}", node_name));
     }
 
-    NodeRole server_role = InfinityContext::instance().GetServerRole();
+    NodeRole server_role = hybridsearchContext::instance().GetServerRole();
     if (server_role != NodeRole::kLeader) {
         return Status::InvalidNodeRole(fmt::format("Can't remove node in {} mode", ToString(server_role)));
     }
@@ -297,13 +297,13 @@ Status ClusterManager::UpdateNodeByLeader(const String &node_name, UpdateNodeOp 
 }
 
 Status ClusterManager::UpdateNodeInfoByHeartBeat(const SharedPtr<NodeInfo> &non_leader_node,
-                                                 Vector<infinity_peer_server::NodeInfo> &other_nodes,
+                                                 Vector<hybridsearch_peer_server::NodeInfo> &other_nodes,
                                                  i64 &leader_term,
-                                                 infinity_peer_server::NodeStatus::type &sender_status) {
+                                                 hybridsearch_peer_server::NodeStatus::type &sender_status) {
     // Used by leader
     std::unique_lock<std::mutex> cluster_lock(cluster_mutex_);
     if (current_node_role_ != NodeRole::kLeader) {
-        sender_status = infinity_peer_server::NodeStatus::type::kRemoved;
+        sender_status = hybridsearch_peer_server::NodeStatus::type::kRemoved;
         return Status::InvalidNodeRole(fmt::format("Leader node is already switch to {}", ToString(current_node_role_)));
     }
 
@@ -319,7 +319,7 @@ Status ClusterManager::UpdateNodeInfoByHeartBeat(const SharedPtr<NodeInfo> &non_
             if (other_node_ip != non_leader_node->node_ip() or other_node_port != non_leader_node->node_port()) {
                 String error_message =
                     fmt::format("Node {}, IP address: {} or port: {} is changed.", other_node_name, other_node_ip, other_node->node_port());
-                sender_status = infinity_peer_server::NodeStatus::type::kTimeout;
+                sender_status = hybridsearch_peer_server::NodeStatus::type::kTimeout;
                 return Status::NodeInfoUpdated(ToString(other_node->node_role()));
             }
             // Found the node
@@ -332,11 +332,11 @@ Status ClusterManager::UpdateNodeInfoByHeartBeat(const SharedPtr<NodeInfo> &non_
                     auto time_since_epoch = now.time_since_epoch();
                     other_node->set_update_ts(std::chrono::duration_cast<std::chrono::seconds>(time_since_epoch).count());
                     other_node->heartbeat_count_increase();
-                    sender_status = infinity_peer_server::NodeStatus::type::kAlive;
+                    sender_status = hybridsearch_peer_server::NodeStatus::type::kAlive;
                     break;
                 }
                 case NodeStatus::kRemoved: {
-                    sender_status = infinity_peer_server::NodeStatus::type::kRemoved;
+                    sender_status = hybridsearch_peer_server::NodeStatus::type::kRemoved;
                     break;
                 }
                 case NodeStatus::kLostConnection: {
@@ -344,7 +344,7 @@ Status ClusterManager::UpdateNodeInfoByHeartBeat(const SharedPtr<NodeInfo> &non_
                                           other_node_name,
                                           other_node_ip,
                                           other_node_port));
-                    sender_status = infinity_peer_server::NodeStatus::type::kLostConnection;
+                    sender_status = hybridsearch_peer_server::NodeStatus::type::kLostConnection;
                     break;
                 }
                 case NodeStatus::kInvalid: {
@@ -354,7 +354,7 @@ Status ClusterManager::UpdateNodeInfoByHeartBeat(const SharedPtr<NodeInfo> &non_
 
             non_leader_node_found = true;
         } else {
-            infinity_peer_server::NodeInfo thrift_node_info;
+            hybridsearch_peer_server::NodeInfo thrift_node_info;
             thrift_node_info.node_name = other_node_name;
             thrift_node_info.node_ip = other_node_ip;
             thrift_node_info.node_port = other_node_port;
@@ -363,15 +363,15 @@ Status ClusterManager::UpdateNodeInfoByHeartBeat(const SharedPtr<NodeInfo> &non_
             NodeRole other_node_role = other_node->node_role();
             switch (other_node_role) {
                 case NodeRole::kLeader: {
-                    thrift_node_info.node_type = infinity_peer_server::NodeType::kLeader;
+                    thrift_node_info.node_type = hybridsearch_peer_server::NodeType::kLeader;
                     break;
                 }
                 case NodeRole::kFollower: {
-                    thrift_node_info.node_type = infinity_peer_server::NodeType::kFollower;
+                    thrift_node_info.node_type = hybridsearch_peer_server::NodeType::kFollower;
                     break;
                 }
                 case NodeRole::kLearner: {
-                    thrift_node_info.node_type = infinity_peer_server::NodeType::kLearner;
+                    thrift_node_info.node_type = hybridsearch_peer_server::NodeType::kLearner;
                     break;
                 }
                 default: {
@@ -382,11 +382,11 @@ Status ClusterManager::UpdateNodeInfoByHeartBeat(const SharedPtr<NodeInfo> &non_
             NodeStatus other_node_status = other_node->node_status();
             switch (other_node_status) {
                 case NodeStatus::kAlive: {
-                    thrift_node_info.node_status = infinity_peer_server::NodeStatus::kAlive;
+                    thrift_node_info.node_status = hybridsearch_peer_server::NodeStatus::kAlive;
                     break;
                 }
                 case NodeStatus::kTimeout: {
-                    thrift_node_info.node_status = infinity_peer_server::NodeStatus::kTimeout;
+                    thrift_node_info.node_status = hybridsearch_peer_server::NodeStatus::kTimeout;
                     break;
                 }
                 default: {
@@ -400,7 +400,7 @@ Status ClusterManager::UpdateNodeInfoByHeartBeat(const SharedPtr<NodeInfo> &non_
     }
 
     if (!non_leader_node_found) {
-        sender_status = infinity_peer_server::NodeStatus::type::kLostConnection;
+        sender_status = hybridsearch_peer_server::NodeStatus::type::kLostConnection;
         return Status::NotRegistered(non_leader_node->node_name());
     }
 
@@ -412,7 +412,7 @@ Status ClusterManager::SyncLogsOnRegistration(const SharedPtr<NodeInfo> &non_lea
 
     // Check leader WAL and get the diff log
     LOG_TRACE("Leader will get the log diff");
-    Storage *storage_ptr = InfinityContext::instance().storage();
+    Storage *storage_ptr = hybridsearchContext::instance().storage();
     WalManager *wal_manager = storage_ptr->wal_manager();
     Vector<SharedPtr<String>> wal_strings = wal_manager->GetDiffWalEntryString(non_leader_node->txn_ts());
 
@@ -536,4 +536,4 @@ Status ClusterManager::GetReadersInfo(Vector<SharedPtr<NodeInfo>> &followers,
     return Status::OK();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

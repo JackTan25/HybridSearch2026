@@ -19,7 +19,7 @@ import stl;
 import emvb_shared_vec;
 import roaring_bitmap;
 
-namespace infinity {
+namespace hybridsearch {
 
 extern template class EMVBSharedVec<u32>;
 class EMVBProductQuantizer;
@@ -117,4 +117,4 @@ private:
     EMVBQueryResultType GetQueryResultT(const f32 *query_ptr, u32 query_embedding_num, auto &&...query_args) const;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

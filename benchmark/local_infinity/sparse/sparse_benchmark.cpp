@@ -19,14 +19,14 @@
 
 import stl;
 import virtual_store;
-import infinity_exception;
+import hybridsearch_exception;
 import compilation_config;
 import third_party;
 import profiler;
 import linscan_alg;
 import sparse_util;
 
-using namespace infinity;
+using namespace hybridsearch;
 using namespace benchmark;
 
 // const f32 error_bound = 1e-6;

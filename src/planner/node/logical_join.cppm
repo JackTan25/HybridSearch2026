@@ -25,7 +25,7 @@ import base_expression;
 import internal_types;
 import join_reference;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalJoin : public LogicalNode {
 public:
@@ -55,4 +55,4 @@ public:
     Vector<SharedPtr<BaseExpression>> conditions_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

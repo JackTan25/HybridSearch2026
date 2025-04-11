@@ -15,7 +15,7 @@
 #include "tuple_mixed_type.h"
 #include "mixed_tuple_value.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 void TupleMixedType::Reset(bool in_constructor) {
     if (in_constructor) {
@@ -41,4 +41,4 @@ void TupleMixedType::Reset(bool in_constructor) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

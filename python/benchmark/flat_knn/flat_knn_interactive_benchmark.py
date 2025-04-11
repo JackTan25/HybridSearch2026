@@ -2,9 +2,9 @@ import os
 import sys
 import inspect
 import time
-import infinity
-from infinity.common import LOCAL_HOST, ConflictType
-from infinity.errors import ErrorCode
+import hybridsearch
+from hybridsearch.common import LOCAL_HOST, ConflictType
+from hybridsearch.errors import ErrorCode
 
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parent_dir = os.path.dirname(current_dir)
@@ -14,10 +14,10 @@ import numpy as np
 import faiss
 
 
-def infinity_import_sift_1m_no_index(path):
-    infinity_obj = infinity.connect(LOCAL_HOST)
-    assert infinity_obj
-    db_obj = infinity_obj.get_database("default_db")
+def hybridsearch_import_sift_1m_no_index(path):
+    hybridsearch_obj = hybridsearch.connect(LOCAL_HOST)
+    assert hybridsearch_obj
+    db_obj = hybridsearch_obj.get_database("default_db")
     assert db_obj
     db_obj.drop_table("sift_benchmark", ConflictType.Ignore)
     db_obj.create_table("sift_benchmark", {"col1": {"type": "vector,128,float"}})
@@ -32,10 +32,10 @@ def infinity_import_sift_1m_no_index(path):
     assert res.error_code == ErrorCode.OK
 
 
-def infinity_import_gist_1m_no_index(path):
-    infinity_obj = infinity.connect(LOCAL_HOST)
-    assert infinity_obj
-    db_obj = infinity_obj.get_database("default_db")
+def hybridsearch_import_gist_1m_no_index(path):
+    hybridsearch_obj = hybridsearch.connect(LOCAL_HOST)
+    assert hybridsearch_obj
+    db_obj = hybridsearch_obj.get_database("default_db")
     assert db_obj
     db_obj.drop_table("gist_benchmark", ConflictType.Ignore)
     db_obj.create_table("gist_benchmark", {"col1": {"type": "vector,960,float"}})
@@ -69,12 +69,12 @@ class FlatKNNBenchmark:
         self.gt_suffix = {"sift_1m": "/sift_groundtruth.ivecs", "gist_1m": "/gist_groundtruth.ivecs"}
         self.query_top_k = {"sift_1m": 100, "gist_1m": 100}
         self.embedding_dim = {"sift_1m": 128, "gist_1m": 960}
-        self.infinity_import_data_func_map = {"sift_1m": infinity_import_sift_1m_no_index,
-                                              "gist_1m": infinity_import_gist_1m_no_index}
+        self.hybridsearch_import_data_func_map = {"sift_1m": hybridsearch_import_sift_1m_no_index,
+                                              "gist_1m": hybridsearch_import_gist_1m_no_index}
         self.faiss_index = {}
 
-    def infinity_import(self, data_set):
-        self.infinity_import_data_func_map[data_set](self.dataset_path_map[data_set] + self.data_suffix[data_set])
+    def hybridsearch_import(self, data_set):
+        self.hybridsearch_import_data_func_map[data_set](self.dataset_path_map[data_set] + self.data_suffix[data_set])
 
     def faiss_import(self, data_set):
         start = time.time()
@@ -87,7 +87,7 @@ class FlatKNNBenchmark:
         print(self.faiss_index[data_set].ntotal)
         print(f"faiss import cost time: {dur} s")
 
-    def infinity_benchmark_flat_knn(self, data_set):
+    def hybridsearch_benchmark_flat_knn(self, data_set):
         threads = int(input("Enter number of threads:\n"))
         rounds = int(input("Enter number of rounds:\n"))
         benchmark(threads, rounds, data_set, 200, True, self.dataset_path_map[data_set])
@@ -150,7 +150,7 @@ class FlatKNNBenchmark:
                 if new_path:
                     self.dataset_path_map[data_set] = new_path
 
-            client_target = int(input("Enter target: all(0), infinity(1), faiss(2), or exit(3).\n"))
+            client_target = int(input("Enter target: all(0), hybridsearch(1), faiss(2), or exit(3).\n"))
             if client_target == 3:
                 break
             if client_target > 3 or client_target < 0:
@@ -162,12 +162,12 @@ class FlatKNNBenchmark:
                 break
             elif operation[0] == "i":
                 if client_target == 0 or client_target == 1:
-                    self.infinity_import(data_set)
+                    self.hybridsearch_import(data_set)
                 if client_target == 0 or client_target == 2:
                     self.faiss_import(data_set)
             elif operation[0] == "b":
                 if client_target == 0 or client_target == 1:
-                    self.infinity_benchmark_flat_knn(data_set)
+                    self.hybridsearch_benchmark_flat_knn(data_set)
                 if client_target == 0 or client_target == 2:
                     self.faiss_benchmark_flat_knn(data_set)
             else:

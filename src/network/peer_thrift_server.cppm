@@ -19,7 +19,7 @@ export module peer_thrift_server;
 import stl;
 import thrift;
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class PeerThriftServerStatus : u8 {
     kStopped,
@@ -40,4 +40,4 @@ private:
     Atomic<PeerThriftServerStatus> status_{PeerThriftServerStatus::kStopped};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

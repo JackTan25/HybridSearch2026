@@ -25,7 +25,7 @@ import base_expression;
 import internal_types;
 import select_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalSort : public LogicalNode {
 public:
@@ -46,4 +46,4 @@ public:
     Vector<OrderType> order_by_types_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

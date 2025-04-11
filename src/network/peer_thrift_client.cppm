@@ -24,17 +24,17 @@ import blocking_queue;
 import peer_task;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 using namespace apache::thrift;
 using namespace apache::thrift::protocol;
 using namespace apache::thrift::transport;
-using namespace infinity_peer_server;
+using namespace hybridsearch_peer_server;
 
 export class PeerClient {
 public:
     PeerClient(const String &from_node_name, const String &ip_addr, i64 port) : from_node_name_(from_node_name), ip_address_(ip_addr), port_(port) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("PeerClient");
 #endif
     }
@@ -84,4 +84,4 @@ private:
     Atomic<u64> peer_task_count_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

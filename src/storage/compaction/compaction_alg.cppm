@@ -20,7 +20,7 @@ import stl;
 import segment_entry;
 import txn;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class CompactionStatus : u8 {
     kDisable,
@@ -73,4 +73,4 @@ protected:
     CompactionStatus status_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

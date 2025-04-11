@@ -141,7 +141,7 @@ export module spinlock;
 
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 /*
  * A simple, small (4-bytes), but unfair rwlock.  Use it when you want
@@ -298,4 +298,4 @@ export struct ScopedTryLock {
     SpinLock &lock_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

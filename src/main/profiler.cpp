@@ -24,9 +24,9 @@ import plan_fragment;
 import operator_state;
 import data_block;
 import logger;
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 void BaseProfiler::Begin() {
     finished_ = false;
@@ -374,4 +374,4 @@ nlohmann::json QueryProfiler::Serialize(const QueryProfiler *profiler) {
     return json;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

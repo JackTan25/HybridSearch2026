@@ -14,11 +14,11 @@
 from abc import ABC, abstractmethod
 from enum import Enum
 
-from infinity import URI
+from hybridsearch import URI
 
 
 # abstract class
-class InfinityConnection(ABC):
+class hybridsearchConnection(ABC):
     def __init__(self, uri):
         self.uri = uri
 

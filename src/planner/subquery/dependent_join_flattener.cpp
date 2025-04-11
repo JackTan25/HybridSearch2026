@@ -22,7 +22,7 @@ import logical_node;
 import logical_node_type;
 import third_party;
 
-import infinity_exception;
+import hybridsearch_exception;
 import logical_aggregate;
 import logical_join;
 import logical_table_scan;
@@ -47,7 +47,7 @@ import join_reference;
 import data_type;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 bool DependentJoinFlattener::DetectCorrelatedExpressions(const SharedPtr<LogicalNode> &logical_node) {
     CorrelatedExpressionsDetector detector(bind_context_ptr_->correlated_column_exprs_);
@@ -358,4 +358,4 @@ SharedPtr<LogicalNode> DependentJoinFlattener::BuildNoCorrelatedInternal(const S
     return cross_product_node;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

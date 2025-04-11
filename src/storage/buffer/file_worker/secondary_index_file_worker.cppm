@@ -21,13 +21,13 @@ import index_file_worker;
 import file_worker;
 
 import index_base;
-import infinity_exception;
+import hybridsearch_exception;
 import default_values;
 import column_def;
 import file_worker_type;
 import persistence_manager;
 
-namespace infinity {
+namespace hybridsearch {
 
 // pgm index
 export class SecondaryIndexFileWorker final : public IndexFileWorker {
@@ -65,4 +65,4 @@ protected:
     const u32 row_count_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

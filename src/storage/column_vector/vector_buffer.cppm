@@ -27,7 +27,7 @@ import sparse_util;
 import sparse_info;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 class BufferManager;
 struct BlockColumnEntry;
@@ -49,13 +49,13 @@ public:
 
 public:
     explicit VectorBuffer() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("VectorBuffer");
 #endif
     }
 
     ~VectorBuffer() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("VectorBuffer");
 #endif
     }
@@ -185,4 +185,4 @@ SizeT VectorBuffer::AppendSparse(const SparseVecRef<DataType, IdxType> &sparse_v
     return file_offset;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

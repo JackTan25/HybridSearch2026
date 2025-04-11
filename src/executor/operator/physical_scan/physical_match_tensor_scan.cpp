@@ -40,7 +40,7 @@ import create_index_info;
 import match_tensor_expr;
 import match_tensor_expression;
 import default_values;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import base_table_ref;
 import load_meta;
@@ -77,7 +77,7 @@ import knn_expression;
 import search_options;
 import result_cache_manager;
 
-namespace infinity {
+namespace hybridsearch {
 
 using AlignedMatchTensorExprHolderT =
     std::pair<std::unique_ptr<void, decltype([](void *ptr) { std::free(ptr); })>, std::unique_ptr<MatchTensorExpression>>;
@@ -1158,4 +1158,4 @@ AlignedMatchTensorExprHolderT GetMatchTensorExprForCalculation(MatchTensorExpres
     return result;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

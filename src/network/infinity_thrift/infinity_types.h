@@ -4,8 +4,8 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
  *  @generated
  */
-#ifndef infinity_TYPES_H
-#define infinity_TYPES_H
+#ifndef hybridsearch_TYPES_H
+#define hybridsearch_TYPES_H
 
 #include <iosfwd>
 
@@ -19,7 +19,7 @@
 #include <memory>
 
 
-namespace infinity_thrift_rpc {
+namespace hybridsearch_thrift_rpc {
 
 struct LogicType {
   enum type {

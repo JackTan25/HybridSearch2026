@@ -55,7 +55,7 @@ import logical_unnest_aggregate;
 import base_expression;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class ExplainLogicalPlan {
 public:
@@ -132,4 +132,4 @@ public:
     static Status Explain(const BaseExpression *base_expression, String &expr_str, bool consider_add_parentheses = false);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

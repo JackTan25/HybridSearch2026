@@ -14,7 +14,7 @@ import operator_state;
 import logical_type;
 import data_block;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class MockCachedNode : public CachedNodeBase {
 public:

@@ -43,13 +43,13 @@ import expression_state;
 import expression_type;
 import reference_expression;
 import in_expression;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import logger;
 import index_defines;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 void ReadDataBlock(DataBlock *output,
                    BufferManager *buffer_mgr,
@@ -172,7 +172,7 @@ void CommonQueryFilter::BuildFilter(u32 task_id) {
         Vector<bool> column_should_load(column_ids.size(), false);
         CollectUsedColumnRef(leftover_filter_.get(), column_should_load);
         db_for_filter->Init(read_column_types);
-        auto bool_column = ColumnVector::Make(MakeShared<infinity::DataType>(LogicalType::kBoolean));
+        auto bool_column = ColumnVector::Make(MakeShared<hybridsearch::DataType>(LogicalType::kBoolean));
         // filter and build bitmask, if filter_expression_ != nullptr
         ExpressionEvaluator expr_evaluator;
         auto block_entry_iter = BlockEntryIter(segment_entry);
@@ -280,4 +280,4 @@ RowID CommonQueryFilter::EqualOrLarger(RowID doc_id) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

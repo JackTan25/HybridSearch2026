@@ -25,11 +25,11 @@ import physical_operator_type;
 import base_expression;
 import data_table;
 import load_meta;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import data_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PhysicalUnnestAggregate : public PhysicalOperator {
 public:
@@ -71,4 +71,4 @@ private:
     SharedPtr<DataTable> input_table_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

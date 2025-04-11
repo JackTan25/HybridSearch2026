@@ -19,7 +19,7 @@ import stl;
 
 export module optimizer_rule;
 
-namespace infinity {
+namespace hybridsearch {
 
 class QueryContext;
 export class OptimizerRule {
@@ -31,4 +31,4 @@ public:
     virtual ~OptimizerRule() = default;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

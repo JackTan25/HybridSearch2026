@@ -23,7 +23,7 @@
 
 #include <memory>
 
-namespace infinity {
+namespace hybridsearch {
 
 class DropStatement : public BaseStatement {
 public:
@@ -36,4 +36,4 @@ public:
     std::shared_ptr<ExtraDDLInfo> drop_info_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

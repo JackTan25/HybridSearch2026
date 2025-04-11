@@ -18,7 +18,7 @@
 #include "parsed_expr.h"
 #include "statement/statement_common.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class SparseMetricType : uint8_t {
     kInnerProduct,
@@ -67,4 +67,4 @@ public:
     std::unique_ptr<ParsedExpr> filter_expr_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

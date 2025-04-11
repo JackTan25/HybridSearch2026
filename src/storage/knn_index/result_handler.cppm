@@ -20,11 +20,11 @@ export module knn_result_handler;
 
 import stl;
 
-import infinity_exception;
+import hybridsearch_exception;
 import roaring_bitmap;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename DistType, typename ID>
 struct CompareMax;
@@ -567,4 +567,4 @@ public:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

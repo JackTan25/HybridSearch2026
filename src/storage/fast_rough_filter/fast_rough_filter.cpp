@@ -23,10 +23,10 @@ import probabilistic_data_filter;
 import min_max_data_filter;
 import logger;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 import filter_expression_push_down_helper;
 
-namespace infinity {
+namespace hybridsearch {
 
 String FastRoughFilter::SerializeToString() const {
     if (HaveMinMaxFilter()) {
@@ -138,4 +138,4 @@ bool FastRoughFilter::LoadFromJsonFile(const nlohmann::json &entry_json) {
     return load_success;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

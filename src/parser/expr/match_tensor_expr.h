@@ -18,7 +18,7 @@
 #include "parsed_expr.h"
 #include <memory>
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class MatchTensorSearchMethod : uint8_t {
     kInvalid,
@@ -49,4 +49,4 @@ public:
     bool ignore_index_ = false;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

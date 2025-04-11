@@ -33,7 +33,7 @@ import cleanup_scanner;
 import snapshot_info;
 import txn;
 
-namespace infinity {
+namespace hybridsearch {
 
 class TxnManager;
 class DBMeta;
@@ -169,4 +169,4 @@ public:
     void MemIndexCommit();
     void MemIndexRecover(BufferManager *buffer_manager, TxnTimeStamp ts);
 };
-} // namespace infinity
+} // namespace hybridsearch

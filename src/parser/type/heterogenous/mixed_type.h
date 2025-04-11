@@ -27,7 +27,7 @@
 #include "tuple_mixed_type.h"
 #include <cstdint>
 
-namespace infinity {
+namespace hybridsearch {
 
 // Not nested data type
 struct __attribute__((packed)) MixedType : public BaseMixedType {
@@ -119,4 +119,4 @@ private:
     static void Move(MixedType &&from, MixedType &to);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

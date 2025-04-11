@@ -21,7 +21,7 @@ import stl;
 import term;
 import analyzer;
 
-namespace infinity {
+namespace hybridsearch {
 
 WhitespaceAnalyzer::WhitespaceAnalyzer(const std::string_view delimiters) {
     delimiters_ = delimiters;
@@ -61,4 +61,4 @@ int WhitespaceAnalyzer::AnalyzeImpl(const Term &input, void *data, HookType func
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -20,7 +20,7 @@ import stl;
 import column_vector;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct BatchInvertTask {
 public:
@@ -33,4 +33,4 @@ public:
     u32 row_count_;
     u32 start_doc_id_;
 };
-} // namespace infinity
+} // namespace hybridsearch

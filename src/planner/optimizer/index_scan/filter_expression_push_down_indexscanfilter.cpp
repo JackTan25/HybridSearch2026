@@ -25,7 +25,7 @@ import internal_types;
 import data_type;
 import logical_type;
 import query_context;
-import infinity_exception;
+import hybridsearch_exception;
 import expression_type;
 import base_expression;
 import function_expression;
@@ -57,7 +57,7 @@ import status;
 import parse_fulltext_options;
 import table_entry;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct ExpressionIndexScanInfo {
     enum class Enum {
@@ -506,7 +506,7 @@ private:
                         RecoverableError(Status::SyntaxError("topn option should not in filter_fulltext"));
                     }
 
-                    auto query_operator_option = FulltextQueryOperatorOption::kInfinitySyntax;
+                    auto query_operator_option = FulltextQueryOperatorOption::khybridsearchSyntax;
                     // option: operator
                     if (iter = search_ops.options_.find("operator"); iter != search_ops.options_.end()) {
                         ToLower(iter->second);
@@ -746,4 +746,4 @@ void FilterExpressionPushDown::BuildFilterFulltextExpression(QueryContext *query
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

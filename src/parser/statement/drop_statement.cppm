@@ -18,8 +18,8 @@ module;
 
 export module drop_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::DropStatement;
+export using hybridsearch::DropStatement;
 
 }

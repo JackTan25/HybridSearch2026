@@ -24,7 +24,7 @@ import logical_type;
 import internal_types;
 import search_options;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class FusionExpression : public BaseExpression {
 public:
@@ -40,4 +40,4 @@ public:
     SharedPtr<MatchTensorExpression> match_tensor_expr_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

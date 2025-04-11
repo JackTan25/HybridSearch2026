@@ -18,13 +18,13 @@ module;
 
 export module column_def;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::ConstraintType;
-export using infinity::ColumnDef;
-export using infinity::ColumnType;
-export using infinity::TableConstraint;
-export using infinity::ConstrainTypeToString;
-export using infinity::StringToConstraintType;
+export using hybridsearch::ConstraintType;
+export using hybridsearch::ColumnDef;
+export using hybridsearch::ColumnType;
+export using hybridsearch::TableConstraint;
+export using hybridsearch::ConstrainTypeToString;
+export using hybridsearch::StringToConstraintType;
 
-} // namespace infinity
+} // namespace hybridsearch

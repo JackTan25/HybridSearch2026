@@ -6,11 +6,11 @@ import sys
 python_executable = sys.executable
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Python cluster test for infinity")
+    parser = argparse.ArgumentParser(description="Python cluster test for hybridsearch")
     parser.add_argument(
-        "--infinity_path",
+        "--hybridsearch_path",
         type=str,
-        default="./build/Debug/src/infinity",
+        default="./build/Debug/src/hybridsearch",
     )
     parser.add_argument(
         "--test_case",
@@ -25,7 +25,7 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
-    infinity_path = args.infinity_path
+    hybridsearch_path = args.hybridsearch_path
     use_sudo = args.use_sudo
 
     current_path = os.getcwd()
@@ -43,7 +43,7 @@ if __name__ == "__main__":
         "pytest",
         "-v",
         test_case,
-        f"--infinity_path={infinity_path}",
+        f"--hybridsearch_path={hybridsearch_path}",
         "-x",
         "-s",
         "-m",

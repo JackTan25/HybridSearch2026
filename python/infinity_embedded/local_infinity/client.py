@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from infinity_embedded.errors import ErrorCode as PyErrorCode
-from infinity_embedded.common import LOCAL_INFINITY_PATH, LOCAL_INFINITY_CONFIG_PATH
-from infinity_embedded.embedded_infinity_ext import *
+from hybridsearch_embedded.errors import ErrorCode as PyErrorCode
+from hybridsearch_embedded.common import LOCAL_hybridsearch_PATH, LOCAL_hybridsearch_CONFIG_PATH
+from hybridsearch_embedded.embedded_hybridsearch_ext import *
 from typing import List
 
 
@@ -44,18 +44,18 @@ class LocalQueryResult:
         self.extra_result = extra_result
 
 
-class LocalInfinityClient:
-    def __init__(self, path: str = LOCAL_INFINITY_PATH, config_path=LOCAL_INFINITY_CONFIG_PATH):
+class LocalhybridsearchClient:
+    def __init__(self, path: str = LOCAL_hybridsearch_PATH, config_path=LOCAL_hybridsearch_CONFIG_PATH):
         self.path = path
-        Infinity.LocalInit(path, config_path)
-        self.client = Infinity.LocalConnect()
+        hybridsearch.LocalInit(path, config_path)
+        self.client = hybridsearch.LocalConnect()
 
     def __del__(self):
         if self.client is not None:
             self.disconnect()
 
     def disconnect(self):
-        Infinity.LocalUnInit()
+        hybridsearch.LocalUnInit()
         self.client = None
         return LocalQueryResult(PyErrorCode.OK, "")
 
@@ -109,7 +109,7 @@ class LocalInfinityClient:
 
     def show_info(self, info_name: str):
         if self.client is None:
-            raise Exception("Local infinity is not connected")
+            raise Exception("Local hybridsearch is not connected")
 
         return self.convert_res(self.client.ShowInfo(info_name))
 
@@ -119,7 +119,7 @@ class LocalInfinityClient:
     def create_table(self, db_name: str, table_name: str, column_defs: list[WrapColumnDef],
                      conflict_type: ConflictType = ConflictType.kError, properties: list = None):
         if self.client is None:
-            raise Exception("Local infinity is not connected")
+            raise Exception("Local hybridsearch is not connected")
         create_table_options = WrapCreateTableOptions()
         create_table_options.conflict_type = conflict_type
         return self.convert_res(self.client.CreateTable(db_name,
@@ -129,30 +129,30 @@ class LocalInfinityClient:
 
     def drop_table(self, db_name: str, table_name: str, conflict_type: ConflictType = ConflictType.kError):
         if self.client is None:
-            raise Exception("Local infinity is not connected")
+            raise Exception("Local hybridsearch is not connected")
         drop_table_options = DropTableOptions()
         drop_table_options.conflict_type = conflict_type
         return self.convert_res(self.client.DropTable(db_name, table_name, drop_table_options))
 
     def get_table(self, db_name: str, table_name: str):
         if self.client is None:
-            raise Exception("Local infinity is not connected")
+            raise Exception("Local hybridsearch is not connected")
         return self.convert_res(self.client.GetTable(db_name, table_name))
 
     def list_tables(self, db_name: str):
         if self.client is None:
-            raise Exception("Local infinity is not connected")
+            raise Exception("Local hybridsearch is not connected")
         return self.convert_res(self.client.ListTables(db_name), has_table_names=True)
 
     def show_table(self, db_name: str, table_name: str):
         if self.client is None:
-            raise Exception("Local infinity is not connected")
+            raise Exception("Local hybridsearch is not connected")
         return self.convert_res(self.client.ShowTable(db_name, table_name))
 
     def create_index(self, db_name: str, table_name: str, index_name: str, index_info: WrapIndexInfo,
                      conflict_type: ConflictType = ConflictType.kError, index_comment: str = ""):
         if self.client is None:
-            raise Exception("Local infinity is not connected")
+            raise Exception("Local hybridsearch is not connected")
         create_index_options = CreateIndexOptions()
         create_index_options.conflict_type = conflict_type
         return self.convert_res(
@@ -160,25 +160,25 @@ class LocalInfinityClient:
 
     def show_index(self, db_name: str, table_name: str, index_name: str):
         if self.client is None:
-            raise Exception("Local infinity is not connected")
+            raise Exception("Local hybridsearch is not connected")
         return self.convert_res(self.client.ShowIndex(db_name, table_name, index_name), has_index_info=True)
 
     def list_indexes(self, db_name: str, table_name: str):
         if self.client is None:
-            raise Exception("Local infinity is not connected")
+            raise Exception("Local hybridsearch is not connected")
         return self.convert_res(self.client.ListTableIndexes(db_name, table_name), has_index_names=True)
 
     def drop_index(self, db_name: str, table_name: str, index_name: str,
                    conflict_type: ConflictType = ConflictType.kError):
         if self.client is None:
-            raise Exception("Local infinity is not connected")
+            raise Exception("Local hybridsearch is not connected")
         drop_index_options = DropIndexOptions()
         drop_index_options.conflict_type = conflict_type
         return self.convert_res(self.client.DropIndex(db_name, table_name, index_name, drop_index_options))
 
     def insert(self, db_name: str, table_name: str, fields):
         if self.client is None:
-            raise Exception("Local infinity is not connected")
+            raise Exception("Local hybridsearch is not connected")
         retry = 0
         inner_ex = None
         while retry <= 2:
@@ -192,12 +192,12 @@ class LocalInfinityClient:
 
     def import_data(self, db_name: str, table_name: str, file_name: str, import_options):
         if self.client is None:
-            raise Exception("Local infinity is not connected")
+            raise Exception("Local hybridsearch is not connected")
         return self.convert_res(self.client.Import(db_name, table_name, file_name, import_options))
 
     def export_data(self, db_name: str, table_name: str, file_name: str, export_options, columns: list[str]):
         if self.client is None:
-            raise Exception("Local infinity is not connected")
+            raise Exception("Local hybridsearch is not connected")
         return self.convert_res(self.client.Export(db_name, table_name, columns, file_name, export_options))
 
     def search(self,
@@ -214,7 +214,7 @@ class LocalInfinityClient:
                limit_expr: WrapParsedExpr = None,
                offset_expr: WrapParsedExpr = None):
         if self.client is None:
-            raise Exception("Local infinity is not connected")
+            raise Exception("Local hybridsearch is not connected")
         return self.convert_res(self.client.Search(db_name,
                                                    table_name,
                                                    select_list,
@@ -243,7 +243,7 @@ class LocalInfinityClient:
                 limit_expr: WrapParsedExpr = None,
                 offset_expr: WrapParsedExpr = None):
         if self.client is None:
-            raise Exception("Local infinity is not connected")
+            raise Exception("Local hybridsearch is not connected")
         return self.convert_res(self.client.Explain(db_name,
                                                     table_name,
                                                     explain_type,
@@ -260,52 +260,52 @@ class LocalInfinityClient:
 
     def delete(self, db_name: str, table_name: str, where_expr):
         if self.client is None:
-            raise Exception("Local infinity is not connected")
+            raise Exception("Local hybridsearch is not connected")
         return self.convert_res(self.client.Delete(db_name, table_name, where_expr), has_deleted_rows=True)
 
     def update(self, db_name: str, table_name: str, where_expr, update_expr_array):
         if self.client is None:
-            raise Exception("Local infinity is not connected")
+            raise Exception("Local hybridsearch is not connected")
         return self.convert_res(self.client.Update(db_name, table_name, where_expr, update_expr_array))
 
     def show_tables(self, db_name: str):
         if self.client is None:
-            raise Exception("Local infinity is not connected")
+            raise Exception("Local hybridsearch is not connected")
         return self.convert_res(self.client.ShowTables(db_name), has_result_data=True)
 
     def show_columns(self, db_name: str, table_name: str):
         if self.client is None:
-            raise Exception("Local infinity is not connected")
+            raise Exception("Local hybridsearch is not connected")
         return self.convert_res(self.client.ShowColumns(db_name, table_name), has_result_data=True)
 
     def show_segments(self, db_name: str, table_name: str):
         if self.client is None:
-            raise Exception("Local infinity is not connected")
+            raise Exception("Local hybridsearch is not connected")
         return self.convert_res(self.client.ShowSegments(db_name, table_name))
 
     def show_segment(self, db_name: str, table_name: str, segment_id: int):
         if self.client is None:
-            raise Exception("Local infinity is not connected")
+            raise Exception("Local hybridsearch is not connected")
         return self.convert_res(self.client.ShowSegment(db_name, table_name, segment_id))
 
     def show_blocks(self, db_name: str, table_name: str, segment_id: int):
         if self.client is None:
-            raise Exception("Local infinity is not connected")
+            raise Exception("Local hybridsearch is not connected")
         return self.convert_res(self.client.ShowBlocks(db_name, table_name, segment_id))
 
     def show_block(self, db_name: str, table_name: str, segment_id: int, block_id: int):
         if self.client is None:
-            raise Exception("Local infinity is not connected")
+            raise Exception("Local hybridsearch is not connected")
         return self.convert_res(self.client.ShowBlock(db_name, table_name, segment_id, block_id))
 
     def show_block_column(self, db_name: str, table_name: str, segment_id: int, block_id: int, column_id: int):
         if self.client is None:
-            raise Exception("Local infinity is not connected")
+            raise Exception("Local hybridsearch is not connected")
         return self.convert_res(self.client.ShowBlockColumn(db_name, table_name, segment_id, block_id, column_id))
 
     def show_current_node(self):
         if self.client is None:
-            raise Exception("Local infinity is not connected")
+            raise Exception("Local hybridsearch is not connected")
         return self.convert_res(self.client.ShowCurrentNode())
 
     def optimize(self, db_name: str, table_name: str, optimize_opt: WrapOptimizeOptions):

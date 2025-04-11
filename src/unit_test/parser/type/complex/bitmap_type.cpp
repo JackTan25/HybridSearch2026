@@ -15,23 +15,23 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 import parser_assert;
 
 #if 0
 
-using namespace infinity;
+using namespace hybridsearch;
 class BitmapTypeTest : public BaseTest {};
 
 TEST_F(BitmapTypeTest, bitmap1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     // default constructor, Initialize, SetBit, GetBit
     BitmapT bt1;
@@ -176,7 +176,7 @@ TEST_F(BitmapTypeTest, bitmap1) {
 }
 
 TEST_F(BitmapTypeTest, bitmap2) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     // default constructor, Initialize, SetBit, GetBit
     BitmapT bt1;
@@ -321,7 +321,7 @@ TEST_F(BitmapTypeTest, bitmap2) {
 }
 
 TEST_F(BitmapTypeTest, bitmap33) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     // default constructor, Initialize, SetBit, GetBit
     BitmapT bt1;
@@ -332,7 +332,7 @@ TEST_F(BitmapTypeTest, bitmap33) {
 }
 
 TEST_F(BitmapTypeTest, bitmap34) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     BitmapT bt11;
     bt11.Initialize(100);

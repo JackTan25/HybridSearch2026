@@ -24,7 +24,7 @@
 #include <memory>
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 class CreateStatement : public BaseStatement {
 public:
@@ -37,4 +37,4 @@ public:
     std::shared_ptr<ExtraDDLInfo> create_info_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

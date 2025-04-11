@@ -26,7 +26,7 @@ import memory_indexer;
 import buffer_obj;
 import buffer_handle;
 
-namespace infinity {
+namespace hybridsearch {
 
 FullTextColumnLengthReader::FullTextColumnLengthReader(ColumnIndexReader *reader)
     : index_dir_(reader->index_dir_), chunk_index_entries_(reader->chunk_index_entries_), memory_indexer_(reader->memory_indexer_) {
@@ -63,4 +63,4 @@ u32 FullTextColumnLengthReader::SeekFile(RowID row_id) {
     current_chunk_row_count_ = chunk_index_entries_[current_chunk]->row_count_;
     return column_lengths_[row_id - current_chunk_base_rowid_];
 }
-} // namespace infinity
+} // namespace hybridsearch

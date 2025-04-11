@@ -21,7 +21,7 @@ import stl;
 import mlas_matrix_multiply;
 import vector_distance;
 
-namespace infinity {
+namespace hybridsearch {
 
 #if defined(__AVX2__)
 template <typename ID>
@@ -326,4 +326,4 @@ void search_top_1_simple_without_dis(u32 dimension, u32 nx, const TypeX *x, u32 
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

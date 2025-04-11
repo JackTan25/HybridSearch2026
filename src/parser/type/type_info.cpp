@@ -14,8 +14,8 @@
 
 #include "type_info.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 bool TypeInfo::operator!=(const TypeInfo &other) const { return !operator==(other); }
 
-} // namespace infinity
+} // namespace hybridsearch

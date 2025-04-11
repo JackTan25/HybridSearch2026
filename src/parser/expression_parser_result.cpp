@@ -16,7 +16,7 @@
 
 #include <sstream>
 
-namespace infinity {
+namespace hybridsearch {
 
 ExpressionParserResult::~ExpressionParserResult() {
     if (exprs_ptr_ == nullptr)
@@ -48,4 +48,4 @@ std::string ExpressionParserResult::ToString() {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

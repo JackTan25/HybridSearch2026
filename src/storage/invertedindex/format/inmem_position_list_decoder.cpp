@@ -13,7 +13,7 @@ import skiplist_reader;
 import index_defines;
 module inmem_position_list_decoder;
 
-namespace infinity {
+namespace hybridsearch {
 
 InMemPositionListDecoder::InMemPositionListDecoder(const PostingFormatOption &option) : PositionListDecoder(option), pos_list_buffer_(nullptr) {}
 
@@ -95,4 +95,4 @@ u32 InMemPositionListDecoder::DecodeRecord(pos_t *pos_buffer, u32 pos_buffer_len
 
     return pos_count;
 }
-} // namespace infinity
+} // namespace hybridsearch

@@ -22,7 +22,7 @@ import file_worker;
 import index_base;
 import emvb_index;
 import index_emvb;
-import infinity_exception;
+import hybridsearch_exception;
 import logical_type;
 import embedding_info;
 import create_index_info;
@@ -34,7 +34,7 @@ import file_worker_type;
 import third_party;
 import emvb_product_quantization;
 
-namespace infinity {
+namespace hybridsearch {
 
 EMVBIndexFileWorker::~EMVBIndexFileWorker() {
     if (data_ != nullptr) {
@@ -108,4 +108,4 @@ void EMVBIndexFileWorker::ReadFromFileImpl(SizeT file_size, bool from_spill) {
 
 const EmbeddingInfo *EMVBIndexFileWorker::GetEmbeddingInfo() const { return static_cast<EmbeddingInfo *>(column_def_->type()->type_info().get()); }
 
-} // namespace infinity
+} // namespace hybridsearch

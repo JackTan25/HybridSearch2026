@@ -20,12 +20,12 @@ import dist_func_l2;
 import data_store;
 import vec_store_type;
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 import hnsw_common;
 import virtual_store;
 import local_file_handle;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class HnswLVQTest : public BaseTest {
 public:
@@ -91,7 +91,7 @@ public:
 };
 
 TEST_F(HnswLVQTest, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     auto data = std::make_unique<float[]>(dim_ * vec_n_);
 

@@ -28,7 +28,7 @@ import config;
 import virtual_store;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 Status Snapshot::DropSnapshot(QueryContext *query_context, const String &snapshot_name) {
 
@@ -60,4 +60,4 @@ Status Snapshot::DropSnapshot(QueryContext *query_context, const String &snapsho
     return Status::OK();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

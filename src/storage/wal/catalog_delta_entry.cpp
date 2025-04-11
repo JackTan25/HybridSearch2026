@@ -23,7 +23,7 @@ import serialize;
 import data_block;
 import table_def;
 import index_base;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import parsed_expr;
 import constant_expr;
@@ -31,14 +31,14 @@ import stl;
 import data_type;
 import block_version;
 import create_index_info;
-import infinity_context;
+import hybridsearch_context;
 import index_defines;
 import persistence_manager;
 import defer_op;
 import third_party;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 String CatalogDeltaOpTypeToString(CatalogDeltaOpType op_type) {
     switch (op_type) {
@@ -84,7 +84,7 @@ SizeT CatalogDeltaOperation::GetBaseSizeInBytes() const {
     SizeT size = sizeof(TxnTimeStamp) + sizeof(merge_flag_) + sizeof(TransactionID) + sizeof(TxnTimeStamp);
     size += sizeof(i32) + encode_->size();
 
-    PersistenceManager *pm = InfinityContext::instance().persistence_manager();
+    PersistenceManager *pm = hybridsearchContext::instance().persistence_manager();
     bool use_object_cache = pm != nullptr;
     if (use_object_cache) {
         pm_size_ = addr_serializer_.GetSizeInBytes();
@@ -94,7 +94,7 @@ SizeT CatalogDeltaOperation::GetBaseSizeInBytes() const {
 }
 
 void CatalogDeltaOperation::InitializeAddrSerializer() {
-    PersistenceManager *pm = InfinityContext::instance().persistence_manager();
+    PersistenceManager *pm = hybridsearchContext::instance().persistence_manager();
     bool use_object_cache = pm != nullptr;
     if (use_object_cache) {
         addr_serializer_.Initialize(pm, GetFilePaths());
@@ -108,7 +108,7 @@ void CatalogDeltaOperation::WriteAdvBase(char *&buf) const {
     WriteBufAdv(buf, this->commit_ts_);
     WriteBufAdv(buf, *(this->encode_));
 
-    PersistenceManager *pm = InfinityContext::instance().persistence_manager();
+    PersistenceManager *pm = hybridsearchContext::instance().persistence_manager();
     bool use_object_cache = pm != nullptr;
     if (use_object_cache) {
         char *start = buf;
@@ -128,7 +128,7 @@ void CatalogDeltaOperation::ReadAdvBase(const char *&ptr) {
     commit_ts_ = ReadBufAdv<TxnTimeStamp>(ptr);
     encode_ = MakeUnique<String>(ReadBufAdv<String>(ptr));
 
-    PersistenceManager *pm = InfinityContext::instance().persistence_manager();
+    PersistenceManager *pm = hybridsearchContext::instance().persistence_manager();
     bool use_object_cache = pm != nullptr;
     if (use_object_cache) {
         addr_serializer_.ReadBufAdv(ptr); // discard return value
@@ -1390,4 +1390,4 @@ Vector<CatalogDeltaOpBrief> GlobalCatalogDeltaEntry::GetOperationBriefs() const 
     return res;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

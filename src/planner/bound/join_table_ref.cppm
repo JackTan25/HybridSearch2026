@@ -23,7 +23,7 @@ import base_expression;
 import table_reference;
 import join_reference;
 
-namespace infinity {
+namespace hybridsearch {
 
 class BindContext;
 
@@ -44,4 +44,4 @@ public:
     JoinType join_type_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

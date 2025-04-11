@@ -22,7 +22,7 @@ import scalar_function;
 
 module function_expression;
 
-namespace infinity {
+namespace hybridsearch {
 
 FunctionExpression::FunctionExpression(ScalarFunction function, Vector<SharedPtr<BaseExpression>> arguments)
     : BaseExpression(ExpressionType::kFunction, std::move(arguments)), func_(std::move(function)) {
@@ -91,4 +91,4 @@ bool FunctionExpression::Eq(const BaseExpression &other_base) const {
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

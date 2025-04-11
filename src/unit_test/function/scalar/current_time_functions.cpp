@@ -17,8 +17,8 @@
 
 import stl;
 import base_test;
-import infinity_exception;
-import infinity_context;
+import hybridsearch_exception;
+import hybridsearch_context;
 
 import catalog;
 import logger;
@@ -46,14 +46,14 @@ import scalar_function_set;
 import current_time;
 import third_party;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class CurrentTimeFunctionsTest : public BaseTestParamStr {};
 
 INSTANTIATE_TEST_SUITE_P(TestWithDifferentParams, CurrentTimeFunctionsTest, ::testing::Values(BaseTestParamStr::NULL_CONFIG_PATH));
 
 TEST_P(CurrentTimeFunctionsTest, current_time_func) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     UniquePtr<Catalog> catalog_ptr = MakeUnique<Catalog>();
 

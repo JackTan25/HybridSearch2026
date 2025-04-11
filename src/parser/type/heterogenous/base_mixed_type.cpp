@@ -14,7 +14,7 @@
 
 #include "base_mixed_type.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 static const char *type2name[] = {
     "Invalid",
@@ -34,4 +34,4 @@ std::string BaseMixedType::GetTypeName(MixedValueType type) noexcept {
     return type2name[type_id];
 }
 
-} // namespace infinity
+} // namespace hybridsearch

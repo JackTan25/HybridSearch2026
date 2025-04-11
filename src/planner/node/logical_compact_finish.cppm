@@ -24,7 +24,7 @@ import data_type;
 import base_table_ref;
 import compact_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalCompactFinish : public LogicalNode {
 public:
@@ -46,4 +46,4 @@ public:
     CompactStatementType compact_type_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

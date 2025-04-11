@@ -31,7 +31,7 @@ import logical_match_tensor_scan;
 import internal_types;
 import meta_info;
 
-namespace infinity {
+namespace hybridsearch {
 struct LoadMeta;
 struct BlockIndex;
 struct BlockColumnEntry;
@@ -118,4 +118,4 @@ export void CalculateFusionMatchTensorRerankerScores(Vector<MatchTensorRerankDoc
 // f32, f64, float16, bfloat16 -> f32
 export void *GetAlignedCast(char *src_embedding_ptr, u32 dim, EmbeddingDataType src_embedding_data_type, EmbeddingDataType new_embedding_data_type);
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -52,16 +52,16 @@ import chunk_index_entry;
 import memory_indexer;
 import config;
 import default_values;
-import infinity_context;
+import hybridsearch_context;
 import options;
 import cluster_manager;
 import utility;
 import peer_task;
-import infinity_exception;
+import hybridsearch_exception;
 import node_info;
 import catalog_delta_entry;
 
-namespace infinity {
+namespace hybridsearch {
 
 QueryResult AdminExecutor::Execute(QueryContext *query_context, const AdminStatement *admin_statement) {
 
@@ -850,7 +850,7 @@ QueryResult AdminExecutor::ShowCatalog(QueryContext *query_context, const AdminS
             ++column_id;
             {
                 String file_path = fmt::format("{}/{}/{}",
-                                               InfinityContext::instance().config()->DataDir(),
+                                               hybridsearchContext::instance().config()->DataDir(),
                                                checkpoint_cmd->catalog_path_,
                                                checkpoint_cmd->catalog_name_);
                 SizeT file_size = VirtualStore::GetFileSize(file_path);
@@ -947,7 +947,7 @@ QueryResult AdminExecutor::ShowCatalog(QueryContext *query_context, const AdminS
             ++column_id;
             {
                 String file_path = fmt::format("{}/{}/{}",
-                                               InfinityContext::instance().config()->DataDir(),
+                                               hybridsearchContext::instance().config()->DataDir(),
                                                checkpoint_cmd->catalog_path_,
                                                checkpoint_cmd->catalog_name_);
                 SizeT file_size = VirtualStore::GetFileSize(file_path);
@@ -968,7 +968,7 @@ QueryResult AdminExecutor::ShowCatalog(QueryContext *query_context, const AdminS
             ++column_id;
             {
                 String file_path = fmt::format("{}/{}/{}",
-                                               InfinityContext::instance().config()->DataDir(),
+                                               hybridsearchContext::instance().config()->DataDir(),
                                                checkpoint_cmd->catalog_path_,
                                                checkpoint_cmd->catalog_name_);
                 UniquePtr<CatalogDeltaEntry> catalog_delta_entry = Catalog::LoadFromFileDelta(file_path);
@@ -3007,7 +3007,7 @@ QueryResult AdminExecutor::ListConfigs(QueryContext *query_context, const AdminS
         }
         {
             // option description
-            Value value = Value::MakeVarchar("Infinity version.");
+            Value value = Value::MakeVarchar("hybridsearch version.");
             ValueExpression value_expr(value);
             value_expr.AppendToChunk(output_block_ptr->column_vectors[2]);
         }
@@ -3055,7 +3055,7 @@ QueryResult AdminExecutor::ListConfigs(QueryContext *query_context, const AdminS
         }
         {
             // option name type
-            Value value = Value::MakeVarchar("CPU number used by infinity executor.");
+            Value value = Value::MakeVarchar("CPU number used by hybridsearch executor.");
             ValueExpression value_expr(value);
             value_expr.AppendToChunk(output_block_ptr->column_vectors[2]);
         }
@@ -3097,7 +3097,7 @@ QueryResult AdminExecutor::ListConfigs(QueryContext *query_context, const AdminS
         }
         {
             // option name type
-            Value value = Value::MakeVarchar("Infinity server listen ip address");
+            Value value = Value::MakeVarchar("hybridsearch server listen ip address");
             ValueExpression value_expr(value);
             value_expr.AppendToChunk(output_block_ptr->column_vectors[2]);
         }
@@ -3334,7 +3334,7 @@ QueryResult AdminExecutor::ListConfigs(QueryContext *query_context, const AdminS
         }
     }
 
-    if (InfinityContext::instance().persistence_manager() != nullptr) {
+    if (hybridsearchContext::instance().persistence_manager() != nullptr) {
         {
             {
                 // option name
@@ -3709,7 +3709,7 @@ QueryResult AdminExecutor::ListConfigs(QueryContext *query_context, const AdminS
         }
         {
             // option name type
-            Value value = Value::MakeVarchar("Infinity resource directory");
+            Value value = Value::MakeVarchar("hybridsearch resource directory");
             ValueExpression value_expr(value);
             value_expr.AppendToChunk(output_block_ptr->column_vectors[2]);
         }
@@ -3752,13 +3752,13 @@ QueryResult AdminExecutor::ListVariables(QueryContext *query_context, const Admi
         }
         {
             // option value
-            Value value = Value::MakeVarchar(ToString(InfinityContext::instance().GetServerRole()));
+            Value value = Value::MakeVarchar(ToString(hybridsearchContext::instance().GetServerRole()));
             ValueExpression value_expr(value);
             value_expr.AppendToChunk(output_block_ptr->column_vectors[1]);
         }
         {
             // option description
-            Value value = Value::MakeVarchar("Current infinity server role");
+            Value value = Value::MakeVarchar("Current hybridsearch server role");
             ValueExpression value_expr(value);
             value_expr.AppendToChunk(output_block_ptr->column_vectors[2]);
         }
@@ -3794,7 +3794,7 @@ QueryResult AdminExecutor::ShowVariable(QueryContext *query_context, const Admin
 
     if (variable_name == "role") {
         output_block_ptr->Init(output_column_types);
-        Value value = Value::MakeVarchar(ToString(InfinityContext::instance().GetServerRole()));
+        Value value = Value::MakeVarchar(ToString(hybridsearchContext::instance().GetServerRole()));
         ValueExpression value_expr(value);
         value_expr.AppendToChunk(output_block_ptr->column_vectors[0]);
     } else {
@@ -3811,7 +3811,7 @@ QueryResult AdminExecutor::ShowVariable(QueryContext *query_context, const Admin
 QueryResult AdminExecutor::ListNodes(QueryContext *query_context, const AdminStatement *admin_statement) {
 
     QueryResult query_result;
-    if (!InfinityContext::instance().IsClusterRole()) {
+    if (!hybridsearchContext::instance().IsClusterRole()) {
         query_result.result_table_ = nullptr;
         query_result.status_ = Status::NotSupport("'ADMIN SHOW NODES' only works in cluster mode");
         return query_result;
@@ -3838,7 +3838,7 @@ QueryResult AdminExecutor::ListNodes(QueryContext *query_context, const AdminSta
     output_block_ptr->Init(column_types);
     SizeT row_count = 0;
 
-    Vector<SharedPtr<NodeInfo>> server_nodes = InfinityContext::instance().cluster_manager()->ListNodes();
+    Vector<SharedPtr<NodeInfo>> server_nodes = hybridsearchContext::instance().cluster_manager()->ListNodes();
     for (const auto &server_node : server_nodes) {
         if (output_block_ptr.get() == nullptr) {
             output_block_ptr = DataBlock::MakeUniquePtr();
@@ -3908,7 +3908,7 @@ QueryResult AdminExecutor::ListNodes(QueryContext *query_context, const AdminSta
 QueryResult AdminExecutor::ShowNode(QueryContext *query_context, const AdminStatement *admin_statement) {
 
     QueryResult query_result;
-    if (!InfinityContext::instance().IsClusterRole()) {
+    if (!hybridsearchContext::instance().IsClusterRole()) {
         query_result.result_table_ = nullptr;
         query_result.status_ = Status::NotSupport("SHOW NODE only works in cluster mode");
         return query_result;
@@ -3934,7 +3934,7 @@ QueryResult AdminExecutor::ShowNode(QueryContext *query_context, const AdminStat
     output_block_ptr->Init(column_types);
 
     String node_name = admin_statement->node_name_.value();
-    auto [status, server_node] = InfinityContext::instance().cluster_manager()->GetNodeInfoByName(node_name);
+    auto [status, server_node] = hybridsearchContext::instance().cluster_manager()->GetNodeInfoByName(node_name);
     if (!status.ok()) {
         query_result.result_table_ = nullptr;
         query_result.status_ = std::move(status);
@@ -4035,7 +4035,7 @@ QueryResult AdminExecutor::RemoveNode(QueryContext *query_context, const AdminSt
     String node_name = admin_statement->node_name_.value();
     QueryResult query_result;
 
-    Status status = InfinityContext::instance().cluster_manager()->RemoveNodeInfo(node_name);
+    Status status = hybridsearchContext::instance().cluster_manager()->RemoveNodeInfo(node_name);
 
     if (status.ok()) {
         auto result_table_def_ptr = MakeShared<TableDef>(MakeShared<String>("default_db"), MakeShared<String>("Tables"), nullptr, column_defs);
@@ -4070,8 +4070,8 @@ QueryResult AdminExecutor::ShowCurrentNode(QueryContext *query_context, const Ad
     UniquePtr<DataBlock> output_block_ptr = DataBlock::MakeUniquePtr();
     output_block_ptr->Init(column_types);
 
-    if (InfinityContext::instance().IsClusterRole()) {
-        SharedPtr<NodeInfo> server_node = InfinityContext::instance().cluster_manager()->ThisNode();
+    if (hybridsearchContext::instance().IsClusterRole()) {
+        SharedPtr<NodeInfo> server_node = hybridsearchContext::instance().cluster_manager()->ThisNode();
         {
             SizeT column_id = 0;
             {
@@ -4154,7 +4154,7 @@ QueryResult AdminExecutor::ShowCurrentNode(QueryContext *query_context, const Ad
             }
         }
     } else {
-        NodeRole server_role = InfinityContext::instance().GetServerRole();
+        NodeRole server_role = hybridsearchContext::instance().GetServerRole();
         {
             SizeT column_id = 0;
             {
@@ -4181,12 +4181,12 @@ QueryResult AdminExecutor::ShowCurrentNode(QueryContext *query_context, const Ad
 
             ++column_id;
             {
-                bool infinity_started = InfinityContext::instance().InfinityContextStarted();
-                String infinity_status("started");
-                if (!infinity_started && server_role != NodeRole::kAdmin) {
-                    infinity_status = "starting";
+                bool hybridsearch_started = hybridsearchContext::instance().hybridsearchContextStarted();
+                String hybridsearch_status("started");
+                if (!hybridsearch_started && server_role != NodeRole::kAdmin) {
+                    hybridsearch_status = "starting";
                 }
-                Value value = Value::MakeVarchar(infinity_status);
+                Value value = Value::MakeVarchar(hybridsearch_status);
                 ValueExpression value_expr(value);
                 value_expr.AppendToChunk(output_block_ptr->column_vectors[column_id]);
             }
@@ -4205,9 +4205,9 @@ QueryResult AdminExecutor::SetRole(QueryContext *query_context, const AdminState
 
     NodeRole target_node_role = admin_statement->node_role_.value();
     QueryResult query_result;
-    NodeRole current_node_role = InfinityContext::instance().GetServerRole();
+    NodeRole current_node_role = hybridsearchContext::instance().GetServerRole();
     if (current_node_role == target_node_role) {
-        LOG_INFO(fmt::format("Infinity is already the role of {}", ToString(current_node_role)));
+        LOG_INFO(fmt::format("hybridsearch is already the role of {}", ToString(current_node_role)));
         auto result_table_def_ptr = MakeShared<TableDef>(MakeShared<String>("default_db"), MakeShared<String>("Tables"), nullptr, column_defs);
         query_result.result_table_ = MakeShared<DataTable>(result_table_def_ptr, TableType::kDataTable);
         query_result.status_ = Status::OK();
@@ -4216,12 +4216,12 @@ QueryResult AdminExecutor::SetRole(QueryContext *query_context, const AdminState
     Status status;
     switch (target_node_role) {
         case NodeRole::kAdmin: {
-            status = InfinityContext::instance().ChangeServerRole(NodeRole::kAdmin);
+            status = hybridsearchContext::instance().ChangeServerRole(NodeRole::kAdmin);
             LOG_INFO("Start in ADMIN mode");
             break;
         }
         case NodeRole::kStandalone: {
-            status = InfinityContext::instance().ChangeServerRole(NodeRole::kStandalone);
+            status = hybridsearchContext::instance().ChangeServerRole(NodeRole::kStandalone);
             LOG_INFO("Start in STANDALONE mode");
             break;
         }
@@ -4247,7 +4247,7 @@ QueryResult AdminExecutor::SetRole(QueryContext *query_context, const AdminState
                 query_result.status_ = status;
                 return query_result;
             }
-            status = InfinityContext::instance().ChangeServerRole(NodeRole::kLeader, false, node_name);
+            status = hybridsearchContext::instance().ChangeServerRole(NodeRole::kLeader, false, node_name);
             if (!status.ok()) {
                 LOG_INFO("Fail to change to LEADER role");
                 if (status.code() == ErrorCode::kCantSwitchRole) {
@@ -4255,7 +4255,7 @@ QueryResult AdminExecutor::SetRole(QueryContext *query_context, const AdminState
                     break;
                 }
 
-                Status restore_status = InfinityContext::instance().ChangeServerRole(NodeRole::kAdmin);
+                Status restore_status = hybridsearchContext::instance().ChangeServerRole(NodeRole::kAdmin);
                 if (!restore_status.ok()) {
                     UnrecoverableError(fmt::format("Fail to change node role to LEADER, then fail to restore to ADMIN."));
                 }
@@ -4295,11 +4295,11 @@ QueryResult AdminExecutor::SetRole(QueryContext *query_context, const AdminState
                 return query_result;
             }
 
-            status = InfinityContext::instance().ChangeServerRole(NodeRole::kFollower, false, node_name, leader_ip, leader_port);
+            status = hybridsearchContext::instance().ChangeServerRole(NodeRole::kFollower, false, node_name, leader_ip, leader_port);
             if (!status.ok()) {
                 if (status.code() != ErrorCode::kCantSwitchRole) {
                     LOG_INFO("Fail to change to FOLLOWER role");
-                    Status restore_status = InfinityContext::instance().ChangeServerRole(NodeRole::kAdmin);
+                    Status restore_status = hybridsearchContext::instance().ChangeServerRole(NodeRole::kAdmin);
                     if (!restore_status.ok()) {
                         UnrecoverableError(fmt::format("Fail to change node role to FOLLOWER, then fail to restore to ADMIN."));
                     }
@@ -4340,11 +4340,11 @@ QueryResult AdminExecutor::SetRole(QueryContext *query_context, const AdminState
                 return query_result;
             }
 
-            status = InfinityContext::instance().ChangeServerRole(NodeRole::kLearner, false, node_name, leader_ip, leader_port);
+            status = hybridsearchContext::instance().ChangeServerRole(NodeRole::kLearner, false, node_name, leader_ip, leader_port);
             if (!status.ok()) {
                 if (status.code() != ErrorCode::kCantSwitchRole) {
                     LOG_INFO("Fail to change to LEARNER role");
-                    Status restore_status = InfinityContext::instance().ChangeServerRole(NodeRole::kAdmin);
+                    Status restore_status = hybridsearchContext::instance().ChangeServerRole(NodeRole::kAdmin);
                     if (!restore_status.ok()) {
                         UnrecoverableError(fmt::format("Fail to change node role to FOLLOWER, then fail to restore to ADMIN."));
                     }
@@ -4411,4 +4411,4 @@ QueryResult AdminExecutor::RecoverFromSnapshot(QueryContext *query_context, cons
     return query_result;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -16,7 +16,7 @@
 
 #include "embedding_type.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 #pragma pack(1)
 
@@ -31,4 +31,4 @@ static_assert(sizeof(TensorType) == sizeof(uint64_t));
 
 #pragma pack()
 
-} // namespace infinity
+} // namespace hybridsearch

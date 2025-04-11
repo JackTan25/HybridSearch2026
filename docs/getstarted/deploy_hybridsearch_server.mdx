@@ -1,0 +1,200 @@
+---
+sidebar_position: 3
+slug: /deploy_hybridsearch_server
+---
+
+# Deploy hybridsearch
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Three ways to deploy hybridsearch.
+
+---
+
+This document provides guidance on deploying the hybridsearch database. In general, you can deploy hybridsearch in the following three ways: 
+
+- [Import hybridsearch as a Python module](#import-hybridsearch-as-a-python-module): To run hybridsearch locally as a Python module.
+- [Deploy hybridsearch using Docker](#deploy-hybridsearch-using-docker): To run hybridsearch with the client and server as separate processes.
+- [Deploy hybridsearch using binary](#deploy-hybridsearch-using-binary): To run hybridsearch with the client and server as separate processes.
+
+## Import hybridsearch as a Python module
+
+:::caution IMPORTANT
+This approach allows you to call hybridsearch as a Python module. To deploy hybridsearch with the client and server as separate processes, follow the instructions in [Deploy hybridsearch using Docker](#deploy-hybridsearch-using-docker) or [Deploy hybridsearch using binary](#deploy-hybridsearch-using-binary).
+:::
+
+### Prerequisites
+
+- CPU: x86_64 with AVX2 support.
+- Python: Python 3.10+.
+- OS: 
+  - Linux with glibc 2.17+.
+  - Windows 10+ with WSL/WSL2.
+
+### Install hybridsearch as a module
+
+```
+pip install hybridsearch-embedded-sdk==0.6.0.dev3
+```
+
+### Create an hybridsearch object
+
+```python
+import hybridsearch_embedded
+
+hybridsearch_obj = hybridsearch_embedded.connect("absolute/path/to/save/to")
+```
+
+:::tip NOTE
+For detailed information about the capabilities and usage of hybridsearch's Python API, see the [Python API Reference](../references/pysdk_api_reference.md).
+:::
+
+
+## Deploy hybridsearch using Docker 
+
+To deploy hybridsearch with the client and server as separate processes, consider either [Deploy hybridsearch using Docker](#deploy-hybridsearch-using-docker) or [Deploy hybridsearch using binary](#deploy-hybridsearch-using-binary). Be aware of the respective system requirements for each approach.
+
+### Prerequisites
+
+- CPU: x86_64 with AVX2 support.
+- OS: 
+  - Linux with glibc 2.17+. 
+  - Windows 10+ with WSL/WSL2. 
+  - MacOS
+
+### Install hybridsearch server
+
+This section provides instructions on deploying the hybridsearch using Docker on Linux x86_64, MacOS x86_64, and Windows WSL/WSL2. 
+
+<Tabs
+  defaultValue="linux_mac"
+  values={[
+    {label: 'Linux x86_64 & MacOS x86_64', value: 'linux_mac'},
+    {label: 'Windows', value: 'windows'},
+  ]}>
+   <TabItem value="linux_mac">
+
+```bash
+sudo mkdir -p /var/hybridsearch && sudo chown -R $USER /var/hybridsearch
+docker pull infiniflow/hybridsearch:nightly
+docker run -d --name hybridsearch -v /var/hybridsearch/:/var/hybridsearch --ulimit nofile=500000:500000 --network=host infiniflow/hybridsearch:nightly
+```
+  </TabItem>
+  <TabItem value="windows">
+
+If you are on Windows 10+, you must enable WSL or WSL2 to deploy hybridsearch using Docker. Suppose you've installed Ubuntu in WSL2:
+
+1. Follow [this](https://learn.microsoft.com/en-us/windows/wsl/systemd) to enable systemd inside WSL2.
+2. Install docker-ce according to the [instructions here](https://docs.docker.com/engine/install/ubuntu).
+3. If you have installed Docker Desktop version 4.29+ for Windows: **Settings** **>** **Features in development**, then select **Enable host networking**.
+4. Pull the Docker image and start hybridsearch: 
+
+   ```bash
+   sudo mkdir -p /var/hybridsearch && sudo chown -R $USER /var/hybridsearch
+   docker pull infiniflow/hybridsearch:nightly
+   docker run -d --name hybridsearch -v /var/hybridsearch/:/var/hybridsearch --ulimit nofile=500000:500000 --network=host infiniflow/hybridsearch:nightly
+   ```
+
+  </TabItem>
+</Tabs>
+
+### Install hybridsearch client
+
+```
+pip install hybridsearch-sdk==0.6.0.dev3
+```
+
+### Run a vector search
+
+```python
+import hybridsearch
+
+hybridsearch_obj = hybridsearch.connect(hybridsearch.NetworkAddress("<SERVER_IP_ADDRESS>", 23817)) 
+db_object = hybridsearch_object.get_database("default_db")
+table_object = db_object.create_table("my_table", {"num": {"type": "integer"}, "body": {"type": "varchar"}, "vec": {"type": "vector, 4, float"}})
+table_object.insert([{"num": 1, "body": "unnecessary and harmful", "vec": [1.0, 1.2, 0.8, 0.9]}])
+table_object.insert([{"num": 2, "body": "Office for Harmful Blooms", "vec": [4.0, 4.2, 4.3, 4.5]}])
+res = table_object.output(["*"])
+                  .match_dense("vec", [3.0, 2.8, 2.7, 3.1], "float", "ip", 2)
+                  .to_pl()
+print(res)
+```
+
+:::tip NOTE
+For detailed information about the capabilities and usage of hybridsearch's Python API, see the [Python API Reference](../references/pysdk_api_reference.md).
+:::
+
+## Deploy hybridsearch using binary
+
+
+To deploy hybridsearch with the client and server as separate processes, consider either [Deploy hybridsearch using binary](#deploy-hybridsearch-using-binary) or [Deploy hybridsearch using Docker](#deploy-hybridsearch-using-docker). Be aware of the respective system requirements for each approach.
+
+### Prerequisites
+
+- CPU: x86_64 with AVX2 support.
+- OS: 
+  - Linux with glibc 2.17+.
+  - Windows 10+ with WSL/WSL2.
+
+### Install hybridsearch server
+
+This section provides instructions on deploying hybridsearch using binary package on Linux x86_64. You can download the binary package (deb, rpm, or tgz) for your Linux system from https://github.com/infiniflow/hybridsearch/releases. The prebuilt packages are compatible with Linux distributions based on glibc 2.17 or later, for example, RHEL 7, Debian 8, Ubuntu 14.04.
+
+
+<Tabs
+  defaultValue="fedora"
+  values={[
+    {label: 'Fedora/RHEL/CentOS/OpenSUSE', value: 'fedora'},
+    {label: 'Ubuntu/Debian', value: 'ubuntu'},
+  ]}>
+   <TabItem value="fedora">
+
+Fedora/RHEL/CentOS/OpenSUSE
+```bash
+sudo rpm -i hybridsearch-0.6.0.dev3-x86_64.rpm
+```
+
+```bash
+sudo systemctl start hybridsearch
+```
+
+  </TabItem>
+  <TabItem value="ubuntu">
+
+```bash
+sudo dpkg -i hybridsearch-0.6.0.dev3-x86_64.deb
+```
+
+```bash
+sudo systemctl start hybridsearch
+```
+
+  </TabItem>
+</Tabs>
+
+### Install hybridsearch client
+
+```
+pip install hybridsearch-sdk==0.6.0.dev3
+```
+
+### Run a vector search
+
+```python
+import hybridsearch
+
+hybridsearch_object = hybridsearch.connect(hybridsearch.NetworkAddress("<SERVER_IP_ADDRESS>", 23817)) 
+db_object = hybridsearch_object.get_database("default_db")
+table_object = db_object.create_table("my_table", {"num": {"type": "integer"}, "body": {"type": "varchar"}, "vec": {"type": "vector, 4, float"}})
+table_object.insert([{"num": 1, "body": "unnecessary and harmful", "vec": [1.0, 1.2, 0.8, 0.9]}])
+table_object.insert([{"num": 2, "body": "Office for Harmful Blooms", "vec": [4.0, 4.2, 4.3, 4.5]}])
+res = table_object.output(["*"])
+                  .match_dense("vec", [3.0, 2.8, 2.7, 3.1], "float", "ip", 2)
+                  .to_pl()
+print(res)
+```
+
+:::tip NOTE
+For detailed information about the capabilities and usage of hybridsearch's Python API, see the [Python API Reference](../references/pysdk_api_reference.md).
+:::
+

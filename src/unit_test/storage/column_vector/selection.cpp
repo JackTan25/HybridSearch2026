@@ -15,7 +15,7 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import logger;
 import selection;
@@ -23,14 +23,14 @@ import default_values;
 import third_party;
 import stl;
 import global_resource_usage;
-import infinity_context;
+import hybridsearch_context;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class SelectionTest : public BaseTest {};
 
 TEST_F(SelectionTest, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     Selection s1;
     EXPECT_THROW(s1.Append(1), UnrecoverableException);

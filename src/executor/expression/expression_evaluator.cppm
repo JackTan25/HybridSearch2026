@@ -31,7 +31,7 @@ import data_block;
 import column_vector;
 import expression_state;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class ExpressionEvaluator {
 public:
@@ -62,4 +62,4 @@ private:
     bool in_aggregate_{false};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

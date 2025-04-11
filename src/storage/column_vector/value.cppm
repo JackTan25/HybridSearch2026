@@ -18,7 +18,7 @@ export module value;
 import stl;
 import type_info;
 import logical_type;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import embedding_info;
 import sparse_info;
@@ -29,7 +29,7 @@ import logger;
 import status;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class ExtraValueInfoType : u8 {
     INVALID_TYPE_INFO = 0,
@@ -45,12 +45,12 @@ enum class ExtraValueInfoType : u8 {
 //===--------------------------------------------------------------------===//
 struct ExtraValueInfo {
     explicit ExtraValueInfo(ExtraValueInfoType type) : type_(type) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("ExtraValueInfo");
 #endif
     }
     virtual ~ExtraValueInfo() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("ExtraValueInfo");
 #endif
     }
@@ -510,4 +510,4 @@ export struct ArrayValueInfo : public ExtraValueInfo {
     Vector<Value> array_elements_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

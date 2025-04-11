@@ -21,7 +21,7 @@ import stl;
 
 import logical_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class CastTable : public Singleton<CastTable> {
 public:
@@ -34,4 +34,4 @@ private:
     Array<Array<i64, to_underlying_val(LogicalType::kInvalid)>, to_underlying_val(LogicalType::kInvalid)> matrix_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

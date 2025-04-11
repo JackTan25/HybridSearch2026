@@ -4,8 +4,8 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_context;
-import infinity_exception;
+import hybridsearch_context;
+import hybridsearch_exception;
 
 import stl;
 import global_resource_usage;
@@ -32,7 +32,7 @@ import data_access_state;
 import txn_store;
 import txn_state;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class TableMetaTest : public BaseTestParamStr {};
 
@@ -41,10 +41,10 @@ INSTANTIATE_TEST_SUITE_P(TestWithDifferentParams,
                          ::testing::Values(BaseTestParamStr::NULL_CONFIG_PATH, BaseTestParamStr::VFS_OFF_CONFIG_PATH));
 
 TEST_P(TableMetaTest, to_string_test) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
-    Catalog *catalog = infinity::InfinityContext::instance().storage()->catalog();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
+    Catalog *catalog = hybridsearch::hybridsearchContext::instance().storage()->catalog();
 
     // start txn1
     auto *txn1 = txn_mgr->BeginTxn(MakeUnique<String>("create table"), TransactionType::kNormal);
@@ -76,10 +76,10 @@ TEST_P(TableMetaTest, to_string_test) {
 }
 
 TEST_P(TableMetaTest, name_test) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
-    Catalog *catalog = infinity::InfinityContext::instance().storage()->catalog();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
+    Catalog *catalog = hybridsearch::hybridsearchContext::instance().storage()->catalog();
 
     // start txn1
     auto *txn1 = txn_mgr->BeginTxn(MakeUnique<String>("create table"), TransactionType::kNormal);
@@ -113,10 +113,10 @@ TEST_P(TableMetaTest, name_test) {
 }
 
 TEST_P(TableMetaTest, get_all_entries_test) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
-    Catalog *catalog = infinity::InfinityContext::instance().storage()->catalog();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
+    Catalog *catalog = hybridsearch::hybridsearchContext::instance().storage()->catalog();
 
     // start txn1
     auto *txn1 = txn_mgr->BeginTxn(MakeUnique<String>("create table"), TransactionType::kNormal);

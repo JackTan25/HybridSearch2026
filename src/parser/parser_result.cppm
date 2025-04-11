@@ -18,8 +18,8 @@ module;
 
 export module parser_result;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::ParserResult;
+export using hybridsearch::ParserResult;
 
 }

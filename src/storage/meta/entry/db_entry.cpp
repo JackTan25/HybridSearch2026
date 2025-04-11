@@ -29,15 +29,15 @@ import default_values;
 import block_index;
 import logger;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 import status;
 import catalog_delta_entry;
 import column_def;
 import extra_ddl_info;
 import cleanup_scanner;
-import infinity_context;
+import hybridsearch_context;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<std::string_view> DBEntry::DecodeIndex(std::string_view encode) {
     if (encode.empty() || encode[0] != '#') {
@@ -78,7 +78,7 @@ SharedPtr<DBEntry> DBEntry::NewDBEntry(DBMeta *db_meta,
 }
 
 SharedPtr<String> DBEntry::DetermineDBDir(const String &db_name) {
-    return DetermineRandomString(InfinityContext::instance().config()->DataDir(), fmt::format("db_{}", db_name));
+    return DetermineRandomString(hybridsearchContext::instance().config()->DataDir(), fmt::format("db_{}", db_name));
 }
 
 SharedPtr<DBEntry> DBEntry::ReplayDBEntry(DBMeta *db_meta,
@@ -94,7 +94,7 @@ SharedPtr<DBEntry> DBEntry::ReplayDBEntry(DBMeta *db_meta,
     return db_entry;
 }
 
-SharedPtr<String> DBEntry::AbsoluteDir() const { return MakeShared<String>(Path(InfinityContext::instance().config()->DataDir()) / *db_entry_dir_); }
+SharedPtr<String> DBEntry::AbsoluteDir() const { return MakeShared<String>(Path(hybridsearchContext::instance().config()->DataDir()) / *db_entry_dir_); }
 
 Tuple<TableEntry *, Status> DBEntry::CreateTable(TableEntryType table_entry_type,
                                                  const SharedPtr<String> &table_name,
@@ -403,4 +403,4 @@ void DBEntry::MemIndexRecover(BufferManager *buffer_manager, TxnTimeStamp ts) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

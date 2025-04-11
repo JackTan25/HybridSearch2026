@@ -24,7 +24,7 @@ import profiler;
 import catalog;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class SessionType {
     kLocal,
@@ -81,13 +81,13 @@ export class LocalSession : public BaseSession {
 
 public:
     explicit LocalSession(u64 session_id) : BaseSession(session_id, SessionType::kLocal) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("LocalSession");
 #endif
     }
 
     ~LocalSession() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("LocalSession");
 #endif
     }
@@ -97,13 +97,13 @@ export class RemoteSession : public BaseSession {
 
 public:
     explicit RemoteSession(u64 session_id) : BaseSession(session_id, SessionType::kRemote) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("RemoteSession");
 #endif
     }
 
     ~RemoteSession() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("RemoteSession");
 #endif
     }
@@ -133,4 +133,4 @@ private:
     u16 client_port_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -17,7 +17,7 @@ module;
 module emvb_shared_vec;
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 // It seems that 'MakeShared' cannot be put into the cppm file.
 template <typename T>
@@ -33,4 +33,4 @@ void EMVBSharedVec<T>::ReserveUnderLock(u32 new_capacity) {
 
 template class EMVBSharedVec<u32>;
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -18,7 +18,7 @@ export module meta_state;
 
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct SegmentEntry;
 struct BlockEntry;
@@ -57,4 +57,4 @@ export struct MetaTableState {
     HashMap<u32, MetaSegmentState> segment_map_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

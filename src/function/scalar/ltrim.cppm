@@ -4,10 +4,10 @@ import stl;
 
 export module ltrim;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 
 export void RegisterLtrimFunction(const UniquePtr<Catalog> &catalog_ptr);
 
-} // namespace infinity
+} // namespace hybridsearch

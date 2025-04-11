@@ -25,7 +25,7 @@ import internal_types;
 import command_statement;
 import data_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct TableEntry;
 
@@ -50,4 +50,4 @@ private:
     SharedPtr<CommandInfo> command_info_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

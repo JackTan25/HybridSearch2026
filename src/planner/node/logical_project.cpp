@@ -27,7 +27,7 @@ import third_party;
 import base_expression;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<ColumnBinding> LogicalProject::GetColumnBindings() const {
     Vector<ColumnBinding> result;
@@ -78,4 +78,4 @@ String LogicalProject::ToString(i64 &space) const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

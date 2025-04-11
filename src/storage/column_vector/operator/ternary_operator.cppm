@@ -19,10 +19,10 @@ export module ternary_operator;
 import stl;
 import column_vector;
 import logger;
-import infinity_exception;
+import hybridsearch_exception;
 import roaring_bitmap;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class TernaryOperator {
 public:
@@ -294,4 +294,4 @@ private:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

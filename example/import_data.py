@@ -13,7 +13,7 @@
 # limitations under the License.
 
 '''
-This example is about connecting local infinity instance, creating table, ing data, importing file into a table, and exporting table's data
+This example is about connecting local hybridsearch instance, creating table, ing data, importing file into a table, and exporting table's data
 '''
 
 import os
@@ -21,22 +21,22 @@ import os
 current_path = os.path.abspath(__file__)
 project_directory = os.path.dirname(current_path)
 
-# import infinity_embedded as infinity
-import infinity
+# import hybridsearch_embedded as hybridsearch
+import hybridsearch
 import sys
 
 try:
-    # Use infinity_embedded module to open a local directory
-    # infinity_instance = infinity.connect("/var/infinity")
+    # Use hybridsearch_embedded module to open a local directory
+    # hybridsearch_instance = hybridsearch.connect("/var/hybridsearch")
 
-    #  Use infinity module to connect a remote server
-    infinity_instance = infinity.connect(infinity.common.NetworkAddress("127.0.0.1", 23817))
+    #  Use hybridsearch module to connect a remote server
+    hybridsearch_instance = hybridsearch.connect(hybridsearch.common.NetworkAddress("127.0.0.1", 23817))
 
     # 'default_db' is the default database
-    db_instance = infinity_instance.get_database("default_db")
+    db_instance = hybridsearch_instance.get_database("default_db")
 
     # Drop my_table if it already exists
-    db_instance.drop_table("my_table", infinity.common.ConflictType.Ignore)
+    db_instance.drop_table("my_table", hybridsearch.common.ConflictType.Ignore)
 
     # Create a table named "my_table"
     table_instance = db_instance.create_table("my_table", {
@@ -53,7 +53,7 @@ try:
     if extra_result is not None:
         print(extra_result)
 
-    infinity_instance.disconnect()
+    hybridsearch_instance.disconnect()
 
     print('test done')
     sys.exit(0)

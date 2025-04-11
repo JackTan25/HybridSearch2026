@@ -21,14 +21,14 @@ module index_bmp;
 
 import status;
 import logger;
-import infinity_exception;
+import hybridsearch_exception;
 import default_values;
 import logical_type;
 import serialize;
 import sparse_info;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 SharedPtr<IndexBMP> IndexBMP::Make(SharedPtr<String> index_name,
                                    SharedPtr<String> index_comment,
@@ -120,4 +120,4 @@ nlohmann::json IndexBMP::Serialize() const {
     return res;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

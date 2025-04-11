@@ -19,7 +19,7 @@ export module obj_status;
 import stl;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Status;
 
@@ -94,4 +94,4 @@ export struct ObjStat {
     void CheckValid(const String &obj_key, SizeT current_object_size) const;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

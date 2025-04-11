@@ -23,7 +23,7 @@ import physical_operator;
 
 module explain_fragment;
 
-namespace infinity {
+namespace hybridsearch {
 
 static String FragmentTitle(u64 fragment_id, bool is_head) {
     if (!is_head) {
@@ -75,4 +75,4 @@ void ExplainFragment::Explain(PlanFragment *plan_fragment_ptr, SharedPtr<Vector<
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

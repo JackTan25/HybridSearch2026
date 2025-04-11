@@ -22,12 +22,12 @@ module file_reader;
 
 import stl;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import logger;
 import virtual_store;
 
-namespace infinity {
+namespace hybridsearch {
 
 FileReader::FileReader(const String &path, SizeT buffer_size)
     : path_(path), data_{nullptr}, buffer_offset_(0), buffer_start_(0), buffer_size_(buffer_size) {
@@ -118,4 +118,4 @@ void FileReader::Seek(const u64 pos) {
         file_handle_->Seek(pos);
     }
 }
-} // namespace infinity
+} // namespace hybridsearch

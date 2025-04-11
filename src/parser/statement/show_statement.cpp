@@ -15,7 +15,7 @@
 #include "show_statement.h"
 #include <sstream>
 
-namespace infinity {
+namespace hybridsearch {
 
 std::string ShowStatement::ToString() const {
     std::stringstream ss;
@@ -196,4 +196,4 @@ std::string ShowStatement::ToString() const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -20,16 +20,16 @@ from thrift.protocol import TBinaryProtocol
 from thrift.transport import TSocket
 from thrift.transport.TTransport import TTransportException
 
-from infinity import URI
-from infinity.remote_thrift.infinity_thrift_rpc import *
-from infinity.remote_thrift.infinity_thrift_rpc.ttypes import *
-from infinity.errors import ErrorCode
-from infinity.common import InfinityException
+from hybridsearch import URI
+from hybridsearch.remote_thrift.hybridsearch_thrift_rpc import *
+from hybridsearch.remote_thrift.hybridsearch_thrift_rpc.ttypes import *
+from hybridsearch.errors import ErrorCode
+from hybridsearch.common import hybridsearchException
 
 TRY_TIMES = 10
 
 
-class ThriftInfinityClient:
+class ThrifthybridsearchClient:
     def __init__(self, uri: URI, *, try_times: int = TRY_TIMES, logger: logging.Logger = None):
         self.lock = rwlock.RWLockRead()
 
@@ -47,7 +47,7 @@ class ThriftInfinityClient:
         if logger is not None:
             self.logger = logger
             return
-        self.logger = logging.getLogger("ThriftInfinityClient")
+        self.logger = logging.getLogger("ThrifthybridsearchClient")
         self.logger.setLevel(logging.DEBUG)
         if not self.logger.handlers:
             formatter = logging.Formatter('%(asctime)s - %(threadName)s - %(levelname)s - %(message)s')
@@ -68,7 +68,7 @@ class ThriftInfinityClient:
             TSocket.TSocket(self.uri.ip, self.uri.port))  # sync
         self.protocol = TBinaryProtocol.TBinaryProtocol(self.transport)
         # self.protocol = TCompactProtocol.TCompactProtocol(self.transport)
-        self.client = InfinityService.Client(self.protocol)
+        self.client = hybridsearchService.Client(self.protocol)
         self.transport.open()
 
         # version: 0.2.0.dev2, client_version: 1
@@ -102,7 +102,7 @@ class ThriftInfinityClient:
         # version: 0.6.0.dev3, client_version: 29
         res = self.client.Connect(ConnectRequest(client_version=29)) # 0.6.0.dev3
         if res.error_code != 0:
-            raise InfinityException(res.error_code, res.error_msg)
+            raise hybridsearchException(res.error_code, res.error_msg)
         self.session_id = res.session_id
 
     def retry_wrapper(func):

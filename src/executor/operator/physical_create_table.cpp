@@ -26,11 +26,11 @@ import status;
 import load_meta;
 import extra_ddl_info;
 import wal_manager;
-import infinity_context;
+import hybridsearch_context;
 
 module physical_create_table;
 
-namespace infinity {
+namespace hybridsearch {
 
 PhysicalCreateTable::PhysicalCreateTable(SharedPtr<String> schema_name,
                                          SharedPtr<TableDef> table_def_ptr,
@@ -58,7 +58,7 @@ PhysicalCreateTable::PhysicalCreateTable(SharedPtr<String> schema_name,
 void PhysicalCreateTable::Init(QueryContext* query_context) {}
 
 bool PhysicalCreateTable::Execute(QueryContext *query_context, OperatorState *operator_state) {
-    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
     if (storage_mode == StorageMode::kUnInitialized) {
         UnrecoverableError("Uninitialized storage mode");
     }
@@ -79,4 +79,4 @@ bool PhysicalCreateTable::Execute(QueryContext *query_context, OperatorState *op
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

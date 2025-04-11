@@ -33,13 +33,13 @@ import expression_evaluator;
 import physical_operator_type;
 import operator_state;
 import data_block;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import status;
 import physical_top;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct BlockRawIndex {
     BlockRawIndex(u32 block_idx, u32 offset) : block_idx_(block_idx), offset_(offset) {}
@@ -220,4 +220,4 @@ bool PhysicalSort::Execute(QueryContext *, OperatorState *operator_state) {
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

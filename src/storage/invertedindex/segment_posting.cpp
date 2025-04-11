@@ -28,7 +28,7 @@ import third_party;
 
 module segment_posting;
 
-namespace infinity {
+namespace hybridsearch {
 void SegmentPosting::Init(SharedPtr<ByteSliceList> slice_list, RowID base_row_id, u64 doc_count, TermMeta &term_meta) {
     slice_list_ = std::move(slice_list);
     base_row_id_ = base_row_id;
@@ -77,4 +77,4 @@ const SharedPtr<ByteSliceList> &SegmentPosting::GetPosSliceListPtr() {
     return pos_slice_list_;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

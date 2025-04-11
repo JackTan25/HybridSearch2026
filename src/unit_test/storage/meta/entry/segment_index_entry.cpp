@@ -3,8 +3,8 @@
 
 #include "gtest/gtest.h"
 import base_test;
-import infinity_context;
-import infinity_exception;
+import hybridsearch_context;
+import hybridsearch_exception;
 
 import stl;
 import global_resource_usage;
@@ -49,7 +49,7 @@ import segment_index_entry;
 import block_entry;
 import txn_state;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class SegmentIndexEntryTest : public BaseTestParamStr {};
 
@@ -64,7 +64,7 @@ void DropIndex();
 void DropTable();
 
 TEST_P(SegmentIndexEntryTest, decode_index_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
     CreateTable();
     CreateIndex();
     InsertData("default_db", "tbl1");
@@ -94,7 +94,7 @@ TEST_P(SegmentIndexEntryTest, decode_index_test) {
 }
 
 TEST_P(SegmentIndexEntryTest, create_ivf_index_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
     {
         auto *txn1 = txn_mgr->BeginTxn(MakeUnique<String>("create table"), TransactionType::kNormal);
@@ -157,7 +157,7 @@ TEST_P(SegmentIndexEntryTest, create_ivf_index_test) {
 }
 
 TEST_P(SegmentIndexEntryTest, opt_hnsw_index_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
     {
         auto *txn1 = txn_mgr->BeginTxn(MakeUnique<String>("create table"), TransactionType::kNormal);
@@ -239,7 +239,7 @@ TEST_P(SegmentIndexEntryTest, opt_hnsw_index_test) {
 }
 
 TEST_P(SegmentIndexEntryTest, opt_bmp_index_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
     {
         auto *txn1 = txn_mgr->BeginTxn(MakeUnique<String>("create table"), TransactionType::kNormal);
@@ -310,7 +310,7 @@ TEST_P(SegmentIndexEntryTest, opt_bmp_index_test) {
 }
 
 TEST_P(SegmentIndexEntryTest, flush_fulltext_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
     CreateTable();
     CreateIndex();
 
@@ -331,7 +331,7 @@ TEST_P(SegmentIndexEntryTest, flush_fulltext_test) {
 }
 
 TEST_P(SegmentIndexEntryTest, flush_bmp_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
     {
         auto *txn1 = txn_mgr->BeginTxn(MakeUnique<String>("create table"), TransactionType::kNormal);
@@ -395,7 +395,7 @@ TEST_P(SegmentIndexEntryTest, flush_bmp_test) {
 }
 
 TEST_P(SegmentIndexEntryTest, cleanup_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
     CreateTable();
     CreateIndex();
 

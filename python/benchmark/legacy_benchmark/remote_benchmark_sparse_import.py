@@ -16,10 +16,10 @@ import argparse
 import os
 import time
 
-import infinity
-from infinity import index
-from infinity.common import LOCAL_HOST, LOCAL_INFINITY_PATH
-from infinity.errors import ErrorCode
+import hybridsearch
+from hybridsearch import index
+from hybridsearch.common import LOCAL_HOST, LOCAL_hybridsearch_PATH
+from hybridsearch.errors import ErrorCode
 
 
 def import_data(
@@ -43,14 +43,14 @@ def import_data(
     else:
         raise Exception("Invalid data set")
 
-    infinity_obj = None
+    hybridsearch_obj = None
     if remote:
-        infinity_obj = infinity.connect(LOCAL_HOST)
+        hybridsearch_obj = hybridsearch.connect(LOCAL_HOST)
     else:
-        infinity_obj = infinity.connect(LOCAL_INFINITY_PATH)
-    assert infinity_obj
+        hybridsearch_obj = hybridsearch.connect(LOCAL_hybridsearch_PATH)
+    assert hybridsearch_obj
 
-    db_obj = infinity_obj.get_database("default_db")
+    db_obj = hybridsearch_obj.get_database("default_db")
     assert db_obj
     db_obj.drop_table("splade_benchmark")
     db_obj.create_table(
@@ -96,7 +96,7 @@ def import_data(
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Benchmark Infinity")
+    parser = argparse.ArgumentParser(description="Benchmark hybridsearch")
     parser.add_argument(
         "-d",
         "--data",

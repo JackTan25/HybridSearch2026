@@ -29,7 +29,7 @@ import status;
 
 export module explain_ast;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class ExplainAST {
 public:
@@ -57,4 +57,4 @@ public:
     static Status BuildOptimize(const OptimizeStatement *optimize_statement, SharedPtr<Vector<SharedPtr<String>>> &result, i64);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -16,13 +16,13 @@ module;
 
 module options;
 
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import status;
 import default_values;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 GlobalOptions::GlobalOptions() {
     i32 invalid_option_index = static_cast<i32>(GlobalOptionIndex::kInvalid);
@@ -172,4 +172,4 @@ bool GlobalOptions::GetBoolValue(GlobalOptionIndex option_index) {
     return boolean_option->value_;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

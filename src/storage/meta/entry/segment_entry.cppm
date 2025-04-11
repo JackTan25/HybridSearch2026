@@ -23,7 +23,7 @@ import buffer_manager;
 import data_access_state;
 import block_entry;
 import base_entry;
-import infinity_exception;
+import hybridsearch_exception;
 import txn;
 import txn_manager;
 import fast_rough_filter;
@@ -38,7 +38,7 @@ import snapshot_info;
 import meta_info;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 class TxnTableStore;
 struct TxnSegmentStore;
@@ -308,4 +308,4 @@ public:
     SharedPtr<SegmentSnapshotInfo> GetSnapshotInfo() const;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -18,7 +18,7 @@ import stl;
 
 export module global_block_id;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct GlobalBlockID {
     SegmentID segment_id_;
@@ -36,4 +36,4 @@ public:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

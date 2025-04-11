@@ -25,7 +25,7 @@ import fast_rough_filter;
 import roaring_bitmap;
 import txn;
 
-namespace infinity {
+namespace hybridsearch {
 
 // TODO: equivalent expression rewrite optimization
 
@@ -73,4 +73,4 @@ public:
     static UniquePtr<FastRoughFilterEvaluator> PushDownToFastRoughFilter(SharedPtr<BaseExpression> &expression);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

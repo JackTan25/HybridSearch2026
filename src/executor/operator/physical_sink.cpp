@@ -28,12 +28,12 @@ import third_party;
 import fragment_data;
 import data_block;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 import logical_type;
 import column_def;
 
-namespace infinity {
+namespace hybridsearch {
 
 String ToString(SinkType sink_type) {
     switch (sink_type) {
@@ -534,4 +534,4 @@ void PhysicalSink::FillSinkStateFromLastOperatorState(FragmentContext *fragment_
     task_operator_state->data_block_array_.clear();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

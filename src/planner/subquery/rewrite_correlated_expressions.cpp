@@ -21,11 +21,11 @@ import logical_node;
 import base_expression;
 import column_expression;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import subquery_expression;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 void RewriteCorrelatedExpressions::VisitNode(LogicalNode &op) { VisitNodeExpression(op); }
 
@@ -63,4 +63,4 @@ SharedPtr<BaseExpression> RewriteCorrelatedExpressions::VisitReplace(const Share
     return nullptr;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

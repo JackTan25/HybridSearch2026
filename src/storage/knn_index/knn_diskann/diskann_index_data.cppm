@@ -24,7 +24,7 @@ import stl;
 import index_base;
 import search_top_1;
 import kmeans_partition;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 import third_party;
 import status;
@@ -35,7 +35,7 @@ import diskann_dist_func;
 import local_file_handle;
 import virtual_store;
 
-namespace infinity {
+namespace hybridsearch {
 export template <typename VectorDataType, typename LabelType, MetricType metric>
 class DiskAnnIndexData {
     using MemVamana = MemVamana<VectorDataType, LabelType, metric>;
@@ -448,4 +448,4 @@ public:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -31,15 +31,15 @@ import posting_list_format;
 import internal_types;
 import third_party;
 import byte_slice_reader;
-import infinity_exception;
+import hybridsearch_exception;
 import status;
 import logger;
 import persistence_manager;
-import infinity_context;
+import hybridsearch_context;
 import persist_result_handler;
 import virtual_store;
 
-namespace infinity {
+namespace hybridsearch {
 
 DiskIndexSegmentReader::DiskIndexSegmentReader(SegmentID segment_id,
                                                ChunkID chunk_id,
@@ -48,9 +48,9 @@ DiskIndexSegmentReader::DiskIndexSegmentReader(SegmentID segment_id,
                                                RowID base_row_id,
                                                optionflag_t flag)
     : IndexSegmentReader(segment_id, chunk_id), base_row_id_(base_row_id) {
-    Path path = Path(InfinityContext::instance().config()->DataDir()) / index_dir / base_name;
+    Path path = Path(hybridsearchContext::instance().config()->DataDir()) / index_dir / base_name;
     String path_str = path.string();
-    PersistenceManager *pm = InfinityContext::instance().persistence_manager();
+    PersistenceManager *pm = hybridsearchContext::instance().persistence_manager();
 
     posting_file_ = path_str;
     posting_file_.append(POSTING_SUFFIX);
@@ -92,7 +92,7 @@ DiskIndexSegmentReader::DiskIndexSegmentReader(SegmentID segment_id,
 DiskIndexSegmentReader::~DiskIndexSegmentReader() {
     if (data_len_ == 0)
         return;
-    PersistenceManager *pm = InfinityContext::instance().persistence_manager();
+    PersistenceManager *pm = hybridsearchContext::instance().persistence_manager();
     String posting_file = posting_file_;
     if (nullptr != pm) {
         posting_file = posting_file_obj_;
@@ -124,4 +124,4 @@ bool DiskIndexSegmentReader::GetSegmentPosting(const String &term, SegmentPostin
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

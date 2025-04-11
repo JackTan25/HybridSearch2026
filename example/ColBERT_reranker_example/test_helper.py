@@ -30,7 +30,7 @@ document_passages = [
 class TestHelper:
     def test(self):
         # create a helper object
-        self.h = helper.InfinityHelperForColBERT()
+        self.h = helper.hybridsearchHelperForColBERT()
         # create a test environment for ColBERT
         self.h.create_test_env({"n": {"type": "int"}})
         # insert data

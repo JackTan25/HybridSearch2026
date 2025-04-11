@@ -26,10 +26,10 @@ import buffer_manager;
 import txn_state;
 import status;
 import catalog_delta_entry;
-import infinity_exception;
+import hybridsearch_exception;
 import base_entry;
 
-namespace infinity {
+namespace hybridsearch {
 
 // Use by default
 UniquePtr<DBMeta> DBMeta::NewDBMeta(const SharedPtr<String> &db_name) {
@@ -151,4 +151,4 @@ void DBMeta::Cleanup(CleanupInfoTracer *info_tracer, bool dropped) { db_entry_li
 
 bool DBMeta::PickCleanup(CleanupScanner *scanner) { return db_entry_list_.PickCleanup(scanner); }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -24,7 +24,7 @@ import common_analyzer;
 import third_party;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class ChineseAnalyzer : public CommonLanguageAnalyzer {
 public:
@@ -64,4 +64,4 @@ protected:
     SharedPtr<FlatHashSet<String>> stopwords_{};
     CutGrain cut_grain_{CutGrain::kCoarse};
 };
-} // namespace infinity
+} // namespace hybridsearch

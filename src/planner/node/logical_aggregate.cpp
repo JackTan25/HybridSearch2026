@@ -24,7 +24,7 @@ import column_binding;
 import base_expression;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<ColumnBinding> LogicalAggregate::GetColumnBindings() const {
     Vector<ColumnBinding> result;
@@ -104,4 +104,4 @@ String LogicalAggregate::ToString(i64 &space) const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

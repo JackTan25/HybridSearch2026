@@ -23,12 +23,12 @@ import operator_state;
 import physical_operator;
 import physical_operator_type;
 import load_meta;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import data_type;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PhysicalHashJoin : public PhysicalOperator {
 public:
@@ -46,4 +46,4 @@ public:
     SharedPtr<Vector<SharedPtr<DataType>>> GetOutputTypes() const final;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

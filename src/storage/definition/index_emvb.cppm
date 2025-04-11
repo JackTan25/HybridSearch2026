@@ -24,7 +24,7 @@ import create_index_info;
 import third_party;
 import statement_common;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class IndexEMVB final : public IndexBase {
 public:
@@ -61,4 +61,4 @@ public:
     const u32 residual_pq_subspace_bits_ = 0;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -15,14 +15,14 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 
 import function_set;
 import aggregate_function_set;
@@ -38,11 +38,11 @@ import bitmap_cast;
 import bound_cast_func;
 
 #if 0
-using namespace infinity;
+using namespace hybridsearch;
 class BitmapCastTest : public BaseTest {};
 
 TEST_F(BitmapCastTest, bitmap_cast0) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     // Try to cast bitmap type to wrong type.
     {
@@ -80,7 +80,7 @@ TEST_F(BitmapCastTest, bitmap_cast0) {
 }
 
 TEST_F(BitmapCastTest, bitmap_cast1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     // Call BindBitmapCast with wrong type of parameters
     {

@@ -30,7 +30,7 @@ import third_party;
 import function_expr;
 import parsed_expr;
 import column_expr;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 import status;
 import logical_type;
@@ -39,7 +39,7 @@ import data_type;
 
 namespace {
 
-using namespace infinity;
+using namespace hybridsearch;
 
 void ConvertAvgToSumDivideCount(FunctionExpr &func_expression, const Vector<String> &column_names) {
     func_expression.func_name_ = "/";
@@ -59,7 +59,7 @@ void ConvertAvgToSumDivideCount(FunctionExpr &func_expression, const Vector<Stri
 
 } // namespace
 
-namespace infinity {
+namespace hybridsearch {
 
 SharedPtr<BaseExpression> ProjectBinder::BuildExpression(const ParsedExpr &expr, BindContext *bind_context_ptr, i64 depth, bool root) {
     String expr_name = expr.GetName();
@@ -194,4 +194,4 @@ SharedPtr<BaseExpression> ProjectBinder::BuildUnnestExpr(const FunctionExpr &exp
     return col_expr;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

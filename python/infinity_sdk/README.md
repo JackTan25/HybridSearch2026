@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="187" src="https://github.com/infiniflow/infinity/assets/7248/015e1f02-1f7f-4b09-a0c2-9d261cd4858b"/>
+  <img width="187" src="https://github.com/infiniflow/hybridsearch/assets/7248/015e1f02-1f7f-4b09-a0c2-9d261cd4858b"/>
 </div>
 
 
@@ -15,7 +15,7 @@
 </h4>
 
 
-Infinity is a cutting-edge AI-native database that provides a wide range of search capabilities for rich data types such as dense vector, sparse vector, tensor, full-text, and structured data. It provides robust support for various LLM applications, including search, recommenders, question-answering, conversational AI, copilot, content generation, and many more **RAG** (Retrieval-augmented Generation) applications.
+hybridsearch is a cutting-edge AI-native database that provides a wide range of search capabilities for rich data types such as dense vector, sparse vector, tensor, full-text, and structured data. It provides robust support for various LLM applications, including search, recommenders, question-answering, conversational AI, copilot, content generation, and many more **RAG** (Retrieval-augmented Generation) applications.
 
 - [Key Features](#-key-features)
 - [Get Started](#-get-started)
@@ -31,7 +31,7 @@ Infinity is a cutting-edge AI-native database that provides a wide range of sear
 
 ## 🌟 Key Features
 
-Infinity comes with high performance, flexibility, ease-of-use, and many features designed to address the challenges facing the next-generation AI applications:
+hybridsearch comes with high performance, flexibility, ease-of-use, and many features designed to address the challenges facing the next-generation AI applications:
 
 ### 🚀 Incredibly fast
 
@@ -57,24 +57,24 @@ Supports a wide range of data types including strings, numerics, vectors, and mo
 
 ## 🎮 Get Started
 
-Infinity supports two working modes, embedded mode and client-server mode. The following shows how to operate in client-server mode:
+hybridsearch supports two working modes, embedded mode and client-server mode. The following shows how to operate in client-server mode:
 
-1. Deploy Infinity in client-server mode. check the [Deploy infinity server](https://infiniflow.org/docs/dev/deploy_infinity_server) guide.
+1. Deploy hybridsearch in client-server mode. check the [Deploy hybridsearch server](https://infiniflow.org/docs/dev/deploy_hybridsearch_server) guide.
 
-2. Install the `infinity-sdk` package:
+2. Install the `hybridsearch-sdk` package:
    ```bash
-   pip install infinity-sdk==0.6.0.dev3
+   pip install hybridsearch-sdk==0.6.0.dev3
    ```
 
-3. Use Infinity to conduct a dense vector search:
+3. Use hybridsearch to conduct a dense vector search:
    ```python
-   import infinity
+   import hybridsearch
 
-   # Connect to infinity
+   # Connect to hybridsearch
    # Change the following IP address and port to your server's IP address and port
-   infinity_object = infinity.connect(infinity.NetworkAddress("127.0.0.1", 23817))
+   hybridsearch_object = hybridsearch.connect(hybridsearch.NetworkAddress("127.0.0.1", 23817))
    # Retrieve a database object named default_db
-   db_object = infinity_object.get_database("default_db")
+   db_object = hybridsearch_object.get_database("default_db")
    # Create a table with an integer column, a varchar column, and a dense vector column
    table_object = db_object.create_table("my_table", {"num": {"type": "integer"}, "body": {"type": "varchar"}, "vec": {"type": "vector, 4, float"}})
    # Insert two rows into the table
@@ -87,7 +87,7 @@ Infinity supports two working modes, embedded mode and client-server mode. The f
    print(res)
    ```
 
-> 💡 For more information about Infinity's Python API, see the [Python API Reference](https://infiniflow.org/docs/dev/pysdk_api_reference).
+> 💡 For more information about hybridsearch's Python API, see the [Python API Reference](https://infiniflow.org/docs/dev/pysdk_api_reference).
 
 ## 📚 Document
 
@@ -99,11 +99,11 @@ Infinity supports two working modes, embedded mode and client-server mode. The f
 
 ## 📜 Roadmap
 
-See the [Infinity Roadmap 2024](https://github.com/infiniflow/infinity/issues/338)
+See the [hybridsearch Roadmap 2024](https://github.com/infiniflow/hybridsearch/issues/338)
 
 ## 🙌 Community
 
 - [Discord](https://discord.gg/jEfRUwEYEV)
 - [Twitter](https://twitter.com/infiniflowai)
-- [GitHub Discussions](https://github.com/infiniflow/infinity/discussions)
+- [GitHub Discussions](https://github.com/infiniflow/hybridsearch/discussions)
 

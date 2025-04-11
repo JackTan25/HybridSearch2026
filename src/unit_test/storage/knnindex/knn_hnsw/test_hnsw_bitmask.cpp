@@ -25,7 +25,7 @@ import hnsw_alg;
 import knn_filter;
 import hnsw_common;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class HnswAlgBitmaskTest : public BaseTest {
 public:

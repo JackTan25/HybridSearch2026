@@ -23,7 +23,7 @@ import create_index_info;
 
 export module meta_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class SegmentStatus;
 
@@ -127,4 +127,4 @@ export struct SegmentIndexInfo {
     Vector<String> files_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

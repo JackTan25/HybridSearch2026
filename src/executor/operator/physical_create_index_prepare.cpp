@@ -28,7 +28,7 @@ import operator_state;
 import load_meta;
 import logger;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import index_base;
 import index_file_worker;
 import buffer_manager;
@@ -39,11 +39,11 @@ import txn_store;
 import base_table_ref;
 import extra_ddl_info;
 import wal_manager;
-import infinity_context;
+import hybridsearch_context;
 import table_entry;
 import table_index_entry;
 
-namespace infinity {
+namespace hybridsearch {
 PhysicalCreateIndexPrepare::PhysicalCreateIndexPrepare(u64 id,
                                                        SharedPtr<BaseTableRef> base_table_ref,
                                                        SharedPtr<IndexBase> index_definition,
@@ -58,7 +58,7 @@ PhysicalCreateIndexPrepare::PhysicalCreateIndexPrepare(u64 id,
 void PhysicalCreateIndexPrepare::Init(QueryContext *query_context) {}
 
 bool PhysicalCreateIndexPrepare::Execute(QueryContext *query_context, OperatorState *operator_state) {
-    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
     if (storage_mode == StorageMode::kUnInitialized) {
         UnrecoverableError("Uninitialized storage mode");
     }
@@ -78,7 +78,7 @@ bool PhysicalCreateIndexPrepare::Execute(QueryContext *query_context, OperatorSt
         RecoverableError(get_table_status);
     }
     monitor_status = 0;
-    std::thread(monitorMemoryUsage,std::ref(monitor_status),"/home/ubuntu/infinity/experiments/peak_memory_index_file").detach();
+    std::thread(monitorMemoryUsage,std::ref(monitor_status),"/home/ubuntu/hybridsearch/experiments/peak_memory_index_file").detach();
     auto [table_index_entry, create_index_status] = txn->CreateIndexDef(table_entry, index_def_ptr_, conflict_type_);
     if (!create_index_status.ok()) {
         operator_state->status_ = create_index_status;
@@ -103,4 +103,4 @@ bool PhysicalCreateIndexPrepare::Execute(QueryContext *query_context, OperatorSt
     operator_state->SetComplete();
     return true;
 }
-} // namespace infinity
+} // namespace hybridsearch

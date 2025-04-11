@@ -16,7 +16,7 @@
 #include "parser_assert.h"
 #include <format>
 
-namespace infinity {
+namespace hybridsearch {
 
 // min date: 0001-01-01
 constexpr static int32_t MIN_DATE_YEAR = -1969;
@@ -422,4 +422,4 @@ int64_t DateType::GetEpochTime() const {
     constexpr int64_t TotalSecondsInDay = 24 * 60 * 60;
     return GetValue() * TotalSecondsInDay;
 }
-} // namespace infinity
+} // namespace hybridsearch

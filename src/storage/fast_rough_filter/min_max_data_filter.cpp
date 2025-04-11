@@ -20,13 +20,13 @@ import stl;
 import value;
 import logger;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 import filter_expression_push_down_helper;
 import internal_types;
 import column_vector;
 import filter_value_type_classification;
 
-namespace infinity {
+namespace hybridsearch {
 
 using VariantEmplaceFuncType = void(InnerMinMaxDataFilter *ptr);
 
@@ -173,4 +173,4 @@ bool MinMaxDataFilter::LoadFromJsonFile(const nlohmann::json &entry_json) {
     return true;
 }
 
-}; // namespace infinity
+}; // namespace hybridsearch

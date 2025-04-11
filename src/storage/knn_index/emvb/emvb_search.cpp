@@ -30,13 +30,13 @@ import emvb_simd_funcs;
 import mlas_matrix_multiply;
 import emvb_product_quantization;
 import emvb_shared_vec;
-import infinity_exception;
+import hybridsearch_exception;
 import roaring_bitmap;
 import segment_entry;
 import block_index;
 import knn_filter;
 
-namespace infinity {
+namespace hybridsearch {
 
 extern template class EMVBSharedVec<u32>;
 
@@ -432,4 +432,4 @@ template class EMVBSearch<192>;
 template class EMVBSearch<224>;
 template class EMVBSearch<256>;
 
-} // namespace infinity
+} // namespace hybridsearch

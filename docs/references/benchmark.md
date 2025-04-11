@@ -4,7 +4,7 @@ slug: /benchmark
 ---
 # Benchmark
 
-This document compares the following key specifications of Elasticsearch, Qdrant, Quickwit and Infinity:
+This document compares the following key specifications of Elasticsearch, Qdrant, Quickwit and hybridsearch:
 
 - Time to insert & build index
 - Time to import & build index
@@ -30,7 +30,7 @@ Test environment:
 | **Elasticsearch** | v8.13.4 |
 | **Qdrant**        | v1.9.2  |
 | **Quickwit**      | v0.8.1  |
-| **Infinity**      | v0.2.0  |
+| **hybridsearch**      | v0.2.0  |
 
 ## Run Benchmark
 
@@ -64,8 +64,8 @@ docker run -d --name qdrant --network host -v $HOME/qdrant/storage:/qdrant/stora
 mkdir -p $HOME/quickwit
 docker run -d --name quickwit --network=host -v $HOME/quickwit/qwdata:/quickwit/qwdata quickwit/quickwit:0.8.1 run
 
-mkdir -p $HOME/infinity
-docker run -d --name infinity --network=host -v $HOME/infinity:/var/infinity --ulimit nofile=500000:500000 infiniflow/infinity:nightly
+mkdir -p $HOME/hybridsearch
+docker run -d --name hybridsearch --network=host -v $HOME/hybridsearch:/var/hybridsearch --ulimit nofile=500000:500000 infiniflow/hybridsearch:nightly
 ```
 
 4. Run Benchmark:
@@ -97,17 +97,17 @@ options:
                         Run the query set randomly using given number of clients without recording the result and latency. This is for QPS measurement. (default: 0)
   --concurrency CONCURRENCY
                         Choose concurrency mechanism, one of: mp - multiprocessing(recommended), mt - multithreading. (default: mp)
-  --engine ENGINE       Choose database engine to benchmark, one of: infinity, qdrant, elasticsearch, quickwit (default: infinity)
+  --engine ENGINE       Choose database engine to benchmark, one of: hybridsearch, qdrant, elasticsearch, quickwit (default: hybridsearch)
   --dataset DATASET     Choose dataset to benchmark, one of: gist, sift, geonames, enwiki, tantivy (default: enwiki)
 ```
 
-Following are commands for engine `infinity` and dataset `enwiki`:
+Following are commands for engine `hybridsearch` and dataset `enwiki`:
 
 ```bash
-python run.py --generate --engine infinity --dataset enwiki
-python run.py --import --engine infinity --dataset enwiki
-python run.py --query=16 --engine infinity --dataset enwiki
-python run.py --query-express=16 --engine infinity --dataset enwiki
+python run.py --generate --engine hybridsearch --dataset enwiki
+python run.py --import --engine hybridsearch --dataset enwiki
+python run.py --query=16 --engine hybridsearch --dataset enwiki
+python run.py --query-express=16 --engine hybridsearch --dataset enwiki
 ```
 
 Following are commands to issue a single query so that you can compare results among several engines.
@@ -117,7 +117,7 @@ curl -X GET "http://localhost:9200/elasticsearch_enwiki/_search" -H 'Content-Typ
 
 curl -X GET "http://localhost:7280/api/v1/_elastic/qucikwit_enwiki/_search" -H 'Content-Type: application/json' -d'{"query": {"query_string": {"query": "wraysbury istorijos", "fields": [ "body" ] } },"sort": ["_score"],"size":10}'
 
-psql -h 0.0.0.0 -p 5432 -c "SELECT doctitle, ROW_ID(), SCORE() FROM infinity_enwiki SEARCH MATCH TEXT ('body', 'wraysbury istorijos', 'topn=10');"
+psql -h 0.0.0.0 -p 5432 -c "SELECT doctitle, ROW_ID(), SCORE() FROM hybridsearch_enwiki SEARCH MATCH TEXT ('body', 'wraysbury istorijos', 'topn=10');"
 ```
 
 ## Benchmark Results
@@ -130,7 +130,7 @@ psql -h 0.0.0.0 -p 5432 -c "SELECT doctitle, ROW_ID(), SCORE() FROM infinity_enw
 | ----------------- | ----- | -------------- | ---------------------------- | ---------------------------- | ------ | ----------- |
 | **Elasticsearch** | 934   | 0.992          | 131 s                        | N/A                          | 874 MB | 1.463 GB    |
 | **Qdrant**        | 1303  | 0.979          | 46 s                         | N/A                          | 418 MB | 1.6 GB      |
-| **Infinity**      | 16320 | 0.973          | 74 s                         | 28 s                         | 792 MB | 0.95 GB     |
+| **hybridsearch**      | 16320 | 0.973          | 74 s                         | 28 s                         | 792 MB | 0.95 GB     |
 
 
 
@@ -143,7 +143,7 @@ psql -h 0.0.0.0 -p 5432 -c "SELECT doctitle, ROW_ID(), SCORE() FROM infinity_enw
 | ----------------- | ---- | -------------- | ---------------------------- | ---------------------------- | ------ | ----------- |
 | **Elasticsearch** | 305  | 0.885          | 872 s                        | N/A                          | 13 GB  | 6.9 GB      |
 | **Qdrant**        | 339  | 0.947          | 366 s                        | N/A                          | 4.4 GB | 7.3 GB      |
-| **Infinity**      | 2200 | 0.946          | 463 s                        | 112 s                        | 4.7 GB | 6.0 GB      |
+| **hybridsearch**      | 2200 | 0.946          | 463 s                        | 112 s                        | 4.7 GB | 6.0 GB      |
 
 
 
@@ -156,19 +156,19 @@ psql -h 0.0.0.0 -p 5432 -c "SELECT doctitle, ROW_ID(), SCORE() FROM infinity_enw
 | ----------------- | ---------------------------- | ---------------------------- | ---------------| ------------------------| --------| ----- |
 | **Elasticsearch** | 2289 s                       | N/A                          | 14.75          | 1340                    | 21.0GB  | 10.6  |
 | **Quickwit**      | 3962 s                       | N/A                          | 65.55          | 179                     | 1.2GB   | 11.3  |
-| **Infinity**      | 1562 s                       | 2244 s                       | 1.37           | 13731                   | 10.0GB  | 11.0  |
+| **hybridsearch**      | 1562 s                       | 2244 s                       | 1.37           | 13731                   | 10.0GB  | 11.0  |
 
 ---
 
 ## Deprecated Benchmark
 
-Infinity provides a Python script for benchmarking the SIFT1M and GIST1M datasets.
+hybridsearch provides a Python script for benchmarking the SIFT1M and GIST1M datasets.
 
-### Build and start Infinity
+### Build and start hybridsearch
 
-You have two options for building Infinity. Choose the option that best fits your needs:
+You have two options for building hybridsearch. Choose the option that best fits your needs:
 
-- [Build Infinity using Docker](https://github.com/infiniflow/infinity/blob/main/README.md)
+- [Build hybridsearch using Docker](https://github.com/infiniflow/hybridsearch/blob/main/README.md)
 - [Build from source](../getstarted/build_from_source.mdx)
 
 ### Download the Benchmark datasets

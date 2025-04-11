@@ -17,7 +17,7 @@
 #include "parser_assert.h"
 #include "point_type.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 // A line segment is specified by two endpoints.
 struct LineSegmentType {
@@ -45,4 +45,4 @@ struct LineSegmentType {
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

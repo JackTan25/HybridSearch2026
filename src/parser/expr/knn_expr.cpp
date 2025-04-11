@@ -15,7 +15,7 @@
 #include "knn_expr.h"
 #include "spdlog/fmt/fmt.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 KnnExpr::~KnnExpr() {
     if (column_expr_ != nullptr) {
@@ -124,15 +124,15 @@ std::string KnnExpr::ToString() const {
 
 bool KnnExpr::InitDistanceType(const char *distance_type) {
     if (strcmp(distance_type, "l2") == 0) {
-        distance_type_ = infinity::KnnDistanceType::kL2;
+        distance_type_ = hybridsearch::KnnDistanceType::kL2;
     } else if (strcmp(distance_type, "ip") == 0) {
-        distance_type_ = infinity::KnnDistanceType::kInnerProduct;
+        distance_type_ = hybridsearch::KnnDistanceType::kInnerProduct;
     } else if (strcmp(distance_type, "cosine") == 0) {
-        distance_type_ = infinity::KnnDistanceType::kCosine;
+        distance_type_ = hybridsearch::KnnDistanceType::kCosine;
     } else if (strcmp(distance_type, "cos") == 0) {
-        distance_type_ = infinity::KnnDistanceType::kCosine;
+        distance_type_ = hybridsearch::KnnDistanceType::kCosine;
     } else if (strcmp(distance_type, "hamming") == 0) {
-        distance_type_ = infinity::KnnDistanceType::kHamming;
+        distance_type_ = hybridsearch::KnnDistanceType::kHamming;
     } else {
         return false;
     }
@@ -140,8 +140,8 @@ bool KnnExpr::InitDistanceType(const char *distance_type) {
 }
 
 bool KnnExpr::InitEmbedding(const char *data_type, const ConstantExpr *query_vec) {
-    if (strcmp(data_type, "float") == 0 and distance_type_ != infinity::KnnDistanceType::kHamming) {
-        embedding_data_type_ = infinity::EmbeddingDataType::kElemFloat;
+    if (strcmp(data_type, "float") == 0 and distance_type_ != hybridsearch::KnnDistanceType::kHamming) {
+        embedding_data_type_ = hybridsearch::EmbeddingDataType::kElemFloat;
         if (!(query_vec->double_array_.empty())) {
             dimension_ = query_vec->double_array_.size();
             embedding_data_ptr_ = new float[dimension_];
@@ -156,8 +156,8 @@ bool KnnExpr::InitEmbedding(const char *data_type, const ConstantExpr *query_vec
                 ((float *)(embedding_data_ptr_))[i] = query_vec->long_array_[i];
             }
         }
-    } else if (strcmp(data_type, "float16") == 0 and distance_type_ != infinity::KnnDistanceType::kHamming) {
-        embedding_data_type_ = infinity::EmbeddingDataType::kElemFloat16;
+    } else if (strcmp(data_type, "float16") == 0 and distance_type_ != hybridsearch::KnnDistanceType::kHamming) {
+        embedding_data_type_ = hybridsearch::EmbeddingDataType::kElemFloat16;
         if (!(query_vec->double_array_.empty())) {
             dimension_ = query_vec->double_array_.size();
             embedding_data_ptr_ = new Float16T[dimension_];
@@ -172,8 +172,8 @@ bool KnnExpr::InitEmbedding(const char *data_type, const ConstantExpr *query_vec
                 ((Float16T *)(embedding_data_ptr_))[i] = static_cast<float>(query_vec->long_array_[i]);
             }
         }
-    } else if (strcmp(data_type, "bfloat16") == 0 and distance_type_ != infinity::KnnDistanceType::kHamming) {
-        embedding_data_type_ = infinity::EmbeddingDataType::kElemBFloat16;
+    } else if (strcmp(data_type, "bfloat16") == 0 and distance_type_ != hybridsearch::KnnDistanceType::kHamming) {
+        embedding_data_type_ = hybridsearch::EmbeddingDataType::kElemBFloat16;
         if (!(query_vec->double_array_.empty())) {
             dimension_ = query_vec->double_array_.size();
             embedding_data_ptr_ = new BFloat16T[dimension_];
@@ -188,47 +188,47 @@ bool KnnExpr::InitEmbedding(const char *data_type, const ConstantExpr *query_vec
                 ((BFloat16T *)(embedding_data_ptr_))[i] = static_cast<float>(query_vec->long_array_[i]);
             }
         }
-    } else if (strcmp(data_type, "tinyint") == 0 and distance_type_ != infinity::KnnDistanceType::kHamming) {
+    } else if (strcmp(data_type, "tinyint") == 0 and distance_type_ != hybridsearch::KnnDistanceType::kHamming) {
         dimension_ = query_vec->long_array_.size();
-        embedding_data_type_ = infinity::EmbeddingDataType::kElemInt8;
+        embedding_data_type_ = hybridsearch::EmbeddingDataType::kElemInt8;
         embedding_data_ptr_ = new char[dimension_];
 
         for (long i = 0; i < dimension_; ++i) {
             ((char *)embedding_data_ptr_)[i] = query_vec->long_array_[i];
         }
-    } else if (strcmp(data_type, "unsigned tinyint") == 0 and distance_type_ != infinity::KnnDistanceType::kHamming) {
+    } else if (strcmp(data_type, "unsigned tinyint") == 0 and distance_type_ != hybridsearch::KnnDistanceType::kHamming) {
         dimension_ = query_vec->long_array_.size();
-        embedding_data_type_ = infinity::EmbeddingDataType::kElemUInt8;
+        embedding_data_type_ = hybridsearch::EmbeddingDataType::kElemUInt8;
         embedding_data_ptr_ = new uint8_t[dimension_];
         for (long i = 0; i < dimension_; ++i) {
             ((uint8_t *)embedding_data_ptr_)[i] = query_vec->long_array_[i];
         }
-    } else if (strcmp(data_type, "smallint") == 0 and distance_type_ != infinity::KnnDistanceType::kHamming) {
+    } else if (strcmp(data_type, "smallint") == 0 and distance_type_ != hybridsearch::KnnDistanceType::kHamming) {
         dimension_ = query_vec->long_array_.size();
-        embedding_data_type_ = infinity::EmbeddingDataType::kElemInt16;
+        embedding_data_type_ = hybridsearch::EmbeddingDataType::kElemInt16;
         embedding_data_ptr_ = new short int[dimension_];
 
         for (long i = 0; i < dimension_; ++i) {
             ((short int *)embedding_data_ptr_)[i] = query_vec->long_array_[i];
         }
-    } else if (strcmp(data_type, "integer") == 0 and distance_type_ != infinity::KnnDistanceType::kHamming) {
+    } else if (strcmp(data_type, "integer") == 0 and distance_type_ != hybridsearch::KnnDistanceType::kHamming) {
         dimension_ = query_vec->long_array_.size();
-        embedding_data_type_ = infinity::EmbeddingDataType::kElemInt32;
+        embedding_data_type_ = hybridsearch::EmbeddingDataType::kElemInt32;
         embedding_data_ptr_ = new int[dimension_];
 
         for (long i = 0; i < dimension_; ++i) {
             ((int *)embedding_data_ptr_)[i] = query_vec->long_array_[i];
         }
-    } else if (strcmp(data_type, "bigint") == 0 and distance_type_ != infinity::KnnDistanceType::kHamming) {
+    } else if (strcmp(data_type, "bigint") == 0 and distance_type_ != hybridsearch::KnnDistanceType::kHamming) {
         dimension_ = query_vec->long_array_.size();
-        embedding_data_type_ = infinity::EmbeddingDataType::kElemInt64;
+        embedding_data_type_ = hybridsearch::EmbeddingDataType::kElemInt64;
         embedding_data_ptr_ = new long[dimension_];
 
         memcpy(embedding_data_ptr_, (void *)query_vec->long_array_.data(), dimension_ * sizeof(long));
-    } else if (strcmp(data_type, "bit") == 0 and distance_type_ == infinity::KnnDistanceType::kHamming) {
+    } else if (strcmp(data_type, "bit") == 0 and distance_type_ == hybridsearch::KnnDistanceType::kHamming) {
         dimension_ = query_vec->long_array_.size();
         if (dimension_ % 8 == 0) {
-            embedding_data_type_ = infinity::EmbeddingDataType::kElemBit;
+            embedding_data_type_ = hybridsearch::EmbeddingDataType::kElemBit;
             long embedding_size = dimension_ / 8;
             char *char_ptr = new char[embedding_size];
             uint8_t *data_ptr = reinterpret_cast<uint8_t *>(char_ptr);
@@ -249,9 +249,9 @@ bool KnnExpr::InitEmbedding(const char *data_type, const ConstantExpr *query_vec
         } else {
             return false;
         }
-    } else if (strcmp(data_type, "double") == 0 and distance_type_ != infinity::KnnDistanceType::kHamming) {
+    } else if (strcmp(data_type, "double") == 0 and distance_type_ != hybridsearch::KnnDistanceType::kHamming) {
         dimension_ = query_vec->double_array_.size();
-        embedding_data_type_ = infinity::EmbeddingDataType::kElemDouble;
+        embedding_data_type_ = hybridsearch::EmbeddingDataType::kElemDouble;
         embedding_data_ptr_ = new double[dimension_];
 
         memcpy(embedding_data_ptr_, (void *)query_vec->double_array_.data(), dimension_ * sizeof(double));
@@ -283,4 +283,4 @@ std::string KnnExpr::KnnDistanceType2Str(KnnDistanceType knn_distance_type) {
     return std::string();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

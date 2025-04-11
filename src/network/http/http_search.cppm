@@ -25,23 +25,23 @@ import match_expr;
 import fusion_expr;
 import match_tensor_expr;
 import match_sparse_expr;
-import infinity;
+import hybridsearch;
 import internal_types;
 import constant_expr;
 import search_expr;
 import select_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class HTTPSearch {
 public:
-    static void Process(Infinity *infinity_ptr,
+    static void Process(hybridsearch *hybridsearch_ptr,
                         const String &db_name,
                         const String &table_name,
                         const String &input_json,
                         HTTPStatus &http_status,
                         nlohmann::json &response);
-    static void Explain(Infinity *infinity_ptr,
+    static void Explain(hybridsearch *hybridsearch_ptr,
                         const String &db_name,
                         const String &table_name,
                         const String &input_json,
@@ -62,4 +62,4 @@ public:
     static UniquePtr<ConstantExpr> ParseSparseVector(const nlohmann::json &json_object, HTTPStatus &http_status, nlohmann::json &response);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

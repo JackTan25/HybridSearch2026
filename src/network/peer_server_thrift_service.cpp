@@ -20,34 +20,34 @@ import stl;
 import third_party;
 import logger;
 import peer_server_thrift_types;
-import infinity_context;
+import hybridsearch_context;
 import peer_task;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import cluster_manager;
 import admin_statement;
 import node_info;
 
-namespace infinity {
+namespace hybridsearch {
 
-void PeerServerThriftService::Register(infinity_peer_server::RegisterResponse &response, const infinity_peer_server::RegisterRequest &request) {
+void PeerServerThriftService::Register(hybridsearch_peer_server::RegisterResponse &response, const hybridsearch_peer_server::RegisterRequest &request) {
 
     LOG_TRACE("Get Register request");
     // This must be a leader node.
-    NodeRole this_server_role = InfinityContext::instance().GetServerRole();
+    NodeRole this_server_role = hybridsearchContext::instance().GetServerRole();
     if (this_server_role == NodeRole::kLeader) {
         NodeRole register_node_role = NodeRole::kUnInitialized;
         switch (request.node_type) {
-            case infinity_peer_server::NodeType::kFollower: {
+            case hybridsearch_peer_server::NodeType::kFollower: {
                 register_node_role = NodeRole::kFollower;
                 break;
             }
-            case infinity_peer_server::NodeType::kLearner: {
+            case hybridsearch_peer_server::NodeType::kLearner: {
                 register_node_role = NodeRole::kLearner;
                 break;
             }
             default: {
-                String error_message = fmt::format("Invalid node type: {}", infinity_peer_server::to_string(request.node_type));
+                String error_message = fmt::format("Invalid node type: {}", hybridsearch_peer_server::to_string(request.node_type));
                 UnrecoverableError(error_message);
             }
         }
@@ -61,10 +61,10 @@ void PeerServerThriftService::Register(infinity_peer_server::RegisterResponse &r
                                                                       request.node_port,
                                                                       request.txn_timestamp,
                                                                       std::chrono::duration_cast<std::chrono::seconds>(time_since_epoch).count());
-        Status status = InfinityContext::instance().cluster_manager()->AddNodeInfo(register_node_info);
+        Status status = hybridsearchContext::instance().cluster_manager()->AddNodeInfo(register_node_info);
         if (status.ok()) {
-            LOG_INFO(fmt::format("Node: {} registered as {}.", request.node_name, infinity_peer_server::to_string(request.node_type)));
-            SharedPtr<NodeInfo> leader_node = InfinityContext::instance().cluster_manager()->ThisNode();
+            LOG_INFO(fmt::format("Node: {} registered as {}.", request.node_name, hybridsearch_peer_server::to_string(request.node_type)));
+            SharedPtr<NodeInfo> leader_node = hybridsearchContext::instance().cluster_manager()->ThisNode();
             response.leader_name = leader_node->node_name();
             response.leader_term = leader_node->leader_term();
             response.heart_beat_interval = leader_node->heartbeat_interval();
@@ -81,11 +81,11 @@ void PeerServerThriftService::Register(infinity_peer_server::RegisterResponse &r
     return;
 }
 
-void PeerServerThriftService::Unregister(infinity_peer_server::UnregisterResponse &response, const infinity_peer_server::UnregisterRequest &request) {
+void PeerServerThriftService::Unregister(hybridsearch_peer_server::UnregisterResponse &response, const hybridsearch_peer_server::UnregisterRequest &request) {
     LOG_TRACE("Get Unregister request");
-    NodeRole this_server_role = InfinityContext::instance().GetServerRole();
+    NodeRole this_server_role = hybridsearchContext::instance().GetServerRole();
     if (this_server_role == NodeRole::kLeader) {
-        Status status = InfinityContext::instance().cluster_manager()->UpdateNodeByLeader(request.node_name, UpdateNodeOp::kRemove);
+        Status status = hybridsearchContext::instance().cluster_manager()->UpdateNodeByLeader(request.node_name, UpdateNodeOp::kRemove);
         if (!status.ok()) {
             response.error_code = static_cast<i64>(status.code_);
             response.error_message = status.message();
@@ -98,21 +98,21 @@ void PeerServerThriftService::Unregister(infinity_peer_server::UnregisterRespons
     return;
 }
 
-void PeerServerThriftService::HeartBeat(infinity_peer_server::HeartBeatResponse &response, const infinity_peer_server::HeartBeatRequest &request) {
+void PeerServerThriftService::HeartBeat(hybridsearch_peer_server::HeartBeatResponse &response, const hybridsearch_peer_server::HeartBeatRequest &request) {
     LOG_DEBUG("Get HeartBeat request");
-    NodeRole this_server_role = InfinityContext::instance().GetServerRole();
+    NodeRole this_server_role = hybridsearchContext::instance().GetServerRole();
     if (this_server_role == NodeRole::kLeader) {
         NodeRole non_leader_node_role = NodeRole::kUnInitialized;
         switch (request.node_type) {
-            case infinity_peer_server::NodeType::kLeader: {
+            case hybridsearch_peer_server::NodeType::kLeader: {
                 non_leader_node_role = NodeRole::kLeader;
                 break;
             }
-            case infinity_peer_server::NodeType::kFollower: {
+            case hybridsearch_peer_server::NodeType::kFollower: {
                 non_leader_node_role = NodeRole::kFollower;
                 break;
             }
-            case infinity_peer_server::NodeType::kLearner: {
+            case hybridsearch_peer_server::NodeType::kLearner: {
                 non_leader_node_role = NodeRole::kLearner;
                 break;
             }
@@ -132,7 +132,7 @@ void PeerServerThriftService::HeartBeat(infinity_peer_server::HeartBeatResponse 
                                                                       request.txn_timestamp,
                                                                       std::chrono::duration_cast<std::chrono::seconds>(time_since_epoch).count());
 
-        Status status = InfinityContext::instance().cluster_manager()->UpdateNodeInfoByHeartBeat(register_node_info,
+        Status status = hybridsearchContext::instance().cluster_manager()->UpdateNodeInfoByHeartBeat(register_node_info,
                                                                                                  response.other_nodes,
                                                                                                  response.leader_term,
                                                                                                  response.sender_status);
@@ -142,25 +142,25 @@ void PeerServerThriftService::HeartBeat(infinity_peer_server::HeartBeatResponse 
         }
     } else {
         response.error_code = static_cast<i64>(ErrorCode::kInvalidNodeRole);
-        response.sender_status = infinity_peer_server::NodeStatus::type::kRemoved;
+        response.sender_status = hybridsearch_peer_server::NodeStatus::type::kRemoved;
         response.error_message = fmt::format("Attempt to heartbeat from a non-leader node: {}", ToString(this_server_role));
     }
     return;
 }
 
-void PeerServerThriftService::SyncLog(infinity_peer_server::SyncLogResponse &response, const infinity_peer_server::SyncLogRequest &request) {
+void PeerServerThriftService::SyncLog(hybridsearch_peer_server::SyncLogResponse &response, const hybridsearch_peer_server::SyncLogRequest &request) {
     LOG_INFO("Get SyncLog request");
     if (request.log_entries.size() == 0) {
         UnrecoverableError("No log is synced from leader node");
     }
 
-    InfinityContext::instance().storage()->wal_manager()->FlushLogByReplication(request.log_entries, request.on_startup);
+    hybridsearchContext::instance().storage()->wal_manager()->FlushLogByReplication(request.log_entries, request.on_startup);
 
     Status status = Status::OK();
     if (request.on_startup) {
-        status = InfinityContext::instance().cluster_manager()->ContinueStartup(request.log_entries);
+        status = hybridsearchContext::instance().cluster_manager()->ContinueStartup(request.log_entries);
     } else {
-        status = InfinityContext::instance().cluster_manager()->ApplySyncedLogNolock(request.log_entries);
+        status = hybridsearchContext::instance().cluster_manager()->ApplySyncedLogNolock(request.log_entries);
     }
 
     if (!status.ok()) {
@@ -170,11 +170,11 @@ void PeerServerThriftService::SyncLog(infinity_peer_server::SyncLogResponse &res
     return;
 }
 
-void PeerServerThriftService::ChangeRole(infinity_peer_server::ChangeRoleResponse &response, const infinity_peer_server::ChangeRoleRequest &request) {
+void PeerServerThriftService::ChangeRole(hybridsearch_peer_server::ChangeRoleResponse &response, const hybridsearch_peer_server::ChangeRoleRequest &request) {
     Status status = Status::OK();
     switch (request.node_type) {
-        case infinity_peer_server::NodeType::kAdmin: {
-            status = InfinityContext::instance().ChangeServerRole(NodeRole::kAdmin, true);
+        case hybridsearch_peer_server::NodeType::kAdmin: {
+            status = hybridsearchContext::instance().ChangeServerRole(NodeRole::kAdmin, true);
             break;
         }
         default: {
@@ -189,9 +189,9 @@ void PeerServerThriftService::ChangeRole(infinity_peer_server::ChangeRoleRespons
     return;
 }
 
-void PeerServerThriftService::NewLeader(infinity_peer_server::NewLeaderResponse &response, const infinity_peer_server::NewLeaderRequest &request) {
+void PeerServerThriftService::NewLeader(hybridsearch_peer_server::NewLeaderResponse &response, const hybridsearch_peer_server::NewLeaderRequest &request) {
     LOG_INFO("Get NewLeader request");
     return;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

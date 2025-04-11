@@ -20,7 +20,7 @@ import stl;
 
 // responsible for parsing and generating filenames for catalog files and wal files
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct FullCatalogFileInfo {
     String path_;
@@ -89,4 +89,4 @@ public:
     static void RecycleWalFile(TxnTimeStamp max_commit_ts, const String &wal_dir);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

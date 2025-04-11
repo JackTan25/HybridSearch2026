@@ -19,7 +19,7 @@ export module tokenizer;
 import stl;
 import term;
 
-namespace infinity {
+namespace hybridsearch {
 constexpr unsigned BYTE_MAX = 255;
 
 export class TokenizeConfig {
@@ -112,4 +112,4 @@ private:
 
     bool is_delimiter_{false};
 };
-} // namespace infinity
+} // namespace hybridsearch

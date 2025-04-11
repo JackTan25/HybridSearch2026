@@ -35,7 +35,7 @@ import peer_server_thrift_types;
 import logger;
 import third_party;
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 
 using namespace apache::thrift;
 using namespace apache::thrift::concurrency;
@@ -43,15 +43,15 @@ using namespace apache::thrift::protocol;
 using namespace apache::thrift::transport;
 using namespace apache::thrift::server;
 
-namespace infinity {
+namespace hybridsearch {
 
-class PeerServiceCloneFactory final : public infinity_peer_server::PeerServiceIfFactory {
+class PeerServiceCloneFactory final : public hybridsearch_peer_server::PeerServiceIfFactory {
 public:
     ~PeerServiceCloneFactory() final = default;
 
-    infinity_peer_server::PeerServiceIf *getHandler(const ::apache::thrift::TConnectionInfo &connInfo) final { return new PeerServerThriftService; }
+    hybridsearch_peer_server::PeerServiceIf *getHandler(const ::apache::thrift::TConnectionInfo &connInfo) final { return new PeerServerThriftService; }
 
-    void releaseHandler(infinity_peer_server::PeerServiceIf *handler) final { delete handler; }
+    void releaseHandler(hybridsearch_peer_server::PeerServiceIf *handler) final { delete handler; }
 };
 
 void PoolPeerThriftServer::Init(const String &server_address, i32 port_no, i32 pool_size) {
@@ -68,7 +68,7 @@ void PoolPeerThriftServer::Init(const String &server_address, i32 port_no, i32 p
 
     fmt::print("Peer server listen on {}: {}, connection limit: {}\n", server_address, port_no, pool_size);
 
-    server = MakeUnique<TThreadPoolServer>(MakeShared<infinity_peer_server::PeerServiceProcessorFactory>(MakeShared<PeerServiceCloneFactory>()),
+    server = MakeUnique<TThreadPoolServer>(MakeShared<hybridsearch_peer_server::PeerServiceProcessorFactory>(MakeShared<PeerServiceCloneFactory>()),
                                            server_socket,
                                            MakeShared<TBufferedTransportFactory>(),
                                            protocol_factory,
@@ -110,4 +110,4 @@ void PoolPeerThriftServer::Shutdown() {
     status_.wait(PeerThriftServerStatus::kStopping);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

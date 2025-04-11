@@ -18,9 +18,9 @@ import time
 import multiprocessing
 import struct
 
-import infinity
-from infinity.remote_thrift.query_builder import InfinityThriftQueryBuilder
-from infinity.common import LOCAL_HOST, LOCAL_INFINITY_PATH, SparseVector
+import hybridsearch
+from hybridsearch.remote_thrift.query_builder import hybridsearchThriftQueryBuilder
+from hybridsearch.common import LOCAL_HOST, LOCAL_hybridsearch_PATH, SparseVector
 
 
 class SparseMatrix:
@@ -86,12 +86,12 @@ def gt_read_all(filename: str):
 
 def work(remote, queries, topk, alpha, beta):
     if remote:
-        infinity_obj = infinity.connect(LOCAL_HOST)
+        hybridsearch_obj = hybridsearch.connect(LOCAL_HOST)
     else:
-        infinity_obj = infinity.connect(LOCAL_INFINITY_PATH)
-    table = infinity_obj.get_database("default_db").get_table("splade_benchmark")
+        hybridsearch_obj = hybridsearch.connect(LOCAL_hybridsearch_PATH)
+    table = hybridsearch_obj.get_database("default_db").get_table("splade_benchmark")
     for indices, value in queries:
-        query_builder = InfinityThriftQueryBuilder(table)
+        query_builder = hybridsearchThriftQueryBuilder(table)
         query_builder.output(["_row_id"])
         query_builder.match_sparse(
             "col1",
@@ -101,7 +101,7 @@ def work(remote, queries, topk, alpha, beta):
             {"alpha": str(alpha), "beta": str(beta)},
         )
         query_builder.to_result()
-    infinity_obj.disconnect()
+    hybridsearch_obj.disconnect()
 
 
 def process_pool(remote, threads, rounds, query_path, topk, alpha, beta):
@@ -143,16 +143,16 @@ def calculate_recall(gt, query_res):
 
 def one_thread(remote, rounds, query_path, gt_path, alpha, beta):
     if remote:
-        infinity_obj = infinity.connect(LOCAL_HOST)
+        hybridsearch_obj = hybridsearch.connect(LOCAL_HOST)
     else:
-        infinity_obj = infinity.connect(LOCAL_INFINITY_PATH)
+        hybridsearch_obj = hybridsearch.connect(LOCAL_hybridsearch_PATH)
     query_mat = csr_read_all(query_path)
     topk, gt = gt_read_all(gt_path)
 
     results = []
     dur_sum = 0
 
-    table = infinity_obj.get_database("default_db").get_table("splade_benchmark")
+    table = hybridsearch_obj.get_database("default_db").get_table("splade_benchmark")
 
     for i in range(rounds):
         query_results = [[] for _ in range(query_mat.nrow)]
@@ -160,7 +160,7 @@ def one_thread(remote, rounds, query_path, gt_path, alpha, beta):
         for query_id in range(query_mat.nrow):
             indices, values = query_mat.at(query_id)
             start = time.time()
-            query_builder = InfinityThriftQueryBuilder(table)
+            query_builder = hybridsearchThriftQueryBuilder(table)
             query_builder.output(["_row_id"])
             query_builder.match_sparse(
                 "col1",
@@ -191,7 +191,7 @@ def one_thread(remote, rounds, query_path, gt_path, alpha, beta):
     results.append(f"Avg Dur: {dur_sum:.2f} s")
     results.append(f"Avg Qps: {(query_mat.nrow / dur_sum):.2f}")
 
-    infinity_obj.disconnect()
+    hybridsearch_obj.disconnect()
 
     for res in results:
         print(res)
@@ -231,7 +231,7 @@ def benchmark(
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Benchmark Infinity")
+    parser = argparse.ArgumentParser(description="Benchmark hybridsearch")
 
     parser.add_argument(
         "-t",

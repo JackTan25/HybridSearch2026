@@ -41,7 +41,7 @@ import meta_info;
 import txn;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 class BufferManager;
 struct SegmentEntry;
@@ -249,4 +249,4 @@ protected:
     Vector<UniquePtr<BlockColumnEntry>> columns_{};
     Vector<UniquePtr<BlockColumnEntry>> dropped_columns_{};
 };
-} // namespace infinity
+} // namespace hybridsearch

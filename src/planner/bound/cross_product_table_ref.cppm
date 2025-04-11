@@ -21,7 +21,7 @@ import stl;
 import table_ref;
 import table_reference;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class CrossProductTableRef : public TableRef {
 public:
@@ -34,4 +34,4 @@ public:
     SharedPtr<TableRef> right_table_ref_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -16,7 +16,7 @@
 
 #include <cstdint>
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class MixedValueType : int8_t {
     kInvalid,

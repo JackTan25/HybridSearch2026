@@ -21,14 +21,14 @@ import base_table;
 import stl;
 import data_type;
 import data_block;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import third_party;
 import column_def;
 import logger;
 import default_values;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class TableType {
     kInvalid,
@@ -110,4 +110,4 @@ public:
     SizeT total_hits_count_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

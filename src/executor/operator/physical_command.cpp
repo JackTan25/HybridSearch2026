@@ -38,20 +38,20 @@ import third_party;
 import defer_op;
 import config;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import variables;
 import logger;
 import table_entry;
 import txn;
 import cleanup_scanner;
-import infinity_context;
+import hybridsearch_context;
 import periodic_trigger;
 import bg_task;
 import wal_manager;
 import result_cache_manager;
 import snapshot;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalCommand::Init(QueryContext* query_context) {}
 
@@ -88,7 +88,7 @@ bool PhysicalCommand::Execute(QueryContext *query_context, OperatorState *operat
                                 Status status = Status::DataTypeMismatch("Boolean", set_command->value_type_str());
                                 RecoverableError(status);
                             }
-                            InfinityContext::instance().storage()->catalog()->SetProfile(set_command->value_bool());
+                            hybridsearchContext::instance().storage()->catalog()->SetProfile(set_command->value_bool());
                             return true;
                         }
                         case GlobalVariable::kProfileRecordCapacity: {
@@ -132,7 +132,7 @@ bool PhysicalCommand::Execute(QueryContext *query_context, OperatorState *operat
                                                                        value_int));
                                 RecoverableError(status);
                             }
-                            Status status = InfinityContext::instance().cluster_manager()->SetFollowerNumber(value_int);
+                            Status status = hybridsearchContext::instance().cluster_manager()->SetFollowerNumber(value_int);
                             if (!status.ok()) {
                                 RecoverableError(status);
                             }
@@ -384,7 +384,7 @@ bool PhysicalCommand::Execute(QueryContext *query_context, OperatorState *operat
         case CommandType::kExport: {
             ExportCmd *export_command = (ExportCmd *)(command_info_.get());
 
-            auto profiler_record = InfinityContext::instance().storage()->catalog()->GetProfileRecord(export_command->file_no());
+            auto profiler_record = hybridsearchContext::instance().storage()->catalog()->GetProfileRecord(export_command->file_no());
             if (profiler_record == nullptr) {
                 Status status = Status::DataNotExist(fmt::format("The record does not exist: {}", export_command->file_no()));
                 RecoverableError(status);
@@ -400,7 +400,7 @@ bool PhysicalCommand::Execute(QueryContext *query_context, OperatorState *operat
             break;
         }
         case CommandType::kLockTable: {
-            StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+            StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
             if (storage_mode == StorageMode::kUnInitialized) {
                 UnrecoverableError("Uninitialized storage mode");
             }
@@ -420,7 +420,7 @@ bool PhysicalCommand::Execute(QueryContext *query_context, OperatorState *operat
             break;
         }
         case CommandType::kUnlockTable: {
-            StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+            StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
             if (storage_mode == StorageMode::kUnInitialized) {
                 UnrecoverableError("Uninitialized storage mode");
             }
@@ -440,7 +440,7 @@ bool PhysicalCommand::Execute(QueryContext *query_context, OperatorState *operat
             break;
         }
         case CommandType::kCleanup: {
-            StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+            StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
             if (storage_mode == StorageMode::kUnInitialized) {
                 UnrecoverableError("Uninitialized storage mode");
             }
@@ -588,4 +588,4 @@ bool PhysicalCommand::Execute(QueryContext *query_context, OperatorState *operat
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

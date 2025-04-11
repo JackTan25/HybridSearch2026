@@ -5,20 +5,20 @@ import time
 import argparse
 
 commands = [
-    "python3 tools/run_pysdk_remote_infinity_test.py --pytest_mark='not complex'",
+    "python3 tools/run_pysdk_remote_hybridsearch_test.py --pytest_mark='not complex'",
     "python3 tools/run_parallel_test.py --pytest_mark='not complex'",
     "python3 tools/run_http_api.py --pytest_mark='not complex'",
     "python3 tools/sqllogictest.py"
 ]
 
-LOG_PATH = "/var/infinity/log/infinity.log"
+LOG_PATH = "/var/hybridsearch/log/hybridsearch.log"
 # TEST_SEC = 3600 # 1 hour
 TEST_SEC = 10 # run once
 
 
-def clear_infinity_log():
-    if os.path.exists(infinity_log_path):
-        os.remove(infinity_log_path)
+def clear_hybridsearch_log():
+    if os.path.exists(hybridsearch_log_path):
+        os.remove(hybridsearch_log_path)
 
 
 if __name__ == "__main__":
@@ -39,7 +39,7 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     test_sec = args.test_sec
-    infinity_log_path = args.log_path
+    hybridsearch_log_path = args.log_path
 
     command_failed = False
     begin_time = time.time()
@@ -60,7 +60,7 @@ if __name__ == "__main__":
                     except RuntimeError as e:
                         print(e)
                         command_failed = True
-                clear_infinity_log()
+                clear_hybridsearch_log()
 
     except Exception as e:
         print(e)

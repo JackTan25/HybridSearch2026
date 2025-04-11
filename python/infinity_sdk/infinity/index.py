@@ -14,9 +14,9 @@
 
 from enum import Enum
 
-import infinity.remote_thrift.infinity_thrift_rpc.ttypes as ttypes
-from infinity.common import InfinityException
-from infinity.errors import ErrorCode
+import hybridsearch.remote_thrift.hybridsearch_thrift_rpc.ttypes as ttypes
+from hybridsearch.common import hybridsearchException
+from hybridsearch.errors import ErrorCode
 
 
 class IndexType(Enum):
@@ -45,7 +45,7 @@ class IndexType(Enum):
             case IndexType.DiskAnn:
                 return ttypes.IndexType.DiskAnn
             case _:
-                raise InfinityException(ErrorCode.INVALID_INDEX_TYPE, "Unknown index type")
+                raise hybridsearchException(ErrorCode.INVALID_INDEX_TYPE, "Unknown index type")
 
 
 class InitParameter:
@@ -71,7 +71,7 @@ class IndexInfo:
             if isinstance(params, dict):
                 self.params = params
             else:
-                raise InfinityException(ErrorCode.INVALID_INDEX_PARAM, f"{params} should be dictionary type")
+                raise hybridsearchException(ErrorCode.INVALID_INDEX_PARAM, f"{params} should be dictionary type")
         else:
             self.params = None
 
@@ -94,7 +94,7 @@ class IndexInfo:
                 if isinstance(value, str):
                     init_params_list.append(ttypes.InitParameter(key, value))
                 else:
-                    raise InfinityException(ErrorCode.INVALID_INDEX_PARAM, f"{value} should be string type")
+                    raise hybridsearchException(ErrorCode.INVALID_INDEX_PARAM, f"{value} should be string type")
 
         return ttypes.IndexInfo(
             self.column_name.strip(),

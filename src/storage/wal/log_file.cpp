@@ -21,14 +21,14 @@ module log_file;
 import stl;
 import virtual_store;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 import default_values;
-import infinity_context;
+import hybridsearch_context;
 import status;
 import admin_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
 Optional<Pair<FullCatalogFileInfo, Vector<DeltaCatalogFileInfo>>> CatalogFile::ParseValidCheckpointFilenames(const String &catalog_dir,
                                                                                                              TxnTimeStamp max_checkpoint_ts) {
@@ -71,7 +71,7 @@ String CatalogFile::TempDeltaCheckpointFilename(TxnTimeStamp max_commit_ts) { re
 
 void CatalogFile::RecycleCatalogFile(TxnTimeStamp max_commit_ts, const String &catalog_dir) {
     bool upload_catalog =
-        InfinityContext::instance().GetServerRole() == NodeRole::kLeader or InfinityContext::instance().GetServerRole() == NodeRole::kStandalone;
+        hybridsearchContext::instance().GetServerRole() == NodeRole::kLeader or hybridsearchContext::instance().GetServerRole() == NodeRole::kStandalone;
 
     auto [full_infos, delta_infos, temp_full_infos, temp_delta_infos] = ParseCheckpointFilenames(catalog_dir);
     bool found = false;
@@ -104,9 +104,9 @@ void CatalogFile::RecycleCatalogFile(TxnTimeStamp max_commit_ts, const String &c
 }
 
 CatalogFilesInfo CatalogFile::ParseCheckpointFilenames(const String &catalog_dir) {
-    auto [entries, status] = VirtualStore::ListDirectory(Path(InfinityContext::instance().config()->DataDir()) / catalog_dir);
+    auto [entries, status] = VirtualStore::ListDirectory(Path(hybridsearchContext::instance().config()->DataDir()) / catalog_dir);
     if (!status.ok()) {
-        String error_message = fmt::format("Can't list directory: {}/{}", InfinityContext::instance().config()->DataDir(), catalog_dir);
+        String error_message = fmt::format("Can't list directory: {}/{}", hybridsearchContext::instance().config()->DataDir(), catalog_dir);
         UnrecoverableError(error_message);
     }
 
@@ -252,4 +252,4 @@ void WalFile::RecycleWalFile(TxnTimeStamp max_commit_ts, const String &wal_dir) 
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

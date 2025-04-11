@@ -9,7 +9,7 @@ import stl;
 import quick_sort_set;
 import lexeme;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LexemePath : public QuickSortSet {
 public:
@@ -47,4 +47,4 @@ public:
 
     std::string ToString() const;
 };
-} // namespace infinity
+} // namespace hybridsearch

@@ -15,28 +15,28 @@
 import os
 from tqdm import tqdm
 from experiments.load_experiments.CQADupStack_en.build.mldr_common_tools import load_corpus, fvecs_read_yield, read_mldr_sparse_embedding_yield, get_all_part_begin_ends
-import infinity
-from infinity.common import ConflictType, LOCAL_HOST, SparseVector
-import infinity.index as index
-from infinity.errors import ErrorCode
+import hybridsearch
+from hybridsearch.common import ConflictType, LOCAL_HOST, SparseVector
+import hybridsearch.index as index
+from hybridsearch.errors import ErrorCode
 from experiments.load_experiments.CQADupStack_en.build.vec_read import load_dense
 from experiments.load_experiments.CQADupStack_en.build.vec_read import load_sparse
 
-class InfinityClientForInsert:
+class hybridsearchClientForInsert:
     def __init__(self):
         self.test_db_name = "default_db"
         self.test_table_name_prefix = "mldr_test_table_text_dense_sparse_"
         self.test_table_schema = {"docid_col": {"type": "varchar"}, "fulltext_col": {"type": "varchar"},
                                   "dense_col": {"type": "vector,1024,float"},
                                   "sparse_col": {"type": "sparse,250002,float,int"}}
-        self.infinity_obj = infinity.connect(LOCAL_HOST)
-        self.infinity_db = self.infinity_obj.create_database(self.test_db_name, ConflictType.Ignore)
-        self.infinity_table = None
+        self.hybridsearch_obj = hybridsearch.connect(LOCAL_HOST)
+        self.hybridsearch_db = self.hybridsearch_obj.create_database(self.test_db_name, ConflictType.Ignore)
+        self.hybridsearch_table = None
 
     def create_test_table(self, language_suffix: str):
         table_name = self.test_table_name_prefix + language_suffix
-        self.infinity_db.drop_table(table_name, ConflictType.Ignore)
-        self.infinity_table = self.infinity_db.create_table(table_name, self.test_table_schema)
+        self.hybridsearch_db.drop_table(table_name, ConflictType.Ignore)
+        self.hybridsearch_table = self.hybridsearch_db.create_table(table_name, self.test_table_schema)
         print("Create table successfully.")
 
     def main(self):
@@ -85,7 +85,7 @@ class InfinityClientForInsert:
                 dense_idx += 1
                 sparse_idx += 1
                 buffer.append(insert_dict)
-            self.infinity_table.insert(buffer)
+            self.hybridsearch_table.insert(buffer)
             if dense_idx >= len(dense_vectors):
                 dense_idx = 0
                 dense_file_idx += 1
@@ -110,7 +110,7 @@ class InfinityClientForInsert:
         #         insert_dict = {"docid_col": docid_list[row_pos], "fulltext_col": corpus_text_list[row_pos],
         #                        "dense_col": next(dense_data), "sparse_col": SparseVector(**(next(sparse_data)))}
         #         buffer.append(insert_dict)
-        #     self.infinity_table.insert(buffer)
+        #     self.hybridsearch_table.insert(buffer)
         #     buffer.clear()
         print("Finish inserting data.")
         del dense_data
@@ -121,13 +121,13 @@ class InfinityClientForInsert:
         ft_params = []
         if lang == "zh":
             ft_params.append(index.InitParameter("analyzer", "chinese"))
-        res = self.infinity_table.create_index("ft_index",
+        res = self.hybridsearch_table.create_index("ft_index",
                                                index.IndexInfo("fulltext_col", index.IndexType.FullText, ft_params),
                                                ConflictType.Error)
         assert res.error_code == ErrorCode.OK
         print("Finish creating fulltext index.")
         print("Start creating Hnsw index...")
-        res = self.infinity_table.create_index("hnsw_index", index.IndexInfo("dense_col", index.IndexType.Hnsw,
+        res = self.hybridsearch_table.create_index("hnsw_index", index.IndexInfo("dense_col", index.IndexType.Hnsw,
                                                                              {
                                                                                  "m": "16",
                                                                                  "ef_construction": "200",
@@ -138,17 +138,17 @@ class InfinityClientForInsert:
         assert res.error_code == ErrorCode.OK
         print("Finish creating Hnsw index.")
         print("Start creating BMP index...")
-        res = self.infinity_table.create_index("bmp_index", index.IndexInfo("sparse_col", index.IndexType.BMP,
+        res = self.hybridsearch_table.create_index("bmp_index", index.IndexInfo("sparse_col", index.IndexType.BMP,
                                                                             {
                                                                                 "block_size": "8",
                                                                                 "compress_type": "compress"
                                                                             }),
                                                ConflictType.Error)
         assert res.error_code == ErrorCode.OK
-        self.infinity_table.optimize("bmp_index", {"topk": "1000", "bp_reorder": ""})
+        self.hybridsearch_table.optimize("bmp_index", {"topk": "1000", "bp_reorder": ""})
         print("Finish creating BMP index.")
 
 
 if __name__ == "__main__":
-    infinity_client = InfinityClientForInsert()
-    infinity_client.main()
+    hybridsearch_client = hybridsearchClientForInsert()
+    hybridsearch_client.main()

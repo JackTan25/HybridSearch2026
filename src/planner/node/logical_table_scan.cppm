@@ -27,7 +27,7 @@ import fast_rough_filter;
 
 export module logical_table_scan;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalTableScan : public LogicalNode {
 public:
@@ -56,4 +56,4 @@ public:
     bool add_row_id_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -18,10 +18,10 @@ import stl;
 
 export module hour;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 
 export void RegisterHourFunction(const UniquePtr<Catalog> &catalog_ptr);
 
-} // namespace infinity
+} // namespace hybridsearch

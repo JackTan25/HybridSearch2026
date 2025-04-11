@@ -7,7 +7,7 @@ import stl;
 import default_values;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export {
 
@@ -77,4 +77,4 @@ export u32 RowID2DocID(u32 segment_id, u32 block_id, u32 block_offset) {
 
 export RowID DocID2RowID(u32 doc_id) { return RowID((doc_id - 1) >> SEGMENT_OFFSET_IN_DOCID, (doc_id - 1) & SEGMENT_MASK_IN_DOCID); }
 
-} // namespace infinity
+} // namespace hybridsearch

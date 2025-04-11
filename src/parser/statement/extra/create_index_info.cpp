@@ -17,7 +17,7 @@
 
 #include <sstream>
 
-namespace infinity {
+namespace hybridsearch {
 
 std::string IndexInfo::IndexTypeToString(IndexType index_type) {
     switch (index_type) {
@@ -130,4 +130,4 @@ std::string CreateIndexInfo::ToString() const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

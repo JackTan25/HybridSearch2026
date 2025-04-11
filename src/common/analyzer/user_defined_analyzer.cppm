@@ -25,7 +25,7 @@ import tokenizer;
 import third_party;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 export class UserDefinedAnalyzer : public Analyzer {
 public:
     UserDefinedAnalyzer(const String &analyzer_path) : analyzer_path_(analyzer_path) {}
@@ -38,5 +38,5 @@ protected:
 private:
     const String analyzer_path_;
 };
-} // namespace infinity
+} // namespace hybridsearch
 #endif

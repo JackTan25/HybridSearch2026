@@ -20,7 +20,7 @@
 #include <cstdint>
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 struct PolygonType {
 public:
@@ -123,5 +123,5 @@ public:
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch
 #endif

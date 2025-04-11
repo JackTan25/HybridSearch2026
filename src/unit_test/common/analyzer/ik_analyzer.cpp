@@ -22,7 +22,7 @@ import term;
 import analyzer;
 import ik_analyzer;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 namespace fs = std::filesystem;
 

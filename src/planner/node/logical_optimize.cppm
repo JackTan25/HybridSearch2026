@@ -25,7 +25,7 @@ import internal_types;
 import optimize_statement;
 import statement_common;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalOptimize : public LogicalNode {
 public:
@@ -56,4 +56,4 @@ public:
     Vector<UniquePtr<InitParameter>> opt_params_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -18,7 +18,7 @@ export module stemmer;
 
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum Language {
     STEM_LANG_UNKNOWN = 0,
@@ -59,4 +59,4 @@ private:
     void *stem_function_; ///< stemming function
 };
 
-} // namespace infinity
+} // namespace hybridsearch

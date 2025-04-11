@@ -12,7 +12,7 @@ import doc_list_format_option;
 
 export module doc_list_encoder;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class DocListEncoder {
 public:
@@ -80,4 +80,4 @@ private:
     friend class InMemDocListDecoderTest;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

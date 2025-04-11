@@ -69,7 +69,7 @@ import between_expression;
 import in_expression;
 import value_expression;
 import reference_expression;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import knn_expr;
 import select_statement;
@@ -82,7 +82,7 @@ import optimize_statement;
 import logger;
 import show_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
 Status ExplainLogicalPlan::Explain(const LogicalNode *statement, SharedPtr<Vector<SharedPtr<String>>> &result, i64 intent_size) {
     switch (statement->operator_type()) {
@@ -2564,4 +2564,4 @@ Status ExplainLogicalPlan::Explain(const LogicalFusion *fusion_node, SharedPtr<V
     return Status::OK();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

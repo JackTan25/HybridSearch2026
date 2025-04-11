@@ -18,10 +18,10 @@ import stl;
 
 export module first;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 
 export void RegisterFirstFunction(const UniquePtr<Catalog> &catalog_ptr);
 
-} // namespace infinity
+} // namespace hybridsearch

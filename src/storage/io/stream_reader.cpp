@@ -21,10 +21,10 @@ module stream_reader;
 import stl;
 import logger;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 StreamReader::~StreamReader() { Close(); }
 
@@ -46,4 +46,4 @@ bool StreamReader::ReadLine(String &line) {
 
 void StreamReader::Close() { file_.close(); }
 
-} // namespace infinity
+} // namespace hybridsearch

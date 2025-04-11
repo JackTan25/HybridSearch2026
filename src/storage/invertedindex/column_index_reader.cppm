@@ -28,7 +28,7 @@ import segment_index_entry;
 import chunk_index_entry;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 struct TableEntry;
 class TermDocIterator;
 class Txn;
@@ -140,4 +140,4 @@ private:
     SharedPtr<FlatHashMap<u64, SharedPtr<Map<String, SharedPtr<ColumnIndexReader>>>, detail::Hash<u64>>> cache_column_readers_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

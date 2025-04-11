@@ -24,10 +24,10 @@ import third_party;
 import file_worker_type;
 import persistence_manager;
 import global_resource_usage;
-import infinity_exception;
+import hybridsearch_exception;
 import defer_op;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct FileWorkerSaveCtx {};
 
@@ -42,7 +42,7 @@ public:
         : data_dir_(std::move(data_dir)), temp_dir_(std::move(temp_dir)), file_dir_(std::move(file_dir)), file_name_(std::move(file_name)),
           persistence_manager_(persistence_manager) {
         assert(!std::filesystem::path(*file_dir_).is_absolute());
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("FileWorker");
 #endif
     }
@@ -116,4 +116,4 @@ protected:
     u8 *mmap_addr_{nullptr};
     u8 *mmap_data_{nullptr};
 };
-} // namespace infinity
+} // namespace hybridsearch

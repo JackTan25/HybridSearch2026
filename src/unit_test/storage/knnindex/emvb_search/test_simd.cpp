@@ -21,7 +21,7 @@ import stl;
 import emvb_simd_funcs;
 import simd_common_tools;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class SIMDTest : public BaseTest {};
 

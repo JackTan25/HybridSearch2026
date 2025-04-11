@@ -28,7 +28,7 @@ module traditional_chinese_analyzer;
 
 namespace fs = std::filesystem;
 
-namespace infinity {
+namespace hybridsearch {
 static const String OPENCC_PATH = "opencc";
 
 TraditionalChineseAnalyzer::TraditionalChineseAnalyzer(const String &path) : ChineseAnalyzer(path) {}
@@ -68,4 +68,4 @@ void TraditionalChineseAnalyzer::Parse(const String &input) {
     ChineseAnalyzer::Parse(out);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

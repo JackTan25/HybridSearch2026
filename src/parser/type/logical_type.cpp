@@ -19,7 +19,7 @@
 #include <string>
 #include <unordered_map>
 
-namespace infinity {
+namespace hybridsearch {
 
 static const char *type2name[] = {
     // Bool
@@ -339,4 +339,4 @@ LogicalType GetCommonLogicalType(const EmbeddingDataType type1, const EmbeddingD
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

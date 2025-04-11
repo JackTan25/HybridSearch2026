@@ -14,7 +14,7 @@ import posting_iterator;
 import column_length_io;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 PhraseDocIterator::PhraseDocIterator(Vector<UniquePtr<PostingIterator>> &&iters,
                                      const float weight,
@@ -209,7 +209,7 @@ bool PhraseDocIterator::GetExactPhraseMatchData() {
             begin_positions.push_back(now_position0);
         }
     }
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     if (SHOULD_LOG_DEBUG()) {
         std::ostringstream oss;
         oss << "Phrase \"" << terms_ptr_->at(0);
@@ -336,7 +336,7 @@ bool PhraseDocIterator::GetSloppyPhraseMatchData() {
     for (auto &solution : solutions) {
         tf_ += 1.0F / (1.0F + solution.matchLength);
     }
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     if (SHOULD_LOG_DEBUG()) {
         std::ostringstream oss;
         oss << "Phrase \"" << terms_ptr_->at(0);
@@ -365,4 +365,4 @@ bool PhraseDocIterator::GetSloppyPhraseMatchData() {
     return false;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

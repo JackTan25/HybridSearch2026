@@ -15,7 +15,7 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import stl;
 import global_resource_usage;
@@ -27,7 +27,7 @@ import data_block;
 import default_values;
 import profiler;
 import value;
-import infinity_context;
+import hybridsearch_context;
 import internal_types;
 import logical_type;
 import decimal_info;
@@ -36,7 +36,7 @@ import array_info;
 import knn_expr;
 import data_type;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class DataBlockTest : public BaseTestParamStr {};
 
@@ -45,7 +45,7 @@ INSTANTIATE_TEST_SUITE_P(TestWithDifferentParams,
                          ::testing::Values(BaseTestParamStr::NULL_CONFIG_PATH, BaseTestParamStr::VFS_OFF_CONFIG_PATH));
 
 TEST_P(DataBlockTest, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     DataBlock data_block;
     Vector<SharedPtr<DataType>> column_types;
@@ -146,7 +146,7 @@ TEST_P(DataBlockTest, test1) {
 }
 
 TEST_P(DataBlockTest, test2) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     DataBlock data_block;
     Vector<SharedPtr<DataType>> column_types;
@@ -179,9 +179,9 @@ TEST_P(DataBlockTest, test2) {
 }
 
 TEST_P(DataBlockTest, test3) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
-    infinity::BaseProfiler profiler;
+    hybridsearch::BaseProfiler profiler;
 
     profiler.Begin();
 
@@ -222,7 +222,7 @@ TEST_P(DataBlockTest, test3) {
 }
 
 TEST_P(DataBlockTest, ReadWrite) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     DataBlock data_block;
     Vector<SharedPtr<DataType>> column_types;

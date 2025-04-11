@@ -18,7 +18,7 @@ import stl;
 
 export module logical_node_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 // Logical operator types used in logical plan
 export enum class LogicalNodeType : u8 {
@@ -86,4 +86,4 @@ export enum class LogicalNodeType : u8 {
     kReadCache,
     kMock,
 };
-} // namespace infinity
+} // namespace hybridsearch

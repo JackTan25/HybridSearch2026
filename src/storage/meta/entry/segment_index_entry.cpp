@@ -26,7 +26,7 @@ import buffer_handle;
 import buffer_obj;
 import logger;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 import logical_type;
 import index_file_worker;
 import status;
@@ -65,12 +65,12 @@ import emvb_index_in_mem;
 import bmp_util;
 import hnsw_util;
 import wal_entry;
-import infinity_context;
+import hybridsearch_context;
 import defer_op;
 import memory_indexer;
 import hnsw_lsg_builder;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<std::string_view> SegmentIndexEntry::DecodeIndex(std::string_view encode) {
     SizeT delimiter_i = encode.rfind('#');
@@ -213,7 +213,7 @@ void SegmentIndexEntry::MemIndexInsert(SharedPtr<BlockEntry> block_entry,
                 String base_name = fmt::format("ft_{:016x}", begin_row_id.ToUint64());
                 {
                     std::unique_lock<std::shared_mutex> lck(rw_locker_);
-                    String full_path = Path(InfinityContext::instance().config()->DataDir()) / *table_index_entry_->index_dir();
+                    String full_path = Path(hybridsearchContext::instance().config()->DataDir()) / *table_index_entry_->index_dir();
                     memory_indexer_ =
                         MakeUnique<MemoryIndexer>(full_path, base_name, begin_row_id, index_fulltext->flag_, index_fulltext->analyzer_, this);
                 }
@@ -422,7 +422,7 @@ void SegmentIndexEntry::AddWalIndexDump(ChunkIndexEntry *dumped_index_entry, Txn
 //     // Init the mem index from previously spilled one.
 //     assert(memory_indexer_.get() == nullptr);
 //     const IndexFullText *index_fulltext = static_cast<const IndexFullText *>(index_base);
-//     String full_path = Path(InfinityContext::instance().config()->DataDir()) / *table_index_entry_->index_dir();
+//     String full_path = Path(hybridsearchContext::instance().config()->DataDir()) / *table_index_entry_->index_dir();
 //     memory_indexer_ = MakeUnique<MemoryIndexer>(full_path, base_name, base_row_id, index_fulltext->flag_, index_fulltext->analyzer_);
 //     memory_indexer_->Load();
 // }
@@ -470,7 +470,7 @@ void SegmentIndexEntry::PopulateEntirely(const SegmentEntry *segment_entry, Txn 
         case IndexType::kFullText: {
             const IndexFullText *index_fulltext = static_cast<const IndexFullText *>(index_base);
             String base_name = fmt::format("ft_{:016x}", base_row_id.ToUint64());
-            String full_path = Path(InfinityContext::instance().config()->DataDir()) / *table_index_entry_->index_dir();
+            String full_path = Path(hybridsearchContext::instance().config()->DataDir()) / *table_index_entry_->index_dir();
             memory_indexer_ = MakeUnique<MemoryIndexer>(full_path, base_name, base_row_id, index_fulltext->flag_, index_fulltext->analyzer_, this);
             u64 column_id = column_def->id();
             SizeT column_idx = table_entry->GetColumnIdxByID(column_id);
@@ -1356,4 +1356,4 @@ SharedPtr<SegmentIndexSnapshotInfo> SegmentIndexEntry::GetSnapshotInfo(Txn *txn_
     return segment_index_snapshot;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

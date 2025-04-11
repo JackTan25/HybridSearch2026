@@ -24,7 +24,7 @@ import simd_functions;
 
 export module dist_func_ip;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename DataType, typename CompressType>
 class LVQIPDist;
@@ -205,4 +205,4 @@ LVQIPDist<DataType, i8> PlainIPDist<DataType>::ToLVQDistance(SizeT dim) && {
     return LVQIPDist<DataType, i8>(dim);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

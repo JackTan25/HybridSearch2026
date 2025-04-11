@@ -21,18 +21,18 @@ import query_context;
 import global_resource_usage;
 
 export module physical_planner;
-namespace infinity {
+namespace hybridsearch {
 
 export class PhysicalPlanner {
 public:
     explicit PhysicalPlanner(QueryContext *query_context_ptr) : query_context_ptr_(query_context_ptr) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("PhysicalPlanner");
 #endif
     }
 
     ~PhysicalPlanner() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("PhysicalPlanner");
 #endif
     }
@@ -154,4 +154,4 @@ private:
     [[nodiscard]] UniquePtr<PhysicalOperator> BuildExplain(const SharedPtr<LogicalNode> &logical_operator) const;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

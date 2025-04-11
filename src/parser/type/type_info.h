@@ -18,7 +18,7 @@
 #include <cstdint>
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class TypeInfoType : uint8_t {
     kInvalid,
@@ -70,4 +70,4 @@ protected:
     TypeInfoType type_{TypeInfoType::kInvalid};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

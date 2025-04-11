@@ -18,10 +18,10 @@ module;
 
 export module base_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::StatementType;
-export using infinity::BaseStatement;
-export using infinity::StatementType2Str;
+export using hybridsearch::StatementType;
+export using hybridsearch::BaseStatement;
+export using hybridsearch::StatementType2Str;
 
-} // namespace infinity
+} // namespace hybridsearch

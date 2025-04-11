@@ -18,7 +18,7 @@ import stl;
 
 export module like;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 
@@ -26,4 +26,4 @@ export void RegisterLikeFunction(const UniquePtr<Catalog> &catalog_ptr);
 
 export void RegisterNotLikeFunction(const UniquePtr<Catalog> &catalog_ptr);
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -23,7 +23,7 @@ import global_resource_usage;
 
 export module buffer_writer;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class BufferWriter {
 public:
@@ -61,4 +61,4 @@ private:
     SharedPtr<boost::asio::ip::tcp::socket> socket_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

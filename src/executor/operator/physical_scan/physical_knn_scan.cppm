@@ -32,7 +32,7 @@ import internal_types;
 import common_query_filter;
 import physical_filter_scan_base;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PhysicalKnnScan final : public PhysicalFilterScanBase {
 public:
@@ -116,4 +116,4 @@ private:
     friend struct ExecuteDispatchHelper;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

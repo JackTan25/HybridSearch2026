@@ -23,7 +23,7 @@ export module bp_reordering;
 import stl;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct BPReorderContext {
 public:
@@ -219,4 +219,4 @@ private:
     SizeT log_thread_n_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

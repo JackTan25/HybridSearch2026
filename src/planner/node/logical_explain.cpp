@@ -22,7 +22,7 @@ import column_binding;
 import base_expression;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<ColumnBinding> LogicalExplain::GetColumnBindings() const { return {}; }
 
@@ -32,4 +32,4 @@ SharedPtr<Vector<SharedPtr<DataType>>> LogicalExplain::GetOutputTypes() const { 
 
 String LogicalExplain::ToString(i64 &space) const { return "LogicalExplain"; }
 
-} // namespace infinity
+} // namespace hybridsearch

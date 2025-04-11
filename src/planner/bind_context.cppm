@@ -21,7 +21,7 @@ import stl;
 import column_binding;
 import third_party;
 
-import infinity_exception;
+import hybridsearch_exception;
 import column_expression;
 import column_identifer;
 import binding;
@@ -35,7 +35,7 @@ import search_expr;
 import data_type;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 class ExpressionBinder;
 
@@ -57,14 +57,14 @@ public:
 public:
     explicit BindContext(const SharedPtr<BindContext> &parent) : parent_(parent.get()) {
         binding_context_id_ = GenerateBindingContextIndex();
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("BindContext");
 #endif
     }
 
     explicit BindContext(BindContext *parent) : parent_(parent) {
         binding_context_id_ = GenerateBindingContextIndex();
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("BindContext");
 #endif
     }
@@ -230,4 +230,4 @@ public:
     SharedPtr<ExpressionBinder> expression_binder_{nullptr};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

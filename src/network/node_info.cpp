@@ -19,7 +19,7 @@ module node_info;
 import stl;
 // import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 NodeInfo::NodeInfo(NodeRole role,
                    NodeStatus status,
@@ -84,4 +84,4 @@ String ToString(NodeStatus status) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

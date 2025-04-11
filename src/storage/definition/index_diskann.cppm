@@ -25,7 +25,7 @@ import base_table_ref;
 import create_index_info;
 import statement_common;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class DiskAnnEncodeType {
     kPlain,
@@ -86,4 +86,4 @@ public:
     const SizeT num_parts_{};     // Number of dataset slices when building the Vamana index
 };
 
-} // namespace infinity
+} // namespace hybridsearch

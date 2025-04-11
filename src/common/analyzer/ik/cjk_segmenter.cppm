@@ -10,7 +10,7 @@ import segmenter;
 import analyze_context;
 import ik_dict;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class CJKSegmenter : public Segmenter {
 public:
@@ -27,4 +27,4 @@ public:
     void Reset() override;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -100,20 +100,20 @@ benchmark/toml/toml_config.h
 benchmark/csv/csv_config.h
 
 # py thrift rpc
-#python/infinity/remote_thrift/infinity_thrift_rpc/constants.py
-#python/infinity/remote_thrift/infinity_thrift_rpc/InfinityService.py
-#python/infinity/remote_thrift/infinity_thrift_rpc/InfinityService-remote
-#python/infinity/remote_thrift/infinity_thrift_rpc/ttypes.py
+#python/hybridsearch/remote_thrift/hybridsearch_thrift_rpc/constants.py
+#python/hybridsearch/remote_thrift/hybridsearch_thrift_rpc/hybridsearchService.py
+#python/hybridsearch/remote_thrift/hybridsearch_thrift_rpc/hybridsearchService-remote
+#python/hybridsearch/remote_thrift/hybridsearch_thrift_rpc/ttypes.py
 
 
 # cpp rpc
-#src/network/infinity_thrift/*
+#src/network/hybridsearch_thrift/*
 
 #python sdk
 python/build
 python/dist
 python/.idea
-python/infinity_sdk.egg-info
+python/hybridsearch_sdk.egg-info
 
 
 sift_1m
@@ -137,7 +137,7 @@ python/benchmark/datasets/
 tmp*/
 
 dist/
-python/infinity_sdk/infinity_sdk.egg-info/
+python/hybridsearch_sdk/hybridsearch_sdk.egg-info/
 minio/
 
 myenv/*

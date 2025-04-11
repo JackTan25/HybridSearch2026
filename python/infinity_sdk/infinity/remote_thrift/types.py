@@ -15,17 +15,17 @@
 import struct
 import json
 import numpy as np
-from infinity.common import VEC, SparseVector, InfinityException
-from infinity.remote_thrift.infinity_thrift_rpc.ttypes import *
+from hybridsearch.common import VEC, SparseVector, hybridsearchException
+from hybridsearch.remote_thrift.hybridsearch_thrift_rpc.ttypes import *
 from collections import defaultdict
 from typing import Any, Optional
 from datetime import date, time, datetime, timedelta
 
 import polars as pl
 from numpy import dtype
-from infinity.errors import ErrorCode
+from hybridsearch.errors import ErrorCode
 
-import infinity.remote_thrift.infinity_thrift_rpc.ttypes as ttypes
+import hybridsearch.remote_thrift.hybridsearch_thrift_rpc.ttypes as ttypes
 
 
 def logic_type_to_dtype(ttype: ttypes.DataType):
@@ -546,7 +546,7 @@ def make_match_tensor_expr(vector_column_name: str, embedding_data: VEC, embeddi
     match_tensor_expr.filter_expr = filter_expr
     data = EmbeddingData()
     if embedding_data_type == 'bit':
-        raise InfinityException(ErrorCode.INVALID_EMBEDDING_DATA_TYPE, f"Invalid embedding {embedding_data[0]} type")
+        raise hybridsearchException(ErrorCode.INVALID_EMBEDDING_DATA_TYPE, f"Invalid embedding {embedding_data[0]} type")
     elif embedding_data_type in ['unsigned tinyint', 'uint8', 'u8']:
         elem_type = ElementType.ElementUInt8
         data.u8_array_value = np.asarray(embedding_data, dtype=np.uint8).flatten()
@@ -575,7 +575,7 @@ def make_match_tensor_expr(vector_column_name: str, embedding_data: VEC, embeddi
         elem_type = ElementType.ElementBFloat16
         data.bf16_array_value = np.asarray(embedding_data, dtype=np.float32).flatten()
     else:
-        raise InfinityException(ErrorCode.INVALID_EMBEDDING_DATA_TYPE, f"Invalid embedding {embedding_data[0]} type")
+        raise hybridsearchException(ErrorCode.INVALID_EMBEDDING_DATA_TYPE, f"Invalid embedding {embedding_data[0]} type")
 
     match_tensor_expr.embedding_data_type = elem_type
     match_tensor_expr.embedding_data = data
@@ -598,11 +598,11 @@ def make_match_sparse_expr(vector_column_name: str, sparse_data: SparseVector | 
             query_sparse_expr.i64_array_idx = indices
             query_sparse_expr.f64_array_value = values
         case SparseVector([int(), *_], None):
-            raise InfinityException(ErrorCode.INVALID_CONSTANT_TYPE,
+            raise hybridsearchException(ErrorCode.INVALID_CONSTANT_TYPE,
                                     f"No values! Sparse data does not support bool value type now")
         case dict():
             if len(sparse_data) == 0:
-                raise InfinityException(ErrorCode.INVALID_EXPRESSION, "Empty sparse vector")
+                raise hybridsearchException(ErrorCode.INVALID_EXPRESSION, "Empty sparse vector")
             match next(iter(sparse_data.values())):
                 case int():
                     query_sparse_expr.literal_type = LiteralType.SparseIntegerArray
@@ -613,10 +613,10 @@ def make_match_sparse_expr(vector_column_name: str, sparse_data: SparseVector | 
                     query_sparse_expr.i64_array_idx = [int(kk) for kk in sparse_data.keys()]
                     query_sparse_expr.f64_array_value = [float(vv) for vv in sparse_data.values()]
                 case _:
-                    raise InfinityException(ErrorCode.INVALID_EXPRESSION,
+                    raise hybridsearchException(ErrorCode.INVALID_EXPRESSION,
                                             f"Invalid sparse vector value type: {type(next(iter(sparse_data.values())))}")
         case _:
-            raise InfinityException(ErrorCode.INVALID_CONSTANT_TYPE, f"Invalid sparse data type {type(sparse_data)}")
+            raise hybridsearchException(ErrorCode.INVALID_CONSTANT_TYPE, f"Invalid sparse data type {type(sparse_data)}")
 
     match_sparse_options = []
     if opt_params is not None:

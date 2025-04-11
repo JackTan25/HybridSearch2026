@@ -18,7 +18,7 @@ module;
 export module simd_common_tools;
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 using U8MaskPtr = const u32 (*)[8];
 
@@ -191,4 +191,4 @@ export inline int popcount_sse2(const __m128i x) {
 }
 #endif // defined (__SSE2__)
 
-} // namespace infinity
+} // namespace hybridsearch

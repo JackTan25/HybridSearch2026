@@ -15,7 +15,7 @@
 #include "extra_ddl_info.h"
 #include "parser_assert.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 std::string ConflictTypeToStr(ConflictType type) {
     switch (type) {
@@ -36,4 +36,4 @@ std::string ConflictTypeToStr(ConflictType type) {
     ParserError("Unreachable");
 }
 
-} // namespace infinity
+} // namespace hybridsearch

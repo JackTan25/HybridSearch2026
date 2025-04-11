@@ -18,7 +18,7 @@ export module knn_diskann;
 
 import stl;
 import deprecated_knn_distance;
-import infinity_exception;
+import hybridsearch_exception;
 import index_base;
 import kmeans_partition;
 import search_top_1;
@@ -30,7 +30,7 @@ import logger;
 import diskann_index_data;
 import diskann_dist_func;
 
-namespace infinity {
+namespace hybridsearch {
 template <typename Compare, MetricType metric, KnnDistanceAlgoType algo>
 class KnnDiskAnn {
     using DistType = typename Compare::DistanceType;
@@ -118,4 +118,4 @@ private:
     bool begin_{false};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

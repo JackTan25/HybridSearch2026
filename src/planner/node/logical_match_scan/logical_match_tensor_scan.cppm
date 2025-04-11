@@ -31,7 +31,7 @@ import fast_rough_filter;
 import common_query_filter;
 import default_values;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct MatchTensorScanIndexOptions {
     // emvb index options
@@ -67,4 +67,4 @@ public:
     SharedPtr<MatchTensorScanIndexOptions> index_options_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

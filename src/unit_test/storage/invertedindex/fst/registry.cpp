@@ -17,7 +17,7 @@ import base_test;
 import stl;
 import fst;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 struct Key {
     int k_{0};

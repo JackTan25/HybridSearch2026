@@ -28,10 +28,10 @@ export module diskann_mem_data_store;
 import stl;
 import diskann_dist_func;
 import diskann_utils;
-import infinity_exception;
+import hybridsearch_exception;
 import local_file_handle;
 
-namespace infinity {
+namespace hybridsearch {
 export template <typename DataType>
 class DiskAnnMemDataStore {
 public:
@@ -281,4 +281,4 @@ private:
     SharedPtr<f32[]> pre_computed_norms_; // in case we need to save vector norms for optimization
 };
 
-} // namespace infinity
+} // namespace hybridsearch

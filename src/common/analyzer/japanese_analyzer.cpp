@@ -34,7 +34,7 @@ module japanese_analyzer;
 
 namespace fs = std::filesystem;
 
-namespace infinity {
+namespace hybridsearch {
 static const String KNOWLEDGE_PATH = "mecab/ipadic";
 
 // Foreign Language is Japanese POS
@@ -131,4 +131,4 @@ void JapaneseAnalyzer::SetLabelMode() {
     analyzer_->setOption(jma::Analyzer::OPTION_TYPE_CONVERT_TO_LOWER_CASE, 0);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

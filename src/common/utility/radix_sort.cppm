@@ -4,6 +4,6 @@ module;
 
 export module radix_sort;
 
-namespace infinity {
-export using infinity::ShiftBasedRadixSorter;
+namespace hybridsearch {
+export using hybridsearch::ShiftBasedRadixSorter;
 }

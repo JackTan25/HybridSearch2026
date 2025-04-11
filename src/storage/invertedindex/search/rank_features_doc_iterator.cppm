@@ -22,7 +22,7 @@ import doc_iterator;
 import multi_doc_iterator;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class RankFeaturesDocIterator : public MultiDocIterator {
 public:
@@ -53,4 +53,4 @@ private:
     f32 *score_sum_ptr_ = nullptr;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

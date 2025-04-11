@@ -24,13 +24,13 @@ import merge_knn;
 import data_block;
 import match_sparse_expr;
 import match_sparse_expression;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import knn_result_handler;
 import sparse_vector_distance;
 import sparse_util;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class SparseDistanceBase {};
 
@@ -122,4 +122,4 @@ public:
     UniquePtr<MergeKnnBase> merge_knn_base_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

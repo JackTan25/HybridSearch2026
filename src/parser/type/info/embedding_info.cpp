@@ -14,7 +14,7 @@
 #include "embedding_info.h"
 #include <arrow/type.h>
 
-namespace infinity {
+namespace hybridsearch {
 
 bool EmbeddingInfo::operator==(const TypeInfo &other) const {
     if (other.type() != TypeInfoType::kEmbedding)
@@ -69,4 +69,4 @@ std::string EmbeddingInfo::EmbeddingDataTypeToString(EmbeddingDataType type) {
     return std::string();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

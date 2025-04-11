@@ -11,7 +11,7 @@ import byte_slice;
 import byte_slice_reader;
 import byte_slice_writer;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class ByteSliceReaderWriterTest : public BaseTest {
 public:
@@ -72,7 +72,7 @@ public:
 };
 
 TEST_F(ByteSliceReaderWriterTest, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
     ByteSliceWriter writer;
     u32 size = 0;
 
@@ -98,7 +98,7 @@ TEST_F(ByteSliceReaderWriterTest, test1) {
 }
 
 TEST_F(ByteSliceReaderWriterTest, test2) {
-    using namespace infinity;
+    using namespace hybridsearch;
     ByteSliceWriter writer;
     i16 i = 0;
     for (i = 0; i < 10000; i++) {
@@ -109,7 +109,7 @@ TEST_F(ByteSliceReaderWriterTest, test2) {
 }
 
 TEST_F(ByteSliceReaderWriterTest, test3) {
-    using namespace infinity;
+    using namespace hybridsearch;
     ByteSliceWriter writer;
     String str(16000, 'x');
     writer.Write(str.c_str(), str.size());
@@ -118,7 +118,7 @@ TEST_F(ByteSliceReaderWriterTest, test3) {
 }
 
 TEST_F(ByteSliceReaderWriterTest, test4) {
-    using namespace infinity;
+    using namespace hybridsearch;
     ByteSliceWriter writer;
     i32 i = 0;
     for (i = 0; i < 10000; i++) {
@@ -133,7 +133,7 @@ TEST_F(ByteSliceReaderWriterTest, test4) {
 }
 
 TEST_F(ByteSliceReaderWriterTest, test5) {
-    using namespace infinity;
+    using namespace hybridsearch;
     ByteSliceWriter writer;
     i64 i = 0;
     for (i = 0; i < 10000; i++) {
@@ -148,7 +148,7 @@ TEST_F(ByteSliceReaderWriterTest, test5) {
 }
 
 TEST_F(ByteSliceReaderWriterTest, TestDataConsistency) {
-    using namespace infinity;
+    using namespace hybridsearch;
     ByteSliceWriter writer;
 
     // Write various data
@@ -167,7 +167,7 @@ TEST_F(ByteSliceReaderWriterTest, TestDataConsistency) {
 }
 
 // TEST_F(ByteSliceReaderWriterTest, TestWriterDumpAndLoad) {
-//     using namespace infinity;
+//     using namespace hybridsearch;
 //     LocalFileSystem local_file_system;
 //     String path = String(GetFullTmpDir()) + "/test_byteslice_dump";
 

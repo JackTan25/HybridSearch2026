@@ -23,7 +23,7 @@ import column_binding;
 
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<ColumnBinding> LogicalImport::GetColumnBindings() const { return {}; }
 
@@ -84,4 +84,4 @@ String LogicalImport::ToString(i64 &space) const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

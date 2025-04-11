@@ -142,7 +142,7 @@ import match_sparse_expression;
 import explain_physical_plan;
 import third_party;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import create_index_info;
 import command_statement;
 import explain_statement;
@@ -151,7 +151,7 @@ import load_meta;
 import block_index;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 UniquePtr<PhysicalOperator> PhysicalPlanner::BuildPhysicalOperator(const SharedPtr<LogicalNode> &logical_operator) const {
 
@@ -1304,4 +1304,4 @@ UniquePtr<PhysicalOperator> PhysicalPlanner::BuildExplain(const SharedPtr<Logica
     return explain_node;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

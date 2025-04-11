@@ -19,7 +19,7 @@
 #include <cstdint>
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 struct TimestampTZType {
     TimestampTZType() = default;
@@ -40,5 +40,5 @@ struct TimestampTZType {
     int32_t time{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch
 */

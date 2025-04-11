@@ -18,8 +18,8 @@ module;
 
 export module create_view_info;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::CreateViewInfo;
+export using hybridsearch::CreateViewInfo;
 
 }

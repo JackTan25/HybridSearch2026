@@ -168,7 +168,7 @@ static size_t sp_seg(converter_desc *converter, ucs4_t **inbuf, size_t *inbuf_le
     size_t i, j;
 
     for (i = 0; i <= length; i++)
-        ossb->min_len[i] = INFINITY_INT;
+        ossb->min_len[i] = hybridsearch_INT;
 
     ossb->min_len[0] = ossb->parent[0] = 0;
 

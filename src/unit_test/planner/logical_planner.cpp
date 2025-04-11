@@ -15,20 +15,20 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 import sql_runner;
 
 class LogicalPlannerTest : public BaseTest {};
 
 TEST_F(LogicalPlannerTest, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SQLRunner::Run("create table t1(a bigint, b bigint);", false);
     SQLRunner::Run("insert into t1 values(1, 2);", false);

@@ -27,7 +27,7 @@ import physical_merge_knn;
 import physical_merge_match_sparse;
 import physical_merge_match_tensor;
 
-namespace infinity {
+namespace hybridsearch {
 
 CachedMatchScanBase::CachedMatchScanBase(TxnTimeStamp query_ts, const LogicalMatchScanBase *logical_match_scan)
     : CachedScanBase(logical_match_scan->operator_type(), logical_match_scan->base_table_ref_.get(), query_ts, logical_match_scan->GetOutputNames()),
@@ -142,4 +142,4 @@ bool CachedMatchTensorScan::Eq(const CachedNodeBase &other) const {
     return topn_ == other_tensor.topn_ && *index_options_ == *other_tensor.index_options_;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

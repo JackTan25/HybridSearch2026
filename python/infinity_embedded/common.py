@@ -83,9 +83,9 @@ INSERT_DATA = dict[str, Union[str, int, float, list[Union[int, float]]], SparseV
 
 LOCAL_HOST = NetworkAddress("127.0.0.1", 23817)
 
-# test embedded_infinity
-LOCAL_INFINITY_PATH = "/var/infinity"
-LOCAL_INFINITY_CONFIG_PATH = "conf/pytest_embedded_infinity_conf.toml"
+# test embedded_hybridsearch
+LOCAL_hybridsearch_PATH = "/var/hybridsearch"
+LOCAL_hybridsearch_CONFIG_PATH = "conf/pytest_embedded_hybridsearch_conf.toml"
 
 
 class ConflictType(object):
@@ -99,7 +99,7 @@ class SortType(object):
     Desc = 1
 
 
-class InfinityException(Exception):
+class hybridsearchException(Exception):
     def __init__(self, error_code=0, error_message=None):
         self.error_code = error_code
         self.error_message = error_message

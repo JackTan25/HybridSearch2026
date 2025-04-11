@@ -25,14 +25,14 @@ import stl;
 import default_values;
 import index_base;
 import local_file_handle;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import secondary_index_pgm;
 import logger;
 import chunk_index_entry;
 import buffer_handle;
 
-namespace infinity {
+namespace hybridsearch {
 
 template <typename RawValueType>
 struct SecondaryIndexChunkDataReader {
@@ -206,4 +206,4 @@ SecondaryIndexData *GetSecondaryIndexData(const SharedPtr<DataType> &data_type, 
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

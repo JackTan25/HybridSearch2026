@@ -23,7 +23,7 @@ import index_base;
 import third_party;
 import column_def;
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class SegmentStatus;
 export struct SnapshotInfo {
@@ -120,4 +120,4 @@ export struct TableSnapshotInfo : public SnapshotInfo {
     static Tuple<SharedPtr<TableSnapshotInfo>, Status> Deserialize(const String &snapshot_dir, const String &snapshot_name);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

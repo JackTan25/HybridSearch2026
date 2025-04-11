@@ -17,7 +17,7 @@ module;
 module merge_knn_data;
 import stl;
 import base_table_ref;
-import infinity_exception;
+import hybridsearch_exception;
 import merge_knn;
 import knn_result_handler;
 import status;
@@ -26,7 +26,7 @@ import internal_types;
 import knn_expr;
 import statement_common;
 
-namespace infinity {
+namespace hybridsearch {
 
 MergeKnnFunctionData::MergeKnnFunctionData(i64 query_count,
                                            i64 topk,
@@ -78,4 +78,4 @@ void MergeKnnFunctionData::InitMergeKnn(KnnDistanceType knn_distance_type) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

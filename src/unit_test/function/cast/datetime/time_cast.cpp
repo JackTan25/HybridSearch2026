@@ -15,14 +15,14 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 
 import function_set;
 import aggregate_function_set;
@@ -40,7 +40,7 @@ import internal_types;
 import logical_type;
 import data_type;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class TimeCastTest : public BaseTest {
     void SetUp() override { BaseTest::SetUp(); }
@@ -49,7 +49,7 @@ class TimeCastTest : public BaseTest {
 };
 
 TEST_F(TimeCastTest, date_cast0) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     // Try to cast time type to wrong type.
     {
@@ -70,7 +70,7 @@ TEST_F(TimeCastTest, date_cast0) {
 }
 
 TEST_F(TimeCastTest, date_cast1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     // Call BindDateCast with wrong type of parameters
     {

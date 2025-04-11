@@ -23,12 +23,12 @@ import operator_state;
 import physical_operator;
 import physical_operator_type;
 import load_meta;
-import infinity_exception;
+import hybridsearch_exception;
 import internal_types;
 import data_type;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 class FragmentContext;
 
@@ -82,4 +82,4 @@ private:
     SinkType type_{SinkType::kInvalid};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

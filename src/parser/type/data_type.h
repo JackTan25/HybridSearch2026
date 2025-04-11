@@ -27,7 +27,7 @@ class DataType;
 
 }
 
-namespace infinity {
+namespace hybridsearch {
 
 class DataType {
 public:
@@ -364,4 +364,4 @@ Float16T DataType::StringToValue<Float16T>(const std::string_view &str_view);
 template <>
 BFloat16T DataType::StringToValue<BFloat16T>(const std::string_view &str_view);
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -2,15 +2,15 @@
 sidebar_position: 2
 slug: /set_up_cluster
 ---
-# Set up an Infinity cluster
+# Set up an hybridsearch cluster
 
-Architecture overview and user guide for Infinity cluster.
+Architecture overview and user guide for hybridsearch cluster.
 
 ---
 
 ## Overview
 
-An Infinity cluster consists of one leader node, up to four follower nodes, and several learner nodes:
+An hybridsearch cluster consists of one leader node, up to four follower nodes, and several learner nodes:
 
 - **Leader node**: The read node and the only write node.
 - **Follower node**: Read node.
@@ -18,11 +18,11 @@ An Infinity cluster consists of one leader node, up to four follower nodes, and 
 
 As of v0.5.0, the supported shared storage is MinIO.
 
-![infinity_cluster](https://github.com/user-attachments/assets/3e9abeed-1698-4741-8bdb-ba3b05c1d7a3)
+![hybridsearch_cluster](https://github.com/user-attachments/assets/3e9abeed-1698-4741-8bdb-ba3b05c1d7a3)
 
 ### Architecture
 
-Infinity employs a distributed architecture comprising one leader node, *N* follower nodes (0 &le; *N* &le; 4), and a number of learner nodes. As illustrated in the diagram above, all nodes in the cluster use MinIO for persistent storage.
+hybridsearch employs a distributed architecture comprising one leader node, *N* follower nodes (0 &le; *N* &le; 4), and a number of learner nodes. As illustrated in the diagram above, all nodes in the cluster use MinIO for persistent storage.
 
 - **Leader node**: The node responsible for processing transactions and managing connection status of other nodes in the cluster. When a transaction occurs, the leader node transmits the logs to both follower and learner nodes. The leader node confirms the completion of the transaction only upon receiving messages confirming completion of log persistence from *all* follower nodes.
 - **Follower node**: Receives log/WAL from the leader synchronously. It acts as a backup for the leader node, maintaining strong consistency with the leader's data state.
@@ -48,7 +48,7 @@ When a transaction occurs, the leader node sends its log to both follower and le
 
 ![mode_transition](https://github.com/user-attachments/assets/932072a3-9ffb-4aad-89f1-7eef0fff931c)
 
-## Set up an Infinity cluster
+## Set up an hybridsearch cluster
 
 ### Customize configuration files for cluster
 
@@ -58,7 +58,7 @@ For *each* cluster node, you are required to prepare a customized configuration 
 2. Set `storage_type` to `"minio"`.
 3. Set `peer_ip` and `peer_port`.
 4. Update object storage-specific settings.
-5. Save your changes and start up Infinity using the customized configuration file.  
+5. Save your changes and start up hybridsearch using the customized configuration file.  
    *When a cluster node starts, it automatically operates in `ADMIN` mode.*
 
 For further instructions on specifying a configuration file or setting parameters, see the [Configurations](https://infiniflow.org/docs/dev/configurations).

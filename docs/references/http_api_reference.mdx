@@ -7,7 +7,7 @@ slug: /http_api_reference
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-A complete reference for Infinity's Python APIs.
+A complete reference for hybridsearch's Python APIs.
 
 ---
 
@@ -181,7 +181,7 @@ The response includes a JSON object like the following:
 
 **GET** `/databases`
 
-Retrieves a list of all available databases within the Infinity system.
+Retrieves a list of all available databases within the hybridsearch system.
 
 #### Request
 
@@ -261,7 +261,7 @@ The response includes a JSON object like the following:
 {
     "error_code": 0,
     "database_name": "default_db"
-    "storage_directory": "/var/infinity/data/nIHniKeHIB_db_default"
+    "storage_directory": "/var/hybridsearch/data/nIHniKeHIB_db_default"
     "table_count": "4"
 }
 ```
@@ -694,7 +694,7 @@ The response includes a JSON object like the following:
     "error_code": 0,
     "database_name": "default_db",
     "table_name": "my_table",
-    "storage_directory": "/var/infinity/data/nIHniKeHIB_db_default/h1abZcWuBs_table_my_table",
+    "storage_directory": "/var/hybridsearch/data/nIHniKeHIB_db_default/h1abZcWuBs_table_my_table",
     "column_count" : 3,
     "segment_count" : 1,
     "row_count" : 5
@@ -1232,7 +1232,7 @@ The response includes a JSON object like the following:
     "index_type": "HNSW",
     "other_parameters": "metric = l2, encode_type = plain, M = 16, ef_construction = 50",
     "segment_index_count": "0",
-    "storage_directory": "/var/infinity/data/3C1tizeluV_db_default_db/O0wSJ88IrJ_table_test_vector_table/RYurmCbD5h_index_idx1"
+    "storage_directory": "/var/hybridsearch/data/3C1tizeluV_db_default_db/O0wSJ88IrJ_table_test_vector_table/RYurmCbD5h_index_idx1"
     "storage_size": "0B"
 }
 ```
@@ -1394,7 +1394,7 @@ curl --request GET \
      --header 'accept: application/json' \
      --header 'content-type: application/json' \
      --data ' {
-         "file_path": "/var/infinity/filename.csv",
+         "file_path": "/var/hybridsearch/filename.csv",
          "file_type": "csv",
          "header": false, 
          "delimiter": "\t",
@@ -1459,7 +1459,7 @@ The response includes a JSON object like the following:
 ```shell
 {
     "error_code": 7002,
-    "error_message": "File already existed: /var/infinity/filename.csv"
+    "error_message": "File already existed: /var/hybridsearch/filename.csv"
 }
 ```
 
@@ -1531,7 +1531,7 @@ curl --request POST \
   The name of the table.
 - `"file_path"`: (*Body parameter*), `string`, *Required* 
 - `Body`: (*Body parameter*),  `object[]`, *Required*  
-  Data to insert. Infinity supports inserting multiple rows to a table at one time in the form of `object[]`. Each JSON object corresponds to a row to insert, and each key-value pair it corresponds to a column name and the table cell value.
+  Data to insert. hybridsearch supports inserting multiple rows to a table at one time in the form of `object[]`. Each JSON object corresponds to a row to insert, and each key-value pair it corresponds to a column name and the table cell value.
 
 :::tip NOTE
 - When inserting incomplete rows of data, ensure that all un-inserted columns have default values when creating the table. Otherwise, an error will occur.
@@ -1963,7 +1963,7 @@ curl --request GET \
     - `"weighted_sum"`  
       The weighted sum approach assigns different weights to different retrieval ways, allowing you to emphasize specific ways. This is particularly useful when you are certain of each path's relative importance.  
     - `"match_tensor"`  
-      Infinity's tensor-based late interaction reranking approach.  
+      hybridsearch's tensor-based late interaction reranking approach.  
 
   - `"topn"`: `int`, *Required*  
     An integer indicating the number of nearest neighbours (vector search) or most relevant rows (full-text search) to return.  
@@ -1990,7 +1990,7 @@ curl --request GET \
       - **"default_field"**: `str`, *Optional*  
         - If `"fields"` is an empty string, this parameter specifies the default field to search on.  
       - **"operator"**: `str`, *Optional*  
-        - If not specified, the search follows Infinity's full-text search syntax, meaning that logical and arithmetic operators, quotation marks and escape characters will function as full-text search operators, such as:
+        - If not specified, the search follows hybridsearch's full-text search syntax, meaning that logical and arithmetic operators, quotation marks and escape characters will function as full-text search operators, such as:
           - AND operator: `AND`
           - OR operator: `OR`
           - NOT operator: `NOT`
@@ -2002,7 +2002,7 @@ curl --request GET \
           - DOUBLE_QUOTED_STRING: Used to search for a phrase, e.g., `"Bloom filter"`.
           - Escape characters: Used to escape reserved characters, e.g., `space\:efficient`. Starting with a backslash `\` will escape the following characters:
             `' '`, `'('`, `')'`, `'^'`, `'"'`, `'\''`, `'~'`, `'*'`, `'?'`, `':'`, `'\\'`
-        - If specified, Infinity's full-text search syntax will not take effect, and the specified operator will be interpolated into `matching_text`.  
+        - If specified, hybridsearch's full-text search syntax will not take effect, and the specified operator will be interpolated into `matching_text`.  
           Useful for searching text including code numbers like `"A01-233:BC"`.  
           - `{"operator": "or"}`: Interpolates the `OR` operator between words in `matching_text` to create a new search text.  
             For example, reinterprets `"A01-233:BC"` as `'"A01" OR "-233" OR "BC"'`.  
@@ -2177,7 +2177,7 @@ The response includes a JSON object like the following:
 
 **GET** `/variables`
 
-Retrieves all global variables in the Infinity system.
+Retrieves all global variables in the hybridsearch system.
 
 #### Request
 
@@ -2203,7 +2203,7 @@ The response includes a JSON object like the following:
 {
     "error_code":0,
     "active_txn_count":"1",
-    "active_wal_filename":"/var/infinity/wal/wal.log",
+    "active_wal_filename":"/var/hybridsearch/wal/wal.log",
     "buffer_object_count":"6",
     "buffer_usage":"0B/4.00GB",
     "current_timestamp":"16774",
@@ -2401,28 +2401,28 @@ The response includes a JSON object like the following:
     "compact_interval":"10",
     "connection_pool_size":"256",
     "cpu_limit":"16",
-    "data_dir":"/var/infinity/data",
+    "data_dir":"/var/hybridsearch/data",
     "delta_checkpoint_interval":"5",
     "delta_checkpoint_threshold":"67108864",
     "error_code":0,
     "full_checkpoint_interval":"30",
     "http_port":"23820",
-    "log_dir":"/var/infinity/log",
+    "log_dir":"/var/hybridsearch/log",
     "log_file_max_size":"1073741824",
     "log_file_rotate_count":"8",
-    "log_filename":"infinity.log",
+    "log_filename":"hybridsearch.log",
     "log_level":"Info",
     "log_to_stdout":"False",
     "mem_index_capacity":"65536",
     "optimize_interval":"10",
     "postgres_port":"5432",
-    "resource_dir":"/var/infinity/resource",
+    "resource_dir":"/var/hybridsearch/resource",
     "server_address":"0.0.0.0",
-    "temp_dir":"/var/infinity/tmp",
+    "temp_dir":"/var/hybridsearch/tmp",
     "time_zone":"UTC+8",
     "version":"0.6.0",
     "wal_compact_threshold":"1073741824",
-    "wal_dir":"/var/infinity/wal",
+    "wal_dir":"/var/hybridsearch/wal",
     "wal_flush":"FlushAtOnce"
 }
 ```
@@ -2535,21 +2535,21 @@ The response includes a JSON object like the following:
     "buffer": [
         {
             "buffered_type": "Persistent",
-            "path": "/var/infinity/data/nlAn5spku9_db_default_db/sNzUhKy3er_table_table1/seg_0/blk_0/0.col",
+            "path": "/var/hybridsearch/data/nlAn5spku9_db_default_db/sNzUhKy3er_table_table1/seg_0/blk_0/0.col",
             "size": "32768",
             "status": "Freed",
             "type": "data"
         },
         {
             "buffered_type": "Persistent",
-            "path": "/var/infinity/data/nlAn5spku9_db_default_db/sNzUhKy3er_table_table1/seg_0/blk_0/2.col",
+            "path": "/var/hybridsearch/data/nlAn5spku9_db_default_db/sNzUhKy3er_table_table1/seg_0/blk_0/2.col",
             "size": "131072",
             "status": "Freed",
             "type": "data"
         },
         {
             "buffered_type": "Persistent",
-            "path": "/var/infinity/data/nlAn5spku9_db_default_db/sNzUhKy3er_table_table1/seg_0/blk_0/version",
+            "path": "/var/hybridsearch/data/nlAn5spku9_db_default_db/sNzUhKy3er_table_table1/seg_0/blk_0/version",
             "size": "65536",
             "status": "Freed",
             "type": "version data"
@@ -2588,7 +2588,7 @@ A `500` HTTP status code indicates an error condition. The response includes a J
 
 **GET** `/instance/profiles`
 
-When set session variable 'profile', Infinity will record query profile information. This command is to list recorded queries profile.
+When set session variable 'profile', hybridsearch will record query profile information. This command is to list recorded queries profile.
 
 #### Request
 
@@ -2992,7 +2992,7 @@ The response includes a JSON object like the following:
     "error_code":0,
     "full_checkpoint":[
         {
-            "file_path":"/var/infinity/data/catalog/FULL.82192.json",
+            "file_path":"/var/hybridsearch/data/catalog/FULL.82192.json",
             "max_commit_timestamp":"82192"
         }
     ]
@@ -3665,16 +3665,16 @@ The response includes a JSON object like the following:
     "compact_interval":"120",
     "connection_pool_size":"128",
     "cpu_limit":"16",
-    "data_dir":"/var/infinity/leader/data",
+    "data_dir":"/var/hybridsearch/leader/data",
     "delta_checkpoint_interval":"60",
     "delta_checkpoint_threshold":"67108864",
     "error_code":0,
     "full_checkpoint_interval":"86400",
     "http_port":"23821",
-    "log_dir":"/var/infinity/leader/log",
+    "log_dir":"/var/hybridsearch/leader/log",
     "log_file_max_size":"10737418240",
     "log_file_rotate_count":"10",
-    "log_filename":"infinity.log",
+    "log_filename":"hybridsearch.log",
     "log_level":"Debug",
     "log_to_stdout":"true",
     "mem_index_capacity":"65536",
@@ -3682,13 +3682,13 @@ The response includes a JSON object like the following:
     "peer_server_connection_pool_size":"64",
     "postgres_port":"5433",
     "record_running_query":"false",
-    "resource_dir":"/var/infinity/leader/resource",
+    "resource_dir":"/var/hybridsearch/leader/resource",
     "server_address":"0.0.0.0",
-    "temp_dir":"/var/infinity/leader/tmp",
+    "temp_dir":"/var/hybridsearch/leader/tmp",
     "time_zone":"UTC-8",
     "version":"0.6.0",
     "wal_compact_threshold":"1073741824",
-    "wal_dir":"/var/infinity/leader/wal",
+    "wal_dir":"/var/hybridsearch/leader/wal",
     "wal_flush":"FlushAtOnce"
 }
 ```

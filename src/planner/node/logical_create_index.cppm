@@ -27,7 +27,7 @@ import internal_types;
 import extra_ddl_info;
 import data_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalCreateIndex : public LogicalNode {
 public:
@@ -58,4 +58,4 @@ private:
     SharedPtr<IndexBase> index_definition_{};
     ConflictType conflict_type_{ConflictType::kInvalid};
 };
-} // namespace infinity
+} // namespace hybridsearch

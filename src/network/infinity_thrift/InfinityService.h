@@ -4,24 +4,24 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
  *  @generated
  */
-#ifndef InfinityService_H
-#define InfinityService_H
+#ifndef hybridsearchService_H
+#define hybridsearchService_H
 
 #include <thrift/TDispatchProcessor.h>
 #include <thrift/async/TConcurrentClientSyncInfo.h>
 #include <memory>
-#include "infinity_types.h"
+#include "hybridsearch_types.h"
 
-namespace infinity_thrift_rpc {
+namespace hybridsearch_thrift_rpc {
 
 #ifdef _MSC_VER
   #pragma warning( push )
   #pragma warning (disable : 4250 ) //inheriting methods via dominance 
 #endif
 
-class InfinityServiceIf {
+class hybridsearchServiceIf {
  public:
-  virtual ~InfinityServiceIf() {}
+  virtual ~hybridsearchServiceIf() {}
   virtual void Connect(CommonResponse& _return, const ConnectRequest& request) = 0;
   virtual void Disconnect(CommonResponse& _return, const CommonRequest& request) = 0;
   virtual void CreateDatabase(CommonResponse& _return, const CreateDatabaseRequest& request) = 0;
@@ -62,33 +62,33 @@ class InfinityServiceIf {
   virtual void Compact(CommonResponse& _return, const CompactRequest& request) = 0;
 };
 
-class InfinityServiceIfFactory {
+class hybridsearchServiceIfFactory {
  public:
-  typedef InfinityServiceIf Handler;
+  typedef hybridsearchServiceIf Handler;
 
-  virtual ~InfinityServiceIfFactory() {}
+  virtual ~hybridsearchServiceIfFactory() {}
 
-  virtual InfinityServiceIf* getHandler(const ::apache::thrift::TConnectionInfo& connInfo) = 0;
-  virtual void releaseHandler(InfinityServiceIf* /* handler */) = 0;
+  virtual hybridsearchServiceIf* getHandler(const ::apache::thrift::TConnectionInfo& connInfo) = 0;
+  virtual void releaseHandler(hybridsearchServiceIf* /* handler */) = 0;
   };
 
-class InfinityServiceIfSingletonFactory : virtual public InfinityServiceIfFactory {
+class hybridsearchServiceIfSingletonFactory : virtual public hybridsearchServiceIfFactory {
  public:
-  InfinityServiceIfSingletonFactory(const ::std::shared_ptr<InfinityServiceIf>& iface) : iface_(iface) {}
-  virtual ~InfinityServiceIfSingletonFactory() {}
+  hybridsearchServiceIfSingletonFactory(const ::std::shared_ptr<hybridsearchServiceIf>& iface) : iface_(iface) {}
+  virtual ~hybridsearchServiceIfSingletonFactory() {}
 
-  virtual InfinityServiceIf* getHandler(const ::apache::thrift::TConnectionInfo&) override {
+  virtual hybridsearchServiceIf* getHandler(const ::apache::thrift::TConnectionInfo&) override {
     return iface_.get();
   }
-  virtual void releaseHandler(InfinityServiceIf* /* handler */) override {}
+  virtual void releaseHandler(hybridsearchServiceIf* /* handler */) override {}
 
  protected:
-  ::std::shared_ptr<InfinityServiceIf> iface_;
+  ::std::shared_ptr<hybridsearchServiceIf> iface_;
 };
 
-class InfinityServiceNull : virtual public InfinityServiceIf {
+class hybridsearchServiceNull : virtual public hybridsearchServiceIf {
  public:
-  virtual ~InfinityServiceNull() {}
+  virtual ~hybridsearchServiceNull() {}
   void Connect(CommonResponse& /* _return */, const ConnectRequest& /* request */) override {
     return;
   }
@@ -205,37 +205,37 @@ class InfinityServiceNull : virtual public InfinityServiceIf {
   }
 };
 
-typedef struct _InfinityService_Connect_args__isset {
-  _InfinityService_Connect_args__isset() : request(false) {}
+typedef struct _hybridsearchService_Connect_args__isset {
+  _hybridsearchService_Connect_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_Connect_args__isset;
+} _hybridsearchService_Connect_args__isset;
 
-class InfinityService_Connect_args {
+class hybridsearchService_Connect_args {
  public:
 
-  InfinityService_Connect_args(const InfinityService_Connect_args&) noexcept;
-  InfinityService_Connect_args& operator=(const InfinityService_Connect_args&) noexcept;
-  InfinityService_Connect_args() noexcept {
+  hybridsearchService_Connect_args(const hybridsearchService_Connect_args&) noexcept;
+  hybridsearchService_Connect_args& operator=(const hybridsearchService_Connect_args&) noexcept;
+  hybridsearchService_Connect_args() noexcept {
   }
 
-  virtual ~InfinityService_Connect_args() noexcept;
+  virtual ~hybridsearchService_Connect_args() noexcept;
   ConnectRequest request;
 
-  _InfinityService_Connect_args__isset __isset;
+  _hybridsearchService_Connect_args__isset __isset;
 
   void __set_request(const ConnectRequest& val);
 
-  bool operator == (const InfinityService_Connect_args & rhs) const
+  bool operator == (const hybridsearchService_Connect_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Connect_args &rhs) const {
+  bool operator != (const hybridsearchService_Connect_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Connect_args & ) const;
+  bool operator < (const hybridsearchService_Connect_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -243,103 +243,103 @@ class InfinityService_Connect_args {
 };
 
 
-class InfinityService_Connect_pargs {
+class hybridsearchService_Connect_pargs {
  public:
 
 
-  virtual ~InfinityService_Connect_pargs() noexcept;
+  virtual ~hybridsearchService_Connect_pargs() noexcept;
   const ConnectRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Connect_result__isset {
-  _InfinityService_Connect_result__isset() : success(false) {}
+typedef struct _hybridsearchService_Connect_result__isset {
+  _hybridsearchService_Connect_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Connect_result__isset;
+} _hybridsearchService_Connect_result__isset;
 
-class InfinityService_Connect_result {
+class hybridsearchService_Connect_result {
  public:
 
-  InfinityService_Connect_result(const InfinityService_Connect_result&);
-  InfinityService_Connect_result& operator=(const InfinityService_Connect_result&);
-  InfinityService_Connect_result() noexcept {
+  hybridsearchService_Connect_result(const hybridsearchService_Connect_result&);
+  hybridsearchService_Connect_result& operator=(const hybridsearchService_Connect_result&);
+  hybridsearchService_Connect_result() noexcept {
   }
 
-  virtual ~InfinityService_Connect_result() noexcept;
+  virtual ~hybridsearchService_Connect_result() noexcept;
   CommonResponse success;
 
-  _InfinityService_Connect_result__isset __isset;
+  _hybridsearchService_Connect_result__isset __isset;
 
   void __set_success(const CommonResponse& val);
 
-  bool operator == (const InfinityService_Connect_result & rhs) const
+  bool operator == (const hybridsearchService_Connect_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Connect_result &rhs) const {
+  bool operator != (const hybridsearchService_Connect_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Connect_result & ) const;
+  bool operator < (const hybridsearchService_Connect_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Connect_presult__isset {
-  _InfinityService_Connect_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_Connect_presult__isset {
+  _hybridsearchService_Connect_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Connect_presult__isset;
+} _hybridsearchService_Connect_presult__isset;
 
-class InfinityService_Connect_presult {
+class hybridsearchService_Connect_presult {
  public:
 
 
-  virtual ~InfinityService_Connect_presult() noexcept;
+  virtual ~hybridsearchService_Connect_presult() noexcept;
   CommonResponse* success;
 
-  _InfinityService_Connect_presult__isset __isset;
+  _hybridsearchService_Connect_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_Disconnect_args__isset {
-  _InfinityService_Disconnect_args__isset() : request(false) {}
+typedef struct _hybridsearchService_Disconnect_args__isset {
+  _hybridsearchService_Disconnect_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_Disconnect_args__isset;
+} _hybridsearchService_Disconnect_args__isset;
 
-class InfinityService_Disconnect_args {
+class hybridsearchService_Disconnect_args {
  public:
 
-  InfinityService_Disconnect_args(const InfinityService_Disconnect_args&) noexcept;
-  InfinityService_Disconnect_args& operator=(const InfinityService_Disconnect_args&) noexcept;
-  InfinityService_Disconnect_args() noexcept {
+  hybridsearchService_Disconnect_args(const hybridsearchService_Disconnect_args&) noexcept;
+  hybridsearchService_Disconnect_args& operator=(const hybridsearchService_Disconnect_args&) noexcept;
+  hybridsearchService_Disconnect_args() noexcept {
   }
 
-  virtual ~InfinityService_Disconnect_args() noexcept;
+  virtual ~hybridsearchService_Disconnect_args() noexcept;
   CommonRequest request;
 
-  _InfinityService_Disconnect_args__isset __isset;
+  _hybridsearchService_Disconnect_args__isset __isset;
 
   void __set_request(const CommonRequest& val);
 
-  bool operator == (const InfinityService_Disconnect_args & rhs) const
+  bool operator == (const hybridsearchService_Disconnect_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Disconnect_args &rhs) const {
+  bool operator != (const hybridsearchService_Disconnect_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Disconnect_args & ) const;
+  bool operator < (const hybridsearchService_Disconnect_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -347,103 +347,103 @@ class InfinityService_Disconnect_args {
 };
 
 
-class InfinityService_Disconnect_pargs {
+class hybridsearchService_Disconnect_pargs {
  public:
 
 
-  virtual ~InfinityService_Disconnect_pargs() noexcept;
+  virtual ~hybridsearchService_Disconnect_pargs() noexcept;
   const CommonRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Disconnect_result__isset {
-  _InfinityService_Disconnect_result__isset() : success(false) {}
+typedef struct _hybridsearchService_Disconnect_result__isset {
+  _hybridsearchService_Disconnect_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Disconnect_result__isset;
+} _hybridsearchService_Disconnect_result__isset;
 
-class InfinityService_Disconnect_result {
+class hybridsearchService_Disconnect_result {
  public:
 
-  InfinityService_Disconnect_result(const InfinityService_Disconnect_result&);
-  InfinityService_Disconnect_result& operator=(const InfinityService_Disconnect_result&);
-  InfinityService_Disconnect_result() noexcept {
+  hybridsearchService_Disconnect_result(const hybridsearchService_Disconnect_result&);
+  hybridsearchService_Disconnect_result& operator=(const hybridsearchService_Disconnect_result&);
+  hybridsearchService_Disconnect_result() noexcept {
   }
 
-  virtual ~InfinityService_Disconnect_result() noexcept;
+  virtual ~hybridsearchService_Disconnect_result() noexcept;
   CommonResponse success;
 
-  _InfinityService_Disconnect_result__isset __isset;
+  _hybridsearchService_Disconnect_result__isset __isset;
 
   void __set_success(const CommonResponse& val);
 
-  bool operator == (const InfinityService_Disconnect_result & rhs) const
+  bool operator == (const hybridsearchService_Disconnect_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Disconnect_result &rhs) const {
+  bool operator != (const hybridsearchService_Disconnect_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Disconnect_result & ) const;
+  bool operator < (const hybridsearchService_Disconnect_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Disconnect_presult__isset {
-  _InfinityService_Disconnect_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_Disconnect_presult__isset {
+  _hybridsearchService_Disconnect_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Disconnect_presult__isset;
+} _hybridsearchService_Disconnect_presult__isset;
 
-class InfinityService_Disconnect_presult {
+class hybridsearchService_Disconnect_presult {
  public:
 
 
-  virtual ~InfinityService_Disconnect_presult() noexcept;
+  virtual ~hybridsearchService_Disconnect_presult() noexcept;
   CommonResponse* success;
 
-  _InfinityService_Disconnect_presult__isset __isset;
+  _hybridsearchService_Disconnect_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_CreateDatabase_args__isset {
-  _InfinityService_CreateDatabase_args__isset() : request(false) {}
+typedef struct _hybridsearchService_CreateDatabase_args__isset {
+  _hybridsearchService_CreateDatabase_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_CreateDatabase_args__isset;
+} _hybridsearchService_CreateDatabase_args__isset;
 
-class InfinityService_CreateDatabase_args {
+class hybridsearchService_CreateDatabase_args {
  public:
 
-  InfinityService_CreateDatabase_args(const InfinityService_CreateDatabase_args&);
-  InfinityService_CreateDatabase_args& operator=(const InfinityService_CreateDatabase_args&);
-  InfinityService_CreateDatabase_args() noexcept {
+  hybridsearchService_CreateDatabase_args(const hybridsearchService_CreateDatabase_args&);
+  hybridsearchService_CreateDatabase_args& operator=(const hybridsearchService_CreateDatabase_args&);
+  hybridsearchService_CreateDatabase_args() noexcept {
   }
 
-  virtual ~InfinityService_CreateDatabase_args() noexcept;
+  virtual ~hybridsearchService_CreateDatabase_args() noexcept;
   CreateDatabaseRequest request;
 
-  _InfinityService_CreateDatabase_args__isset __isset;
+  _hybridsearchService_CreateDatabase_args__isset __isset;
 
   void __set_request(const CreateDatabaseRequest& val);
 
-  bool operator == (const InfinityService_CreateDatabase_args & rhs) const
+  bool operator == (const hybridsearchService_CreateDatabase_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_CreateDatabase_args &rhs) const {
+  bool operator != (const hybridsearchService_CreateDatabase_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_CreateDatabase_args & ) const;
+  bool operator < (const hybridsearchService_CreateDatabase_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -451,103 +451,103 @@ class InfinityService_CreateDatabase_args {
 };
 
 
-class InfinityService_CreateDatabase_pargs {
+class hybridsearchService_CreateDatabase_pargs {
  public:
 
 
-  virtual ~InfinityService_CreateDatabase_pargs() noexcept;
+  virtual ~hybridsearchService_CreateDatabase_pargs() noexcept;
   const CreateDatabaseRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_CreateDatabase_result__isset {
-  _InfinityService_CreateDatabase_result__isset() : success(false) {}
+typedef struct _hybridsearchService_CreateDatabase_result__isset {
+  _hybridsearchService_CreateDatabase_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_CreateDatabase_result__isset;
+} _hybridsearchService_CreateDatabase_result__isset;
 
-class InfinityService_CreateDatabase_result {
+class hybridsearchService_CreateDatabase_result {
  public:
 
-  InfinityService_CreateDatabase_result(const InfinityService_CreateDatabase_result&);
-  InfinityService_CreateDatabase_result& operator=(const InfinityService_CreateDatabase_result&);
-  InfinityService_CreateDatabase_result() noexcept {
+  hybridsearchService_CreateDatabase_result(const hybridsearchService_CreateDatabase_result&);
+  hybridsearchService_CreateDatabase_result& operator=(const hybridsearchService_CreateDatabase_result&);
+  hybridsearchService_CreateDatabase_result() noexcept {
   }
 
-  virtual ~InfinityService_CreateDatabase_result() noexcept;
+  virtual ~hybridsearchService_CreateDatabase_result() noexcept;
   CommonResponse success;
 
-  _InfinityService_CreateDatabase_result__isset __isset;
+  _hybridsearchService_CreateDatabase_result__isset __isset;
 
   void __set_success(const CommonResponse& val);
 
-  bool operator == (const InfinityService_CreateDatabase_result & rhs) const
+  bool operator == (const hybridsearchService_CreateDatabase_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_CreateDatabase_result &rhs) const {
+  bool operator != (const hybridsearchService_CreateDatabase_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_CreateDatabase_result & ) const;
+  bool operator < (const hybridsearchService_CreateDatabase_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_CreateDatabase_presult__isset {
-  _InfinityService_CreateDatabase_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_CreateDatabase_presult__isset {
+  _hybridsearchService_CreateDatabase_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_CreateDatabase_presult__isset;
+} _hybridsearchService_CreateDatabase_presult__isset;
 
-class InfinityService_CreateDatabase_presult {
+class hybridsearchService_CreateDatabase_presult {
  public:
 
 
-  virtual ~InfinityService_CreateDatabase_presult() noexcept;
+  virtual ~hybridsearchService_CreateDatabase_presult() noexcept;
   CommonResponse* success;
 
-  _InfinityService_CreateDatabase_presult__isset __isset;
+  _hybridsearchService_CreateDatabase_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_DropDatabase_args__isset {
-  _InfinityService_DropDatabase_args__isset() : request(false) {}
+typedef struct _hybridsearchService_DropDatabase_args__isset {
+  _hybridsearchService_DropDatabase_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_DropDatabase_args__isset;
+} _hybridsearchService_DropDatabase_args__isset;
 
-class InfinityService_DropDatabase_args {
+class hybridsearchService_DropDatabase_args {
  public:
 
-  InfinityService_DropDatabase_args(const InfinityService_DropDatabase_args&);
-  InfinityService_DropDatabase_args& operator=(const InfinityService_DropDatabase_args&);
-  InfinityService_DropDatabase_args() noexcept {
+  hybridsearchService_DropDatabase_args(const hybridsearchService_DropDatabase_args&);
+  hybridsearchService_DropDatabase_args& operator=(const hybridsearchService_DropDatabase_args&);
+  hybridsearchService_DropDatabase_args() noexcept {
   }
 
-  virtual ~InfinityService_DropDatabase_args() noexcept;
+  virtual ~hybridsearchService_DropDatabase_args() noexcept;
   DropDatabaseRequest request;
 
-  _InfinityService_DropDatabase_args__isset __isset;
+  _hybridsearchService_DropDatabase_args__isset __isset;
 
   void __set_request(const DropDatabaseRequest& val);
 
-  bool operator == (const InfinityService_DropDatabase_args & rhs) const
+  bool operator == (const hybridsearchService_DropDatabase_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_DropDatabase_args &rhs) const {
+  bool operator != (const hybridsearchService_DropDatabase_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_DropDatabase_args & ) const;
+  bool operator < (const hybridsearchService_DropDatabase_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -555,103 +555,103 @@ class InfinityService_DropDatabase_args {
 };
 
 
-class InfinityService_DropDatabase_pargs {
+class hybridsearchService_DropDatabase_pargs {
  public:
 
 
-  virtual ~InfinityService_DropDatabase_pargs() noexcept;
+  virtual ~hybridsearchService_DropDatabase_pargs() noexcept;
   const DropDatabaseRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_DropDatabase_result__isset {
-  _InfinityService_DropDatabase_result__isset() : success(false) {}
+typedef struct _hybridsearchService_DropDatabase_result__isset {
+  _hybridsearchService_DropDatabase_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_DropDatabase_result__isset;
+} _hybridsearchService_DropDatabase_result__isset;
 
-class InfinityService_DropDatabase_result {
+class hybridsearchService_DropDatabase_result {
  public:
 
-  InfinityService_DropDatabase_result(const InfinityService_DropDatabase_result&);
-  InfinityService_DropDatabase_result& operator=(const InfinityService_DropDatabase_result&);
-  InfinityService_DropDatabase_result() noexcept {
+  hybridsearchService_DropDatabase_result(const hybridsearchService_DropDatabase_result&);
+  hybridsearchService_DropDatabase_result& operator=(const hybridsearchService_DropDatabase_result&);
+  hybridsearchService_DropDatabase_result() noexcept {
   }
 
-  virtual ~InfinityService_DropDatabase_result() noexcept;
+  virtual ~hybridsearchService_DropDatabase_result() noexcept;
   CommonResponse success;
 
-  _InfinityService_DropDatabase_result__isset __isset;
+  _hybridsearchService_DropDatabase_result__isset __isset;
 
   void __set_success(const CommonResponse& val);
 
-  bool operator == (const InfinityService_DropDatabase_result & rhs) const
+  bool operator == (const hybridsearchService_DropDatabase_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_DropDatabase_result &rhs) const {
+  bool operator != (const hybridsearchService_DropDatabase_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_DropDatabase_result & ) const;
+  bool operator < (const hybridsearchService_DropDatabase_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_DropDatabase_presult__isset {
-  _InfinityService_DropDatabase_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_DropDatabase_presult__isset {
+  _hybridsearchService_DropDatabase_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_DropDatabase_presult__isset;
+} _hybridsearchService_DropDatabase_presult__isset;
 
-class InfinityService_DropDatabase_presult {
+class hybridsearchService_DropDatabase_presult {
  public:
 
 
-  virtual ~InfinityService_DropDatabase_presult() noexcept;
+  virtual ~hybridsearchService_DropDatabase_presult() noexcept;
   CommonResponse* success;
 
-  _InfinityService_DropDatabase_presult__isset __isset;
+  _hybridsearchService_DropDatabase_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_CreateTable_args__isset {
-  _InfinityService_CreateTable_args__isset() : request(false) {}
+typedef struct _hybridsearchService_CreateTable_args__isset {
+  _hybridsearchService_CreateTable_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_CreateTable_args__isset;
+} _hybridsearchService_CreateTable_args__isset;
 
-class InfinityService_CreateTable_args {
+class hybridsearchService_CreateTable_args {
  public:
 
-  InfinityService_CreateTable_args(const InfinityService_CreateTable_args&);
-  InfinityService_CreateTable_args& operator=(const InfinityService_CreateTable_args&);
-  InfinityService_CreateTable_args() noexcept {
+  hybridsearchService_CreateTable_args(const hybridsearchService_CreateTable_args&);
+  hybridsearchService_CreateTable_args& operator=(const hybridsearchService_CreateTable_args&);
+  hybridsearchService_CreateTable_args() noexcept {
   }
 
-  virtual ~InfinityService_CreateTable_args() noexcept;
+  virtual ~hybridsearchService_CreateTable_args() noexcept;
   CreateTableRequest request;
 
-  _InfinityService_CreateTable_args__isset __isset;
+  _hybridsearchService_CreateTable_args__isset __isset;
 
   void __set_request(const CreateTableRequest& val);
 
-  bool operator == (const InfinityService_CreateTable_args & rhs) const
+  bool operator == (const hybridsearchService_CreateTable_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_CreateTable_args &rhs) const {
+  bool operator != (const hybridsearchService_CreateTable_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_CreateTable_args & ) const;
+  bool operator < (const hybridsearchService_CreateTable_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -659,103 +659,103 @@ class InfinityService_CreateTable_args {
 };
 
 
-class InfinityService_CreateTable_pargs {
+class hybridsearchService_CreateTable_pargs {
  public:
 
 
-  virtual ~InfinityService_CreateTable_pargs() noexcept;
+  virtual ~hybridsearchService_CreateTable_pargs() noexcept;
   const CreateTableRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_CreateTable_result__isset {
-  _InfinityService_CreateTable_result__isset() : success(false) {}
+typedef struct _hybridsearchService_CreateTable_result__isset {
+  _hybridsearchService_CreateTable_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_CreateTable_result__isset;
+} _hybridsearchService_CreateTable_result__isset;
 
-class InfinityService_CreateTable_result {
+class hybridsearchService_CreateTable_result {
  public:
 
-  InfinityService_CreateTable_result(const InfinityService_CreateTable_result&);
-  InfinityService_CreateTable_result& operator=(const InfinityService_CreateTable_result&);
-  InfinityService_CreateTable_result() noexcept {
+  hybridsearchService_CreateTable_result(const hybridsearchService_CreateTable_result&);
+  hybridsearchService_CreateTable_result& operator=(const hybridsearchService_CreateTable_result&);
+  hybridsearchService_CreateTable_result() noexcept {
   }
 
-  virtual ~InfinityService_CreateTable_result() noexcept;
+  virtual ~hybridsearchService_CreateTable_result() noexcept;
   CommonResponse success;
 
-  _InfinityService_CreateTable_result__isset __isset;
+  _hybridsearchService_CreateTable_result__isset __isset;
 
   void __set_success(const CommonResponse& val);
 
-  bool operator == (const InfinityService_CreateTable_result & rhs) const
+  bool operator == (const hybridsearchService_CreateTable_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_CreateTable_result &rhs) const {
+  bool operator != (const hybridsearchService_CreateTable_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_CreateTable_result & ) const;
+  bool operator < (const hybridsearchService_CreateTable_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_CreateTable_presult__isset {
-  _InfinityService_CreateTable_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_CreateTable_presult__isset {
+  _hybridsearchService_CreateTable_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_CreateTable_presult__isset;
+} _hybridsearchService_CreateTable_presult__isset;
 
-class InfinityService_CreateTable_presult {
+class hybridsearchService_CreateTable_presult {
  public:
 
 
-  virtual ~InfinityService_CreateTable_presult() noexcept;
+  virtual ~hybridsearchService_CreateTable_presult() noexcept;
   CommonResponse* success;
 
-  _InfinityService_CreateTable_presult__isset __isset;
+  _hybridsearchService_CreateTable_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_DropTable_args__isset {
-  _InfinityService_DropTable_args__isset() : request(false) {}
+typedef struct _hybridsearchService_DropTable_args__isset {
+  _hybridsearchService_DropTable_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_DropTable_args__isset;
+} _hybridsearchService_DropTable_args__isset;
 
-class InfinityService_DropTable_args {
+class hybridsearchService_DropTable_args {
  public:
 
-  InfinityService_DropTable_args(const InfinityService_DropTable_args&);
-  InfinityService_DropTable_args& operator=(const InfinityService_DropTable_args&);
-  InfinityService_DropTable_args() noexcept {
+  hybridsearchService_DropTable_args(const hybridsearchService_DropTable_args&);
+  hybridsearchService_DropTable_args& operator=(const hybridsearchService_DropTable_args&);
+  hybridsearchService_DropTable_args() noexcept {
   }
 
-  virtual ~InfinityService_DropTable_args() noexcept;
+  virtual ~hybridsearchService_DropTable_args() noexcept;
   DropTableRequest request;
 
-  _InfinityService_DropTable_args__isset __isset;
+  _hybridsearchService_DropTable_args__isset __isset;
 
   void __set_request(const DropTableRequest& val);
 
-  bool operator == (const InfinityService_DropTable_args & rhs) const
+  bool operator == (const hybridsearchService_DropTable_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_DropTable_args &rhs) const {
+  bool operator != (const hybridsearchService_DropTable_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_DropTable_args & ) const;
+  bool operator < (const hybridsearchService_DropTable_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -763,103 +763,103 @@ class InfinityService_DropTable_args {
 };
 
 
-class InfinityService_DropTable_pargs {
+class hybridsearchService_DropTable_pargs {
  public:
 
 
-  virtual ~InfinityService_DropTable_pargs() noexcept;
+  virtual ~hybridsearchService_DropTable_pargs() noexcept;
   const DropTableRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_DropTable_result__isset {
-  _InfinityService_DropTable_result__isset() : success(false) {}
+typedef struct _hybridsearchService_DropTable_result__isset {
+  _hybridsearchService_DropTable_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_DropTable_result__isset;
+} _hybridsearchService_DropTable_result__isset;
 
-class InfinityService_DropTable_result {
+class hybridsearchService_DropTable_result {
  public:
 
-  InfinityService_DropTable_result(const InfinityService_DropTable_result&);
-  InfinityService_DropTable_result& operator=(const InfinityService_DropTable_result&);
-  InfinityService_DropTable_result() noexcept {
+  hybridsearchService_DropTable_result(const hybridsearchService_DropTable_result&);
+  hybridsearchService_DropTable_result& operator=(const hybridsearchService_DropTable_result&);
+  hybridsearchService_DropTable_result() noexcept {
   }
 
-  virtual ~InfinityService_DropTable_result() noexcept;
+  virtual ~hybridsearchService_DropTable_result() noexcept;
   CommonResponse success;
 
-  _InfinityService_DropTable_result__isset __isset;
+  _hybridsearchService_DropTable_result__isset __isset;
 
   void __set_success(const CommonResponse& val);
 
-  bool operator == (const InfinityService_DropTable_result & rhs) const
+  bool operator == (const hybridsearchService_DropTable_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_DropTable_result &rhs) const {
+  bool operator != (const hybridsearchService_DropTable_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_DropTable_result & ) const;
+  bool operator < (const hybridsearchService_DropTable_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_DropTable_presult__isset {
-  _InfinityService_DropTable_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_DropTable_presult__isset {
+  _hybridsearchService_DropTable_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_DropTable_presult__isset;
+} _hybridsearchService_DropTable_presult__isset;
 
-class InfinityService_DropTable_presult {
+class hybridsearchService_DropTable_presult {
  public:
 
 
-  virtual ~InfinityService_DropTable_presult() noexcept;
+  virtual ~hybridsearchService_DropTable_presult() noexcept;
   CommonResponse* success;
 
-  _InfinityService_DropTable_presult__isset __isset;
+  _hybridsearchService_DropTable_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_Insert_args__isset {
-  _InfinityService_Insert_args__isset() : request(false) {}
+typedef struct _hybridsearchService_Insert_args__isset {
+  _hybridsearchService_Insert_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_Insert_args__isset;
+} _hybridsearchService_Insert_args__isset;
 
-class InfinityService_Insert_args {
+class hybridsearchService_Insert_args {
  public:
 
-  InfinityService_Insert_args(const InfinityService_Insert_args&);
-  InfinityService_Insert_args& operator=(const InfinityService_Insert_args&);
-  InfinityService_Insert_args() noexcept {
+  hybridsearchService_Insert_args(const hybridsearchService_Insert_args&);
+  hybridsearchService_Insert_args& operator=(const hybridsearchService_Insert_args&);
+  hybridsearchService_Insert_args() noexcept {
   }
 
-  virtual ~InfinityService_Insert_args() noexcept;
+  virtual ~hybridsearchService_Insert_args() noexcept;
   InsertRequest request;
 
-  _InfinityService_Insert_args__isset __isset;
+  _hybridsearchService_Insert_args__isset __isset;
 
   void __set_request(const InsertRequest& val);
 
-  bool operator == (const InfinityService_Insert_args & rhs) const
+  bool operator == (const hybridsearchService_Insert_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Insert_args &rhs) const {
+  bool operator != (const hybridsearchService_Insert_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Insert_args & ) const;
+  bool operator < (const hybridsearchService_Insert_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -867,103 +867,103 @@ class InfinityService_Insert_args {
 };
 
 
-class InfinityService_Insert_pargs {
+class hybridsearchService_Insert_pargs {
  public:
 
 
-  virtual ~InfinityService_Insert_pargs() noexcept;
+  virtual ~hybridsearchService_Insert_pargs() noexcept;
   const InsertRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Insert_result__isset {
-  _InfinityService_Insert_result__isset() : success(false) {}
+typedef struct _hybridsearchService_Insert_result__isset {
+  _hybridsearchService_Insert_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Insert_result__isset;
+} _hybridsearchService_Insert_result__isset;
 
-class InfinityService_Insert_result {
+class hybridsearchService_Insert_result {
  public:
 
-  InfinityService_Insert_result(const InfinityService_Insert_result&);
-  InfinityService_Insert_result& operator=(const InfinityService_Insert_result&);
-  InfinityService_Insert_result() noexcept {
+  hybridsearchService_Insert_result(const hybridsearchService_Insert_result&);
+  hybridsearchService_Insert_result& operator=(const hybridsearchService_Insert_result&);
+  hybridsearchService_Insert_result() noexcept {
   }
 
-  virtual ~InfinityService_Insert_result() noexcept;
+  virtual ~hybridsearchService_Insert_result() noexcept;
   CommonResponse success;
 
-  _InfinityService_Insert_result__isset __isset;
+  _hybridsearchService_Insert_result__isset __isset;
 
   void __set_success(const CommonResponse& val);
 
-  bool operator == (const InfinityService_Insert_result & rhs) const
+  bool operator == (const hybridsearchService_Insert_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Insert_result &rhs) const {
+  bool operator != (const hybridsearchService_Insert_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Insert_result & ) const;
+  bool operator < (const hybridsearchService_Insert_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Insert_presult__isset {
-  _InfinityService_Insert_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_Insert_presult__isset {
+  _hybridsearchService_Insert_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Insert_presult__isset;
+} _hybridsearchService_Insert_presult__isset;
 
-class InfinityService_Insert_presult {
+class hybridsearchService_Insert_presult {
  public:
 
 
-  virtual ~InfinityService_Insert_presult() noexcept;
+  virtual ~hybridsearchService_Insert_presult() noexcept;
   CommonResponse* success;
 
-  _InfinityService_Insert_presult__isset __isset;
+  _hybridsearchService_Insert_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_Import_args__isset {
-  _InfinityService_Import_args__isset() : request(false) {}
+typedef struct _hybridsearchService_Import_args__isset {
+  _hybridsearchService_Import_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_Import_args__isset;
+} _hybridsearchService_Import_args__isset;
 
-class InfinityService_Import_args {
+class hybridsearchService_Import_args {
  public:
 
-  InfinityService_Import_args(const InfinityService_Import_args&);
-  InfinityService_Import_args& operator=(const InfinityService_Import_args&);
-  InfinityService_Import_args() noexcept {
+  hybridsearchService_Import_args(const hybridsearchService_Import_args&);
+  hybridsearchService_Import_args& operator=(const hybridsearchService_Import_args&);
+  hybridsearchService_Import_args() noexcept {
   }
 
-  virtual ~InfinityService_Import_args() noexcept;
+  virtual ~hybridsearchService_Import_args() noexcept;
   ImportRequest request;
 
-  _InfinityService_Import_args__isset __isset;
+  _hybridsearchService_Import_args__isset __isset;
 
   void __set_request(const ImportRequest& val);
 
-  bool operator == (const InfinityService_Import_args & rhs) const
+  bool operator == (const hybridsearchService_Import_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Import_args &rhs) const {
+  bool operator != (const hybridsearchService_Import_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Import_args & ) const;
+  bool operator < (const hybridsearchService_Import_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -971,103 +971,103 @@ class InfinityService_Import_args {
 };
 
 
-class InfinityService_Import_pargs {
+class hybridsearchService_Import_pargs {
  public:
 
 
-  virtual ~InfinityService_Import_pargs() noexcept;
+  virtual ~hybridsearchService_Import_pargs() noexcept;
   const ImportRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Import_result__isset {
-  _InfinityService_Import_result__isset() : success(false) {}
+typedef struct _hybridsearchService_Import_result__isset {
+  _hybridsearchService_Import_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Import_result__isset;
+} _hybridsearchService_Import_result__isset;
 
-class InfinityService_Import_result {
+class hybridsearchService_Import_result {
  public:
 
-  InfinityService_Import_result(const InfinityService_Import_result&);
-  InfinityService_Import_result& operator=(const InfinityService_Import_result&);
-  InfinityService_Import_result() noexcept {
+  hybridsearchService_Import_result(const hybridsearchService_Import_result&);
+  hybridsearchService_Import_result& operator=(const hybridsearchService_Import_result&);
+  hybridsearchService_Import_result() noexcept {
   }
 
-  virtual ~InfinityService_Import_result() noexcept;
+  virtual ~hybridsearchService_Import_result() noexcept;
   CommonResponse success;
 
-  _InfinityService_Import_result__isset __isset;
+  _hybridsearchService_Import_result__isset __isset;
 
   void __set_success(const CommonResponse& val);
 
-  bool operator == (const InfinityService_Import_result & rhs) const
+  bool operator == (const hybridsearchService_Import_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Import_result &rhs) const {
+  bool operator != (const hybridsearchService_Import_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Import_result & ) const;
+  bool operator < (const hybridsearchService_Import_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Import_presult__isset {
-  _InfinityService_Import_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_Import_presult__isset {
+  _hybridsearchService_Import_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Import_presult__isset;
+} _hybridsearchService_Import_presult__isset;
 
-class InfinityService_Import_presult {
+class hybridsearchService_Import_presult {
  public:
 
 
-  virtual ~InfinityService_Import_presult() noexcept;
+  virtual ~hybridsearchService_Import_presult() noexcept;
   CommonResponse* success;
 
-  _InfinityService_Import_presult__isset __isset;
+  _hybridsearchService_Import_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_Export_args__isset {
-  _InfinityService_Export_args__isset() : request(false) {}
+typedef struct _hybridsearchService_Export_args__isset {
+  _hybridsearchService_Export_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_Export_args__isset;
+} _hybridsearchService_Export_args__isset;
 
-class InfinityService_Export_args {
+class hybridsearchService_Export_args {
  public:
 
-  InfinityService_Export_args(const InfinityService_Export_args&);
-  InfinityService_Export_args& operator=(const InfinityService_Export_args&);
-  InfinityService_Export_args() noexcept {
+  hybridsearchService_Export_args(const hybridsearchService_Export_args&);
+  hybridsearchService_Export_args& operator=(const hybridsearchService_Export_args&);
+  hybridsearchService_Export_args() noexcept {
   }
 
-  virtual ~InfinityService_Export_args() noexcept;
+  virtual ~hybridsearchService_Export_args() noexcept;
   ExportRequest request;
 
-  _InfinityService_Export_args__isset __isset;
+  _hybridsearchService_Export_args__isset __isset;
 
   void __set_request(const ExportRequest& val);
 
-  bool operator == (const InfinityService_Export_args & rhs) const
+  bool operator == (const hybridsearchService_Export_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Export_args &rhs) const {
+  bool operator != (const hybridsearchService_Export_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Export_args & ) const;
+  bool operator < (const hybridsearchService_Export_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -1075,103 +1075,103 @@ class InfinityService_Export_args {
 };
 
 
-class InfinityService_Export_pargs {
+class hybridsearchService_Export_pargs {
  public:
 
 
-  virtual ~InfinityService_Export_pargs() noexcept;
+  virtual ~hybridsearchService_Export_pargs() noexcept;
   const ExportRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Export_result__isset {
-  _InfinityService_Export_result__isset() : success(false) {}
+typedef struct _hybridsearchService_Export_result__isset {
+  _hybridsearchService_Export_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Export_result__isset;
+} _hybridsearchService_Export_result__isset;
 
-class InfinityService_Export_result {
+class hybridsearchService_Export_result {
  public:
 
-  InfinityService_Export_result(const InfinityService_Export_result&);
-  InfinityService_Export_result& operator=(const InfinityService_Export_result&);
-  InfinityService_Export_result() noexcept {
+  hybridsearchService_Export_result(const hybridsearchService_Export_result&);
+  hybridsearchService_Export_result& operator=(const hybridsearchService_Export_result&);
+  hybridsearchService_Export_result() noexcept {
   }
 
-  virtual ~InfinityService_Export_result() noexcept;
+  virtual ~hybridsearchService_Export_result() noexcept;
   CommonResponse success;
 
-  _InfinityService_Export_result__isset __isset;
+  _hybridsearchService_Export_result__isset __isset;
 
   void __set_success(const CommonResponse& val);
 
-  bool operator == (const InfinityService_Export_result & rhs) const
+  bool operator == (const hybridsearchService_Export_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Export_result &rhs) const {
+  bool operator != (const hybridsearchService_Export_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Export_result & ) const;
+  bool operator < (const hybridsearchService_Export_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Export_presult__isset {
-  _InfinityService_Export_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_Export_presult__isset {
+  _hybridsearchService_Export_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Export_presult__isset;
+} _hybridsearchService_Export_presult__isset;
 
-class InfinityService_Export_presult {
+class hybridsearchService_Export_presult {
  public:
 
 
-  virtual ~InfinityService_Export_presult() noexcept;
+  virtual ~hybridsearchService_Export_presult() noexcept;
   CommonResponse* success;
 
-  _InfinityService_Export_presult__isset __isset;
+  _hybridsearchService_Export_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_Select_args__isset {
-  _InfinityService_Select_args__isset() : request(false) {}
+typedef struct _hybridsearchService_Select_args__isset {
+  _hybridsearchService_Select_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_Select_args__isset;
+} _hybridsearchService_Select_args__isset;
 
-class InfinityService_Select_args {
+class hybridsearchService_Select_args {
  public:
 
-  InfinityService_Select_args(const InfinityService_Select_args&);
-  InfinityService_Select_args& operator=(const InfinityService_Select_args&);
-  InfinityService_Select_args() noexcept {
+  hybridsearchService_Select_args(const hybridsearchService_Select_args&);
+  hybridsearchService_Select_args& operator=(const hybridsearchService_Select_args&);
+  hybridsearchService_Select_args() noexcept {
   }
 
-  virtual ~InfinityService_Select_args() noexcept;
+  virtual ~hybridsearchService_Select_args() noexcept;
   SelectRequest request;
 
-  _InfinityService_Select_args__isset __isset;
+  _hybridsearchService_Select_args__isset __isset;
 
   void __set_request(const SelectRequest& val);
 
-  bool operator == (const InfinityService_Select_args & rhs) const
+  bool operator == (const hybridsearchService_Select_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Select_args &rhs) const {
+  bool operator != (const hybridsearchService_Select_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Select_args & ) const;
+  bool operator < (const hybridsearchService_Select_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -1179,103 +1179,103 @@ class InfinityService_Select_args {
 };
 
 
-class InfinityService_Select_pargs {
+class hybridsearchService_Select_pargs {
  public:
 
 
-  virtual ~InfinityService_Select_pargs() noexcept;
+  virtual ~hybridsearchService_Select_pargs() noexcept;
   const SelectRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Select_result__isset {
-  _InfinityService_Select_result__isset() : success(false) {}
+typedef struct _hybridsearchService_Select_result__isset {
+  _hybridsearchService_Select_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Select_result__isset;
+} _hybridsearchService_Select_result__isset;
 
-class InfinityService_Select_result {
+class hybridsearchService_Select_result {
  public:
 
-  InfinityService_Select_result(const InfinityService_Select_result&);
-  InfinityService_Select_result& operator=(const InfinityService_Select_result&);
-  InfinityService_Select_result() noexcept {
+  hybridsearchService_Select_result(const hybridsearchService_Select_result&);
+  hybridsearchService_Select_result& operator=(const hybridsearchService_Select_result&);
+  hybridsearchService_Select_result() noexcept {
   }
 
-  virtual ~InfinityService_Select_result() noexcept;
+  virtual ~hybridsearchService_Select_result() noexcept;
   SelectResponse success;
 
-  _InfinityService_Select_result__isset __isset;
+  _hybridsearchService_Select_result__isset __isset;
 
   void __set_success(const SelectResponse& val);
 
-  bool operator == (const InfinityService_Select_result & rhs) const
+  bool operator == (const hybridsearchService_Select_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Select_result &rhs) const {
+  bool operator != (const hybridsearchService_Select_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Select_result & ) const;
+  bool operator < (const hybridsearchService_Select_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Select_presult__isset {
-  _InfinityService_Select_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_Select_presult__isset {
+  _hybridsearchService_Select_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Select_presult__isset;
+} _hybridsearchService_Select_presult__isset;
 
-class InfinityService_Select_presult {
+class hybridsearchService_Select_presult {
  public:
 
 
-  virtual ~InfinityService_Select_presult() noexcept;
+  virtual ~hybridsearchService_Select_presult() noexcept;
   SelectResponse* success;
 
-  _InfinityService_Select_presult__isset __isset;
+  _hybridsearchService_Select_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_Explain_args__isset {
-  _InfinityService_Explain_args__isset() : request(false) {}
+typedef struct _hybridsearchService_Explain_args__isset {
+  _hybridsearchService_Explain_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_Explain_args__isset;
+} _hybridsearchService_Explain_args__isset;
 
-class InfinityService_Explain_args {
+class hybridsearchService_Explain_args {
  public:
 
-  InfinityService_Explain_args(const InfinityService_Explain_args&);
-  InfinityService_Explain_args& operator=(const InfinityService_Explain_args&);
-  InfinityService_Explain_args() noexcept {
+  hybridsearchService_Explain_args(const hybridsearchService_Explain_args&);
+  hybridsearchService_Explain_args& operator=(const hybridsearchService_Explain_args&);
+  hybridsearchService_Explain_args() noexcept {
   }
 
-  virtual ~InfinityService_Explain_args() noexcept;
+  virtual ~hybridsearchService_Explain_args() noexcept;
   ExplainRequest request;
 
-  _InfinityService_Explain_args__isset __isset;
+  _hybridsearchService_Explain_args__isset __isset;
 
   void __set_request(const ExplainRequest& val);
 
-  bool operator == (const InfinityService_Explain_args & rhs) const
+  bool operator == (const hybridsearchService_Explain_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Explain_args &rhs) const {
+  bool operator != (const hybridsearchService_Explain_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Explain_args & ) const;
+  bool operator < (const hybridsearchService_Explain_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -1283,103 +1283,103 @@ class InfinityService_Explain_args {
 };
 
 
-class InfinityService_Explain_pargs {
+class hybridsearchService_Explain_pargs {
  public:
 
 
-  virtual ~InfinityService_Explain_pargs() noexcept;
+  virtual ~hybridsearchService_Explain_pargs() noexcept;
   const ExplainRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Explain_result__isset {
-  _InfinityService_Explain_result__isset() : success(false) {}
+typedef struct _hybridsearchService_Explain_result__isset {
+  _hybridsearchService_Explain_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Explain_result__isset;
+} _hybridsearchService_Explain_result__isset;
 
-class InfinityService_Explain_result {
+class hybridsearchService_Explain_result {
  public:
 
-  InfinityService_Explain_result(const InfinityService_Explain_result&);
-  InfinityService_Explain_result& operator=(const InfinityService_Explain_result&);
-  InfinityService_Explain_result() noexcept {
+  hybridsearchService_Explain_result(const hybridsearchService_Explain_result&);
+  hybridsearchService_Explain_result& operator=(const hybridsearchService_Explain_result&);
+  hybridsearchService_Explain_result() noexcept {
   }
 
-  virtual ~InfinityService_Explain_result() noexcept;
+  virtual ~hybridsearchService_Explain_result() noexcept;
   SelectResponse success;
 
-  _InfinityService_Explain_result__isset __isset;
+  _hybridsearchService_Explain_result__isset __isset;
 
   void __set_success(const SelectResponse& val);
 
-  bool operator == (const InfinityService_Explain_result & rhs) const
+  bool operator == (const hybridsearchService_Explain_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Explain_result &rhs) const {
+  bool operator != (const hybridsearchService_Explain_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Explain_result & ) const;
+  bool operator < (const hybridsearchService_Explain_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Explain_presult__isset {
-  _InfinityService_Explain_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_Explain_presult__isset {
+  _hybridsearchService_Explain_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Explain_presult__isset;
+} _hybridsearchService_Explain_presult__isset;
 
-class InfinityService_Explain_presult {
+class hybridsearchService_Explain_presult {
  public:
 
 
-  virtual ~InfinityService_Explain_presult() noexcept;
+  virtual ~hybridsearchService_Explain_presult() noexcept;
   SelectResponse* success;
 
-  _InfinityService_Explain_presult__isset __isset;
+  _hybridsearchService_Explain_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_Delete_args__isset {
-  _InfinityService_Delete_args__isset() : request(false) {}
+typedef struct _hybridsearchService_Delete_args__isset {
+  _hybridsearchService_Delete_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_Delete_args__isset;
+} _hybridsearchService_Delete_args__isset;
 
-class InfinityService_Delete_args {
+class hybridsearchService_Delete_args {
  public:
 
-  InfinityService_Delete_args(const InfinityService_Delete_args&);
-  InfinityService_Delete_args& operator=(const InfinityService_Delete_args&);
-  InfinityService_Delete_args() noexcept {
+  hybridsearchService_Delete_args(const hybridsearchService_Delete_args&);
+  hybridsearchService_Delete_args& operator=(const hybridsearchService_Delete_args&);
+  hybridsearchService_Delete_args() noexcept {
   }
 
-  virtual ~InfinityService_Delete_args() noexcept;
+  virtual ~hybridsearchService_Delete_args() noexcept;
   DeleteRequest request;
 
-  _InfinityService_Delete_args__isset __isset;
+  _hybridsearchService_Delete_args__isset __isset;
 
   void __set_request(const DeleteRequest& val);
 
-  bool operator == (const InfinityService_Delete_args & rhs) const
+  bool operator == (const hybridsearchService_Delete_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Delete_args &rhs) const {
+  bool operator != (const hybridsearchService_Delete_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Delete_args & ) const;
+  bool operator < (const hybridsearchService_Delete_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -1387,103 +1387,103 @@ class InfinityService_Delete_args {
 };
 
 
-class InfinityService_Delete_pargs {
+class hybridsearchService_Delete_pargs {
  public:
 
 
-  virtual ~InfinityService_Delete_pargs() noexcept;
+  virtual ~hybridsearchService_Delete_pargs() noexcept;
   const DeleteRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Delete_result__isset {
-  _InfinityService_Delete_result__isset() : success(false) {}
+typedef struct _hybridsearchService_Delete_result__isset {
+  _hybridsearchService_Delete_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Delete_result__isset;
+} _hybridsearchService_Delete_result__isset;
 
-class InfinityService_Delete_result {
+class hybridsearchService_Delete_result {
  public:
 
-  InfinityService_Delete_result(const InfinityService_Delete_result&);
-  InfinityService_Delete_result& operator=(const InfinityService_Delete_result&);
-  InfinityService_Delete_result() noexcept {
+  hybridsearchService_Delete_result(const hybridsearchService_Delete_result&);
+  hybridsearchService_Delete_result& operator=(const hybridsearchService_Delete_result&);
+  hybridsearchService_Delete_result() noexcept {
   }
 
-  virtual ~InfinityService_Delete_result() noexcept;
+  virtual ~hybridsearchService_Delete_result() noexcept;
   DeleteResponse success;
 
-  _InfinityService_Delete_result__isset __isset;
+  _hybridsearchService_Delete_result__isset __isset;
 
   void __set_success(const DeleteResponse& val);
 
-  bool operator == (const InfinityService_Delete_result & rhs) const
+  bool operator == (const hybridsearchService_Delete_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Delete_result &rhs) const {
+  bool operator != (const hybridsearchService_Delete_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Delete_result & ) const;
+  bool operator < (const hybridsearchService_Delete_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Delete_presult__isset {
-  _InfinityService_Delete_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_Delete_presult__isset {
+  _hybridsearchService_Delete_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Delete_presult__isset;
+} _hybridsearchService_Delete_presult__isset;
 
-class InfinityService_Delete_presult {
+class hybridsearchService_Delete_presult {
  public:
 
 
-  virtual ~InfinityService_Delete_presult() noexcept;
+  virtual ~hybridsearchService_Delete_presult() noexcept;
   DeleteResponse* success;
 
-  _InfinityService_Delete_presult__isset __isset;
+  _hybridsearchService_Delete_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_Update_args__isset {
-  _InfinityService_Update_args__isset() : request(false) {}
+typedef struct _hybridsearchService_Update_args__isset {
+  _hybridsearchService_Update_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_Update_args__isset;
+} _hybridsearchService_Update_args__isset;
 
-class InfinityService_Update_args {
+class hybridsearchService_Update_args {
  public:
 
-  InfinityService_Update_args(const InfinityService_Update_args&);
-  InfinityService_Update_args& operator=(const InfinityService_Update_args&);
-  InfinityService_Update_args() noexcept {
+  hybridsearchService_Update_args(const hybridsearchService_Update_args&);
+  hybridsearchService_Update_args& operator=(const hybridsearchService_Update_args&);
+  hybridsearchService_Update_args() noexcept {
   }
 
-  virtual ~InfinityService_Update_args() noexcept;
+  virtual ~hybridsearchService_Update_args() noexcept;
   UpdateRequest request;
 
-  _InfinityService_Update_args__isset __isset;
+  _hybridsearchService_Update_args__isset __isset;
 
   void __set_request(const UpdateRequest& val);
 
-  bool operator == (const InfinityService_Update_args & rhs) const
+  bool operator == (const hybridsearchService_Update_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Update_args &rhs) const {
+  bool operator != (const hybridsearchService_Update_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Update_args & ) const;
+  bool operator < (const hybridsearchService_Update_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -1491,103 +1491,103 @@ class InfinityService_Update_args {
 };
 
 
-class InfinityService_Update_pargs {
+class hybridsearchService_Update_pargs {
  public:
 
 
-  virtual ~InfinityService_Update_pargs() noexcept;
+  virtual ~hybridsearchService_Update_pargs() noexcept;
   const UpdateRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Update_result__isset {
-  _InfinityService_Update_result__isset() : success(false) {}
+typedef struct _hybridsearchService_Update_result__isset {
+  _hybridsearchService_Update_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Update_result__isset;
+} _hybridsearchService_Update_result__isset;
 
-class InfinityService_Update_result {
+class hybridsearchService_Update_result {
  public:
 
-  InfinityService_Update_result(const InfinityService_Update_result&);
-  InfinityService_Update_result& operator=(const InfinityService_Update_result&);
-  InfinityService_Update_result() noexcept {
+  hybridsearchService_Update_result(const hybridsearchService_Update_result&);
+  hybridsearchService_Update_result& operator=(const hybridsearchService_Update_result&);
+  hybridsearchService_Update_result() noexcept {
   }
 
-  virtual ~InfinityService_Update_result() noexcept;
+  virtual ~hybridsearchService_Update_result() noexcept;
   CommonResponse success;
 
-  _InfinityService_Update_result__isset __isset;
+  _hybridsearchService_Update_result__isset __isset;
 
   void __set_success(const CommonResponse& val);
 
-  bool operator == (const InfinityService_Update_result & rhs) const
+  bool operator == (const hybridsearchService_Update_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Update_result &rhs) const {
+  bool operator != (const hybridsearchService_Update_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Update_result & ) const;
+  bool operator < (const hybridsearchService_Update_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Update_presult__isset {
-  _InfinityService_Update_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_Update_presult__isset {
+  _hybridsearchService_Update_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Update_presult__isset;
+} _hybridsearchService_Update_presult__isset;
 
-class InfinityService_Update_presult {
+class hybridsearchService_Update_presult {
  public:
 
 
-  virtual ~InfinityService_Update_presult() noexcept;
+  virtual ~hybridsearchService_Update_presult() noexcept;
   CommonResponse* success;
 
-  _InfinityService_Update_presult__isset __isset;
+  _hybridsearchService_Update_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_ListDatabase_args__isset {
-  _InfinityService_ListDatabase_args__isset() : request(false) {}
+typedef struct _hybridsearchService_ListDatabase_args__isset {
+  _hybridsearchService_ListDatabase_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_ListDatabase_args__isset;
+} _hybridsearchService_ListDatabase_args__isset;
 
-class InfinityService_ListDatabase_args {
+class hybridsearchService_ListDatabase_args {
  public:
 
-  InfinityService_ListDatabase_args(const InfinityService_ListDatabase_args&) noexcept;
-  InfinityService_ListDatabase_args& operator=(const InfinityService_ListDatabase_args&) noexcept;
-  InfinityService_ListDatabase_args() noexcept {
+  hybridsearchService_ListDatabase_args(const hybridsearchService_ListDatabase_args&) noexcept;
+  hybridsearchService_ListDatabase_args& operator=(const hybridsearchService_ListDatabase_args&) noexcept;
+  hybridsearchService_ListDatabase_args() noexcept {
   }
 
-  virtual ~InfinityService_ListDatabase_args() noexcept;
+  virtual ~hybridsearchService_ListDatabase_args() noexcept;
   ListDatabaseRequest request;
 
-  _InfinityService_ListDatabase_args__isset __isset;
+  _hybridsearchService_ListDatabase_args__isset __isset;
 
   void __set_request(const ListDatabaseRequest& val);
 
-  bool operator == (const InfinityService_ListDatabase_args & rhs) const
+  bool operator == (const hybridsearchService_ListDatabase_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ListDatabase_args &rhs) const {
+  bool operator != (const hybridsearchService_ListDatabase_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ListDatabase_args & ) const;
+  bool operator < (const hybridsearchService_ListDatabase_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -1595,103 +1595,103 @@ class InfinityService_ListDatabase_args {
 };
 
 
-class InfinityService_ListDatabase_pargs {
+class hybridsearchService_ListDatabase_pargs {
  public:
 
 
-  virtual ~InfinityService_ListDatabase_pargs() noexcept;
+  virtual ~hybridsearchService_ListDatabase_pargs() noexcept;
   const ListDatabaseRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ListDatabase_result__isset {
-  _InfinityService_ListDatabase_result__isset() : success(false) {}
+typedef struct _hybridsearchService_ListDatabase_result__isset {
+  _hybridsearchService_ListDatabase_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ListDatabase_result__isset;
+} _hybridsearchService_ListDatabase_result__isset;
 
-class InfinityService_ListDatabase_result {
+class hybridsearchService_ListDatabase_result {
  public:
 
-  InfinityService_ListDatabase_result(const InfinityService_ListDatabase_result&);
-  InfinityService_ListDatabase_result& operator=(const InfinityService_ListDatabase_result&);
-  InfinityService_ListDatabase_result() noexcept {
+  hybridsearchService_ListDatabase_result(const hybridsearchService_ListDatabase_result&);
+  hybridsearchService_ListDatabase_result& operator=(const hybridsearchService_ListDatabase_result&);
+  hybridsearchService_ListDatabase_result() noexcept {
   }
 
-  virtual ~InfinityService_ListDatabase_result() noexcept;
+  virtual ~hybridsearchService_ListDatabase_result() noexcept;
   ListDatabaseResponse success;
 
-  _InfinityService_ListDatabase_result__isset __isset;
+  _hybridsearchService_ListDatabase_result__isset __isset;
 
   void __set_success(const ListDatabaseResponse& val);
 
-  bool operator == (const InfinityService_ListDatabase_result & rhs) const
+  bool operator == (const hybridsearchService_ListDatabase_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ListDatabase_result &rhs) const {
+  bool operator != (const hybridsearchService_ListDatabase_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ListDatabase_result & ) const;
+  bool operator < (const hybridsearchService_ListDatabase_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ListDatabase_presult__isset {
-  _InfinityService_ListDatabase_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_ListDatabase_presult__isset {
+  _hybridsearchService_ListDatabase_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ListDatabase_presult__isset;
+} _hybridsearchService_ListDatabase_presult__isset;
 
-class InfinityService_ListDatabase_presult {
+class hybridsearchService_ListDatabase_presult {
  public:
 
 
-  virtual ~InfinityService_ListDatabase_presult() noexcept;
+  virtual ~hybridsearchService_ListDatabase_presult() noexcept;
   ListDatabaseResponse* success;
 
-  _InfinityService_ListDatabase_presult__isset __isset;
+  _hybridsearchService_ListDatabase_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_ListTable_args__isset {
-  _InfinityService_ListTable_args__isset() : request(false) {}
+typedef struct _hybridsearchService_ListTable_args__isset {
+  _hybridsearchService_ListTable_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_ListTable_args__isset;
+} _hybridsearchService_ListTable_args__isset;
 
-class InfinityService_ListTable_args {
+class hybridsearchService_ListTable_args {
  public:
 
-  InfinityService_ListTable_args(const InfinityService_ListTable_args&);
-  InfinityService_ListTable_args& operator=(const InfinityService_ListTable_args&);
-  InfinityService_ListTable_args() noexcept {
+  hybridsearchService_ListTable_args(const hybridsearchService_ListTable_args&);
+  hybridsearchService_ListTable_args& operator=(const hybridsearchService_ListTable_args&);
+  hybridsearchService_ListTable_args() noexcept {
   }
 
-  virtual ~InfinityService_ListTable_args() noexcept;
+  virtual ~hybridsearchService_ListTable_args() noexcept;
   ListTableRequest request;
 
-  _InfinityService_ListTable_args__isset __isset;
+  _hybridsearchService_ListTable_args__isset __isset;
 
   void __set_request(const ListTableRequest& val);
 
-  bool operator == (const InfinityService_ListTable_args & rhs) const
+  bool operator == (const hybridsearchService_ListTable_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ListTable_args &rhs) const {
+  bool operator != (const hybridsearchService_ListTable_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ListTable_args & ) const;
+  bool operator < (const hybridsearchService_ListTable_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -1699,103 +1699,103 @@ class InfinityService_ListTable_args {
 };
 
 
-class InfinityService_ListTable_pargs {
+class hybridsearchService_ListTable_pargs {
  public:
 
 
-  virtual ~InfinityService_ListTable_pargs() noexcept;
+  virtual ~hybridsearchService_ListTable_pargs() noexcept;
   const ListTableRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ListTable_result__isset {
-  _InfinityService_ListTable_result__isset() : success(false) {}
+typedef struct _hybridsearchService_ListTable_result__isset {
+  _hybridsearchService_ListTable_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ListTable_result__isset;
+} _hybridsearchService_ListTable_result__isset;
 
-class InfinityService_ListTable_result {
+class hybridsearchService_ListTable_result {
  public:
 
-  InfinityService_ListTable_result(const InfinityService_ListTable_result&);
-  InfinityService_ListTable_result& operator=(const InfinityService_ListTable_result&);
-  InfinityService_ListTable_result() noexcept {
+  hybridsearchService_ListTable_result(const hybridsearchService_ListTable_result&);
+  hybridsearchService_ListTable_result& operator=(const hybridsearchService_ListTable_result&);
+  hybridsearchService_ListTable_result() noexcept {
   }
 
-  virtual ~InfinityService_ListTable_result() noexcept;
+  virtual ~hybridsearchService_ListTable_result() noexcept;
   ListTableResponse success;
 
-  _InfinityService_ListTable_result__isset __isset;
+  _hybridsearchService_ListTable_result__isset __isset;
 
   void __set_success(const ListTableResponse& val);
 
-  bool operator == (const InfinityService_ListTable_result & rhs) const
+  bool operator == (const hybridsearchService_ListTable_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ListTable_result &rhs) const {
+  bool operator != (const hybridsearchService_ListTable_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ListTable_result & ) const;
+  bool operator < (const hybridsearchService_ListTable_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ListTable_presult__isset {
-  _InfinityService_ListTable_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_ListTable_presult__isset {
+  _hybridsearchService_ListTable_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ListTable_presult__isset;
+} _hybridsearchService_ListTable_presult__isset;
 
-class InfinityService_ListTable_presult {
+class hybridsearchService_ListTable_presult {
  public:
 
 
-  virtual ~InfinityService_ListTable_presult() noexcept;
+  virtual ~hybridsearchService_ListTable_presult() noexcept;
   ListTableResponse* success;
 
-  _InfinityService_ListTable_presult__isset __isset;
+  _hybridsearchService_ListTable_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_ListIndex_args__isset {
-  _InfinityService_ListIndex_args__isset() : request(false) {}
+typedef struct _hybridsearchService_ListIndex_args__isset {
+  _hybridsearchService_ListIndex_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_ListIndex_args__isset;
+} _hybridsearchService_ListIndex_args__isset;
 
-class InfinityService_ListIndex_args {
+class hybridsearchService_ListIndex_args {
  public:
 
-  InfinityService_ListIndex_args(const InfinityService_ListIndex_args&);
-  InfinityService_ListIndex_args& operator=(const InfinityService_ListIndex_args&);
-  InfinityService_ListIndex_args() noexcept {
+  hybridsearchService_ListIndex_args(const hybridsearchService_ListIndex_args&);
+  hybridsearchService_ListIndex_args& operator=(const hybridsearchService_ListIndex_args&);
+  hybridsearchService_ListIndex_args() noexcept {
   }
 
-  virtual ~InfinityService_ListIndex_args() noexcept;
+  virtual ~hybridsearchService_ListIndex_args() noexcept;
   ListIndexRequest request;
 
-  _InfinityService_ListIndex_args__isset __isset;
+  _hybridsearchService_ListIndex_args__isset __isset;
 
   void __set_request(const ListIndexRequest& val);
 
-  bool operator == (const InfinityService_ListIndex_args & rhs) const
+  bool operator == (const hybridsearchService_ListIndex_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ListIndex_args &rhs) const {
+  bool operator != (const hybridsearchService_ListIndex_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ListIndex_args & ) const;
+  bool operator < (const hybridsearchService_ListIndex_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -1803,103 +1803,103 @@ class InfinityService_ListIndex_args {
 };
 
 
-class InfinityService_ListIndex_pargs {
+class hybridsearchService_ListIndex_pargs {
  public:
 
 
-  virtual ~InfinityService_ListIndex_pargs() noexcept;
+  virtual ~hybridsearchService_ListIndex_pargs() noexcept;
   const ListIndexRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ListIndex_result__isset {
-  _InfinityService_ListIndex_result__isset() : success(false) {}
+typedef struct _hybridsearchService_ListIndex_result__isset {
+  _hybridsearchService_ListIndex_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ListIndex_result__isset;
+} _hybridsearchService_ListIndex_result__isset;
 
-class InfinityService_ListIndex_result {
+class hybridsearchService_ListIndex_result {
  public:
 
-  InfinityService_ListIndex_result(const InfinityService_ListIndex_result&);
-  InfinityService_ListIndex_result& operator=(const InfinityService_ListIndex_result&);
-  InfinityService_ListIndex_result() noexcept {
+  hybridsearchService_ListIndex_result(const hybridsearchService_ListIndex_result&);
+  hybridsearchService_ListIndex_result& operator=(const hybridsearchService_ListIndex_result&);
+  hybridsearchService_ListIndex_result() noexcept {
   }
 
-  virtual ~InfinityService_ListIndex_result() noexcept;
+  virtual ~hybridsearchService_ListIndex_result() noexcept;
   ListIndexResponse success;
 
-  _InfinityService_ListIndex_result__isset __isset;
+  _hybridsearchService_ListIndex_result__isset __isset;
 
   void __set_success(const ListIndexResponse& val);
 
-  bool operator == (const InfinityService_ListIndex_result & rhs) const
+  bool operator == (const hybridsearchService_ListIndex_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ListIndex_result &rhs) const {
+  bool operator != (const hybridsearchService_ListIndex_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ListIndex_result & ) const;
+  bool operator < (const hybridsearchService_ListIndex_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ListIndex_presult__isset {
-  _InfinityService_ListIndex_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_ListIndex_presult__isset {
+  _hybridsearchService_ListIndex_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ListIndex_presult__isset;
+} _hybridsearchService_ListIndex_presult__isset;
 
-class InfinityService_ListIndex_presult {
+class hybridsearchService_ListIndex_presult {
  public:
 
 
-  virtual ~InfinityService_ListIndex_presult() noexcept;
+  virtual ~hybridsearchService_ListIndex_presult() noexcept;
   ListIndexResponse* success;
 
-  _InfinityService_ListIndex_presult__isset __isset;
+  _hybridsearchService_ListIndex_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_ShowTable_args__isset {
-  _InfinityService_ShowTable_args__isset() : request(false) {}
+typedef struct _hybridsearchService_ShowTable_args__isset {
+  _hybridsearchService_ShowTable_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_ShowTable_args__isset;
+} _hybridsearchService_ShowTable_args__isset;
 
-class InfinityService_ShowTable_args {
+class hybridsearchService_ShowTable_args {
  public:
 
-  InfinityService_ShowTable_args(const InfinityService_ShowTable_args&);
-  InfinityService_ShowTable_args& operator=(const InfinityService_ShowTable_args&);
-  InfinityService_ShowTable_args() noexcept {
+  hybridsearchService_ShowTable_args(const hybridsearchService_ShowTable_args&);
+  hybridsearchService_ShowTable_args& operator=(const hybridsearchService_ShowTable_args&);
+  hybridsearchService_ShowTable_args() noexcept {
   }
 
-  virtual ~InfinityService_ShowTable_args() noexcept;
+  virtual ~hybridsearchService_ShowTable_args() noexcept;
   ShowTableRequest request;
 
-  _InfinityService_ShowTable_args__isset __isset;
+  _hybridsearchService_ShowTable_args__isset __isset;
 
   void __set_request(const ShowTableRequest& val);
 
-  bool operator == (const InfinityService_ShowTable_args & rhs) const
+  bool operator == (const hybridsearchService_ShowTable_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ShowTable_args &rhs) const {
+  bool operator != (const hybridsearchService_ShowTable_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ShowTable_args & ) const;
+  bool operator < (const hybridsearchService_ShowTable_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -1907,103 +1907,103 @@ class InfinityService_ShowTable_args {
 };
 
 
-class InfinityService_ShowTable_pargs {
+class hybridsearchService_ShowTable_pargs {
  public:
 
 
-  virtual ~InfinityService_ShowTable_pargs() noexcept;
+  virtual ~hybridsearchService_ShowTable_pargs() noexcept;
   const ShowTableRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ShowTable_result__isset {
-  _InfinityService_ShowTable_result__isset() : success(false) {}
+typedef struct _hybridsearchService_ShowTable_result__isset {
+  _hybridsearchService_ShowTable_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ShowTable_result__isset;
+} _hybridsearchService_ShowTable_result__isset;
 
-class InfinityService_ShowTable_result {
+class hybridsearchService_ShowTable_result {
  public:
 
-  InfinityService_ShowTable_result(const InfinityService_ShowTable_result&);
-  InfinityService_ShowTable_result& operator=(const InfinityService_ShowTable_result&);
-  InfinityService_ShowTable_result() noexcept {
+  hybridsearchService_ShowTable_result(const hybridsearchService_ShowTable_result&);
+  hybridsearchService_ShowTable_result& operator=(const hybridsearchService_ShowTable_result&);
+  hybridsearchService_ShowTable_result() noexcept {
   }
 
-  virtual ~InfinityService_ShowTable_result() noexcept;
+  virtual ~hybridsearchService_ShowTable_result() noexcept;
   ShowTableResponse success;
 
-  _InfinityService_ShowTable_result__isset __isset;
+  _hybridsearchService_ShowTable_result__isset __isset;
 
   void __set_success(const ShowTableResponse& val);
 
-  bool operator == (const InfinityService_ShowTable_result & rhs) const
+  bool operator == (const hybridsearchService_ShowTable_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ShowTable_result &rhs) const {
+  bool operator != (const hybridsearchService_ShowTable_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ShowTable_result & ) const;
+  bool operator < (const hybridsearchService_ShowTable_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ShowTable_presult__isset {
-  _InfinityService_ShowTable_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_ShowTable_presult__isset {
+  _hybridsearchService_ShowTable_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ShowTable_presult__isset;
+} _hybridsearchService_ShowTable_presult__isset;
 
-class InfinityService_ShowTable_presult {
+class hybridsearchService_ShowTable_presult {
  public:
 
 
-  virtual ~InfinityService_ShowTable_presult() noexcept;
+  virtual ~hybridsearchService_ShowTable_presult() noexcept;
   ShowTableResponse* success;
 
-  _InfinityService_ShowTable_presult__isset __isset;
+  _hybridsearchService_ShowTable_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_ShowColumns_args__isset {
-  _InfinityService_ShowColumns_args__isset() : request(false) {}
+typedef struct _hybridsearchService_ShowColumns_args__isset {
+  _hybridsearchService_ShowColumns_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_ShowColumns_args__isset;
+} _hybridsearchService_ShowColumns_args__isset;
 
-class InfinityService_ShowColumns_args {
+class hybridsearchService_ShowColumns_args {
  public:
 
-  InfinityService_ShowColumns_args(const InfinityService_ShowColumns_args&);
-  InfinityService_ShowColumns_args& operator=(const InfinityService_ShowColumns_args&);
-  InfinityService_ShowColumns_args() noexcept {
+  hybridsearchService_ShowColumns_args(const hybridsearchService_ShowColumns_args&);
+  hybridsearchService_ShowColumns_args& operator=(const hybridsearchService_ShowColumns_args&);
+  hybridsearchService_ShowColumns_args() noexcept {
   }
 
-  virtual ~InfinityService_ShowColumns_args() noexcept;
+  virtual ~hybridsearchService_ShowColumns_args() noexcept;
   ShowColumnsRequest request;
 
-  _InfinityService_ShowColumns_args__isset __isset;
+  _hybridsearchService_ShowColumns_args__isset __isset;
 
   void __set_request(const ShowColumnsRequest& val);
 
-  bool operator == (const InfinityService_ShowColumns_args & rhs) const
+  bool operator == (const hybridsearchService_ShowColumns_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ShowColumns_args &rhs) const {
+  bool operator != (const hybridsearchService_ShowColumns_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ShowColumns_args & ) const;
+  bool operator < (const hybridsearchService_ShowColumns_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -2011,103 +2011,103 @@ class InfinityService_ShowColumns_args {
 };
 
 
-class InfinityService_ShowColumns_pargs {
+class hybridsearchService_ShowColumns_pargs {
  public:
 
 
-  virtual ~InfinityService_ShowColumns_pargs() noexcept;
+  virtual ~hybridsearchService_ShowColumns_pargs() noexcept;
   const ShowColumnsRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ShowColumns_result__isset {
-  _InfinityService_ShowColumns_result__isset() : success(false) {}
+typedef struct _hybridsearchService_ShowColumns_result__isset {
+  _hybridsearchService_ShowColumns_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ShowColumns_result__isset;
+} _hybridsearchService_ShowColumns_result__isset;
 
-class InfinityService_ShowColumns_result {
+class hybridsearchService_ShowColumns_result {
  public:
 
-  InfinityService_ShowColumns_result(const InfinityService_ShowColumns_result&);
-  InfinityService_ShowColumns_result& operator=(const InfinityService_ShowColumns_result&);
-  InfinityService_ShowColumns_result() noexcept {
+  hybridsearchService_ShowColumns_result(const hybridsearchService_ShowColumns_result&);
+  hybridsearchService_ShowColumns_result& operator=(const hybridsearchService_ShowColumns_result&);
+  hybridsearchService_ShowColumns_result() noexcept {
   }
 
-  virtual ~InfinityService_ShowColumns_result() noexcept;
+  virtual ~hybridsearchService_ShowColumns_result() noexcept;
   SelectResponse success;
 
-  _InfinityService_ShowColumns_result__isset __isset;
+  _hybridsearchService_ShowColumns_result__isset __isset;
 
   void __set_success(const SelectResponse& val);
 
-  bool operator == (const InfinityService_ShowColumns_result & rhs) const
+  bool operator == (const hybridsearchService_ShowColumns_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ShowColumns_result &rhs) const {
+  bool operator != (const hybridsearchService_ShowColumns_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ShowColumns_result & ) const;
+  bool operator < (const hybridsearchService_ShowColumns_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ShowColumns_presult__isset {
-  _InfinityService_ShowColumns_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_ShowColumns_presult__isset {
+  _hybridsearchService_ShowColumns_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ShowColumns_presult__isset;
+} _hybridsearchService_ShowColumns_presult__isset;
 
-class InfinityService_ShowColumns_presult {
+class hybridsearchService_ShowColumns_presult {
  public:
 
 
-  virtual ~InfinityService_ShowColumns_presult() noexcept;
+  virtual ~hybridsearchService_ShowColumns_presult() noexcept;
   SelectResponse* success;
 
-  _InfinityService_ShowColumns_presult__isset __isset;
+  _hybridsearchService_ShowColumns_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_ShowDatabase_args__isset {
-  _InfinityService_ShowDatabase_args__isset() : request(false) {}
+typedef struct _hybridsearchService_ShowDatabase_args__isset {
+  _hybridsearchService_ShowDatabase_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_ShowDatabase_args__isset;
+} _hybridsearchService_ShowDatabase_args__isset;
 
-class InfinityService_ShowDatabase_args {
+class hybridsearchService_ShowDatabase_args {
  public:
 
-  InfinityService_ShowDatabase_args(const InfinityService_ShowDatabase_args&);
-  InfinityService_ShowDatabase_args& operator=(const InfinityService_ShowDatabase_args&);
-  InfinityService_ShowDatabase_args() noexcept {
+  hybridsearchService_ShowDatabase_args(const hybridsearchService_ShowDatabase_args&);
+  hybridsearchService_ShowDatabase_args& operator=(const hybridsearchService_ShowDatabase_args&);
+  hybridsearchService_ShowDatabase_args() noexcept {
   }
 
-  virtual ~InfinityService_ShowDatabase_args() noexcept;
+  virtual ~hybridsearchService_ShowDatabase_args() noexcept;
   ShowDatabaseRequest request;
 
-  _InfinityService_ShowDatabase_args__isset __isset;
+  _hybridsearchService_ShowDatabase_args__isset __isset;
 
   void __set_request(const ShowDatabaseRequest& val);
 
-  bool operator == (const InfinityService_ShowDatabase_args & rhs) const
+  bool operator == (const hybridsearchService_ShowDatabase_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ShowDatabase_args &rhs) const {
+  bool operator != (const hybridsearchService_ShowDatabase_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ShowDatabase_args & ) const;
+  bool operator < (const hybridsearchService_ShowDatabase_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -2115,103 +2115,103 @@ class InfinityService_ShowDatabase_args {
 };
 
 
-class InfinityService_ShowDatabase_pargs {
+class hybridsearchService_ShowDatabase_pargs {
  public:
 
 
-  virtual ~InfinityService_ShowDatabase_pargs() noexcept;
+  virtual ~hybridsearchService_ShowDatabase_pargs() noexcept;
   const ShowDatabaseRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ShowDatabase_result__isset {
-  _InfinityService_ShowDatabase_result__isset() : success(false) {}
+typedef struct _hybridsearchService_ShowDatabase_result__isset {
+  _hybridsearchService_ShowDatabase_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ShowDatabase_result__isset;
+} _hybridsearchService_ShowDatabase_result__isset;
 
-class InfinityService_ShowDatabase_result {
+class hybridsearchService_ShowDatabase_result {
  public:
 
-  InfinityService_ShowDatabase_result(const InfinityService_ShowDatabase_result&);
-  InfinityService_ShowDatabase_result& operator=(const InfinityService_ShowDatabase_result&);
-  InfinityService_ShowDatabase_result() noexcept {
+  hybridsearchService_ShowDatabase_result(const hybridsearchService_ShowDatabase_result&);
+  hybridsearchService_ShowDatabase_result& operator=(const hybridsearchService_ShowDatabase_result&);
+  hybridsearchService_ShowDatabase_result() noexcept {
   }
 
-  virtual ~InfinityService_ShowDatabase_result() noexcept;
+  virtual ~hybridsearchService_ShowDatabase_result() noexcept;
   ShowDatabaseResponse success;
 
-  _InfinityService_ShowDatabase_result__isset __isset;
+  _hybridsearchService_ShowDatabase_result__isset __isset;
 
   void __set_success(const ShowDatabaseResponse& val);
 
-  bool operator == (const InfinityService_ShowDatabase_result & rhs) const
+  bool operator == (const hybridsearchService_ShowDatabase_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ShowDatabase_result &rhs) const {
+  bool operator != (const hybridsearchService_ShowDatabase_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ShowDatabase_result & ) const;
+  bool operator < (const hybridsearchService_ShowDatabase_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ShowDatabase_presult__isset {
-  _InfinityService_ShowDatabase_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_ShowDatabase_presult__isset {
+  _hybridsearchService_ShowDatabase_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ShowDatabase_presult__isset;
+} _hybridsearchService_ShowDatabase_presult__isset;
 
-class InfinityService_ShowDatabase_presult {
+class hybridsearchService_ShowDatabase_presult {
  public:
 
 
-  virtual ~InfinityService_ShowDatabase_presult() noexcept;
+  virtual ~hybridsearchService_ShowDatabase_presult() noexcept;
   ShowDatabaseResponse* success;
 
-  _InfinityService_ShowDatabase_presult__isset __isset;
+  _hybridsearchService_ShowDatabase_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_ShowTables_args__isset {
-  _InfinityService_ShowTables_args__isset() : request(false) {}
+typedef struct _hybridsearchService_ShowTables_args__isset {
+  _hybridsearchService_ShowTables_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_ShowTables_args__isset;
+} _hybridsearchService_ShowTables_args__isset;
 
-class InfinityService_ShowTables_args {
+class hybridsearchService_ShowTables_args {
  public:
 
-  InfinityService_ShowTables_args(const InfinityService_ShowTables_args&);
-  InfinityService_ShowTables_args& operator=(const InfinityService_ShowTables_args&);
-  InfinityService_ShowTables_args() noexcept {
+  hybridsearchService_ShowTables_args(const hybridsearchService_ShowTables_args&);
+  hybridsearchService_ShowTables_args& operator=(const hybridsearchService_ShowTables_args&);
+  hybridsearchService_ShowTables_args() noexcept {
   }
 
-  virtual ~InfinityService_ShowTables_args() noexcept;
+  virtual ~hybridsearchService_ShowTables_args() noexcept;
   ShowTablesRequest request;
 
-  _InfinityService_ShowTables_args__isset __isset;
+  _hybridsearchService_ShowTables_args__isset __isset;
 
   void __set_request(const ShowTablesRequest& val);
 
-  bool operator == (const InfinityService_ShowTables_args & rhs) const
+  bool operator == (const hybridsearchService_ShowTables_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ShowTables_args &rhs) const {
+  bool operator != (const hybridsearchService_ShowTables_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ShowTables_args & ) const;
+  bool operator < (const hybridsearchService_ShowTables_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -2219,103 +2219,103 @@ class InfinityService_ShowTables_args {
 };
 
 
-class InfinityService_ShowTables_pargs {
+class hybridsearchService_ShowTables_pargs {
  public:
 
 
-  virtual ~InfinityService_ShowTables_pargs() noexcept;
+  virtual ~hybridsearchService_ShowTables_pargs() noexcept;
   const ShowTablesRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ShowTables_result__isset {
-  _InfinityService_ShowTables_result__isset() : success(false) {}
+typedef struct _hybridsearchService_ShowTables_result__isset {
+  _hybridsearchService_ShowTables_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ShowTables_result__isset;
+} _hybridsearchService_ShowTables_result__isset;
 
-class InfinityService_ShowTables_result {
+class hybridsearchService_ShowTables_result {
  public:
 
-  InfinityService_ShowTables_result(const InfinityService_ShowTables_result&);
-  InfinityService_ShowTables_result& operator=(const InfinityService_ShowTables_result&);
-  InfinityService_ShowTables_result() noexcept {
+  hybridsearchService_ShowTables_result(const hybridsearchService_ShowTables_result&);
+  hybridsearchService_ShowTables_result& operator=(const hybridsearchService_ShowTables_result&);
+  hybridsearchService_ShowTables_result() noexcept {
   }
 
-  virtual ~InfinityService_ShowTables_result() noexcept;
+  virtual ~hybridsearchService_ShowTables_result() noexcept;
   SelectResponse success;
 
-  _InfinityService_ShowTables_result__isset __isset;
+  _hybridsearchService_ShowTables_result__isset __isset;
 
   void __set_success(const SelectResponse& val);
 
-  bool operator == (const InfinityService_ShowTables_result & rhs) const
+  bool operator == (const hybridsearchService_ShowTables_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ShowTables_result &rhs) const {
+  bool operator != (const hybridsearchService_ShowTables_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ShowTables_result & ) const;
+  bool operator < (const hybridsearchService_ShowTables_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ShowTables_presult__isset {
-  _InfinityService_ShowTables_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_ShowTables_presult__isset {
+  _hybridsearchService_ShowTables_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ShowTables_presult__isset;
+} _hybridsearchService_ShowTables_presult__isset;
 
-class InfinityService_ShowTables_presult {
+class hybridsearchService_ShowTables_presult {
  public:
 
 
-  virtual ~InfinityService_ShowTables_presult() noexcept;
+  virtual ~hybridsearchService_ShowTables_presult() noexcept;
   SelectResponse* success;
 
-  _InfinityService_ShowTables_presult__isset __isset;
+  _hybridsearchService_ShowTables_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_ShowSegments_args__isset {
-  _InfinityService_ShowSegments_args__isset() : request(false) {}
+typedef struct _hybridsearchService_ShowSegments_args__isset {
+  _hybridsearchService_ShowSegments_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_ShowSegments_args__isset;
+} _hybridsearchService_ShowSegments_args__isset;
 
-class InfinityService_ShowSegments_args {
+class hybridsearchService_ShowSegments_args {
  public:
 
-  InfinityService_ShowSegments_args(const InfinityService_ShowSegments_args&);
-  InfinityService_ShowSegments_args& operator=(const InfinityService_ShowSegments_args&);
-  InfinityService_ShowSegments_args() noexcept {
+  hybridsearchService_ShowSegments_args(const hybridsearchService_ShowSegments_args&);
+  hybridsearchService_ShowSegments_args& operator=(const hybridsearchService_ShowSegments_args&);
+  hybridsearchService_ShowSegments_args() noexcept {
   }
 
-  virtual ~InfinityService_ShowSegments_args() noexcept;
+  virtual ~hybridsearchService_ShowSegments_args() noexcept;
   ShowSegmentsRequest request;
 
-  _InfinityService_ShowSegments_args__isset __isset;
+  _hybridsearchService_ShowSegments_args__isset __isset;
 
   void __set_request(const ShowSegmentsRequest& val);
 
-  bool operator == (const InfinityService_ShowSegments_args & rhs) const
+  bool operator == (const hybridsearchService_ShowSegments_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ShowSegments_args &rhs) const {
+  bool operator != (const hybridsearchService_ShowSegments_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ShowSegments_args & ) const;
+  bool operator < (const hybridsearchService_ShowSegments_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -2323,103 +2323,103 @@ class InfinityService_ShowSegments_args {
 };
 
 
-class InfinityService_ShowSegments_pargs {
+class hybridsearchService_ShowSegments_pargs {
  public:
 
 
-  virtual ~InfinityService_ShowSegments_pargs() noexcept;
+  virtual ~hybridsearchService_ShowSegments_pargs() noexcept;
   const ShowSegmentsRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ShowSegments_result__isset {
-  _InfinityService_ShowSegments_result__isset() : success(false) {}
+typedef struct _hybridsearchService_ShowSegments_result__isset {
+  _hybridsearchService_ShowSegments_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ShowSegments_result__isset;
+} _hybridsearchService_ShowSegments_result__isset;
 
-class InfinityService_ShowSegments_result {
+class hybridsearchService_ShowSegments_result {
  public:
 
-  InfinityService_ShowSegments_result(const InfinityService_ShowSegments_result&);
-  InfinityService_ShowSegments_result& operator=(const InfinityService_ShowSegments_result&);
-  InfinityService_ShowSegments_result() noexcept {
+  hybridsearchService_ShowSegments_result(const hybridsearchService_ShowSegments_result&);
+  hybridsearchService_ShowSegments_result& operator=(const hybridsearchService_ShowSegments_result&);
+  hybridsearchService_ShowSegments_result() noexcept {
   }
 
-  virtual ~InfinityService_ShowSegments_result() noexcept;
+  virtual ~hybridsearchService_ShowSegments_result() noexcept;
   SelectResponse success;
 
-  _InfinityService_ShowSegments_result__isset __isset;
+  _hybridsearchService_ShowSegments_result__isset __isset;
 
   void __set_success(const SelectResponse& val);
 
-  bool operator == (const InfinityService_ShowSegments_result & rhs) const
+  bool operator == (const hybridsearchService_ShowSegments_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ShowSegments_result &rhs) const {
+  bool operator != (const hybridsearchService_ShowSegments_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ShowSegments_result & ) const;
+  bool operator < (const hybridsearchService_ShowSegments_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ShowSegments_presult__isset {
-  _InfinityService_ShowSegments_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_ShowSegments_presult__isset {
+  _hybridsearchService_ShowSegments_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ShowSegments_presult__isset;
+} _hybridsearchService_ShowSegments_presult__isset;
 
-class InfinityService_ShowSegments_presult {
+class hybridsearchService_ShowSegments_presult {
  public:
 
 
-  virtual ~InfinityService_ShowSegments_presult() noexcept;
+  virtual ~hybridsearchService_ShowSegments_presult() noexcept;
   SelectResponse* success;
 
-  _InfinityService_ShowSegments_presult__isset __isset;
+  _hybridsearchService_ShowSegments_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_ShowSegment_args__isset {
-  _InfinityService_ShowSegment_args__isset() : request(false) {}
+typedef struct _hybridsearchService_ShowSegment_args__isset {
+  _hybridsearchService_ShowSegment_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_ShowSegment_args__isset;
+} _hybridsearchService_ShowSegment_args__isset;
 
-class InfinityService_ShowSegment_args {
+class hybridsearchService_ShowSegment_args {
  public:
 
-  InfinityService_ShowSegment_args(const InfinityService_ShowSegment_args&);
-  InfinityService_ShowSegment_args& operator=(const InfinityService_ShowSegment_args&);
-  InfinityService_ShowSegment_args() noexcept {
+  hybridsearchService_ShowSegment_args(const hybridsearchService_ShowSegment_args&);
+  hybridsearchService_ShowSegment_args& operator=(const hybridsearchService_ShowSegment_args&);
+  hybridsearchService_ShowSegment_args() noexcept {
   }
 
-  virtual ~InfinityService_ShowSegment_args() noexcept;
+  virtual ~hybridsearchService_ShowSegment_args() noexcept;
   ShowSegmentRequest request;
 
-  _InfinityService_ShowSegment_args__isset __isset;
+  _hybridsearchService_ShowSegment_args__isset __isset;
 
   void __set_request(const ShowSegmentRequest& val);
 
-  bool operator == (const InfinityService_ShowSegment_args & rhs) const
+  bool operator == (const hybridsearchService_ShowSegment_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ShowSegment_args &rhs) const {
+  bool operator != (const hybridsearchService_ShowSegment_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ShowSegment_args & ) const;
+  bool operator < (const hybridsearchService_ShowSegment_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -2427,103 +2427,103 @@ class InfinityService_ShowSegment_args {
 };
 
 
-class InfinityService_ShowSegment_pargs {
+class hybridsearchService_ShowSegment_pargs {
  public:
 
 
-  virtual ~InfinityService_ShowSegment_pargs() noexcept;
+  virtual ~hybridsearchService_ShowSegment_pargs() noexcept;
   const ShowSegmentRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ShowSegment_result__isset {
-  _InfinityService_ShowSegment_result__isset() : success(false) {}
+typedef struct _hybridsearchService_ShowSegment_result__isset {
+  _hybridsearchService_ShowSegment_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ShowSegment_result__isset;
+} _hybridsearchService_ShowSegment_result__isset;
 
-class InfinityService_ShowSegment_result {
+class hybridsearchService_ShowSegment_result {
  public:
 
-  InfinityService_ShowSegment_result(const InfinityService_ShowSegment_result&);
-  InfinityService_ShowSegment_result& operator=(const InfinityService_ShowSegment_result&);
-  InfinityService_ShowSegment_result() noexcept {
+  hybridsearchService_ShowSegment_result(const hybridsearchService_ShowSegment_result&);
+  hybridsearchService_ShowSegment_result& operator=(const hybridsearchService_ShowSegment_result&);
+  hybridsearchService_ShowSegment_result() noexcept {
   }
 
-  virtual ~InfinityService_ShowSegment_result() noexcept;
+  virtual ~hybridsearchService_ShowSegment_result() noexcept;
   ShowSegmentResponse success;
 
-  _InfinityService_ShowSegment_result__isset __isset;
+  _hybridsearchService_ShowSegment_result__isset __isset;
 
   void __set_success(const ShowSegmentResponse& val);
 
-  bool operator == (const InfinityService_ShowSegment_result & rhs) const
+  bool operator == (const hybridsearchService_ShowSegment_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ShowSegment_result &rhs) const {
+  bool operator != (const hybridsearchService_ShowSegment_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ShowSegment_result & ) const;
+  bool operator < (const hybridsearchService_ShowSegment_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ShowSegment_presult__isset {
-  _InfinityService_ShowSegment_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_ShowSegment_presult__isset {
+  _hybridsearchService_ShowSegment_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ShowSegment_presult__isset;
+} _hybridsearchService_ShowSegment_presult__isset;
 
-class InfinityService_ShowSegment_presult {
+class hybridsearchService_ShowSegment_presult {
  public:
 
 
-  virtual ~InfinityService_ShowSegment_presult() noexcept;
+  virtual ~hybridsearchService_ShowSegment_presult() noexcept;
   ShowSegmentResponse* success;
 
-  _InfinityService_ShowSegment_presult__isset __isset;
+  _hybridsearchService_ShowSegment_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_ShowBlocks_args__isset {
-  _InfinityService_ShowBlocks_args__isset() : request(false) {}
+typedef struct _hybridsearchService_ShowBlocks_args__isset {
+  _hybridsearchService_ShowBlocks_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_ShowBlocks_args__isset;
+} _hybridsearchService_ShowBlocks_args__isset;
 
-class InfinityService_ShowBlocks_args {
+class hybridsearchService_ShowBlocks_args {
  public:
 
-  InfinityService_ShowBlocks_args(const InfinityService_ShowBlocks_args&);
-  InfinityService_ShowBlocks_args& operator=(const InfinityService_ShowBlocks_args&);
-  InfinityService_ShowBlocks_args() noexcept {
+  hybridsearchService_ShowBlocks_args(const hybridsearchService_ShowBlocks_args&);
+  hybridsearchService_ShowBlocks_args& operator=(const hybridsearchService_ShowBlocks_args&);
+  hybridsearchService_ShowBlocks_args() noexcept {
   }
 
-  virtual ~InfinityService_ShowBlocks_args() noexcept;
+  virtual ~hybridsearchService_ShowBlocks_args() noexcept;
   ShowBlocksRequest request;
 
-  _InfinityService_ShowBlocks_args__isset __isset;
+  _hybridsearchService_ShowBlocks_args__isset __isset;
 
   void __set_request(const ShowBlocksRequest& val);
 
-  bool operator == (const InfinityService_ShowBlocks_args & rhs) const
+  bool operator == (const hybridsearchService_ShowBlocks_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ShowBlocks_args &rhs) const {
+  bool operator != (const hybridsearchService_ShowBlocks_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ShowBlocks_args & ) const;
+  bool operator < (const hybridsearchService_ShowBlocks_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -2531,103 +2531,103 @@ class InfinityService_ShowBlocks_args {
 };
 
 
-class InfinityService_ShowBlocks_pargs {
+class hybridsearchService_ShowBlocks_pargs {
  public:
 
 
-  virtual ~InfinityService_ShowBlocks_pargs() noexcept;
+  virtual ~hybridsearchService_ShowBlocks_pargs() noexcept;
   const ShowBlocksRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ShowBlocks_result__isset {
-  _InfinityService_ShowBlocks_result__isset() : success(false) {}
+typedef struct _hybridsearchService_ShowBlocks_result__isset {
+  _hybridsearchService_ShowBlocks_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ShowBlocks_result__isset;
+} _hybridsearchService_ShowBlocks_result__isset;
 
-class InfinityService_ShowBlocks_result {
+class hybridsearchService_ShowBlocks_result {
  public:
 
-  InfinityService_ShowBlocks_result(const InfinityService_ShowBlocks_result&);
-  InfinityService_ShowBlocks_result& operator=(const InfinityService_ShowBlocks_result&);
-  InfinityService_ShowBlocks_result() noexcept {
+  hybridsearchService_ShowBlocks_result(const hybridsearchService_ShowBlocks_result&);
+  hybridsearchService_ShowBlocks_result& operator=(const hybridsearchService_ShowBlocks_result&);
+  hybridsearchService_ShowBlocks_result() noexcept {
   }
 
-  virtual ~InfinityService_ShowBlocks_result() noexcept;
+  virtual ~hybridsearchService_ShowBlocks_result() noexcept;
   SelectResponse success;
 
-  _InfinityService_ShowBlocks_result__isset __isset;
+  _hybridsearchService_ShowBlocks_result__isset __isset;
 
   void __set_success(const SelectResponse& val);
 
-  bool operator == (const InfinityService_ShowBlocks_result & rhs) const
+  bool operator == (const hybridsearchService_ShowBlocks_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ShowBlocks_result &rhs) const {
+  bool operator != (const hybridsearchService_ShowBlocks_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ShowBlocks_result & ) const;
+  bool operator < (const hybridsearchService_ShowBlocks_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ShowBlocks_presult__isset {
-  _InfinityService_ShowBlocks_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_ShowBlocks_presult__isset {
+  _hybridsearchService_ShowBlocks_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ShowBlocks_presult__isset;
+} _hybridsearchService_ShowBlocks_presult__isset;
 
-class InfinityService_ShowBlocks_presult {
+class hybridsearchService_ShowBlocks_presult {
  public:
 
 
-  virtual ~InfinityService_ShowBlocks_presult() noexcept;
+  virtual ~hybridsearchService_ShowBlocks_presult() noexcept;
   SelectResponse* success;
 
-  _InfinityService_ShowBlocks_presult__isset __isset;
+  _hybridsearchService_ShowBlocks_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_ShowBlock_args__isset {
-  _InfinityService_ShowBlock_args__isset() : request(false) {}
+typedef struct _hybridsearchService_ShowBlock_args__isset {
+  _hybridsearchService_ShowBlock_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_ShowBlock_args__isset;
+} _hybridsearchService_ShowBlock_args__isset;
 
-class InfinityService_ShowBlock_args {
+class hybridsearchService_ShowBlock_args {
  public:
 
-  InfinityService_ShowBlock_args(const InfinityService_ShowBlock_args&);
-  InfinityService_ShowBlock_args& operator=(const InfinityService_ShowBlock_args&);
-  InfinityService_ShowBlock_args() noexcept {
+  hybridsearchService_ShowBlock_args(const hybridsearchService_ShowBlock_args&);
+  hybridsearchService_ShowBlock_args& operator=(const hybridsearchService_ShowBlock_args&);
+  hybridsearchService_ShowBlock_args() noexcept {
   }
 
-  virtual ~InfinityService_ShowBlock_args() noexcept;
+  virtual ~hybridsearchService_ShowBlock_args() noexcept;
   ShowBlockRequest request;
 
-  _InfinityService_ShowBlock_args__isset __isset;
+  _hybridsearchService_ShowBlock_args__isset __isset;
 
   void __set_request(const ShowBlockRequest& val);
 
-  bool operator == (const InfinityService_ShowBlock_args & rhs) const
+  bool operator == (const hybridsearchService_ShowBlock_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ShowBlock_args &rhs) const {
+  bool operator != (const hybridsearchService_ShowBlock_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ShowBlock_args & ) const;
+  bool operator < (const hybridsearchService_ShowBlock_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -2635,103 +2635,103 @@ class InfinityService_ShowBlock_args {
 };
 
 
-class InfinityService_ShowBlock_pargs {
+class hybridsearchService_ShowBlock_pargs {
  public:
 
 
-  virtual ~InfinityService_ShowBlock_pargs() noexcept;
+  virtual ~hybridsearchService_ShowBlock_pargs() noexcept;
   const ShowBlockRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ShowBlock_result__isset {
-  _InfinityService_ShowBlock_result__isset() : success(false) {}
+typedef struct _hybridsearchService_ShowBlock_result__isset {
+  _hybridsearchService_ShowBlock_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ShowBlock_result__isset;
+} _hybridsearchService_ShowBlock_result__isset;
 
-class InfinityService_ShowBlock_result {
+class hybridsearchService_ShowBlock_result {
  public:
 
-  InfinityService_ShowBlock_result(const InfinityService_ShowBlock_result&);
-  InfinityService_ShowBlock_result& operator=(const InfinityService_ShowBlock_result&);
-  InfinityService_ShowBlock_result() noexcept {
+  hybridsearchService_ShowBlock_result(const hybridsearchService_ShowBlock_result&);
+  hybridsearchService_ShowBlock_result& operator=(const hybridsearchService_ShowBlock_result&);
+  hybridsearchService_ShowBlock_result() noexcept {
   }
 
-  virtual ~InfinityService_ShowBlock_result() noexcept;
+  virtual ~hybridsearchService_ShowBlock_result() noexcept;
   ShowBlockResponse success;
 
-  _InfinityService_ShowBlock_result__isset __isset;
+  _hybridsearchService_ShowBlock_result__isset __isset;
 
   void __set_success(const ShowBlockResponse& val);
 
-  bool operator == (const InfinityService_ShowBlock_result & rhs) const
+  bool operator == (const hybridsearchService_ShowBlock_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ShowBlock_result &rhs) const {
+  bool operator != (const hybridsearchService_ShowBlock_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ShowBlock_result & ) const;
+  bool operator < (const hybridsearchService_ShowBlock_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ShowBlock_presult__isset {
-  _InfinityService_ShowBlock_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_ShowBlock_presult__isset {
+  _hybridsearchService_ShowBlock_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ShowBlock_presult__isset;
+} _hybridsearchService_ShowBlock_presult__isset;
 
-class InfinityService_ShowBlock_presult {
+class hybridsearchService_ShowBlock_presult {
  public:
 
 
-  virtual ~InfinityService_ShowBlock_presult() noexcept;
+  virtual ~hybridsearchService_ShowBlock_presult() noexcept;
   ShowBlockResponse* success;
 
-  _InfinityService_ShowBlock_presult__isset __isset;
+  _hybridsearchService_ShowBlock_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_ShowBlockColumn_args__isset {
-  _InfinityService_ShowBlockColumn_args__isset() : request(false) {}
+typedef struct _hybridsearchService_ShowBlockColumn_args__isset {
+  _hybridsearchService_ShowBlockColumn_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_ShowBlockColumn_args__isset;
+} _hybridsearchService_ShowBlockColumn_args__isset;
 
-class InfinityService_ShowBlockColumn_args {
+class hybridsearchService_ShowBlockColumn_args {
  public:
 
-  InfinityService_ShowBlockColumn_args(const InfinityService_ShowBlockColumn_args&);
-  InfinityService_ShowBlockColumn_args& operator=(const InfinityService_ShowBlockColumn_args&);
-  InfinityService_ShowBlockColumn_args() noexcept {
+  hybridsearchService_ShowBlockColumn_args(const hybridsearchService_ShowBlockColumn_args&);
+  hybridsearchService_ShowBlockColumn_args& operator=(const hybridsearchService_ShowBlockColumn_args&);
+  hybridsearchService_ShowBlockColumn_args() noexcept {
   }
 
-  virtual ~InfinityService_ShowBlockColumn_args() noexcept;
+  virtual ~hybridsearchService_ShowBlockColumn_args() noexcept;
   ShowBlockColumnRequest request;
 
-  _InfinityService_ShowBlockColumn_args__isset __isset;
+  _hybridsearchService_ShowBlockColumn_args__isset __isset;
 
   void __set_request(const ShowBlockColumnRequest& val);
 
-  bool operator == (const InfinityService_ShowBlockColumn_args & rhs) const
+  bool operator == (const hybridsearchService_ShowBlockColumn_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ShowBlockColumn_args &rhs) const {
+  bool operator != (const hybridsearchService_ShowBlockColumn_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ShowBlockColumn_args & ) const;
+  bool operator < (const hybridsearchService_ShowBlockColumn_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -2739,103 +2739,103 @@ class InfinityService_ShowBlockColumn_args {
 };
 
 
-class InfinityService_ShowBlockColumn_pargs {
+class hybridsearchService_ShowBlockColumn_pargs {
  public:
 
 
-  virtual ~InfinityService_ShowBlockColumn_pargs() noexcept;
+  virtual ~hybridsearchService_ShowBlockColumn_pargs() noexcept;
   const ShowBlockColumnRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ShowBlockColumn_result__isset {
-  _InfinityService_ShowBlockColumn_result__isset() : success(false) {}
+typedef struct _hybridsearchService_ShowBlockColumn_result__isset {
+  _hybridsearchService_ShowBlockColumn_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ShowBlockColumn_result__isset;
+} _hybridsearchService_ShowBlockColumn_result__isset;
 
-class InfinityService_ShowBlockColumn_result {
+class hybridsearchService_ShowBlockColumn_result {
  public:
 
-  InfinityService_ShowBlockColumn_result(const InfinityService_ShowBlockColumn_result&);
-  InfinityService_ShowBlockColumn_result& operator=(const InfinityService_ShowBlockColumn_result&);
-  InfinityService_ShowBlockColumn_result() noexcept {
+  hybridsearchService_ShowBlockColumn_result(const hybridsearchService_ShowBlockColumn_result&);
+  hybridsearchService_ShowBlockColumn_result& operator=(const hybridsearchService_ShowBlockColumn_result&);
+  hybridsearchService_ShowBlockColumn_result() noexcept {
   }
 
-  virtual ~InfinityService_ShowBlockColumn_result() noexcept;
+  virtual ~hybridsearchService_ShowBlockColumn_result() noexcept;
   ShowBlockColumnResponse success;
 
-  _InfinityService_ShowBlockColumn_result__isset __isset;
+  _hybridsearchService_ShowBlockColumn_result__isset __isset;
 
   void __set_success(const ShowBlockColumnResponse& val);
 
-  bool operator == (const InfinityService_ShowBlockColumn_result & rhs) const
+  bool operator == (const hybridsearchService_ShowBlockColumn_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ShowBlockColumn_result &rhs) const {
+  bool operator != (const hybridsearchService_ShowBlockColumn_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ShowBlockColumn_result & ) const;
+  bool operator < (const hybridsearchService_ShowBlockColumn_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ShowBlockColumn_presult__isset {
-  _InfinityService_ShowBlockColumn_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_ShowBlockColumn_presult__isset {
+  _hybridsearchService_ShowBlockColumn_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ShowBlockColumn_presult__isset;
+} _hybridsearchService_ShowBlockColumn_presult__isset;
 
-class InfinityService_ShowBlockColumn_presult {
+class hybridsearchService_ShowBlockColumn_presult {
  public:
 
 
-  virtual ~InfinityService_ShowBlockColumn_presult() noexcept;
+  virtual ~hybridsearchService_ShowBlockColumn_presult() noexcept;
   ShowBlockColumnResponse* success;
 
-  _InfinityService_ShowBlockColumn_presult__isset __isset;
+  _hybridsearchService_ShowBlockColumn_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_ShowCurrentNode_args__isset {
-  _InfinityService_ShowCurrentNode_args__isset() : request(false) {}
+typedef struct _hybridsearchService_ShowCurrentNode_args__isset {
+  _hybridsearchService_ShowCurrentNode_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_ShowCurrentNode_args__isset;
+} _hybridsearchService_ShowCurrentNode_args__isset;
 
-class InfinityService_ShowCurrentNode_args {
+class hybridsearchService_ShowCurrentNode_args {
  public:
 
-  InfinityService_ShowCurrentNode_args(const InfinityService_ShowCurrentNode_args&) noexcept;
-  InfinityService_ShowCurrentNode_args& operator=(const InfinityService_ShowCurrentNode_args&) noexcept;
-  InfinityService_ShowCurrentNode_args() noexcept {
+  hybridsearchService_ShowCurrentNode_args(const hybridsearchService_ShowCurrentNode_args&) noexcept;
+  hybridsearchService_ShowCurrentNode_args& operator=(const hybridsearchService_ShowCurrentNode_args&) noexcept;
+  hybridsearchService_ShowCurrentNode_args() noexcept {
   }
 
-  virtual ~InfinityService_ShowCurrentNode_args() noexcept;
+  virtual ~hybridsearchService_ShowCurrentNode_args() noexcept;
   ShowCurrentNodeRequest request;
 
-  _InfinityService_ShowCurrentNode_args__isset __isset;
+  _hybridsearchService_ShowCurrentNode_args__isset __isset;
 
   void __set_request(const ShowCurrentNodeRequest& val);
 
-  bool operator == (const InfinityService_ShowCurrentNode_args & rhs) const
+  bool operator == (const hybridsearchService_ShowCurrentNode_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ShowCurrentNode_args &rhs) const {
+  bool operator != (const hybridsearchService_ShowCurrentNode_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ShowCurrentNode_args & ) const;
+  bool operator < (const hybridsearchService_ShowCurrentNode_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -2843,103 +2843,103 @@ class InfinityService_ShowCurrentNode_args {
 };
 
 
-class InfinityService_ShowCurrentNode_pargs {
+class hybridsearchService_ShowCurrentNode_pargs {
  public:
 
 
-  virtual ~InfinityService_ShowCurrentNode_pargs() noexcept;
+  virtual ~hybridsearchService_ShowCurrentNode_pargs() noexcept;
   const ShowCurrentNodeRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ShowCurrentNode_result__isset {
-  _InfinityService_ShowCurrentNode_result__isset() : success(false) {}
+typedef struct _hybridsearchService_ShowCurrentNode_result__isset {
+  _hybridsearchService_ShowCurrentNode_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ShowCurrentNode_result__isset;
+} _hybridsearchService_ShowCurrentNode_result__isset;
 
-class InfinityService_ShowCurrentNode_result {
+class hybridsearchService_ShowCurrentNode_result {
  public:
 
-  InfinityService_ShowCurrentNode_result(const InfinityService_ShowCurrentNode_result&);
-  InfinityService_ShowCurrentNode_result& operator=(const InfinityService_ShowCurrentNode_result&);
-  InfinityService_ShowCurrentNode_result() noexcept {
+  hybridsearchService_ShowCurrentNode_result(const hybridsearchService_ShowCurrentNode_result&);
+  hybridsearchService_ShowCurrentNode_result& operator=(const hybridsearchService_ShowCurrentNode_result&);
+  hybridsearchService_ShowCurrentNode_result() noexcept {
   }
 
-  virtual ~InfinityService_ShowCurrentNode_result() noexcept;
+  virtual ~hybridsearchService_ShowCurrentNode_result() noexcept;
   ShowCurrentNodeResponse success;
 
-  _InfinityService_ShowCurrentNode_result__isset __isset;
+  _hybridsearchService_ShowCurrentNode_result__isset __isset;
 
   void __set_success(const ShowCurrentNodeResponse& val);
 
-  bool operator == (const InfinityService_ShowCurrentNode_result & rhs) const
+  bool operator == (const hybridsearchService_ShowCurrentNode_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ShowCurrentNode_result &rhs) const {
+  bool operator != (const hybridsearchService_ShowCurrentNode_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ShowCurrentNode_result & ) const;
+  bool operator < (const hybridsearchService_ShowCurrentNode_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ShowCurrentNode_presult__isset {
-  _InfinityService_ShowCurrentNode_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_ShowCurrentNode_presult__isset {
+  _hybridsearchService_ShowCurrentNode_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ShowCurrentNode_presult__isset;
+} _hybridsearchService_ShowCurrentNode_presult__isset;
 
-class InfinityService_ShowCurrentNode_presult {
+class hybridsearchService_ShowCurrentNode_presult {
  public:
 
 
-  virtual ~InfinityService_ShowCurrentNode_presult() noexcept;
+  virtual ~hybridsearchService_ShowCurrentNode_presult() noexcept;
   ShowCurrentNodeResponse* success;
 
-  _InfinityService_ShowCurrentNode_presult__isset __isset;
+  _hybridsearchService_ShowCurrentNode_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_GetDatabase_args__isset {
-  _InfinityService_GetDatabase_args__isset() : request(false) {}
+typedef struct _hybridsearchService_GetDatabase_args__isset {
+  _hybridsearchService_GetDatabase_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_GetDatabase_args__isset;
+} _hybridsearchService_GetDatabase_args__isset;
 
-class InfinityService_GetDatabase_args {
+class hybridsearchService_GetDatabase_args {
  public:
 
-  InfinityService_GetDatabase_args(const InfinityService_GetDatabase_args&);
-  InfinityService_GetDatabase_args& operator=(const InfinityService_GetDatabase_args&);
-  InfinityService_GetDatabase_args() noexcept {
+  hybridsearchService_GetDatabase_args(const hybridsearchService_GetDatabase_args&);
+  hybridsearchService_GetDatabase_args& operator=(const hybridsearchService_GetDatabase_args&);
+  hybridsearchService_GetDatabase_args() noexcept {
   }
 
-  virtual ~InfinityService_GetDatabase_args() noexcept;
+  virtual ~hybridsearchService_GetDatabase_args() noexcept;
   GetDatabaseRequest request;
 
-  _InfinityService_GetDatabase_args__isset __isset;
+  _hybridsearchService_GetDatabase_args__isset __isset;
 
   void __set_request(const GetDatabaseRequest& val);
 
-  bool operator == (const InfinityService_GetDatabase_args & rhs) const
+  bool operator == (const hybridsearchService_GetDatabase_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_GetDatabase_args &rhs) const {
+  bool operator != (const hybridsearchService_GetDatabase_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_GetDatabase_args & ) const;
+  bool operator < (const hybridsearchService_GetDatabase_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -2947,103 +2947,103 @@ class InfinityService_GetDatabase_args {
 };
 
 
-class InfinityService_GetDatabase_pargs {
+class hybridsearchService_GetDatabase_pargs {
  public:
 
 
-  virtual ~InfinityService_GetDatabase_pargs() noexcept;
+  virtual ~hybridsearchService_GetDatabase_pargs() noexcept;
   const GetDatabaseRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_GetDatabase_result__isset {
-  _InfinityService_GetDatabase_result__isset() : success(false) {}
+typedef struct _hybridsearchService_GetDatabase_result__isset {
+  _hybridsearchService_GetDatabase_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_GetDatabase_result__isset;
+} _hybridsearchService_GetDatabase_result__isset;
 
-class InfinityService_GetDatabase_result {
+class hybridsearchService_GetDatabase_result {
  public:
 
-  InfinityService_GetDatabase_result(const InfinityService_GetDatabase_result&);
-  InfinityService_GetDatabase_result& operator=(const InfinityService_GetDatabase_result&);
-  InfinityService_GetDatabase_result() noexcept {
+  hybridsearchService_GetDatabase_result(const hybridsearchService_GetDatabase_result&);
+  hybridsearchService_GetDatabase_result& operator=(const hybridsearchService_GetDatabase_result&);
+  hybridsearchService_GetDatabase_result() noexcept {
   }
 
-  virtual ~InfinityService_GetDatabase_result() noexcept;
+  virtual ~hybridsearchService_GetDatabase_result() noexcept;
   CommonResponse success;
 
-  _InfinityService_GetDatabase_result__isset __isset;
+  _hybridsearchService_GetDatabase_result__isset __isset;
 
   void __set_success(const CommonResponse& val);
 
-  bool operator == (const InfinityService_GetDatabase_result & rhs) const
+  bool operator == (const hybridsearchService_GetDatabase_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_GetDatabase_result &rhs) const {
+  bool operator != (const hybridsearchService_GetDatabase_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_GetDatabase_result & ) const;
+  bool operator < (const hybridsearchService_GetDatabase_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_GetDatabase_presult__isset {
-  _InfinityService_GetDatabase_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_GetDatabase_presult__isset {
+  _hybridsearchService_GetDatabase_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_GetDatabase_presult__isset;
+} _hybridsearchService_GetDatabase_presult__isset;
 
-class InfinityService_GetDatabase_presult {
+class hybridsearchService_GetDatabase_presult {
  public:
 
 
-  virtual ~InfinityService_GetDatabase_presult() noexcept;
+  virtual ~hybridsearchService_GetDatabase_presult() noexcept;
   CommonResponse* success;
 
-  _InfinityService_GetDatabase_presult__isset __isset;
+  _hybridsearchService_GetDatabase_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_GetTable_args__isset {
-  _InfinityService_GetTable_args__isset() : request(false) {}
+typedef struct _hybridsearchService_GetTable_args__isset {
+  _hybridsearchService_GetTable_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_GetTable_args__isset;
+} _hybridsearchService_GetTable_args__isset;
 
-class InfinityService_GetTable_args {
+class hybridsearchService_GetTable_args {
  public:
 
-  InfinityService_GetTable_args(const InfinityService_GetTable_args&);
-  InfinityService_GetTable_args& operator=(const InfinityService_GetTable_args&);
-  InfinityService_GetTable_args() noexcept {
+  hybridsearchService_GetTable_args(const hybridsearchService_GetTable_args&);
+  hybridsearchService_GetTable_args& operator=(const hybridsearchService_GetTable_args&);
+  hybridsearchService_GetTable_args() noexcept {
   }
 
-  virtual ~InfinityService_GetTable_args() noexcept;
+  virtual ~hybridsearchService_GetTable_args() noexcept;
   GetTableRequest request;
 
-  _InfinityService_GetTable_args__isset __isset;
+  _hybridsearchService_GetTable_args__isset __isset;
 
   void __set_request(const GetTableRequest& val);
 
-  bool operator == (const InfinityService_GetTable_args & rhs) const
+  bool operator == (const hybridsearchService_GetTable_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_GetTable_args &rhs) const {
+  bool operator != (const hybridsearchService_GetTable_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_GetTable_args & ) const;
+  bool operator < (const hybridsearchService_GetTable_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -3051,103 +3051,103 @@ class InfinityService_GetTable_args {
 };
 
 
-class InfinityService_GetTable_pargs {
+class hybridsearchService_GetTable_pargs {
  public:
 
 
-  virtual ~InfinityService_GetTable_pargs() noexcept;
+  virtual ~hybridsearchService_GetTable_pargs() noexcept;
   const GetTableRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_GetTable_result__isset {
-  _InfinityService_GetTable_result__isset() : success(false) {}
+typedef struct _hybridsearchService_GetTable_result__isset {
+  _hybridsearchService_GetTable_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_GetTable_result__isset;
+} _hybridsearchService_GetTable_result__isset;
 
-class InfinityService_GetTable_result {
+class hybridsearchService_GetTable_result {
  public:
 
-  InfinityService_GetTable_result(const InfinityService_GetTable_result&);
-  InfinityService_GetTable_result& operator=(const InfinityService_GetTable_result&);
-  InfinityService_GetTable_result() noexcept {
+  hybridsearchService_GetTable_result(const hybridsearchService_GetTable_result&);
+  hybridsearchService_GetTable_result& operator=(const hybridsearchService_GetTable_result&);
+  hybridsearchService_GetTable_result() noexcept {
   }
 
-  virtual ~InfinityService_GetTable_result() noexcept;
+  virtual ~hybridsearchService_GetTable_result() noexcept;
   CommonResponse success;
 
-  _InfinityService_GetTable_result__isset __isset;
+  _hybridsearchService_GetTable_result__isset __isset;
 
   void __set_success(const CommonResponse& val);
 
-  bool operator == (const InfinityService_GetTable_result & rhs) const
+  bool operator == (const hybridsearchService_GetTable_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_GetTable_result &rhs) const {
+  bool operator != (const hybridsearchService_GetTable_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_GetTable_result & ) const;
+  bool operator < (const hybridsearchService_GetTable_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_GetTable_presult__isset {
-  _InfinityService_GetTable_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_GetTable_presult__isset {
+  _hybridsearchService_GetTable_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_GetTable_presult__isset;
+} _hybridsearchService_GetTable_presult__isset;
 
-class InfinityService_GetTable_presult {
+class hybridsearchService_GetTable_presult {
  public:
 
 
-  virtual ~InfinityService_GetTable_presult() noexcept;
+  virtual ~hybridsearchService_GetTable_presult() noexcept;
   CommonResponse* success;
 
-  _InfinityService_GetTable_presult__isset __isset;
+  _hybridsearchService_GetTable_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_CreateIndex_args__isset {
-  _InfinityService_CreateIndex_args__isset() : request(false) {}
+typedef struct _hybridsearchService_CreateIndex_args__isset {
+  _hybridsearchService_CreateIndex_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_CreateIndex_args__isset;
+} _hybridsearchService_CreateIndex_args__isset;
 
-class InfinityService_CreateIndex_args {
+class hybridsearchService_CreateIndex_args {
  public:
 
-  InfinityService_CreateIndex_args(const InfinityService_CreateIndex_args&);
-  InfinityService_CreateIndex_args& operator=(const InfinityService_CreateIndex_args&);
-  InfinityService_CreateIndex_args() noexcept {
+  hybridsearchService_CreateIndex_args(const hybridsearchService_CreateIndex_args&);
+  hybridsearchService_CreateIndex_args& operator=(const hybridsearchService_CreateIndex_args&);
+  hybridsearchService_CreateIndex_args() noexcept {
   }
 
-  virtual ~InfinityService_CreateIndex_args() noexcept;
+  virtual ~hybridsearchService_CreateIndex_args() noexcept;
   CreateIndexRequest request;
 
-  _InfinityService_CreateIndex_args__isset __isset;
+  _hybridsearchService_CreateIndex_args__isset __isset;
 
   void __set_request(const CreateIndexRequest& val);
 
-  bool operator == (const InfinityService_CreateIndex_args & rhs) const
+  bool operator == (const hybridsearchService_CreateIndex_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_CreateIndex_args &rhs) const {
+  bool operator != (const hybridsearchService_CreateIndex_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_CreateIndex_args & ) const;
+  bool operator < (const hybridsearchService_CreateIndex_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -3155,103 +3155,103 @@ class InfinityService_CreateIndex_args {
 };
 
 
-class InfinityService_CreateIndex_pargs {
+class hybridsearchService_CreateIndex_pargs {
  public:
 
 
-  virtual ~InfinityService_CreateIndex_pargs() noexcept;
+  virtual ~hybridsearchService_CreateIndex_pargs() noexcept;
   const CreateIndexRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_CreateIndex_result__isset {
-  _InfinityService_CreateIndex_result__isset() : success(false) {}
+typedef struct _hybridsearchService_CreateIndex_result__isset {
+  _hybridsearchService_CreateIndex_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_CreateIndex_result__isset;
+} _hybridsearchService_CreateIndex_result__isset;
 
-class InfinityService_CreateIndex_result {
+class hybridsearchService_CreateIndex_result {
  public:
 
-  InfinityService_CreateIndex_result(const InfinityService_CreateIndex_result&);
-  InfinityService_CreateIndex_result& operator=(const InfinityService_CreateIndex_result&);
-  InfinityService_CreateIndex_result() noexcept {
+  hybridsearchService_CreateIndex_result(const hybridsearchService_CreateIndex_result&);
+  hybridsearchService_CreateIndex_result& operator=(const hybridsearchService_CreateIndex_result&);
+  hybridsearchService_CreateIndex_result() noexcept {
   }
 
-  virtual ~InfinityService_CreateIndex_result() noexcept;
+  virtual ~hybridsearchService_CreateIndex_result() noexcept;
   CommonResponse success;
 
-  _InfinityService_CreateIndex_result__isset __isset;
+  _hybridsearchService_CreateIndex_result__isset __isset;
 
   void __set_success(const CommonResponse& val);
 
-  bool operator == (const InfinityService_CreateIndex_result & rhs) const
+  bool operator == (const hybridsearchService_CreateIndex_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_CreateIndex_result &rhs) const {
+  bool operator != (const hybridsearchService_CreateIndex_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_CreateIndex_result & ) const;
+  bool operator < (const hybridsearchService_CreateIndex_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_CreateIndex_presult__isset {
-  _InfinityService_CreateIndex_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_CreateIndex_presult__isset {
+  _hybridsearchService_CreateIndex_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_CreateIndex_presult__isset;
+} _hybridsearchService_CreateIndex_presult__isset;
 
-class InfinityService_CreateIndex_presult {
+class hybridsearchService_CreateIndex_presult {
  public:
 
 
-  virtual ~InfinityService_CreateIndex_presult() noexcept;
+  virtual ~hybridsearchService_CreateIndex_presult() noexcept;
   CommonResponse* success;
 
-  _InfinityService_CreateIndex_presult__isset __isset;
+  _hybridsearchService_CreateIndex_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_DropIndex_args__isset {
-  _InfinityService_DropIndex_args__isset() : request(false) {}
+typedef struct _hybridsearchService_DropIndex_args__isset {
+  _hybridsearchService_DropIndex_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_DropIndex_args__isset;
+} _hybridsearchService_DropIndex_args__isset;
 
-class InfinityService_DropIndex_args {
+class hybridsearchService_DropIndex_args {
  public:
 
-  InfinityService_DropIndex_args(const InfinityService_DropIndex_args&);
-  InfinityService_DropIndex_args& operator=(const InfinityService_DropIndex_args&);
-  InfinityService_DropIndex_args() noexcept {
+  hybridsearchService_DropIndex_args(const hybridsearchService_DropIndex_args&);
+  hybridsearchService_DropIndex_args& operator=(const hybridsearchService_DropIndex_args&);
+  hybridsearchService_DropIndex_args() noexcept {
   }
 
-  virtual ~InfinityService_DropIndex_args() noexcept;
+  virtual ~hybridsearchService_DropIndex_args() noexcept;
   DropIndexRequest request;
 
-  _InfinityService_DropIndex_args__isset __isset;
+  _hybridsearchService_DropIndex_args__isset __isset;
 
   void __set_request(const DropIndexRequest& val);
 
-  bool operator == (const InfinityService_DropIndex_args & rhs) const
+  bool operator == (const hybridsearchService_DropIndex_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_DropIndex_args &rhs) const {
+  bool operator != (const hybridsearchService_DropIndex_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_DropIndex_args & ) const;
+  bool operator < (const hybridsearchService_DropIndex_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -3259,103 +3259,103 @@ class InfinityService_DropIndex_args {
 };
 
 
-class InfinityService_DropIndex_pargs {
+class hybridsearchService_DropIndex_pargs {
  public:
 
 
-  virtual ~InfinityService_DropIndex_pargs() noexcept;
+  virtual ~hybridsearchService_DropIndex_pargs() noexcept;
   const DropIndexRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_DropIndex_result__isset {
-  _InfinityService_DropIndex_result__isset() : success(false) {}
+typedef struct _hybridsearchService_DropIndex_result__isset {
+  _hybridsearchService_DropIndex_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_DropIndex_result__isset;
+} _hybridsearchService_DropIndex_result__isset;
 
-class InfinityService_DropIndex_result {
+class hybridsearchService_DropIndex_result {
  public:
 
-  InfinityService_DropIndex_result(const InfinityService_DropIndex_result&);
-  InfinityService_DropIndex_result& operator=(const InfinityService_DropIndex_result&);
-  InfinityService_DropIndex_result() noexcept {
+  hybridsearchService_DropIndex_result(const hybridsearchService_DropIndex_result&);
+  hybridsearchService_DropIndex_result& operator=(const hybridsearchService_DropIndex_result&);
+  hybridsearchService_DropIndex_result() noexcept {
   }
 
-  virtual ~InfinityService_DropIndex_result() noexcept;
+  virtual ~hybridsearchService_DropIndex_result() noexcept;
   CommonResponse success;
 
-  _InfinityService_DropIndex_result__isset __isset;
+  _hybridsearchService_DropIndex_result__isset __isset;
 
   void __set_success(const CommonResponse& val);
 
-  bool operator == (const InfinityService_DropIndex_result & rhs) const
+  bool operator == (const hybridsearchService_DropIndex_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_DropIndex_result &rhs) const {
+  bool operator != (const hybridsearchService_DropIndex_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_DropIndex_result & ) const;
+  bool operator < (const hybridsearchService_DropIndex_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_DropIndex_presult__isset {
-  _InfinityService_DropIndex_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_DropIndex_presult__isset {
+  _hybridsearchService_DropIndex_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_DropIndex_presult__isset;
+} _hybridsearchService_DropIndex_presult__isset;
 
-class InfinityService_DropIndex_presult {
+class hybridsearchService_DropIndex_presult {
  public:
 
 
-  virtual ~InfinityService_DropIndex_presult() noexcept;
+  virtual ~hybridsearchService_DropIndex_presult() noexcept;
   CommonResponse* success;
 
-  _InfinityService_DropIndex_presult__isset __isset;
+  _hybridsearchService_DropIndex_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_ShowIndex_args__isset {
-  _InfinityService_ShowIndex_args__isset() : request(false) {}
+typedef struct _hybridsearchService_ShowIndex_args__isset {
+  _hybridsearchService_ShowIndex_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_ShowIndex_args__isset;
+} _hybridsearchService_ShowIndex_args__isset;
 
-class InfinityService_ShowIndex_args {
+class hybridsearchService_ShowIndex_args {
  public:
 
-  InfinityService_ShowIndex_args(const InfinityService_ShowIndex_args&);
-  InfinityService_ShowIndex_args& operator=(const InfinityService_ShowIndex_args&);
-  InfinityService_ShowIndex_args() noexcept {
+  hybridsearchService_ShowIndex_args(const hybridsearchService_ShowIndex_args&);
+  hybridsearchService_ShowIndex_args& operator=(const hybridsearchService_ShowIndex_args&);
+  hybridsearchService_ShowIndex_args() noexcept {
   }
 
-  virtual ~InfinityService_ShowIndex_args() noexcept;
+  virtual ~hybridsearchService_ShowIndex_args() noexcept;
   ShowIndexRequest request;
 
-  _InfinityService_ShowIndex_args__isset __isset;
+  _hybridsearchService_ShowIndex_args__isset __isset;
 
   void __set_request(const ShowIndexRequest& val);
 
-  bool operator == (const InfinityService_ShowIndex_args & rhs) const
+  bool operator == (const hybridsearchService_ShowIndex_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ShowIndex_args &rhs) const {
+  bool operator != (const hybridsearchService_ShowIndex_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ShowIndex_args & ) const;
+  bool operator < (const hybridsearchService_ShowIndex_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -3363,103 +3363,103 @@ class InfinityService_ShowIndex_args {
 };
 
 
-class InfinityService_ShowIndex_pargs {
+class hybridsearchService_ShowIndex_pargs {
  public:
 
 
-  virtual ~InfinityService_ShowIndex_pargs() noexcept;
+  virtual ~hybridsearchService_ShowIndex_pargs() noexcept;
   const ShowIndexRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ShowIndex_result__isset {
-  _InfinityService_ShowIndex_result__isset() : success(false) {}
+typedef struct _hybridsearchService_ShowIndex_result__isset {
+  _hybridsearchService_ShowIndex_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ShowIndex_result__isset;
+} _hybridsearchService_ShowIndex_result__isset;
 
-class InfinityService_ShowIndex_result {
+class hybridsearchService_ShowIndex_result {
  public:
 
-  InfinityService_ShowIndex_result(const InfinityService_ShowIndex_result&);
-  InfinityService_ShowIndex_result& operator=(const InfinityService_ShowIndex_result&);
-  InfinityService_ShowIndex_result() noexcept {
+  hybridsearchService_ShowIndex_result(const hybridsearchService_ShowIndex_result&);
+  hybridsearchService_ShowIndex_result& operator=(const hybridsearchService_ShowIndex_result&);
+  hybridsearchService_ShowIndex_result() noexcept {
   }
 
-  virtual ~InfinityService_ShowIndex_result() noexcept;
+  virtual ~hybridsearchService_ShowIndex_result() noexcept;
   ShowIndexResponse success;
 
-  _InfinityService_ShowIndex_result__isset __isset;
+  _hybridsearchService_ShowIndex_result__isset __isset;
 
   void __set_success(const ShowIndexResponse& val);
 
-  bool operator == (const InfinityService_ShowIndex_result & rhs) const
+  bool operator == (const hybridsearchService_ShowIndex_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_ShowIndex_result &rhs) const {
+  bool operator != (const hybridsearchService_ShowIndex_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_ShowIndex_result & ) const;
+  bool operator < (const hybridsearchService_ShowIndex_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_ShowIndex_presult__isset {
-  _InfinityService_ShowIndex_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_ShowIndex_presult__isset {
+  _hybridsearchService_ShowIndex_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_ShowIndex_presult__isset;
+} _hybridsearchService_ShowIndex_presult__isset;
 
-class InfinityService_ShowIndex_presult {
+class hybridsearchService_ShowIndex_presult {
  public:
 
 
-  virtual ~InfinityService_ShowIndex_presult() noexcept;
+  virtual ~hybridsearchService_ShowIndex_presult() noexcept;
   ShowIndexResponse* success;
 
-  _InfinityService_ShowIndex_presult__isset __isset;
+  _hybridsearchService_ShowIndex_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_Optimize_args__isset {
-  _InfinityService_Optimize_args__isset() : request(false) {}
+typedef struct _hybridsearchService_Optimize_args__isset {
+  _hybridsearchService_Optimize_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_Optimize_args__isset;
+} _hybridsearchService_Optimize_args__isset;
 
-class InfinityService_Optimize_args {
+class hybridsearchService_Optimize_args {
  public:
 
-  InfinityService_Optimize_args(const InfinityService_Optimize_args&);
-  InfinityService_Optimize_args& operator=(const InfinityService_Optimize_args&);
-  InfinityService_Optimize_args() noexcept {
+  hybridsearchService_Optimize_args(const hybridsearchService_Optimize_args&);
+  hybridsearchService_Optimize_args& operator=(const hybridsearchService_Optimize_args&);
+  hybridsearchService_Optimize_args() noexcept {
   }
 
-  virtual ~InfinityService_Optimize_args() noexcept;
+  virtual ~hybridsearchService_Optimize_args() noexcept;
   OptimizeRequest request;
 
-  _InfinityService_Optimize_args__isset __isset;
+  _hybridsearchService_Optimize_args__isset __isset;
 
   void __set_request(const OptimizeRequest& val);
 
-  bool operator == (const InfinityService_Optimize_args & rhs) const
+  bool operator == (const hybridsearchService_Optimize_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Optimize_args &rhs) const {
+  bool operator != (const hybridsearchService_Optimize_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Optimize_args & ) const;
+  bool operator < (const hybridsearchService_Optimize_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -3467,103 +3467,103 @@ class InfinityService_Optimize_args {
 };
 
 
-class InfinityService_Optimize_pargs {
+class hybridsearchService_Optimize_pargs {
  public:
 
 
-  virtual ~InfinityService_Optimize_pargs() noexcept;
+  virtual ~hybridsearchService_Optimize_pargs() noexcept;
   const OptimizeRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Optimize_result__isset {
-  _InfinityService_Optimize_result__isset() : success(false) {}
+typedef struct _hybridsearchService_Optimize_result__isset {
+  _hybridsearchService_Optimize_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Optimize_result__isset;
+} _hybridsearchService_Optimize_result__isset;
 
-class InfinityService_Optimize_result {
+class hybridsearchService_Optimize_result {
  public:
 
-  InfinityService_Optimize_result(const InfinityService_Optimize_result&);
-  InfinityService_Optimize_result& operator=(const InfinityService_Optimize_result&);
-  InfinityService_Optimize_result() noexcept {
+  hybridsearchService_Optimize_result(const hybridsearchService_Optimize_result&);
+  hybridsearchService_Optimize_result& operator=(const hybridsearchService_Optimize_result&);
+  hybridsearchService_Optimize_result() noexcept {
   }
 
-  virtual ~InfinityService_Optimize_result() noexcept;
+  virtual ~hybridsearchService_Optimize_result() noexcept;
   CommonResponse success;
 
-  _InfinityService_Optimize_result__isset __isset;
+  _hybridsearchService_Optimize_result__isset __isset;
 
   void __set_success(const CommonResponse& val);
 
-  bool operator == (const InfinityService_Optimize_result & rhs) const
+  bool operator == (const hybridsearchService_Optimize_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Optimize_result &rhs) const {
+  bool operator != (const hybridsearchService_Optimize_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Optimize_result & ) const;
+  bool operator < (const hybridsearchService_Optimize_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Optimize_presult__isset {
-  _InfinityService_Optimize_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_Optimize_presult__isset {
+  _hybridsearchService_Optimize_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Optimize_presult__isset;
+} _hybridsearchService_Optimize_presult__isset;
 
-class InfinityService_Optimize_presult {
+class hybridsearchService_Optimize_presult {
  public:
 
 
-  virtual ~InfinityService_Optimize_presult() noexcept;
+  virtual ~hybridsearchService_Optimize_presult() noexcept;
   CommonResponse* success;
 
-  _InfinityService_Optimize_presult__isset __isset;
+  _hybridsearchService_Optimize_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_AddColumns_args__isset {
-  _InfinityService_AddColumns_args__isset() : request(false) {}
+typedef struct _hybridsearchService_AddColumns_args__isset {
+  _hybridsearchService_AddColumns_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_AddColumns_args__isset;
+} _hybridsearchService_AddColumns_args__isset;
 
-class InfinityService_AddColumns_args {
+class hybridsearchService_AddColumns_args {
  public:
 
-  InfinityService_AddColumns_args(const InfinityService_AddColumns_args&);
-  InfinityService_AddColumns_args& operator=(const InfinityService_AddColumns_args&);
-  InfinityService_AddColumns_args() noexcept {
+  hybridsearchService_AddColumns_args(const hybridsearchService_AddColumns_args&);
+  hybridsearchService_AddColumns_args& operator=(const hybridsearchService_AddColumns_args&);
+  hybridsearchService_AddColumns_args() noexcept {
   }
 
-  virtual ~InfinityService_AddColumns_args() noexcept;
+  virtual ~hybridsearchService_AddColumns_args() noexcept;
   AddColumnsRequest request;
 
-  _InfinityService_AddColumns_args__isset __isset;
+  _hybridsearchService_AddColumns_args__isset __isset;
 
   void __set_request(const AddColumnsRequest& val);
 
-  bool operator == (const InfinityService_AddColumns_args & rhs) const
+  bool operator == (const hybridsearchService_AddColumns_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_AddColumns_args &rhs) const {
+  bool operator != (const hybridsearchService_AddColumns_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_AddColumns_args & ) const;
+  bool operator < (const hybridsearchService_AddColumns_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -3571,103 +3571,103 @@ class InfinityService_AddColumns_args {
 };
 
 
-class InfinityService_AddColumns_pargs {
+class hybridsearchService_AddColumns_pargs {
  public:
 
 
-  virtual ~InfinityService_AddColumns_pargs() noexcept;
+  virtual ~hybridsearchService_AddColumns_pargs() noexcept;
   const AddColumnsRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_AddColumns_result__isset {
-  _InfinityService_AddColumns_result__isset() : success(false) {}
+typedef struct _hybridsearchService_AddColumns_result__isset {
+  _hybridsearchService_AddColumns_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_AddColumns_result__isset;
+} _hybridsearchService_AddColumns_result__isset;
 
-class InfinityService_AddColumns_result {
+class hybridsearchService_AddColumns_result {
  public:
 
-  InfinityService_AddColumns_result(const InfinityService_AddColumns_result&);
-  InfinityService_AddColumns_result& operator=(const InfinityService_AddColumns_result&);
-  InfinityService_AddColumns_result() noexcept {
+  hybridsearchService_AddColumns_result(const hybridsearchService_AddColumns_result&);
+  hybridsearchService_AddColumns_result& operator=(const hybridsearchService_AddColumns_result&);
+  hybridsearchService_AddColumns_result() noexcept {
   }
 
-  virtual ~InfinityService_AddColumns_result() noexcept;
+  virtual ~hybridsearchService_AddColumns_result() noexcept;
   CommonResponse success;
 
-  _InfinityService_AddColumns_result__isset __isset;
+  _hybridsearchService_AddColumns_result__isset __isset;
 
   void __set_success(const CommonResponse& val);
 
-  bool operator == (const InfinityService_AddColumns_result & rhs) const
+  bool operator == (const hybridsearchService_AddColumns_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_AddColumns_result &rhs) const {
+  bool operator != (const hybridsearchService_AddColumns_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_AddColumns_result & ) const;
+  bool operator < (const hybridsearchService_AddColumns_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_AddColumns_presult__isset {
-  _InfinityService_AddColumns_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_AddColumns_presult__isset {
+  _hybridsearchService_AddColumns_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_AddColumns_presult__isset;
+} _hybridsearchService_AddColumns_presult__isset;
 
-class InfinityService_AddColumns_presult {
+class hybridsearchService_AddColumns_presult {
  public:
 
 
-  virtual ~InfinityService_AddColumns_presult() noexcept;
+  virtual ~hybridsearchService_AddColumns_presult() noexcept;
   CommonResponse* success;
 
-  _InfinityService_AddColumns_presult__isset __isset;
+  _hybridsearchService_AddColumns_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_DropColumns_args__isset {
-  _InfinityService_DropColumns_args__isset() : request(false) {}
+typedef struct _hybridsearchService_DropColumns_args__isset {
+  _hybridsearchService_DropColumns_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_DropColumns_args__isset;
+} _hybridsearchService_DropColumns_args__isset;
 
-class InfinityService_DropColumns_args {
+class hybridsearchService_DropColumns_args {
  public:
 
-  InfinityService_DropColumns_args(const InfinityService_DropColumns_args&);
-  InfinityService_DropColumns_args& operator=(const InfinityService_DropColumns_args&);
-  InfinityService_DropColumns_args() noexcept {
+  hybridsearchService_DropColumns_args(const hybridsearchService_DropColumns_args&);
+  hybridsearchService_DropColumns_args& operator=(const hybridsearchService_DropColumns_args&);
+  hybridsearchService_DropColumns_args() noexcept {
   }
 
-  virtual ~InfinityService_DropColumns_args() noexcept;
+  virtual ~hybridsearchService_DropColumns_args() noexcept;
   DropColumnsRequest request;
 
-  _InfinityService_DropColumns_args__isset __isset;
+  _hybridsearchService_DropColumns_args__isset __isset;
 
   void __set_request(const DropColumnsRequest& val);
 
-  bool operator == (const InfinityService_DropColumns_args & rhs) const
+  bool operator == (const hybridsearchService_DropColumns_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_DropColumns_args &rhs) const {
+  bool operator != (const hybridsearchService_DropColumns_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_DropColumns_args & ) const;
+  bool operator < (const hybridsearchService_DropColumns_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -3675,103 +3675,103 @@ class InfinityService_DropColumns_args {
 };
 
 
-class InfinityService_DropColumns_pargs {
+class hybridsearchService_DropColumns_pargs {
  public:
 
 
-  virtual ~InfinityService_DropColumns_pargs() noexcept;
+  virtual ~hybridsearchService_DropColumns_pargs() noexcept;
   const DropColumnsRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_DropColumns_result__isset {
-  _InfinityService_DropColumns_result__isset() : success(false) {}
+typedef struct _hybridsearchService_DropColumns_result__isset {
+  _hybridsearchService_DropColumns_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_DropColumns_result__isset;
+} _hybridsearchService_DropColumns_result__isset;
 
-class InfinityService_DropColumns_result {
+class hybridsearchService_DropColumns_result {
  public:
 
-  InfinityService_DropColumns_result(const InfinityService_DropColumns_result&);
-  InfinityService_DropColumns_result& operator=(const InfinityService_DropColumns_result&);
-  InfinityService_DropColumns_result() noexcept {
+  hybridsearchService_DropColumns_result(const hybridsearchService_DropColumns_result&);
+  hybridsearchService_DropColumns_result& operator=(const hybridsearchService_DropColumns_result&);
+  hybridsearchService_DropColumns_result() noexcept {
   }
 
-  virtual ~InfinityService_DropColumns_result() noexcept;
+  virtual ~hybridsearchService_DropColumns_result() noexcept;
   CommonResponse success;
 
-  _InfinityService_DropColumns_result__isset __isset;
+  _hybridsearchService_DropColumns_result__isset __isset;
 
   void __set_success(const CommonResponse& val);
 
-  bool operator == (const InfinityService_DropColumns_result & rhs) const
+  bool operator == (const hybridsearchService_DropColumns_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_DropColumns_result &rhs) const {
+  bool operator != (const hybridsearchService_DropColumns_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_DropColumns_result & ) const;
+  bool operator < (const hybridsearchService_DropColumns_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_DropColumns_presult__isset {
-  _InfinityService_DropColumns_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_DropColumns_presult__isset {
+  _hybridsearchService_DropColumns_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_DropColumns_presult__isset;
+} _hybridsearchService_DropColumns_presult__isset;
 
-class InfinityService_DropColumns_presult {
+class hybridsearchService_DropColumns_presult {
  public:
 
 
-  virtual ~InfinityService_DropColumns_presult() noexcept;
+  virtual ~hybridsearchService_DropColumns_presult() noexcept;
   CommonResponse* success;
 
-  _InfinityService_DropColumns_presult__isset __isset;
+  _hybridsearchService_DropColumns_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_Cleanup_args__isset {
-  _InfinityService_Cleanup_args__isset() : request(false) {}
+typedef struct _hybridsearchService_Cleanup_args__isset {
+  _hybridsearchService_Cleanup_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_Cleanup_args__isset;
+} _hybridsearchService_Cleanup_args__isset;
 
-class InfinityService_Cleanup_args {
+class hybridsearchService_Cleanup_args {
  public:
 
-  InfinityService_Cleanup_args(const InfinityService_Cleanup_args&) noexcept;
-  InfinityService_Cleanup_args& operator=(const InfinityService_Cleanup_args&) noexcept;
-  InfinityService_Cleanup_args() noexcept {
+  hybridsearchService_Cleanup_args(const hybridsearchService_Cleanup_args&) noexcept;
+  hybridsearchService_Cleanup_args& operator=(const hybridsearchService_Cleanup_args&) noexcept;
+  hybridsearchService_Cleanup_args() noexcept {
   }
 
-  virtual ~InfinityService_Cleanup_args() noexcept;
+  virtual ~hybridsearchService_Cleanup_args() noexcept;
   CommonRequest request;
 
-  _InfinityService_Cleanup_args__isset __isset;
+  _hybridsearchService_Cleanup_args__isset __isset;
 
   void __set_request(const CommonRequest& val);
 
-  bool operator == (const InfinityService_Cleanup_args & rhs) const
+  bool operator == (const hybridsearchService_Cleanup_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Cleanup_args &rhs) const {
+  bool operator != (const hybridsearchService_Cleanup_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Cleanup_args & ) const;
+  bool operator < (const hybridsearchService_Cleanup_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -3779,103 +3779,103 @@ class InfinityService_Cleanup_args {
 };
 
 
-class InfinityService_Cleanup_pargs {
+class hybridsearchService_Cleanup_pargs {
  public:
 
 
-  virtual ~InfinityService_Cleanup_pargs() noexcept;
+  virtual ~hybridsearchService_Cleanup_pargs() noexcept;
   const CommonRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Cleanup_result__isset {
-  _InfinityService_Cleanup_result__isset() : success(false) {}
+typedef struct _hybridsearchService_Cleanup_result__isset {
+  _hybridsearchService_Cleanup_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Cleanup_result__isset;
+} _hybridsearchService_Cleanup_result__isset;
 
-class InfinityService_Cleanup_result {
+class hybridsearchService_Cleanup_result {
  public:
 
-  InfinityService_Cleanup_result(const InfinityService_Cleanup_result&);
-  InfinityService_Cleanup_result& operator=(const InfinityService_Cleanup_result&);
-  InfinityService_Cleanup_result() noexcept {
+  hybridsearchService_Cleanup_result(const hybridsearchService_Cleanup_result&);
+  hybridsearchService_Cleanup_result& operator=(const hybridsearchService_Cleanup_result&);
+  hybridsearchService_Cleanup_result() noexcept {
   }
 
-  virtual ~InfinityService_Cleanup_result() noexcept;
+  virtual ~hybridsearchService_Cleanup_result() noexcept;
   CommonResponse success;
 
-  _InfinityService_Cleanup_result__isset __isset;
+  _hybridsearchService_Cleanup_result__isset __isset;
 
   void __set_success(const CommonResponse& val);
 
-  bool operator == (const InfinityService_Cleanup_result & rhs) const
+  bool operator == (const hybridsearchService_Cleanup_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Cleanup_result &rhs) const {
+  bool operator != (const hybridsearchService_Cleanup_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Cleanup_result & ) const;
+  bool operator < (const hybridsearchService_Cleanup_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Cleanup_presult__isset {
-  _InfinityService_Cleanup_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_Cleanup_presult__isset {
+  _hybridsearchService_Cleanup_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Cleanup_presult__isset;
+} _hybridsearchService_Cleanup_presult__isset;
 
-class InfinityService_Cleanup_presult {
+class hybridsearchService_Cleanup_presult {
  public:
 
 
-  virtual ~InfinityService_Cleanup_presult() noexcept;
+  virtual ~hybridsearchService_Cleanup_presult() noexcept;
   CommonResponse* success;
 
-  _InfinityService_Cleanup_presult__isset __isset;
+  _hybridsearchService_Cleanup_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_Command_args__isset {
-  _InfinityService_Command_args__isset() : request(false) {}
+typedef struct _hybridsearchService_Command_args__isset {
+  _hybridsearchService_Command_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_Command_args__isset;
+} _hybridsearchService_Command_args__isset;
 
-class InfinityService_Command_args {
+class hybridsearchService_Command_args {
  public:
 
-  InfinityService_Command_args(const InfinityService_Command_args&);
-  InfinityService_Command_args& operator=(const InfinityService_Command_args&);
-  InfinityService_Command_args() noexcept {
+  hybridsearchService_Command_args(const hybridsearchService_Command_args&);
+  hybridsearchService_Command_args& operator=(const hybridsearchService_Command_args&);
+  hybridsearchService_Command_args() noexcept {
   }
 
-  virtual ~InfinityService_Command_args() noexcept;
+  virtual ~hybridsearchService_Command_args() noexcept;
   CommandRequest request;
 
-  _InfinityService_Command_args__isset __isset;
+  _hybridsearchService_Command_args__isset __isset;
 
   void __set_request(const CommandRequest& val);
 
-  bool operator == (const InfinityService_Command_args & rhs) const
+  bool operator == (const hybridsearchService_Command_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Command_args &rhs) const {
+  bool operator != (const hybridsearchService_Command_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Command_args & ) const;
+  bool operator < (const hybridsearchService_Command_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -3883,103 +3883,103 @@ class InfinityService_Command_args {
 };
 
 
-class InfinityService_Command_pargs {
+class hybridsearchService_Command_pargs {
  public:
 
 
-  virtual ~InfinityService_Command_pargs() noexcept;
+  virtual ~hybridsearchService_Command_pargs() noexcept;
   const CommandRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Command_result__isset {
-  _InfinityService_Command_result__isset() : success(false) {}
+typedef struct _hybridsearchService_Command_result__isset {
+  _hybridsearchService_Command_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Command_result__isset;
+} _hybridsearchService_Command_result__isset;
 
-class InfinityService_Command_result {
+class hybridsearchService_Command_result {
  public:
 
-  InfinityService_Command_result(const InfinityService_Command_result&);
-  InfinityService_Command_result& operator=(const InfinityService_Command_result&);
-  InfinityService_Command_result() noexcept {
+  hybridsearchService_Command_result(const hybridsearchService_Command_result&);
+  hybridsearchService_Command_result& operator=(const hybridsearchService_Command_result&);
+  hybridsearchService_Command_result() noexcept {
   }
 
-  virtual ~InfinityService_Command_result() noexcept;
+  virtual ~hybridsearchService_Command_result() noexcept;
   CommonResponse success;
 
-  _InfinityService_Command_result__isset __isset;
+  _hybridsearchService_Command_result__isset __isset;
 
   void __set_success(const CommonResponse& val);
 
-  bool operator == (const InfinityService_Command_result & rhs) const
+  bool operator == (const hybridsearchService_Command_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Command_result &rhs) const {
+  bool operator != (const hybridsearchService_Command_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Command_result & ) const;
+  bool operator < (const hybridsearchService_Command_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Command_presult__isset {
-  _InfinityService_Command_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_Command_presult__isset {
+  _hybridsearchService_Command_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Command_presult__isset;
+} _hybridsearchService_Command_presult__isset;
 
-class InfinityService_Command_presult {
+class hybridsearchService_Command_presult {
  public:
 
 
-  virtual ~InfinityService_Command_presult() noexcept;
+  virtual ~hybridsearchService_Command_presult() noexcept;
   CommonResponse* success;
 
-  _InfinityService_Command_presult__isset __isset;
+  _hybridsearchService_Command_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_Flush_args__isset {
-  _InfinityService_Flush_args__isset() : request(false) {}
+typedef struct _hybridsearchService_Flush_args__isset {
+  _hybridsearchService_Flush_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_Flush_args__isset;
+} _hybridsearchService_Flush_args__isset;
 
-class InfinityService_Flush_args {
+class hybridsearchService_Flush_args {
  public:
 
-  InfinityService_Flush_args(const InfinityService_Flush_args&);
-  InfinityService_Flush_args& operator=(const InfinityService_Flush_args&);
-  InfinityService_Flush_args() noexcept {
+  hybridsearchService_Flush_args(const hybridsearchService_Flush_args&);
+  hybridsearchService_Flush_args& operator=(const hybridsearchService_Flush_args&);
+  hybridsearchService_Flush_args() noexcept {
   }
 
-  virtual ~InfinityService_Flush_args() noexcept;
+  virtual ~hybridsearchService_Flush_args() noexcept;
   FlushRequest request;
 
-  _InfinityService_Flush_args__isset __isset;
+  _hybridsearchService_Flush_args__isset __isset;
 
   void __set_request(const FlushRequest& val);
 
-  bool operator == (const InfinityService_Flush_args & rhs) const
+  bool operator == (const hybridsearchService_Flush_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Flush_args &rhs) const {
+  bool operator != (const hybridsearchService_Flush_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Flush_args & ) const;
+  bool operator < (const hybridsearchService_Flush_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -3987,103 +3987,103 @@ class InfinityService_Flush_args {
 };
 
 
-class InfinityService_Flush_pargs {
+class hybridsearchService_Flush_pargs {
  public:
 
 
-  virtual ~InfinityService_Flush_pargs() noexcept;
+  virtual ~hybridsearchService_Flush_pargs() noexcept;
   const FlushRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Flush_result__isset {
-  _InfinityService_Flush_result__isset() : success(false) {}
+typedef struct _hybridsearchService_Flush_result__isset {
+  _hybridsearchService_Flush_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Flush_result__isset;
+} _hybridsearchService_Flush_result__isset;
 
-class InfinityService_Flush_result {
+class hybridsearchService_Flush_result {
  public:
 
-  InfinityService_Flush_result(const InfinityService_Flush_result&);
-  InfinityService_Flush_result& operator=(const InfinityService_Flush_result&);
-  InfinityService_Flush_result() noexcept {
+  hybridsearchService_Flush_result(const hybridsearchService_Flush_result&);
+  hybridsearchService_Flush_result& operator=(const hybridsearchService_Flush_result&);
+  hybridsearchService_Flush_result() noexcept {
   }
 
-  virtual ~InfinityService_Flush_result() noexcept;
+  virtual ~hybridsearchService_Flush_result() noexcept;
   CommonResponse success;
 
-  _InfinityService_Flush_result__isset __isset;
+  _hybridsearchService_Flush_result__isset __isset;
 
   void __set_success(const CommonResponse& val);
 
-  bool operator == (const InfinityService_Flush_result & rhs) const
+  bool operator == (const hybridsearchService_Flush_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Flush_result &rhs) const {
+  bool operator != (const hybridsearchService_Flush_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Flush_result & ) const;
+  bool operator < (const hybridsearchService_Flush_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Flush_presult__isset {
-  _InfinityService_Flush_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_Flush_presult__isset {
+  _hybridsearchService_Flush_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Flush_presult__isset;
+} _hybridsearchService_Flush_presult__isset;
 
-class InfinityService_Flush_presult {
+class hybridsearchService_Flush_presult {
  public:
 
 
-  virtual ~InfinityService_Flush_presult() noexcept;
+  virtual ~hybridsearchService_Flush_presult() noexcept;
   CommonResponse* success;
 
-  _InfinityService_Flush_presult__isset __isset;
+  _hybridsearchService_Flush_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _InfinityService_Compact_args__isset {
-  _InfinityService_Compact_args__isset() : request(false) {}
+typedef struct _hybridsearchService_Compact_args__isset {
+  _hybridsearchService_Compact_args__isset() : request(false) {}
   bool request :1;
-} _InfinityService_Compact_args__isset;
+} _hybridsearchService_Compact_args__isset;
 
-class InfinityService_Compact_args {
+class hybridsearchService_Compact_args {
  public:
 
-  InfinityService_Compact_args(const InfinityService_Compact_args&);
-  InfinityService_Compact_args& operator=(const InfinityService_Compact_args&);
-  InfinityService_Compact_args() noexcept {
+  hybridsearchService_Compact_args(const hybridsearchService_Compact_args&);
+  hybridsearchService_Compact_args& operator=(const hybridsearchService_Compact_args&);
+  hybridsearchService_Compact_args() noexcept {
   }
 
-  virtual ~InfinityService_Compact_args() noexcept;
+  virtual ~hybridsearchService_Compact_args() noexcept;
   CompactRequest request;
 
-  _InfinityService_Compact_args__isset __isset;
+  _hybridsearchService_Compact_args__isset __isset;
 
   void __set_request(const CompactRequest& val);
 
-  bool operator == (const InfinityService_Compact_args & rhs) const
+  bool operator == (const hybridsearchService_Compact_args & rhs) const
   {
     if (!(request == rhs.request))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Compact_args &rhs) const {
+  bool operator != (const hybridsearchService_Compact_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Compact_args & ) const;
+  bool operator < (const hybridsearchService_Compact_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -4091,78 +4091,78 @@ class InfinityService_Compact_args {
 };
 
 
-class InfinityService_Compact_pargs {
+class hybridsearchService_Compact_pargs {
  public:
 
 
-  virtual ~InfinityService_Compact_pargs() noexcept;
+  virtual ~hybridsearchService_Compact_pargs() noexcept;
   const CompactRequest* request;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Compact_result__isset {
-  _InfinityService_Compact_result__isset() : success(false) {}
+typedef struct _hybridsearchService_Compact_result__isset {
+  _hybridsearchService_Compact_result__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Compact_result__isset;
+} _hybridsearchService_Compact_result__isset;
 
-class InfinityService_Compact_result {
+class hybridsearchService_Compact_result {
  public:
 
-  InfinityService_Compact_result(const InfinityService_Compact_result&);
-  InfinityService_Compact_result& operator=(const InfinityService_Compact_result&);
-  InfinityService_Compact_result() noexcept {
+  hybridsearchService_Compact_result(const hybridsearchService_Compact_result&);
+  hybridsearchService_Compact_result& operator=(const hybridsearchService_Compact_result&);
+  hybridsearchService_Compact_result() noexcept {
   }
 
-  virtual ~InfinityService_Compact_result() noexcept;
+  virtual ~hybridsearchService_Compact_result() noexcept;
   CommonResponse success;
 
-  _InfinityService_Compact_result__isset __isset;
+  _hybridsearchService_Compact_result__isset __isset;
 
   void __set_success(const CommonResponse& val);
 
-  bool operator == (const InfinityService_Compact_result & rhs) const
+  bool operator == (const hybridsearchService_Compact_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const InfinityService_Compact_result &rhs) const {
+  bool operator != (const hybridsearchService_Compact_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const InfinityService_Compact_result & ) const;
+  bool operator < (const hybridsearchService_Compact_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _InfinityService_Compact_presult__isset {
-  _InfinityService_Compact_presult__isset() : success(false) {}
+typedef struct _hybridsearchService_Compact_presult__isset {
+  _hybridsearchService_Compact_presult__isset() : success(false) {}
   bool success :1;
-} _InfinityService_Compact_presult__isset;
+} _hybridsearchService_Compact_presult__isset;
 
-class InfinityService_Compact_presult {
+class hybridsearchService_Compact_presult {
  public:
 
 
-  virtual ~InfinityService_Compact_presult() noexcept;
+  virtual ~hybridsearchService_Compact_presult() noexcept;
   CommonResponse* success;
 
-  _InfinityService_Compact_presult__isset __isset;
+  _hybridsearchService_Compact_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-class InfinityServiceClient : virtual public InfinityServiceIf {
+class hybridsearchServiceClient : virtual public hybridsearchServiceIf {
  public:
-  InfinityServiceClient(std::shared_ptr< ::apache::thrift::protocol::TProtocol> prot) {
+  hybridsearchServiceClient(std::shared_ptr< ::apache::thrift::protocol::TProtocol> prot) {
     setProtocol(prot);
   }
-  InfinityServiceClient(std::shared_ptr< ::apache::thrift::protocol::TProtocol> iprot, std::shared_ptr< ::apache::thrift::protocol::TProtocol> oprot) {
+  hybridsearchServiceClient(std::shared_ptr< ::apache::thrift::protocol::TProtocol> iprot, std::shared_ptr< ::apache::thrift::protocol::TProtocol> oprot) {
     setProtocol(iprot,oprot);
   }
  private:
@@ -4303,12 +4303,12 @@ class InfinityServiceClient : virtual public InfinityServiceIf {
   ::apache::thrift::protocol::TProtocol* oprot_;
 };
 
-class InfinityServiceProcessor : public ::apache::thrift::TDispatchProcessor {
+class hybridsearchServiceProcessor : public ::apache::thrift::TDispatchProcessor {
  protected:
-  ::std::shared_ptr<InfinityServiceIf> iface_;
+  ::std::shared_ptr<hybridsearchServiceIf> iface_;
   virtual bool dispatchCall(::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, const std::string& fname, int32_t seqid, void* callContext) override;
  private:
-  typedef  void (InfinityServiceProcessor::*ProcessFunction)(int32_t, ::apache::thrift::protocol::TProtocol*, ::apache::thrift::protocol::TProtocol*, void*);
+  typedef  void (hybridsearchServiceProcessor::*ProcessFunction)(int32_t, ::apache::thrift::protocol::TProtocol*, ::apache::thrift::protocol::TProtocol*, void*);
   typedef std::map<std::string, ProcessFunction> ProcessMap;
   ProcessMap processMap_;
   void process_Connect(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
@@ -4350,71 +4350,71 @@ class InfinityServiceProcessor : public ::apache::thrift::TDispatchProcessor {
   void process_Flush(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_Compact(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
  public:
-  InfinityServiceProcessor(::std::shared_ptr<InfinityServiceIf> iface) :
+  hybridsearchServiceProcessor(::std::shared_ptr<hybridsearchServiceIf> iface) :
     iface_(iface) {
-    processMap_["Connect"] = &InfinityServiceProcessor::process_Connect;
-    processMap_["Disconnect"] = &InfinityServiceProcessor::process_Disconnect;
-    processMap_["CreateDatabase"] = &InfinityServiceProcessor::process_CreateDatabase;
-    processMap_["DropDatabase"] = &InfinityServiceProcessor::process_DropDatabase;
-    processMap_["CreateTable"] = &InfinityServiceProcessor::process_CreateTable;
-    processMap_["DropTable"] = &InfinityServiceProcessor::process_DropTable;
-    processMap_["Insert"] = &InfinityServiceProcessor::process_Insert;
-    processMap_["Import"] = &InfinityServiceProcessor::process_Import;
-    processMap_["Export"] = &InfinityServiceProcessor::process_Export;
-    processMap_["Select"] = &InfinityServiceProcessor::process_Select;
-    processMap_["Explain"] = &InfinityServiceProcessor::process_Explain;
-    processMap_["Delete"] = &InfinityServiceProcessor::process_Delete;
-    processMap_["Update"] = &InfinityServiceProcessor::process_Update;
-    processMap_["ListDatabase"] = &InfinityServiceProcessor::process_ListDatabase;
-    processMap_["ListTable"] = &InfinityServiceProcessor::process_ListTable;
-    processMap_["ListIndex"] = &InfinityServiceProcessor::process_ListIndex;
-    processMap_["ShowTable"] = &InfinityServiceProcessor::process_ShowTable;
-    processMap_["ShowColumns"] = &InfinityServiceProcessor::process_ShowColumns;
-    processMap_["ShowDatabase"] = &InfinityServiceProcessor::process_ShowDatabase;
-    processMap_["ShowTables"] = &InfinityServiceProcessor::process_ShowTables;
-    processMap_["ShowSegments"] = &InfinityServiceProcessor::process_ShowSegments;
-    processMap_["ShowSegment"] = &InfinityServiceProcessor::process_ShowSegment;
-    processMap_["ShowBlocks"] = &InfinityServiceProcessor::process_ShowBlocks;
-    processMap_["ShowBlock"] = &InfinityServiceProcessor::process_ShowBlock;
-    processMap_["ShowBlockColumn"] = &InfinityServiceProcessor::process_ShowBlockColumn;
-    processMap_["ShowCurrentNode"] = &InfinityServiceProcessor::process_ShowCurrentNode;
-    processMap_["GetDatabase"] = &InfinityServiceProcessor::process_GetDatabase;
-    processMap_["GetTable"] = &InfinityServiceProcessor::process_GetTable;
-    processMap_["CreateIndex"] = &InfinityServiceProcessor::process_CreateIndex;
-    processMap_["DropIndex"] = &InfinityServiceProcessor::process_DropIndex;
-    processMap_["ShowIndex"] = &InfinityServiceProcessor::process_ShowIndex;
-    processMap_["Optimize"] = &InfinityServiceProcessor::process_Optimize;
-    processMap_["AddColumns"] = &InfinityServiceProcessor::process_AddColumns;
-    processMap_["DropColumns"] = &InfinityServiceProcessor::process_DropColumns;
-    processMap_["Cleanup"] = &InfinityServiceProcessor::process_Cleanup;
-    processMap_["Command"] = &InfinityServiceProcessor::process_Command;
-    processMap_["Flush"] = &InfinityServiceProcessor::process_Flush;
-    processMap_["Compact"] = &InfinityServiceProcessor::process_Compact;
+    processMap_["Connect"] = &hybridsearchServiceProcessor::process_Connect;
+    processMap_["Disconnect"] = &hybridsearchServiceProcessor::process_Disconnect;
+    processMap_["CreateDatabase"] = &hybridsearchServiceProcessor::process_CreateDatabase;
+    processMap_["DropDatabase"] = &hybridsearchServiceProcessor::process_DropDatabase;
+    processMap_["CreateTable"] = &hybridsearchServiceProcessor::process_CreateTable;
+    processMap_["DropTable"] = &hybridsearchServiceProcessor::process_DropTable;
+    processMap_["Insert"] = &hybridsearchServiceProcessor::process_Insert;
+    processMap_["Import"] = &hybridsearchServiceProcessor::process_Import;
+    processMap_["Export"] = &hybridsearchServiceProcessor::process_Export;
+    processMap_["Select"] = &hybridsearchServiceProcessor::process_Select;
+    processMap_["Explain"] = &hybridsearchServiceProcessor::process_Explain;
+    processMap_["Delete"] = &hybridsearchServiceProcessor::process_Delete;
+    processMap_["Update"] = &hybridsearchServiceProcessor::process_Update;
+    processMap_["ListDatabase"] = &hybridsearchServiceProcessor::process_ListDatabase;
+    processMap_["ListTable"] = &hybridsearchServiceProcessor::process_ListTable;
+    processMap_["ListIndex"] = &hybridsearchServiceProcessor::process_ListIndex;
+    processMap_["ShowTable"] = &hybridsearchServiceProcessor::process_ShowTable;
+    processMap_["ShowColumns"] = &hybridsearchServiceProcessor::process_ShowColumns;
+    processMap_["ShowDatabase"] = &hybridsearchServiceProcessor::process_ShowDatabase;
+    processMap_["ShowTables"] = &hybridsearchServiceProcessor::process_ShowTables;
+    processMap_["ShowSegments"] = &hybridsearchServiceProcessor::process_ShowSegments;
+    processMap_["ShowSegment"] = &hybridsearchServiceProcessor::process_ShowSegment;
+    processMap_["ShowBlocks"] = &hybridsearchServiceProcessor::process_ShowBlocks;
+    processMap_["ShowBlock"] = &hybridsearchServiceProcessor::process_ShowBlock;
+    processMap_["ShowBlockColumn"] = &hybridsearchServiceProcessor::process_ShowBlockColumn;
+    processMap_["ShowCurrentNode"] = &hybridsearchServiceProcessor::process_ShowCurrentNode;
+    processMap_["GetDatabase"] = &hybridsearchServiceProcessor::process_GetDatabase;
+    processMap_["GetTable"] = &hybridsearchServiceProcessor::process_GetTable;
+    processMap_["CreateIndex"] = &hybridsearchServiceProcessor::process_CreateIndex;
+    processMap_["DropIndex"] = &hybridsearchServiceProcessor::process_DropIndex;
+    processMap_["ShowIndex"] = &hybridsearchServiceProcessor::process_ShowIndex;
+    processMap_["Optimize"] = &hybridsearchServiceProcessor::process_Optimize;
+    processMap_["AddColumns"] = &hybridsearchServiceProcessor::process_AddColumns;
+    processMap_["DropColumns"] = &hybridsearchServiceProcessor::process_DropColumns;
+    processMap_["Cleanup"] = &hybridsearchServiceProcessor::process_Cleanup;
+    processMap_["Command"] = &hybridsearchServiceProcessor::process_Command;
+    processMap_["Flush"] = &hybridsearchServiceProcessor::process_Flush;
+    processMap_["Compact"] = &hybridsearchServiceProcessor::process_Compact;
   }
 
-  virtual ~InfinityServiceProcessor() {}
+  virtual ~hybridsearchServiceProcessor() {}
 };
 
-class InfinityServiceProcessorFactory : public ::apache::thrift::TProcessorFactory {
+class hybridsearchServiceProcessorFactory : public ::apache::thrift::TProcessorFactory {
  public:
-  InfinityServiceProcessorFactory(const ::std::shared_ptr< InfinityServiceIfFactory >& handlerFactory) noexcept :
+  hybridsearchServiceProcessorFactory(const ::std::shared_ptr< hybridsearchServiceIfFactory >& handlerFactory) noexcept :
       handlerFactory_(handlerFactory) {}
 
   ::std::shared_ptr< ::apache::thrift::TProcessor > getProcessor(const ::apache::thrift::TConnectionInfo& connInfo) override;
 
  protected:
-  ::std::shared_ptr< InfinityServiceIfFactory > handlerFactory_;
+  ::std::shared_ptr< hybridsearchServiceIfFactory > handlerFactory_;
 };
 
-class InfinityServiceMultiface : virtual public InfinityServiceIf {
+class hybridsearchServiceMultiface : virtual public hybridsearchServiceIf {
  public:
-  InfinityServiceMultiface(std::vector<std::shared_ptr<InfinityServiceIf> >& ifaces) : ifaces_(ifaces) {
+  hybridsearchServiceMultiface(std::vector<std::shared_ptr<hybridsearchServiceIf> >& ifaces) : ifaces_(ifaces) {
   }
-  virtual ~InfinityServiceMultiface() {}
+  virtual ~hybridsearchServiceMultiface() {}
  protected:
-  std::vector<std::shared_ptr<InfinityServiceIf> > ifaces_;
-  InfinityServiceMultiface() {}
-  void add(::std::shared_ptr<InfinityServiceIf> iface) {
+  std::vector<std::shared_ptr<hybridsearchServiceIf> > ifaces_;
+  hybridsearchServiceMultiface() {}
+  void add(::std::shared_ptr<hybridsearchServiceIf> iface) {
     ifaces_.push_back(iface);
   }
  public:
@@ -4803,13 +4803,13 @@ class InfinityServiceMultiface : virtual public InfinityServiceIf {
 // The 'concurrent' client is a thread safe client that correctly handles
 // out of order responses.  It is slower than the regular client, so should
 // only be used when you need to share a connection among multiple threads
-class InfinityServiceConcurrentClient : virtual public InfinityServiceIf {
+class hybridsearchServiceConcurrentClient : virtual public hybridsearchServiceIf {
  public:
-  InfinityServiceConcurrentClient(std::shared_ptr< ::apache::thrift::protocol::TProtocol> prot, std::shared_ptr< ::apache::thrift::async::TConcurrentClientSyncInfo> sync) : sync_(sync)
+  hybridsearchServiceConcurrentClient(std::shared_ptr< ::apache::thrift::protocol::TProtocol> prot, std::shared_ptr< ::apache::thrift::async::TConcurrentClientSyncInfo> sync) : sync_(sync)
 {
     setProtocol(prot);
   }
-  InfinityServiceConcurrentClient(std::shared_ptr< ::apache::thrift::protocol::TProtocol> iprot, std::shared_ptr< ::apache::thrift::protocol::TProtocol> oprot, std::shared_ptr< ::apache::thrift::async::TConcurrentClientSyncInfo> sync) : sync_(sync)
+  hybridsearchServiceConcurrentClient(std::shared_ptr< ::apache::thrift::protocol::TProtocol> iprot, std::shared_ptr< ::apache::thrift::protocol::TProtocol> oprot, std::shared_ptr< ::apache::thrift::async::TConcurrentClientSyncInfo> sync) : sync_(sync)
 {
     setProtocol(iprot,oprot);
   }

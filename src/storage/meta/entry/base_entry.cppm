@@ -21,14 +21,14 @@ export module base_entry;
 
 import stl;
 import default_values;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import logger;
 import cleanup_scanner;
 import global_resource_usage;
 import txn;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 
@@ -83,7 +83,7 @@ export String ToString(EntryType entry_type) {
 export struct BaseEntry {
     explicit BaseEntry(EntryType entry_type, bool is_delete, String encode)
         : deleted_(is_delete), entry_type_(entry_type), encode_(MakeUnique<String>(std::move(encode))) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("BaseEntry");
 #endif
     }
@@ -91,7 +91,7 @@ export struct BaseEntry {
     BaseEntry(const BaseEntry &other);
 
     virtual ~BaseEntry() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("BaseEntry");
 #endif
     }
@@ -140,12 +140,12 @@ private:
 export class BaseMeta {
 public:
     BaseMeta() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("BaseMeta");
 #endif
     }
     virtual ~BaseMeta() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("BaseMeta");
 #endif
     }
@@ -163,4 +163,4 @@ concept MetaConcept = std::derived_from<Meta, BaseMeta>;
 export template <typename Entry>
 concept EntryConcept = std::derived_from<Entry, BaseEntry>;
 
-} // namespace infinity
+} // namespace hybridsearch

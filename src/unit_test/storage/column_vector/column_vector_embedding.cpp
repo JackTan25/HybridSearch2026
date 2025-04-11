@@ -15,7 +15,7 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import logger;
 import column_vector;
@@ -26,7 +26,7 @@ import third_party;
 import stl;
 import selection;
 import vector_buffer;
-import infinity_context;
+import hybridsearch_context;
 import global_resource_usage;
 import internal_types;
 import logical_type;
@@ -35,11 +35,11 @@ import knn_expr;
 import data_type;
 import compilation_config;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class ColumnVectorEmbeddingTest : public BaseTest {
     void SetUp() override {
-        using namespace infinity;
+        using namespace hybridsearch;
 
         LoggerConfig logger_config;
         logger_config.log_level_ = LogLevel::kOff;
@@ -47,13 +47,13 @@ class ColumnVectorEmbeddingTest : public BaseTest {
     }
 
     void TearDown() override {
-        using namespace infinity;
+        using namespace hybridsearch;
 
         Logger::Shutdown();
     }
 };
 TEST_F(ColumnVectorEmbeddingTest, flat_embedding) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     auto embedding_info = EmbeddingInfo::Make(EmbeddingDataType::kElemFloat, 16);
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kEmbedding, embedding_info);
@@ -165,7 +165,7 @@ TEST_F(ColumnVectorEmbeddingTest, flat_embedding) {
 
 TEST_F(ColumnVectorEmbeddingTest, contant_embedding) {
 
-    using namespace infinity;
+    using namespace hybridsearch;
 
     auto embedding_info = EmbeddingInfo::Make(EmbeddingDataType::kElemFloat, 16);
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kEmbedding, embedding_info);
@@ -244,7 +244,7 @@ TEST_F(ColumnVectorEmbeddingTest, contant_embedding) {
 }
 
 TEST_F(ColumnVectorEmbeddingTest, embedding_column_vector_select) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     auto embedding_info = EmbeddingInfo::Make(EmbeddingDataType::kElemFloat, 16);
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kEmbedding, embedding_info);
@@ -290,7 +290,7 @@ TEST_F(ColumnVectorEmbeddingTest, embedding_column_vector_select) {
 }
 
 TEST_F(ColumnVectorEmbeddingTest, embedding_column_slice_init) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     auto embedding_info = EmbeddingInfo::Make(EmbeddingDataType::kElemFloat, 16);
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kEmbedding, embedding_info);

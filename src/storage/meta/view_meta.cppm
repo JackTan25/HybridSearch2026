@@ -21,7 +21,7 @@ import base_entry;
 import status;
 import column_def;
 
-namespace infinity {
+namespace hybridsearch {
 
 class TxnManager;
 
@@ -60,4 +60,4 @@ private:
     List<UniquePtr<BaseEntry>> entry_list_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

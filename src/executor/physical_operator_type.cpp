@@ -18,10 +18,10 @@ module physical_operator_type;
 
 import stl;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 String PhysicalOperatorToString(PhysicalOperatorType type) {
     switch (type) {
 
@@ -164,4 +164,4 @@ String PhysicalOperatorToString(PhysicalOperatorType type) {
     Status status = Status::NotSupport("Unknown physical operator type");
     RecoverableError(status);
 }
-} // namespace infinity
+} // namespace hybridsearch

@@ -3,7 +3,7 @@
 import { ITableIndex } from '@/lib/databse-interface';
 import { ColumnDef } from '@tanstack/react-table';
 import { useFetchTableIndexes } from 'app/(dashboard)/database/hooks';
-import { DataTable } from 'app/(dashboard)/database/infinity-table';
+import { DataTable } from 'app/(dashboard)/database/hybridsearch-table';
 import { PureDatabaseRouteParams } from 'app/(dashboard)/database/interface';
 
 export const columns: ColumnDef<ITableIndex>[] = [

@@ -18,9 +18,9 @@ export module table_entry_type;
 
 import stl;
 import logger;
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum TableEntryType : i8 {
     kTableEntry,
@@ -42,4 +42,4 @@ export inline String ToString(TableEntryType type) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -37,7 +37,7 @@
 #include "type/number/float16.h"
 #include "type/number/huge_int.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 // 40 types in total now.
 enum class LogicalType : int8_t {
@@ -134,4 +134,4 @@ extern int64_t LogicalTypeWidth(LogicalType logical_type);
 
 extern LogicalType GetCommonLogicalType(const EmbeddingDataType type1, const EmbeddingDataType type2);
 
-} // namespace infinity
+} // namespace hybridsearch

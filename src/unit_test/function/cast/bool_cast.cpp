@@ -15,14 +15,14 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 
 import function_set;
 import aggregate_function_set;
@@ -40,11 +40,11 @@ import internal_types;
 import logical_type;
 import data_type;
 
-using namespace infinity;
+using namespace hybridsearch;
 class BoolCastTest : public BaseTest {
     void SetUp() override {
-#ifdef INFINITY_DEBUG
-        infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+        hybridsearch::GlobalResourceUsage::Init();
 #endif
     }
 
@@ -52,7 +52,7 @@ class BoolCastTest : public BaseTest {
 };
 
 TEST_F(BoolCastTest, bool_cast0) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     // BooleanT to BooleanT, throw exception
     {
@@ -76,7 +76,7 @@ TEST_F(BoolCastTest, bool_cast0) {
 }
 
 TEST_F(BoolCastTest, bool_cast1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> bool_type = MakeShared<DataType>(LogicalType::kBoolean);
 

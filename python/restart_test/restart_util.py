@@ -1,9 +1,9 @@
 import os
-from infinity import index
+from hybridsearch import index
 import csv
 import json
 import numpy as np
-from infinity.common import SparseVector
+from hybridsearch.common import SparseVector
 
 
 class SimpleEmbeddingGenerator:

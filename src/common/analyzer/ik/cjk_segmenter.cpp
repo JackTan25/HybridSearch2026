@@ -13,7 +13,7 @@ import character_util;
 import ik_dict;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 const std::wstring CJKSegmenter::SEGMENTER_NAME = L"CJK_SEGMENTER";
 
 CJKSegmenter::CJKSegmenter(Dictionary *dict) : dict_(dict) {}
@@ -68,4 +68,4 @@ void CJKSegmenter::Analyze(AnalyzeContext *context) {
 
 void CJKSegmenter::Reset() { tmp_hits_.clear(); }
 
-} // namespace infinity
+} // namespace hybridsearch

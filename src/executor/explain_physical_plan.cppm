@@ -74,7 +74,7 @@ import physical_unnest_aggregate;
 
 export module explain_physical_plan;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class ExplainPhysicalPlan {
 public:
@@ -192,4 +192,4 @@ public:
     static void Explain(const PhysicalUnnestAggregate *unnest_node, SharedPtr<Vector<SharedPtr<String>>> &result, i64 intent_size = 0);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

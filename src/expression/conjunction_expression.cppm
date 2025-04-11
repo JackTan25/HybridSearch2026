@@ -22,7 +22,7 @@ import data_type;
 import logical_type;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class ConjunctionType {
     kInvalid,
@@ -46,4 +46,4 @@ private:
     ConjunctionType conjunction_type_{ConjunctionType::kInvalid};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

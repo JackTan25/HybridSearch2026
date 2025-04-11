@@ -26,7 +26,7 @@ import operator_state;
 import base_expression;
 import value_expression;
 import expression_state;
-import infinity_exception;
+import hybridsearch_exception;
 import expression_evaluator;
 import data_block;
 import column_vector;
@@ -34,7 +34,7 @@ import default_values;
 import physical_top;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct VectorBlockRawIndex {
     u32 left_row_cnt_{};
@@ -185,4 +185,4 @@ bool PhysicalMergeTop::Execute(QueryContext *, OperatorState *operator_state) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

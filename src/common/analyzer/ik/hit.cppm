@@ -4,7 +4,7 @@ export module hit;
 
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 class DictSegment;
 export class Hit {
@@ -45,4 +45,4 @@ public:
 
     void SetEnd(int end) { end_ = end; }
 };
-} // namespace infinity
+} // namespace hybridsearch

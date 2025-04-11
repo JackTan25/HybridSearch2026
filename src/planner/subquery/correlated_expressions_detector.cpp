@@ -22,10 +22,10 @@ import base_expression;
 import column_expression;
 import subquery_expression;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 void CorrelatedExpressionsDetector::VisitNode(LogicalNode &op) { VisitNodeExpression(op); }
 
@@ -55,4 +55,4 @@ SharedPtr<BaseExpression> CorrelatedExpressionsDetector::VisitReplace(const Shar
     return nullptr;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

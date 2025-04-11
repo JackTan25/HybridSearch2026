@@ -25,12 +25,12 @@ import txn_manager;
 import db_entry;
 import table_entry;
 import logger;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import blocking_queue;
 import bg_query_state;
 import query_context;
-import infinity_context;
+import hybridsearch_context;
 import compact_statement;
 import compilation_config;
 import defer_op;
@@ -47,16 +47,16 @@ import wal_manager;
 import global_resource_usage;
 import txn_state;
 
-namespace infinity {
+namespace hybridsearch {
 
 CompactionProcessor::CompactionProcessor(Catalog *catalog, TxnManager *txn_mgr) : catalog_(catalog), txn_mgr_(txn_mgr) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::IncrObjectCount("CompactionProcessor");
 #endif
 }
 
 CompactionProcessor::~CompactionProcessor() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::DecrObjectCount("CompactionProcessor");
 #endif
 }
@@ -177,7 +177,7 @@ void CompactionProcessor::ScanAndOptimize() {
 void CompactionProcessor::DoDump(DumpIndexTask *dump_task) {
     Txn *dump_txn = dump_task->txn_;
     BaseMemIndex *mem_index = dump_task->mem_index_;
-    auto *memindex_tracer = InfinityContext::instance().storage()->memindex_tracer();
+    auto *memindex_tracer = hybridsearchContext::instance().storage()->memindex_tracer();
     try {
         TableIndexEntry *table_index_entry = mem_index->table_index_entry();
         auto *table_entry = table_index_entry->table_index_meta()->GetTableEntry();
@@ -235,7 +235,7 @@ void CompactionProcessor::Process() {
                     break;
                 }
                 case BGTaskType::kNotifyCompact: {
-                    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+                    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
                     if (storage_mode == StorageMode::kUnInitialized) {
                         UnrecoverableError("Uninitialized storage mode");
                     }
@@ -247,7 +247,7 @@ void CompactionProcessor::Process() {
                     break;
                 }
                 case BGTaskType::kNotifyOptimize: {
-                    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+                    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
                     if (storage_mode == StorageMode::kUnInitialized) {
                         UnrecoverableError("Uninitialized storage mode");
                     }
@@ -259,7 +259,7 @@ void CompactionProcessor::Process() {
                     break;
                 }
                 case BGTaskType::kDumpIndex: {
-                    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+                    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
                     if (storage_mode == StorageMode::kUnInitialized) {
                         UnrecoverableError("Uninitialized storage mode");
                     }
@@ -273,7 +273,7 @@ void CompactionProcessor::Process() {
                     break;
                 }
                 case BGTaskType::kDumpIndexByline: {
-                    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+                    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
                     if (storage_mode == StorageMode::kUnInitialized) {
                         UnrecoverableError("Uninitialized storage mode");
                     }
@@ -305,4 +305,4 @@ void CompactionProcessor::Process() {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

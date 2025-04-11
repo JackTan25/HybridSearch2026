@@ -25,7 +25,7 @@ import column_def;
 import file_worker_type;
 import persistence_manager;
 
-namespace infinity {
+namespace hybridsearch {
 
 // TODO:now only suppor f32
 export class EMVBIndexFileWorker final : public IndexFileWorker {
@@ -67,4 +67,4 @@ private:
     const u32 start_segment_offset_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

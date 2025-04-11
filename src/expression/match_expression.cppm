@@ -22,7 +22,7 @@ import base_expression;
 import logical_type;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class MatchExpression : public BaseExpression {
 public:
@@ -44,4 +44,4 @@ public:
     SharedPtr<BaseExpression> optional_filter_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

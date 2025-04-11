@@ -18,7 +18,7 @@
 #include "expr/parsed_expr.h"
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 class DeleteStatement final : public BaseStatement {
 public:
@@ -34,4 +34,4 @@ public:
     ParsedExpr *where_expr_{nullptr};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

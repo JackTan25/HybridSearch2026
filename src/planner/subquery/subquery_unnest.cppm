@@ -23,7 +23,7 @@ import column_expression;
 
 export module subquery_unnest;
 
-namespace infinity {
+namespace hybridsearch {
 
 class QueryContext;
 class BindContext;
@@ -60,4 +60,4 @@ private:
                                        SizeT correlated_base_index);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

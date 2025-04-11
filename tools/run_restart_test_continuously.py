@@ -18,14 +18,14 @@ if __name__ == "__main__":
         dest="test_sec",
     )
     parser.add_argument(
-        "--infinity_path",
+        "--hybridsearch_path",
         type=str,
-        default="./build/Debug/src/infinity",
-        dest="infinity_path",
+        default="./build/Debug/src/hybridsearch",
+        dest="hybridsearch_path",
     )
     args = parser.parse_args()
     test_sec = args.test_sec
-    infinity_path = args.infinity_path
+    hybridsearch_path = args.hybridsearch_path
 
     begin_time = time.time()
     test_i = 0
@@ -33,7 +33,7 @@ if __name__ == "__main__":
     test_fail = False
     while (time.time() - begin_time) < test_sec and not test_fail:
         print(f"Test {test_i}")
-        ret = os.system(f"python3 tools/run_restart_test.py --infinity_path={infinity_path} --slow=true")
+        ret = os.system(f"python3 tools/run_restart_test.py --hybridsearch_path={hybridsearch_path} --slow=true")
         if ret != 0:
             test_fail = True
             print(f"Test {test_i} failed")

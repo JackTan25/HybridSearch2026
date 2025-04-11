@@ -19,7 +19,7 @@ export module txn_context;
 import stl;
 import txn_state;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct TxnContext {
     // This struct is used to store the operation history of a transaction. This history can be used for debugging purposes.
@@ -41,4 +41,4 @@ export struct TxnContext {
     Vector<SharedPtr<String>> operations_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

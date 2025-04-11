@@ -21,7 +21,7 @@ import file_worker;
 import file_worker_type;
 import persistence_manager;
 
-namespace infinity {
+namespace hybridsearch {
 
 // RawFileWorker is FileWorker for raw file:
 // - There's no file header nor footer.
@@ -55,4 +55,4 @@ protected:
 private:
     SizeT buffer_size_;
 };
-} // namespace infinity
+} // namespace hybridsearch

@@ -120,7 +120,7 @@ def import_data(
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Benchmark Infinity")
+    parser = argparse.ArgumentParser(description="Benchmark hybridsearch")
     parser.add_argument(
         "-d",
         "--data",

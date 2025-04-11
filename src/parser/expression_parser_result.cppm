@@ -18,8 +18,8 @@ module;
 
 export module expression_parser_result;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::ExpressionParserResult;
+export using hybridsearch::ExpressionParserResult;
 
 }

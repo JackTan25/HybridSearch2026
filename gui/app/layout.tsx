@@ -4,8 +4,8 @@ import { Toaster } from '@/components/ui/toaster';
 import { Analytics } from '@vercel/analytics/react';
 
 export const metadata = {
-  title: 'Infinity',
-  description: 'AI-native database for LLM | Infinity'
+  title: 'hybridsearch',
+  description: 'AI-native database for LLM | hybridsearch'
 };
 
 export default function RootLayout({

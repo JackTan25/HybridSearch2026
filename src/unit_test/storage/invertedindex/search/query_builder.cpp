@@ -27,13 +27,13 @@ import query_builder;
 import query_node;
 import search_driver;
 import table_entry;
-import infinity_context;
+import hybridsearch_context;
 import global_resource_usage;
 import third_party;
 import logger;
 import parse_fulltext_options;
 
-namespace infinity {
+namespace hybridsearch {
 
 class MockVectorDocIterator : public DocIterator {
 public:
@@ -114,9 +114,9 @@ struct MockQueryNode : public TermQueryNode {
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch
 
-using namespace infinity;
+using namespace hybridsearch;
 
 constexpr int DocIDMaxN = 100'000;
 constexpr int TestAndVecN = 70'000;

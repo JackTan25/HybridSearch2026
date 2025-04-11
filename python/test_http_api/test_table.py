@@ -371,7 +371,7 @@ class TestTable(HttpTest):
         self.drop_table(db_name, table_name)
         return
 
-    # INFO:if use invalid options, then infinity will use default options: kInvalid
+    # INFO:if use invalid options, then hybridsearch will use default options: kInvalid
     def test_http_table_with_different_invalid_options(self):
         db_name = "default_db"
         table_name = "test_http_test_table_with_different_invalid_options"

@@ -20,7 +20,7 @@ import stl;
 import data_block;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class FragmentDataType {
     kData,
@@ -68,4 +68,4 @@ export struct FragmentNone : public FragmentDataBase {
     FragmentNone(u64 fragment_id) : FragmentDataBase(FragmentDataType::kNone, fragment_id) {}
 };
 
-} // namespace infinity
+} // namespace hybridsearch

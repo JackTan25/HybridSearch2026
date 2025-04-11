@@ -16,11 +16,11 @@ module;
 
 export module function_data;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class FunctionData {
 public:
     virtual ~FunctionData() = default;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -20,16 +20,16 @@ module;
 module pg_server;
 
 import thrift_server;
-import infinity_context;
+import hybridsearch_context;
 import stl;
 import boost;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 
 import connection;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 Thread PGServer::Run() {
     {
@@ -38,13 +38,13 @@ Thread PGServer::Run() {
             UnrecoverableError(fmt::format("PGServer in unexpected state: {}", u8(expected)));
         }
     }
-    u16 pg_port = InfinityContext::instance().config()->PostgresPort();
-    const String &pg_listen_addr = InfinityContext::instance().config()->ServerAddress();
+    u16 pg_port = hybridsearchContext::instance().config()->PostgresPort();
+    const String &pg_listen_addr = hybridsearchContext::instance().config()->ServerAddress();
 
     boost::system::error_code error;
     boost::asio::ip::address address = boost::asio::ip::make_address(pg_listen_addr, error);
     if (error) {
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
         String err_msg = fmt::format("{} isn't a valid IPv4 address.\n", pg_listen_addr);
         UnrecoverableError(err_msg);
     }
@@ -116,4 +116,4 @@ void PGServer::StartConnection(SharedPtr<Connection> &connection) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

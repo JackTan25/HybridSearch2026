@@ -22,7 +22,7 @@ import operator_state;
 
 module physical_nested_loop_join;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalNestedLoopJoin::Init(QueryContext* query_context) {}
 
@@ -62,4 +62,4 @@ SharedPtr<Vector<SharedPtr<DataType>>> PhysicalNestedLoopJoin::GetOutputTypes() 
     return result;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

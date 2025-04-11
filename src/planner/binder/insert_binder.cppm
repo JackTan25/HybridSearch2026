@@ -25,7 +25,7 @@ import query_context;
 import parsed_expr;
 import knn_expr;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class InsertBinder final : public ExpressionBinder {
 public:
@@ -42,4 +42,4 @@ public:
 private:
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -21,7 +21,7 @@ import singleton;
 import aho_corasick;
 import analyzer;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct HighlightInfo {
     Vector<String> query_terms_;
@@ -39,4 +39,4 @@ public:
 private:
     AhoCorasick sentence_delimiter_;
 };
-}; // namespace infinity
+}; // namespace hybridsearch

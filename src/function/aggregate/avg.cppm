@@ -18,10 +18,10 @@ import stl;
 
 export module avg;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 
 export void RegisterAvgFunction(const UniquePtr<Catalog> &catalog_ptr);
 
-} // namespace infinity
+} // namespace hybridsearch

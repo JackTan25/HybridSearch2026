@@ -15,23 +15,23 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 import parser_assert;
 
 #if 0
 
-using namespace infinity;
+using namespace hybridsearch;
 class PathTypeTest : public BaseTest {};
 
 TEST_F(PathTypeTest, path1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     PathT path1;
     EXPECT_EQ(path1.PointCount(), 0);

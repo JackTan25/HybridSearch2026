@@ -16,7 +16,7 @@
 #include <arrow/type.h>
 #include <cstring>
 
-namespace infinity {
+namespace hybridsearch {
 
 bool operator==(const EmbeddingDataType &type, const arrow::Type::type &arrow_type) {
     switch (type) {
@@ -66,4 +66,4 @@ void EmbeddingType::Init(const void *from_ptr, size_t size) {
     memcpy(ptr, from_ptr, size);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

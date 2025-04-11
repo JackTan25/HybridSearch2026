@@ -19,13 +19,13 @@ module column_identifer;
 import stl;
 
 import column_expr;
-import infinity_exception;
+import hybridsearch_exception;
 import status;
 import third_party;
 import query_context;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 ColumnIdentifier ColumnIdentifier::MakeColumnIdentifier(QueryContext *, const ColumnExpr &expr) {
     if (expr.star_ && expr.names_.empty()) {
@@ -97,4 +97,4 @@ bool ColumnIdentifier::operator==(const ColumnIdentifier &other) const {
     return false;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

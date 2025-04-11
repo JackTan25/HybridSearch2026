@@ -18,8 +18,8 @@ module;
 
 export module data_type;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::DataType;
+export using hybridsearch::DataType;
 
 }

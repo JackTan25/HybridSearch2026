@@ -23,7 +23,7 @@ import stl;
 // import buffer_manager;
 // import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class ObjectStorageTaskType {
     kInvalid,
@@ -119,4 +119,4 @@ export struct LocalDropTask final : public BaseObjectStorageTask {
     String drop_path_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

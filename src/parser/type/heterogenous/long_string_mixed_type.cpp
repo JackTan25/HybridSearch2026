@@ -14,7 +14,7 @@
 
 #include "long_string_mixed_type.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 bool LongStrMixedType::Equal(const std::string &input) {
     if (this->length != input.length())
@@ -36,4 +36,4 @@ bool LongStrMixedType::Equal(const std::string &input) {
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

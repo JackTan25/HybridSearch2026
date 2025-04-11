@@ -25,7 +25,7 @@ import posting_writer;
 import memory_indexer;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 InMemIndexSegmentReader::InMemIndexSegmentReader(SegmentID segment_id, MemoryIndexer *memory_indexer)
     : IndexSegmentReader(segment_id, std::numeric_limits<ChunkID>::max()), posting_table_(memory_indexer->GetPostingTable()),
       base_row_id_(memory_indexer->GetBaseRowId()) {}
@@ -40,4 +40,4 @@ bool InMemIndexSegmentReader::GetSegmentPosting(const String &term, SegmentPosti
     return false;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

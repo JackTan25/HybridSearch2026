@@ -17,7 +17,7 @@ import base_test;
 import stl;
 import third_party;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 constexpr uint32_t TestNum = 200;
 

@@ -18,9 +18,9 @@ module;
 
 export module search_driver;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::FulltextQueryOperatorOption;
-export using infinity::SearchDriver;
+export using hybridsearch::FulltextQueryOperatorOption;
+export using hybridsearch::SearchDriver;
 
-} // namespace infinity
+} // namespace hybridsearch

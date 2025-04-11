@@ -7,7 +7,7 @@
 #include <functional>
 #include <limits>
 
-namespace infinity {
+namespace hybridsearch {
 
 bool RadixPrepare(size_t n, size_t last[257], size_t ptr[256], size_t cnt[256]);
 
@@ -479,4 +479,4 @@ T *RadixStableSort(GR R, GE E, T *a, T *b, size_t n, unsigned int insert_sort_le
     return a;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

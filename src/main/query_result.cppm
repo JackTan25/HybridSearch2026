@@ -20,24 +20,24 @@ import status;
 import logical_node_type;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct BaseResult {
 public:
     BaseResult() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("BaseResult");
 #endif
     }
 
     ~BaseResult() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("BaseResult");
 #endif
     }
 
     BaseResult(BaseResult &other) : status_(other.status_), result_table_(other.result_table_) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("BaseResult");
 #endif
     }
@@ -68,4 +68,4 @@ export struct QueryResult : public BaseResult {
     static QueryResult UnusedResult() { return {}; }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

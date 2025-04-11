@@ -15,7 +15,7 @@
 #include "drop_collection_info.h"
 #include <sstream>
 
-namespace infinity {
+namespace hybridsearch {
 
 std::string DropCollectionInfo::ToString() const {
     std::stringstream ss;
@@ -28,4 +28,4 @@ std::string DropCollectionInfo::ToString() const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

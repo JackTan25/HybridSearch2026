@@ -15,7 +15,7 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import logger;
 import column_vector;
@@ -27,17 +27,17 @@ import stl;
 import selection;
 import vector_buffer;
 import global_resource_usage;
-import infinity_context;
+import hybridsearch_context;
 import internal_types;
 import logical_type;
 import data_type;
 import compilation_config;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class ColumnVectorUuidTest : public BaseTest {
     void SetUp() override {
-        using namespace infinity;
+        using namespace hybridsearch;
 
         LoggerConfig logger_config;
         logger_config.log_level_ = LogLevel::kOff;
@@ -45,14 +45,14 @@ class ColumnVectorUuidTest : public BaseTest {
     }
 
     void TearDown() override {
-        using namespace infinity;
+        using namespace hybridsearch;
 
         Logger::Shutdown();
     }
 };
 
 TEST_F(ColumnVectorUuidTest, flat_uuid) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kUuid);
     ColumnVector column_vector(data_type);
@@ -160,7 +160,7 @@ TEST_F(ColumnVectorUuidTest, flat_uuid) {
 
 TEST_F(ColumnVectorUuidTest, contant_uuid) {
 
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kUuid);
     ColumnVector column_vector(data_type);
@@ -246,7 +246,7 @@ TEST_F(ColumnVectorUuidTest, contant_uuid) {
 }
 
 TEST_F(ColumnVectorUuidTest, uuid_column_vector_select) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kUuid);
     ColumnVector column_vector(data_type);
@@ -290,7 +290,7 @@ TEST_F(ColumnVectorUuidTest, uuid_column_vector_select) {
 }
 
 TEST_F(ColumnVectorUuidTest, uuid_column_slice_init) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kUuid);
     ColumnVector column_vector(data_type);

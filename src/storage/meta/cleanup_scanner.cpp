@@ -21,18 +21,18 @@ module cleanup_scanner;
 import stl;
 import catalog;
 import base_entry;
-import infinity_exception;
+import hybridsearch_exception;
 import status;
 import logger;
 import third_party;
-import infinity_context;
+import hybridsearch_context;
 import table_entry;
 import table_index_entry;
 import virtual_store;
 import segment_index_entry;
 import chunk_index_entry;
 
-namespace infinity {
+namespace hybridsearch {
 
 void CleanupInfoTracer::ResetInfo(TxnTimeStamp cleanup_ts) {
     std::scoped_lock lock(mutex_);
@@ -123,4 +123,4 @@ void CleanupScanner::CleanupDir(const String &abs_dir) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

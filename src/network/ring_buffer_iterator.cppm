@@ -20,24 +20,24 @@ import global_resource_usage;
 
 export module ring_buffer_iterator;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class RingBufferIterator {
 public:
     explicit RingBufferIterator(Array<char, PG_MSG_BUFFER_SIZE> &data, SizeT position = 0) : data_(data), position_(position) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("RingBufferIterator");
 #endif
     }
 
     RingBufferIterator(const RingBufferIterator &other) : data_(other.data_), position_(other.position_) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("RingBufferIterator");
 #endif
     }
 
     ~RingBufferIterator() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("RingBufferIterator");
 #endif
     }
@@ -111,4 +111,4 @@ public:
     u32 position_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

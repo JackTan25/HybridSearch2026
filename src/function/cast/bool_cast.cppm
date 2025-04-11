@@ -19,7 +19,7 @@ export module bool_cast;
 import stl;
 import bound_cast_func;
 import column_vector_cast;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import column_vector;
 import logical_type;
@@ -28,7 +28,7 @@ import data_type;
 import logger;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct TryCastBoolean {
     template <typename SourceType, typename TargetType>
@@ -75,4 +75,4 @@ export inline BoundCastFunc BindBoolCast(const DataType &source, const DataType 
     return BoundCastFunc(nullptr);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -30,9 +30,9 @@ import data_block;
 import logger;
 import third_party;
 
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalFilter::Init(QueryContext* query_context) {
     //    executor.Init({condition_});
@@ -91,4 +91,4 @@ bool PhysicalFilter::Execute(QueryContext *, OperatorState *operator_state) {
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

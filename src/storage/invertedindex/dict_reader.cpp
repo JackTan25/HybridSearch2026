@@ -23,9 +23,9 @@ import term_meta;
 import posting_list_format;
 import fst;
 import mmap;
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 DictionaryReader::DictionaryReader(const String &dict_path, const PostingFormatOption &option)
     : dict_path_(dict_path), meta_loader_(option), data_ptr_(nullptr), data_len_(0) {
@@ -86,4 +86,4 @@ bool DictionaryReader::Next(String &term, TermMeta &term_meta) {
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

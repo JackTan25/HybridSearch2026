@@ -1,12 +1,12 @@
 import time
-import infinity.index as index
+import hybridsearch.index as index
 import pytest
 import random
 from threading import Thread
-from infinity.common import ConflictType
-from infinity.errors import ErrorCode
-from infinity.connection_pool import ConnectionPool
-from infinity.db import Database
+from hybridsearch.common import ConflictType
+from hybridsearch.errors import ErrorCode
+from hybridsearch.connection_pool import ConnectionPool
+from hybridsearch.db import Database
 
 kRunningTime = 30
 kNumThread = 4
@@ -16,8 +16,8 @@ index_name = "c1 verctor index"
 
 
 class TestInsertDeleteUpdate:
-    def test_insert_delete_ddl_parallel(self, get_infinity_connection_pool):
-        connection_pool = get_infinity_connection_pool
+    def test_insert_delete_ddl_parallel(self, get_hybridsearch_connection_pool):
+        connection_pool = get_hybridsearch_connection_pool
 
         threads = []
         end_time = time.time() + kRunningTime
@@ -28,8 +28,8 @@ class TestInsertDeleteUpdate:
         for i in range(len(threads)):
             threads[i].join()
 
-        infinity_obj = connection_pool.get_conn()
-        db_obj = infinity_obj.get_database("default_db")
+        hybridsearch_obj = connection_pool.get_conn()
+        db_obj = hybridsearch_obj.get_database("default_db")
         res = db_obj.drop_table(table_name, ConflictType.Ignore)
         assert res.error_code == ErrorCode.OK
 
@@ -100,8 +100,8 @@ def update(db_obj: Database):
 
 
 def random_exec(connection_pool: ConnectionPool, end_time, thread_id):
-    infinity_obj = connection_pool.get_conn()
-    db_obj = infinity_obj.get_database("default_db")
+    hybridsearch_obj = connection_pool.get_conn()
+    db_obj = hybridsearch_obj.get_database("default_db")
     while time.time() < end_time:
         rand_v = random.randint(0, 99)
         if rand_v == 0:
@@ -118,4 +118,4 @@ def random_exec(connection_pool: ConnectionPool, end_time, thread_id):
             delete(db_obj)
         else:
             update(db_obj)
-    connection_pool.release_conn(infinity_obj)
+    connection_pool.release_conn(hybridsearch_obj)

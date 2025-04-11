@@ -1,13 +1,13 @@
 import os
 import time
-from infinity_runner import InfinityRunner, infinity_runner_decorator_factory
+from hybridsearch_runner import hybridsearchRunner, hybridsearch_runner_decorator_factory
 import pytest
 from common import common_values
-from infinity.common import ConflictType
+from hybridsearch.common import ConflictType
 from restart_util import *
-import infinity
+import hybridsearch
 import pathlib
-from infinity.errors import ErrorCode
+from hybridsearch.errors import ErrorCode
 
 
 # Test with cleanuped data but meta data not cleanuped
@@ -31,22 +31,22 @@ class TestCleanup:
     )
     def test_cleanuped_data(
         self,
-        infinity_runner: InfinityRunner,
+        hybridsearch_runner: hybridsearchRunner,
         columns: dict,
         data_gen_factory,
     ):
         config = "test/data/config/restart_test/test_cleanup/1.toml"
-        data_dir = "/var/infinity/data"
+        data_dir = "/var/hybridsearch/data"
         uri = common_values.TEST_LOCAL_HOST
-        infinity_runner.clear()
+        hybridsearch_runner.clear()
         table_name = "test_cleanup"
         table_name2 = "test2_cleanup"
 
-        decorator = infinity_runner_decorator_factory(config, uri, infinity_runner)
+        decorator = hybridsearch_runner_decorator_factory(config, uri, hybridsearch_runner)
 
         @decorator
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.drop_table(table_name, ConflictType.Ignore)
             db_obj.drop_table(table_name2, ConflictType.Ignore)
             table_obj = db_obj.create_table(table_name, columns, ConflictType.Error)
@@ -64,7 +64,7 @@ class TestCleanup:
 
             db_obj.drop_table(table_name, ConflictType.Error)
 
-            infinity_obj.cleanup()
+            hybridsearch_obj.cleanup()
 
             # check
             dropped_dirs = pathlib.Path(data_dir).rglob(f"*{table_name}*")
@@ -78,7 +78,7 @@ class TestCleanup:
         part1()
 
         @decorator
-        def part2(infinity_obj):
+        def part2(hybridsearch_obj):
             dropped_dirs = pathlib.Path(data_dir).rglob(f"*{table_name2}*")
             assert len(list(dropped_dirs)) == 0
 
@@ -101,34 +101,34 @@ class TestCleanup:
     )
     def test_cleanuped_index(
         self,
-        infinity_runner: InfinityRunner,
+        hybridsearch_runner: hybridsearchRunner,
         columns: dict,
         indexes: list[index.IndexInfo],
         data_gen_factory,
     ):
         config = "test/data/config/restart_test/test_cleanup/1.toml"
-        data_dir = "/var/infinity/data"
+        data_dir = "/var/hybridsearch/data"
         uri = common_values.TEST_LOCAL_HOST
-        infinity_runner.clear()
+        hybridsearch_runner.clear()
         table_name = "test_cleanup_index"
         index_name = "idx1"
         index_name2 = "idx2"
 
-        decorator = infinity_runner_decorator_factory(config, uri, infinity_runner)
+        decorator = hybridsearch_runner_decorator_factory(config, uri, hybridsearch_runner)
         insert_n = 100
 
         @decorator
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.drop_table(table_name, ConflictType.Ignore)
             table_obj = db_obj.create_table(table_name, columns, ConflictType.Error)
 
             for idx in indexes:
                 res = table_obj.create_index(index_name, idx)
-                assert res.error_code == infinity.ErrorCode.OK
+                assert res.error_code == hybridsearch.ErrorCode.OK
 
                 res = table_obj.create_index(index_name2, idx)
-                assert res.error_code == infinity.ErrorCode.OK
+                assert res.error_code == hybridsearch.ErrorCode.OK
 
             data_gen = data_gen_factory(insert_n)
 
@@ -139,9 +139,9 @@ class TestCleanup:
                 table_obj.insert([data_line])
 
             res = table_obj.drop_index(index_name)
-            assert res.error_code == infinity.ErrorCode.OK
+            assert res.error_code == hybridsearch.ErrorCode.OK
 
-            infinity_obj.cleanup()
+            hybridsearch_obj.cleanup()
 
             # check
             dropped_dirs = pathlib.Path(data_dir).rglob(f"*{index_name}*")
@@ -155,11 +155,11 @@ class TestCleanup:
         part1()
 
         @decorator
-        def part2(infinity_obj):
+        def part2(hybridsearch_obj):
             dropped_dirs = pathlib.Path(data_dir).rglob(f"*{index_name2}")
             assert len(list(dropped_dirs)) == 0
 
-            db_obj = infinity_obj.get_database("default_db")
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.get_table(table_name)
             data_dict, _, _ = table_obj.output(["count(*)"]).to_result()
             count_star = data_dict["count(star)"][0]
@@ -167,24 +167,24 @@ class TestCleanup:
 
             db_obj.drop_table(table_name, ConflictType.Error)
 
-            infinity_obj.cleanup()
+            hybridsearch_obj.cleanup()
 
             dropped_dirs = pathlib.Path(data_dir).rglob(f"*{table_name}*")
             assert len(list(dropped_dirs)) == 0
 
         part2()
 
-    def test_invalidate_fulltext_cache(self, infinity_runner: InfinityRunner):
+    def test_invalidate_fulltext_cache(self, hybridsearch_runner: hybridsearchRunner):
         table_name = "test_invalid_fulltext_cache"
         config = "test/data/config/restart_test/test_cleanup/1.toml"
         uri = common_values.TEST_LOCAL_HOST
-        infinity_runner.clear()
+        hybridsearch_runner.clear()
 
-        decorator = infinity_runner_decorator_factory(config, uri, infinity_runner)
+        decorator = hybridsearch_runner_decorator_factory(config, uri, hybridsearch_runner)
 
         @decorator
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.drop_table(table_name, ConflictType.Ignore)
             table_obj = db_obj.create_table(
                 table_name,
@@ -211,8 +211,8 @@ class TestCleanup:
 
             table_obj.drop_index(drop_index_name)
 
-            infinity_obj.cleanup()
-            dropped_index_dirs = pathlib.Path("/var/infinity/data").rglob(
+            hybridsearch_obj.cleanup()
+            dropped_index_dirs = pathlib.Path("/var/hybridsearch/data").rglob(
                 f"*{drop_index_name}*"
             )
             assert len(list(dropped_index_dirs)) == 0
@@ -221,21 +221,21 @@ class TestCleanup:
 
         part1()
 
-    def test_invalidate_fulltext_cache2(self, infinity_runner: InfinityRunner):
+    def test_invalidate_fulltext_cache2(self, hybridsearch_runner: hybridsearchRunner):
         table_name = "test_invalid_fulltext_cache2"
         index_name = "body_index"
 
-        data_dir = "/var/infinity/data"
+        data_dir = "/var/hybridsearch/data"
         config = "test/data/config/restart_test/test_cleanup/2.toml"
         uri = common_values.TEST_LOCAL_HOST
         import_file = "test/data/csv/enwiki_9.csv"
         abs_import_file = os.path.abspath(import_file)
 
-        decorator = infinity_runner_decorator_factory(config, uri, infinity_runner)
+        decorator = hybridsearch_runner_decorator_factory(config, uri, hybridsearch_runner)
 
         @decorator
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.drop_table(table_name, ConflictType.Ignore)
             table_obj = db_obj.create_table(
                 table_name,
@@ -260,7 +260,7 @@ class TestCleanup:
             # wait for compaction
             time.sleep(3)
 
-            infinity_obj.cleanup()
+            hybridsearch_obj.cleanup()
             time.sleep(1)
 
             cnt = 0

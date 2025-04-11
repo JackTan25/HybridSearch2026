@@ -18,7 +18,7 @@
 #include <string>
 #include <vector>
 
-namespace infinity {
+namespace hybridsearch {
 
 class TableAlias {
 public:
@@ -48,4 +48,4 @@ public:
     TableAlias *alias_{nullptr};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

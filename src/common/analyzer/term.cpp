@@ -18,7 +18,7 @@ import stl;
 
 module term;
 
-namespace infinity {
+namespace hybridsearch {
 
 String PLACE_HOLDER("<PH>");
 
@@ -29,4 +29,4 @@ void Term::Reset() {
 
 Term TermList::global_temporary_;
 
-} // namespace infinity
+} // namespace hybridsearch

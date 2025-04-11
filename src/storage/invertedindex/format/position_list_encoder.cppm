@@ -14,7 +14,7 @@ import posting_list_format;
 import inmem_position_list_decoder;
 export module position_list_encoder;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PositionListEncoder {
 public:
@@ -54,4 +54,4 @@ private:
     const PositionListFormat *pos_list_format_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

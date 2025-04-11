@@ -19,7 +19,7 @@
 #include <cstdint>
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 struct BlobType {
 public:
@@ -64,6 +64,6 @@ public:
     [[nodiscard]] inline std::string ToString() const { return {this->ptr, this->size}; }
 };
 
-} // namespace infinity
+} // namespace hybridsearch
 
 #endif

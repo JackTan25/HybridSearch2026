@@ -17,7 +17,7 @@
 #include "parser_assert.h"
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 enum class StatementType {
     kInvalidStmt, // unused
@@ -58,4 +58,4 @@ public:
     std::string text_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

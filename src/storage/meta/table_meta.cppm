@@ -31,7 +31,7 @@ import entry_list;
 import meta_info;
 import cleanup_scanner;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct DBEntry;
 class TxnManager;
@@ -144,4 +144,4 @@ public:
     bool Empty() override { return table_entry_list_.Empty(); }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

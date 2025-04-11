@@ -23,7 +23,7 @@ import analyzer;
 import tokenizer;
 import common_analyzer;
 
-namespace infinity {
+namespace hybridsearch {
 export class StandardAnalyzer : public CommonLanguageAnalyzer {
 public:
     StandardAnalyzer() : CommonLanguageAnalyzer() {}
@@ -68,4 +68,4 @@ protected:
 
     inline bool IsSpecialChar() override { return tokenizer_.IsDelimiter(); }
 };
-} // namespace infinity
+} // namespace hybridsearch

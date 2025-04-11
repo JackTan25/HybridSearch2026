@@ -18,7 +18,7 @@ module cast_expression;
 
 import base_expression;
 import logical_type;
-import infinity_exception;
+import hybridsearch_exception;
 import bound_cast_func;
 import stl;
 import third_party;
@@ -26,7 +26,7 @@ import cast_function;
 import status;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 SharedPtr<BaseExpression> CastExpression::AddCastToType(const SharedPtr<BaseExpression> &source_expr_ptr, const DataType &target_type) {
     if (source_expr_ptr->Type() == target_type) {
@@ -192,4 +192,4 @@ bool CastExpression::Eq(const BaseExpression &other_base) const {
     return func_.function == other.func_.function && arguments_[0]->Eq(*other.arguments_[0]);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

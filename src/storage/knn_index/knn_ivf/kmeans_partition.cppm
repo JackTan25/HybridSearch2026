@@ -19,13 +19,13 @@ module;
 export module kmeans_partition;
 
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 import index_base;
 import vector_distance;
 import logger;
 import simd_functions;
 
-namespace infinity {
+namespace hybridsearch {
 
 inline Vector<u32> RandomPermutatePartially(const u32 vector_count, u32 random_num = 0) {
     if (random_num == 0 || random_num > vector_count) {
@@ -304,4 +304,4 @@ export template <typename ElemType, typename CentroidsOutputType>
     return partition_num;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

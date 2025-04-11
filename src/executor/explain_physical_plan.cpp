@@ -81,7 +81,7 @@ import physical_unnest_aggregate;
 
 import explain_logical_plan;
 import logical_show;
-import infinity_exception;
+import hybridsearch_exception;
 
 import base_expression;
 import knn_expression;
@@ -99,7 +99,7 @@ import show_statement;
 import base_table_ref;
 import meta_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 void ExplainPhysicalPlan::Explain(const PhysicalOperator *op, SharedPtr<Vector<SharedPtr<String>>> &result, bool is_recursive, i64 intent_size) {
     switch (op->operator_type()) {
@@ -2953,4 +2953,4 @@ void ExplainPhysicalPlan::Explain(const PhysicalUnnestAggregate *unnest_aggregat
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -27,7 +27,7 @@ import base_memindex;
 import memindex_tracer;
 import table_index_entry;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct BlockColumnEntry;
 class BufferManager;
@@ -85,4 +85,4 @@ private:
                                   const std::function<void(f32, SegmentOffset)> &add_result_func) const = 0;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

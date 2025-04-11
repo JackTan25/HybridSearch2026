@@ -23,10 +23,10 @@ import table_entry;
 import status;
 import third_party;
 import config;
-import infinity_exception;
+import hybridsearch_exception;
 import snapshot_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 Status Snapshot::CreateTableSnapshot(QueryContext *query_context, const String &snapshot_name, const String &table_name) {
     Txn *txn_ptr = query_context->GetTxn();
@@ -59,4 +59,4 @@ Status Snapshot::RestoreTableSnapshot(QueryContext *query_context, const String 
     return Status::OK();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

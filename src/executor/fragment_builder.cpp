@@ -28,7 +28,7 @@ import physical_explain;
 import physical_knn_scan;
 import physical_fusion;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 
 import explain_fragment;
 import fragment_context;
@@ -36,7 +36,7 @@ import logger;
 import third_party;
 import explain_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
 SharedPtr<PlanFragment> FragmentBuilder::BuildFragment(const Vector<PhysicalOperator *> &phys_ops) {
     SharedPtr<PlanFragment> result = nullptr;
@@ -451,4 +451,4 @@ void FragmentBuilder::BuildFragments(PhysicalOperator *phys_op, PlanFragment *cu
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

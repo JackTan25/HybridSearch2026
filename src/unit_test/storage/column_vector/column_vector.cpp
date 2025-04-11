@@ -15,7 +15,7 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import logger;
 import column_vector;
@@ -25,16 +25,16 @@ import default_values;
 import third_party;
 import stl;
 import global_resource_usage;
-import infinity_context;
+import hybridsearch_context;
 import internal_types;
 import logical_type;
 import data_type;
 
-using namespace infinity;
+using namespace hybridsearch;
 class ColumnVectorTest : public BaseTest {};
 
 TEST_F(ColumnVectorTest, ReadWrite) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     Vector<SharedPtr<ColumnVector>> columns;
     SizeT vector_size = DEFAULT_VECTOR_SIZE / 3;

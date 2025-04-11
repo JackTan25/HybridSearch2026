@@ -31,7 +31,7 @@ import table_entry;
 import query_node;
 import column_index_reader;
 import txn;
-import infinity_exception;
+import hybridsearch_exception;
 import status;
 import internal_types;
 import third_party;
@@ -39,7 +39,7 @@ import segment_index_entry;
 import doc_iterator;
 import score_threshold_iterator;
 
-namespace infinity {
+namespace hybridsearch {
 
 // all cases for candidates:
 //
@@ -765,4 +765,4 @@ Bitmask IndexFilterEvaluatorSecondaryT<ColumnValueT>::Evaluate(const SegmentID s
     return result;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

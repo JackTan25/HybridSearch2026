@@ -17,7 +17,7 @@ module;
 export module emvb_product_quantization;
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 class LocalFileHandle;
 
 export class EMVBProductQuantizer {
@@ -83,4 +83,4 @@ public:
 
 export UniquePtr<EMVBProductQuantizer> GetEMVBOPQ(u32 pq_subspace_num, u32 pq_subspace_bits, u32 embedding_dimension);
 
-} // namespace infinity
+} // namespace hybridsearch

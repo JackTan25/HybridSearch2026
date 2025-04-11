@@ -18,7 +18,7 @@ import stl;
 
 export module builtin_functions;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 
@@ -41,4 +41,4 @@ private:
     void RegisterSpecialFunction();
 };
 
-} // namespace infinity
+} // namespace hybridsearch

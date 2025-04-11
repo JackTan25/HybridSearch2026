@@ -16,24 +16,24 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 import internal_types;
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 import embedding_info;
 import knn_expr;
 import parser_assert;
 import parser_defaults;
 
-using namespace infinity;
+using namespace hybridsearch;
 class EmbeddingInfoTest : public BaseTest {};
 
 TEST_F(EmbeddingInfoTest, embedding_info_A) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     EXPECT_THROW(EmbeddingInfo::Make(EmbeddingDataType::kElemFloat, EMBEDDING_LIMIT + 1), ParserException);
 

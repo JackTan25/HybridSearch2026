@@ -4,7 +4,7 @@
 #include "parser_assert.h"
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 // Time format: HH:MM:SS
 struct TimeTypeStd {
@@ -58,4 +58,4 @@ public:
     int32_t value{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

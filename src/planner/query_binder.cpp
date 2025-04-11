@@ -20,7 +20,7 @@ module query_binder;
 
 import stl;
 import internal_types;
-import infinity_exception;
+import hybridsearch_exception;
 
 import bind_context;
 import join_table_ref;
@@ -81,7 +81,7 @@ import defer_op;
 import highlighter;
 import txn_store;
 
-namespace infinity {
+namespace hybridsearch {
 
 UniquePtr<BoundSelectStatement> QueryBinder::BindSelect(const SelectStatement &statement) {
 
@@ -1158,4 +1158,4 @@ UniquePtr<BoundCompactStatement> QueryBinder::BindCompact(const CompactStatement
     return MakeUnique<BoundCompactStatement>(bind_context_ptr_, base_table_ref, statement.compact_type_);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

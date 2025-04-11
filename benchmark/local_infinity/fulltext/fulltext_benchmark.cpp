@@ -27,7 +27,7 @@ import stl;
 import third_party;
 import compilation_config;
 import profiler;
-import infinity;
+import hybridsearch;
 
 import internal_types;
 import logical_type;
@@ -47,7 +47,7 @@ import column_expr;
 import virtual_store;
 import insert_row_expr;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 void ReadJsonl(std::ifstream &input_file, SizeT lines_to_read, Vector<Tuple<char *, char *, char *>> &batch) {
     String line;
@@ -79,7 +79,7 @@ void ReadJsonl(std::ifstream &input_file, SizeT lines_to_read, Vector<Tuple<char
     }
 }
 
-SharedPtr<Infinity> CreateDbAndTable(const String &db_name, const String &table_name) {
+SharedPtr<hybridsearch> CreateDbAndTable(const String &db_name, const String &table_name) {
     Vector<ColumnDef *> column_defs;
     {
         String col1_name = "id";
@@ -100,27 +100,27 @@ SharedPtr<Infinity> CreateDbAndTable(const String &db_name, const String &table_
         column_defs.push_back(col3_def);
     }
 
-    String data_path = "/var/infinity";
+    String data_path = "/var/hybridsearch";
 
-    Infinity::LocalInit(data_path);
+    hybridsearch::LocalInit(data_path);
     // SetLogLevel(LogLevel::kTrace);
 
-    SharedPtr<Infinity> infinity = Infinity::LocalConnect();
+    SharedPtr<hybridsearch> hybridsearch = hybridsearch::LocalConnect();
     CreateDatabaseOptions create_db_options;
     create_db_options.conflict_type_ = ConflictType::kIgnore;
-    infinity->CreateDatabase(db_name, std::move(create_db_options), "");
+    hybridsearch->CreateDatabase(db_name, std::move(create_db_options), "");
 
     DropTableOptions drop_tb_options;
     drop_tb_options.conflict_type_ = ConflictType::kIgnore;
-    infinity->DropTable(db_name, table_name, std::move(drop_tb_options));
+    hybridsearch->DropTable(db_name, table_name, std::move(drop_tb_options));
 
     CreateTableOptions create_tb_options;
     create_tb_options.conflict_type_ = ConflictType::kIgnore;
-    infinity->CreateTable(db_name, table_name, std::move(column_defs), Vector<TableConstraint *>{}, std::move(create_tb_options));
-    return infinity;
+    hybridsearch->CreateTable(db_name, table_name, std::move(column_defs), Vector<TableConstraint *>{}, std::move(create_tb_options));
+    return hybridsearch;
 }
 
-void BenchmarkImport(SharedPtr<Infinity> infinity, const String &db_name, const String &table_name, const String &import_from) {
+void BenchmarkImport(SharedPtr<hybridsearch> hybridsearch, const String &db_name, const String &table_name, const String &import_from) {
     if (!VirtualStore::Exists(import_from)) {
         LOG_ERROR(fmt::format("Data file doesn't exist: {}", import_from));
         return;
@@ -141,12 +141,12 @@ void BenchmarkImport(SharedPtr<Infinity> infinity, const String &db_name, const 
         LOG_ERROR(fmt::format("Unsupported file extension: {}", extension));
         return;
     }
-    infinity->Import(db_name, table_name, import_from, std::move(import_options));
+    hybridsearch->Import(db_name, table_name, import_from, std::move(import_options));
     LOG_INFO(fmt::format("Import data cost: {}", profiler.ElapsedToString()));
     profiler.End();
 }
 
-void BenchmarkInsert(SharedPtr<Infinity> infinity, const String &db_name, const String &table_name, const String &insert_from, SizeT insert_batch) {
+void BenchmarkInsert(SharedPtr<hybridsearch> hybridsearch, const String &db_name, const String &table_name, const String &insert_from, SizeT insert_batch) {
     std::ifstream input_file(insert_from);
     if (!input_file.is_open()) {
         LOG_ERROR(fmt::format("Failed to open file {}", insert_from));
@@ -184,7 +184,7 @@ void BenchmarkInsert(SharedPtr<Infinity> infinity, const String &db_name, const 
             insert_row->values_.emplace_back(std::move(const_expr));
             insert_rows->push_back(insert_row.release());
         }
-        infinity->Insert(db_name, table_name, insert_rows);
+        hybridsearch->Insert(db_name, table_name, insert_rows);
         // NOTE: ~InsertStatement() has deleted or freed columns, values, value_list, const_expr, const_expr->str_value_
         num_inserted += insert_batch;
     }
@@ -193,7 +193,7 @@ void BenchmarkInsert(SharedPtr<Infinity> infinity, const String &db_name, const 
     profiler.End();
 }
 
-void BenchmarkCreateIndex(SharedPtr<Infinity> infinity, const String &db_name, const String &table_name, const String &index_name) {
+void BenchmarkCreateIndex(SharedPtr<hybridsearch> hybridsearch, const String &db_name, const String &table_name, const String &index_name) {
     BaseProfiler profiler;
     profiler.Begin();
     auto index_info = new IndexInfo();
@@ -202,9 +202,9 @@ void BenchmarkCreateIndex(SharedPtr<Infinity> infinity, const String &db_name, c
     index_info->index_param_list_ = new Vector<InitParameter *>();
 
     String index_comment = "";
-    auto r = infinity->CreateIndex(db_name, table_name, index_name, index_comment, index_info, CreateIndexOptions());
+    auto r = hybridsearch->CreateIndex(db_name, table_name, index_name, index_comment, index_info, CreateIndexOptions());
     if (r.IsOk()) {
-        r = infinity->Flush();
+        r = hybridsearch->Flush();
     } else {
         LOG_ERROR(fmt::format("Fail to create index {}", r.ToString()));
         return;
@@ -215,15 +215,15 @@ void BenchmarkCreateIndex(SharedPtr<Infinity> infinity, const String &db_name, c
     profiler.End();
 }
 
-void BenchmarkOptimize(SharedPtr<Infinity> infinity, const String &db_name, const String &table_name) {
+void BenchmarkOptimize(SharedPtr<hybridsearch> hybridsearch, const String &db_name, const String &table_name) {
     BaseProfiler profiler;
     profiler.Begin();
-    infinity->Optimize(db_name, table_name);
+    hybridsearch->Optimize(db_name, table_name);
     LOG_INFO(fmt::format("Merge index cost: {}", profiler.ElapsedToString()));
     profiler.End();
 }
 
-void BenchmarkQuery(SharedPtr<Infinity> infinity, const String &db_name, const String &table_name) {
+void BenchmarkQuery(SharedPtr<hybridsearch> hybridsearch, const String &db_name, const String &table_name) {
     std::string fields = "text";
     std::vector<std::string> query_vec = {"harmful \"social custom\"",
                                           "social custom \"harmful chemical\"",
@@ -254,9 +254,9 @@ void BenchmarkQuery(SharedPtr<Infinity> infinity, const String &db_name, const S
             output_columns->emplace_back(select_rowid_expr);
             output_columns->emplace_back(select_score_expr);
         }
-        infinity->Search(db_name, table_name, search_expr, nullptr, nullptr, nullptr, output_columns, nullptr, nullptr, nullptr, nullptr, false);
+        hybridsearch->Search(db_name, table_name, search_expr, nullptr, nullptr, nullptr, output_columns, nullptr, nullptr, nullptr, nullptr, false);
         /*
-        auto result = infinity->Search(db_name, table_name, search_expr, nullptr, output_columns);
+        auto result = hybridsearch->Search(db_name, table_name, search_expr, nullptr, output_columns);
         {
             auto &cv = result.result_table_->GetDataBlockById(0)->column_vectors;
             auto &column = *cv[0];
@@ -298,11 +298,11 @@ void RegisterSignal() {
     sigaction(SIGUSR2, &sig_action, NULL);
 #endif
 }
-void BenchmarkMoreQuery(SharedPtr<Infinity> infinity, const String &db_name, const String &table_name, int query_times = 10) {
+void BenchmarkMoreQuery(SharedPtr<hybridsearch> hybridsearch, const String &db_name, const String &table_name, int query_times = 10) {
     BaseProfiler profiler;
     profiler.Begin();
     for (int i = 0; i < query_times; i++) {
-        BenchmarkQuery(infinity, db_name, table_name);
+        BenchmarkQuery(hybridsearch, db_name, table_name);
     }
     LOG_INFO(fmt::format("run benchmark query {} times cost: {}", query_times, profiler.ElapsedToString()));
     profiler.End();
@@ -334,34 +334,34 @@ int main(int argc, char *argv[]) {
     srcfile += "/benchmark/dbpedia-entity/corpus.jsonl";
     // srcfile += "/benchmark/enwiki.33332620.csv";
 
-    printf("Cleanup /var/infinity\n");
-    system("rm -rf /var/infinity/data /var/infinity/log /var/infinity/persistence /var/infinity/tmp /var/infinity/wal");
+    printf("Cleanup /var/hybridsearch\n");
+    system("rm -rf /var/hybridsearch/data /var/hybridsearch/log /var/hybridsearch/persistence /var/hybridsearch/tmp /var/hybridsearch/wal");
 
-    SharedPtr<Infinity> infinity = CreateDbAndTable(db_name, table_name);
+    SharedPtr<hybridsearch> hybridsearch = CreateDbAndTable(db_name, table_name);
 
     switch (mode) {
         case Mode::kInsert: {
-            BenchmarkCreateIndex(infinity, db_name, table_name, index_name);
-            BenchmarkInsert(infinity, db_name, table_name, srcfile, insert_batch);
+            BenchmarkCreateIndex(hybridsearch, db_name, table_name, index_name);
+            BenchmarkInsert(hybridsearch, db_name, table_name, srcfile, insert_batch);
             break;
         }
         case Mode::kImport: {
-            BenchmarkCreateIndex(infinity, db_name, table_name, index_name);
-            BenchmarkImport(infinity, db_name, table_name, srcfile);
+            BenchmarkCreateIndex(hybridsearch, db_name, table_name, index_name);
+            BenchmarkImport(hybridsearch, db_name, table_name, srcfile);
             break;
         }
         case Mode::kMerge: {
-            BenchmarkCreateIndex(infinity, db_name, table_name, index_name);
-            BenchmarkInsert(infinity, db_name, table_name, srcfile, insert_batch);
-            BenchmarkOptimize(infinity, db_name, table_name);
+            BenchmarkCreateIndex(hybridsearch, db_name, table_name, index_name);
+            BenchmarkInsert(hybridsearch, db_name, table_name, srcfile, insert_batch);
+            BenchmarkOptimize(hybridsearch, db_name, table_name);
             break;
         }
         case Mode::kQuery: {
-            BenchmarkCreateIndex(infinity, db_name, table_name, index_name);
-            BenchmarkInsert(infinity, db_name, table_name, srcfile, insert_batch);
-            BenchmarkOptimize(infinity, db_name, table_name);
+            BenchmarkCreateIndex(hybridsearch, db_name, table_name, index_name);
+            BenchmarkInsert(hybridsearch, db_name, table_name, srcfile, insert_batch);
+            BenchmarkOptimize(hybridsearch, db_name, table_name);
             sleep(10);
-            BenchmarkMoreQuery(infinity, db_name, table_name, 1);
+            BenchmarkMoreQuery(hybridsearch, db_name, table_name, 1);
             break;
         }
         default: {
@@ -370,5 +370,5 @@ int main(int argc, char *argv[]) {
     }
     sleep(10);
 
-    Infinity::LocalUnInit();
+    hybridsearch::LocalUnInit();
 }

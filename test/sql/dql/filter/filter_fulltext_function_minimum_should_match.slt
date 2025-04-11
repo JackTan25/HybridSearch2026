@@ -7,7 +7,7 @@ CREATE TABLE ft_in_filter_minimum_should_match(num int, doc varchar);
 
 # copy data from csv file
 statement ok
-COPY ft_in_filter_minimum_should_match FROM '/var/infinity/test_data/fulltext_delete.csv' WITH ( DELIMITER '\t', FORMAT CSV );
+COPY ft_in_filter_minimum_should_match FROM '/var/hybridsearch/test_data/fulltext_delete.csv' WITH ( DELIMITER '\t', FORMAT CSV );
 
 statement ok
 INSERT INTO ft_in_filter_minimum_should_match VALUES (4, 'another second text'), (5, 'another multiple');

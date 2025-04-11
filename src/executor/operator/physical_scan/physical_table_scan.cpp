@@ -33,7 +33,7 @@ import base_table_ref;
 import block_index;
 
 import default_values;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import logger;
 import column_vector;
@@ -41,7 +41,7 @@ import logical_type;
 import meta_info;
 import block_entry;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalTableScan::Init(QueryContext* query_context) {}
 
@@ -114,7 +114,7 @@ void PhysicalTableScan::ExecuteInternal(QueryContext *query_context, TableScanOp
     TxnTimeStamp begin_ts = query_context->GetTxn()->BeginTS();
     SizeT &read_offset = table_scan_function_data_ptr->current_read_offset_;
 
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     // This part has performance issue
     {
         String out;
@@ -203,4 +203,4 @@ void PhysicalTableScan::ExecuteInternal(QueryContext *query_context, TableScanOp
     output_ptr->Finalize();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

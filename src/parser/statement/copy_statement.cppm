@@ -18,8 +18,8 @@ module;
 
 export module copy_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
-export using infinity::CopyStatement;
+export using hybridsearch::CopyStatement;
 
 }

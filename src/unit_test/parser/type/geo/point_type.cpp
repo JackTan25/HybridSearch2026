@@ -15,21 +15,21 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 import internal_types;
 
-using namespace infinity;
+using namespace hybridsearch;
 class PointTypeTest : public BaseTest {};
 
 TEST_F(PointTypeTest, point1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     PointT p1;
     p1.x = 1.0f;

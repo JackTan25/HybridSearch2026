@@ -24,7 +24,7 @@ import stl;
 
 export module bound_delete_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct BoundDeleteStatement final : public BoundStatement {
 public:
@@ -69,4 +69,4 @@ public:
     bool building_subquery_{false};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

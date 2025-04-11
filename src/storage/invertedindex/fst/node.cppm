@@ -21,7 +21,7 @@ import :common_inputs;
 import :writer;
 import :bytes;
 
-namespace infinity {
+namespace hybridsearch {
 
 /// CompiledAddr is the type used to address nodes in a finite state
 /// transducer.
@@ -812,4 +812,4 @@ CompiledAddr Node::TransAddr(SizeT i) { return State(state_).TransAddr(*this, i)
 
 bool Node::FindInput(u8 b, SizeT &ti) { return State(state_).FindInput(*this, b, ti); }
 
-} // namespace infinity
+} // namespace hybridsearch

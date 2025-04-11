@@ -23,13 +23,13 @@ import operator_state;
 import query_context;
 import load_meta;
 import data_type;
-import infinity_exception;
+import hybridsearch_exception;
 import base_table_ref;
 import compact_state_data;
 import compact_statement;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PhysicalCompactFinish : public PhysicalOperator {
 public:
@@ -68,4 +68,4 @@ private:
     SharedPtr<Vector<SharedPtr<DataType>>> output_types_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

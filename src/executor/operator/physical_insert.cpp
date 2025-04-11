@@ -33,21 +33,21 @@ import expression_evaluator;
 import base_expression;
 import default_values;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 import meta_info;
 
 import wal_manager;
-import infinity_context;
+import hybridsearch_context;
 
 import column_def;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalInsert::Init(QueryContext *query_context) {}
 
 bool PhysicalInsert::Execute(QueryContext *query_context, OperatorState *operator_state) {
-    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
     if (storage_mode == StorageMode::kUnInitialized) {
         UnrecoverableError("Uninitialized storage mode");
     }
@@ -114,4 +114,4 @@ bool PhysicalInsert::Execute(QueryContext *query_context, OperatorState *operato
     return true;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

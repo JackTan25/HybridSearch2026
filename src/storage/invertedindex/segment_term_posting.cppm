@@ -11,7 +11,7 @@ import column_index_iterator;
 import index_defines;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 // Utility class for posting merging
 export class SegmentTermPosting {
 public:
@@ -64,4 +64,4 @@ private:
     Vector<SegmentTermPosting *> merging_term_postings_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

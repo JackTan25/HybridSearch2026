@@ -28,7 +28,7 @@ import physical_scan_base;
 import match_sparse_expr;
 import base_expression;
 
-namespace infinity {
+namespace hybridsearch {
 struct LoadMeta;
 
 export class PhysicalMergeMatchSparse final : public PhysicalScanBase {
@@ -70,4 +70,4 @@ private:
     SharedPtr<BaseExpression> filter_expression_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -22,7 +22,7 @@ import mlas_matrix_multiply;
 import vector_distance;
 import heap_twin_operation;
 
-namespace infinity {
+namespace hybridsearch {
 
 #if defined(__AVX2__)
 template <typename ID>
@@ -259,4 +259,4 @@ void search_top_k_simple_with_dis(u32 k, u32 dimension, u32 nx, const TypeX *x, 
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

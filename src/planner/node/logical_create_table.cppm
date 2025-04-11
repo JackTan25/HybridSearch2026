@@ -25,7 +25,7 @@ import column_binding;
 import internal_types;
 import extra_ddl_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class LogicalCreateTable : public LogicalNode {
 public:
@@ -64,4 +64,4 @@ private:
     ConflictType conflict_type_{ConflictType::kInvalid};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

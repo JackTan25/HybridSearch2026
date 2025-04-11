@@ -23,13 +23,13 @@ import bind_context;
 import column_expression;
 import function;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import function_set;
 import bind_alias_proxy;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 SharedPtr<BaseExpression> InsertBinder::BuildExpression(const ParsedExpr &expr, BindContext *bind_context_ptr, i64 depth, bool root) {
     SharedPtr<BaseExpression> result = ExpressionBinder::BuildExpression(expr, bind_context_ptr, depth, root);
@@ -47,4 +47,4 @@ SharedPtr<BaseExpression> InsertBinder::BuildKnnExpr(const KnnExpr &, BindContex
 //     PlannerError("HavingBinder::BuildColRefExpr");
 // }
 
-} // namespace infinity
+} // namespace hybridsearch

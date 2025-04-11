@@ -20,7 +20,7 @@ export module profiler;
 import stl;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class BaseProfiler {
 public:
@@ -217,4 +217,4 @@ private:
     void ExecuteRender(std::stringstream &ss) const;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -25,15 +25,15 @@ import var_buffer;
 import compilation_config;
 import third_party;
 import buffer_handle;
-import infinity_context;
+import hybridsearch_context;
 import virtual_store;
 import logger;
 import config;
-import infinity_exception;
+import hybridsearch_exception;
 import persistence_manager;
 import default_values;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class BufferManagerTest : public BaseTest {
 private:

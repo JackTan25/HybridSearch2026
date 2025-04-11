@@ -35,7 +35,7 @@ import index_base;
 import buffer_manager;
 import buffer_obj;
 import buffer_handle;
-import infinity_exception;
+import hybridsearch_exception;
 import index_defines;
 import virtual_store;
 import secondary_index_file_worker;
@@ -44,12 +44,12 @@ import emvb_index_file_worker;
 import bmp_index_file_worker;
 import column_def;
 import internal_types;
-import infinity_context;
+import hybridsearch_context;
 import persistence_manager;
 import persist_result_handler;
 import snapshot_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<std::string_view> ChunkIndexEntry::DecodeIndex(std::string_view encode) {
     SizeT delimiter_i = encode.rfind('#');
@@ -103,8 +103,8 @@ SharedPtr<ChunkIndexEntry> ChunkIndexEntry::NewHnswIndexChunkIndexEntry(ChunkID 
         auto hnsw_index_file_name = MakeShared<String>(IndexFileName(segment_id, chunk_id));
         const auto &index_base = segment_index_entry->table_index_entry()->table_index_def();
         const auto &column_def = segment_index_entry->table_index_entry()->column_def();
-        auto file_worker = MakeUnique<HnswFileWorker>(MakeShared<String>(InfinityContext::instance().config()->DataDir()),
-                                                      MakeShared<String>(InfinityContext::instance().config()->TempDir()),
+        auto file_worker = MakeUnique<HnswFileWorker>(MakeShared<String>(hybridsearchContext::instance().config()->DataDir()),
+                                                      MakeShared<String>(hybridsearchContext::instance().config()->TempDir()),
                                                       index_dir,
                                                       std::move(hnsw_index_file_name),
                                                       index_base,
@@ -128,8 +128,8 @@ SharedPtr<ChunkIndexEntry> ChunkIndexEntry::NewFtChunkIndexEntry(SegmentIndexEnt
     assert(index_dir.get() != nullptr);
     if (buffer_mgr != nullptr) {
         auto column_length_file_name = MakeShared<String>(base_name + LENGTH_SUFFIX);
-        auto file_worker = MakeUnique<RawFileWorker>(MakeShared<String>(InfinityContext::instance().config()->DataDir()),
-                                                     MakeShared<String>(InfinityContext::instance().config()->TempDir()),
+        auto file_worker = MakeUnique<RawFileWorker>(MakeShared<String>(hybridsearchContext::instance().config()->DataDir()),
+                                                     MakeShared<String>(hybridsearchContext::instance().config()->TempDir()),
                                                      index_dir,
                                                      std::move(column_length_file_name),
                                                      row_count * sizeof(u32),
@@ -154,8 +154,8 @@ SharedPtr<ChunkIndexEntry> ChunkIndexEntry::NewSecondaryIndexChunkIndexEntry(Chu
         auto secondary_index_file_name = MakeShared<String>(IndexFileName(segment_id, chunk_id));
         const auto &index_base = segment_index_entry->table_index_entry()->table_index_def();
         const auto &column_def = segment_index_entry->table_index_entry()->column_def();
-        auto file_worker = MakeUnique<SecondaryIndexFileWorker>(MakeShared<String>(InfinityContext::instance().config()->DataDir()),
-                                                                MakeShared<String>(InfinityContext::instance().config()->TempDir()),
+        auto file_worker = MakeUnique<SecondaryIndexFileWorker>(MakeShared<String>(hybridsearchContext::instance().config()->DataDir()),
+                                                                MakeShared<String>(hybridsearchContext::instance().config()->TempDir()),
                                                                 index_dir,
                                                                 secondary_index_file_name,
                                                                 index_base,
@@ -182,8 +182,8 @@ SharedPtr<ChunkIndexEntry> ChunkIndexEntry::NewIVFIndexChunkIndexEntry(ChunkID c
         auto ivf_index_file_name = MakeShared<String>(IndexFileName(segment_id, chunk_id));
         const auto &index_base = segment_index_entry->table_index_entry()->table_index_def();
         const auto &column_def = segment_index_entry->table_index_entry()->column_def();
-        auto file_worker = MakeUnique<IVFIndexFileWorker>(MakeShared<String>(InfinityContext::instance().config()->DataDir()),
-                                                          MakeShared<String>(InfinityContext::instance().config()->TempDir()),
+        auto file_worker = MakeUnique<IVFIndexFileWorker>(MakeShared<String>(hybridsearchContext::instance().config()->DataDir()),
+                                                          MakeShared<String>(hybridsearchContext::instance().config()->TempDir()),
                                                           index_dir,
                                                           ivf_index_file_name,
                                                           index_base,
@@ -210,8 +210,8 @@ SharedPtr<ChunkIndexEntry> ChunkIndexEntry::NewEMVBIndexChunkIndexEntry(ChunkID 
         const auto &index_base = segment_index_entry->table_index_entry()->table_index_def();
         const auto &column_def = segment_index_entry->table_index_entry()->column_def();
         const auto segment_start_offset = base_rowid.segment_offset_;
-        auto file_worker = MakeUnique<EMVBIndexFileWorker>(MakeShared<String>(InfinityContext::instance().config()->DataDir()),
-                                                           MakeShared<String>(InfinityContext::instance().config()->TempDir()),
+        auto file_worker = MakeUnique<EMVBIndexFileWorker>(MakeShared<String>(hybridsearchContext::instance().config()->DataDir()),
+                                                           MakeShared<String>(hybridsearchContext::instance().config()->TempDir()),
                                                            index_dir,
                                                            std::move(emvb_index_file_name),
                                                            index_base,
@@ -239,8 +239,8 @@ SharedPtr<ChunkIndexEntry> ChunkIndexEntry::NewBMPIndexChunkIndexEntry(ChunkID c
         auto bmp_index_file_name = MakeShared<String>(IndexFileName(segment_id, chunk_id));
         const auto &index_base = segment_index_entry->table_index_entry()->table_index_def();
         const auto &column_def = segment_index_entry->table_index_entry()->column_def();
-        auto file_worker = MakeUnique<BMPIndexFileWorker>(MakeShared<String>(InfinityContext::instance().config()->DataDir()),
-                                                          MakeShared<String>(InfinityContext::instance().config()->TempDir()),
+        auto file_worker = MakeUnique<BMPIndexFileWorker>(MakeShared<String>(hybridsearchContext::instance().config()->DataDir()),
+                                                          MakeShared<String>(hybridsearchContext::instance().config()->TempDir()),
                                                           index_dir,
                                                           std::move(bmp_index_file_name),
                                                           index_base,
@@ -269,8 +269,8 @@ SharedPtr<ChunkIndexEntry> ChunkIndexEntry::NewReplayChunkIndexEntry(ChunkID chu
         case IndexType::kHnsw: {
             const SegmentID segment_id = segment_index_entry->segment_id();
             auto index_file_name = MakeShared<String>(IndexFileName(segment_id, chunk_id));
-            auto file_worker = MakeUnique<HnswFileWorker>(MakeShared<String>(InfinityContext::instance().config()->DataDir()),
-                                                          MakeShared<String>(InfinityContext::instance().config()->TempDir()),
+            auto file_worker = MakeUnique<HnswFileWorker>(MakeShared<String>(hybridsearchContext::instance().config()->DataDir()),
+                                                          MakeShared<String>(hybridsearchContext::instance().config()->TempDir()),
                                                           index_dir,
                                                           std::move(index_file_name),
                                                           index_base,
@@ -283,8 +283,8 @@ SharedPtr<ChunkIndexEntry> ChunkIndexEntry::NewReplayChunkIndexEntry(ChunkID chu
         }
         case IndexType::kFullText: {
             auto column_length_file_name = MakeShared<String>(base_name + LENGTH_SUFFIX);
-            auto file_worker = MakeUnique<RawFileWorker>(MakeShared<String>(InfinityContext::instance().config()->DataDir()),
-                                                         MakeShared<String>(InfinityContext::instance().config()->TempDir()),
+            auto file_worker = MakeUnique<RawFileWorker>(MakeShared<String>(hybridsearchContext::instance().config()->DataDir()),
+                                                         MakeShared<String>(hybridsearchContext::instance().config()->TempDir()),
                                                          index_dir,
                                                          std::move(column_length_file_name),
                                                          row_count * sizeof(u32),
@@ -295,8 +295,8 @@ SharedPtr<ChunkIndexEntry> ChunkIndexEntry::NewReplayChunkIndexEntry(ChunkID chu
         case IndexType::kSecondary: {
             const SegmentID segment_id = segment_index_entry->segment_id();
             auto secondary_index_file_name = MakeShared<String>(IndexFileName(segment_id, chunk_id));
-            auto file_worker = MakeUnique<SecondaryIndexFileWorker>(MakeShared<String>(InfinityContext::instance().config()->DataDir()),
-                                                                    MakeShared<String>(InfinityContext::instance().config()->TempDir()),
+            auto file_worker = MakeUnique<SecondaryIndexFileWorker>(MakeShared<String>(hybridsearchContext::instance().config()->DataDir()),
+                                                                    MakeShared<String>(hybridsearchContext::instance().config()->TempDir()),
                                                                     index_dir,
                                                                     std::move(secondary_index_file_name),
                                                                     index_base,
@@ -309,8 +309,8 @@ SharedPtr<ChunkIndexEntry> ChunkIndexEntry::NewReplayChunkIndexEntry(ChunkID chu
         case IndexType::kIVF: {
             const SegmentID segment_id = segment_index_entry->segment_id();
             auto ivf_index_file_name = MakeShared<String>(IndexFileName(segment_id, chunk_id));
-            auto file_worker = MakeUnique<IVFIndexFileWorker>(MakeShared<String>(InfinityContext::instance().config()->DataDir()),
-                                                              MakeShared<String>(InfinityContext::instance().config()->TempDir()),
+            auto file_worker = MakeUnique<IVFIndexFileWorker>(MakeShared<String>(hybridsearchContext::instance().config()->DataDir()),
+                                                              MakeShared<String>(hybridsearchContext::instance().config()->TempDir()),
                                                               index_dir,
                                                               std::move(ivf_index_file_name),
                                                               index_base,
@@ -323,8 +323,8 @@ SharedPtr<ChunkIndexEntry> ChunkIndexEntry::NewReplayChunkIndexEntry(ChunkID chu
             const SegmentID segment_id = segment_index_entry->segment_id();
             auto emvb_index_file_name = MakeShared<String>(IndexFileName(segment_id, chunk_id));
             const auto segment_start_offset = base_rowid.segment_offset_;
-            auto file_worker = MakeUnique<EMVBIndexFileWorker>(MakeShared<String>(InfinityContext::instance().config()->DataDir()),
-                                                               MakeShared<String>(InfinityContext::instance().config()->TempDir()),
+            auto file_worker = MakeUnique<EMVBIndexFileWorker>(MakeShared<String>(hybridsearchContext::instance().config()->DataDir()),
+                                                               MakeShared<String>(hybridsearchContext::instance().config()->TempDir()),
                                                                index_dir,
                                                                std::move(emvb_index_file_name),
                                                                index_base,
@@ -337,8 +337,8 @@ SharedPtr<ChunkIndexEntry> ChunkIndexEntry::NewReplayChunkIndexEntry(ChunkID chu
         case IndexType::kBMP: {
             const SegmentID segment_id = segment_index_entry->segment_id();
             auto index_file_name = MakeShared<String>(IndexFileName(segment_id, chunk_id));
-            auto file_worker = MakeUnique<BMPIndexFileWorker>(MakeShared<String>(InfinityContext::instance().config()->DataDir()),
-                                                              MakeShared<String>(InfinityContext::instance().config()->TempDir()),
+            auto file_worker = MakeUnique<BMPIndexFileWorker>(MakeShared<String>(hybridsearchContext::instance().config()->DataDir()),
+                                                              MakeShared<String>(hybridsearchContext::instance().config()->TempDir()),
                                                               index_dir,
                                                               std::move(index_file_name),
                                                               index_base,
@@ -413,7 +413,7 @@ void ChunkIndexEntry::Cleanup(CleanupInfoTracer *info_tracer, bool dropped) {
     const auto &index_dir = segment_index_entry_->index_dir();
     const IndexBase *index_base = table_index_entry->index_base();
     if (index_base->index_type_ == IndexType::kFullText) {
-        PersistenceManager *pm = InfinityContext::instance().persistence_manager();
+        PersistenceManager *pm = hybridsearchContext::instance().persistence_manager();
         Path path = Path(*index_dir) / base_name_;
         String index_prefix = path.string();
         String posting_file = index_prefix + POSTING_SUFFIX;
@@ -428,8 +428,8 @@ void ChunkIndexEntry::Cleanup(CleanupInfoTracer *info_tracer, bool dropped) {
             handler.HandleWriteResult(result2);
 
         } else {
-            String absolute_posting_file = fmt::format("{}/{}", InfinityContext::instance().config()->DataDir(), posting_file);
-            String absolute_dict_file = fmt::format("{}/{}", InfinityContext::instance().config()->DataDir(), dict_file);
+            String absolute_posting_file = fmt::format("{}/{}", hybridsearchContext::instance().config()->DataDir(), posting_file);
+            String absolute_dict_file = fmt::format("{}/{}", hybridsearchContext::instance().config()->DataDir(), dict_file);
 
             LOG_INFO(fmt::format("Clean chunk index entry {}, posting: {}, dictionary file: {}",
                                   index_prefix,
@@ -510,4 +510,4 @@ SharedPtr<ChunkIndexSnapshotInfo> ChunkIndexEntry::GetSnapshotInfo(Txn *txn_ptr)
     return chunk_index_snapshot_info;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

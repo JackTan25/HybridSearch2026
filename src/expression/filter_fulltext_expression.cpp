@@ -22,13 +22,13 @@ import data_type;
 import stl;
 import logical_type;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 import status;
 import parsed_expr;
 import function_expr;
 import constant_expr;
 
-namespace infinity {
+namespace hybridsearch {
 
 FilterFulltextExpression::FilterFulltextExpression(String fields, String matching_text, String options_text)
     : BaseExpression(ExpressionType::kFilterFullText, Vector<SharedPtr<BaseExpression>>()), fields_(std::move(fields)),
@@ -80,4 +80,4 @@ bool FilterFulltextExpression::Eq(const BaseExpression &other_base) const {
            std::strcmp(options_text_.c_str(), other.options_text_.c_str()) == 0;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

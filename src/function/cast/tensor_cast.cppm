@@ -23,7 +23,7 @@ import bound_cast_func;
 import column_vector_cast;
 import float_cast;
 import integer_cast;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import logger;
 import status;
@@ -35,7 +35,7 @@ import data_type;
 import default_values;
 import embedding_cast;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct TensorTryCastToTensorMultiVector;
 
@@ -192,4 +192,4 @@ struct TensorTryCastToTensorMultiVector {
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

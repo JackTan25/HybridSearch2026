@@ -23,7 +23,7 @@ import third_party;
 
 module match_expression;
 
-namespace infinity {
+namespace hybridsearch {
 
 void ParseMultiIndexHints(const String &index_hints, Vector<String> &index_names) {
     index_names.clear();
@@ -91,4 +91,4 @@ bool MatchExpression::Eq(const BaseExpression &other_base) const {
     return eq;
 }
 
-} // namespace infinity
+} // namespace hybridsearch
