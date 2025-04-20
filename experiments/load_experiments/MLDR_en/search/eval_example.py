@@ -13,7 +13,7 @@ def ndcg(relevance_scores, k):
         return 0
     return dcg(relevance_scores, k) / idcg
 
-# 解析 qrels 文件
+#  qrels 
 qrels = {}
 with open('qrel_example.txt', 'r') as f:
     for line in f:
@@ -24,7 +24,7 @@ with open('qrel_example.txt', 'r') as f:
             qrels[qid] = {}
         qrels[qid][docid] = rel
 
-# 解析 run.txt 文件并计算 NDCG@10
+#  run.txt  NDCG@10
 total_ndcg = 0
 num_queries = 0
 with open('run_example.txt', 'r') as f:
@@ -45,10 +45,10 @@ with open('run_example.txt', 'r') as f:
         else:
             relevance_scores.append(0)
 
-    # 处理最后一个查询
+    # 
     total_ndcg += ndcg(relevance_scores, 10)
     num_queries += 1
 
-# 计算平均 NDCG@10
+#  NDCG@10
 average_ndcg = total_ndcg / num_queries
 print(f"Average NDCG@10: {average_ndcg}")

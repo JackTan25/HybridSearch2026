@@ -45,9 +45,9 @@ def read_file_content(file_path):
             content = file.read()
             return content
     except FileNotFoundError:
-        print(f"错误：文件 {file_path} 未找到。")
+        print(f" {file_path} ")
     except Exception as e:
-        print(f"错误：发生未知错误 - {e}")
+        print(f" - {e}")
     return None
 
 def extract_number(filename):

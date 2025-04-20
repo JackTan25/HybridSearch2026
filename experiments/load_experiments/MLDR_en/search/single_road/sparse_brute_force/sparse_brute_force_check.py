@@ -27,7 +27,7 @@ def GetQuestions():
         sparse_file_idx += 1
     return questions
 
-# 定义排序函数，使用正则表达式提取数字
+# 
 def extract_number(filename):
     match = re.search(r'sparse(\d+)\.fvecs', filename)
     if match:
@@ -42,7 +42,7 @@ def GetSparseData():
     print(f"Expect total number of rows: {total_num}")
     sparse_embedding_dir = '/home/ubuntu/data_download_data/embedding_reserve/mldr_en/sparse_embedding/vectors'
     sparse_names = [f for f in os.listdir(sparse_embedding_dir) if os.path.isfile(os.path.join(sparse_embedding_dir, f))]
-    # 按照提取的数字进行排序
+    # 
     sparse_names = sorted(sparse_names, key=extract_number)
     for sparse_name in sparse_names:
         print(sparse_name)
@@ -75,30 +75,30 @@ def GetSparseData():
 def sparse_vector_inner_product(index_value_dict1, vec2_dict2):
     inner_product = 0
     for idx, val2 in vec2_dict2.items():
-        # 检查当前索引是否也存在于第一个向量中
+        # 
         if idx in index_value_dict1:
-            # 如果存在，则将两个向量在该索引位置的取值相乘，并累加到内积结果中
+            # 
             inner_product += index_value_dict1[idx] * val2
     return inner_product
 
 def search_nearest(query_vectors, dataset, result_file=None,top_k=10):
     """
-    搜索最近的top_k个结果
+    top_k
     """
     results = []
     id = 0
     for (query_vector_dict,query_id) in query_vectors:
         similarities = []
         for sparse_vector_dict, doc_id in dataset:
-            # 计算内积相似度
+            # 
             similarity = sparse_vector_inner_product(query_vector_dict, sparse_vector_dict)
             similarities.append((query_id, doc_id, similarity))
         
-        # 按照相似度从大到小排序
+        # 
         similarities.sort(key=lambda x: x[2], reverse=True)
-        # 选择最相似的top_k个
+        # top_k
         top_k_results = similarities[:top_k]
-        # 输出结果
+        # 
         for result in top_k_results:
             query_id, doc_id, similarity = result
             result_file.write(f"{query_id}\t{doc_id}\n")

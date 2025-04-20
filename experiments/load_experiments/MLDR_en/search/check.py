@@ -5,13 +5,13 @@ import pandas as pd
 import infinity
 from infinity.common import LOCAL_HOST
 
-# 从 CSV 文件中读取数据
+#  CSV 
 # df = pd.read_csv('data.csv')
-# 设置最大显示列数为无限制
+# 
 pd.options.display.max_columns = None
-# 设置最大显示行数为无限制
+# 
 pd.options.display.max_rows = None
-# 设置列宽为无限制（避免字符串被截断）
+# 
 pd.options.display.max_colwidth = None
 
  #  Use infinity module to connect a remote server

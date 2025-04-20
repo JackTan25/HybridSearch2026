@@ -34,23 +34,23 @@ table_name = "MS_MARCO_en_Table"
 
 def remove_extremes_and_average(lst):
     """
-    移除列表中的最大值和最小值，返回剩余元素的平均值。
-    若列表长度 < 2，返回 0。
+    
+     < 2 0
 
-    :param lst: 输入列表（支持数值型元素）
-    :return: 平均值（浮点数）
+    :param lst: 
+    :return: 
     """
     if len(lst) < 2:
-        return 0.0  # 或抛出异常，根据需求调整
+        return 0.0  # 
 
-    # 创建副本避免修改原列表
+    # 
     filtered = lst.copy()
 
-    # 移除最大值和最小值
+    # 
     filtered.remove(max(filtered))
     filtered.remove(min(filtered))
 
-    # 处理剩余元素为空的情况
+    # 
     if not filtered:
         return 0.0
 
@@ -96,14 +96,14 @@ class MultiThreadClient:
             )
         for i in range(max_workers):
             threads[i].start()
-         # 等待所有线程结束
+         # 
         for thread in threads:
             thread.join()
-        # 所有线程结束后执行的操作
+        # 
         return self.post_threads_finished()
 
     def post_threads_finished(self):
-        # 所有线程结束后要执行的操作
+        # 
         end_time = time.time()
         print(f"All requests processed in {(end_time - self.begin_time)*1000:.2f} ms")
         print("QPS: ", len(self.queries) / (end_time - self.begin_time))

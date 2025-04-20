@@ -6,14 +6,14 @@ def load_dense(dense_save_file: str):
     dense_embeddings = []
     with open(dense_save_file, 'rb') as f:
         while True:
-            # 读取向量的维度（4字节整数，小端格式）
+            # 4
             dim_data = f.read(4)
-            if not dim_data:  # 文件结束
+            if not dim_data:  # 
                 break
             dim = struct.unpack('<i', dim_data)[0]
             
-            # 读取对应维度的浮点数向量
-            vector_data = f.read(dim * 4)  # 每个浮点数4字节
+            # 
+            vector_data = f.read(dim * 4)  # 4
             one_dense = np.frombuffer(vector_data, dtype=np.float32)
             
             dense_embeddings.append(one_dense)
@@ -27,20 +27,20 @@ def load_result(dense_save_file: str):
     dense_embeddings = []
     with open(dense_save_file, 'rb') as f:
         while True:
-            # 读取向量的维度（4字节整数，小端格式）
+            # 4
             dim_data = f.read(4)
-            if not dim_data:  # 文件结束
+            if not dim_data:  # 
                 break
             dim = struct.unpack('<i', dim_data)[0]
             
-            # 读取对应维度的浮点数向量
-            vector_data = f.read(dim * 2)  # 每个浮点数4字节
+            # 
+            vector_data = f.read(dim * 2)  # 4
             one_dense = np.frombuffer(vector_data, dtype=np.float32)
             
             dense_embeddings.append(one_dense)
     return np.array(dense_embeddings)
 
-# # 示例用法
+# # 
 # dense_save_file = "/home/ubuntu/experiments/small_embedding/MLDR_en/dense_embeddings/vectors/MLDR_en_dense1.fvecs"
 # dense_embeddings = load_result(dense_save_file)
 

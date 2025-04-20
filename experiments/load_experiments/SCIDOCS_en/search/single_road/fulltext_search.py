@@ -31,23 +31,23 @@ path_prefix = "/home/ubuntu/infinity/experiments/load_experiments/SCIDOCS_en/sea
 
 def remove_extremes_and_average(lst):
     """
-    移除列表中的最大值和最小值，返回剩余元素的平均值。
-    若列表长度 < 2，返回 0。
+    
+     < 2 0
 
-    :param lst: 输入列表（支持数值型元素）
-    :return: 平均值（浮点数）
+    :param lst: 
+    :return: 
     """
     if len(lst) < 2:
-        return 0.0  # 或抛出异常，根据需求调整
+        return 0.0  # 
 
-    # 创建副本避免修改原列表
+    # 
     filtered = lst.copy()
 
-    # 移除最大值和最小值
+    # 
     filtered.remove(max(filtered))
     filtered.remove(min(filtered))
 
-    # 处理剩余元素为空的情况
+    # 
     if not filtered:
         return 0.0
 
@@ -73,9 +73,9 @@ def read_file_content(file_path):
             content = file.read()
             return content
     except FileNotFoundError:
-        print(f"错误：文件 {file_path} 未找到。")
+        print(f" {file_path} ")
     except Exception as e:
-        print(f"错误：发生未知错误 - {e}")
+        print(f" - {e}")
     return None
 
 cost_time = 0
@@ -133,11 +133,11 @@ def single_search(questions):
         sys.exit(-1)
 
 if __name__ == "__main__":
-    # 启动服务并在适当的时候杀死它
-    service_command = "/home/ubuntu/infinity/cmake-build-release/src/infinity -f /home/ubuntu/infinity/conf/infinity_conf.toml"  # 示例命令，启动一个简单的 HTTP 服务器
+    # 
+    service_command = "/home/ubuntu/infinity/cmake-build-release/src/infinity -f /home/ubuntu/infinity/conf/infinity_conf.toml"  #  HTTP 
     process = subprocess.Popen(service_command, shell=True)
     time.sleep(3)
-    print(f"服务已启动，进程 ID: {process.pid}")
+    print(f" ID: {process.pid}")
     print(__file__)
     time_cost = []
     questions = GetQuestions()
@@ -151,11 +151,11 @@ if __name__ == "__main__":
     with open(current_dir + "/" + current_file_name_without_extension + ".time",'w') as tfile:
         tfile.write(f"{cost_time/len(questions)} ms")
         tfile.flush()
-    # 读取文件内容
+    # 
     file_path = '/home/ubuntu/infinity/experiments/query_memory_file'
     content = read_file_content(file_path)
     with open(current_dir + "/" + current_file_name_without_extension + ".memory",'w') as mfile:
         mfile.write(content)
         mfile.flush()
     terminate_process_tree(process.pid)
-    print(f"服务进程 {process.pid} 已被终止。")
+    print(f" {process.pid} ")
