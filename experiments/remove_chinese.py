@@ -15,7 +15,7 @@ def remove_chinese(text):
     return pattern.sub('', text)
 
 def process_directory(directory):
-    allowed_ext = {'.txt', '.md', '.csv', '.html', '.xml', '.log','.py'}  # 
+    allowed_ext = {'.txt', '.md', '.html', '.xml', '.log','.py'}  # 
     for root, _, files in os.walk(directory):
         for file in files:
             file_path = os.path.join(root, file)

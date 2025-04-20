@@ -75,7 +75,7 @@ class TestInfinity:
         pytest.param('12'),
         pytest.param('name-12'),
         pytest.param('12name'),
-        pytest.param('数据库名'),
+        pytest.param(''),
         pytest.param(''.join('x' for i in range(65536 + 1))),
         None,
     ])

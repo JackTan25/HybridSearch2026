@@ -248,7 +248,7 @@ class TestIndexParallel(HttpTest):
             }
             self.insert(db_name, table_name, [data])
 
-        end_time = time.time() + 10  # 运行10秒
+        end_time = time.time() + 10  # 10
 
         def build_index_worker(end_time, thread_id):
             while time.time() < end_time:

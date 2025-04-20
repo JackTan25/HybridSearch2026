@@ -193,7 +193,7 @@ class TestInfinity:
                 print(e)
 
             res, extra_result = table_obj.output(["*"]).to_df()
-            print("{}：{}".format(common_values.types_array[i], res))
+            print("{}{}".format(common_values.types_array[i], res))
             assert tb
 
         for i in range(len(common_values.types_array)):

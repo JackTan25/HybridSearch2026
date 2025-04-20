@@ -41,7 +41,7 @@ cd python/benchmark
 pip install -r requirements.txt
 ```
 
-2. Download the required Benchmark datasets to your **/datasets** folder：
+2. Download the required Benchmark datasets to your **/datasets** folder
    - [SIFT1M](http://ann-benchmarks.com/sift-128-euclidean.hdf5)
    - [GIST1M](http://ann-benchmarks.com/gist-960-euclidean.hdf5)
    - [Enwiki](https://home.apache.org/~mikemccand/enwiki-20120502-lines-1k.txt.lzma)

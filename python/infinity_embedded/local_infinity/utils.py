@@ -322,7 +322,7 @@ def get_local_constant_expr_from_python_value(value) -> WrapConstantExpr:
 #     '12',
 #     'name-12',
 #     '12name',
-#     '数据库名',
+#     '',
 #     ''.join('x' for i in range(identifier_limit + 1)),
 #     None,
 # ]
