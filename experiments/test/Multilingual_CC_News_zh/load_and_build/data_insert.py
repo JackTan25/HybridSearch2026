@@ -123,7 +123,7 @@ class hybridsearchClientForInsert:
                 tensor_idx = 0
                 tensor_file_idx += 1
         if len(buffer) > 0:
-            self.infinity_table.insert(buffer)
+            self.hybridsearch_table.insert(buffer)
         end_insert_time = time.time()
         print("insert time: ",(end_insert_time - begin_insert_time)*1000,'ms')
         current_dir = os.path.dirname(os.path.abspath(__file__))

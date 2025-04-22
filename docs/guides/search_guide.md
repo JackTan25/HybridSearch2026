@@ -73,9 +73,9 @@ Both RAG tokenization and fine-grained RAG tokenization are used in RAGFlow to e
 
 #### IK analyzer
 
-The IK analyzer is a bilingual tokenizer that supports Chinese (simplified and traditional) and English. It is a C++ adaptation of the [IK Analyzer](https://github.com/infinilabs/analysis-ik), which is widely used as a tokenizer by Chinese Elasticsearch users.
+The IK analyzer is a bilingual tokenizer that supports Chinese (simplified and traditional) and English. It is a C++ adaptation of the [IK Analyzer](https://github.com/hybridsearchlabs/analysis-ik), which is widely used as a tokenizer by Chinese Elasticsearch users.
 
-Use `"ik"` to select this analyzer, which is equivalent to the `ik_smart` option in the [IK Analyzer](https://github.com/infinilabs/analysis-ik), or `"ik-fine"` for fine-grained mode, which is equivalent to the `ik_max_word` option in the [IK Analyzer](https://github.com/infinilabs/analysis-ik).
+Use `"ik"` to select this analyzer, which is equivalent to the `ik_smart` option in the [IK Analyzer](https://github.com/hybridsearchlabs/analysis-ik), or `"ik-fine"` for fine-grained mode, which is equivalent to the `ik_max_word` option in the [IK Analyzer](https://github.com/hybridsearchlabs/analysis-ik).
 
 #### Keyword analyzer
 
