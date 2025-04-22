@@ -1,22 +1,10 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_context;
-import infinity_exception;
+import hybridsearch_context;
+import hybridsearch_exception;
 
 import stl;
 import global_resource_usage;
@@ -43,7 +31,7 @@ import data_type;
 import txn_state;
 import table_entry;
 
-using namespace infinity;
+using namespace hybridsearch;
 class TableEntryTest : public BaseTestParamStr {};
 
 INSTANTIATE_TEST_SUITE_P(TestWithDifferentParams,
@@ -51,7 +39,7 @@ INSTANTIATE_TEST_SUITE_P(TestWithDifferentParams,
                          ::testing::Values(BaseTestParamStr::NULL_CONFIG_PATH, BaseTestParamStr::VFS_OFF_CONFIG_PATH));
 
 TEST_P(TableEntryTest, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<String> table_dir = MakeShared<String>(GetTmpDir());
     SharedPtr<TableDef> table_def{};
@@ -99,9 +87,9 @@ TEST_P(TableEntryTest, test1) {
 }
 
 TEST_P(TableEntryTest, test2) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
     // Txn1: Create, OK
     Txn *new_txn = txn_mgr->BeginTxn(MakeUnique<String>("create db1"), TransactionType::kNormal);

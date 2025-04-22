@@ -37,7 +37,7 @@ select * from sqllogic_test_export_deleted_jsonl;
 6 4433255 [2.1,2.3,2.68,3.7]
 
 statement ok
-COPY sqllogic_test_export_deleted_jsonl TO '/var/infinity/test_data/tmp/test_export_deleted.jsonl' WITH (FORMAT JSONL, DELIMITER ',');
+COPY sqllogic_test_export_deleted_jsonl TO '/var/hybridsearch/test_data/tmp/test_export_deleted.jsonl' WITH (FORMAT JSONL, DELIMITER ',');
 
 statement ok
 DROP TABLE IF EXISTS sqllogic_test_export_deleted_jsonl;
@@ -49,7 +49,7 @@ statement ok
 CREATE TABLE test_import_deleted_jsonl (name VARCHAR, age INT, embedding_column EMBEDDING(FLOAT, 4));
 
 statement ok
-COPY test_import_deleted_jsonl FROM '/var/infinity/test_data/tmp/test_export_deleted.jsonl' WITH (FORMAT JSONL, DELIMITER ',');
+COPY test_import_deleted_jsonl FROM '/var/hybridsearch/test_data/tmp/test_export_deleted.jsonl' WITH (FORMAT JSONL, DELIMITER ',');
 
 query I
 select * from test_import_deleted_jsonl;
@@ -99,7 +99,7 @@ select * from sqllogic_test_export_deleted_csv;
 6 4433255 [2.1,2.3,2.68,3.7]
 
 statement ok
-COPY sqllogic_test_export_deleted_csv TO '/var/infinity/test_data/tmp/test_export_deleted.csv' WITH (FORMAT CSV, DELIMITER ',');
+COPY sqllogic_test_export_deleted_csv TO '/var/hybridsearch/test_data/tmp/test_export_deleted.csv' WITH (FORMAT CSV, DELIMITER ',');
 
 statement ok
 DROP TABLE IF EXISTS sqllogic_test_export_deleted_csv;
@@ -111,7 +111,7 @@ statement ok
 CREATE TABLE test_import_deleted_csv (name VARCHAR, age INT, embedding_column EMBEDDING(FLOAT, 4));
 
 statement ok
-COPY test_import_deleted_csv FROM '/var/infinity/test_data/tmp/test_export_deleted.csv' WITH (FORMAT CSV, DELIMITER ',');
+COPY test_import_deleted_csv FROM '/var/hybridsearch/test_data/tmp/test_export_deleted.csv' WITH (FORMAT CSV, DELIMITER ',');
 
 query I
 select * from test_import_deleted_csv;

@@ -22,7 +22,7 @@ INCLUDE mlasi.inc
 
         ALIGN   16
 MlasFp16MaskSign                DD      4 DUP (00007FFFh)
-MlasFp16CompareInfinity         DD      4 DUP (00007C00h)
+MlasFp16Comparehybridsearch         DD      4 DUP (00007C00h)
 MlasFp16CompareSmallest         DD      4 DUP (00000400h)
 MlasFp16AdjustExponent          DD      4 DUP (38000000h)
 MlasFp16MagicDenormal           DD      4 DUP (38800000h)
@@ -69,15 +69,15 @@ ConvertHalfToFloat:
         movaps  xmm1,xmm0                   ; isolate exponent/mantissa
         pand    xmm1,XMMWORD PTR [MlasFp16MaskSign]
         pxor    xmm0,xmm1                   ; isolate sign bit
-        movaps  xmm2,XMMWORD PTR [MlasFp16CompareInfinity]
-        pcmpgtd xmm2,xmm1                   ; test for infinity/NaNs
+        movaps  xmm2,XMMWORD PTR [MlasFp16Comparehybridsearch]
+        pcmpgtd xmm2,xmm1                   ; test for hybridsearch/NaNs
         movaps  xmm3,XMMWORD PTR [MlasFp16CompareSmallest]
         pcmpgtd xmm3,xmm1                   ; test for denormals
         pandn   xmm2,XMMWORD PTR [MlasFp16AdjustExponent]
         pslld   xmm1,13                     ; shift exponent/mask into place
         movaps  xmm4,xmm1
         paddd   xmm1,XMMWORD PTR [MlasFp16AdjustExponent]
-        paddd   xmm1,xmm2                   ; adjust exponent again for infinity/NaNs
+        paddd   xmm1,xmm2                   ; adjust exponent again for hybridsearch/NaNs
         paddd   xmm4,XMMWORD PTR [MlasFp16MagicDenormal]
         pslld   xmm0,16                     ; shift sign into place
         subps   xmm4,XMMWORD PTR [MlasFp16MagicDenormal]

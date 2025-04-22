@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -29,7 +17,7 @@ import default_values;
 import value;
 import status;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 import fix_heap;
 import internal_types;
 import data_type;
@@ -43,7 +31,7 @@ import logical_type;
 import var_buffer;
 import sparse_util;
 
-namespace infinity {
+namespace hybridsearch {
 
 class BufferManager;
 struct BlockColumnEntry;
@@ -101,14 +89,14 @@ private:
 
 public:
     ColumnVector() : vector_type_(ColumnVectorType::kInvalid) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("ColumnVector");
 #endif
     }
 
     // Construct a column vector without initialization;
     explicit ColumnVector(SharedPtr<DataType> data_type) : vector_type_(ColumnVectorType::kInvalid), data_type_(std::move(data_type)) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("ColumnVector");
 #endif
     }
@@ -118,7 +106,7 @@ public:
         : data_type_size_(right.data_type_size_), buffer_(right.buffer_), nulls_ptr_(right.nulls_ptr_), initialized(right.initialized),
           vector_type_(right.vector_type_), data_type_(right.data_type_), data_ptr_(right.data_ptr_), capacity_(right.capacity_),
           tail_index_(right.tail_index_) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("ColumnVector");
 #endif
     }
@@ -128,7 +116,7 @@ public:
         : data_type_size_(right.data_type_size_), buffer_(std::move(right.buffer_)), nulls_ptr_(std::move(right.nulls_ptr_)),
           initialized(right.initialized), vector_type_(right.vector_type_), data_type_(std::move(right.data_type_)), data_ptr_(right.data_ptr_),
           capacity_(right.capacity_), tail_index_(right.tail_index_) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("ColumnVector");
 #endif
     }
@@ -150,7 +138,7 @@ public:
 
     ~ColumnVector() {
         // Reset(); // TODO: overload copy constructor and move constructor TO PREVENT USING `Reset`
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("ColumnVector");
 #endif
     }
@@ -1417,4 +1405,4 @@ export using BooleanColumnWriter = ColumnVectorPtrAndIdx<BooleanT>;
 export template <BinaryGenerateBoolean ColumnValueType>
 using ColumnValueReader = ColumnVectorPtrAndIdx<ColumnValueType>;
 
-} // namespace infinity
+} // namespace hybridsearch

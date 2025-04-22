@@ -424,7 +424,7 @@ class TestInsert(HttpTest):
     @pytest.mark.complex
     @pytest.mark.skip(reason="TODO")
     def test_http_insert_and_shutdown_output(self):
-        os.system("rm -fr /var/infinity")
+        os.system("rm -fr /var/hybridsearch")
         db_name = "default_db"
         table_name = "test_http_test_insert_and_shutdown_output"
         self.show_database(db_name)

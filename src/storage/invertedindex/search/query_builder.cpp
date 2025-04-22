@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -29,7 +17,7 @@ import table_entry;
 import segment_index_entry;
 import internal_types;
 import index_base;
-import infinity_exception;
+import hybridsearch_exception;
 import query_node;
 import base_table_ref;
 import segment_entry;
@@ -38,7 +26,7 @@ import logger;
 import third_party;
 import parse_fulltext_options;
 
-namespace infinity {
+namespace hybridsearch {
 
 void QueryBuilder::Init(SharedPtr<IndexReader> index_reader) { index_reader_ = std::move(index_reader); }
 
@@ -77,7 +65,7 @@ UniquePtr<DocIterator> QueryBuilder::CreateSearch(FullTextQueryContext &context)
         context.optimized_query_tree_ = std::move(query_tree);
     }
     auto result = context.optimized_query_tree_->CreateSearch(params);
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     {
         OStringStream oss;
         oss << "DocIterator:\n";
@@ -92,4 +80,4 @@ UniquePtr<DocIterator> QueryBuilder::CreateSearch(FullTextQueryContext &context)
     return result;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

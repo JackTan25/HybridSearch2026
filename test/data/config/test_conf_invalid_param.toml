@@ -16,15 +16,15 @@ connection_p00l_size    = 144
 # wrong list name, right arguments
 [l0g]
 log_filename            = "info.logwrong"
-log_dir                 = "/var/infinity/logwrong"
+log_dir                 = "/var/hybridsearch/logwrong"
 log_to_stdout           = true
 log_file_max_size       = "2GB"
 log_file_rotate_count   = 101
 log_1evel               = "tracewrong"
 
 [st0rage]
-data_dir                = "/var/infinity/datawrong"
-persistence_dirrr       = "/var/infinity/persistencewrong"
+data_dir                = "/var/hybridsearch/datawrong"
+persistence_dirrr       = "/var/hybridsearch/persistencewrong"
 
 [bufferrrr]
 buffer_mAnager_size        = "50GB"
@@ -33,7 +33,7 @@ temp_dIIIr                = "/tmpwrong"
 memindex_mem0ry_quota   = "1GB"
 
 [wal]
-wa1_dir                 = "/var/infinity/wawrong"
+wa1_dir                 = "/var/hybridsearch/wawrong"
 
 [resourCEEe]
-resource_dffir          = "/var/infinity/resourcewrong"
+resource_dffir          = "/var/hybridsearch/resourcewrong"

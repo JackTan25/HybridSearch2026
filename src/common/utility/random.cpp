@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -24,10 +12,10 @@ import third_party;
 import logger;
 import virtual_store;
 import default_values;
-import infinity_context;
+import hybridsearch_context;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 namespace {
 String available_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -53,7 +41,7 @@ SharedPtr<String> DetermineRandomString(const String &parent_dir, const String &
         srand(std::time(nullptr));
     }
 
-    bool use_persistence_manager = InfinityContext::instance().persistence_manager();
+    bool use_persistence_manager = hybridsearchContext::instance().persistence_manager();
     bool created = false;
     do {
         rand = RandomString(DEFAULT_RANDOM_NAME_LEN);
@@ -75,4 +63,4 @@ SharedPtr<String> DetermineRandomString(const String &parent_dir, const String &
     return MakeShared<String>(std::move(result));
 }
 
-} // namespace infinity
+} // namespace hybridsearch

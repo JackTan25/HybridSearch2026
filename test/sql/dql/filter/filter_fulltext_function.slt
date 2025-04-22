@@ -9,7 +9,7 @@ CREATE TABLE ft_in_filter(num int, doc varchar);
 
 # copy data from csv file
 statement ok
-COPY ft_in_filter FROM '/var/infinity/test_data/fulltext_delete.csv' WITH ( DELIMITER '\t', FORMAT CSV );
+COPY ft_in_filter FROM '/var/hybridsearch/test_data/fulltext_delete.csv' WITH ( DELIMITER '\t', FORMAT CSV );
 
 statement ok
 CREATE INDEX ft_index ON ft_in_filter(doc) USING FULLTEXT;

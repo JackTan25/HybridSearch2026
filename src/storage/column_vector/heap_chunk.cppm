@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -20,12 +8,12 @@ import global_resource_usage;
 import stl;
 import allocator;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct HeapChunk {
 public:
     inline explicit HeapChunk(u64 capacity) : current_offset_(0), capacity_(capacity), object_count_(0) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("HeapChunk");
 #endif
         ptr_ = Allocator::allocate(capacity);
@@ -37,7 +25,7 @@ public:
         capacity_ = 0;
         current_offset_ = 0;
         object_count_ = 0;
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("HeapChunk");
 #endif
     }
@@ -54,13 +42,13 @@ export struct StringHeapMgr {
 
 public:
     inline explicit StringHeapMgr(u64 chunk_size = CHUNK_SIZE) : current_chunk_size_(chunk_size) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("StringHeapMgr");
 #endif
     }
 
     inline ~StringHeapMgr() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("StringHeapMgr");
 #endif
     }
@@ -83,4 +71,4 @@ private:
     u64 current_chunk_idx_{std::numeric_limits<u64>::max()};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

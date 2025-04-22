@@ -3,8 +3,8 @@ import time
 from SCIDOCS_en.search.vec_read import load_sparse
 from datasets import Dataset
 import pandas as pd
-import infinity
-from infinity.common import LOCAL_HOST
+import hybridsearch
+from hybridsearch.common import LOCAL_HOST
 
 # 从 CSV 文件中读取数据
 # df = pd.read_csv('data.csv')
@@ -15,11 +15,11 @@ pd.options.display.max_rows = None
 # 设置列宽为无限制（避免字符串被截断）
 pd.options.display.max_colwidth = None
 
- #  Use infinity module to connect a remote server
-infinity_instance = infinity.connect(LOCAL_HOST)
-# infinity_instance.drop_database("default_db2")
+ #  Use hybridsearch module to connect a remote server
+hybridsearch_instance = hybridsearch.connect(LOCAL_HOST)
+# hybridsearch_instance.drop_database("default_db2")
 # 'default_db' is the default database
-db_instance = infinity_instance.get_database("default_db")
+db_instance = hybridsearch_instance.get_database("default_db")
 table = db_instance.get_table('SCIDOCS_en_Table')
 table.drop_index('SCIDOCS_en_hnsw_index')
 print(db_instance.show_table('SCIDOCS_en_Table'))

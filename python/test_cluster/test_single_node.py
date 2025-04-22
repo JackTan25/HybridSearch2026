@@ -1,8 +1,8 @@
-from infinity_cluster import InfinityCluster
+from hybridsearch_cluster import hybridsearchCluster
 import time
 from database_operations import do_some_operations, instance_state, clear_instance
 
-def test_admin2standalone(cluster: InfinityCluster):
+def test_admin2standalone(cluster: hybridsearchCluster):
     '''
     test: admin->(standalone, operations)->admin->(standalone, operations)
     '''
@@ -26,12 +26,12 @@ def test_admin2standalone(cluster: InfinityCluster):
         clear_instance(state, test_client)
         cluster.remove_node("test")
 
-def test_standalone2admin(cluster: InfinityCluster):
+def test_standalone2admin(cluster: hybridsearchCluster):
     '''
     test: (standalone, operations)->admin->(standalone, operations)->admin
     '''
     with cluster:
-        cluster.add_node("test", "conf/infinity_conf.toml")
+        cluster.add_node("test", "conf/hybridsearch_conf.toml")
         test_client = cluster.client("test")
         state = instance_state(test_client)
         assert test_client.show_current_node().node_role == "standalone"
@@ -50,7 +50,7 @@ def test_standalone2admin(cluster: InfinityCluster):
 
         cluster.remove_node("test")
 
-def test_admin2standalone2admin2leader(cluster: InfinityCluster):
+def test_admin2standalone2admin2leader(cluster: hybridsearchCluster):
     '''
     test: admin->(standalone, operations)->admin->(leader, operations)
     '''
@@ -76,12 +76,12 @@ def test_admin2standalone2admin2leader(cluster: InfinityCluster):
         clear_instance(state, test_client)
         cluster.remove_node("test")
 
-def test_standalone2admin2leader2admin(cluster: InfinityCluster):
+def test_standalone2admin2leader2admin(cluster: hybridsearchCluster):
     '''
     test: (standalone, operations)->admin->(leader, operations)->admin
     '''
     with cluster:
-        cluster.add_node("test", "conf/infinity_minio_conf.toml")
+        cluster.add_node("test", "conf/hybridsearch_minio_conf.toml")
         test_client = cluster.client("test")
         state = instance_state(test_client)
         assert test_client.show_current_node().node_role == "standalone"

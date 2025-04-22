@@ -1,8 +1,8 @@
 import random
 import pytest
 from common import common_values
-from infinity.common import ConflictType
-from infinity_runner import InfinityRunner, infinity_runner_decorator_factory
+from hybridsearch.common import ConflictType
+from hybridsearch_runner import hybridsearchRunner, hybridsearch_runner_decorator_factory
 import time
 import threading
 from restart_util import *
@@ -13,7 +13,7 @@ class TestInsert:
     def insert_inner(
         self,
         insert_n: int,
-        infinity_runner: InfinityRunner,
+        hybridsearch_runner: hybridsearchRunner,
         config: str,
         columns: dict,
         data_gen_factory,
@@ -28,7 +28,7 @@ class TestInsert:
         shutdown = False
         error = False
 
-        decorator = infinity_runner_decorator_factory(config, uri, infinity_runner, shutdown_out=True)
+        decorator = hybridsearch_runner_decorator_factory(config, uri, hybridsearch_runner, shutdown_out=True)
 
         def insert_func(table_obj):
             nonlocal cur_insert_n, shutdown, error
@@ -71,16 +71,16 @@ class TestInsert:
                     and cur_insert_n - last_shutdown_insert_n >= insert_n // stop_n
                 ):
                     shutdown = True
-                    infinity_runner.uninit()
-                    print("shutdown infinity")
+                    hybridsearch_runner.uninit()
+                    print("shutdown hybridsearch")
                     shutdown_time += 1
                     return
                 print(f"cur_insert_n inner: {cur_insert_n}")
                 time.sleep(0.1)
 
         @decorator
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.get_table("test_insert")
 
             data_dict, _, _ = table_obj.output(["count(*)"]).to_result()
@@ -137,28 +137,28 @@ class TestInsert:
     )
     def test_data(
         self,
-        infinity_runner: InfinityRunner,
+        hybridsearch_runner: hybridsearchRunner,
         insert_n: int,
         config: str,
         columns: dict,
         data_gen_factory,
     ):
         uri = common_values.TEST_LOCAL_HOST
-        infinity_runner.clear()
+        hybridsearch_runner.clear()
 
-        decorator = infinity_runner_decorator_factory(config, uri, infinity_runner)
+        decorator = hybridsearch_runner_decorator_factory(config, uri, hybridsearch_runner)
 
         @decorator
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.create_table("test_insert", columns, ConflictType.Error)
         part1()
 
-        self.insert_inner(insert_n, infinity_runner, config, columns, data_gen_factory)
+        self.insert_inner(insert_n, hybridsearch_runner, config, columns, data_gen_factory)
 
         @decorator
-        def part2(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part2(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.drop_table("test_insert", ConflictType.Error)
         part2()
 
@@ -194,7 +194,7 @@ class TestInsert:
     )
     def test_index(
         self,
-        infinity_runner: InfinityRunner,
+        hybridsearch_runner: hybridsearchRunner,
         insert_n: int,
         config: str,
         columns: dict,
@@ -202,45 +202,45 @@ class TestInsert:
         data_gen_factory,
     ):
         uri = common_values.TEST_LOCAL_HOST
-        infinity_runner.clear()
+        hybridsearch_runner.clear()
 
-        decorator = infinity_runner_decorator_factory(config, uri, infinity_runner)
+        decorator = hybridsearch_runner_decorator_factory(config, uri, hybridsearch_runner)
 
         @decorator
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.create_table("test_insert", columns, ConflictType.Error)
             for idx in indexes:
                 table_obj.create_index(f"idx_{idx.column_name}", idx)
         part1()
 
-        self.insert_inner(insert_n, infinity_runner, config, columns, data_gen_factory)
+        self.insert_inner(insert_n, hybridsearch_runner, config, columns, data_gen_factory)
 
         @decorator
-        def part2(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part2(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.drop_table("test_insert", ConflictType.Error)
         part2()
 
     def _test_insert_checkpoint_inner(
-        self, infinity_runner: InfinityRunner, test_n: int
+        self, hybridsearch_runner: hybridsearchRunner, test_n: int
     ):
-        infinity_runner.clear()
+        hybridsearch_runner.clear()
         config = "test/data/config/restart_test/test_insert/6.toml"
         uri = common_values.TEST_LOCAL_HOST
 
-        decorator = infinity_runner_decorator_factory(config, uri, infinity_runner)
+        decorator = hybridsearch_runner_decorator_factory(config, uri, hybridsearch_runner)
 
         line_num = 0
 
         @decorator
-        def create_table(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def create_table(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.create_table("test_insert_checkpoint", {"c1": {"type": "int"}})
 
         @decorator
-        def part1(infinity_obj, test_i: int):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj, test_i: int):
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.get_table("test_insert_checkpoint")
 
             data_dict, _, _ = table_obj.output(["count(*)"]).to_result()
@@ -249,14 +249,14 @@ class TestInsert:
 
             stop_insert = False
 
-            def checkpoint_func(infinity_obj):
+            def checkpoint_func(hybridsearch_obj):
                 nonlocal stop_insert
 
                 try:
                     time.sleep(0.2)
-                    infinity_obj.flush_data()
+                    hybridsearch_obj.flush_data()
                     time.sleep(0.2)
-                    infinity_obj.flush_delta()
+                    hybridsearch_obj.flush_delta()
                     time.sleep(0.2)
                 except Exception as e:
                     print(e)
@@ -273,13 +273,13 @@ class TestInsert:
 
             t1 = RtnThread(target=insert_func, args=(table_obj,))
             t1.start()
-            checkpoint_func(infinity_obj)
+            checkpoint_func(hybridsearch_obj)
             t1.join()
             print(f"join end {test_i}")
 
         @decorator
-        def drop_table(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def drop_table(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.drop_table("test_insert_checkpoint", ConflictType.Error)
 
         create_table()
@@ -287,12 +287,12 @@ class TestInsert:
             part1(i)
         drop_table()
 
-    def test_insert_checkpoint(self, infinity_runner: InfinityRunner):
-        self._test_insert_checkpoint_inner(infinity_runner, 10)
+    def test_insert_checkpoint(self, hybridsearch_runner: hybridsearchRunner):
+        self._test_insert_checkpoint_inner(hybridsearch_runner, 10)
 
     @pytest.mark.slow
-    def test_insert_checkpoint_slow(self, infinity_runner: InfinityRunner):
-        self._test_insert_checkpoint_inner(infinity_runner, 100)
+    def test_insert_checkpoint_slow(self, hybridsearch_runner: hybridsearchRunner):
+        self._test_insert_checkpoint_inner(hybridsearch_runner, 100)
 
 
 if __name__ == "__main__":

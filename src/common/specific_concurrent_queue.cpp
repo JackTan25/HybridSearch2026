@@ -7,7 +7,7 @@ module specific_concurrent_queue;
 import stl;
 import buffer_obj;
 
-namespace infinity {
+namespace hybridsearch {
 
 template <>
 void SpecificConcurrentQueue<FloatDistHeap>::Enqueue(const FloatDistHeap &item) {
@@ -53,4 +53,4 @@ template <>
 bool SpecificConcurrentQueue<Vector<bool>>::TryDequeue(Vector<bool> &item) {
     return queue_.try_dequeue(item);
 }
-} // namespace infinity
+} // namespace hybridsearch

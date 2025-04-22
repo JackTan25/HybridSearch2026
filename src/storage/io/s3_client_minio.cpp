@@ -5,12 +5,12 @@ module;
 module s3_client_minio;
 
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 import status;
 import third_party;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 Status S3ClientMinio::Init() {
     client_ = MakeUnique<minio::s3::Client>(base_url, &provider);
@@ -151,4 +151,4 @@ Status S3ClientMinio::MakeBucket(const String &bucket_name) {
     return Status::OK();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

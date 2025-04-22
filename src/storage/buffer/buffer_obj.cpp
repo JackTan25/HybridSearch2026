@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -22,7 +10,7 @@ import stl;
 import file_worker;
 import buffer_handle;
 import buffer_manager;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 import third_party;
 import logger;
@@ -30,7 +18,7 @@ import file_worker_type;
 import var_file_worker;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 BufferObj::BufferObj(BufferManager *buffer_mgr, bool is_ephemeral, UniquePtr<FileWorker> file_worker, u32 id)
     : buffer_mgr_(buffer_mgr), file_worker_(std::move(file_worker)), id_(id) {
@@ -41,13 +29,13 @@ BufferObj::BufferObj(BufferManager *buffer_mgr, bool is_ephemeral, UniquePtr<Fil
         type_ = BufferType::kPersistent;
         status_ = BufferStatus::kFreed;
     }
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::IncrObjectCount("BufferObj");
 #endif
 }
 
 BufferObj::~BufferObj() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::DecrObjectCount("BufferObj");
 #endif
 }
@@ -426,4 +414,4 @@ void BufferObj::CheckState() const {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

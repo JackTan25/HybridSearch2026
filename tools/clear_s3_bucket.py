@@ -8,7 +8,7 @@ client = Minio(
 )
 
 
-objects = client.list_objects("infinity", recursive=True)
+objects = client.list_objects("hybridsearch", recursive=True)
 for obj in objects:
     print(obj.object_name)
-    client.remove_object("infinity", obj.object_name)
+    client.remove_object("hybridsearch", obj.object_name)

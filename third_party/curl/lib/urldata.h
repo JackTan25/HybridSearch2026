@@ -1581,7 +1581,7 @@ struct UserDefined {
   unsigned long httpauth;  /* kind of HTTP authentication to use (bitmask) */
   unsigned long proxyauth; /* kind of proxy authentication to use (bitmask) */
   long maxredirs;    /* maximum no. of http(s) redirects to follow, set to -1
-                        for infinity */
+                        for hybridsearch */
 
   void *postfields;  /* if POST, set the fields' values here */
   curl_seek_callback seek_func;      /* function that seeks the input */

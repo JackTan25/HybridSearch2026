@@ -1,16 +1,4 @@
-// Copyright(C) 2024 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 #include <gtest/gtest.h>
 
@@ -19,12 +7,12 @@ import stl;
 import virtual_store;
 import local_file_handle;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class LocalFileTest : public BaseTest {};
 
 TEST_F(LocalFileTest, TestAppend) {
-    using namespace infinity;
+    using namespace hybridsearch;
     String path = String(GetFullTmpDir()) + "/test_file2.abc";
 
     auto [local_file_handle, status] = VirtualStore::Open(path, FileAccessMode::kWrite);
@@ -45,7 +33,7 @@ TEST_F(LocalFileTest, TestAppend) {
 }
 
 TEST_F(LocalFileTest, TestDir) {
-    using namespace infinity;
+    using namespace hybridsearch;
     String dir = String(GetFullTmpDir()) + "/unit_test";
     String path = dir + "/test_file.test";
 
@@ -73,7 +61,7 @@ TEST_F(LocalFileTest, TestDir) {
 }
 
 TEST_F(LocalFileTest, TestRead) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     String path = String(GetFullTmpDir()) + "/test_file_read.abc";
 
@@ -110,7 +98,7 @@ TEST_F(LocalFileTest, TestRead) {
 }
 
 TEST_F(LocalFileTest, TestRename) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     String old_path = String(GetFullTmpDir()) + "/test_file_old.abc";
     String new_path = String(GetFullTmpDir()) + "/test_file_new.abc";
@@ -138,7 +126,7 @@ TEST_F(LocalFileTest, TestRename) {
 }
 
 TEST_F(LocalFileTest, TestTruncate) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     String path = String(GetFullTmpDir()) + "/test_file_truncate.abc";
 
@@ -177,7 +165,7 @@ TEST_F(LocalFileTest, TestTruncate) {
 }
 
 TEST_F(LocalFileTest, TestMerge) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     String dst_path = String(GetFullTmpDir()) + "/test_file_append_dst.abc";
     String src_path = String(GetFullTmpDir()) + "/test_file_append_src.abc";
@@ -231,7 +219,7 @@ TEST_F(LocalFileTest, TestMerge) {
 }
 
 TEST_F(LocalFileTest, TestCleanDir) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     String dir = String(GetFullTmpDir()) + "/cleanup_test_dir";
     String file_path1 = dir + "/file1.txt";

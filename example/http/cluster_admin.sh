@@ -1,10 +1,10 @@
-# This file shows how cluster in infinity work.
+# This file shows how cluster in hybridsearch work.
 # To run this script, you should first run these 3 commands to start 3 nodes seperately,
 # you can run these commands at the root directory of project after building the code:
 
-# ./cmake-build-debug/src/infinity --config conf/leader.toml
-# ./cmake-build-debug/src/infinity --config conf/follower.toml
-# ./cmake-build-debug/src/infinity --config conf/learner.toml
+# ./cmake-build-debug/src/hybridsearch --config conf/leader.toml
+# ./cmake-build-debug/src/hybridsearch --config conf/follower.toml
+# ./cmake-build-debug/src/hybridsearch --config conf/learner.toml
 
 echo '\n\n--show admin configs'
 curl --request GET \

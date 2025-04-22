@@ -9,7 +9,7 @@ import posting_byte_slice_reader;
 import doc_list_format_option;
 import index_defines;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class PostingByteSliceReaderTest : public BaseTest {
 public:
@@ -107,7 +107,7 @@ protected:
 };
 
 TEST_F(PostingByteSliceReaderTest, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
     DocListFormatOption option(of_none);
     DocListFormat doc_list_format(option);
     {
@@ -177,7 +177,7 @@ TEST_F(PostingByteSliceReaderTest, test1) {
 }
 
 TEST_F(PostingByteSliceReaderTest, test2) {
-    using namespace infinity;
+    using namespace hybridsearch;
     u32 flush_size = 5;
     SharedPtr<PostingByteSliceReader> reader = CreateReader(33, flush_size);
 
@@ -236,7 +236,7 @@ TEST_F(PostingByteSliceReaderTest, test2) {
 }
 
 TEST_F(PostingByteSliceReaderTest, test3) {
-    using namespace infinity;
+    using namespace hybridsearch;
     TestCheck(10, 5);
     TestCheck(513, 128);
 }

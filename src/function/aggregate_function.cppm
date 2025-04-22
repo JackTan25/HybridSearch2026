@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -23,14 +11,14 @@ import function;
 import function_data;
 import column_vector;
 import vector_buffer;
-import infinity_exception;
+import hybridsearch_exception;
 import base_expression;
 import data_type;
 import logical_type;
 import internal_types;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 using AggregateInitializeFuncType = std::function<void(ptr_t)>;
 using AggregateUpdateFuncType = std::function<void(ptr_t, const SharedPtr<ColumnVector> &)>;
@@ -151,4 +139,4 @@ inline AggregateFunction UnaryAggregate(const String &name, const DataType &inpu
                              AggregateOperation::StateFinalize<AggregateState, ResultType>);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

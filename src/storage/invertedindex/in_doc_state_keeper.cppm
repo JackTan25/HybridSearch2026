@@ -12,7 +12,7 @@ import posting_list_format;
 import index_defines;
 export module in_doc_state_keeper;
 
-namespace infinity {
+namespace hybridsearch {
 export class InDocStateKeeper {
 public:
     InDocStateKeeper(InDocPositionState *state);
@@ -32,4 +32,4 @@ private:
     InDocPositionState *state_ = nullptr;
     Vector<PositionListDecoder *> pos_decoders_;
 };
-} // namespace infinity
+} // namespace hybridsearch

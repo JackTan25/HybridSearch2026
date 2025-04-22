@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -20,11 +8,11 @@ import data_block;
 import stl;
 import physical_operator_type;
 import fragment_data;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 void QueueSourceState::MarkCompletedTask(u64 fragment_id) {
     auto it = num_tasks_.find(fragment_id);
@@ -196,4 +184,4 @@ bool QueueSourceState::GetData() {
     return completed;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

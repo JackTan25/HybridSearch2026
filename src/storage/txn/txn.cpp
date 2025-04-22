@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -22,7 +10,7 @@ module txn;
 
 import stl;
 
-import infinity_exception;
+import hybridsearch_exception;
 import txn_manager;
 import buffer_manager;
 import wal_entry;
@@ -51,14 +39,14 @@ import default_values;
 import chunk_index_entry;
 import memory_indexer;
 import persistence_manager;
-import infinity_context;
+import hybridsearch_context;
 import admin_statement;
 import global_resource_usage;
 import wal_manager;
 import defer_op;
 import snapshot_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 Txn::Txn(TxnManager *txn_manager,
          BufferManager *buffer_manager,
@@ -68,8 +56,8 @@ Txn::Txn(TxnManager *txn_manager,
          TransactionType txn_type)
     : txn_mgr_(txn_manager), buffer_mgr_(buffer_manager), txn_store_(this), wal_entry_(MakeShared<WalEntry>()),
       txn_delta_ops_entry_(MakeUnique<CatalogDeltaEntry>()), txn_text_(std::move(txn_text)) {
-    catalog_ = InfinityContext::instance().storage()->catalog();
-#ifdef INFINITY_DEBUG
+    catalog_ = hybridsearchContext::instance().storage()->catalog();
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::IncrObjectCount("Txn");
 #endif
     txn_context_ptr_ = TxnContext::Make();
@@ -82,8 +70,8 @@ Txn::Txn(TxnManager *txn_manager,
 Txn::Txn(BufferManager *buffer_mgr, TxnManager *txn_mgr, TransactionID txn_id, TxnTimeStamp begin_ts, TransactionType txn_type)
     : txn_mgr_(txn_mgr), buffer_mgr_(buffer_mgr), txn_store_(this), wal_entry_(MakeShared<WalEntry>()),
       txn_delta_ops_entry_(MakeUnique<CatalogDeltaEntry>()) {
-    catalog_ = InfinityContext::instance().storage()->catalog();
-#ifdef INFINITY_DEBUG
+    catalog_ = hybridsearchContext::instance().storage()->catalog();
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::IncrObjectCount("Txn");
 #endif
     txn_context_ptr_ = TxnContext::Make();
@@ -101,7 +89,7 @@ Txn::NewReplayTxn(BufferManager *buffer_mgr, TxnManager *txn_mgr, TransactionID 
 }
 
 Txn::~Txn() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::DecrObjectCount("Txn");
 #endif
 }
@@ -793,7 +781,7 @@ TxnTimeStamp Txn::Commit() {
         return commit_ts;
     }
 
-    StorageMode current_storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+    StorageMode current_storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
     if (current_storage_mode != StorageMode::kWritable) {
         if (!IsReaderAllowed()) {
             RecoverableError(
@@ -869,7 +857,7 @@ void Txn::PostCommit() {
         sema->acquire();
     }
 
-    auto *wal_manager = InfinityContext::instance().storage()->wal_manager();
+    auto *wal_manager = hybridsearchContext::instance().storage()->wal_manager();
     for (const SharedPtr<WalCmd> &wal_cmd : wal_entry_->cmds_) {
         if (wal_cmd->GetType() == WalCommandType::CHECKPOINT) {
             auto *checkpoint_cmd = static_cast<WalCmdCheckpoint *>(wal_cmd.get());
@@ -958,4 +946,4 @@ void Txn::AddWriteTxnNum(TableEntry *table_entry) {
     table_store->AddWriteTxnNum();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

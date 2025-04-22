@@ -1,21 +1,9 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import logger;
 import column_vector;
@@ -27,17 +15,17 @@ import stl;
 import selection;
 import vector_buffer;
 import global_resource_usage;
-import infinity_context;
+import hybridsearch_context;
 import internal_types;
 import logical_type;
 import data_type;
 import compilation_config;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class ColumnVectorRowTest : public BaseTest {
     void SetUp() override {
-        using namespace infinity;
+        using namespace hybridsearch;
 
         LoggerConfig logger_config;
         logger_config.log_level_ = LogLevel::kOff;
@@ -45,14 +33,14 @@ class ColumnVectorRowTest : public BaseTest {
     }
 
     void TearDown() override {
-        using namespace infinity;
+        using namespace hybridsearch;
 
         Logger::Shutdown();
     }
 };
 
 TEST_F(ColumnVectorRowTest, flat_row) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kRowID);
     ColumnVector column_vector(data_type);
@@ -163,7 +151,7 @@ TEST_F(ColumnVectorRowTest, flat_row) {
 
 TEST_F(ColumnVectorRowTest, contant_row) {
 
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kRowID);
     ColumnVector column_vector(data_type);
@@ -245,7 +233,7 @@ TEST_F(ColumnVectorRowTest, contant_row) {
 }
 
 TEST_F(ColumnVectorRowTest, row_column_vector_select) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kRowID);
     ColumnVector column_vector(data_type);
@@ -283,7 +271,7 @@ TEST_F(ColumnVectorRowTest, row_column_vector_select) {
 }
 
 TEST_F(ColumnVectorRowTest, row_column_slice_init) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     SharedPtr<DataType> data_type = MakeShared<DataType>(LogicalType::kRowID);
     ColumnVector column_vector(data_type);

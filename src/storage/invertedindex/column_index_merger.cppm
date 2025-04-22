@@ -16,7 +16,7 @@ import segment_term_posting;
 import internal_types;
 import vector_with_lock;
 
-namespace infinity {
+namespace hybridsearch {
 export class ColumnIndexMerger {
 public:
     ColumnIndexMerger(const String &index_dir, optionflag_t flag);
@@ -36,4 +36,4 @@ private:
     // for column length info
     VectorWithLock<u32> column_lengths_;
 };
-} // namespace infinity
+} // namespace hybridsearch

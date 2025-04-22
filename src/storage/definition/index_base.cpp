@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -33,12 +21,12 @@ import bmp_util;
 import third_party;
 import status;
 
-import infinity_exception;
+import hybridsearch_exception;
 import create_index_info;
 import index_defines;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 String MetricTypeToString(MetricType metric_type) {
     switch (metric_type) {
@@ -68,11 +56,11 @@ MetricType StringToMetricType(const String &str) {
         return MetricType::kInvalid;
     }
 }
-} // namespace infinity
+} // namespace hybridsearch
 
 //--------------------------------------------------
 
-namespace infinity {
+namespace hybridsearch {
 
 bool IndexBase::operator==(const IndexBase &other) const { return index_type_ == other.index_type_ && column_names_ == other.column_names_; }
 
@@ -324,4 +312,4 @@ SharedPtr<IndexBase> IndexBase::Deserialize(const nlohmann::json &index_def_json
     return res;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

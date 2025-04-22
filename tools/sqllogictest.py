@@ -112,9 +112,9 @@ if __name__ == "__main__":
 
     test_dir = current_path + "/test/sql"
     data_dir = current_path + "/test/data"
-    copy_dir = "/var/infinity/test_data"
+    copy_dir = "/var/hybridsearch/test_data"
 
-    parser = argparse.ArgumentParser(description="SQL Logic Test For Infinity")
+    parser = argparse.ArgumentParser(description="SQL Logic Test For hybridsearch")
 
     parser.add_argument(
         "-g",
@@ -199,9 +199,9 @@ if __name__ == "__main__":
     print("Generate file finshed.")
 
     # remove all file in tmp directory and create an empty tmp
-    if os.path.exists("/var/infinity/test_data/tmp"):
-        os.system("rm -rf /var/infinity/test_data/tmp")
-    os.makedirs("/var/infinity/test_data/tmp")
+    if os.path.exists("/var/hybridsearch/test_data/tmp"):
+        os.system("rm -rf /var/hybridsearch/test_data/tmp")
+    os.makedirs("/var/hybridsearch/test_data/tmp")
 
     print("Start copying data...")
     if args.just_copy_all_data is True:

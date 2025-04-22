@@ -1355,14 +1355,14 @@ struct AntiExtrema<bool> {
 
 template <>
 struct AntiExtrema<float> {
-  static constexpr float anti_min() { return std::numeric_limits<float>::infinity(); }
-  static constexpr float anti_max() { return -std::numeric_limits<float>::infinity(); }
+  static constexpr float anti_min() { return std::numeric_limits<float>::hybridsearch(); }
+  static constexpr float anti_max() { return -std::numeric_limits<float>::hybridsearch(); }
 };
 
 template <>
 struct AntiExtrema<double> {
-  static constexpr double anti_min() { return std::numeric_limits<double>::infinity(); }
-  static constexpr double anti_max() { return -std::numeric_limits<double>::infinity(); }
+  static constexpr double anti_min() { return std::numeric_limits<double>::hybridsearch(); }
+  static constexpr double anti_max() { return -std::numeric_limits<double>::hybridsearch(); }
 };
 
 template <>

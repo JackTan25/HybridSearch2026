@@ -1,16 +1,4 @@
-// Copyright(C) 2024 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 #pragma once
 
@@ -19,12 +7,12 @@
 #include <string>
 #include <unordered_map>
 
-namespace infinity {
+namespace hybridsearch {
 
 class GlobalResourceUsage {
 public:
     static inline void Init() {
-#ifdef INFINITY_STATS
+#ifdef hybridsearch_STATS
         if (initialized_) {
             return;
         }
@@ -35,7 +23,7 @@ public:
     }
 
     static inline void UnInit() {
-#ifdef INFINITY_STATS
+#ifdef hybridsearch_STATS
         if (initialized_) {
             object_count_ = 0;
             raw_memory_count_ = 0;
@@ -45,7 +33,7 @@ public:
     }
 
     static inline void IncrObjectCount(const std::string &key) {
-#ifdef INFINITY_STATS
+#ifdef hybridsearch_STATS
         std::unique_lock<std::mutex> unique_locker(object_mutex_);
         ++object_map_[key];
         ++object_count_;
@@ -53,7 +41,7 @@ public:
     }
 
     static void DecrObjectCount(const std::string &key) {
-#ifdef INFINITY_STATS
+#ifdef hybridsearch_STATS
         std::unique_lock<std::mutex> unique_locker(object_mutex_);
         --object_map_[key];
         --object_count_;
@@ -61,7 +49,7 @@ public:
     }
 
     static int64_t GetObjectCount() {
-#ifdef INFINITY_STATS
+#ifdef hybridsearch_STATS
         std::unique_lock<std::mutex> unique_locker(object_mutex_);
         return object_count_;
 #else
@@ -70,7 +58,7 @@ public:
     }
 
     static std::string GetObjectCountInfo() {
-#ifdef INFINITY_STATS
+#ifdef hybridsearch_STATS
         std::unique_lock<std::mutex> unique_locker(object_mutex_);
         return std::to_string(object_count_);
 #else
@@ -79,7 +67,7 @@ public:
     }
 
     static int64_t GetObjectCount(const std::string &key) {
-#ifdef INFINITY_STATS
+#ifdef hybridsearch_STATS
         std::unique_lock<std::mutex> unique_locker(object_mutex_);
         return object_map_[key];
 #else
@@ -88,7 +76,7 @@ public:
     }
 
     static std::unordered_map<std::string, int64_t> GetObjectClones() {
-#ifdef INFINITY_STATS
+#ifdef hybridsearch_STATS
         std::unique_lock<std::mutex> unique_locker(object_mutex_);
         return object_map_;
 #else
@@ -97,7 +85,7 @@ public:
     }
 
     static void IncrRawMemCount(const std::string &key) {
-#ifdef INFINITY_STATS
+#ifdef hybridsearch_STATS
         std::unique_lock<std::mutex> unique_locker(raw_memory_mutex_);
         ++raw_memory_count_;
         ++raw_memory_map_[key];
@@ -105,7 +93,7 @@ public:
     }
 
     static void DecrRawMemCount(const std::string &key) {
-#ifdef INFINITY_STATS
+#ifdef hybridsearch_STATS
         std::unique_lock<std::mutex> unique_locker(raw_memory_mutex_);
         --raw_memory_count_;
         --raw_memory_map_[key];
@@ -113,7 +101,7 @@ public:
     }
 
     static int64_t GetRawMemoryCount() {
-#ifdef INFINITY_STATS
+#ifdef hybridsearch_STATS
         std::unique_lock<std::mutex> unique_locker(raw_memory_mutex_);
         return raw_memory_count_;
 #else
@@ -122,7 +110,7 @@ public:
     }
 
     static int64_t GetRawMemoryCount(const std::string &key) {
-#ifdef INFINITY_STATS
+#ifdef hybridsearch_STATS
         std::unique_lock<std::mutex> unique_locker(raw_memory_mutex_);
         return raw_memory_map_[key];
 #else
@@ -131,7 +119,7 @@ public:
     }
 
     static std::string GetRawMemoryInfo() {
-#ifdef INFINITY_STATS
+#ifdef hybridsearch_STATS
         std::unique_lock<std::mutex> unique_locker(raw_memory_mutex_);
         return "allocate count: " + std::to_string(raw_memory_map_.size()) + ", total_size: " + std::to_string(raw_memory_count_);
 #else
@@ -140,7 +128,7 @@ public:
     }
 
     static std::unordered_map<std::string, int64_t> GetRawMemoryClone() {
-#ifdef INFINITY_STATS
+#ifdef hybridsearch_STATS
         std::unique_lock<std::mutex> unique_locker(raw_memory_mutex_);
         return raw_memory_map_;
 #else
@@ -160,4 +148,4 @@ private:
     static std::unordered_map<std::string, int64_t> raw_memory_map_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

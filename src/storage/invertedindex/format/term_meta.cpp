@@ -10,7 +10,7 @@ import vbyte_compressor;
 import index_defines;
 module term_meta;
 
-namespace infinity {
+namespace hybridsearch {
 
 TermMetaLoader::TermMetaLoader(const PostingFormatOption &option) : option_(option) {}
 void TermMetaLoader::Load(ByteSliceReader *byte_slice_reader, TermMeta &term_meta) const {
@@ -104,4 +104,4 @@ void TermMetaDumper::Dump(const SharedPtr<FileWriter> &file, const TermMeta &ter
     file->WriteVLong(term_meta.pos_end_);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

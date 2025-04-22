@@ -7,7 +7,7 @@ import ik_dict_segment;
 import hit;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 export class Dictionary {
 public:
     UniquePtr<DictSegment> main_dict_;
@@ -72,4 +72,4 @@ public:
 private:
     void ParseProperties(const String &content);
 };
-} // namespace infinity
+} // namespace hybridsearch

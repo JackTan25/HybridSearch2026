@@ -17,7 +17,7 @@ import status;
 import character_util;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 IKAnalyzer::IKAnalyzer(const String &path) : dict_path_(path) {}
 
@@ -96,4 +96,4 @@ int IKAnalyzer::AnalyzeImpl(const Term &input, void *data, HookType func) {
     return 0;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -1,26 +1,14 @@
-# Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      https://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+
 
 import re
 import time
 import os
 from tqdm import tqdm
 from mldr_common_tools import load_corpus, fvecs_read_yield, read_mldr_sparse_embedding_yield, get_all_part_begin_ends
-import infinity
-from infinity.common import ConflictType, LOCAL_HOST, SparseVector
-import infinity.index as index
-from infinity.errors import ErrorCode
+import hybridsearch
+from hybridsearch.common import ConflictType, LOCAL_HOST, SparseVector
+import hybridsearch.index as index
+from hybridsearch.errors import ErrorCode
 from vec_read import load_dense
 from vec_read import load_sparse
 from colbert_read import load_colbert_list
@@ -33,7 +21,7 @@ def extract_number(filename):
         return int(match.group(1))
     return 0
 
-class InfinityClientForInsert:
+class hybridsearchClientForInsert:
     def __init__(self):
         self.test_db_name = "default_db_demo"
         self.test_table_name_prefix = "CQADupStack_en_Table_demo"
@@ -41,14 +29,14 @@ class InfinityClientForInsert:
                                   "dense_col": {"type": "vector,1024,float16"},
                                   "sparse_col": {"type": "sparse,250002,float16,int"},
                                   "tensor_col": {"type": "tensor,96,float16"}}
-        self.infinity_obj = infinity.connect(LOCAL_HOST)
-        self.infinity_db = self.infinity_obj.create_database(self.test_db_name, ConflictType.Ignore)
-        self.infinity_table = None
+        self.hybridsearch_obj = hybridsearch.connect(LOCAL_HOST)
+        self.hybridsearch_db = self.hybridsearch_obj.create_database(self.test_db_name, ConflictType.Ignore)
+        self.hybridsearch_table = None
 
     def create_test_table(self):
         table_name = self.test_table_name_prefix
-        self.infinity_db.drop_table(table_name, ConflictType.Ignore)
-        self.infinity_table = self.infinity_db.create_table(table_name, self.test_table_schema)
+        self.hybridsearch_db.drop_table(table_name, ConflictType.Ignore)
+        self.hybridsearch_table = self.hybridsearch_db.create_table(table_name, self.test_table_schema)
         print("Create table successfully.")
 
     def main(self):
@@ -130,7 +118,7 @@ class InfinityClientForInsert:
             if doc_id_idx == 1000:
                 break
             # print(len(buffer[0]['dense_col']))
-            self.infinity_table.insert(buffer[0])
+            self.hybridsearch_table.insert(buffer[0])
             # break
             if dense_idx >= len(dense_vectors):
                 dense_idx = 0
@@ -146,5 +134,5 @@ class InfinityClientForInsert:
         print(f"Finish inserting data. tensor_nums: {tensor_nums+1}, sparse_nums: {sparse_nums+1}, dense_nums: {dense_nums+1}, text_nums: {doc_id_idx+1}")
 
 if __name__ == "__main__":
-    infinity_client = InfinityClientForInsert()
-    infinity_client.main()
+    hybridsearch_client = hybridsearchClientForInsert()
+    hybridsearch_client.main()

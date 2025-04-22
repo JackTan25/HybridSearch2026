@@ -10009,7 +10009,7 @@ class binary_reader
                             return std::ldexp(mant, -24);
                         case 31:
                             return (mant == 0)
-                            ? std::numeric_limits<double>::infinity()
+                            ? std::numeric_limits<double>::hybridsearch()
                             : std::numeric_limits<double>::quiet_NaN();
                         default:
                             return std::ldexp(mant + 1024, exp - 25);
@@ -11556,7 +11556,7 @@ class binary_reader
                             return std::ldexp(mant, -24);
                         case 31:
                             return (mant == 0)
-                            ? std::numeric_limits<double>::infinity()
+                            ? std::numeric_limits<double>::hybridsearch()
                             : std::numeric_limits<double>::quiet_NaN();
                         default:
                             return std::ldexp(mant + 1024, exp - 25);
@@ -15248,7 +15248,7 @@ class binary_writer
                 }
                 else if (std::isinf(j.m_data.m_value.number_float))
                 {
-                    // Infinity is 0xf97c00, -Infinity is 0xf9fc00
+                    // hybridsearch is 0xf97c00, -hybridsearch is 0xf9fc00
                     oa->write_character(to_char_type(0xf9));
                     oa->write_character(j.m_data.m_value.number_float > 0 ? to_char_type(0x7C) : to_char_type(0xFC));
                     oa->write_character(to_char_type(0x00));

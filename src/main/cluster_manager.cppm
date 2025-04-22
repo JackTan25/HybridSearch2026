@@ -1,16 +1,4 @@
-// Copyright(C) 2024 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -26,7 +14,7 @@ import storage;
 import admin_statement;
 import node_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class UpdateNodeOp { kRemove, kLostConnection };
 
@@ -78,9 +66,9 @@ public:
     Status UpdateNodeByLeader(const String &node_name, UpdateNodeOp update_node_op);
     // Used by leader when get HB request
     Status UpdateNodeInfoByHeartBeat(const SharedPtr<NodeInfo> &non_leader_node,
-                                     Vector<infinity_peer_server::NodeInfo> &other_nodes,
+                                     Vector<hybridsearch_peer_server::NodeInfo> &other_nodes,
                                      i64 &leader_term,
-                                     infinity_peer_server::NodeStatus::type &sender_status);
+                                     hybridsearch_peer_server::NodeStatus::type &sender_status);
 
     // Used by leader to notify leader to synchronize logs to the follower and learner, during registration
     Status SyncLogsOnRegistration(const SharedPtr<NodeInfo> &non_leader_node, const SharedPtr<PeerClient> &peer_client);
@@ -131,4 +119,4 @@ private:
     Atomic<bool> hb_running_{false};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

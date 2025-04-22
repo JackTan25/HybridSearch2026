@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -19,15 +7,15 @@ module;
 module var_buffer;
 
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import block_column_entry;
 import buffer_manager;
 import var_file_worker;
 import logger;
-import infinity_context;
+import hybridsearch_context;
 
-namespace infinity {
+namespace hybridsearch {
 
 SizeT VarBuffer::Append(UniquePtr<char[]> buffer, SizeT size, bool *free_success_p) {
     if (std::holds_alternative<const char *>(buffers_)) {
@@ -143,8 +131,8 @@ void VarBufferManager::InitBuffer() {
     } else {
         if (!buffer_handle_.has_value()) {
             if (auto *block_obj = block_column_entry_->GetOutlineBuffer(0); block_obj == nullptr) {
-                auto file_worker = MakeUnique<VarFileWorker>(MakeShared<String>(InfinityContext::instance().config()->DataDir()),
-                                                             MakeShared<String>(InfinityContext::instance().config()->TempDir()),
+                auto file_worker = MakeUnique<VarFileWorker>(MakeShared<String>(hybridsearchContext::instance().config()->DataDir()),
+                                                             MakeShared<String>(hybridsearchContext::instance().config()->TempDir()),
                                                              block_column_entry_->block_entry()->block_dir(),
                                                              block_column_entry_->OutlineFilename(0),
                                                              0, /*buffer_size*/
@@ -177,4 +165,4 @@ const VarBuffer *VarBufferManager::GetInner() {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -37,7 +37,7 @@ def python_sdk_test(python_test_dir: str, pytest_mark: str):
             raise Exception(f"An error occurred: {process.stderr}")
         print(f"iteration {i} complete")
         i += 1
-        directory = "/var/infinity"
+        directory = "/var/hybridsearch"
         folder_size = shutil.disk_usage(directory)
         print(f"{directory} size: {folder_size.used / (1024 * 1024)} MB")
 
@@ -48,7 +48,7 @@ if __name__ == "__main__":
     print("Note: this script must be run under root directory of the project.")
     current_path = os.getcwd()
     python_test_dir = current_path + "/python/"
-    parser = argparse.ArgumentParser(description="Python SDK Test For Infinity")
+    parser = argparse.ArgumentParser(description="Python SDK Test For hybridsearch")
     parser.add_argument(
         "-m",
         "--pytest_mark",

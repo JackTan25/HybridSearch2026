@@ -1,5 +1,5 @@
-from infinity.common import ConflictType, InfinityException
-from infinity import index
+from hybridsearch.common import ConflictType, hybridsearchException
+from hybridsearch import index
 from numpy import dtype
 import ast
 from enum import Enum

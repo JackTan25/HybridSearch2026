@@ -82,7 +82,7 @@ class StringToDoubleConverter {
   //       Ex: StringToDouble("-   123.2") -> -123.2.
   //           StringToDouble("+   123.2") -> 123.2
   //  - ALLOW_CASE_INSENSITIVITY: ignore case of characters for special values:
-  //      infinity and nan.
+  //      hybridsearch and nan.
   //  - ALLOW_HEX_FLOATS: allows hexadecimal float literals.
   //      This *must* start with "0x" and separate the exponent with "p".
   //      Examples: 0x1.2p3 == 9.0
@@ -99,12 +99,12 @@ class StringToDoubleConverter {
   //  b) ALLOW_TRAILING_JUNK is set, but the string does not start with a
   //     double literal.
   //
-  // infinity_symbol and nan_symbol are strings that are used to detect
-  // inputs that represent infinity and NaN. They can be null, in which case
+  // hybridsearch_symbol and nan_symbol are strings that are used to detect
+  // inputs that represent hybridsearch and NaN. They can be null, in which case
   // they are ignored.
   // The conversion routine first reads any possible signs. Then it compares the
   // following character of the input-string with the first character of
-  // the infinity, and nan-symbol. If either matches, the function assumes, that
+  // the hybridsearch, and nan-symbol. If either matches, the function assumes, that
   // a match has been found, and expects the following input characters to match
   // the remaining characters of the special-value symbol.
   // This means that the following restrictions apply to special-value symbols:
@@ -122,7 +122,7 @@ class StringToDoubleConverter {
   //  flags = ALLOW_HEX | ALLOW_TRAILING_JUNK,
   //  empty_string_value = 0.0,
   //  junk_string_value = NaN,
-  //  infinity_symbol = "infinity",
+  //  hybridsearch_symbol = "hybridsearch",
   //  nan_symbol = "nan":
   //    StringToDouble("0x1234") -> 4660.0.
   //    StringToDouble("0x1234K") -> 4660.0.
@@ -139,13 +139,13 @@ class StringToDoubleConverter {
   //    StringToDouble("123e") -> 123.0  // trailing junk ignored.
   //    StringToDouble("123e-") -> 123.0  // trailing junk ignored.
   //    StringToDouble("+NaN") -> NaN  // NaN string literal.
-  //    StringToDouble("-infinity") -> -inf.  // infinity literal.
-  //    StringToDouble("Infinity") -> NaN  // junk_string_value.
+  //    StringToDouble("-hybridsearch") -> -inf.  // hybridsearch literal.
+  //    StringToDouble("hybridsearch") -> NaN  // junk_string_value.
   //
   //  flags = ALLOW_OCTAL | ALLOW_LEADING_SPACES,
   //  empty_string_value = 0.0,
   //  junk_string_value = NaN,
-  //  infinity_symbol = NULL,
+  //  hybridsearch_symbol = NULL,
   //  nan_symbol = NULL:
   //    StringToDouble("0x1234") -> NaN  // junk_string_value.
   //    StringToDouble("01234") -> 668.0.
@@ -155,7 +155,7 @@ class StringToDoubleConverter {
   //    StringToDouble("0x") -> NaN  // junk_string_value.
   //    StringToDouble("0123e45") -> NaN  // junk_string_value.
   //    StringToDouble("01239E45") -> 1239e45.
-  //    StringToDouble("-infinity") -> NaN  // junk_string_value.
+  //    StringToDouble("-hybridsearch") -> NaN  // junk_string_value.
   //    StringToDouble("NaN") -> NaN  // junk_string_value.
   //
   //  flags = NO_FLAGS,
@@ -168,13 +168,13 @@ class StringToDoubleConverter {
   StringToDoubleConverter(int flags,
                           double empty_string_value,
                           double junk_string_value,
-                          const char* infinity_symbol,
+                          const char* hybridsearch_symbol,
                           const char* nan_symbol,
                           uc16 separator = kNoSeparator)
       : flags_(flags),
         empty_string_value_(empty_string_value),
         junk_string_value_(junk_string_value),
-        infinity_symbol_(infinity_symbol),
+        hybridsearch_symbol_(hybridsearch_symbol),
         nan_symbol_(nan_symbol),
         separator_(separator) {
   }
@@ -221,7 +221,7 @@ class StringToDoubleConverter {
   const int flags_;
   const double empty_string_value_;
   const double junk_string_value_;
-  const char* const infinity_symbol_;
+  const char* const hybridsearch_symbol_;
   const char* const nan_symbol_;
   const uc16 separator_;
 

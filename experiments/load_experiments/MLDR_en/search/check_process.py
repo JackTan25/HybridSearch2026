@@ -52,12 +52,12 @@ def terminate_process_tree(pid):
 
 if __name__ == "__main__":
     # 读取文件内容
-    file_path = '/home/ubuntu/infinity/experiments/query_memory_file'
+    file_path = '/home/ubuntu/hybridsearch/experiments/query_memory_file'
     content = read_file_content(file_path)
 
 
     # 启动服务并在适当的时候杀死它
-    service_command = "/home/ubuntu/infinity/cmake-build-release/src/infinity -f /home/ubuntu/infinity/conf/infinity_conf.toml"  # 示例命令，启动一个简单的 HTTP 服务器
+    service_command = "/home/ubuntu/hybridsearch/cmake-build-release/src/hybridsearch -f /home/ubuntu/hybridsearch/conf/hybridsearch_conf.toml"  # 示例命令，启动一个简单的 HTTP 服务器
     process = subprocess.Popen(service_command, shell=True)
     time.sleep(3)
     print(f"服务已启动，进程 ID: {process.pid}")

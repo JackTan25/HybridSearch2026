@@ -4,7 +4,7 @@ import stl;
 
 module byte_slice;
 
-namespace infinity {
+namespace hybridsearch {
 
 ByteSlice *ByteSlice::CreateSlice(SizeT data_size) {
     u8 *mem;
@@ -153,4 +153,4 @@ void ByteSliceListIterator::Next(void *&data, SizeT &size) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

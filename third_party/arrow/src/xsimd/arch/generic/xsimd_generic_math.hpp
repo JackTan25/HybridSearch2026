@@ -540,7 +540,7 @@ namespace xsimd
             batch_type r2 = exp(-x * x) * detail::erf_kernel<batch_type>::erfc2(z);
             r1 = select(test1, r1, r2);
 #ifndef XSIMD_NO_INFINITIES
-            r1 = select(x == constants::infinity<batch_type>(), batch_type(0.), r1);
+            r1 = select(x == constants::hybridsearch<batch_type>(), batch_type(0.), r1);
 #endif
             return select(test0, batch_type(2.) - r1, r1);
         }
@@ -575,7 +575,7 @@ namespace xsimd
             batch_type z = ex * detail::erf_kernel<batch_type>::erfc3(x);
             r1 = select(test2, r1, z);
 #ifndef XSIMD_NO_INFINITIES
-            r1 = select(x == constants::infinity<batch_type>(), batch_type(0.), r1);
+            r1 = select(x == constants::hybridsearch<batch_type>(), batch_type(0.), r1);
 #endif
             return select(test0, batch_type(2.) - r1, r1);
         }
@@ -890,7 +890,7 @@ namespace xsimd
                 batch_type k = reducer_t::reduce(self, x);
                 x = reducer_t::approx(x);
                 x = select(self <= reducer_t::minlog(), batch_type(0.), ldexp(x, to_int(k)));
-                x = select(self >= reducer_t::maxlog(), constants::infinity<batch_type>(), x);
+                x = select(self >= reducer_t::maxlog(), constants::hybridsearch<batch_type>(), x);
                 return x;
             }
 
@@ -904,7 +904,7 @@ namespace xsimd
                 batch_type c = reducer_t::approx(x);
                 c = reducer_t::finalize(x, c, hi, lo);
                 c = select(self <= reducer_t::minlog(), batch_type(0.), ldexp(c, to_int(k)));
-                c = select(self >= reducer_t::maxlog(), constants::infinity<batch_type>(), c);
+                c = select(self >= reducer_t::maxlog(), constants::hybridsearch<batch_type>(), c);
                 return c;
             }
         }
@@ -1011,7 +1011,7 @@ namespace xsimd
             return select(self < constants::logeps<batch_type>(),
                           batch_type(-1.),
                           select(self > constants::maxlog<batch_type>(),
-                                 constants::infinity<batch_type>(),
+                                 constants::hybridsearch<batch_type>(),
                                  detail::expm1(self)));
         }
 
@@ -1232,19 +1232,19 @@ namespace xsimd
                     batch_type x = select(inf_result, constants::nan<batch_type>(), a);
                     batch_type q = abs(x);
 #ifndef XSIMD_NO_INFINITIES
-                    inf_result = (x == constants::infinity<batch_type>()) || inf_result;
+                    inf_result = (x == constants::hybridsearch<batch_type>()) || inf_result;
 #endif
                     auto ltza = a < batch_type(0.);
                     batch_type r;
                     batch_type r1 = other(q);
                     if (any(ltza))
                     {
-                        r = select(inf_result, constants::infinity<batch_type>(), negative(q, r1));
+                        r = select(inf_result, constants::hybridsearch<batch_type>(), negative(q, r1));
                         if (all(ltza))
                             return r;
                     }
                     batch_type r2 = select(ltza, r, r1);
-                    return select(a == constants::minusinfinity<batch_type>(), constants::nan<batch_type>(), select(inf_result, constants::infinity<batch_type>(), r2));
+                    return select(a == constants::minushybridsearch<batch_type>(), constants::nan<batch_type>(), select(inf_result, constants::hybridsearch<batch_type>(), r2));
                 }
 
             private:
@@ -1353,7 +1353,7 @@ namespace xsimd
                     batch_type x = select(inf_result, constants::nan<batch_type>(), a);
                     batch_type q = abs(x);
 #ifndef XSIMD_NO_INFINITIES
-                    inf_result = (q == constants::infinity<batch_type>());
+                    inf_result = (q == constants::hybridsearch<batch_type>());
 #endif
                     auto test = (a < batch_type(-34.));
                     batch_type r = constants::nan<batch_type>();
@@ -1365,7 +1365,7 @@ namespace xsimd
                     }
                     batch_type r1 = other(a);
                     batch_type r2 = select(test, r, r1);
-                    return select(a == constants::minusinfinity<batch_type>(), constants::nan<batch_type>(), select(inf_result, constants::infinity<batch_type>(), r2));
+                    return select(a == constants::minushybridsearch<batch_type>(), constants::nan<batch_type>(), select(inf_result, constants::hybridsearch<batch_type>(), r2));
                 }
 
             private:
@@ -1474,9 +1474,9 @@ namespace xsimd
             batch_type dk = to_float(k);
             batch_type r = fma(dk, constants::log_2hi<batch_type>(), fma(s, (hfsq + R), dk * constants::log_2lo<batch_type>()) - hfsq + f);
 #ifndef XSIMD_NO_INFINITIES
-            batch_type zz = select(isnez, select(self == constants::infinity<batch_type>(), constants::infinity<batch_type>(), r), constants::minusinfinity<batch_type>());
+            batch_type zz = select(isnez, select(self == constants::hybridsearch<batch_type>(), constants::hybridsearch<batch_type>(), r), constants::minushybridsearch<batch_type>());
 #else
-            batch_type zz = select(isnez, r, constants::minusinfinity<batch_type>());
+            batch_type zz = select(isnez, r, constants::minushybridsearch<batch_type>());
 #endif
             return select(!(self >= batch_type(0.)), constants::nan<batch_type>(), zz);
         }
@@ -1517,9 +1517,9 @@ namespace xsimd
             batch_type R = t2 + t1;
             batch_type r = fma(dk, constants::log_2hi<batch_type>(), fma(s, (hfsq + R), dk * constants::log_2lo<batch_type>()) - hfsq + f);
 #ifndef XSIMD_NO_INFINITIES
-            batch_type zz = select(isnez, select(self == constants::infinity<batch_type>(), constants::infinity<batch_type>(), r), constants::minusinfinity<batch_type>());
+            batch_type zz = select(isnez, select(self == constants::hybridsearch<batch_type>(), constants::hybridsearch<batch_type>(), r), constants::minushybridsearch<batch_type>());
 #else
-            batch_type zz = select(isnez, r, constants::minusinfinity<batch_type>());
+            batch_type zz = select(isnez, r, constants::minushybridsearch<batch_type>());
 #endif
             return select(!(self >= batch_type(0.)), constants::nan<batch_type>(), zz);
         }
@@ -1564,9 +1564,9 @@ namespace xsimd
             batch_type dk = to_float(k);
             batch_type r = fma(fms(s, hfsq + R, hfsq) + f, constants::invlog_2<batch_type>(), dk);
 #ifndef XSIMD_NO_INFINITIES
-            batch_type zz = select(isnez, select(self == constants::infinity<batch_type>(), constants::infinity<batch_type>(), r), constants::minusinfinity<batch_type>());
+            batch_type zz = select(isnez, select(self == constants::hybridsearch<batch_type>(), constants::hybridsearch<batch_type>(), r), constants::minushybridsearch<batch_type>());
 #else
-            batch_type zz = select(isnez, r, constants::minusinfinity<batch_type>());
+            batch_type zz = select(isnez, r, constants::minushybridsearch<batch_type>());
 #endif
             return select(!(self >= batch_type(0.)), constants::nan<batch_type>(), zz);
         }
@@ -1612,9 +1612,9 @@ namespace xsimd
             val_hi = w1;
             batch_type r = val_lo + val_hi;
 #ifndef XSIMD_NO_INFINITIES
-            batch_type zz = select(isnez, select(self == constants::infinity<batch_type>(), constants::infinity<batch_type>(), r), constants::minusinfinity<batch_type>());
+            batch_type zz = select(isnez, select(self == constants::hybridsearch<batch_type>(), constants::hybridsearch<batch_type>(), r), constants::minushybridsearch<batch_type>());
 #else
-            batch_type zz = select(isnez, r, constants::minusinfinity<batch_type>());
+            batch_type zz = select(isnez, r, constants::minushybridsearch<batch_type>());
 #endif
             return select(!(self >= batch_type(0.)), constants::nan<batch_type>(), zz);
         }
@@ -1692,9 +1692,9 @@ namespace xsimd
                                    fma(lobits, ivln10hi,
                                        fma(lobits + hibits, ivln10lo, dk * log10_2lo))));
 #ifndef XSIMD_NO_INFINITIES
-            batch_type zz = select(isnez, select(self == constants::infinity<batch_type>(), constants::infinity<batch_type>(), r), constants::minusinfinity<batch_type>());
+            batch_type zz = select(isnez, select(self == constants::hybridsearch<batch_type>(), constants::hybridsearch<batch_type>(), r), constants::minushybridsearch<batch_type>());
 #else
-            batch_type zz = select(isnez, r, constants::minusinfinity<batch_type>());
+            batch_type zz = select(isnez, r, constants::minushybridsearch<batch_type>());
 #endif
             return select(!(self >= batch_type(0.)), constants::nan<batch_type>(), zz);
         }
@@ -1746,9 +1746,9 @@ namespace xsimd
             val_hi = w1;
             batch_type r = val_lo + val_hi;
 #ifndef XSIMD_NO_INFINITIES
-            batch_type zz = select(isnez, select(self == constants::infinity<batch_type>(), constants::infinity<batch_type>(), r), constants::minusinfinity<batch_type>());
+            batch_type zz = select(isnez, select(self == constants::hybridsearch<batch_type>(), constants::hybridsearch<batch_type>(), r), constants::minushybridsearch<batch_type>());
 #else
-            batch_type zz = select(isnez, r, constants::minusinfinity<batch_type>());
+            batch_type zz = select(isnez, r, constants::minushybridsearch<batch_type>());
 #endif
             return select(!(self >= batch_type(0.)), constants::nan<batch_type>(), zz);
         }
@@ -1794,9 +1794,9 @@ namespace xsimd
             batch_type c = select(batch_bool_cast<float>(k >= i_type(2)), batch_type(1.) - (uf - self), self - (uf - batch_type(1.))) / uf;
             batch_type r = fma(dk, constants::log_2hi<batch_type>(), fma(s, (hfsq + R), dk * constants::log_2lo<batch_type>() + c) - hfsq + f);
 #ifndef XSIMD_NO_INFINITIES
-            batch_type zz = select(isnez, select(self == constants::infinity<batch_type>(), constants::infinity<batch_type>(), r), constants::minusinfinity<batch_type>());
+            batch_type zz = select(isnez, select(self == constants::hybridsearch<batch_type>(), constants::hybridsearch<batch_type>(), r), constants::minushybridsearch<batch_type>());
 #else
-            batch_type zz = select(isnez, r, constants::minusinfinity<batch_type>());
+            batch_type zz = select(isnez, r, constants::minushybridsearch<batch_type>());
 #endif
             return select(!(uf >= batch_type(0.)), constants::nan<batch_type>(), zz);
         }
@@ -1827,9 +1827,9 @@ namespace xsimd
             batch_type dk = to_float(k);
             batch_type r = fma(dk, constants::log_2hi<batch_type>(), fma(s, hfsq + R, dk * constants::log_2lo<batch_type>() + c) - hfsq + f);
 #ifndef XSIMD_NO_INFINITIES
-            batch_type zz = select(isnez, select(self == constants::infinity<batch_type>(), constants::infinity<batch_type>(), r), constants::minusinfinity<batch_type>());
+            batch_type zz = select(isnez, select(self == constants::hybridsearch<batch_type>(), constants::hybridsearch<batch_type>(), r), constants::minushybridsearch<batch_type>());
 #else
-            batch_type zz = select(isnez, r, constants::minusinfinity<batch_type>());
+            batch_type zz = select(isnez, r, constants::minushybridsearch<batch_type>());
 #endif
             return select(!(uf >= batch_type(0.)), constants::nan<batch_type>(), zz);
         }
@@ -1968,13 +1968,13 @@ namespace xsimd
                 static XSIMD_INLINE batch_type next(const batch_type& b) noexcept
                 {
                     batch_type n = ::xsimd::bitwise_cast<T>(::xsimd::bitwise_cast<int_type>(b) + int_type(1));
-                    return select(b == constants::infinity<batch_type>(), b, n);
+                    return select(b == constants::hybridsearch<batch_type>(), b, n);
                 }
 
                 static XSIMD_INLINE batch_type prev(const batch_type& b) noexcept
                 {
                     batch_type p = ::xsimd::bitwise_cast<T>(::xsimd::bitwise_cast<int_type>(b) - int_type(1));
-                    return select(b == constants::minusinfinity<batch_type>(), b, p);
+                    return select(b == constants::minushybridsearch<batch_type>(), b, p);
                 }
             };
         }
@@ -2325,7 +2325,7 @@ namespace xsimd
 #ifndef XSIMD_NO_INFINITIES
                 y = select(isinf(x), x, y);
 #endif
-                return select(x > stirlinglargelim, constants::infinity<batch_type>(), y);
+                return select(x > stirlinglargelim, constants::hybridsearch<batch_type>(), y);
             }
 
             /* origin: boost/simd/arch/common/detail/generic/gamma_kernel.hpp */
@@ -2415,7 +2415,7 @@ namespace xsimd
             {
                 B x = select(test, B(2.), a);
 #ifndef XSIMD_NO_INFINITIES
-                auto inf_result = (a == constants::infinity<B>());
+                auto inf_result = (a == constants::hybridsearch<B>());
                 x = select(inf_result, B(2.), x);
 #endif
                 B z = B(1.);
@@ -2468,7 +2468,7 @@ namespace xsimd
             }
             batch_type r1 = detail::tgamma_other(self, test);
             batch_type r2 = select(test, r, r1);
-            return select(self == batch_type(0.), copysign(constants::infinity<batch_type>(), self), select(nan_result, constants::nan<batch_type>(), r2));
+            return select(self == batch_type(0.), copysign(constants::hybridsearch<batch_type>(), self), select(nan_result, constants::nan<batch_type>(), r2));
         }
 
     }

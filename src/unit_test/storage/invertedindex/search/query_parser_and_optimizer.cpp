@@ -1,16 +1,4 @@
-//  Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//      https://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
+
 
 #include "gtest/gtest.h"
 import base_test;
@@ -18,13 +6,13 @@ import base_test;
 import stl;
 import search_driver;
 import query_node;
-import infinity_exception;
+import hybridsearch_exception;
 import global_resource_usage;
-import infinity_context;
+import hybridsearch_context;
 import third_party;
 import logger;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class QueryParserAndOptimizerTest : public BaseTest {
 public:
@@ -85,7 +73,7 @@ int ParseAndOptimizeFromStream(const SearchDriver &driver, std::istream &ist) {
 }
 
 TEST_F(QueryParserAndOptimizerTest, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     std::string row_quires = R"##(
 #basic_filter with implicit field
@@ -149,7 +137,7 @@ sda:rtw AND ((NOT name:god^2 OR NOT kddd:ss^4) OR NOT ee:ff^1.2)
 }
 
 TEST_F(QueryParserAndOptimizerTest, operator_option_test_standard) {
-    using namespace infinity;
+    using namespace hybridsearch;
     std::string row_quires = R"##(
 #query
 dune god
@@ -187,7 +175,7 @@ sda:rtw AND ((NOT name:god^2 OR NOT kddd:ss^4) OR NOT ee:ff^1.2)
 }
 
 TEST_F(QueryParserAndOptimizerTest, operator_option_test_chinese) {
-    using namespace infinity;
+    using namespace hybridsearch;
     std::string row_quires = R"##(
 #basic_filter_boost with explicit field
 name:芯片^1.2

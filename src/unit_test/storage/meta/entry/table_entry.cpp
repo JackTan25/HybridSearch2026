@@ -2,8 +2,8 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_context;
-import infinity_exception;
+import hybridsearch_context;
+import hybridsearch_exception;
 
 import stl;
 import global_resource_usage;
@@ -41,7 +41,7 @@ import segment_entry;
 import block_entry;
 import txn_state;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class TableEntryTest : public BaseTestParamStr {};
 
@@ -52,7 +52,7 @@ void InsertData(const String &db_name, const String &table_name) {
         {R"#(The American Football Conference (AFC) harm chemical anarchism add test is one of harm chemical the two conferences of the National Football League (NFL). This add test conference and its counterpart, the National Football Conference (NFC), currently contain 16 teams each, making up the 32 teams of the NFL. The current AFC title holder is the New England Patriots.)#"},
         {R"#(周末我和朋友一起去“电子城”，想挑选一些新的“电脑配件”。那里有各种各样的“hardware”，如“motherboard”、“graphics card”等。我们还看到了一些很“awesome”的“peripheral devices”，像“keyboard”和“mouse”。我朋友说他需要一个新的“power supply”，而我则对那些“high-tech”的“storage devices”比较感兴趣。逛了一会儿后，我们都买到了自己心仪的东西，然后就“happily”回家了。)#"},
     };
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
     auto *txn = txn_mgr->BeginTxn(MakeUnique<String>("import data"), TransactionType::kNormal);
     auto [table_entry, status] = txn->GetTableByName(db_name, table_name);
@@ -90,8 +90,8 @@ INSTANTIATE_TEST_SUITE_P(TestWithDifferentParams,
                          ::testing::Values(BaseTestParamStr::NULL_CONFIG_PATH, BaseTestParamStr::VFS_OFF_CONFIG_PATH));
 
 TEST_P(TableEntryTest, decode_index_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
-    Catalog *catalog = infinity::InfinityContext::instance().storage()->catalog();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
+    Catalog *catalog = hybridsearch::hybridsearchContext::instance().storage()->catalog();
     auto *txn1 = txn_mgr->BeginTxn(MakeUnique<String>("get table"), TransactionType::kRead);
 
     // create table, drop table
@@ -123,8 +123,8 @@ TEST_P(TableEntryTest, decode_index_test) {
 }
 
 TEST_P(TableEntryTest, create_no_name_index_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
-    Catalog *catalog = infinity::InfinityContext::instance().storage()->catalog();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
+    Catalog *catalog = hybridsearch::hybridsearchContext::instance().storage()->catalog();
 
     // start txn1
     auto *txn1 = txn_mgr->BeginTxn(MakeUnique<String>("create index"), TransactionType::kNormal);
@@ -179,8 +179,8 @@ TEST_P(TableEntryTest, create_no_name_index_test) {
 }
 
 TEST_P(TableEntryTest, remove_index_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
-    Catalog *catalog = infinity::InfinityContext::instance().storage()->catalog();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
+    Catalog *catalog = hybridsearch::hybridsearchContext::instance().storage()->catalog();
 
     // start txn1
     auto *txn1 = txn_mgr->BeginTxn(MakeUnique<String>("create index"), TransactionType::kNormal);
@@ -246,8 +246,8 @@ TEST_P(TableEntryTest, remove_index_test) {
 }
 
 TEST_P(TableEntryTest, table_indexes_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
-    Catalog *catalog = infinity::InfinityContext::instance().storage()->catalog();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
+    Catalog *catalog = hybridsearch::hybridsearchContext::instance().storage()->catalog();
 
     // start txn1
     auto *txn1 = txn_mgr->BeginTxn(MakeUnique<String>("create index"), TransactionType::kNormal);
@@ -317,7 +317,7 @@ TEST_P(TableEntryTest, table_indexes_test) {
 }
 
 TEST_P(TableEntryTest, get_fulltext_analyzers_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
     // create table
     {
@@ -385,7 +385,7 @@ TEST_P(TableEntryTest, get_fulltext_analyzers_test) {
 }
 
 TEST_P(TableEntryTest, optimize_fulltext_index_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
     // create table
     {
@@ -462,7 +462,7 @@ TEST_P(TableEntryTest, optimize_fulltext_index_test) {
 }
 
 TEST_P(TableEntryTest, roll_back_committed_write_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
     // create table
     {
@@ -491,7 +491,7 @@ TEST_P(TableEntryTest, roll_back_committed_write_test) {
             {R"#(The American Football Conference (AFC) harm chemical anarchism add test is one of harm chemical the two conferences of the National Football League (NFL). This add test conference and its counterpart, the National Football Conference (NFC), currently contain 16 teams each, making up the 32 teams of the NFL. The current AFC title holder is the New England Patriots.)#"},
             {R"#(周末我和朋友一起去“电子城”，想挑选一些新的“电脑配件”。那里有各种各样的“hardware”，如“motherboard”、“graphics card”等。我们还看到了一些很“awesome”的“peripheral devices”，像“keyboard”和“mouse”。我朋友说他需要一个新的“power supply”，而我则对那些“high-tech”的“storage devices”比较感兴趣。逛了一会儿后，我们都买到了自己心仪的东西，然后就“happily”回家了。)#"},
         };
-        TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+        TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
         auto *txn = txn_mgr->BeginTxn(MakeUnique<String>("import data"), TransactionType::kNormal);
         auto [table_entry, status] = txn->GetTableByName(db_name, table_name);
@@ -542,7 +542,7 @@ TEST_P(TableEntryTest, roll_back_committed_write_test) {
 }
 
 TEST_P(TableEntryTest, roll_back_uncommitted_write_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
     // create table
     {
@@ -571,7 +571,7 @@ TEST_P(TableEntryTest, roll_back_uncommitted_write_test) {
             {R"#(The American Football Conference (AFC) harm chemical anarchism add test is one of harm chemical the two conferences of the National Football League (NFL). This add test conference and its counterpart, the National Football Conference (NFC), currently contain 16 teams each, making up the 32 teams of the NFL. The current AFC title holder is the New England Patriots.)#"},
             {R"#(周末我和朋友一起去“电子城”，想挑选一些新的“电脑配件”。那里有各种各样的“hardware”，如“motherboard”、“graphics card”等。我们还看到了一些很“awesome”的“peripheral devices”，像“keyboard”和“mouse”。我朋友说他需要一个新的“power supply”，而我则对那些“high-tech”的“storage devices”比较感兴趣。逛了一会儿后，我们都买到了自己心仪的东西，然后就“happily”回家了。)#"},
         };
-        TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+        TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
         auto *txn = txn_mgr->BeginTxn(MakeUnique<String>("import data"), TransactionType::kNormal);
         auto [table_entry, status] = txn->GetTableByName(db_name, table_name);
@@ -620,7 +620,7 @@ TEST_P(TableEntryTest, roll_back_uncommitted_write_test) {
 }
 
 TEST_P(TableEntryTest, compact_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
     // create table
     {
@@ -667,7 +667,7 @@ TEST_P(TableEntryTest, compact_test) {
 }
 
 TEST_P(TableEntryTest, check_any_delete_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
     // create table
     {
@@ -722,7 +722,7 @@ TEST_P(TableEntryTest, table_entry_type_test) {
 }
 
 TEST_P(TableEntryTest, serialize_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
     // create table
     {
@@ -793,8 +793,8 @@ TEST_P(TableEntryTest, serialize_test) {
 }
 
 TEST_P(TableEntryTest, deserialize_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
-    BufferManager *buffer_mgr = infinity::InfinityContext::instance().storage()->buffer_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
+    BufferManager *buffer_mgr = hybridsearch::hybridsearchContext::instance().storage()->buffer_manager();
 
     // create table
     {
@@ -866,7 +866,7 @@ TEST_P(TableEntryTest, deserialize_test) {
 }
 
 TEST_P(TableEntryTest, get_colunm_id_by_name_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
     // create table
     {

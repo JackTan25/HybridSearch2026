@@ -5,7 +5,7 @@
 #include <iostream>
 #include <thread>
 
-namespace infinity {
+namespace hybridsearch {
 
 // Encapsulates methods for thread access.
 class ThreadUtil {
@@ -26,4 +26,4 @@ public:
 #endif
     }
 };
-} // namespace infinity
+} // namespace hybridsearch

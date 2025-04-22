@@ -5,7 +5,7 @@ statement ok
 CREATE TABLE cached_fulltext(doctitle varchar DEFAULT '', docdate varchar DEFAULT '', body varchar DEFAULT '');
 
 statement ok
-COPY cached_fulltext FROM '/var/infinity/test_data/enwiki_99.csv' WITH ( DELIMITER '\t', FORMAT CSV );
+COPY cached_fulltext FROM '/var/hybridsearch/test_data/enwiki_99.csv' WITH ( DELIMITER '\t', FORMAT CSV );
 
 statement ok
 CREATE INDEX ft_index ON cached_fulltext(body) USING FULLTEXT;

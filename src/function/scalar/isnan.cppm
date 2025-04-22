@@ -4,10 +4,10 @@ import stl;
 
 export module isnan;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 
 export void RegisterIsnanFunction(const UniquePtr<Catalog> &catalog_ptr);
 
-} // namespace infinity
+} // namespace hybridsearch

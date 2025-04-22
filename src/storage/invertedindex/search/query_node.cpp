@@ -11,7 +11,7 @@ import column_index_reader;
 import posting_iterator;
 import index_defines;
 import column_length_io;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 
 import doc_iterator;
@@ -30,7 +30,7 @@ import blockmax_leaf_iterator;
 import rank_feature_doc_iterator;
 import rank_features_doc_iterator;
 
-namespace infinity {
+namespace hybridsearch {
 
 // optimize: from leaf to root, replace tree node in place
 
@@ -876,4 +876,4 @@ uint32_t MultiQueryNode::LeafCount() const {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

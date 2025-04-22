@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -21,7 +9,7 @@ module explain_ast;
 import stl;
 import third_party;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import base_statement;
 import select_statement;
 import copy_statement;
@@ -49,7 +37,7 @@ import table_reference;
 import statement_common;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 Status ExplainAST::Explain(const BaseStatement *statement, SharedPtr<Vector<SharedPtr<String>>> &stmt_string, i64 intent_size) {
     switch (statement->Type()) {
@@ -903,4 +891,4 @@ Status ExplainAST::BuildCopy(const CopyStatement *copy_statement, SharedPtr<Vect
     }
     return Status::OK();
 }
-} // namespace infinity
+} // namespace hybridsearch

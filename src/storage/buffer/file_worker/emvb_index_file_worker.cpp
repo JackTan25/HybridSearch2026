@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -22,7 +10,7 @@ import file_worker;
 import index_base;
 import emvb_index;
 import index_emvb;
-import infinity_exception;
+import hybridsearch_exception;
 import logical_type;
 import embedding_info;
 import create_index_info;
@@ -34,7 +22,7 @@ import file_worker_type;
 import third_party;
 import emvb_product_quantization;
 
-namespace infinity {
+namespace hybridsearch {
 
 EMVBIndexFileWorker::~EMVBIndexFileWorker() {
     if (data_ != nullptr) {
@@ -108,4 +96,4 @@ void EMVBIndexFileWorker::ReadFromFileImpl(SizeT file_size, bool from_spill) {
 
 const EmbeddingInfo *EMVBIndexFileWorker::GetEmbeddingInfo() const { return static_cast<EmbeddingInfo *>(column_def_->type()->type_info().get()); }
 
-} // namespace infinity
+} // namespace hybridsearch

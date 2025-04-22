@@ -1,6 +1,6 @@
 #pragma once
 
-namespace infinity {
+namespace hybridsearch {
 
 #if defined(__x86_64__) || defined(__amd64__)
 #define PAUSE __builtin_ia32_pause()
@@ -61,4 +61,4 @@ inline int Builtin::lsb(unsigned long v) { return v ? __builtin_ctzl(v) : 0; }
 inline int Builtin::lsb(unsigned long long v) { return v ? __builtin_ctzll(v) : 0; }
 #endif
 
-} // namespace infinity
+} // namespace hybridsearch

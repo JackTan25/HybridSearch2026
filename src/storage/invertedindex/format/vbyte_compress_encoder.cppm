@@ -6,7 +6,7 @@ import byte_slice_writer;
 
 export module vbyte_compress_encoder;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename T>
 class VByteIntEncoder {
@@ -38,4 +38,4 @@ u32 VByteIntEncoder<T>::Decode(T *dest, u32 dest_len, ByteSliceReader &slice_rea
     return len;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

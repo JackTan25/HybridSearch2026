@@ -11,7 +11,7 @@
 
 #include <thrift/TToString.h>
 
-namespace infinity_peer_server {
+namespace hybridsearch_peer_server {
 
 int _kNodeTypeValues[] = {
   NodeType::kAdmin,

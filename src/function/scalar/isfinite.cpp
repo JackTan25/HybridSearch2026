@@ -7,7 +7,7 @@ module isfinite;
 import stl;
 import catalog;
 import status;
-import infinity_exception;
+import hybridsearch_exception;
 import scalar_function;
 import scalar_function_set;
 
@@ -17,7 +17,7 @@ import internal_types;
 import data_type;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct IsfiniteFunction {
     template <typename TA, typename TB>
@@ -79,4 +79,4 @@ void RegisterIsfiniteFunction(const UniquePtr<Catalog> &catalog_ptr) {
     Catalog::AddFunctionSet(catalog_ptr.get(), function_set_ptr);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

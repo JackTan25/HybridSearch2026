@@ -27,9 +27,9 @@ import logical_type;
 import third_party;
 import random;
 import global_resource_usage;
-import infinity_context;
+import hybridsearch_context;
 
-using namespace infinity;
+using namespace hybridsearch;
 class ColumnIndexMergerTest : public BaseTestParamStr {
 public:
     struct ExpectedPosting {
@@ -161,7 +161,7 @@ String ColumnIndexMergerTest::GetTerm(u32 n) {
     return result;
 }
 
-void ColumnIndexMergerTest::GenerateTerms(Vector<infinity::String> &terms, infinity::u32 term_num) {
+void ColumnIndexMergerTest::GenerateTerms(Vector<hybridsearch::String> &terms, hybridsearch::u32 term_num) {
     for (u32 i = 1; i <= term_num; ++i) {
         terms.emplace_back(GetTerm(i));
     }
@@ -238,7 +238,7 @@ TEST_P(ColumnIndexMergerTest, GenerateParagraphsTest) {
 }
 
 TEST_P(ColumnIndexMergerTest, BasicParagraphTest) {
-    using namespace infinity;
+    using namespace hybridsearch;
     const char *paragraphs[] = {R"#(B A)#", R"#(A B A)#", R"#(A A A)#"};
     const SizeT num_paragraph = sizeof(paragraphs) / sizeof(char *);
     const String index_dir = GetFullDataDir();
@@ -255,7 +255,7 @@ TEST_P(ColumnIndexMergerTest, BasicParagraphTest) {
 }
 
 TEST_P(ColumnIndexMergerTest, BasicParagraphTest1) {
-    using namespace infinity;
+    using namespace hybridsearch;
     const char *paragraphs[] = {
         R"#(B A)#",
         R"#(A B A)#",
@@ -275,7 +275,7 @@ TEST_P(ColumnIndexMergerTest, BasicParagraphTest1) {
 }
 
 TEST_P(ColumnIndexMergerTest, BasicParagraphTest2) {
-    using namespace infinity;
+    using namespace hybridsearch;
     // https://en.wikipedia.org/wiki/Finite-state_transducer
     const char *paragraphs[] = {
         R"#(A finite-state transducer (FST) is a finite-state machine with two memory tapes, following the terminology for Turing machines: an input tape and an output tape. This contrasts with an ordinary finite-state automaton, which has a single tape. An FST is a type of finite-state automaton (FSA) that maps between two sets of symbols.[1] An FST is more general than an FSA. An FSA defines a formal language by defining a set of accepted strings, while an FST defines a relation between sets of strings.)#",
@@ -299,7 +299,7 @@ TEST_P(ColumnIndexMergerTest, BasicParagraphTest2) {
 }
 
 TEST_P(ColumnIndexMergerTest, BasicParagraphTest3) {
-    using namespace infinity;
+    using namespace hybridsearch;
     // https://en.wikipedia.org/wiki/Finite-state_transducer
     const char *paragraphs[] = {
         R"#(A finite-state transducer (FST) is a finite-state machine with two memory tapes, following the terminology for Turing machines: an input tape and an output tape. This contrasts with an ordinary finite-state automaton, which has a single tape. An FST is a type of finite-state automaton (FSA) that maps between two sets of symbols.[1] An FST is more general than an FSA. An FSA defines a formal language by defining a set of accepted strings, while an FST defines a relation between sets of strings.)#",
@@ -323,7 +323,7 @@ TEST_P(ColumnIndexMergerTest, BasicParagraphTest3) {
 }
 
 TEST_P(ColumnIndexMergerTest, BasicParagraphTest4) {
-    using namespace infinity;
+    using namespace hybridsearch;
     // https://en.wikipedia.org/wiki/Finite-state_transducer
     const char *paragraphs[] = {
         R"#(A finite-state transducer (FST) is a finite-state machine with two memory tapes, following the terminology for Turing machines: an input tape and an output tape. This contrasts with an ordinary finite-state automaton, which has a single tape. An FST is a type of finite-state automaton (FSA) that maps between two sets of symbols.[1] An FST is more general than an FSA. An FSA defines a formal language by defining a set of accepted strings, while an FST defines a relation between sets of strings.)#",
@@ -347,7 +347,7 @@ TEST_P(ColumnIndexMergerTest, BasicParagraphTest4) {
 }
 
 TEST_P(ColumnIndexMergerTest, BasicParagraphTest5) {
-    using namespace infinity;
+    using namespace hybridsearch;
     // https://en.wikipedia.org/wiki/Finite-state_transducer
     const char *paragraphs[] = {
         R"#(A finite-state transducer (FST) is a finite-state machine with two memory tapes, following the terminology for Turing machines: an input tape and an output tape. This contrasts with an ordinary finite-state automaton, which has a single tape. An FST is a type of finite-state automaton (FSA) that maps between two sets of symbols.[1] An FST is more general than an FSA. An FSA defines a formal language by defining a set of accepted strings, while an FST defines a relation between sets of strings.)#",
@@ -371,7 +371,7 @@ TEST_P(ColumnIndexMergerTest, BasicParagraphTest5) {
 }
 
 TEST_P(ColumnIndexMergerTest, GeneratePargraphsMergeTest) {
-    using namespace infinity;
+    using namespace hybridsearch;
     Vector<String> paragraphs;
     Vector<ExpectedPosting> expected_postings;
 
@@ -393,7 +393,7 @@ TEST_P(ColumnIndexMergerTest, GeneratePargraphsMergeTest) {
 }
 
 TEST_P(ColumnIndexMergerTest, GeneratePargraphsMergeTest1) {
-    using namespace infinity;
+    using namespace hybridsearch;
     Vector<String> paragraphs;
     Vector<ExpectedPosting> expected_postings;
 
@@ -417,7 +417,7 @@ TEST_P(ColumnIndexMergerTest, GeneratePargraphsMergeTest1) {
 // #define LOCAL_MERGER_TEST
 #ifdef LOCAL_MERGER_TEST
 TEST_P(ColumnIndexMergerTest, GeneratePargraphsMergeTest2) {
-    using namespace infinity;
+    using namespace hybridsearch;
     Vector<String> paragraphs;
     Vector<ExpectedPosting> expected_postings;
 
@@ -452,7 +452,7 @@ TEST_P(ColumnIndexMergerTest, GeneratePargraphsMergeTest2) {
 }
 
 TEST_P(ColumnIndexMergerTest, GeneratePargraphsMergeTest3) {
-    using namespace infinity;
+    using namespace hybridsearch;
     Vector<String> paragraphs;
     Vector<ExpectedPosting> expected_postings;
 

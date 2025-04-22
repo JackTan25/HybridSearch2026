@@ -1,16 +1,4 @@
-//  Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//      https://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
+
 
 module;
 
@@ -25,7 +13,7 @@ import internal_types;
 import data_type;
 import logical_type;
 import query_context;
-import infinity_exception;
+import hybridsearch_exception;
 import expression_type;
 import base_expression;
 import function_expression;
@@ -57,7 +45,7 @@ import status;
 import parse_fulltext_options;
 import table_entry;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct ExpressionIndexScanInfo {
     enum class Enum {
@@ -506,7 +494,7 @@ private:
                         RecoverableError(Status::SyntaxError("topn option should not in filter_fulltext"));
                     }
 
-                    auto query_operator_option = FulltextQueryOperatorOption::kInfinitySyntax;
+                    auto query_operator_option = FulltextQueryOperatorOption::khybridsearchSyntax;
                     // option: operator
                     if (iter = search_ops.options_.find("operator"); iter != search_ops.options_.end()) {
                         ToLower(iter->second);
@@ -746,4 +734,4 @@ void FilterExpressionPushDown::BuildFilterFulltextExpression(QueryContext *query
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

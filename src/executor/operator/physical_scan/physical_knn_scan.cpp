@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -41,7 +29,7 @@ import knn_scan_data;
 import knn_filter;
 import third_party;
 import txn;
-import infinity_exception;
+import hybridsearch_exception;
 import default_values;
 import column_expression;
 import embedding_info;
@@ -65,7 +53,7 @@ import ivf_index_data_in_mem;
 import ivf_index_data;
 import ivf_index_search;
 
-namespace infinity {
+namespace hybridsearch {
 
 auto GetKnnExprForCalculation(const KnnExpression &src_knn_expr, const EmbeddingDataType column_embedding_type) {
     // check column basic embedding data type and query embedding data type
@@ -905,4 +893,4 @@ void MultiVectorSearchOneLine(MergeKnn<QueryDataType, C, DistanceDataType> *merg
     merge_heap->Search(0, &result_dist, &db_row_id, 1);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

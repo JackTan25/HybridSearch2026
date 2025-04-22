@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -29,7 +17,7 @@ import data_block;
 import txn;
 import data_access_state;
 
-import infinity_exception;
+import hybridsearch_exception;
 import defer_op;
 import buffer_handle;
 import logger;
@@ -42,11 +30,11 @@ import compact_state_data;
 import cleanup_scanner;
 import background_process;
 import wal_entry;
-import infinity_context;
+import hybridsearch_context;
 import roaring_bitmap;
 import meta_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 Vector<std::string_view> SegmentEntry::DecodeIndex(std::string_view encode) {
     SizeT delimiter_i = encode.rfind('#');
@@ -706,7 +694,7 @@ void SegmentEntry::Cleanup(CleanupInfoTracer *info_tracer, bool dropped) {
     }
 
     if (dropped) {
-        String full_segment_dir = Path(InfinityContext::instance().config()->DataDir()) / *segment_dir_;
+        String full_segment_dir = Path(hybridsearchContext::instance().config()->DataDir()) / *segment_dir_;
         LOG_DEBUG(fmt::format("Cleaning up segment dir: {}", full_segment_dir));
         CleanupScanner::CleanupDir(full_segment_dir);
         LOG_DEBUG(fmt::format("Cleaned segment dir: {}", full_segment_dir));
@@ -824,4 +812,4 @@ SizeT SegmentEntry::GetStorageSize() const {
     return result;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -10,7 +10,7 @@ import index_defines;
 import posting_field;
 import file_writer;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class SkipListWriterTest : public BaseTest {
 public:
@@ -28,10 +28,10 @@ protected:
     static constexpr SizeT BUFFER_SIZE_ = 1024;
 };
 
-SharedPtr<FileWriter> SkipListWriterTest::CreateFileWriter(infinity::String file_path) { return MakeShared<FileWriter>(file_path, BUFFER_SIZE_); }
+SharedPtr<FileWriter> SkipListWriterTest::CreateFileWriter(hybridsearch::String file_path) { return MakeShared<FileWriter>(file_path, BUFFER_SIZE_); }
 
 TEST_F(SkipListWriterTest, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     ASSERT_NE(nullptr, skiplist_writer_);
     PostingFields posting_fields;
@@ -69,7 +69,7 @@ TEST_F(SkipListWriterTest, test1) {
 }
 
 TEST_F(SkipListWriterTest, test2) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     ASSERT_NE(nullptr, skiplist_writer_);
     PostingFields posting_fields;
@@ -141,7 +141,7 @@ TEST_F(SkipListWriterTest, test2) {
 }
 
 TEST_F(SkipListWriterTest, test3) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     ASSERT_NE(nullptr, skiplist_writer_);
     PostingFields posting_fields;

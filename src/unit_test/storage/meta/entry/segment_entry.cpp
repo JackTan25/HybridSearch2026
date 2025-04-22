@@ -3,8 +3,8 @@
 #include <regex>
 import base_test;
 
-import infinity_context;
-import infinity_exception;
+import hybridsearch_context;
+import hybridsearch_exception;
 
 import stl;
 import global_resource_usage;
@@ -43,7 +43,7 @@ import segment_entry;
 import block_entry;
 import txn_state;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class SegmentEntryTest : public BaseTestParamStr {};
 
@@ -58,7 +58,7 @@ void DropIndex();
 void DropTable();
 
 TEST_P(SegmentEntryTest, decode_index_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
     CreateTable();
     InsertData("default_db", "tbl1");
 
@@ -101,7 +101,7 @@ TEST(ToStringTest, segment_status_to_string_test) {
 }
 
 TEST_P(SegmentEntryTest, segment_entry_to_string_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
     CreateTable();
     InsertData("default_db", "tbl1");
 
@@ -124,7 +124,7 @@ TEST_P(SegmentEntryTest, segment_entry_to_string_test) {
 }
 
 TEST_P(SegmentEntryTest, set_sealed_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
     CreateTable();
     InsertData("default_db", "tbl1");
 
@@ -143,7 +143,7 @@ TEST_P(SegmentEntryTest, set_sealed_test) {
 }
 
 TEST_P(SegmentEntryTest, set_compacting_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
     CreateTable();
     InsertData("default_db", "tbl1");
 
@@ -163,7 +163,7 @@ TEST_P(SegmentEntryTest, set_compacting_test) {
 }
 
 TEST_P(SegmentEntryTest, set_no_delete_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
     CreateTable();
     InsertData("default_db", "tbl1");
 
@@ -184,7 +184,7 @@ TEST_P(SegmentEntryTest, set_no_delete_test) {
 }
 
 TEST_P(SegmentEntryTest, set_deprecated_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
     CreateTable();
     InsertData("default_db", "tbl1");
 
@@ -206,7 +206,7 @@ TEST_P(SegmentEntryTest, set_deprecated_test) {
 }
 
 TEST_P(SegmentEntryTest, roll_back_compact_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
     CreateTable();
     InsertData("default_db", "tbl1");
 
@@ -229,7 +229,7 @@ TEST_P(SegmentEntryTest, roll_back_compact_test) {
 }
 
 TEST_P(SegmentEntryTest, check_row_visible_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
     CreateTable();
     InsertData("default_db", "tbl1");
 
@@ -247,7 +247,7 @@ TEST_P(SegmentEntryTest, check_row_visible_test) {
 }
 
 TEST_P(SegmentEntryTest, check_rows_visible_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
     CreateTable();
     InsertData("default_db", "tbl1");
 
@@ -268,8 +268,8 @@ TEST_P(SegmentEntryTest, check_rows_visible_test) {
 }
 
 TEST_P(SegmentEntryTest, append_data_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
-    BufferManager *buffer_mgr = infinity::InfinityContext::instance().storage()->buffer_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
+    BufferManager *buffer_mgr = hybridsearch::hybridsearchContext::instance().storage()->buffer_manager();
     CreateTable();
     InsertData("default_db", "tbl1");
 

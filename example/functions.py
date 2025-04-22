@@ -1,16 +1,16 @@
 import os
 import pandas as pd
-import infinity
-import infinity.index as index
+import hybridsearch
+import hybridsearch.index as index
 from numpy import dtype
-from infinity.errors import ErrorCode
-from infinity.common import ConflictType, SortType
+from hybridsearch.errors import ErrorCode
+from hybridsearch.common import ConflictType, SortType
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 
 
-infinity_obj = infinity.connect(infinity.common.NetworkAddress("127.0.0.1", 23817))
-db_obj = infinity_obj.get_database("default_db")
+hybridsearch_obj = hybridsearch.connect(hybridsearch.common.NetworkAddress("127.0.0.1", 23817))
+db_obj = hybridsearch_obj.get_database("default_db")
 db_obj.drop_table("function_example", ConflictType.Ignore)
 db_obj.create_table("function_example",
                     {"c1": {"type": "varchar", "constraints": ["primary key", "not null"]},
@@ -20,7 +20,7 @@ table_obj.insert(
     [{"c1": 'a', "c2": 'a'}, {"c1": 'b', "c2": 'b'}, {"c1": 'c', "c2": 'c'}, {"c1": 'd', "c2": 'd'},
         {"c1": 'abc', "c2": 'abc'}, {"c1": 'bbc', "c2": 'bbc'}, {"c1": 'cbc', "c2": 'cbc'}, {"c1": 'dbc', "c2": 'dbc'},
         {"c1": 'abcd', "c2": 'abc'}, 
-        {"c1": 'test@gmail.com', "c2": 'email'}, {"c1": 'test@hotmail.com', "c2": 'email'},
+        {"c1": '', "c2": 'email'}, {"c1": 'test@hotmail.com', "c2": 'email'},
         {"c1": ' abc', "c2": 'abc'}, {"c1": 'abc ', "c2": 'abc'}, {"c1": ' abc ', "c2": 'abc'}])
 
 # varchar functions
@@ -69,8 +69,6 @@ if extra_result is not None:
     print(extra_result)
 
 #function upper and lower
-res, extra_result = table_obj.output(["*", "upper(c1)"]).filter("upper(c1) = 'TEST@GMAIL.COM'").to_df()
-print(res)
 if extra_result is not None:
     print(extra_result)
 
@@ -153,4 +151,4 @@ if extra_result is not None:
 
 res = db_obj.drop_table("function_example")
 
-infinity_obj.disconnect()
+hybridsearch_obj.disconnect()

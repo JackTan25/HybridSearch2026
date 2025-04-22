@@ -4,10 +4,10 @@ import os
 import os
 import pytest
 from common import common_values
-import infinity
-import infinity_embedded
-from infinity.errors import ErrorCode
-from infinity.common import ConflictType, InfinityException
+import hybridsearch
+import hybridsearch_embedded
+from hybridsearch.errors import ErrorCode
+from hybridsearch.common import ConflictType, hybridsearchException
 
 from common.utils import generate_big_int_csv, copy_data, generate_big_rows_csv, generate_big_columns_csv, generate_fvecs, \
     generate_commas_enwiki, read_fvecs_file
@@ -15,12 +15,12 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
-from infinity_http import infinity_http
+from hybridsearch_http import hybridsearch_http
 
 
 @pytest.fixture(scope="class")
-def local_infinity(request):
-    return request.config.getoption("--local-infinity")
+def local_hybridsearch(request):
+    return request.config.getoption("--local-hybridsearch")
 
 @pytest.fixture(scope="class")
 def http(request):
@@ -28,24 +28,24 @@ def http(request):
 
 
 @pytest.fixture(scope="class")
-def setup_class(request, local_infinity, http):
-    if local_infinity:
-        module = importlib.import_module("infinity_embedded.common")
+def setup_class(request, local_hybridsearch, http):
+    if local_hybridsearch:
+        module = importlib.import_module("hybridsearch_embedded.common")
         func = getattr(module, 'ConflictType')
         globals()['ConflictType'] = func
-        func = getattr(module, 'InfinityException')
-        globals()['InfinityException'] = func
+        func = getattr(module, 'hybridsearchException')
+        globals()['hybridsearchException'] = func
         uri = common_values.TEST_LOCAL_PATH
-        request.cls.infinity_obj = infinity_embedded.connect(uri)
+        request.cls.hybridsearch_obj = hybridsearch_embedded.connect(uri)
     elif http:
         uri = common_values.TEST_LOCAL_HOST
-        request.cls.infinity_obj = infinity_http()
+        request.cls.hybridsearch_obj = hybridsearch_http()
     else:
         uri = common_values.TEST_LOCAL_HOST
-        request.cls.infinity_obj = infinity.connect(uri)
+        request.cls.hybridsearch_obj = hybridsearch.connect(uri)
     request.cls.uri = uri
     yield
-    request.cls.infinity_obj.disconnect()
+    request.cls.hybridsearch_obj.disconnect()
 
 def count_lines(file_path: str):
     with open(file_path, 'r') as file:
@@ -58,7 +58,7 @@ def delete_file(file_path: str):
 
 @pytest.mark.usefixtures("setup_class")
 @pytest.mark.usefixtures("suffix")
-class TestInfinity:
+class Testhybridsearch:
     @pytest.fixture
     def skip_setup_marker(self, request):
         request.node.skip_setup = True
@@ -69,7 +69,7 @@ class TestInfinity:
 
         test_csv_dir = common_values.TEST_TMP_DIR + file_name
 
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_export_csv"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_export_csv"+suffix, {"doctitle": {"type": "varchar"}, "docdate": {"type": "varchar"}, "body": {"type": "varchar"}, "num": {"type": "integer"}, "vec": {"type": "vector, 4, float"}})
         res = table_obj.import_data(test_csv_dir, import_options={"file_type": "csv", "delimiter" : "\t"})
@@ -119,7 +119,7 @@ class TestInfinity:
 
         test_csv_dir = common_values.TEST_TMP_DIR + file_name
 
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_export_jsonl"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_export_jsonl"+suffix, {"doctitle": {"type": "varchar"}, "docdate": {"type": "varchar"}, "body": {"type": "varchar"}, "num": {"type": "integer"}, "vec": {"type": "vector, 4, float"}})
         res = table_obj.import_data(test_csv_dir, import_options={"file_type": "csv", "delimiter" : "\t"})
@@ -169,7 +169,7 @@ class TestInfinity:
 
         test_csv_dir = common_values.TEST_TMP_DIR + file_name
 
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_export_fvecs"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_export_fvecs"+suffix, {"doctitle": {"type": "varchar"}, "docdate": {"type": "varchar"}, "body": {"type": "varchar"}, "num": {"type": "integer"}, "vec": {"type": "vector, 4, float"}})
         res = table_obj.import_data(test_csv_dir, import_options={"file_type": "csv", "delimiter" : "\t"})

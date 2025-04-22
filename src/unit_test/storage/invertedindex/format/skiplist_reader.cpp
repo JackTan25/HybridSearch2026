@@ -17,7 +17,7 @@ import third_party;
 import byte_slice_reader;
 import random;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class SkiplistReaderTest : public BaseTest {
 public:
@@ -41,10 +41,10 @@ protected:
 
 void SkiplistReaderTest::InitSkiplistWriter(PostingFields &posting_fields,
                                             SizeT doc_num,
-                                            Vector<infinity::u32> &doc_ids,
-                                            Vector<infinity::u32> &tfs,
-                                            Vector<infinity::u32> &deltas,
-                                            Vector<infinity::u32> &offsets) {
+                                            Vector<hybridsearch::u32> &doc_ids,
+                                            Vector<hybridsearch::u32> &tfs,
+                                            Vector<hybridsearch::u32> &deltas,
+                                            Vector<hybridsearch::u32> &offsets) {
     u8 row_count = 0;
     u32 offset = 0;
 

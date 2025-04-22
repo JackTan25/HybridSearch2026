@@ -2,7 +2,7 @@ import sys
 import pytest
 from httpapibase import HttpTest
 from common.common_values import *
-import infinity.index as index
+import hybridsearch.index as index
 
 
 class TestQuery(HttpTest):

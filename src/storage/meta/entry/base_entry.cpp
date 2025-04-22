@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -18,14 +6,14 @@ module base_entry;
 
 import txn_manager;
 
-namespace infinity {
+namespace hybridsearch {
 
 BaseEntry::BaseEntry(const BaseEntry &other) : deleted_(other.deleted_), entry_type_(other.entry_type_), encode_(other.encode_) {
     txn_id_ = other.txn_id_;
     begin_ts_ = other.begin_ts_;
     commit_ts_ = other.commit_ts_.load();
 
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::IncrObjectCount("BaseEntry");
 #endif
 }
@@ -53,4 +41,4 @@ bool BaseEntry::CheckVisible(Txn *txn) const {
     return txn_mgr->CheckIfCommitting(txn_id_, begin_ts);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

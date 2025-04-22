@@ -1,22 +1,10 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 #include "gtest/gtest.h"
 import base_test;
 
 import stl;
-import infinity;
+import hybridsearch;
 import query_result;
 import data_block;
 import value;
@@ -35,22 +23,22 @@ import column_def;
 import explain_statement;
 import data_type;
 
-using namespace infinity;
-class InfinityTableTest : public BaseTest {};
+using namespace hybridsearch;
+class hybridsearchTableTest : public BaseTest {};
 
-TEST_F(InfinityTableTest, test1) {
-    using namespace infinity;
+TEST_F(hybridsearchTableTest, test1) {
+    using namespace hybridsearch;
 
     String path = GetHomeDir();
     RemoveDbDirs();
-    Infinity::LocalInit(path);
+    hybridsearch::LocalInit(path);
 
-    SharedPtr<Infinity> infinity = Infinity::LocalConnect();
+    SharedPtr<hybridsearch> hybridsearch = hybridsearch::LocalConnect();
     {
         CreateDatabaseOptions create_db_opts;
-        infinity->CreateDatabase("db1", create_db_opts, "");
+        hybridsearch->CreateDatabase("db1", create_db_opts, "");
 
-        QueryResult result = infinity->GetDatabase("db1");
+        QueryResult result = hybridsearch->GetDatabase("db1");
         EXPECT_TRUE(result.IsOk());
     }
 
@@ -76,7 +64,7 @@ TEST_F(InfinityTableTest, test1) {
         create_tb_options.conflict_type_ = ConflictType::kIgnore;
 
         QueryResult create_result =
-            infinity->CreateTable(db_name, table_name, std::move(column_defs), std::vector<TableConstraint *>{}, std::move(create_tb_options));
+            hybridsearch->CreateTable(db_name, table_name, std::move(column_defs), std::vector<TableConstraint *>{}, std::move(create_tb_options));
         EXPECT_TRUE(create_result.IsOk());
 
         {
@@ -86,7 +74,7 @@ TEST_F(InfinityTableTest, test1) {
             output_columns->emplace_back(col2);
 
             QueryResult explain_ast =
-                infinity
+                hybridsearch
                     ->Explain(db_name, table_name, ExplainType::kAst, nullptr, nullptr, nullptr, nullptr, output_columns, nullptr, nullptr, nullptr, nullptr);
             EXPECT_TRUE(explain_ast.IsOk());
             //            fmt::print("AST: {}\n", explain_ast.ToString());
@@ -98,7 +86,7 @@ TEST_F(InfinityTableTest, test1) {
             col2->names_.emplace_back(col2_name);
             output_columns->emplace_back(col2);
 
-            QueryResult explain_unopt = infinity->Explain(db_name,
+            QueryResult explain_unopt = hybridsearch->Explain(db_name,
                                                           table_name,
                                                           ExplainType::kUnOpt,
                                                           nullptr,
@@ -121,7 +109,7 @@ TEST_F(InfinityTableTest, test1) {
             output_columns->emplace_back(col2);
 
             QueryResult explain_optimized_logical =
-                infinity
+                hybridsearch
                     ->Explain(db_name, table_name, ExplainType::kOpt, nullptr, nullptr, nullptr, nullptr, output_columns, nullptr, nullptr, nullptr, nullptr);
 
             EXPECT_TRUE(explain_optimized_logical.IsOk());
@@ -134,7 +122,7 @@ TEST_F(InfinityTableTest, test1) {
             col2->names_.emplace_back(col2_name);
             output_columns->emplace_back(col2);
 
-            QueryResult explain_phy = infinity->Explain(db_name,
+            QueryResult explain_phy = hybridsearch->Explain(db_name,
                                                         table_name,
                                                         ExplainType::kPhysical,
                                                         nullptr,
@@ -156,7 +144,7 @@ TEST_F(InfinityTableTest, test1) {
             col2->names_.emplace_back(col2_name);
             output_columns->emplace_back(col2);
 
-            QueryResult explain_fragment = infinity->Explain(db_name,
+            QueryResult explain_fragment = hybridsearch->Explain(db_name,
                                                              table_name,
                                                              ExplainType::kFragment,
                                                              nullptr,
@@ -178,7 +166,7 @@ TEST_F(InfinityTableTest, test1) {
             col2->names_.emplace_back(col2_name);
             output_columns->emplace_back(col2);
 
-            QueryResult explain_pipeline = infinity->Explain(db_name,
+            QueryResult explain_pipeline = hybridsearch->Explain(db_name,
                                                              table_name,
                                                              ExplainType::kPipeline,
                                                              nullptr,
@@ -195,6 +183,6 @@ TEST_F(InfinityTableTest, test1) {
         }
     }
 
-    infinity->LocalDisconnect();
-    Infinity::LocalUnInit();
+    hybridsearch->LocalDisconnect();
+    hybridsearch::LocalUnInit();
 }

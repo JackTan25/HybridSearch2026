@@ -6,12 +6,12 @@ import struct
 import time
 import traceback
 
-import infinity
-from infinity import index
-from infinity.common import LOCAL_HOST
-from infinity.errors import ErrorCode
-from infinity.remote_thrift.client import ThriftInfinityClient
-from infinity.remote_thrift.table import RemoteTable
+import hybridsearch
+from hybridsearch import index
+from hybridsearch.common import LOCAL_HOST
+from hybridsearch.errors import ErrorCode
+from hybridsearch.remote_thrift.client import ThrifthybridsearchClient
+from hybridsearch.remote_thrift.table import RemoteTable
 
 
 def fvecs_read_all(filename):
@@ -41,10 +41,10 @@ def fvecs_read(filename):
 
 
 def insert_sift_1m(path):
-    infinity_obj = infinity.connect(LOCAL_HOST)
-    assert infinity_obj
+    hybridsearch_obj = hybridsearch.connect(LOCAL_HOST)
+    assert hybridsearch_obj
 
-    db_obj = infinity_obj.get_database("default_db")
+    db_obj = hybridsearch_obj.get_database("default_db")
     assert db_obj
     db_obj.drop_table("sift_benchmark")
     db_obj.create_table("sift_benchmark", {"col1": {"type": "vector,128,float"}})
@@ -80,10 +80,10 @@ def insert_sift_1m(path):
 
 
 def insert_gist_1m(path):
-    infinity_obj = infinity.connect(LOCAL_HOST)
-    assert infinity_obj
+    hybridsearch_obj = hybridsearch.connect(LOCAL_HOST)
+    assert hybridsearch_obj
 
-    db_obj = infinity_obj.get_database("default_db")
+    db_obj = hybridsearch_obj.get_database("default_db")
     assert db_obj
     db_obj.drop_table("gist_benchmark")
     db_obj.create_table("gist_benchmark", {"col1": {"type": "vector,960,float"}})
@@ -120,7 +120,7 @@ def insert_gist_1m(path):
 
 
 def create_index(table_name):
-    conn = ThriftInfinityClient(LOCAL_HOST)
+    conn = ThrifthybridsearchClient(LOCAL_HOST)
     table = RemoteTable(conn, "default_db", table_name)
     res = table.create_index("hnsw_index",
                              index.IndexInfo("col1",
@@ -136,9 +136,9 @@ def create_index(table_name):
 
 
 def work(vectors, table_name, column_name):
-    infinity_obj = infinity.connect(LOCAL_HOST)
-    assert infinity_obj
-    db_obj = infinity_obj.get_database("default_db")
+    hybridsearch_obj = hybridsearch.connect(LOCAL_HOST)
+    assert hybridsearch_obj
+    db_obj = hybridsearch_obj.get_database("default_db")
     assert db_obj
     table_obj = db_obj.get_table(table_name)
     assert table_obj
@@ -152,14 +152,14 @@ def process_pool(threads, path, table_name):
         print(f"File: {path} doesn't exist")
         raise Exception(f"File: {path} doesn't exist")
 
-    infinity_obj = infinity.connect(LOCAL_HOST)
-    assert infinity_obj
+    hybridsearch_obj = hybridsearch.connect(LOCAL_HOST)
+    assert hybridsearch_obj
 
-    db_obj = infinity_obj.get_database("default_db")
+    db_obj = hybridsearch_obj.get_database("default_db")
     assert db_obj
     db_obj.drop_table(table_name)
     db_obj.create_table(table_name, {"col1": {"type": "vector,128,float"}})
-    infinity_obj.disconnect()
+    hybridsearch_obj.disconnect()
 
     results = []
     total_vectors = fvecs_read_all(path)
@@ -228,7 +228,7 @@ if __name__ == '__main__':
     print(f"Current Path: {current_path}")
     print(f"Parent Path: {parent_path}")
 
-    parser = argparse.ArgumentParser(description="Benchmark Infinity")
+    parser = argparse.ArgumentParser(description="Benchmark hybridsearch")
 
     parser.add_argument(
         "-d",

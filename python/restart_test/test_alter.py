@@ -2,28 +2,28 @@ from functools import wraps
 import pathlib
 import time
 import pytest
-from infinity_runner import InfinityRunner, infinity_runner_decorator_factory
+from hybridsearch_runner import hybridsearchRunner, hybridsearch_runner_decorator_factory
 from common import common_values
-from infinity.common import ConflictType
-from infinity.errors import ErrorCode
+from hybridsearch.common import ConflictType
+from hybridsearch.errors import ErrorCode
 import pandas as pd
 from numpy import dtype
-import infinity.index as index
+import hybridsearch.index as index
 
 
 class TestAlter:
-    def test_alter_simple(self, infinity_runner: InfinityRunner):
+    def test_alter_simple(self, hybridsearch_runner: hybridsearchRunner):
         table_name = "test_alter1"
         config = "test/data/config/restart_test/test_alter/1.toml"
 
-        infinity_runner.clear()
+        hybridsearch_runner.clear()
         uri = common_values.TEST_LOCAL_HOST
 
-        decorator = infinity_runner_decorator_factory(config, uri, infinity_runner)
+        decorator = hybridsearch_runner_decorator_factory(config, uri, hybridsearch_runner)
 
         @decorator
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.drop_table(table_name, ConflictType.Ignore)
             table_obj = db_obj.create_table(
                 table_name,
@@ -51,8 +51,8 @@ class TestAlter:
             table_obj.insert([{"c1": 2, "c3": "test", "c4": "test2"}])
 
         @decorator
-        def part2(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part2(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.get_table(table_name)
 
             res, extra_result = table_obj.output(["*"]).to_df()
@@ -83,19 +83,19 @@ class TestAlter:
         ],
     )
     def test_alter_complex(
-        self, infinity_runner: InfinityRunner, flush: bool, flush_mid: bool
+        self, hybridsearch_runner: hybridsearchRunner, flush: bool, flush_mid: bool
     ):
         config = "test/data/config/restart_test/test_alter/1.toml"
         table_name = "test_alter2"
 
-        infinity_runner.clear()
+        hybridsearch_runner.clear()
         uri = common_values.TEST_LOCAL_HOST
 
-        decorator = infinity_runner_decorator_factory(config, uri, infinity_runner)
+        decorator = hybridsearch_runner_decorator_factory(config, uri, hybridsearch_runner)
 
         @decorator
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.drop_table(table_name, ConflictType.Ignore)
             table_obj = db_obj.create_table(
                 table_name,
@@ -113,7 +113,7 @@ class TestAlter:
             table_obj.insert([{"c1": 1, "c2": 2, "c3": "test"}])
 
             if flush and flush_mid:
-                infinity_obj.flush_delta()
+                hybridsearch_obj.flush_delta()
 
             res = table_obj.add_columns({"c4": {"type": "varchar", "default": "tttt"}})
             assert res.error_code == ErrorCode.OK
@@ -130,11 +130,11 @@ class TestAlter:
             assert res.error_code == ErrorCode.OK
 
             if flush:
-                infinity_obj.flush_delta()
+                hybridsearch_obj.flush_delta()
 
         @decorator
-        def part2(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part2(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.get_table(table_name)
             res, extra_result = table_obj.output(["*"]).to_df()
             pd.testing.assert_frame_equal(
@@ -157,7 +157,7 @@ class TestAlter:
                     }
                 ),
             )
-            dropped_column_dirs = pathlib.Path("/var/infinity/data").rglob("1.col")
+            dropped_column_dirs = pathlib.Path("/var/hybridsearch/data").rglob("1.col")
             assert len(list(dropped_column_dirs)) == 0
 
             res = table_obj.list_indexes()
@@ -175,20 +175,20 @@ class TestAlter:
         part1()
         part2()
 
-    def test_alter_cleanup_simple(self, infinity_runner: InfinityRunner):
+    def test_alter_cleanup_simple(self, hybridsearch_runner: hybridsearchRunner):
         table_name = "test_alter3"
         config = "test/data/config/restart_test/test_alter/3.toml"
 
-        infinity_runner.clear()
+        hybridsearch_runner.clear()
         uri = common_values.TEST_LOCAL_HOST
 
-        decorator = infinity_runner_decorator_factory(config, uri, infinity_runner)
+        decorator = hybridsearch_runner_decorator_factory(config, uri, hybridsearch_runner)
 
-        data_dir = "/var/infinity/data"
+        data_dir = "/var/hybridsearch/data"
 
         @decorator
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.drop_table(table_name, ConflictType.Ignore)
 
             table_obj = db_obj.create_table(
@@ -204,7 +204,7 @@ class TestAlter:
             res = table_obj.drop_columns(["c2"])
             assert res.error_code == ErrorCode.OK
 
-            infinity_obj.cleanup()
+            hybridsearch_obj.cleanup()
 
             dropped_column_dirs = pathlib.Path(data_dir).rglob("1.col")
             # find the column file with the column idx = 1
@@ -220,8 +220,8 @@ class TestAlter:
         part1()
 
         @decorator
-        def part2(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part2(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
 
             dropped_column_dirs = pathlib.Path(data_dir).rglob("2.col")
             assert len(list(dropped_column_dirs)) == 0
@@ -230,19 +230,19 @@ class TestAlter:
 
         part2()
 
-    def test_restart_after_alter_and_checkpoint(self, infinity_runner: InfinityRunner):
+    def test_restart_after_alter_and_checkpoint(self, hybridsearch_runner: hybridsearchRunner):
         table_name = "test_alter4"
         config = "test/data/config/restart_test/test_alter/1.toml"
 
-        infinity_runner.clear()
+        hybridsearch_runner.clear()
         uri = common_values.TEST_LOCAL_HOST
-        data_dir = "/var/infinity/data"
+        data_dir = "/var/hybridsearch/data"
 
-        decorator = infinity_runner_decorator_factory(config, uri, infinity_runner)
+        decorator = hybridsearch_runner_decorator_factory(config, uri, hybridsearch_runner)
 
         @decorator
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.drop_table(table_name, ConflictType.Ignore)
             table_obj = db_obj.create_table(
                 table_name,
@@ -257,16 +257,16 @@ class TestAlter:
             table_obj.add_columns({"c4": {"type": "varchar", "default": "tttt"}})
             table_obj.drop_columns(["c2"])
 
-            infinity_obj.flush_data()
+            hybridsearch_obj.flush_data()
 
             table_obj.drop_columns(["c3"])
 
-            infinity_obj.flush_delta()
+            hybridsearch_obj.flush_delta()
         
         part1()
 
         @decorator
-        def part2(infinity_obj):
+        def part2(hybridsearch_obj):
             dropped_column_dirs = pathlib.Path(data_dir).rglob("1.col")
             assert len(list(dropped_column_dirs)) == 0
 

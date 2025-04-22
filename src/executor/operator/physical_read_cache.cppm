@@ -24,7 +24,7 @@ import physical_operator_type;
 import load_meta;
 import logical_node_type;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PhysicalReadCache : public PhysicalOperator {
 public:
@@ -66,4 +66,4 @@ private:
     bool is_min_heap_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

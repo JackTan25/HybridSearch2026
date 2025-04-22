@@ -4,10 +4,10 @@ export module ceil;
 
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 
 export void RegisterCeilFunction(const UniquePtr<Catalog> &catalog_ptr);
 
-} // namespace infinity
+} // namespace hybridsearch

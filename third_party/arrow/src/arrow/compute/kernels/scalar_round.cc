@@ -222,7 +222,7 @@ struct RoundImpl<Type, RoundMode::TOWARDS_ZERO> {
 };
 
 template <typename Type>
-struct RoundImpl<Type, RoundMode::TOWARDS_INFINITY> {
+struct RoundImpl<Type, RoundMode::TOWARDS_hybridsearch> {
   template <typename T = Type>
   static constexpr enable_if_floating_value<T> Round(const T val) {
     return std::signbit(val) ? std::floor(val) : std::ceil(val);
@@ -331,22 +331,22 @@ struct RoundImpl<Type, RoundMode::HALF_TOWARDS_ZERO> {
 };
 
 template <typename Type>
-struct RoundImpl<Type, RoundMode::HALF_TOWARDS_INFINITY> {
+struct RoundImpl<Type, RoundMode::HALF_TOWARDS_hybridsearch> {
   template <typename T = Type>
   static constexpr enable_if_floating_value<T> Round(const T val) {
-    return RoundImpl<T, RoundMode::TOWARDS_INFINITY>::Round(val);
+    return RoundImpl<T, RoundMode::TOWARDS_hybridsearch>::Round(val);
   }
 
   template <typename T = Type>
   static enable_if_decimal_value<T, void> Round(T* val, const T& remainder,
                                                 const T& multiple, const int32_t scale) {
-    RoundImpl<T, RoundMode::TOWARDS_INFINITY>::Round(val, remainder, multiple, scale);
+    RoundImpl<T, RoundMode::TOWARDS_hybridsearch>::Round(val, remainder, multiple, scale);
   }
 
   template <typename T = Type>
   static constexpr enable_if_integer_value<T> Round(const T val, const T floor,
                                                     const T multiple, Status* st) {
-    return RoundImpl<T, RoundMode::TOWARDS_INFINITY>::Round(val, floor, multiple, st);
+    return RoundImpl<T, RoundMode::TOWARDS_hybridsearch>::Round(val, floor, multiple, st);
   }
 };
 
@@ -373,7 +373,7 @@ struct RoundImpl<Type, RoundMode::HALF_TO_EVEN> {
     if ((floor / multiple) % 2 == 0) {
       return floor;
     }
-    return RoundImpl<T, RoundMode::TOWARDS_INFINITY>::Round(val, floor, multiple, st);
+    return RoundImpl<T, RoundMode::TOWARDS_hybridsearch>::Round(val, floor, multiple, st);
   }
 };
 
@@ -400,7 +400,7 @@ struct RoundImpl<Type, RoundMode::HALF_TO_ODD> {
     if ((floor / multiple) % 2 != 0) {
       return floor;
     }
-    return RoundImpl<T, RoundMode::TOWARDS_INFINITY>::Round(val, floor, multiple, st);
+    return RoundImpl<T, RoundMode::TOWARDS_hybridsearch>::Round(val, floor, multiple, st);
   }
 };
 
@@ -610,7 +610,7 @@ struct RoundToMultiple<ArrowType, kRoundMode, enable_if_decimal<ArrowType>> {
           case RoundMode::HALF_TOWARDS_ZERO:
             // Do nothing
             break;
-          case RoundMode::HALF_TOWARDS_INFINITY:
+          case RoundMode::HALF_TOWARDS_hybridsearch:
             pair.first += remainder.Sign() >= 0 ? 1 : -1;
             break;
           case RoundMode::HALF_TO_EVEN:
@@ -650,7 +650,7 @@ struct RoundToMultiple<ArrowType, kRoundMode, enable_if_decimal<ArrowType>> {
         case RoundMode::TOWARDS_ZERO:
           // Do nothing
           break;
-        case RoundMode::TOWARDS_INFINITY:
+        case RoundMode::TOWARDS_hybridsearch:
           pair.first += remainder.Sign() >= 0 ? 1 : -1;
           break;
         default:
@@ -1161,11 +1161,11 @@ struct RoundKernel {
       ROUND_CASE(DOWN)
       ROUND_CASE(UP)
       ROUND_CASE(TOWARDS_ZERO)
-      ROUND_CASE(TOWARDS_INFINITY)
+      ROUND_CASE(TOWARDS_hybridsearch)
       ROUND_CASE(HALF_DOWN)
       ROUND_CASE(HALF_UP)
       ROUND_CASE(HALF_TOWARDS_ZERO)
-      ROUND_CASE(HALF_TOWARDS_INFINITY)
+      ROUND_CASE(HALF_TOWARDS_hybridsearch)
       ROUND_CASE(HALF_TO_EVEN)
       ROUND_CASE(HALF_TO_ODD)
     }
@@ -1197,11 +1197,11 @@ struct RoundBinaryKernel {
       ROUND_BINARY_CASE(DOWN)
       ROUND_BINARY_CASE(UP)
       ROUND_BINARY_CASE(TOWARDS_ZERO)
-      ROUND_BINARY_CASE(TOWARDS_INFINITY)
+      ROUND_BINARY_CASE(TOWARDS_hybridsearch)
       ROUND_BINARY_CASE(HALF_DOWN)
       ROUND_BINARY_CASE(HALF_UP)
       ROUND_BINARY_CASE(HALF_TOWARDS_ZERO)
-      ROUND_BINARY_CASE(HALF_TOWARDS_INFINITY)
+      ROUND_BINARY_CASE(HALF_TOWARDS_hybridsearch)
       ROUND_BINARY_CASE(HALF_TO_EVEN)
       ROUND_BINARY_CASE(HALF_TO_ODD)
     }

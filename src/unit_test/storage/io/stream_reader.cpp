@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
 import base_test;
-import infinity_exception;
+import hybridsearch_exception;
 
 import stl;
 import global_resource_usage;
@@ -10,11 +10,11 @@ import logger;
 
 import file_writer;
 import file_reader;
-import infinity_context;
+import hybridsearch_context;
 import stream_reader;
 import virtual_store;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class StreamReaderTest : public BaseTest {};
 

@@ -22,7 +22,7 @@ Today there are many open-source vector databases and search engines, each offer
 
 - Qdrant
 - ElasticSearch
-- Infinity
+- hybridsearch
 
 ## Datasets:
 
@@ -62,9 +62,9 @@ Options:
        default="mp"
        Choose concurrency mechanism, one of: mp - multiprocessing(recommended), mt - multithreading.
     --engine
-       default="infinity" 
+       default="hybridsearch" 
        Choose database engine to benchmark:
-          infinity,
+          hybridsearch,
           qdrant,
           elasticsearch,
           quickwit
@@ -118,17 +118,17 @@ qdrant_sift.json
 }
 ```
 
-Or, if you want to run an infinity benchmark on splade data set, with:  
+Or, if you want to run an hybridsearch benchmark on splade data set, with:  
 - IP to measure similarities among vectors,
 - BMP index type with block_size = 16, compress_type = compress,
 - alpha = 0.92, beta = 0.8,
 - top 10 most similar results,
 - precision of the results
 ```
-infinity_spade.json
+hybridsearch_spade.json
 {
-    "name": "infinity_splade",
-    "app": "infinity",
+    "name": "hybridsearch_splade",
+    "app": "hybridsearch",
     "host": "127.0.0.1:23817",
     "data_path": "datasets/SPLADE/base_1M.csr",
     "use_import": "sparse_vector_csr",
@@ -162,7 +162,7 @@ infinity_spade.json
 Download the data set for import, query set for query and the ground truth set if you want to validate the results and calculate precision and save them in the "datasets" folder. The benchmark framework also support automatically downloading data set if you give the url link in "data_link" field in your configuration files.
 #### Step 2: Customize your configuration files
 Customize your configuration files for the specific benchmark you want to run, just like the previous configuration section did. Your configuration should also include the correct data path where you saved data set and be named correctly in pattern "\<engine_name\>_\<dataset_name\>.json".  
-For example, if you want to run an infinity benchmark on splade data set, then the configuration file name should be "infinity_splade.json".
+For example, if you want to run an hybridsearch benchmark on splade data set, then the configuration file name should be "hybridsearch_splade.json".
 #### Step 3: Run the database engine
 Download and run the database engine, make sure it is accessible when you run the benchmark.
 #### Step 4: Import the data set
@@ -177,7 +177,7 @@ For example, if you want to run a qdrant benchmark on splade data set with singl
 ```commandline
 python3 run.py --engine qdrant --dataset splade --query 1 
 ```
-Or, if you want to run an infinity benchmark on sift data set with 16 processes for QPS measurement, then you shall use:
+Or, if you want to run an hybridsearch benchmark on sift data set with 16 processes for QPS measurement, then you shall use:
 ```commandline
-python3 run.py --engine  infinity --dataset sift --query-express 16
+python3 run.py --engine  hybridsearch --dataset sift --query-express 16
 ```

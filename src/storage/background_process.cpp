@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -24,15 +12,15 @@ import bg_task;
 import update_segment_bloom_filter_task;
 import logger;
 import blocking_queue;
-import infinity_exception;
+import hybridsearch_exception;
 import wal_manager;
 import catalog;
 import third_party;
 import buffer_manager;
 import periodic_trigger;
-import infinity_context;
+import hybridsearch_context;
 
-namespace infinity {
+namespace hybridsearch {
 
 void BGTaskProcessor::SetCleanupTrigger(SharedPtr<CleanupPeriodicTrigger> cleanup_trigger) { cleanup_trigger_ = cleanup_trigger; }
 
@@ -73,7 +61,7 @@ void BGTaskProcessor::Process() {
                     break;
                 }
                 case BGTaskType::kForceCheckpoint: {
-                    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+                    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
                     if (storage_mode == StorageMode::kUnInitialized) {
                         UnrecoverableError("Uninitialized storage mode");
                     }
@@ -100,7 +88,7 @@ void BGTaskProcessor::Process() {
                     break;
                 }
                 case BGTaskType::kAddDeltaEntry: {
-                    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+                    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
                     if (storage_mode == StorageMode::kUnInitialized) {
                         UnrecoverableError("Uninitialized storage mode");
                     }
@@ -115,7 +103,7 @@ void BGTaskProcessor::Process() {
                     break;
                 }
                 case BGTaskType::kCheckpoint: {
-                    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+                    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
                     if (storage_mode == StorageMode::kUnInitialized) {
                         UnrecoverableError("Uninitialized storage mode");
                     }
@@ -153,7 +141,7 @@ void BGTaskProcessor::Process() {
                     break;
                 }
                 case BGTaskType::kCleanup: {
-                    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+                    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
                     if (storage_mode == StorageMode::kUnInitialized) {
                         UnrecoverableError("Uninitialized storage mode");
                     }
@@ -170,7 +158,7 @@ void BGTaskProcessor::Process() {
                     break;
                 }
                 case BGTaskType::kUpdateSegmentBloomFilterData: {
-                    StorageMode storage_mode = InfinityContext::instance().storage()->GetStorageMode();
+                    StorageMode storage_mode = hybridsearchContext::instance().storage()->GetStorageMode();
                     if (storage_mode == StorageMode::kUnInitialized) {
                         UnrecoverableError("Uninitialized storage mode");
                     }
@@ -200,4 +188,4 @@ void BGTaskProcessor::Process() {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

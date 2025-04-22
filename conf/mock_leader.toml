@@ -18,16 +18,16 @@ peer_recv_timeout = 0
 peer_send_timeout = 0
 
 [log]
-log_filename = "infinity.log"
-log_dir = "/var/infinity/leader/log"
+log_filename = "hybridsearch.log"
+log_dir = "/var/hybridsearch/leader/log"
 log_to_stdout = false
 log_file_max_size = "10GB"
 log_file_rotate_count = 10
 log_level = "trace"
 
 [storage]
-persistence_dir = "/var/infinity/leader/persistence"
-data_dir = "/var/infinity/leader/data"
+persistence_dir = "/var/hybridsearch/leader/persistence"
+data_dir = "/var/hybridsearch/leader/data"
 optimize_interval = "10s"
 cleanup_interval = "60s"
 compact_interval = "120s"
@@ -36,7 +36,7 @@ storage_type = "minio"
 
 [storage.object_storage]
 url = "17.0.0.1:9005"
-bucket_name = "infinity"
+bucket_name = "hybridsearch"
 access_key = "minioadmin"
 secret_key = "minioadmin"
 enable_https = false
@@ -44,15 +44,15 @@ enable_https = false
 [buffer]
 buffer_manager_size = "4GB"
 lru_num = 7
-temp_dir = "/var/infinity/leader/tmp"
+temp_dir = "/var/hybridsearch/leader/tmp"
 memindex_memory_quota = "1GB"
 
 [wal]
-wal_dir = "/var/infinity/leader/wal"
+wal_dir = "/var/hybridsearch/leader/wal"
 full_checkpoint_interval = "86400s"
 delta_checkpoint_interval = "60s"
 wal_compact_threshold = "1GB"
 wal_flush = "only_write"
 
 [resource]
-resource_dir = "/var/infinity/leader/resource"
+resource_dir = "/var/hybridsearch/leader/resource"

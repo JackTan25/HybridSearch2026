@@ -7,9 +7,9 @@ import index_defines;
 import posting_field;
 import posting_buffer;
 
-using namespace infinity;
+using namespace hybridsearch;
 
-namespace infinity {
+namespace hybridsearch {
 
 template <typename T>
 class SimpleFormat : public PostingFields {
@@ -23,7 +23,7 @@ public:
         }
     }
 };
-} // namespace infinity
+} // namespace hybridsearch
 
 class PostingBufferTest : public BaseTest {
 
@@ -35,7 +35,7 @@ protected:
 };
 
 void PostingBufferTest::CheckPostingBuffer(u32 *expect_posting_buffer, SizeT row_num, SizeT col_num, PostingBuffer *posting_buffer, u8 *capacity) {
-    using namespace infinity;
+    using namespace hybridsearch;
     UniquePtr<PostingBuffer> posting_buffer_ptr;
     SimpleFormat<u32> posting_fields(row_num);
     if (!posting_buffer) {
@@ -62,7 +62,7 @@ void PostingBufferTest::CheckPostingBuffer(u32 *expect_posting_buffer, SizeT row
 }
 
 void PostingBufferTest::CheckEqual(u32 *expect_posting_buffer, SizeT row_num, SizeT col_num, PostingBuffer *posting_buffer) {
-    using namespace infinity;
+    using namespace hybridsearch;
     ASSERT_EQ(row_num, (SizeT)posting_buffer->GetRowCount());
     ASSERT_EQ(col_num, (SizeT)posting_buffer->Size());
     for (SizeT r = 0; r < row_num; ++r) {
@@ -76,7 +76,7 @@ void PostingBufferTest::CheckEqual(u32 *expect_posting_buffer, SizeT row_num, Si
 }
 
 TEST_F(PostingBufferTest, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
     SimpleFormat<u32> posting_fields(1);
     PostingBuffer posting_buffer;
     posting_buffer.Init(&posting_fields);
@@ -91,13 +91,13 @@ TEST_F(PostingBufferTest, test1) {
 }
 
 TEST_F(PostingBufferTest, test2) {
-    using namespace infinity;
+    using namespace hybridsearch;
     u32 expect_posting_buffer[] = {100, 101, 102, 200, 201, 202};
     CheckPostingBuffer((u32 *)expect_posting_buffer, 2, 3);
 }
 
 TEST_F(PostingBufferTest, test3) {
-    using namespace infinity;
+    using namespace hybridsearch;
     PostingBuffer posting_buffer;
     SimpleFormat<u32> posting_fields(8);
     posting_buffer.Init(&posting_fields);
@@ -117,7 +117,7 @@ TEST_F(PostingBufferTest, test3) {
 }
 
 TEST_F(PostingBufferTest, test4) {
-    using namespace infinity;
+    using namespace hybridsearch;
     {
         // push same row repeatedly
         PostingBuffer posting_buffer;
@@ -143,7 +143,7 @@ TEST_F(PostingBufferTest, test4) {
 }
 
 TEST_F(PostingBufferTest, test5) {
-    using namespace infinity;
+    using namespace hybridsearch;
     PostingBuffer posting_buffer;
     SimpleFormat<u32> posting_fields(2);
     posting_buffer.Init(&posting_fields);
@@ -157,7 +157,7 @@ TEST_F(PostingBufferTest, test5) {
 }
 
 TEST_F(PostingBufferTest, test6) {
-    using namespace infinity;
+    using namespace hybridsearch;
     PostingBuffer posting_buffer;
     SimpleFormat<u32> posting_fields(3);
     posting_buffer.Init(&posting_fields);
@@ -182,7 +182,7 @@ TEST_F(PostingBufferTest, test6) {
 }
 
 TEST_F(PostingBufferTest, test7) {
-    using namespace infinity;
+    using namespace hybridsearch;
     PostingBuffer posting_buffer;
     SimpleFormat<u32> posting_fields(1);
     posting_buffer.Init(&posting_fields);
@@ -198,7 +198,7 @@ TEST_F(PostingBufferTest, test7) {
 }
 
 TEST_F(PostingBufferTest, test8) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
 // TODO some type order might fail when using memory pool
 #define NUMBER_TYPE_HELPER_FOR_TEST(macro)                                                                                                           \

@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -26,10 +14,10 @@ import buffer_manager;
 import txn_state;
 import status;
 import catalog_delta_entry;
-import infinity_exception;
+import hybridsearch_exception;
 import base_entry;
 
-namespace infinity {
+namespace hybridsearch {
 
 // Use by default
 UniquePtr<DBMeta> DBMeta::NewDBMeta(const SharedPtr<String> &db_name) {
@@ -151,4 +139,4 @@ void DBMeta::Cleanup(CleanupInfoTracer *info_tracer, bool dropped) { db_entry_li
 
 bool DBMeta::PickCleanup(CleanupScanner *scanner) { return db_entry_list_.PickCleanup(scanner); }
 
-} // namespace infinity
+} // namespace hybridsearch

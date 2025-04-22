@@ -7,7 +7,7 @@ export module ring;
 
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename T>
 class Ring {
@@ -112,4 +112,4 @@ public:
         // printf("%p Ring::Iterate end off_ground_ %lu, off_filled_ %lu, off_ceiling_ %lu\n", this, off_ground_, off_filled_, off_ceiling_);
     }
 };
-} // namespace infinity
+} // namespace hybridsearch

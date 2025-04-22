@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
-if ! id -u infinity > /dev/null 2>&1 ; then
-    useradd --create-home --home-dir /var/infinity --skel /dev/null infinity
+if ! id -u hybridsearch > /dev/null 2>&1 ; then
+    useradd --create-home --home-dir /var/hybridsearch --skel /dev/null hybridsearch
 fi
 
-mkdir -p /var/infinity && chown -R infinity /var/infinity
+mkdir -p /var/hybridsearch && chown -R hybridsearch /var/hybridsearch

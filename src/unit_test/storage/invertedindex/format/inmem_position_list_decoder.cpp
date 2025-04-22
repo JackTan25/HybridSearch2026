@@ -13,7 +13,7 @@ import position_list_encoder;
 import in_doc_pos_state;
 import position_list_format_option;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class InMemPositionListDecoderTest : public BaseTest {
 public:

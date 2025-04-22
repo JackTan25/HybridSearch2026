@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -25,7 +13,7 @@ import serialize;
 import data_block;
 import table_def;
 import index_base;
-import infinity_exception;
+import hybridsearch_exception;
 
 import stl;
 import defer_op;
@@ -40,10 +28,10 @@ import block_version;
 import index_defines;
 import create_index_info;
 import persistence_manager;
-import infinity_context;
+import hybridsearch_context;
 import virtual_store;
 
-namespace infinity {
+namespace hybridsearch {
 
 WalBlockInfo::WalBlockInfo(BlockEntry *block_entry)
     : block_id_(block_entry->block_id_), row_count_(block_entry->block_row_count_), row_capacity_(block_entry->row_capacity_) {
@@ -57,9 +45,9 @@ WalBlockInfo::WalBlockInfo(BlockEntry *block_entry)
     }
     String version_file_path = fmt::format("{}/{}", *block_entry->block_dir(), *BlockVersion::FileName());
     paths_.push_back(version_file_path);
-    auto *pm = InfinityContext::instance().persistence_manager();
+    auto *pm = hybridsearchContext::instance().persistence_manager();
     addr_serializer_.Initialize(pm, paths_);
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     for (auto &pth : paths_) {
         assert(!std::filesystem::path(pth).is_absolute());
     }
@@ -75,7 +63,7 @@ i32 WalBlockInfo::GetSizeInBytes() const {
     i32 size = sizeof(BlockID) + sizeof(row_count_) + sizeof(row_capacity_);
     size += sizeof(i32) + outline_infos_.size() * (sizeof(u32) + sizeof(u64));
 
-    PersistenceManager *pm = InfinityContext::instance().persistence_manager();
+    PersistenceManager *pm = hybridsearchContext::instance().persistence_manager();
     bool use_object_cache = pm != nullptr;
     if (use_object_cache) {
         pm_size_ = addr_serializer_.GetSizeInBytes();
@@ -85,7 +73,7 @@ i32 WalBlockInfo::GetSizeInBytes() const {
 }
 
 void WalBlockInfo::WriteBufferAdv(char *&buf) const {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     for (auto &pth : paths_) {
         assert(!std::filesystem::path(pth).is_absolute());
     }
@@ -98,7 +86,7 @@ void WalBlockInfo::WriteBufferAdv(char *&buf) const {
         WriteBufAdv(buf, idx);
         WriteBufAdv(buf, off);
     }
-    PersistenceManager *pm = InfinityContext::instance().persistence_manager();
+    PersistenceManager *pm = hybridsearchContext::instance().persistence_manager();
     bool use_object_cache = pm != nullptr;
     if (use_object_cache) {
         char *start = buf;
@@ -124,7 +112,7 @@ WalBlockInfo WalBlockInfo::ReadBufferAdv(const char *&ptr) {
         const auto last_chunk_offset = ReadBufAdv<u64>(ptr);
         outline_info = {buffer_cnt, last_chunk_offset};
     }
-    PersistenceManager *pm = InfinityContext::instance().persistence_manager();
+    PersistenceManager *pm = hybridsearchContext::instance().persistence_manager();
     bool use_object_cache = pm != nullptr;
     if (use_object_cache) {
         block_info.paths_ = block_info.addr_serializer_.ReadBufAdv(ptr);
@@ -232,7 +220,7 @@ WalChunkIndexInfo::WalChunkIndexInfo(ChunkIndexEntry *chunk_index_entry)
             UnrecoverableError(error_message);
         }
     }
-    auto *pm = InfinityContext::instance().persistence_manager();
+    auto *pm = hybridsearchContext::instance().persistence_manager();
     addr_serializer_.Initialize(pm, paths_);
 }
 
@@ -242,7 +230,7 @@ bool WalChunkIndexInfo::operator==(const WalChunkIndexInfo &other) const {
 }
 
 i32 WalChunkIndexInfo::GetSizeInBytes() const {
-    PersistenceManager *pm = InfinityContext::instance().persistence_manager();
+    PersistenceManager *pm = hybridsearchContext::instance().persistence_manager();
     bool use_object_cache = pm != nullptr;
     SizeT size = 0;
     if (use_object_cache) {
@@ -253,7 +241,7 @@ i32 WalChunkIndexInfo::GetSizeInBytes() const {
 }
 
 void WalChunkIndexInfo::WriteBufferAdv(char *&buf) const {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     for (auto &pth : paths_) {
         assert(!std::filesystem::path(pth).is_absolute());
     }
@@ -264,7 +252,7 @@ void WalChunkIndexInfo::WriteBufferAdv(char *&buf) const {
     WriteBufAdv(buf, row_count_);
     WriteBufAdv(buf, deprecate_ts_);
 
-    PersistenceManager *pm = InfinityContext::instance().persistence_manager();
+    PersistenceManager *pm = hybridsearchContext::instance().persistence_manager();
     bool use_object_cache = pm != nullptr;
     if (use_object_cache) {
         char *start = buf;
@@ -285,7 +273,7 @@ WalChunkIndexInfo WalChunkIndexInfo::ReadBufferAdv(const char *&ptr) {
     chunk_index_info.row_count_ = ReadBufAdv<u32>(ptr);
     chunk_index_info.deprecate_ts_ = ReadBufAdv<TxnTimeStamp>(ptr);
 
-    PersistenceManager *pm = InfinityContext::instance().persistence_manager();
+    PersistenceManager *pm = hybridsearchContext::instance().persistence_manager();
     bool use_object_cache = pm != nullptr;
     if (use_object_cache) {
         chunk_index_info.paths_ = chunk_index_info.addr_serializer_.ReadBufAdv(ptr);
@@ -682,21 +670,21 @@ i32 WalCmdDelete::GetSizeInBytes() const {
 }
 
 i32 WalCmdSetSegmentStatusSealed::GetSizeInBytes() const {
-    i32 sz = sizeof(WalCommandType) + ::infinity::GetSizeInBytes(db_name_) + ::infinity::GetSizeInBytes(table_name_) +
-             ::infinity::GetSizeInBytes(segment_id_) + ::infinity::GetSizeInBytes(segment_filter_binary_data_);
+    i32 sz = sizeof(WalCommandType) + ::hybridsearch::GetSizeInBytes(db_name_) + ::hybridsearch::GetSizeInBytes(table_name_) +
+             ::hybridsearch::GetSizeInBytes(segment_id_) + ::hybridsearch::GetSizeInBytes(segment_filter_binary_data_);
     sz += +sizeof(i32); // count of vector
     for (const auto &data : block_filter_binary_data_) {
-        sz += sizeof(data.first) + ::infinity::GetSizeInBytes(data.second);
+        sz += sizeof(data.first) + ::hybridsearch::GetSizeInBytes(data.second);
     }
     return sz;
 }
 
 i32 WalCmdUpdateSegmentBloomFilterData::GetSizeInBytes() const {
-    i32 sz = sizeof(WalCommandType) + ::infinity::GetSizeInBytes(db_name_) + ::infinity::GetSizeInBytes(table_name_) +
-             ::infinity::GetSizeInBytes(segment_id_) + ::infinity::GetSizeInBytes(segment_filter_binary_data_);
+    i32 sz = sizeof(WalCommandType) + ::hybridsearch::GetSizeInBytes(db_name_) + ::hybridsearch::GetSizeInBytes(table_name_) +
+             ::hybridsearch::GetSizeInBytes(segment_id_) + ::hybridsearch::GetSizeInBytes(segment_filter_binary_data_);
     sz += +sizeof(i32); // count of vector
     for (const auto &data : block_filter_binary_data_) {
-        sz += sizeof(data.first) + ::infinity::GetSizeInBytes(data.second);
+        sz += sizeof(data.first) + ::hybridsearch::GetSizeInBytes(data.second);
     }
     return sz;
 }
@@ -1632,4 +1620,4 @@ SharedPtr<WalEntry> WalListIterator::Next() {
     return entry;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

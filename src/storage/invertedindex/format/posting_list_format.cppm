@@ -8,7 +8,7 @@ import position_list_format_option;
 import posting_field;
 import index_defines;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PostingFormatOption {
 public:
@@ -74,4 +74,4 @@ private:
     PositionListFormat *pos_list_format_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

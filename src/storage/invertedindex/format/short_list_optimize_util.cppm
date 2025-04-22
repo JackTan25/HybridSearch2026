@@ -5,7 +5,7 @@ export module short_list_optimize_util;
 import index_defines;
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 export class ShortListOptimizeUtil {
 public:
     ShortListOptimizeUtil();
@@ -17,4 +17,4 @@ public:
 
     static bool IsShortSkipList(u32 size) { return size <= MAX_UNCOMPRESSED_SKIP_LIST_SIZE; }
 };
-} // namespace infinity
+} // namespace hybridsearch

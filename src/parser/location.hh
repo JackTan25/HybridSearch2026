@@ -32,7 +32,7 @@
 
 /**
  ** \file location.hh
- ** Define the infinity::location class.
+ ** Define the hybridsearch::location class.
  */
 
 #ifndef YY_YY_LOCATION_HH_INCLUDED
@@ -54,7 +54,7 @@
 # endif
 
 #line 10 "search_parser.y"
-namespace infinity {
+namespace hybridsearch {
 #line 59 "location.hh"
 
   /// A point in a source file.
@@ -300,7 +300,7 @@ namespace infinity {
   }
 
 #line 10 "search_parser.y"
-} // infinity
+} // hybridsearch
 #line 305 "location.hh"
 
 #endif // !YY_YY_LOCATION_HH_INCLUDED

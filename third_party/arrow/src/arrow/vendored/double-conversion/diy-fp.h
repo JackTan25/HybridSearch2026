@@ -38,7 +38,7 @@ namespace double_conversion {
 // have the most significant bit of the significand set.
 // Multiplication and Subtraction do not normalize their results.
 // DiyFp store only non-negative numbers and are not designed to contain special
-// doubles (NaN and Infinity).
+// doubles (NaN and hybridsearch).
 class DiyFp {
  public:
   static const int kSignificandSize = 64;

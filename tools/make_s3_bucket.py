@@ -8,4 +8,4 @@ client = Minio(
 )
 
 # Create bucket.
-client.make_bucket("infinity")
+client.make_bucket("hybridsearch")

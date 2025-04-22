@@ -10,7 +10,7 @@ import analyze_context;
 import lexeme;
 import character_util;
 
-namespace infinity {
+namespace hybridsearch {
 const std::wstring LetterSegmenter::SEGMENTER_NAME = L"LETTER_SEGMENTER";
 Vector<wchar_t> LetterSegmenter::Letter_Connector = {L'#', L'&', L'+', L'-', L'.', L'@', L'_'};
 Vector<wchar_t> LetterSegmenter::Num_Connector = {L',', L'.'};
@@ -162,4 +162,4 @@ bool LetterSegmenter::IsNumConnector(wchar_t input) {
     return it != Num_Connector.end() && *it == input;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

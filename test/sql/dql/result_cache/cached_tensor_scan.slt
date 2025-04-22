@@ -5,7 +5,7 @@ statement ok
 CREATE TABLE cached_tensor_scan (title VARCHAR, num INT, t TENSOR(FLOAT, 4), body VARCHAR);
 
 statement ok
-COPY cached_tensor_scan FROM '/var/infinity/test_data/tensor_maxsim.csv' WITH (DELIMITER ',', FORMAT CSV);
+COPY cached_tensor_scan FROM '/var/hybridsearch/test_data/tensor_maxsim.csv' WITH (DELIMITER ',', FORMAT CSV);
 
 query I
 EXPLAIN SELECT title, SCORE() FROM cached_tensor_scan SEARCH MATCH TENSOR (t, [0.0, -10.0, 0.0, 0.7, 9.2, 45.6, -55.8, 3.5], 'float', 'maxsim', '');
@@ -72,7 +72,7 @@ EXPLAIN SELECT title, SCORE() FROM cached_tensor_scan SEARCH MATCH TENSOR (t, [0
     - output columns: [num, title, __score, __rowid]
 
 statement ok
-COPY cached_tensor_scan FROM '/var/infinity/test_data/tensor_maxsim.csv' WITH (DELIMITER ',', FORMAT CSV);
+COPY cached_tensor_scan FROM '/var/hybridsearch/test_data/tensor_maxsim.csv' WITH (DELIMITER ',', FORMAT CSV);
 
 query I
 EXPLAIN SELECT title, SCORE() FROM cached_tensor_scan SEARCH MATCH TENSOR (t, [0.0, -10.0, 0.0, 0.7, 9.2, 45.6, -55.8, 3.5], 'float', 'maxsim', '');

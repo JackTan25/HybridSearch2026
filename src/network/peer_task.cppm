@@ -1,16 +1,4 @@
-// Copyright(C) 2024 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -21,7 +9,7 @@ import admin_statement;
 import global_resource_usage;
 import node_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 export enum class PeerTaskType {
     kInvalid,
@@ -40,12 +28,12 @@ public:
         : type_(type), complete_(false), async_(async) // complete_ should not be assigned false in wait(), otherwise it might be stuck in wait()
                                                        // forever if complete() is called before wait().
     {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("PeerTask");
 #endif
     }
     virtual ~PeerTask() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("PeerTask");
 #endif
     }
@@ -174,4 +162,4 @@ public:
     String error_message_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

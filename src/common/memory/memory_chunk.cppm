@@ -4,7 +4,7 @@ import stl;
 
 export module memory_chunk;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class MemoryChunk {
 public:
@@ -111,4 +111,4 @@ private:
     SizeT total_bytes_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

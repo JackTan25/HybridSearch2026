@@ -2,20 +2,20 @@ import threading
 import time
 
 import pytest
-from infinity_cluster import InfinityCluster
+from hybridsearch_cluster import hybridsearchCluster
 from numpy import dtype
 import pandas as pd
 import time
-from infinity.errors import ErrorCode
-from infinity.common import InfinityException
-from infinity.common import ConflictType
+from hybridsearch.errors import ErrorCode
+from hybridsearch.common import hybridsearchException
+from hybridsearch.common import ConflictType
 from database_operations import do_some_operations_cluster, clear_instance
-from infinity_http import infinity_http
+from hybridsearch_http import hybridsearch_http
 from database_operations import instance_state
 from util import RtnThread
 
 # FIXME: when running multiple times without clear_instance, this test case will fail.
-def test_cluster_leader_follower_change(cluster : InfinityCluster):
+def test_cluster_leader_follower_change(cluster : hybridsearchCluster):
     '''
     n1 : leader
     n2 : follower
@@ -72,7 +72,7 @@ def test_cluster_leader_follower_change(cluster : InfinityCluster):
 
 @pytest.mark.parametrize("kill", [False, True])
 @pytest.mark.parametrize("leader_shutdown", [False])
-def test_cluster_shutdown_and_recover(cluster: InfinityCluster, kill: bool, leader_shutdown: bool):
+def test_cluster_shutdown_and_recover(cluster: hybridsearchCluster, kill: bool, leader_shutdown: bool):
     with cluster:
         logger = cluster.logger
 
@@ -85,11 +85,11 @@ def test_cluster_shutdown_and_recover(cluster: InfinityCluster, kill: bool, lead
         table_name = "test_cluster_leader_shutdown_and_recover_in_follower"
 
         def init():
-            infinity_n1 = cluster.client("node1")
-            infinity_n1.get_database("default_db").drop_table(
+            hybridsearch_n1 = cluster.client("node1")
+            hybridsearch_n1.get_database("default_db").drop_table(
                 table_name, ConflictType.Ignore
             )
-            table_n1 = infinity_n1.get_database("default_db").create_table(
+            table_n1 = hybridsearch_n1.get_database("default_db").create_table(
                 table_name, {"c1": {"type": "int"}}
             )
 
@@ -103,7 +103,7 @@ def test_cluster_shutdown_and_recover(cluster: InfinityCluster, kill: bool, lead
             shutdown = False
             leader_name = cluster.leader_name
             follower_name = "node2" if leader_name == "node1" else "node1"
-            infinity_leader: infinity_http = cluster.client(leader_name)
+            hybridsearch_leader: hybridsearch_http = cluster.client(leader_name)
 
             def shutdown_leader(sleep: int, shutdown_leader: bool):
                 nonlocal shutdown
@@ -122,7 +122,7 @@ def test_cluster_shutdown_and_recover(cluster: InfinityCluster, kill: bool, lead
 
             def insert_data():
                 nonlocal insert_line
-                table_leader = infinity_leader.get_database("default_db").get_table(
+                table_leader = hybridsearch_leader.get_database("default_db").get_table(
                     table_name
                 )
                 while not shutdown:
@@ -146,8 +146,8 @@ def test_cluster_shutdown_and_recover(cluster: InfinityCluster, kill: bool, lead
 
             def verify_data(node_name: str):
                 nonlocal insert_line
-                infinity: infinity_http = cluster.client(node_name)
-                table = infinity.get_database("default_db").get_table(table_name)
+                hybridsearch: hybridsearch_http = cluster.client(node_name)
+                table = hybridsearch.get_database("default_db").get_table(table_name)
                 res, extra_result = table.output(["*"]).to_df()
                 if res.shape[0] == insert_line + 1:
                     insert_line += 1
@@ -176,7 +176,7 @@ def test_cluster_shutdown_and_recover(cluster: InfinityCluster, kill: bool, lead
                 verify_data(follower_name)
 
         def clear():
-            infinity_n1 = cluster.client("node1")
-            infinity_n1.get_database("default_db").drop_table(table_name)
+            hybridsearch_n1 = cluster.client("node1")
+            hybridsearch_n1.get_database("default_db").drop_table(table_name)
 
         clear()

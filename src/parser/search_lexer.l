@@ -5,14 +5,14 @@
 #include <cstdlib>
 
 /* Implementation of yyFlexScanner */
-#define SearchScannerDerived SearchScannerInfinitySyntax
+#define SearchScannerDerived SearchScannerhybridsearchSyntax
 #include "search_scanner_derived.h"
 #undef SearchScannerDerived
 #undef  YY_DECL
-#define YY_DECL int infinity::SearchScannerInfinitySyntax::yylex(infinity::SearchParser::semantic_type * const lval, infinity::SearchParser::location_type *loc)
+#define YY_DECL int hybridsearch::SearchScannerhybridsearchSyntax::yylex(hybridsearch::SearchParser::semantic_type * const lval, hybridsearch::SearchParser::location_type *loc)
 
 /* typedef to make the returns for the tokens shorter */
-using token = infinity::SearchParser::token;
+using token = hybridsearch::SearchParser::token;
 
 /* define yyterminate as this instead of NULL */
 #define yyterminate() return( token::END )
@@ -29,9 +29,9 @@ static thread_local std::stringstream string_buffer;
 %}
 
 %option c++
-%option yyclass="infinity::SearchScannerInfinitySyntax"
+%option yyclass="hybridsearch::SearchScannerhybridsearchSyntax"
 %option noyywrap nounput batch debug noinput
-%option prefix="SearchScannerInfinitySyntax"
+%option prefix="SearchScannerhybridsearchSyntax"
 %option warn
 %option never-interactive
 

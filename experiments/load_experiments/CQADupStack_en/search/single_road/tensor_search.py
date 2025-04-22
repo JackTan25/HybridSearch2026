@@ -1,34 +1,22 @@
-# Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      https://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+
 
 """
-This example is to connect local infinity instance, create table, insert data, search the data
+This example is to connect local hybridsearch instance, create table, insert data, search the data
 """
 
-# import infinity_embedded as infinity
+# import hybridsearch_embedded as hybridsearch
 from multi_client import use_multi_client
 import os
 import re
 import time
 from CQADupStack_en.colbert_read import load_colbert_list
-import infinity
+import hybridsearch
 import sys
-from infinity.common import LOCAL_HOST
+from hybridsearch.common import LOCAL_HOST
 import pandas as pd
 from utils import add_escape_characters
 
-path_prefix = "/home/ubuntu/infinity/experiments/load_experiments/CQADupStack_en/search"
+path_prefix = "/home/ubuntu/hybridsearch/experiments/load_experiments/CQADupStack_en/search"
 
 def extract_number(filename):
     match = re.search(r'(\d+)\.', filename)
@@ -63,11 +51,11 @@ def remove_extremes_and_average(lst):
 # emvb_threshold_first
 # emvb_threshold_final
 cost_time = 0
-def tensor_search(infinity_table, question):
+def tensor_search(hybridsearch_table, question):
      global cost_time
      begin_time = time.time()
      res = (
-                infinity_table.output(["docid_col","tensor_col"])
+                hybridsearch_table.output(["docid_col","tensor_col"])
                 .match_tensor("tensor_col", question[0], "float", 10)
                 # .to_pl()
             )
@@ -79,8 +67,8 @@ def tensor_search(infinity_table, question):
      return qb_result, extra_result
 
 def GetQuestions():
-    tensor_embedding_dir = "/home/ubuntu/infinity/experiments/small_embedding/CQADupStack_en/query_tensor_embeddings/vectors"
-    df = pd.read_csv('/home/ubuntu/infinity/experiments/small_embedding/CQADupStack_en/english/queries_decline_with_id.csv')
+    tensor_embedding_dir = "/home/ubuntu/hybridsearch/experiments/small_embedding/CQADupStack_en/query_tensor_embeddings/vectors"
+    df = pd.read_csv('/home/ubuntu/hybridsearch/experiments/small_embedding/CQADupStack_en/english/queries_decline_with_id.csv')
     tensor_names = [f for f in os.listdir(tensor_embedding_dir) if os.path.isfile(os.path.join(tensor_embedding_dir, f))]
     tensor_names = sorted(tensor_names,key=extract_number)
     tensor_file_idx = 0
@@ -97,12 +85,12 @@ def GetQuestions():
 
 def single_search(questions):
     try:
-        #  Use infinity module to connect a remote server
-        infinity_instance = infinity.connect(LOCAL_HOST)
+        #  Use hybridsearch module to connect a remote server
+        hybridsearch_instance = hybridsearch.connect(LOCAL_HOST)
 
         # 'default_db' is the default database
-        db_instance = infinity_instance.get_database("default_db")
-        infinity_table = db_instance.get_table("CQADupStack_en_Table")
+        db_instance = hybridsearch_instance.get_database("default_db")
+        hybridsearch_table = db_instance.get_table("CQADupStack_en_Table")
         with open(path_prefix + '/single_road/tensor_result.txt','w') as result_file:
             id = 0
             time_cost = 0
@@ -110,7 +98,7 @@ def single_search(questions):
             for question in questions:
                 id += 1
                 begin_time = time.time()
-                qb_result, extra_result = tensor_search(infinity_table, question)
+                qb_result, extra_result = tensor_search(hybridsearch_table, question)
                 end_time = time.time()
                 time_cost += (end_time - begin_time) * 1000
                 for i in range(len(qb_result['docid_col'])):
@@ -121,7 +109,7 @@ def single_search(questions):
             print("lastid: ",id)
             time_cost = time_cost / len(questions)
             print(f"time_cost: {time_cost} ms")
-        infinity_instance.disconnect()
+        hybridsearch_instance.disconnect()
         return time_cost
     except Exception as e:
         print(str(e))

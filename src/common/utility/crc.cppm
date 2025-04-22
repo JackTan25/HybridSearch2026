@@ -8,7 +8,7 @@ export module crc;
 
 import stl;
 
-export namespace infinity {
+export namespace hybridsearch {
 
 template <class T>
 struct CRCBase {
@@ -47,4 +47,4 @@ CRCBase<T> CRCImpl<T, polynomial, initial_remainder, final_xor_value>::base{poly
 constexpr u32 CRC32_IEEE = 0xEDB88320;
 using CRC32IEEE = CRCImpl<u32, CRC32_IEEE, 0xFFFFFFFF, 0xFFFFFFFF>;
 
-} // namespace infinity
+} // namespace hybridsearch

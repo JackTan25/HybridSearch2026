@@ -1,15 +1,15 @@
 import time
 
-from infinity_cluster import InfinityCluster
+from hybridsearch_cluster import hybridsearchCluster
 from numpy import dtype
 import pandas as pd
 import time
-from infinity.errors import ErrorCode
-from infinity.common import InfinityException
-from infinity.common import ConflictType
+from hybridsearch.errors import ErrorCode
+from hybridsearch.common import hybridsearchException
+from hybridsearch.common import ConflictType
 
 
-def test_tc1(cluster: InfinityCluster):
+def test_tc1(cluster: hybridsearchCluster):
     '''
     tc1:
     n1: admin
@@ -46,25 +46,25 @@ def test_tc1(cluster: InfinityCluster):
         cluster.add_node("node2", "conf/follower.toml")
 
         cluster.set_leader("node1")
-        infinity1 = cluster.client("node1")
-        res = infinity1.show_node("node1")
+        hybridsearch1 = cluster.client("node1")
+        res = hybridsearch1.show_node("node1")
         assert (res.node_name == "node1")
         assert (res.node_role == "leader")
         assert (res.node_status == "alive")
 
         cluster.set_follower("node2")
-        infinity2 = cluster.client("node2")
-        res = infinity1.show_node("node1")
+        hybridsearch2 = cluster.client("node2")
+        res = hybridsearch1.show_node("node1")
         assert (res.node_name == "node1")
         assert (res.node_role == "leader")
         assert (res.node_status == "alive")
-        res = infinity1.show_node("node2")
+        res = hybridsearch1.show_node("node2")
         assert (res.node_name == "node2")
         assert (res.node_role == "follower")
         assert (res.node_status == "alive")
 
         table_name = "table1"
-        db1 = infinity1.get_database("default_db")
+        db1 = hybridsearch1.get_database("default_db")
         res = db1.drop_table(table_name, ConflictType.Ignore)
         table1 = db1.create_table(
             table_name, {"c1": {"type": "int"}, "c2": {"type": "vector,4,float"}}
@@ -84,49 +84,49 @@ def test_tc1(cluster: InfinityCluster):
         time.sleep(1)
         print("select in node2")
 
-        infinity2 = cluster.client("node2")
-        db2 = infinity2.get_database("default_db")
+        hybridsearch2 = cluster.client("node2")
+        db2 = hybridsearch2.get_database("default_db")
         table2 = db2.get_table(table_name)
         res, extra_result = table2.output(["*"]).to_df()
         pd.testing.assert_frame_equal(res, res_gt)
 
         try:
             table2.insert([{"c1": 1, "c2": [1.0, 2.0, 3.0, 4.0]}])
-        except InfinityException as e:
+        except hybridsearchException as e:
             print(e)
 
         cluster.set_admin("node1")
         time.sleep(1)
-        res = infinity2.show_node("node1")
+        res = hybridsearch2.show_node("node1")
         assert (res.node_status == "timeout")
-        res = infinity2.show_node("node2")
+        res = hybridsearch2.show_node("node2")
         assert (res.node_name == "node2")
         assert (res.node_role == "follower")
         assert (res.node_status == "alive")
 
         table_name = "table2"
-        db2 = infinity2.get_database("default_db")
+        db2 = hybridsearch2.get_database("default_db")
         try:
             table2 = db1.create_table(
                 table_name, {"c1": {"type": "int"}, "c2": {"type": "vector,4,float"}}
             )
-        except InfinityException as e:
+        except hybridsearchException as e:
             print(e)
 
         cluster.set_leader("node1")
         time.sleep(1)
-        res = infinity1.show_node("node1")
+        res = hybridsearch1.show_node("node1")
         assert (res.node_name == "node1")
         assert (res.node_role == "leader")
         assert (res.node_status == "alive")
 
         try:
-            infinity1.show_node("node2")
-        except InfinityException as e:
+            hybridsearch1.show_node("node2")
+        except hybridsearchException as e:
             print(e)
             assert (e.error_code == 7019)  # Not found node2
 
-        res = infinity2.show_node("node1")
+        res = hybridsearch2.show_node("node1")
         assert (res.node_name == "node1")
         assert (res.node_role == "leader")
         assert (res.node_status == "lost connection")
@@ -134,17 +134,17 @@ def test_tc1(cluster: InfinityCluster):
         cluster.set_admin("node2")
         cluster.set_follower("node2")
         time.sleep(1)
-        res = infinity1.show_node("node2")
+        res = hybridsearch1.show_node("node2")
         assert (res.node_name == "node2")
         assert (res.node_role == "follower")
         assert (res.node_status == "alive")
-        res = infinity2.show_node("node1")
+        res = hybridsearch2.show_node("node1")
         assert (res.node_name == "node1")
         assert (res.node_role == "leader")
         assert (res.node_status == "alive")
 
         table_name = "table1"
-        db1 = infinity1.get_database("default_db")
+        db1 = hybridsearch1.get_database("default_db")
         table1 = db1.get_table(table_name)
         table1.insert([{"c1": 2, "c2": [1.0, 2.0, 3.0, 4.0]}])
         res_gt = pd.DataFrame(
@@ -157,7 +157,7 @@ def test_tc1(cluster: InfinityCluster):
         res, extra_result = table1.output(["*"]).to_df()
         pd.testing.assert_frame_equal(res, res_gt)
 
-        db2 = infinity2.get_database("default_db")
+        db2 = hybridsearch2.get_database("default_db")
         table2 = db2.get_table(table_name)
         res, extra_result = table2.output(["*"]).to_df()
         pd.testing.assert_frame_equal(res, res_gt)
@@ -165,22 +165,22 @@ def test_tc1(cluster: InfinityCluster):
         cluster.set_admin("node2")
         time.sleep(1)
         try:
-            infinity1.show_node("node2")
-        except InfinityException as e:
+            hybridsearch1.show_node("node2")
+        except hybridsearchException as e:
             print(e)
             assert (e.error_code == 7019)  # Not found node2
         try:
             table2.insert([{"c1": 1, "c2": [1.0, 2.0, 3.0, 4.0]}])
-        except InfinityException as e:
+        except hybridsearchException as e:
             print(e)
 
         cluster.set_follower("node2")
         time.sleep(1)
-        res = infinity1.show_node("node2")
+        res = hybridsearch1.show_node("node2")
         assert (res.node_name == "node2")
         assert (res.node_role == "follower")
         assert (res.node_status == "alive")
-        res = infinity2.show_node("node1")
+        res = hybridsearch2.show_node("node1")
         assert (res.node_name == "node1")
         assert (res.node_role == "leader")
         assert (res.node_status == "alive")
@@ -195,12 +195,12 @@ def test_tc1(cluster: InfinityCluster):
 
         try:
             db1.show_table(table_name)
-        except InfinityException as e:
+        except hybridsearchException as e:
             print(e)
 
         try:
             db2.show_table(table_name)
-        except InfinityException as e:
+        except hybridsearchException as e:
             print(e)
 
         time.sleep(1)
@@ -208,7 +208,7 @@ def test_tc1(cluster: InfinityCluster):
         cluster.remove_node("node1")
 
 
-def test_tc2(cluster: InfinityCluster):
+def test_tc2(cluster: hybridsearchCluster):
     '''
     tc2:
     n1: admin
@@ -234,8 +234,8 @@ def test_tc2(cluster: InfinityCluster):
         cluster.set_admin("node4")
 
         cluster.set_leader("node1")
-        infinity1 = cluster.client("node1")
-        db1 = infinity1.get_database("default_db")
+        hybridsearch1 = cluster.client("node1")
+        db1 = hybridsearch1.get_database("default_db")
         table_name = "table1_tc2"
         db1.drop_table(table_name, ConflictType.Ignore)
         table1 = db1.create_table(
@@ -251,17 +251,17 @@ def test_tc2(cluster: InfinityCluster):
             }
         ).astype({"c1": dtype("int32"), "c2": dtype("object")})
 
-        infinity2 = cluster.client("node2")
+        hybridsearch2 = cluster.client("node2")
         cluster.set_follower("node2")
 
-        infinity3 = cluster.client("node3")
+        hybridsearch3 = cluster.client("node3")
         cluster.set_learner("node3")
 
-        infinity4 = cluster.client("node4")
+        hybridsearch4 = cluster.client("node4")
         cluster.set_learner("node4")
 
         time.sleep(4)
-        for server in [infinity1, infinity2, infinity3, infinity4]:
+        for server in [hybridsearch1, hybridsearch2, hybridsearch3, hybridsearch4]:
             res = server.show_node("node1")
             assert (res.node_name == "node1")
             assert (res.node_role == "leader")
@@ -279,7 +279,7 @@ def test_tc2(cluster: InfinityCluster):
             assert (res.node_role == "learner")
             assert (res.node_status == "alive")
 
-        for server in [infinity1, infinity2, infinity3, infinity4]:
+        for server in [hybridsearch1, hybridsearch2, hybridsearch3, hybridsearch4]:
             db = server.get_database("default_db")
             table = db.get_table(table_name)
             res, extra_result = table.output(["*"]).to_df()

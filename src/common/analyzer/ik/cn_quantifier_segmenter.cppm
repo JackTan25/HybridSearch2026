@@ -10,7 +10,7 @@ import segmenter;
 import analyze_context;
 import ik_dict;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class CNQuantifierSegmenter : public Segmenter {
 public:
@@ -42,4 +42,4 @@ public:
     void OutputNumLexeme(AnalyzeContext *context);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

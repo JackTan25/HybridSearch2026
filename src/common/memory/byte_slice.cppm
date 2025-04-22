@@ -4,7 +4,7 @@ import stl;
 
 export module byte_slice;
 
-namespace infinity {
+namespace hybridsearch {
 
 #pragma pack(push, 1)
 
@@ -86,4 +86,4 @@ private:
     SizeT end_pos_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

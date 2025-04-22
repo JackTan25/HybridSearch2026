@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 #include "gtest/gtest.h"
 import base_test;
@@ -18,11 +6,11 @@ import base_test;
 import stl;
 import global_resource_usage;
 import storage;
-import infinity_context;
+import hybridsearch_context;
 import compilation_config;
 import txn_manager;
 import extra_ddl_info;
-import infinity_exception;
+import hybridsearch_exception;
 import log_file;
 import config;
 import bg_task;
@@ -32,7 +20,7 @@ import status;
 import logger;
 import txn_state;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class RecycleLogTest : public BaseTestParamStr {
 protected:
@@ -53,14 +41,14 @@ INSTANTIATE_TEST_SUITE_P(TestWithDifferentParams,
 
 TEST_P(RecycleLogTest, recycle_wal_after_delta_checkpoint) {
     {
-#ifdef INFINITY_DEBUG
-        infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+        hybridsearch::GlobalResourceUsage::Init();
 #endif
         std::shared_ptr<std::string> config_path = RecycleLogTest::test_ckp_recycle_config();
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
 
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         Config *config = storage->config();
         TxnManager *txn_mgr = storage->txn_manager();
         BGTaskProcessor *bg_processor = storage->bg_processor();
@@ -113,23 +101,23 @@ TEST_P(RecycleLogTest, recycle_wal_after_delta_checkpoint) {
                 ASSERT_TRUE(wal_files.empty());
             }
         }
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
 
-#ifdef INFINITY_DEBUG
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetObjectCount(), 0);
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetRawMemoryCount(), 0);
-        infinity::GlobalResourceUsage::UnInit();
+#ifdef hybridsearch_DEBUG
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetObjectCount(), 0);
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetRawMemoryCount(), 0);
+        hybridsearch::GlobalResourceUsage::UnInit();
 #endif
     }
     {
-#ifdef INFINITY_DEBUG
-        infinity::GlobalResourceUsage::Init(); // test replay
+#ifdef hybridsearch_DEBUG
+        hybridsearch::GlobalResourceUsage::Init(); // test replay
 #endif
         std::shared_ptr<std::string> config_path = RecycleLogTest::test_ckp_recycle_config();
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
 
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         TxnManager *txn_mgr = storage->txn_manager();
         {
             auto *txn = txn_mgr->BeginTxn(MakeUnique<String>("get db"), TransactionType::kRead);
@@ -137,26 +125,26 @@ TEST_P(RecycleLogTest, recycle_wal_after_delta_checkpoint) {
             ASSERT_TRUE(status.ok());
             txn_mgr->CommitTxn(txn);
         }
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
 
-#ifdef INFINITY_DEBUG
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetObjectCount(), 0);
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetRawMemoryCount(), 0);
-        infinity::GlobalResourceUsage::UnInit();
+#ifdef hybridsearch_DEBUG
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetObjectCount(), 0);
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetRawMemoryCount(), 0);
+        hybridsearch::GlobalResourceUsage::UnInit();
 #endif
     }
 }
 
 TEST_P(RecycleLogTest, recycle_wal_after_full_checkpoint) {
     {
-#ifdef INFINITY_DEBUG
-        infinity::GlobalResourceUsage::Init();
+#ifdef hybridsearch_DEBUG
+        hybridsearch::GlobalResourceUsage::Init();
 #endif
         std::shared_ptr<std::string> config_path = RecycleLogTest::test_ckp_recycle_config();
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
 
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         Config *config = storage->config();
         TxnManager *txn_mgr = storage->txn_manager();
         BGTaskProcessor *bg_processor = storage->bg_processor();
@@ -221,23 +209,23 @@ TEST_P(RecycleLogTest, recycle_wal_after_full_checkpoint) {
             ASSERT_TRUE(temp_full_infos.empty());
             ASSERT_TRUE(temp_delta_infos.empty());
         }
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
 
-#ifdef INFINITY_DEBUG
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetObjectCount(), 0);
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetRawMemoryCount(), 0);
-        infinity::GlobalResourceUsage::UnInit();
+#ifdef hybridsearch_DEBUG
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetObjectCount(), 0);
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetRawMemoryCount(), 0);
+        hybridsearch::GlobalResourceUsage::UnInit();
 #endif
     }
     {
-#ifdef INFINITY_DEBUG
-        infinity::GlobalResourceUsage::Init(); // test replay
+#ifdef hybridsearch_DEBUG
+        hybridsearch::GlobalResourceUsage::Init(); // test replay
 #endif
         std::shared_ptr<std::string> config_path = RecycleLogTest::test_ckp_recycle_config();
-        infinity::InfinityContext::instance().InitPhase1(config_path);
-        infinity::InfinityContext::instance().InitPhase2();
+        hybridsearch::hybridsearchContext::instance().InitPhase1(config_path);
+        hybridsearch::hybridsearchContext::instance().InitPhase2();
 
-        Storage *storage = infinity::InfinityContext::instance().storage();
+        Storage *storage = hybridsearch::hybridsearchContext::instance().storage();
         TxnManager *txn_mgr = storage->txn_manager();
         {
             auto *txn = txn_mgr->BeginTxn(MakeUnique<String>("get db"), TransactionType::kRead);
@@ -245,12 +233,12 @@ TEST_P(RecycleLogTest, recycle_wal_after_full_checkpoint) {
             ASSERT_TRUE(status.ok());
             txn_mgr->CommitTxn(txn);
         }
-        infinity::InfinityContext::instance().UnInit();
+        hybridsearch::hybridsearchContext::instance().UnInit();
 
-#ifdef INFINITY_DEBUG
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetObjectCount(), 0);
-        EXPECT_EQ(infinity::GlobalResourceUsage::GetRawMemoryCount(), 0);
-        infinity::GlobalResourceUsage::UnInit();
+#ifdef hybridsearch_DEBUG
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetObjectCount(), 0);
+        EXPECT_EQ(hybridsearch::GlobalResourceUsage::GetRawMemoryCount(), 0);
+        hybridsearch::GlobalResourceUsage::UnInit();
 #endif
     }
 }

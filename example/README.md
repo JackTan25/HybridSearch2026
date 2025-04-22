@@ -2,16 +2,16 @@
 
 ## Python SDK examples
 
-The Python scripts in the current directory provides the examples of the infinity SDK API. Before running these scripts, please ensure that the correct version of infinity SDK is installed. If you are using the server version of Infinity, you can use the following command to install it
+The Python scripts in the current directory provides the examples of the hybridsearch SDK API. Before running these scripts, please ensure that the correct version of hybridsearch SDK is installed. If you are using the server version of hybridsearch, you can use the following command to install it
 
 ```shell
-pip install infinity-sdk==0.6.0.dev3
+pip install hybridsearch-sdk==0.6.0.dev3
 ```
 
-To use Infinity locally as a Python module, install the Infinity Embedded SDK:
+To use hybridsearch locally as a Python module, install the hybridsearch Embedded SDK:
 
 ```shell
-pip install infinity-embedded-sdk==0.6.0.dev3
+pip install hybridsearch-embedded-sdk==0.6.0.dev3
 ```
 
 Once the installation completes, run some simple examples:
@@ -28,7 +28,7 @@ We provide several SHELL scripts in the **/example/http** directory, and you nee
 sudo apt install curl
 ```
 
-The HTTP APIs work only with the Infinity server. Ensure that an Infinity server is running properly before executing these scripts:
+The HTTP APIs work only with the hybridsearch server. Ensure that an hybridsearch server is running properly before executing these scripts:
 
 ```shell
 bash http/create_list_show_database.sh

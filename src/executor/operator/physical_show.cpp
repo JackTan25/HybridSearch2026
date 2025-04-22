@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -27,7 +15,7 @@ import profiler;
 import operator_state;
 import data_block;
 
-import infinity_exception;
+import hybridsearch_exception;
 import table_entry_type;
 import value_expression;
 import logical_show;
@@ -76,7 +64,7 @@ import catalog_delta_entry;
 import memindex_tracer;
 import persistence_manager;
 import global_resource_usage;
-import infinity_context;
+import hybridsearch_context;
 import cleanup_scanner;
 import obj_status;
 import admin_statement;
@@ -88,7 +76,7 @@ import txn_state;
 import snapshot_brief;
 import command_statement;
 
-namespace infinity {
+namespace hybridsearch {
 
 void PhysicalShow::Init(QueryContext *query_context) {
     auto varchar_type = MakeShared<DataType>(LogicalType::kVarchar);
@@ -1185,7 +1173,7 @@ void PhysicalShow::ExecuteShowIndex(QueryContext *query_context, ShowOperatorSta
 //
 //        ++column_id;
 //        {
-//            const String table_dir = fmt::format("{}/{}", InfinityContext::instance().config()->DataDir(), *table_index_info->index_entry_dir_);
+//            const String table_dir = fmt::format("{}/{}", hybridsearchContext::instance().config()->DataDir(), *table_index_info->index_entry_dir_);
 //            String index_size_str;
 //            if (query_context->persistence_manager() == nullptr) {
 //                index_size_str = Utility::FormatByteSize(VirtualStore::GetDirectorySize(table_dir));
@@ -1263,7 +1251,7 @@ void PhysicalShow::ExecuteShowIndexSegment(QueryContext *query_context, ShowOper
         }
     }
 
-    String full_segment_index_dir = Path(InfinityContext::instance().config()->DataDir()) / *segment_index_info->index_dir_;
+    String full_segment_index_dir = Path(hybridsearchContext::instance().config()->DataDir()) / *segment_index_info->index_dir_;
     {
         SizeT column_id = 0;
         {
@@ -1981,7 +1969,7 @@ void PhysicalShow::ExecuteShowSegments(QueryContext *query_context, ShowOperator
         ++column_id;
         {
             String segment_size_str;
-            String full_segment_dir = Path(InfinityContext::instance().config()->DataDir()) / *segment_info->segment_dir_;
+            String full_segment_dir = Path(hybridsearchContext::instance().config()->DataDir()) / *segment_info->segment_dir_;
             if (query_context->persistence_manager() == nullptr) {
                 segment_size_str = Utility::FormatByteSize(VirtualStore::GetDirectorySize(full_segment_dir));
             } else {
@@ -2231,7 +2219,7 @@ void PhysicalShow::ExecuteShowBlocks(QueryContext *query_context, ShowOperatorSt
         {
             String block_size_str;
             if (query_context->persistence_manager() == nullptr) {
-                String full_block_dir = Path(InfinityContext::instance().config()->DataDir()) / *block_info->block_dir_;
+                String full_block_dir = Path(hybridsearchContext::instance().config()->DataDir()) / *block_info->block_dir_;
                 block_size_str = Utility::FormatByteSize(VirtualStore::GetDirectorySize(full_block_dir));
             } else {
                 Vector<String> &paths = block_info->files_;
@@ -2311,7 +2299,7 @@ void PhysicalShow::ExecuteShowBlockDetail(QueryContext *query_context, ShowOpera
 
         ++column_id;
         {
-            String full_block_dir = Path(InfinityContext::instance().config()->DataDir()) / *block_info->block_dir_;
+            String full_block_dir = Path(hybridsearchContext::instance().config()->DataDir()) / *block_info->block_dir_;
             Value value = Value::MakeVarchar(full_block_dir);
             ValueExpression value_expr(value);
             value_expr.AppendToChunk(output_block_ptr->column_vectors[column_id]);
@@ -2580,7 +2568,7 @@ void PhysicalShow::ExecuteShowConfigs(QueryContext *query_context, ShowOperatorS
         }
         {
             // option description
-            Value value = Value::MakeVarchar("Infinity version.");
+            Value value = Value::MakeVarchar("hybridsearch version.");
             ValueExpression value_expr(value);
             value_expr.AppendToChunk(output_block_ptr->column_vectors[2]);
         }
@@ -2628,7 +2616,7 @@ void PhysicalShow::ExecuteShowConfigs(QueryContext *query_context, ShowOperatorS
         }
         {
             // option name type
-            Value value = Value::MakeVarchar("CPU number used by infinity executor.");
+            Value value = Value::MakeVarchar("CPU number used by hybridsearch executor.");
             ValueExpression value_expr(value);
             value_expr.AppendToChunk(output_block_ptr->column_vectors[2]);
         }
@@ -2670,7 +2658,7 @@ void PhysicalShow::ExecuteShowConfigs(QueryContext *query_context, ShowOperatorS
         }
         {
             // option name type
-            Value value = Value::MakeVarchar("Infinity server ip");
+            Value value = Value::MakeVarchar("hybridsearch server ip");
             ValueExpression value_expr(value);
             value_expr.AppendToChunk(output_block_ptr->column_vectors[2]);
         }
@@ -2691,7 +2679,7 @@ void PhysicalShow::ExecuteShowConfigs(QueryContext *query_context, ShowOperatorS
         }
         {
             // option name type
-            Value value = Value::MakeVarchar("Infinity peer server ip");
+            Value value = Value::MakeVarchar("hybridsearch peer server ip");
             ValueExpression value_expr(value);
             value_expr.AppendToChunk(output_block_ptr->column_vectors[2]);
         }
@@ -2712,7 +2700,7 @@ void PhysicalShow::ExecuteShowConfigs(QueryContext *query_context, ShowOperatorS
         }
         {
             // option name type
-            Value value = Value::MakeVarchar("Infinity peer server port");
+            Value value = Value::MakeVarchar("hybridsearch peer server port");
             ValueExpression value_expr(value);
             value_expr.AppendToChunk(output_block_ptr->column_vectors[2]);
         }
@@ -3365,7 +3353,7 @@ void PhysicalShow::ExecuteShowConfigs(QueryContext *query_context, ShowOperatorS
         }
         {
             // option name type
-            Value value = Value::MakeVarchar("Infinity resource directory");
+            Value value = Value::MakeVarchar("hybridsearch resource directory");
             ValueExpression value_expr(value);
             value_expr.AppendToChunk(output_block_ptr->column_vectors[2]);
         }
@@ -4423,7 +4411,7 @@ void PhysicalShow::ExecuteShowGlobalVariable(QueryContext *query_context, ShowOp
             break;
         }
         case GlobalVariable::kFollowerNum: {
-            SharedPtr<NodeInfo> this_node = InfinityContext::instance().cluster_manager()->ThisNode();
+            SharedPtr<NodeInfo> this_node = hybridsearchContext::instance().cluster_manager()->ThisNode();
             if (this_node->node_role() == NodeRole::kLeader) {
                 Vector<SharedPtr<ColumnDef>> output_column_defs = {
                     MakeShared<ColumnDef>(0, integer_type, "value", std::set<ConstraintType>()),
@@ -4439,7 +4427,7 @@ void PhysicalShow::ExecuteShowGlobalVariable(QueryContext *query_context, ShowOp
 
                 output_block_ptr->Init(output_column_types);
 
-                i64 follower_number = InfinityContext::instance().cluster_manager()->GetFollowerLimit();
+                i64 follower_number = hybridsearchContext::instance().cluster_manager()->GetFollowerLimit();
                 Value value = Value::MakeBigInt(follower_number);
                 ValueExpression value_expr(value);
                 value_expr.AppendToChunk(output_block_ptr->column_vectors[0]);
@@ -4464,7 +4452,7 @@ void PhysicalShow::ExecuteShowGlobalVariable(QueryContext *query_context, ShowOp
 
             output_block_ptr->Init(output_column_types);
 
-            Value value = Value::MakeBool(InfinityContext::instance().storage()->catalog()->GetProfile());
+            Value value = Value::MakeBool(hybridsearchContext::instance().storage()->catalog()->GetProfile());
             ValueExpression value_expr(value);
             value_expr.AppendToChunk(output_block_ptr->column_vectors[0]);
             break;
@@ -5024,7 +5012,7 @@ void PhysicalShow::ExecuteShowGlobalVariables(QueryContext *query_context, ShowO
                 }
                 {
                     // option description
-                    Value value = Value::MakeVarchar("Infinity system memory usage.");
+                    Value value = Value::MakeVarchar("hybridsearch system memory usage.");
                     ValueExpression value_expr(value);
                     value_expr.AppendToChunk(output_block_ptr->column_vectors[2]);
                 }
@@ -5046,7 +5034,7 @@ void PhysicalShow::ExecuteShowGlobalVariables(QueryContext *query_context, ShowO
                 }
                 {
                     // option description
-                    Value value = Value::MakeVarchar("File description opened count by Infinity.");
+                    Value value = Value::MakeVarchar("File description opened count by hybridsearch.");
                     ValueExpression value_expr(value);
                     value_expr.AppendToChunk(output_block_ptr->column_vectors[2]);
                 }
@@ -5068,7 +5056,7 @@ void PhysicalShow::ExecuteShowGlobalVariables(QueryContext *query_context, ShowO
                 }
                 {
                     // option description
-                    Value value = Value::MakeVarchar("Infinity system CPU usage.");
+                    Value value = Value::MakeVarchar("hybridsearch system CPU usage.");
                     ValueExpression value_expr(value);
                     value_expr.AppendToChunk(output_block_ptr->column_vectors[2]);
                 }
@@ -5093,15 +5081,15 @@ void PhysicalShow::ExecuteShowGlobalVariables(QueryContext *query_context, ShowO
                 }
                 {
                     // option description
-                    Value value = Value::MakeVarchar("Use jemalloc to profile Infinity");
+                    Value value = Value::MakeVarchar("Use jemalloc to profile hybridsearch");
                     ValueExpression value_expr(value);
                     value_expr.AppendToChunk(output_block_ptr->column_vectors[2]);
                 }
                 break;
             }
             case GlobalVariable::kFollowerNum: {
-                if (InfinityContext::instance().IsClusterRole()) {
-                    SharedPtr<NodeInfo> this_node = InfinityContext::instance().cluster_manager()->ThisNode();
+                if (hybridsearchContext::instance().IsClusterRole()) {
+                    SharedPtr<NodeInfo> this_node = hybridsearchContext::instance().cluster_manager()->ThisNode();
                     if (this_node->node_role() == NodeRole::kLeader) {
                         {
                             // option name
@@ -5111,14 +5099,14 @@ void PhysicalShow::ExecuteShowGlobalVariables(QueryContext *query_context, ShowO
                         }
                         {
                             // option value
-                            SizeT follower_count = InfinityContext::instance().cluster_manager()->GetFollowerLimit();
+                            SizeT follower_count = hybridsearchContext::instance().cluster_manager()->GetFollowerLimit();
                             Value value = Value::MakeVarchar(std::to_string(follower_count));
                             ValueExpression value_expr(value);
                             value_expr.AppendToChunk(output_block_ptr->column_vectors[1]);
                         }
                         {
                             // option description
-                            Value value = Value::MakeVarchar("Follower number for Infinity cluster");
+                            Value value = Value::MakeVarchar("Follower number for hybridsearch cluster");
                             ValueExpression value_expr(value);
                             value_expr.AppendToChunk(output_block_ptr->column_vectors[2]);
                         }
@@ -5135,7 +5123,7 @@ void PhysicalShow::ExecuteShowGlobalVariables(QueryContext *query_context, ShowO
                 }
                 {
                     // option value
-                    bool enable_profile = InfinityContext::instance().storage()->catalog()->GetProfile();
+                    bool enable_profile = hybridsearchContext::instance().storage()->catalog()->GetProfile();
                     String enable_profile_condition = enable_profile ? "true" : "false";
                     Value value = Value::MakeVarchar(enable_profile_condition);
                     ValueExpression value_expr(value);
@@ -6679,4 +6667,4 @@ void PhysicalShow::ExecuteShowSnapshot(QueryContext *query_context, ShowOperator
     return;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

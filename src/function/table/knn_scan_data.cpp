@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -18,7 +6,7 @@ module;
 module knn_scan_data;
 
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import logical_type;
 import merge_knn;
@@ -34,7 +22,7 @@ import status;
 import logger;
 import simd_functions;
 
-namespace infinity {
+namespace hybridsearch {
 
 namespace {
 
@@ -184,4 +172,4 @@ KnnScanFunctionData::KnnScanFunctionData(KnnScanSharedData *shared_data, u32 cur
     knn_distance_ = KnnDistanceBase1::Make(knn_scan_shared_data_->query_elem_type_, knn_scan_shared_data_->knn_distance_type_);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

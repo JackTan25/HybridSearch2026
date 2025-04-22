@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -19,13 +7,13 @@ module;
 module result_cache_manager;
 
 import cached_scan_base;
-import infinity_exception;
+import hybridsearch_exception;
 import logical_match;
 import physical_match;
 import logical_node_type;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 UniquePtr<CacheContent> CacheContent::AppendColumns(const CacheContent &other, const Vector<SizeT> &column_idxes) const {
     if (data_blocks_.size() != other.data_blocks_.size()) {
@@ -191,4 +179,4 @@ SizeT ResultCacheManager::DropTable(const String &schema_name, const String &tab
     return cache_map_.DropIF(pred);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

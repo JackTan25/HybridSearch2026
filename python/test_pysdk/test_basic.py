@@ -4,17 +4,17 @@ import pandas as pd
 from numpy import dtype
 import pytest
 from common import common_values
-import infinity
-import infinity_embedded
-import infinity.index as index
-from infinity.errors import ErrorCode
-from infinity.common import ConflictType
+import hybridsearch
+import hybridsearch_embedded
+import hybridsearch.index as index
+from hybridsearch.errors import ErrorCode
+from hybridsearch.common import ConflictType
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
-from infinity_http import infinity_http
+from hybridsearch_http import hybridsearch_http
 from common.utils import copy_data
 import importlib
 
@@ -25,60 +25,60 @@ test_export_jsonl_file = "export_embedding_int_dim3.jsonl"
 test_export_jsonl_file_part = "export_embedding_int_dim3_part.jsonl"
 
 
-@pytest.mark.usefixtures("local_infinity")
+@pytest.mark.usefixtures("local_hybridsearch")
 @pytest.mark.usefixtures("http")
 @pytest.mark.usefixtures("suffix")
-class TestInfinity:
+class Testhybridsearch:
     @pytest.fixture(autouse=True)
-    def setup(self, local_infinity, http):
-        if local_infinity:
-            module = importlib.import_module("infinity_embedded.index")
+    def setup(self, local_hybridsearch, http):
+        if local_hybridsearch:
+            module = importlib.import_module("hybridsearch_embedded.index")
             globals()["index"] = module
             self.uri = common_values.TEST_LOCAL_PATH
-            self.infinity_obj = infinity_embedded.connect(self.uri)
+            self.hybridsearch_obj = hybridsearch_embedded.connect(self.uri)
         elif http:
             self.uri = common_values.TEST_LOCAL_HOST
-            self.infinity_obj = infinity_http()
+            self.hybridsearch_obj = hybridsearch_http()
         else:
             self.uri = common_values.TEST_LOCAL_HOST
-            self.infinity_obj = infinity.connect(self.uri)
+            self.hybridsearch_obj = hybridsearch.connect(self.uri)
 
     def teardown(self):
-        res = self.infinity_obj.disconnect()
+        res = self.hybridsearch_obj.disconnect()
         assert res.error_code == ErrorCode.OK
 
     # def test_version(self):
-    #     self.test_infinity_obj._test_version()
-    def test_connection(self, local_infinity):
+    #     self.test_hybridsearch_obj._test_version()
+    def test_connection(self, local_hybridsearch):
         """
         target: test connect and disconnect server ok
         method: connect server
         expect: connect and disconnect successfully
         """
-        if local_infinity:
-            infinity_obj = infinity_embedded.connect(self.uri)
+        if local_hybridsearch:
+            hybridsearch_obj = hybridsearch_embedded.connect(self.uri)
         else:
-            infinity_obj = infinity.connect(self.uri)
-        assert infinity_obj
-        assert infinity_obj.disconnect()
+            hybridsearch_obj = hybridsearch.connect(self.uri)
+        assert hybridsearch_obj
+        assert hybridsearch_obj.disconnect()
 
-    def test_create_db_with_invalid_name(self, local_infinity):
+    def test_create_db_with_invalid_name(self, local_hybridsearch):
         """
         target: test db name limitation
         method: create db with empty name
         expect: create db fail with error message
         """
-        if local_infinity:
-            infinity_obj = infinity_embedded.connect(self.uri)
+        if local_hybridsearch:
+            hybridsearch_obj = hybridsearch_embedded.connect(self.uri)
         else:
-            infinity_obj = infinity.connect(self.uri)
-        assert infinity_obj
+            hybridsearch_obj = hybridsearch.connect(self.uri)
+        assert hybridsearch_obj
 
         db_name = ""
         with pytest.raises(Exception,
                            match=f"DB name '{db_name}' is not valid. It should start with a letter and can contain only letters, numbers and underscores"):
-            db = infinity_obj.create_database("")
-        assert infinity_obj.disconnect()
+            db = hybridsearch_obj.create_database("")
+        assert hybridsearch_obj.disconnect()
 
     @pytest.mark.parametrize("check_data", [{"file_name": "embedding_int_dim3.csv",
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
@@ -100,17 +100,17 @@ class TestInfinity:
         12.
         expect: all operations successfully
         """
-        res = self.infinity_obj.list_databases()
+        res = self.hybridsearch_obj.list_databases()
         assert res.error_code == ErrorCode.OK
         for db_name in res.db_names:
             if db_name == "my_db"+suffix:
-                self.infinity_obj.drop_database(db_name, ConflictType.Error)
+                self.hybridsearch_obj.drop_database(db_name, ConflictType.Error)
 
-        # infinity
-        db_obj = self.infinity_obj.create_database("my_db"+suffix, ConflictType.Error)
+        # hybridsearch
+        db_obj = self.hybridsearch_obj.create_database("my_db"+suffix, ConflictType.Error)
         assert db_obj is not None
 
-        res = self.infinity_obj.list_databases()
+        res = self.hybridsearch_obj.list_databases()
         assert res.error_code == ErrorCode.OK
 
         res_db_names = []
@@ -119,10 +119,10 @@ class TestInfinity:
                 res_db_names.append(db)
         assert len(res_db_names) == 2
 
-        res = self.infinity_obj.drop_database("my_db"+suffix, ConflictType.Error)
+        res = self.hybridsearch_obj.drop_database("my_db"+suffix, ConflictType.Error)
         assert res.error_code == ErrorCode.OK
 
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("my_table1"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table(
             "my_table1"+suffix, {"c1": {"type": "int", "constraints": ["primary key"]}}, ConflictType.Error)

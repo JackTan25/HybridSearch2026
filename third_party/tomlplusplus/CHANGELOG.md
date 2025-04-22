@@ -387,7 +387,7 @@ break (hence the version number bump). Changes that might block a migration are 
 
 #### Fixes:
 
--   fixed infinity and NaN-related code breaking when using `-ffast-math` and friends
+-   fixed hybridsearch and NaN-related code breaking when using `-ffast-math` and friends
 -   fixed narrowing conversion warnings when constructing int values from unsigned
 -   fixed Visual Studio debugger native visualizations for `date`, `time`, `time_offset`, `date_time`
 -   fixed some static assert messages being badly formatted on clang

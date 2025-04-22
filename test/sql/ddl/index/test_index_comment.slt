@@ -10,7 +10,7 @@ CREATE TABLE sqllogic_test_index_comment (col1 embedding(float,128));
 
 # import data from fvecs file
 statement ok
-COPY sqllogic_test_index_comment FROM '/var/infinity/test_data/test.fvecs' WITH ( DELIMITER ',', FORMAT fvecs);
+COPY sqllogic_test_index_comment FROM '/var/hybridsearch/test_data/test.fvecs' WITH ( DELIMITER ',', FORMAT fvecs);
 
 statement ok
 CREATE INDEX idx1 ON sqllogic_test_index_comment (col1) USING IVF WITH (metric = l2) COMMENT 'testcomment';

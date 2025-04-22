@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 #include "statement/statement_common.h"
 #include "gtest/gtest.h"
@@ -24,11 +12,11 @@ import index_full_text;
 
 import statement_common;
 
-using namespace infinity;
+using namespace hybridsearch;
 class IndexBaseTest : public BaseTest {};
 
 TEST_F(IndexBaseTest, ivf_readwrite) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     Vector<String> columns{"col1"};
     Vector<InitParameter *> parameters;
@@ -59,7 +47,7 @@ TEST_F(IndexBaseTest, ivf_readwrite) {
 }
 
 TEST_F(IndexBaseTest, hnsw_readwrite) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     Vector<String> columns{"col1", "col2"};
     Vector<InitParameter *> parameters;
@@ -92,7 +80,7 @@ TEST_F(IndexBaseTest, hnsw_readwrite) {
 }
 
 TEST_F(IndexBaseTest, full_text_readwrite) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     Vector<String> columns{"col1", "col2"};
     Vector<InitParameter *> parameters;

@@ -1,26 +1,26 @@
-import infinity
+import hybridsearch
 from common import common_values
-from infinity_runner import InfinityRunner, infinity_runner_decorator_factory
-from infinity import index
+from hybridsearch_runner import hybridsearchRunner, hybridsearch_runner_decorator_factory
+from hybridsearch import index
 import time
 import pathlib
-from infinity.common import ConflictType, SparseVector
+from hybridsearch.common import ConflictType, SparseVector
 import pytest
 
 
 class TestMemIdx:
-    def test_mem_hnsw(self, infinity_runner: InfinityRunner):
+    def test_mem_hnsw(self, hybridsearch_runner: hybridsearchRunner):
         config1 = "test/data/config/restart_test/test_memidx/1.toml"
         config2 = "test/data/config/restart_test/test_memidx/2.toml"
         config3 = "test/data/config/restart_test/test_memidx/3.toml"
         uri = common_values.TEST_LOCAL_HOST
-        infinity_runner.clear()
+        hybridsearch_runner.clear()
 
-        decorator1 = infinity_runner_decorator_factory(config1, uri, infinity_runner)
+        decorator1 = hybridsearch_runner_decorator_factory(config1, uri, hybridsearch_runner)
 
         @decorator1
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.create_table(
                 "test_memidx1",
                 {"c1": {"type": "int"}, "c2": {"type": "vector,4,float"}},
@@ -38,7 +38,7 @@ class TestMemIdx:
                     },
                 ),
             )
-            assert res.error_code == infinity.ErrorCode.OK
+            assert res.error_code == hybridsearch.ErrorCode.OK
 
             table_obj.insert([{"c1": 2, "c2": [0.1, 0.2, 0.3, -0.2]} for i in range(5)])
             table_obj.insert([{"c1": 4, "c2": [0.2, 0.1, 0.3, 0.4]}])
@@ -52,12 +52,12 @@ class TestMemIdx:
 
         # config1 can hold 6 rows of hnsw mem index before dump
         # 1. recover by dumpindex wal & memindex recovery
-        decorator2 = infinity_runner_decorator_factory(config2, uri, infinity_runner)
+        decorator2 = hybridsearch_runner_decorator_factory(config2, uri, hybridsearch_runner)
 
         @decorator2
-        def part2(infinity_obj):
+        def part2(hybridsearch_obj):
             time.sleep(5)
-            db_obj = infinity_obj.get_database("default_db")
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.get_table("test_memidx1")
             data_dict, data_type_dict, _ = (
                 table_obj.output(["c1"])
@@ -79,12 +79,12 @@ class TestMemIdx:
         part2()
 
         # 2. recover by delta ckp & dumpindex wal & memindex recovery
-        decorator3 = infinity_runner_decorator_factory(config3, uri, infinity_runner)
+        decorator3 = hybridsearch_runner_decorator_factory(config3, uri, hybridsearch_runner)
 
         @decorator3
-        def part3(infinity_obj):
+        def part3(hybridsearch_obj):
             time.sleep(5)
-            db_obj = infinity_obj.get_database("default_db")
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.get_table("test_memidx1")
 
             def check():
@@ -99,7 +99,7 @@ class TestMemIdx:
                 assert data_dict["count(star)"] == [13]
 
             check()
-            infinity_obj.optimize("default_db", "test_memidx1", optimize_opt=None)
+            hybridsearch_obj.optimize("default_db", "test_memidx1", optimize_opt=None)
             check()
 
             db_obj.drop_table("test_memidx1")
@@ -132,18 +132,18 @@ class TestMemIdx:
     # # result: 13
 
     # recover cose hnsw from mmap column
-    def test_mem_hnsw_cos(self, infinity_runner: InfinityRunner):
+    def test_mem_hnsw_cos(self, hybridsearch_runner: hybridsearchRunner):
         # 100M quota in 7.toml not dump index when insert 8192 rows
         row_n = 8192
         config1 = "test/data/config/restart_test/test_memidx/7.toml"
         uri = common_values.TEST_LOCAL_HOST
-        infinity_runner.clear()
+        hybridsearch_runner.clear()
 
-        decorator1 = infinity_runner_decorator_factory(config1, uri, infinity_runner)
+        decorator1 = hybridsearch_runner_decorator_factory(config1, uri, hybridsearch_runner)
 
         @decorator1
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.create_table(
                 "test_memidx1",
                 {"c1": {"type": "int"}, "c2": {"type": "vector,4,float"}},
@@ -167,12 +167,12 @@ class TestMemIdx:
             time.sleep(3)
 
         @decorator1
-        def part2(infinity_obj):
+        def part2(hybridsearch_obj):
             time.sleep(2)
 
         part1()
 
-        data_dir = "/var/infinity/data"
+        data_dir = "/var/hybridsearch/data"
         cnt = 0
         for path in pathlib.Path(data_dir).rglob("*.col"):
             print(path)
@@ -184,18 +184,18 @@ class TestMemIdx:
 
         part2()
 
-    def test_mem_ivf(self, infinity_runner: InfinityRunner):
+    def test_mem_ivf(self, hybridsearch_runner: hybridsearchRunner):
         config1 = "test/data/config/restart_test/test_memidx/1.toml"
         config2 = "test/data/config/restart_test/test_memidx/2.toml"
         config3 = "test/data/config/restart_test/test_memidx/3.toml"
         uri = common_values.TEST_LOCAL_HOST
-        infinity_runner.clear()
+        hybridsearch_runner.clear()
 
-        decorator1 = infinity_runner_decorator_factory(config1, uri, infinity_runner)
+        decorator1 = hybridsearch_runner_decorator_factory(config1, uri, hybridsearch_runner)
 
         @decorator1
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.create_table(
                 "test_mem_ivf",
                 {"c1": {"type": "int"}, "c2": {"type": "vector,4,float"}},
@@ -210,7 +210,7 @@ class TestMemIdx:
                     },
                 ),
             )
-            assert res.error_code == infinity.ErrorCode.OK
+            assert res.error_code == hybridsearch.ErrorCode.OK
 
             table_obj.insert([{"c1": 2, "c2": [0.1, 0.2, 0.3, -0.2]} for i in range(51)])
             # trigger the dump by 52th record
@@ -223,12 +223,12 @@ class TestMemIdx:
 
         # config1 can hold 51 rows of ivf mem index before dump
         # 1. recover by dumpindex wal & memindex recovery
-        decorator2 = infinity_runner_decorator_factory(config2, uri, infinity_runner)
+        decorator2 = hybridsearch_runner_decorator_factory(config2, uri, hybridsearch_runner)
 
         @decorator2
-        def part2(infinity_obj):
+        def part2(hybridsearch_obj):
             time.sleep(5)
-            db_obj = infinity_obj.get_database("default_db")
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.get_table("test_mem_ivf")
             data_dict, data_type_dict, _ = table_obj.output(["count(*)"]).to_result()
             # print(data_dict)
@@ -254,12 +254,12 @@ class TestMemIdx:
         part2()
 
         # 2. recover by delta ckp & dumpindex wal & memindex recovery
-        decorator3 = infinity_runner_decorator_factory(config3, uri, infinity_runner)
+        decorator3 = hybridsearch_runner_decorator_factory(config3, uri, hybridsearch_runner)
 
         @decorator3
-        def part3(infinity_obj):
+        def part3(hybridsearch_obj):
             time.sleep(5)
-            db_obj = infinity_obj.get_database("default_db")
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.get_table("test_mem_ivf")
 
             def check():
@@ -274,25 +274,25 @@ class TestMemIdx:
                 assert data_dict["count(star)"] == [59]
 
             check()
-            infinity_obj.optimize("default_db", "test_mem_ivf", optimize_opt=None)
+            hybridsearch_obj.optimize("default_db", "test_mem_ivf", optimize_opt=None)
             check()
 
             db_obj.drop_table("test_memidx1")
 
         part3()
 
-    def test_mem_indexer(self, infinity_runner : InfinityRunner):
+    def test_mem_indexer(self, hybridsearch_runner : hybridsearchRunner):
         config1 = "test/data/config/restart_test/test_memidx/1.toml"
         config2 = "test/data/config/restart_test/test_memidx/2.toml"
         config3 = "test/data/config/restart_test/test_memidx/3.toml"
         uri = common_values.TEST_LOCAL_HOST
-        infinity_runner.clear()
+        hybridsearch_runner.clear()
 
-        decorator1 = infinity_runner_decorator_factory(config1, uri, infinity_runner)
+        decorator1 = hybridsearch_runner_decorator_factory(config1, uri, hybridsearch_runner)
 
         @decorator1
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.create_table(
                 "test_mem_indexer",
                 {"c1" : {"type" : "int"}, "c2": {"type": "varchar"}},
@@ -304,7 +304,7 @@ class TestMemIdx:
                     index.IndexType.FullText,
                 ),
             )
-            assert res.error_code == infinity.ErrorCode.OK
+            assert res.error_code == hybridsearch.ErrorCode.OK
 
             table_obj.insert([
                 {"c1" : 1, "c2" : "this is a test text"},
@@ -323,12 +323,12 @@ class TestMemIdx:
 
         # config1 can hold 2 rows of identical fulltext mem index before dump
         # 1. recover by dumpindex wal & memindex recovery
-        decorator2 = infinity_runner_decorator_factory(config2, uri, infinity_runner)
+        decorator2 = hybridsearch_runner_decorator_factory(config2, uri, hybridsearch_runner)
 
         @decorator2
-        def part2(infinity_obj):
+        def part2(hybridsearch_obj):
             time.sleep(5)
-            db_obj = infinity_obj.get_database("default_db")
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.get_table("test_mem_indexer")
             data_dict, data_type_dict, _ = table_obj.output(["count(*)"]).to_result()
             # print(data_dict)
@@ -362,12 +362,12 @@ class TestMemIdx:
         part2()
 
         # 2. recover by delta ckp & dumpindex wal & memindex recovery
-        decorator3 = infinity_runner_decorator_factory(config3, uri, infinity_runner)
+        decorator3 = hybridsearch_runner_decorator_factory(config3, uri, hybridsearch_runner)
 
         @decorator3
-        def part3(infinity_obj):
+        def part3(hybridsearch_obj):
             time.sleep(5)
-            db_obj = infinity_obj.get_database("default_db")
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.get_table("test_mem_indexer")
 
             def check(rows):
@@ -394,12 +394,12 @@ class TestMemIdx:
         part3()
 
     # @pytest.mark.skip(reason="bug")
-    def test_mem_bmp(self, infinity_runner: InfinityRunner):
+    def test_mem_bmp(self, hybridsearch_runner: hybridsearchRunner):
         config1 = "test/data/config/restart_test/test_memidx/1.toml"
         config2 = "test/data/config/restart_test/test_memidx/2.toml"
         config3 = "test/data/config/restart_test/test_memidx/3.toml"
         uri = common_values.TEST_LOCAL_HOST
-        infinity_runner.clear()
+        hybridsearch_runner.clear()
 
         test_data = [
             {"c1" : 1, "c2" : SparseVector(indices=[0, 10, 20, 30, 40, 50, 60, 70, 80, 90], values=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0])},
@@ -410,11 +410,11 @@ class TestMemIdx:
         ]
         query_vector = SparseVector(indices=[0, 20, 80], values=[1.0, 2.0, 3.0])
 
-        decorator1 = infinity_runner_decorator_factory(config1, uri, infinity_runner)
+        decorator1 = hybridsearch_runner_decorator_factory(config1, uri, hybridsearch_runner)
 
         @decorator1
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.create_table(
                 "test_mem_bmp",
                 {"c1": {"type": "int"}, "c2": {"type": "sparse,100,float,int"}},
@@ -427,7 +427,7 @@ class TestMemIdx:
                     {"BLOCK_SIZE": "8", "COMPRESS_TYPE": "compress"},
                 ),
             )
-            assert res.error_code == infinity.ErrorCode.OK
+            assert res.error_code == hybridsearch.ErrorCode.OK
 
             # trigger dump
             for i in range(7):
@@ -437,12 +437,12 @@ class TestMemIdx:
 
         # config1 can hold 51 rows of ivf mem index before dump
         # 1. recover by dumpindex wal & memindex recovery
-        decorator2 = infinity_runner_decorator_factory(config2, uri, infinity_runner)
+        decorator2 = hybridsearch_runner_decorator_factory(config2, uri, hybridsearch_runner)
 
         @decorator2
-        def part2(infinity_obj):
+        def part2(hybridsearch_obj):
             time.sleep(5)
-            db_obj = infinity_obj.get_database("default_db")
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.get_table("test_mem_bmp")
             data_dict, data_type_dict, _ = table_obj.output(["count(*)"]).to_result()
             # print(data_dict)
@@ -473,12 +473,12 @@ class TestMemIdx:
         part2()
 
         # 2. recover by delta ckp & dumpindex wal & memindex recovery
-        decorator3 = infinity_runner_decorator_factory(config3, uri, infinity_runner)
+        decorator3 = hybridsearch_runner_decorator_factory(config3, uri, hybridsearch_runner)
 
         @decorator3
-        def part3(infinity_obj):
+        def part3(hybridsearch_obj):
             time.sleep(5)
-            db_obj = infinity_obj.get_database("default_db")
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.get_table("test_mem_bmp")
 
             def check():
@@ -493,28 +493,28 @@ class TestMemIdx:
                 assert data_dict["count(star)"] == [50]
 
             check()
-            infinity_obj.optimize("default_db", "test_mem_bmp", optimize_opt=None)
+            hybridsearch_obj.optimize("default_db", "test_mem_bmp", optimize_opt=None)
             check()
 
             db_obj.drop_table("test_mem_bmp")
 
         part3()
 
-    def test_optimize_from_different_database(self, infinity_runner: InfinityRunner):
-        infinity_runner.clear()
+    def test_optimize_from_different_database(self, hybridsearch_runner: hybridsearchRunner):
+        hybridsearch_runner.clear()
 
         config1 = "test/data/config/restart_test/test_memidx/1.toml"
         config2 = "test/data/config/restart_test/test_memidx/3.toml"
         uri = common_values.TEST_LOCAL_HOST
-        decorator1 = infinity_runner_decorator_factory(config1, uri, infinity_runner)
-        decorator2 = infinity_runner_decorator_factory(config2, uri, infinity_runner)
+        decorator1 = hybridsearch_runner_decorator_factory(config1, uri, hybridsearch_runner)
+        decorator2 = hybridsearch_runner_decorator_factory(config2, uri, hybridsearch_runner)
 
-        data_dir = "/var/infinity/data"
+        data_dir = "/var/hybridsearch/data"
         idx1_name = "index1"
         idx2_name = "index2"
 
         @decorator1
-        def part1(infinity_obj):
+        def part1(hybridsearch_obj):
             params = {
                 "M": "16",
                 "ef_construction": "20",
@@ -522,8 +522,8 @@ class TestMemIdx:
                 "block_size": "1",
             }
 
-            infinity_obj.drop_database("db1", conflict_type=ConflictType.Ignore)
-            db_obj1 = infinity_obj.create_database("db1")
+            hybridsearch_obj.drop_database("db1", conflict_type=ConflictType.Ignore)
+            db_obj1 = hybridsearch_obj.create_database("db1")
             table_obj1 = db_obj1.create_table(
                 "test_memidx1",
                 {"c1": {"type": "int"}, "c2": {"type": "vector,4,float"}},
@@ -536,8 +536,8 @@ class TestMemIdx:
                 [{"c1": 2, "c2": [0.1, 0.2, 0.3, -0.2]} for i in range(6)]
             )
 
-            infinity_obj.drop_database("db2", conflict_type=ConflictType.Ignore)
-            db_obj2 = infinity_obj.create_database("db2")
+            hybridsearch_obj.drop_database("db2", conflict_type=ConflictType.Ignore)
+            db_obj2 = hybridsearch_obj.create_database("db2")
             table_obj2 = db_obj2.create_table(
                 "test_memidx2",
                 {"c1": {"type": "int"}, "c2": {"type": "vector,4,float"}},
@@ -570,11 +570,11 @@ class TestMemIdx:
 
         if len(idx1_files) != 2 or len(idx2_files) not in [1, 2]:
             print("Warning: memidx dump not triggered. skip this test")
-            infinity_runner.clear()
+            hybridsearch_runner.clear()
             return
 
         @decorator2
-        def part2(infinity_obj):
+        def part2(hybridsearch_obj):
             # wait for optimize
             time.sleep(3)
 
@@ -585,7 +585,7 @@ class TestMemIdx:
                 print("Warning: optimize not triggered. skip this test")
                 print(f"idx1_files: {idx1_files}")
                 print(f"idx2_files: {idx2_files}")
-                infinity_runner.clear()
+                hybridsearch_runner.clear()
                 return
 
             assert len(idx1_files) == 3
@@ -593,7 +593,7 @@ class TestMemIdx:
 
             time.sleep(2)
 
-            infinity_obj.cleanup()
+            hybridsearch_obj.cleanup()
             idx1_files = list(idx1_dir.glob("*"))
             assert len(idx1_files) == 1
 
@@ -602,20 +602,20 @@ class TestMemIdx:
 
         part2()
 
-        infinity_runner.clear()
+        hybridsearch_runner.clear()
 
-    def test_recover_memindex_with_dump(self, infinity_runner: InfinityRunner):
+    def test_recover_memindex_with_dump(self, hybridsearch_runner: hybridsearchRunner):
         config1 = "test/data/config/restart_test/test_memidx/4.toml"
         config2 = "test/data/config/restart_test/test_memidx/1.toml"
         uri = common_values.TEST_LOCAL_HOST
-        decorator1 = infinity_runner_decorator_factory(config1, uri, infinity_runner)
-        decorator2 = infinity_runner_decorator_factory(config2, uri, infinity_runner)
+        decorator1 = hybridsearch_runner_decorator_factory(config1, uri, hybridsearch_runner)
+        decorator2 = hybridsearch_runner_decorator_factory(config2, uri, hybridsearch_runner)
 
         table_name = "test_memidx3"
 
         @decorator1
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.drop_table(table_name, conflict_type=ConflictType.Ignore)
             table_obj = db_obj.create_table(
                 table_name,
@@ -634,7 +634,7 @@ class TestMemIdx:
                     },
                 ),
             )
-            assert res.error_code == infinity.ErrorCode.OK
+            assert res.error_code == hybridsearch.ErrorCode.OK
 
             # big enough to trigger dump in part2 memindex recover, but no dump in part1
             table_obj.insert(
@@ -645,31 +645,31 @@ class TestMemIdx:
         part1()
 
         @decorator2
-        def part2(infinity_obj):
+        def part2(hybridsearch_obj):
             time.sleep(1)  # wait dump task triggered
 
-            db_obj = infinity_obj.get_database("default_db")
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.drop_table(table_name)
 
         part2()
 
-    def test_memidx_recover2(self, infinity_runner: InfinityRunner):
-        infinity_runner.clear()
+    def test_memidx_recover2(self, hybridsearch_runner: hybridsearchRunner):
+        hybridsearch_runner.clear()
 
         uri = common_values.TEST_LOCAL_HOST
-        data_dir = "/var/infinity/data"
-        catalog_dir = "/var/infinity/data/catalog"
+        data_dir = "/var/hybridsearch/data"
+        catalog_dir = "/var/hybridsearch/data/catalog"
 
         config1 = "test/data/config/restart_test/test_memidx/5.toml"
         config2 = "test/data/config/restart_test/test_memidx/4.toml"
-        decorator1 = infinity_runner_decorator_factory(config1, uri, infinity_runner)
-        decorator2 = infinity_runner_decorator_factory(config2, uri, infinity_runner)
+        decorator1 = hybridsearch_runner_decorator_factory(config1, uri, hybridsearch_runner)
+        decorator2 = hybridsearch_runner_decorator_factory(config2, uri, hybridsearch_runner)
 
         table_name = "test_memidx4"
 
         @decorator1
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.drop_table(table_name, conflict_type=ConflictType.Ignore)
             dim = 100
             table_obj = db_obj.create_table(
@@ -691,7 +691,7 @@ class TestMemIdx:
                     {"BLOCK_SIZE": "8", "COMPRESS_TYPE": "compress"},
                 ),
             )
-            infinity_obj.test_command("stuck dump by line bg_task for 3 second")
+            hybridsearch_obj.test_command("stuck dump by line bg_task for 3 second")
             table_obj.insert(
                 [
                     {
@@ -703,7 +703,7 @@ class TestMemIdx:
                 ]
             )
             # dump by line submit here
-            infinity_obj.flush_delta()
+            hybridsearch_obj.flush_delta()
             for i in range(100):
                 table_obj.insert(
                     [
@@ -722,12 +722,12 @@ class TestMemIdx:
         delta_paths = list(pathlib.Path(catalog_dir).rglob("*DELTA*"))
         if len(delta_paths) < 1:
             print("Warning: delta checkpoint not triggered. skip this test")
-            infinity_runner.clear()
+            hybridsearch_runner.clear()
             return
 
         @decorator2
-        def part2(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part2(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.get_table(table_name)
             data_dict, data_type_dict, _ = (
                 table_obj.output(["c1"]).filter("c2 >= 8192").to_result()
@@ -743,19 +743,19 @@ class TestMemIdx:
 
         part2()
 
-        infinity_runner.clear()
+        hybridsearch_runner.clear()
 
-    def test_tmp(self, infinity_runner: InfinityRunner):
-        infinity_runner.clear()
+    def test_tmp(self, hybridsearch_runner: hybridsearchRunner):
+        hybridsearch_runner.clear()
 
         config = "test/data/config/restart_test/test_memidx/1.toml"
         uri = common_values.TEST_LOCAL_HOST
 
-        decorator = infinity_runner_decorator_factory(config, uri, infinity_runner)
+        decorator = hybridsearch_runner_decorator_factory(config, uri, hybridsearch_runner)
 
         @decorator
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.create_table(
                 "test_memidx5",
                 {"c1": {"type": "int"}, "c2": {"type": "varchar"}},
@@ -766,16 +766,16 @@ class TestMemIdx:
             table_obj.insert(
                 [{"c1": 1, "c2": "hello world. hello world. hello world."}]
             )
-            infinity_obj.flush_delta()
+            hybridsearch_obj.flush_delta()
 
             table_obj.insert([{"c1": 2, "c2": "hello c++. hello c++. hello c++."}])
-            infinity_obj.flush_delta()
+            hybridsearch_obj.flush_delta()
 
         part1()
 
         @decorator
-        def part2(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part2(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.get_table("test_memidx5")
             data_dict, data_type_dict, _ = (
                 table_obj.output(["c1"]).match_text("c2", "hello", 2).to_result()
@@ -784,17 +784,17 @@ class TestMemIdx:
 
         part2()
 
-    def test_optimize_empty_index(self, infinity_runner: InfinityRunner):
-        infinity_runner.clear()
+    def test_optimize_empty_index(self, hybridsearch_runner: hybridsearchRunner):
+        hybridsearch_runner.clear()
         config = "test/data/config/restart_test/test_memidx/6.toml"
         uri = common_values.TEST_LOCAL_HOST
 
         table_name = "t1"
-        decorator = infinity_runner_decorator_factory(config, uri, infinity_runner)
+        decorator = hybridsearch_runner_decorator_factory(config, uri, hybridsearch_runner)
 
         @decorator
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.drop_table(table_name, ConflictType.Ignore)
             table_obj = db_obj.create_table(table_name, {"c1": {"type": "int"}, "c2": {"type": "varchar"}})
             table_obj.create_index("idx1", index.IndexInfo("c2", index.IndexType.FullText))

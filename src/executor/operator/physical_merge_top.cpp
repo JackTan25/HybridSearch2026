@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -26,7 +14,7 @@ import operator_state;
 import base_expression;
 import value_expression;
 import expression_state;
-import infinity_exception;
+import hybridsearch_exception;
 import expression_evaluator;
 import data_block;
 import column_vector;
@@ -34,7 +22,7 @@ import default_values;
 import physical_top;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct VectorBlockRawIndex {
     u32 left_row_cnt_{};
@@ -185,4 +173,4 @@ bool PhysicalMergeTop::Execute(QueryContext *, OperatorState *operator_state) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

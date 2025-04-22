@@ -5,13 +5,13 @@ import sys
 current_path = os.path.abspath(os.path.dirname(__file__))
 parent = os.path.join(os.getcwd(), os.pardir)
 pparent = os.path.join(parent, os.pardir)
-local_infinity_path = os.path.abspath(pparent)
+local_hybridsearch_path = os.path.abspath(pparent)
 current_python_path = os.path.abspath(pparent) + '/python'
 
-print(current_path, local_infinity_path)
+print(current_path, local_hybridsearch_path)
 
-if local_infinity_path in sys.path:
-    sys.path.remove(local_infinity_path)
+if local_hybridsearch_path in sys.path:
+    sys.path.remove(local_hybridsearch_path)
 
 if current_python_path in sys.path:
     sys.path.remove(current_python_path)
@@ -21,8 +21,8 @@ print(sys.path)
 import pytest
 from httpapibase import HttpTest
 from common.common_values import *
-from infinity.errors import ErrorCode
-import infinity.index as index
+from hybridsearch.errors import ErrorCode
+import hybridsearch.index as index
 import pandas
 import os
 import time

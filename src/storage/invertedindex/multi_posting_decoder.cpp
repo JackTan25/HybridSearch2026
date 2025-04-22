@@ -23,7 +23,7 @@ import skiplist_reader;
 import internal_types;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 MultiPostingDecoder::~MultiPostingDecoder() {
     if (index_decoder_) {
@@ -194,4 +194,4 @@ IndexDecoder *MultiPostingDecoder::CreateDocIndexDecoder(u32 doc_list_begin_pos)
     return new SkipIndexDecoder<SkipListReaderByteSlice>(&doc_reader_, doc_list_begin_pos, format_option_.GetDocListFormatOption());
 }
 
-} // namespace infinity
+} // namespace hybridsearch

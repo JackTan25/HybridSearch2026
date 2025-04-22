@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -33,7 +21,7 @@ import third_party;
 import logger;
 
 import txn;
-import infinity_exception;
+import hybridsearch_exception;
 import status;
 import background_process;
 import compaction_process;
@@ -45,7 +33,7 @@ import periodic_trigger;
 import log_file;
 
 import query_context;
-import infinity_context;
+import hybridsearch_context;
 import memindex_tracer;
 import cleanup_scanner;
 import persistence_manager;
@@ -55,16 +43,16 @@ import result_cache_manager;
 import global_resource_usage;
 import txn_state;
 
-namespace infinity {
+namespace hybridsearch {
 
 Storage::Storage(Config *config_ptr) : config_ptr_(config_ptr) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::IncrObjectCount("Storage");
 #endif
 }
 
 Storage::~Storage() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::DecrObjectCount("Storage");
 #endif
 }
@@ -781,4 +769,4 @@ void Storage::CreateDefaultDB() {
     txn_mgr_->CommitTxn(new_txn);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

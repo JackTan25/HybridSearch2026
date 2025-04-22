@@ -7,7 +7,7 @@
 #include <chrono>
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 class BaseProfiler {
 public:
@@ -45,4 +45,4 @@ private:
     std::string name_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

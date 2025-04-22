@@ -9,7 +9,7 @@ import posting_byte_slice_reader;
 import index_decoder;
 import index_defines;
 
-namespace infinity {
+namespace hybridsearch {
 
 InMemDocListDecoder::InMemDocListDecoder(const DocListFormatOption &doc_list_format_option) : IndexDecoder(doc_list_format_option) {}
 
@@ -106,4 +106,4 @@ void InMemDocListDecoder::DecodeCurrentDocPayloadBuffer(docpayload_t *doc_payloa
     doc_list_reader_.Decode(doc_payload_buffer, MAX_DOC_PER_RECORD, decode_count);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

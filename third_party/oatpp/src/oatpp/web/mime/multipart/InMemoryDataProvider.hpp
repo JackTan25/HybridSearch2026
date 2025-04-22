@@ -42,14 +42,14 @@ public:
 
 /**
  * Create in-memory part reader.
- * @param maxDataSize - max-allowed size of the data. Use `-1` for infinity.
+ * @param maxDataSize - max-allowed size of the data. Use `-1` for hybridsearch.
  * @return
  */
 std::shared_ptr<PartReader> createInMemoryPartReader(v_io_size maxDataSize);
 
 /**
  * Create Async in-memory part reader.
- * @param maxDataSize - max-allowed size of the data. Use `-1` for infinity.
+ * @param maxDataSize - max-allowed size of the data. Use `-1` for hybridsearch.
  * @return
  */
 std::shared_ptr<AsyncPartReader> createAsyncInMemoryPartReader(v_io_size maxDataSize);

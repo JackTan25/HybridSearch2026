@@ -8,7 +8,7 @@ import stl;
 import logger;
 import darts;
 
-namespace infinity {
+namespace hybridsearch {
 
 // Aho-corasick based on double array trie
 // Modified from https://github.com/jeongukjae/darts-ac
@@ -59,4 +59,4 @@ private:
         result->position = position;
     }
 };
-} // namespace infinity
+} // namespace hybridsearch

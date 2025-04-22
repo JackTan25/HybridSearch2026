@@ -3,14 +3,14 @@ import os
 from numpy import dtype
 import pandas as pd
 import pytest
-from infinity_cluster import InfinityCluster
-from infinity.common import ConflictType
-from infinity.common import InfinityException
-from infinity.errors import ErrorCode
+from hybridsearch_cluster import hybridsearchCluster
+from hybridsearch.common import ConflictType
+from hybridsearch.common import hybridsearchException
+from hybridsearch.errors import ErrorCode
 import common_values
 
 class TestKnn:
-    def test_knn(self, cluster: InfinityCluster):
+    def test_knn(self, cluster: hybridsearchCluster):
         with cluster:
             cluster.add_node("node1", "conf/leader.toml")
             cluster.add_node("node2", "conf/follower.toml")
@@ -20,10 +20,10 @@ class TestKnn:
             cluster.set_follower("node2")
             time.sleep(1)
 
-            infinity1 = cluster.client("node1")
-            infinity2 = cluster.client("node2")
+            hybridsearch1 = cluster.client("node1")
+            hybridsearch2 = cluster.client("node2")
 
-            db_obj = infinity1.get_database("default_db")
+            db_obj = hybridsearch1.get_database("default_db")
 
             test_csv_dir = common_values.TEST_DATA_DIR + "csv/tmp_20240116.csv"
             print(f"import file: {test_csv_dir}")
@@ -51,7 +51,7 @@ class TestKnn:
             print(res)
 
             time.sleep(1)
-            db_obj_2 = infinity2.get_database("default_db")
+            db_obj_2 = hybridsearch2.get_database("default_db")
             table_obj_2 = db_obj_2.get_table("test_knn")
             res, extra_result = table_obj_2.output(["variant_id", "_row_id"]).match_dense("gender_vector", [1.0] * 4, "float", "ip", 10).to_pl()
             print(res)

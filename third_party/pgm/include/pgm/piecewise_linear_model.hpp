@@ -293,7 +293,7 @@ size_t make_segmentation(size_t n, size_t start, size_t end, size_t epsilon, Fin
             // For floating-point keys, the value x+1 above is replaced by the next representable value following x.
             if constexpr (std::is_floating_point_v<K>) {
                 K next;
-                if ((next = std::nextafter(in(i), std::numeric_limits<K>::infinity())) < in(i + 1))
+                if ((next = std::nextafter(in(i), std::numeric_limits<K>::hybridsearch())) < in(i + 1))
                     add_point(next, i);
             } else {
                 if (in(i) + 1 < in(i + 1))
@@ -309,7 +309,7 @@ size_t make_segmentation(size_t n, size_t start, size_t end, size_t epsilon, Fin
     if (end == n) {
         // Ensure values greater than the last one are mapped to n
         if constexpr (std::is_floating_point_v<K>) {
-            add_point(std::nextafter(in(n - 1), std::numeric_limits<K>::infinity()), n);
+            add_point(std::nextafter(in(n - 1), std::numeric_limits<K>::hybridsearch()), n);
         } else {
             add_point(in(n - 1) + 1, n);
         }

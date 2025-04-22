@@ -17,7 +17,7 @@ import mem_usage_change;
 
 module posting_writer;
 
-namespace infinity {
+namespace hybridsearch {
 
 PostingWriter::PostingWriter(const PostingFormat &posting_format, VectorWithLock<u32> &column_lengths)
     : posting_format_(posting_format), column_lengths_(column_lengths) {
@@ -119,4 +119,4 @@ MemUsageChange PostingWriter::GetSizeChange() {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

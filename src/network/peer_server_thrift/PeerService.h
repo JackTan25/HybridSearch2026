@@ -12,7 +12,7 @@
 #include <memory>
 #include "peer_server_types.h"
 
-namespace infinity_peer_server {
+namespace hybridsearch_peer_server {
 
 #ifdef _MSC_VER
   #pragma warning( push )

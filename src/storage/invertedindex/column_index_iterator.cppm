@@ -12,7 +12,7 @@ import posting_list_format;
 import index_defines;
 import term_meta;
 import dict_reader;
-namespace infinity {
+namespace hybridsearch {
 
 export class ColumnIndexIterator {
 public:
@@ -42,4 +42,4 @@ private:
     SharedPtr<PostingDecoder> posting_decoder_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

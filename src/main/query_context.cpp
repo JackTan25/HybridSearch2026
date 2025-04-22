@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -31,7 +19,7 @@ import resource_manager;
 import txn;
 import sql_parser;
 import profiler;
-import infinity_exception;
+import hybridsearch_exception;
 import logical_planner;
 import logical_node_type;
 import data_block;
@@ -58,20 +46,20 @@ import admin_statement;
 import admin_executor;
 import persistence_manager;
 import global_resource_usage;
-import infinity_context;
+import hybridsearch_context;
 import txn_state;
 
-namespace infinity {
+namespace hybridsearch {
 
 QueryContext::QueryContext(BaseSession *session) : session_ptr_(session) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::IncrObjectCount("QueryContext");
 #endif
 }
 
 QueryContext::~QueryContext() {
     UnInit();
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::DecrObjectCount("QueryContext");
 #endif
 }
@@ -104,7 +92,7 @@ QueryResult QueryContext::Query(const String &query) {
     CreateQueryProfiler();
     fmt::print("Query Is %s.\n",query.c_str());
     query_mointor_status = 0;
-    std::thread(monitorMemoryUsage,std::ref(query_mointor_status),"/home/ubuntu/infinity/experiments/query_memory_file").detach();
+    std::thread(monitorMemoryUsage,std::ref(query_mointor_status),"/home/ubuntu/hybridsearch/experiments/query_memory_file").detach();
     StartProfile(QueryPhase::kParser);
     UniquePtr<ParserResult> parsed_result = MakeUnique<ParserResult>();
     parser_->Parse(query, parsed_result.get());
@@ -134,9 +122,9 @@ QueryResult QueryContext::QueryStatement(const BaseStatement *base_statement) {
     QueryResult query_result;
     // fmt::print("QueryStatement\n");
     query_mointor_status = 0;
-    std::thread(monitorMemoryUsage,std::ref(query_mointor_status),"/home/ubuntu/infinity/experiments/query_memory_file").detach();
+    std::thread(monitorMemoryUsage,std::ref(query_mointor_status),"/home/ubuntu/hybridsearch/experiments/query_memory_file").detach();
     if (base_statement->Type() == StatementType::kAdmin) {
-        if (InfinityContext::instance().IsAdminRole()) {
+        if (hybridsearchContext::instance().IsAdminRole()) {
             const AdminStatement *admin_statement = static_cast<const AdminStatement *>(base_statement);
             return HandleAdminStatement(admin_statement);
         } else {
@@ -145,9 +133,9 @@ QueryResult QueryContext::QueryStatement(const BaseStatement *base_statement) {
                 return HandleAdminStatement(admin_statement);
             }
 
-            if (!InfinityContext::instance().InfinityContextStarted()) {
+            if (!hybridsearchContext::instance().hybridsearchContextStarted()) {
                 query_result.result_table_ = nullptr;
-                query_result.status_ = Status::InfinityIsStarting();
+                query_result.status_ = Status::hybridsearchIsStarting();
                 return query_result;
             }
 
@@ -177,9 +165,9 @@ QueryResult QueryContext::QueryStatement(const BaseStatement *base_statement) {
             return query_result;
         }
     } else {
-        if (!InfinityContext::instance().InfinityContextStarted()) {
+        if (!hybridsearchContext::instance().hybridsearchContextStarted()) {
             query_result.result_table_ = nullptr;
-            query_result.status_ = Status::InfinityIsStarting();
+            query_result.status_ = Status::hybridsearchIsStarting();
             return query_result;
         }
     }
@@ -326,11 +314,11 @@ QueryResult QueryContext::QueryStatement(const BaseStatement *base_statement) {
 }
 
 void QueryContext::CreateQueryProfiler() {
-    if (InfinityContext::instance().storage()->catalog() == nullptr) {
+    if (hybridsearchContext::instance().storage()->catalog() == nullptr) {
         return;
     }
 
-    if (InfinityContext::instance().storage()->catalog()->GetProfile()) {
+    if (hybridsearchContext::instance().storage()->catalog()->GetProfile()) {
         if (query_profiler_ == nullptr) {
             query_profiler_ = MakeShared<QueryProfiler>(true);
         }
@@ -339,7 +327,7 @@ void QueryContext::CreateQueryProfiler() {
 
 void QueryContext::RecordQueryProfiler(const StatementType &type) {
     if (type != StatementType::kCommand && type != StatementType::kExplain && type != StatementType::kShow) {
-        InfinityContext::instance().storage()->catalog()->AppendProfileRecord(query_profiler_);
+        hybridsearchContext::instance().storage()->catalog()->AppendProfileRecord(query_profiler_);
     }
 }
 
@@ -464,4 +452,4 @@ void QueryContext::RollbackTxn() {
     storage_->txn_manager()->IncreaseRollbackedTxnCount();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

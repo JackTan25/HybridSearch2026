@@ -11297,7 +11297,7 @@ simdjson_inline error_code parse_exponent(simdjson_unused const uint8_t *const s
     // than 999,999,999,999,999,999.
     // We can truncate.
     // Note that 999999999999999999 is assuredly too large. The maximal ieee64 value before
-    // infinity is ~1.8e308. The smallest subnormal is ~5e-324. So, actually, we could
+    // hybridsearch is ~1.8e308. The smallest subnormal is ~5e-324. So, actually, we could
     // truncate at 324.
     // Note that there is no reason to fail per se at this point in time.
     // E.g., 0e999999999999999999999 is a fine number.
@@ -13001,7 +13001,7 @@ simdjson_inline error_code parse_exponent(simdjson_unused const uint8_t *const s
     // than 999,999,999,999,999,999.
     // We can truncate.
     // Note that 999999999999999999 is assuredly too large. The maximal ieee64 value before
-    // infinity is ~1.8e308. The smallest subnormal is ~5e-324. So, actually, we could
+    // hybridsearch is ~1.8e308. The smallest subnormal is ~5e-324. So, actually, we could
     // truncate at 324.
     // Note that there is no reason to fail per se at this point in time.
     // E.g., 0e999999999999999999999 is a fine number.
@@ -15202,7 +15202,7 @@ simdjson_inline error_code parse_exponent(simdjson_unused const uint8_t *const s
     // than 999,999,999,999,999,999.
     // We can truncate.
     // Note that 999999999999999999 is assuredly too large. The maximal ieee64 value before
-    // infinity is ~1.8e308. The smallest subnormal is ~5e-324. So, actually, we could
+    // hybridsearch is ~1.8e308. The smallest subnormal is ~5e-324. So, actually, we could
     // truncate at 324.
     // Note that there is no reason to fail per se at this point in time.
     // E.g., 0e999999999999999999999 is a fine number.
@@ -17394,7 +17394,7 @@ simdjson_inline error_code parse_exponent(simdjson_unused const uint8_t *const s
     // than 999,999,999,999,999,999.
     // We can truncate.
     // Note that 999999999999999999 is assuredly too large. The maximal ieee64 value before
-    // infinity is ~1.8e308. The smallest subnormal is ~5e-324. So, actually, we could
+    // hybridsearch is ~1.8e308. The smallest subnormal is ~5e-324. So, actually, we could
     // truncate at 324.
     // Note that there is no reason to fail per se at this point in time.
     // E.g., 0e999999999999999999999 is a fine number.
@@ -19696,7 +19696,7 @@ simdjson_inline error_code parse_exponent(simdjson_unused const uint8_t *const s
     // than 999,999,999,999,999,999.
     // We can truncate.
     // Note that 999999999999999999 is assuredly too large. The maximal ieee64 value before
-    // infinity is ~1.8e308. The smallest subnormal is ~5e-324. So, actually, we could
+    // hybridsearch is ~1.8e308. The smallest subnormal is ~5e-324. So, actually, we could
     // truncate at 324.
     // Note that there is no reason to fail per se at this point in time.
     // E.g., 0e999999999999999999999 is a fine number.
@@ -21846,7 +21846,7 @@ simdjson_inline error_code parse_exponent(simdjson_unused const uint8_t *const s
     // than 999,999,999,999,999,999.
     // We can truncate.
     // Note that 999999999999999999 is assuredly too large. The maximal ieee64 value before
-    // infinity is ~1.8e308. The smallest subnormal is ~5e-324. So, actually, we could
+    // hybridsearch is ~1.8e308. The smallest subnormal is ~5e-324. So, actually, we could
     // truncate at 324.
     // Note that there is no reason to fail per se at this point in time.
     // E.g., 0e999999999999999999999 is a fine number.

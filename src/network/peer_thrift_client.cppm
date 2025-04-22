@@ -1,16 +1,4 @@
-// Copyright(C) 2024 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -24,17 +12,17 @@ import blocking_queue;
 import peer_task;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 using namespace apache::thrift;
 using namespace apache::thrift::protocol;
 using namespace apache::thrift::transport;
-using namespace infinity_peer_server;
+using namespace hybridsearch_peer_server;
 
 export class PeerClient {
 public:
     PeerClient(const String &from_node_name, const String &ip_addr, i64 port) : from_node_name_(from_node_name), ip_address_(ip_addr), port_(port) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("PeerClient");
 #endif
     }
@@ -84,4 +72,4 @@ private:
     Atomic<u64> peer_task_count_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

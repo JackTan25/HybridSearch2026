@@ -9,7 +9,7 @@
 #include <iostream>
 #include <cstdio>
 
-namespace infinity {
+namespace hybridsearch {
 
 void OptimizerProfiler::StartRule(const std::string &rule_name) {
     profilers_.emplace_back(rule_name);
@@ -102,4 +102,4 @@ std::string QueryProfiler::ToString() const {
     return ss.str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

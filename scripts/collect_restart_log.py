@@ -46,9 +46,9 @@ def collect_log(executable_path, output_dir, failure, show_lines):
             shutil.copy(executable_path, f"{output_dir}/{random_name}.exe")
 
     if failure:
-        # copy file in /var/infinity/../FULL.*.json
+        # copy file in /var/hybridsearch/../FULL.*.json
         copy_n = 0
-        for filepath in glob.iglob(f"/var/infinity/**/FULL.*.json", recursive=True):
+        for filepath in glob.iglob(f"/var/hybridsearch/**/FULL.*.json", recursive=True):
             print(filepath)
             filename = filepath.split("/")[-1]
             shutil.copy(filepath, f"./{filename}")
@@ -65,7 +65,7 @@ def collect_log(executable_path, output_dir, failure, show_lines):
 
 
 if "__main__" == __name__:
-    parser = argparse.ArgumentParser(description="Python restart test for infinity")
+    parser = argparse.ArgumentParser(description="Python restart test for hybridsearch")
     parser.add_argument(
         "--executable_path",
         type=str,

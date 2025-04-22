@@ -8,7 +8,7 @@ log_to_stdout            = true
 log_level               = "info"
 
 [storage]
-data_dir = "/var/infinity/data"
+data_dir = "/var/hybridsearch/data"
 # close auto optimize
 optimize_interval = "0s"
 # close auto cleanup task

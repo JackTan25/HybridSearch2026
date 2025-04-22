@@ -15,7 +15,7 @@ import posting_list_format;
 import internal_types;
 import posting_writer;
 
-namespace infinity {
+namespace hybridsearch {
 export class MultiPostingDecoder {
 public:
     MultiPostingDecoder(const PostingFormatOption &format_option, InDocPositionState *state)
@@ -97,4 +97,4 @@ private:
     ByteSliceReader doc_reader_;
     ByteSliceReader pos_reader_;
 };
-} // namespace infinity
+} // namespace hybridsearch

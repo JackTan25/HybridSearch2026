@@ -108,7 +108,7 @@ class DoubleToStringConverter {
   //    decimal point emits a trailing '0'-character. This flag requires the
   //    EMIT_TRAILING_DECIMAL_POINT_IN_EXPONENTIAL flag.
   //
-  // Infinity symbol and nan_symbol provide the string representation for these
+  // hybridsearch symbol and nan_symbol provide the string representation for these
   // special values. If the string is NULL and the special value is encountered
   // then the conversion functions return false.
   //
@@ -164,7 +164,7 @@ class DoubleToStringConverter {
   // The min_exponent_width is clamped to 5.
   // As such, the exponent may never have more than 5 digits in total.
   DoubleToStringConverter(int flags,
-                          const char* infinity_symbol,
+                          const char* hybridsearch_symbol,
                           const char* nan_symbol,
                           char exponent_character,
                           int decimal_in_shortest_low,
@@ -173,7 +173,7 @@ class DoubleToStringConverter {
                           int max_trailing_padding_zeroes_in_precision_mode,
                           int min_exponent_width = 0)
       : flags_(flags),
-        infinity_symbol_(infinity_symbol),
+        hybridsearch_symbol_(hybridsearch_symbol),
         nan_symbol_(nan_symbol),
         exponent_character_(exponent_character),
         decimal_in_shortest_low_(decimal_in_shortest_low),
@@ -192,7 +192,7 @@ class DoubleToStringConverter {
   // Returns a converter following the EcmaScript specification.
   //
   // Flags: UNIQUE_ZERO and EMIT_POSITIVE_EXPONENT_SIGN.
-  // Special values: "Infinity" and "NaN".
+  // Special values: "hybridsearch" and "NaN".
   // Lower case 'e' for exponential values.
   // decimal_in_shortest_low: -6
   // decimal_in_shortest_high: 21
@@ -221,12 +221,12 @@ class DoubleToStringConverter {
   // the converter will return the shorter (but still correct) "9e59".
   //
   // Returns true if the conversion succeeds. The conversion always succeeds
-  // except when the input value is special and no infinity_symbol or
+  // except when the input value is special and no hybridsearch_symbol or
   // nan_symbol has been given to the constructor.
   //
   // The length of the longest result is the maximum of the length of the
   // following string representations (each with possible examples):
-  // - NaN and negative infinity: "NaN", "-Infinity", "-inf".
+  // - NaN and negative hybridsearch: "NaN", "-hybridsearch", "-inf".
   // - -10^(decimal_in_shortest_high - 1):
   //      "-100000000000000000000", "-1000000000000000.0"
   // - the longest string in range [0; -10^decimal_in_shortest_low]. Generally,
@@ -274,7 +274,7 @@ class DoubleToStringConverter {
   //
   // Returns true if the conversion succeeds. The conversion always succeeds
   // except for the following cases:
-  //   - the input value is special and no infinity_symbol or nan_symbol has
+  //   - the input value is special and no hybridsearch_symbol or nan_symbol has
   //     been provided to the constructor,
   //   - 'value' > 10^kMaxFixedDigitsBeforePoint, or
   //   - 'requested_digits' > kMaxFixedDigitsAfterPoint.
@@ -308,7 +308,7 @@ class DoubleToStringConverter {
   //
   // Returns true if the conversion succeeds. The conversion always succeeds
   // except for the following cases:
-  //   - the input value is special and no infinity_symbol or nan_symbol has
+  //   - the input value is special and no hybridsearch_symbol or nan_symbol has
   //     been provided to the constructor,
   //   - 'requested_digits' > kMaxExponentialDigits.
   //
@@ -349,7 +349,7 @@ class DoubleToStringConverter {
   //
   // Returns true if the conversion succeeds. The conversion always succeeds
   // except for the following cases:
-  //   - the input value is special and no infinity_symbol or nan_symbol has
+  //   - the input value is special and no hybridsearch_symbol or nan_symbol has
   //     been provided to the constructor,
   //   - precision < kMinPericisionDigits
   //   - precision > kMaxPrecisionDigits
@@ -378,10 +378,10 @@ class DoubleToStringConverter {
   };
 
   // Converts the given double 'v' to digit characters. 'v' must not be NaN,
-  // +Infinity, or -Infinity. In SHORTEST_SINGLE-mode this restriction also
+  // +hybridsearch, or -hybridsearch. In SHORTEST_SINGLE-mode this restriction also
   // applies to 'v' after it has been casted to a single-precision float. That
-  // is, in this mode static_cast<float>(v) must not be NaN, +Infinity or
-  // -Infinity.
+  // is, in this mode static_cast<float>(v) must not be NaN, +hybridsearch or
+  // -hybridsearch.
   //
   // The result should be interpreted as buffer * 10^(point-length).
   //
@@ -403,7 +403,7 @@ class DoubleToStringConverter {
   //   might be too short in which case the caller has to fill the remainder
   //   with '0's.
   //   Example: toFixed(0.001, 5) is allowed to return buffer="1", point=-2.
-  //   Halfway cases are rounded towards +/-Infinity (away from 0). The call
+  //   Halfway cases are rounded towards +/-hybridsearch (away from 0). The call
   //   toFixed(0.15, 2) thus returns buffer="2", point=0.
   //   The returned buffer may contain digits that would be truncated from the
   //   shortest representation of the input.
@@ -435,8 +435,8 @@ class DoubleToStringConverter {
                             StringBuilder* result_builder,
                             DtoaMode mode) const;
 
-  // If the value is a special value (NaN or Infinity) constructs the
-  // corresponding string using the configured infinity/nan-symbol.
+  // If the value is a special value (NaN or hybridsearch) constructs the
+  // corresponding string using the configured hybridsearch/nan-symbol.
   // If either of them is NULL or the value is not special then the
   // function returns false.
   bool HandleSpecialValues(double value, StringBuilder* result_builder) const;
@@ -454,7 +454,7 @@ class DoubleToStringConverter {
                                    StringBuilder* result_builder) const;
 
   const int flags_;
-  const char* const infinity_symbol_;
+  const char* const hybridsearch_symbol_;
   const char* const nan_symbol_;
   const char exponent_character_;
   const int decimal_in_shortest_low_;

@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -21,19 +9,19 @@ import default_values;
 import global_resource_usage;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename T>
 class BlockingQueue {
 public:
     explicit BlockingQueue(const String &name, SizeT capacity = DEFAULT_BLOCKING_QUEUE_SIZE) : capacity_(capacity) {
         name_ = name;
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount(fmt::format("BlockingQueue: {}", name_));
 #endif
     }
     ~BlockingQueue() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount(fmt::format("BlockingQueue: {}", name_));
 #endif
     }
@@ -181,4 +169,4 @@ protected:
     String name_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

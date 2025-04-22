@@ -3,13 +3,13 @@ import time
 from numpy import dtype
 import pandas as pd
 import pytest
-from infinity_cluster import InfinityCluster
-from infinity.common import ConflictType
-from infinity.common import InfinityException
+from hybridsearch_cluster import hybridsearchCluster
+from hybridsearch.common import ConflictType
+from hybridsearch.common import hybridsearchException
 
 
 class TestTable:
-    def test_create_100_table(self, cluster: InfinityCluster):
+    def test_create_100_table(self, cluster: hybridsearchCluster):
         with cluster:
             cluster.add_node("node1", "conf/leader.toml")
             cluster.add_node("node2", "conf/follower.toml")
@@ -19,10 +19,10 @@ class TestTable:
             cluster.set_follower("node2")
             time.sleep(1)
 
-            infinity1 = cluster.client("node1")
-            infinity2 = cluster.client("node2")
+            hybridsearch1 = cluster.client("node1")
+            hybridsearch2 = cluster.client("node2")
 
-            db1 = infinity1.get_database("default_db")
+            db1 = hybridsearch1.get_database("default_db")
             table_count = 100
             for i in range(table_count):
                 print('drop test_cluster_table_name' + str(i))
@@ -40,7 +40,7 @@ class TestTable:
                     res_tables.append(table_name)
             assert len(res_tables) == (table_count)
 
-            db2 = infinity2.get_database("default_db")
+            db2 = hybridsearch2.get_database("default_db")
             tables = db2.get_all_tables()
             res_tables = []
             for table_name in tables:
@@ -60,7 +60,7 @@ class TestTable:
                     res_tables.append(table_name)
             assert len(res_tables) == 0
 
-            db2 = infinity2.get_database("default_db")
+            db2 = hybridsearch2.get_database("default_db")
             tables = db2.get_all_tables()
             res_tables = []
             for table_name in tables:
@@ -68,7 +68,7 @@ class TestTable:
                     res_tables.append(table_name)
             assert len(res_tables) == 0
 
-    def test_create_table_on_follower(self, cluster: InfinityCluster):
+    def test_create_table_on_follower(self, cluster: hybridsearchCluster):
         with cluster:
             cluster.add_node("node1", "conf/leader.toml")
             cluster.add_node("node2", "conf/follower.toml")
@@ -78,13 +78,13 @@ class TestTable:
             cluster.set_follower("node2")
             time.sleep(1)
 
-            infinity1 = cluster.client("node1")
-            infinity2 = cluster.client("node2")
+            hybridsearch1 = cluster.client("node1")
+            hybridsearch2 = cluster.client("node2")
 
-            db = infinity2.get_database("default_db")
+            db = hybridsearch2.get_database("default_db")
             try:
                 db.create_table('test_cluster_follwer_table', {"c1": {"type": "int", "constraints": ["primary key"]}, "c2": {"type": "float"}},
             ConflictType.Error)
-            except InfinityException as e:
+            except hybridsearchException as e:
                 print(e)
                 assert(e.error_code == 8007)

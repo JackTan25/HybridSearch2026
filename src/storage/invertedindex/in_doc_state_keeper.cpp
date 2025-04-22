@@ -14,7 +14,7 @@ import index_defines;
 import posting_list_format;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 InDocStateKeeper::InDocStateKeeper(InDocPositionState *state) : state_(state) {}
 
 InDocStateKeeper::~InDocStateKeeper() {
@@ -47,4 +47,4 @@ void InDocStateKeeper::MoveToSegment(InMemPositionListDecoder *decoder) {
     state_->SetPositionListDecoder(decoder);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -6,7 +6,7 @@ export module mem_usage_change;
 
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 export struct MemUsageChange {
     bool is_add_{true};
@@ -41,4 +41,4 @@ export struct MemUsageChange {
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

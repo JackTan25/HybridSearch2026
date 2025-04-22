@@ -1,25 +1,13 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 #include "gtest/gtest.h"
 #include <vector>
 import base_test;
-import infinity_exception;
+import hybridsearch_exception;
 import stl;
 import index_ivf;
 import internal_types;
-import infinity_context;
+import hybridsearch_context;
 import global_resource_usage;
 import statement_common;
 import defer_op;
@@ -28,7 +16,7 @@ import data_type;
 import logical_type;
 import embedding_info;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class IndexIVFTest : public BaseTest {};
 
@@ -61,7 +49,7 @@ struct InitParameterHelper {
 };
 
 TEST_F(IndexIVFTest, testplain) {
-    using namespace infinity;
+    using namespace hybridsearch;
     Map<String, String> args_map{{"meTric", "cos"}, {"plain_storage_data_type", "f32"}};
     InitParameterHelper h;
     {
@@ -106,7 +94,7 @@ TEST_F(IndexIVFTest, testplain) {
 }
 
 TEST_F(IndexIVFTest, testsq) {
-    using namespace infinity;
+    using namespace hybridsearch;
     Map<String, String> args_map{{"metrIc", "L2"},
                                  {"centroids_num_ratio", "0.33"},
                                  {"storage_type", "Scalar_Quantization"},
@@ -144,7 +132,7 @@ TEST_F(IndexIVFTest, testsq) {
 }
 
 TEST_F(IndexIVFTest, testpq) {
-    using namespace infinity;
+    using namespace hybridsearch;
     Map<String, String> args_map{{"Metric", "ip"},
                                  {"storage_type", "product_quAntization"},
                                  {"product_quantization_subspace_num", "32"},

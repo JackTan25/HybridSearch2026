@@ -4,12 +4,12 @@ import random
 import time
 from threading import Thread
 
-import infinity.index as index
+import hybridsearch.index as index
 import pandas
 import pytest
-from infinity.common import ConflictType
-from infinity.connection_pool import ConnectionPool
-from infinity.errors import ErrorCode
+from hybridsearch.common import ConflictType
+from hybridsearch.connection_pool import ConnectionPool
+from hybridsearch.errors import ErrorCode
 
 from test_sdkbase import TestSdk
 from util import RtnThread
@@ -23,11 +23,11 @@ kThreadNum = 4
 class TestIndexParallel(TestSdk):
 
     @pytest.mark.parametrize("file_format", ["csv"])
-    def test_fulltext_index_rw_parallel(self, get_infinity_connection_pool, file_format):
+    def test_fulltext_index_rw_parallel(self, get_hybridsearch_connection_pool, file_format):
 
         def write_worker(connection_pool: ConnectionPool, data, file_path, end_time, thread_id):
-            infinity_obj = connection_pool.get_conn()
-            db_obj = infinity_obj.get_database("default_db")
+            hybridsearch_obj = connection_pool.get_conn()
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.get_table("test_fulltext_index_parallel")
 
             while time.time() < end_time:
@@ -44,11 +44,11 @@ class TestIndexParallel(TestSdk):
                     table_obj.import_data(file_path, {"delimiter": "\t"})
                     print(f"thread {thread_id}: import complete")
 
-            connection_pool.release_conn(infinity_obj)
+            connection_pool.release_conn(hybridsearch_obj)
 
         def read_worker(connection_pool: ConnectionPool, end_time):
-            infinity_obj = connection_pool.get_conn()
-            db_obj = infinity_obj.get_database("default_db")
+            hybridsearch_obj = connection_pool.get_conn()
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.get_table("test_fulltext_index_parallel")
 
             while time.time() < end_time:
@@ -57,7 +57,7 @@ class TestIndexParallel(TestSdk):
                 print(res)
                 time.sleep(0.1)
 
-            connection_pool.release_conn(infinity_obj)
+            connection_pool.release_conn(hybridsearch_obj)
 
         # prepare data for insert
         column_names = ["doctitle", "docdate", "body"]
@@ -71,9 +71,9 @@ class TestIndexParallel(TestSdk):
                 for key, value in df.to_dict().items()}
 
         # create index
-        connection_pool = get_infinity_connection_pool
-        infinity_obj = connection_pool.get_conn()
-        db_obj = infinity_obj.get_database("default_db")
+        connection_pool = get_hybridsearch_connection_pool
+        hybridsearch_obj = connection_pool.get_conn()
+        db_obj = hybridsearch_obj.get_database("default_db")
         res = db_obj.drop_table(
             "test_fulltext_index_parallel", ConflictType.Ignore)
         assert res.error_code == ErrorCode.OK
@@ -100,7 +100,7 @@ class TestIndexParallel(TestSdk):
 
         res = db_obj.drop_table(
             "test_fulltext_index_parallel", ConflictType.Error)
-        connection_pool.release_conn(infinity_obj)
+        connection_pool.release_conn(hybridsearch_obj)
 
     @pytest.mark.parametrize("index_type", [index.IndexType.Hnsw])
     @pytest.mark.parametrize("index_column_name", ["gender_vector"])
@@ -109,15 +109,15 @@ class TestIndexParallel(TestSdk):
     @pytest.mark.parametrize("knn_distance_type", ["l2"])
     @pytest.mark.parametrize("file_format", ["csv"])
     @pytest.mark.parametrize("running_time", [30])
-    def test_vector_index_single_thread(self, get_infinity_connection_pool, index_type, index_column_name,
+    def test_vector_index_single_thread(self, get_hybridsearch_connection_pool, index_type, index_column_name,
                                         knn_column_name,
                                         index_distance_type, knn_distance_type, file_format, running_time):
         file_path = os.getcwd() + TEST_DATA_DIR + file_format + \
                     "/pysdk_test_knn." + file_format
 
-        connection_pool = get_infinity_connection_pool
-        infinity_obj = connection_pool.get_conn()
-        db_obj = infinity_obj.get_database("default_db")
+        connection_pool = get_hybridsearch_connection_pool
+        hybridsearch_obj = connection_pool.get_conn()
+        db_obj = hybridsearch_obj.get_database("default_db")
         res = db_obj.drop_table(
             "test_vector_index_parallel", ConflictType.Ignore)
         assert res.error_code == ErrorCode.OK
@@ -156,7 +156,7 @@ class TestIndexParallel(TestSdk):
         res = db_obj.drop_table(
             "test_vector_index_parallel", ConflictType.Error)
         assert res.error_code == ErrorCode.OK
-        connection_pool.release_conn(infinity_obj)
+        connection_pool.release_conn(hybridsearch_obj)
 
     # @pytest.mark.parametrize("index_column_name", ["gender_vector",
     #                                                "color_vector",
@@ -177,13 +177,13 @@ class TestIndexParallel(TestSdk):
     @pytest.mark.parametrize("index_distance_type", ["l2"])
     @pytest.mark.parametrize("knn_distance_type", ["l2"])
     @pytest.mark.parametrize("file_format", ["csv"])
-    def test_vector_index_rw_parallel(self, get_infinity_connection_pool, index_type, index_column_name,
+    def test_vector_index_rw_parallel(self, get_hybridsearch_connection_pool, index_type, index_column_name,
                                       knn_column_name,
                                       index_distance_type, knn_distance_type, file_format):
 
         def write_worker(connection_pool: ConnectionPool, file_path, end_time, thread_id):
-            infinity_obj = connection_pool.get_conn()
-            db_obj = infinity_obj.get_database("default_db")
+            hybridsearch_obj = connection_pool.get_conn()
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.get_table("test_vector_index_parallel")
 
             while time.time() < end_time:
@@ -191,11 +191,11 @@ class TestIndexParallel(TestSdk):
                 table_obj.import_data(file_path)
                 print(f"thread {thread_id}: import complete")
 
-            connection_pool.release_conn(infinity_obj)
+            connection_pool.release_conn(hybridsearch_obj)
 
         def read_worker(connection_pool: ConnectionPool, end_time, knn_column_name, knn_distance_type):
-            infinity_obj = connection_pool.get_conn()
-            db_obj = infinity_obj.get_database("default_db")
+            hybridsearch_obj = connection_pool.get_conn()
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.get_table("test_vector_index_parallel")
 
             while time.time() < end_time:
@@ -204,15 +204,15 @@ class TestIndexParallel(TestSdk):
                 print(res)
                 time.sleep(0.1)
 
-            connection_pool.release_conn(infinity_obj)
+            connection_pool.release_conn(hybridsearch_obj)
 
         file_path = os.getcwd() + TEST_DATA_DIR + file_format + \
                     "/pysdk_test_knn." + file_format
 
         # create index
-        connection_pool = get_infinity_connection_pool
-        infinity_obj = connection_pool.get_conn()
-        db_obj = infinity_obj.get_database("default_db")
+        connection_pool = get_hybridsearch_connection_pool
+        hybridsearch_obj = connection_pool.get_conn()
+        db_obj = hybridsearch_obj.get_database("default_db")
         res = db_obj.drop_table(
             "test_vector_index_parallel", ConflictType.Ignore)
         assert res.error_code == ErrorCode.OK
@@ -256,14 +256,14 @@ class TestIndexParallel(TestSdk):
         res = db_obj.drop_table(
             "test_vector_index_parallel", ConflictType.Error)
         assert res.error_code == ErrorCode.OK
-        connection_pool.release_conn(infinity_obj)
+        connection_pool.release_conn(hybridsearch_obj)
 
-    def test_index_creation_deletion_parallel(self, get_infinity_connection_pool):
+    def test_index_creation_deletion_parallel(self, get_hybridsearch_connection_pool):
         self.logger = logging.getLogger("run_parallel_test")
 
         def index_worker(connection_pool: ConnectionPool, table_name, column_name, index_name, end_time, thread_id):
-            infinity_obj = connection_pool.get_conn()
-            db_obj = infinity_obj.get_database("default_db")
+            hybridsearch_obj = connection_pool.get_conn()
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.get_table(table_name)
 
             while time.time() < end_time:
@@ -287,11 +287,11 @@ class TestIndexParallel(TestSdk):
                     self.logger.info(f"thread {thread_id}: delete_index {index_name} failed: {res.error_msg}")
                 time.sleep(0.5)
 
-            connection_pool.release_conn(infinity_obj)
+            connection_pool.release_conn(hybridsearch_obj)
 
         def insert_worker(connection_pool: ConnectionPool, table_name, data, end_time, thread_id):
-            infinity_obj = connection_pool.get_conn()
-            db_obj = infinity_obj.get_database("default_db")
+            hybridsearch_obj = connection_pool.get_conn()
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.get_table(table_name)
 
             while time.time() < end_time:
@@ -304,11 +304,11 @@ class TestIndexParallel(TestSdk):
                 self.logger.info(f"thread {thread_id}: put data")
                 time.sleep(1)
 
-            connection_pool.release_conn(infinity_obj)
+            connection_pool.release_conn(hybridsearch_obj)
 
         def query_worker(connection_pool: ConnectionPool, table_name, end_time, thread_id):
-            infinity_obj = connection_pool.get_conn()
-            db_obj = infinity_obj.get_database("default_db")
+            hybridsearch_obj = connection_pool.get_conn()
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.get_table(table_name)
 
             while time.time() < end_time:
@@ -322,7 +322,7 @@ class TestIndexParallel(TestSdk):
                     self.logger.info(f"thread {thread_id}: check failed: {e}")
                 time.sleep(0.5)
 
-            connection_pool.release_conn(infinity_obj)
+            connection_pool.release_conn(hybridsearch_obj)
 
         column_names = ["doctitle", "docdate", "body"]
         file_path = os.getcwd() + TEST_DATA_DIR + "csv" + "/enwiki_99.csv"
@@ -333,9 +333,9 @@ class TestIndexParallel(TestSdk):
         data = {key: list(value.values())
                 for key, value in df.to_dict().items()}
 
-        connection_pool = get_infinity_connection_pool
-        infinity_obj = connection_pool.get_conn()
-        db_obj = infinity_obj.get_database("default_db")
+        connection_pool = get_hybridsearch_connection_pool
+        hybridsearch_obj = connection_pool.get_conn()
+        db_obj = hybridsearch_obj.get_database("default_db")
         table_name = "test_index_creation_deletion_parallel"
         res = db_obj.drop_table(table_name, ConflictType.Ignore)
         assert res.error_code == ErrorCode.OK
@@ -375,13 +375,13 @@ class TestIndexParallel(TestSdk):
 
         res = db_obj.drop_table(table_name, ConflictType.Ignore)
         assert res.error_code == ErrorCode.OK
-        connection_pool.release_conn(infinity_obj)
+        connection_pool.release_conn(hybridsearch_obj)
 
-    def test_table_creation_deletion_parallel(self, get_infinity_connection_pool):
+    def test_table_creation_deletion_parallel(self, get_hybridsearch_connection_pool):
 
         def create_table_worker(connection_pool: ConnectionPool, table_name_prefix, end_time, thread_id):
-            infinity_obj = connection_pool.get_conn()
-            db_obj = infinity_obj.get_database("default_db")
+            hybridsearch_obj = connection_pool.get_conn()
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_counter = 0
             while time.time() < end_time:
                 table_name = f"{table_name_prefix}_{thread_id}_{table_counter}"
@@ -396,10 +396,10 @@ class TestIndexParallel(TestSdk):
                 else:
                     print(f"thread {thread_id}: delete table {table_name} failed: {res.error_msg}")
                 time.sleep(0.5)
-            connection_pool.release_conn(infinity_obj)
+            connection_pool.release_conn(hybridsearch_obj)
 
-        connection_pool = get_infinity_connection_pool
-        infinity_obj = connection_pool.get_conn()
+        connection_pool = get_hybridsearch_connection_pool
+        hybridsearch_obj = connection_pool.get_conn()
         table_name_prefix = "test_table_creation_deletion"
 
         threads = []
@@ -411,4 +411,4 @@ class TestIndexParallel(TestSdk):
             t.start()
         for t in threads:
             t.join()
-        connection_pool.release_conn(infinity_obj)
+        connection_pool.release_conn(hybridsearch_obj)

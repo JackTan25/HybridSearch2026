@@ -1,16 +1,16 @@
 import time
 
-import infinity_http
+import hybridsearch_http
 from numpy import dtype
 import pandas as pd
 import time
-from infinity.common import ConflictType
+from hybridsearch.common import ConflictType
 from dataclasses import dataclass
 from typing import Dict, Set, Tuple
 
 
 class instance_state:
-    def __init__(self, client: infinity_http.infinity_http = None):
+    def __init__(self, client: hybridsearch_http.hybridsearch_http = None):
         self.db2tables: Dict[str, Set[str]] = {"default_db": set()}
         self.dbtable2index: Dict[Tuple[str, str], Set[str]] = {}
         self.dbtable2df: Dict[Tuple[str, str], pd.DataFrame] = {}
@@ -35,32 +35,32 @@ class instance_state:
 
     def check_db_exist(self, db_name: str):
         if db_name not in self.db2tables:
-            raise InfinityException(ErrorCode.DB_NOT_EXIST, f"database {db_name} does not exist!")
+            raise hybridsearchException(ErrorCode.DB_NOT_EXIST, f"database {db_name} does not exist!")
 
     def check_db_not_exist(self, db_name: str):
         if db_name in self.db2tables:
-            raise InfinityException(ErrorCode.DUPLICATE_DATABASE_NAME, f"database {db_name} already exists!")
+            raise hybridsearchException(ErrorCode.DUPLICATE_DATABASE_NAME, f"database {db_name} already exists!")
 
     def check_table_exist(self, db_name: str, table_name: str):
         self.check_db_exist(db_name)
         if table_name not in self.db2tables[db_name]:
-            raise InfinityException(ErrorCode.TABLE_NOT_EXIST, f"table {db_name}.{table_name} does not exist!")
+            raise hybridsearchException(ErrorCode.TABLE_NOT_EXIST, f"table {db_name}.{table_name} does not exist!")
 
     def check_table_not_exist(self, db_name: str, table_name: str):
         self.check_db_exist(db_name)
         if table_name in self.db2tables[db_name]:
-            raise InfinityException(ErrorCode.DUPLICATE_TABLE_NAME, f"table {db_name}.{table_name} already exists!")
+            raise hybridsearchException(ErrorCode.DUPLICATE_TABLE_NAME, f"table {db_name}.{table_name} already exists!")
 
     def check_index_exist(self, db_name: str, table_name: str, index_name: str):
         self.check_table_exist(db_name, table_name)
         if index_name not in self.dbtable2index:
-            raise InfinityException(ErrorCode.INDEX_NOT_EXIST,
+            raise hybridsearchException(ErrorCode.INDEX_NOT_EXIST,
                                     f"table {db_name}.{table_name}.{index_name} does not exist!")
 
     def check_index_not_exist(self, db_name: str, table_name: str, index_name: str):
         self.check_table_exist(db_name, table_name)
         if index_name in self.dbtable2index:
-            raise InfinityException(ErrorCode.DUPLICATE_INDEX_NAME,
+            raise hybridsearchException(ErrorCode.DUPLICATE_INDEX_NAME,
                                     f"table {db_name}.{table_name}.{index_name} already exists!")
 
     # operations to a instance_state()
@@ -147,7 +147,7 @@ class instance_state:
 
 # this will clear a instance to its initial state:
 # only a default_db is remained
-def clear_instance(state: instance_state, client: infinity_http.infinity_http):
+def clear_instance(state: instance_state, client: hybridsearch_http.hybridsearch_http):
     for db_name, tables in state.db2tables.items():
         if db_name == "default_db":
             db_obj = client.get_database(db_name)
@@ -157,7 +157,7 @@ def clear_instance(state: instance_state, client: infinity_http.infinity_http):
             client.drop_database(db_name)
 
 
-def check_instance_table_equal(state: instance_state, client: infinity_http.infinity_http, db_name: str,
+def check_instance_table_equal(state: instance_state, client: hybridsearch_http.hybridsearch_http, db_name: str,
                                table_name: str):
     db_obj = client.get_database(db_name)
     table_obj = db_obj.get_table(table_name)
@@ -170,7 +170,7 @@ def check_instance_table_equal(state: instance_state, client: infinity_http.infi
     pd.testing.assert_frame_equal(res, expected)
 
 
-def check_instance_equal(state: instance_state, client: infinity_http.infinity_http):
+def check_instance_equal(state: instance_state, client: hybridsearch_http.hybridsearch_http):
     client_state = instance_state(client)
     assert state.db2tables == client_state.db2tables
     assert state.dbtable2index == client_state.dbtable2index
@@ -181,12 +181,12 @@ def check_instance_equal(state: instance_state, client: infinity_http.infinity_h
 
 
 # do operations on a single node
-def do_some_operations(client: infinity_http.infinity_http, state: instance_state):
+def do_some_operations(client: hybridsearch_http.hybridsearch_http, state: instance_state):
     table_create_insert_delete_modify(client, state)
 
 
 # do operations on a cluster of nodes
-def do_some_operations_cluster(leader_client: infinity_http.infinity_http, other_clients: [infinity_http.infinity_http],
+def do_some_operations_cluster(leader_client: hybridsearch_http.hybridsearch_http, other_clients: [hybridsearch_http.hybridsearch_http],
                                leader_state: instance_state):
     table_create_insert_delete_modify(leader_client, leader_state)
     time.sleep(1)
@@ -195,11 +195,11 @@ def do_some_operations_cluster(leader_client: infinity_http.infinity_http, other
     return
 
 
-def table_create_insert_delete_modify_verify(client: infinity_http.infinity_http, leader_state: instance_state):
+def table_create_insert_delete_modify_verify(client: hybridsearch_http.hybridsearch_http, leader_state: instance_state):
     check_instance_equal(leader_state, client)
 
 
-def table_create_insert_delete_modify(client: infinity_http.infinity_http, leader_state: instance_state):
+def table_create_insert_delete_modify(client: hybridsearch_http.hybridsearch_http, leader_state: instance_state):
     db = client.get_database("default_db")
     table = db.create_table("test_data", {"c1": {"type": "int"}, "c2": {"type": "vector,4,float"}}, ConflictType.Ignore)
     leader_state.add_table("default_db", "test_data", ConflictType.Ignore)

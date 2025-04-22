@@ -11,11 +11,11 @@ import posting_field;
 import position_list_format_option;
 import doc_list_format_option;
 
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 PostingDecoder::PostingDecoder(const PostingFormatOption &posting_format_option)
     : term_meta_(nullptr), doc_id_encoder_(nullptr), tf_list_encoder_(nullptr), doc_payload_encoder_(nullptr), position_encoder_(nullptr),
@@ -113,4 +113,4 @@ void PostingDecoder::InitPosListEncoder(const PositionListFormatOption &position
     }
     position_encoder_ = GetPosListEncoder();
 }
-} // namespace infinity
+} // namespace hybridsearch

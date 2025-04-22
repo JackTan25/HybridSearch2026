@@ -12,7 +12,7 @@ import position_list_format_option;
 import posting_field;
 import index_defines;
 
-namespace infinity {
+namespace hybridsearch {
 
 class InDocPositionState;
 export class PositionListDecoder {
@@ -64,4 +64,4 @@ private:
     friend class PositionListDecoderTest;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

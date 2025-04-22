@@ -1,10 +1,10 @@
-from infinity import NetworkAddress
+from hybridsearch import NetworkAddress
 import numpy as np
 
 TEST_LOCAL_HOST = NetworkAddress("127.0.0.1", 23817)
 # TEST_LOCAL_HOST = NetworkAddress("192.168.200.151", 23817)
-# infinity thrift server port
-infinity_server_port = 23817
+# hybridsearch thrift server port
+hybridsearch_server_port = 23817
 
 identifier_limit = 65536
 database_count_limit = 65536
@@ -12,7 +12,7 @@ table_count_limit = 65536
 table_column_count_limit = 65536
 
 TEST_DATA_DIR = "/test/data/"
-TEST_TMP_DIR = "/var/infinity/test_data/"
+TEST_TMP_DIR = "/var/hybridsearch/test_data/"
 
 types_array = [
     # # int

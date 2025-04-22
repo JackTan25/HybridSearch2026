@@ -5,25 +5,25 @@ import os
 import pandas as pd
 import pytest
 from common import common_values
-import infinity
-import infinity.index as index
-import infinity_embedded
+import hybridsearch
+import hybridsearch.index as index
+import hybridsearch_embedded
 from numpy import dtype
-from infinity.errors import ErrorCode
-from infinity.common import ConflictType, SortType
+from hybridsearch.errors import ErrorCode
+from hybridsearch.common import ConflictType, SortType
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
-from infinity_http import infinity_http
+from hybridsearch_http import hybridsearch_http
 from common.utils import copy_data
 from datetime import date, time, datetime
 
 
 @pytest.fixture(scope="class")
-def local_infinity(request):
-    return request.config.getoption("--local-infinity")
+def local_hybridsearch(request):
+    return request.config.getoption("--local-hybridsearch")
 
 
 @pytest.fixture(scope="class")
@@ -32,35 +32,35 @@ def http(request):
 
 
 @pytest.fixture(scope="class")
-def setup_class(request, local_infinity, http):
-    if local_infinity:
-        module = importlib.import_module("infinity_embedded.index")
+def setup_class(request, local_hybridsearch, http):
+    if local_hybridsearch:
+        module = importlib.import_module("hybridsearch_embedded.index")
         globals()["index"] = module
-        module = importlib.import_module("infinity_embedded.common")
+        module = importlib.import_module("hybridsearch_embedded.common")
         func = getattr(module, 'ConflictType')
         globals()['ConflictType'] = func
-        func = getattr(module, 'InfinityException')
-        globals()['InfinityException'] = func
+        func = getattr(module, 'hybridsearchException')
+        globals()['hybridsearchException'] = func
         uri = common_values.TEST_LOCAL_PATH
-        request.cls.infinity_obj = infinity_embedded.connect(uri)
+        request.cls.hybridsearch_obj = hybridsearch_embedded.connect(uri)
     elif http:
         uri = common_values.TEST_LOCAL_HOST
-        request.cls.infinity_obj = infinity_http()
+        request.cls.hybridsearch_obj = hybridsearch_http()
     else:
         uri = common_values.TEST_LOCAL_HOST
-        request.cls.infinity_obj = infinity.connect(uri)
+        request.cls.hybridsearch_obj = hybridsearch.connect(uri)
     request.cls.uri = uri
     yield
-    request.cls.infinity_obj.disconnect()
+    request.cls.hybridsearch_obj.disconnect()
 
 
 @pytest.mark.usefixtures("setup_class")
 @pytest.mark.usefixtures("suffix")
-class TestInfinity:
+class Testhybridsearch:
     def test_limit(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
 
-        # infinity
+        # hybridsearch
         db_obj.drop_table("test_limit" + suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table(
             "test_limit" + suffix, {
@@ -105,9 +105,9 @@ class TestInfinity:
         res = db_obj.drop_table("test_limit" + suffix, ConflictType.Error)
         assert res.error_code == ErrorCode.OK
 
-    @pytest.mark.usefixtures("skip_if_local_infinity")
+    @pytest.mark.usefixtures("skip_if_local_hybridsearch")
     def test_limit_2block(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
 
         table_name = "ragspace_kb_bcc87f1cd48711ef8ed510ffe02aa993" + suffix
         db_obj.drop_table(table_name, ConflictType.Ignore)

@@ -8,7 +8,7 @@ import short_list_optimize_util;
 
 export module skiplist_writer;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class SkipListWriter : public PostingByteSlice {
 public:
@@ -34,4 +34,4 @@ private:
     u32 last_value1_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

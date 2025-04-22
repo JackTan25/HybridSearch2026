@@ -8,7 +8,7 @@ log_to_stdout = true
 log_level = "trace"
 
 [storage]
-data_dir = "/var/infinity/data"
+data_dir = "/var/hybridsearch/data"
 optimize_interval = "0s"
 cleanup_interval = "0s"
 compact_interval = "0s"

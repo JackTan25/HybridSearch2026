@@ -9,7 +9,7 @@ import hit;
 import character_util;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 HashMap<wchar_t, wchar_t> DictSegment::char_map_;
 
@@ -126,4 +126,4 @@ DictSegment *DictSegment::LookforSegment(wchar_t key_char, int create) {
     return ds;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

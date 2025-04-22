@@ -4,7 +4,7 @@ import stl;
 
 export module vbyte_compressor;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class VByteCompressor {
 public:
@@ -207,4 +207,4 @@ inline void VByteCompressor::VSkip(Iterator &in) {
     ++in;
     return;
 }
-} // namespace infinity
+} // namespace hybridsearch

@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -18,8 +6,8 @@ export module status;
 
 import stl;
 
-// If new error codes are added, it also needs to be added to python/infinity/errors.py.
-namespace infinity {
+// If new error codes are added, it also needs to be added to python/hybridsearch/errors.py.
+namespace hybridsearch {
 
 export enum class ErrorCode : long {
 
@@ -43,8 +31,8 @@ export enum class ErrorCode : long {
     kClientVersionMismatch = 2004,
     kAdminOnlySupportInMaintenanceMode = 2005,
     kNotSupportInMaintenanceMode = 2006,
-    kInfinityIsStarting = 2007,
-    kInfinityIsIniting = 2008,
+    khybridsearchIsStarting = 2007,
+    khybridsearchIsIniting = 2008,
 
     // 3. syntax error or access rule violation
     kInvalidUsername = 3001,
@@ -226,8 +214,8 @@ public:
     static Status ClientVersionMismatch(const char *expected_version, const char *given_version);
     static Status AdminOnlySupportInMaintenanceMode();
     static Status NotSupportInMaintenanceMode();
-    static Status InfinityIsStarting();
-    static Status InfinityIsIniting();
+    static Status hybridsearchIsStarting();
+    static Status hybridsearchIsIniting();
 
     // 3. Syntax error or access rule violation`
     static Status InvalidUserName(const String &user_name);
@@ -427,4 +415,4 @@ public:
     UniquePtr<String> msg_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

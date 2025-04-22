@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -21,14 +9,14 @@ export module base_entry;
 
 import stl;
 import default_values;
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import logger;
 import cleanup_scanner;
 import global_resource_usage;
 import txn;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 
@@ -83,7 +71,7 @@ export String ToString(EntryType entry_type) {
 export struct BaseEntry {
     explicit BaseEntry(EntryType entry_type, bool is_delete, String encode)
         : deleted_(is_delete), entry_type_(entry_type), encode_(MakeUnique<String>(std::move(encode))) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("BaseEntry");
 #endif
     }
@@ -91,7 +79,7 @@ export struct BaseEntry {
     BaseEntry(const BaseEntry &other);
 
     virtual ~BaseEntry() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("BaseEntry");
 #endif
     }
@@ -140,12 +128,12 @@ private:
 export class BaseMeta {
 public:
     BaseMeta() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("BaseMeta");
 #endif
     }
     virtual ~BaseMeta() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("BaseMeta");
 #endif
     }
@@ -163,4 +151,4 @@ concept MetaConcept = std::derived_from<Meta, BaseMeta>;
 export template <typename Entry>
 concept EntryConcept = std::derived_from<Entry, BaseEntry>;
 
-} // namespace infinity
+} // namespace hybridsearch

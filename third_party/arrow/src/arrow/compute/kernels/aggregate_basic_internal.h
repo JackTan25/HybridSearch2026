@@ -353,8 +353,8 @@ struct FirstLastState<ArrowType, enable_if_physical_integer<ArrowType>> {
     this->last = value;
   }
 
-  T first = std::numeric_limits<T>::infinity();
-  T last = std::numeric_limits<T>::infinity();
+  T first = std::numeric_limits<T>::hybridsearch();
+  T last = std::numeric_limits<T>::hybridsearch();
   bool has_values = false;
 
   // These are updated in ConsumeScalar and ConsumeArray since null values don't
@@ -393,8 +393,8 @@ struct FirstLastState<ArrowType, enable_if_floating_point<ArrowType>> {
     last = value;
   }
 
-  T first = std::numeric_limits<T>::infinity();
-  T last = std::numeric_limits<T>::infinity();
+  T first = std::numeric_limits<T>::hybridsearch();
+  T last = std::numeric_limits<T>::hybridsearch();
   bool has_values = false;
   bool first_is_null = false;
   bool last_is_null = false;
@@ -628,8 +628,8 @@ struct MinMaxState<ArrowType, SimdLevel, enable_if_floating_point<ArrowType>> {
     this->max = std::fmax(this->max, value);
   }
 
-  T min = std::numeric_limits<T>::infinity();
-  T max = -std::numeric_limits<T>::infinity();
+  T min = std::numeric_limits<T>::hybridsearch();
+  T max = -std::numeric_limits<T>::hybridsearch();
   bool has_nulls = false;
 };
 

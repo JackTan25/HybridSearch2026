@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -62,7 +50,7 @@ import logical_unnest;
 
 import subquery_unnest;
 
-import infinity_exception;
+import hybridsearch_exception;
 import expression_transformer;
 import expression_type;
 
@@ -91,7 +79,7 @@ import data_type;
 import internal_types;
 import txn;
 
-namespace infinity {
+namespace hybridsearch {
 
 SharedPtr<LogicalNode> BoundSelectStatement::BuildPlan(QueryContext *query_context) {
     const SharedPtr<BindContext> &bind_context = this->bind_context_;
@@ -261,7 +249,7 @@ SharedPtr<LogicalNode> BoundSelectStatement::BuildPlan(QueryContext *query_conte
                         match_node->top_n_ = DEFAULT_MATCH_TEXT_OPTION_TOP_N;
                     }
 
-                    auto query_operator_option = FulltextQueryOperatorOption::kInfinitySyntax;
+                    auto query_operator_option = FulltextQueryOperatorOption::khybridsearchSyntax;
                     // option: operator
                     if (iter = search_ops.options_.find("operator"); iter != search_ops.options_.end()) {
                         ToLower(iter->second);
@@ -684,4 +672,4 @@ SharedPtr<BaseExpression> BoundSelectStatement::UnnestSubquery(SharedPtr<Logical
     return return_expr;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -7,7 +7,7 @@
 #include <sstream>
 #include <utility>
 
-namespace infinity {
+namespace hybridsearch {
 
 MatchExpr::MatchExpr() : ParsedExpr(ParsedExprType::kMatch) {}
 
@@ -31,4 +31,4 @@ std::string MatchExpr::ToString() const {
     return std::move(oss).str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

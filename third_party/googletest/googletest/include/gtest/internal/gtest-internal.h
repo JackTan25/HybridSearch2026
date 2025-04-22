@@ -302,8 +302,8 @@ class FloatingPoint {
     return fp.u_.value_;
   }
 
-  // Returns the floating-point number that represent positive infinity.
-  static RawType Infinity() { return ReinterpretBits(kExponentBitMask); }
+  // Returns the floating-point number that represent positive hybridsearch.
+  static RawType hybridsearch() { return ReinterpretBits(kExponentBitMask); }
 
   // Returns the maximum representable finite floating-point number.
   static RawType Max();
@@ -333,7 +333,7 @@ class FloatingPoint {
   // from rhs.  In particular, this function:
   //
   //   - returns false if either number is (or both are) NAN.
-  //   - treats really large numbers as almost equal to infinity.
+  //   - treats really large numbers as almost equal to hybridsearch.
   //   - thinks +0.0 and -0.0 are 0 DLP's apart.
   bool AlmostEquals(const FloatingPoint& rhs) const {
     // The IEEE standard says that any comparison operation involving

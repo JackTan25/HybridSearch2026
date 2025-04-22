@@ -123,7 +123,7 @@ points). */
 enum { REPTYPE_MIN, REPTYPE_MAX, REPTYPE_POS };
 
 /* Min and max values for the common repeats; a maximum of UINT32_MAX =>
-infinity. */
+hybridsearch. */
 
 static const uint32_t rep_min[] = {
   0, 0,       /* * and *? */
@@ -1961,7 +1961,7 @@ fprintf(stderr, "++ %2ld op=%3d %s\n", Fecode - mb->start_code, *Fecode,
         case OP_CRPOSRANGE:
         Lmin = GET2(Fecode, 1);
         Lmax = GET2(Fecode, 1 + IMM2_SIZE);
-        if (Lmax == 0) Lmax = UINT32_MAX;       /* Max 0 => infinity */
+        if (Lmax == 0) Lmax = UINT32_MAX;       /* Max 0 => hybridsearch */
         reptype = rep_typ[*Fecode - OP_CRSTAR];
         Fecode += 1 + 2 * IMM2_SIZE;
         break;
@@ -2199,7 +2199,7 @@ fprintf(stderr, "++ %2ld op=%3d %s\n", Fecode - mb->start_code, *Fecode,
         case OP_CRPOSRANGE:
         Lmin = GET2(Fecode, 1);
         Lmax = GET2(Fecode, 1 + IMM2_SIZE);
-        if (Lmax == 0) Lmax = UINT32_MAX;  /* Max 0 => infinity */
+        if (Lmax == 0) Lmax = UINT32_MAX;  /* Max 0 => hybridsearch */
         reptype = rep_typ[*Fecode - OP_CRSTAR];
         Fecode += 1 + 2 * IMM2_SIZE;
         break;
@@ -5038,7 +5038,7 @@ fprintf(stderr, "++ %2ld op=%3d %s\n", Fecode - mb->start_code, *Fecode,
       Lmin = GET2(Fecode, 1);
       Lmax = GET2(Fecode, 1 + IMM2_SIZE);
       reptype = rep_typ[*Fecode - OP_CRSTAR];
-      if (Lmax == 0) Lmax = UINT32_MAX;  /* Max 0 => infinity */
+      if (Lmax == 0) Lmax = UINT32_MAX;  /* Max 0 => hybridsearch */
       Fecode += 1 + 2 * IMM2_SIZE;
       break;
 

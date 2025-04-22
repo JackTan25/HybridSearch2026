@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -20,7 +8,7 @@ module fix_heap;
 
 import stl;
 import third_party;
-import infinity_exception;
+import hybridsearch_exception;
 import vector_heap_chunk;
 import global_resource_usage;
 
@@ -28,12 +16,12 @@ import block_column_entry;
 import buffer_manager;
 import data_file_worker;
 import logger;
-import infinity_context;
+import hybridsearch_context;
 
-namespace infinity {
+namespace hybridsearch {
 
 FixHeapManager::FixHeapManager(const u64 chunk_size, bool allow_cross_chunk) : current_chunk_size_(chunk_size) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::IncrObjectCount("FixHeapManager");
 #endif
     current_chunk_idx_ = INVALID_CHUNK_ID;
@@ -43,7 +31,7 @@ FixHeapManager::FixHeapManager(const u64 chunk_size, bool allow_cross_chunk) : c
 FixHeapManager::FixHeapManager(BufferManager *buffer_mgr, BlockColumnEntry *block_column_entry, const u64 chunk_size, bool allow_cross_chunk)
     : current_chunk_size_(chunk_size), current_chunk_offset_(block_column_entry->LastChunkOff()), buffer_mgr_(buffer_mgr),
       block_column_entry_(block_column_entry) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::IncrObjectCount("FixHeapManager");
 #endif
     const int cnt = block_column_entry->OutlineBufferCount();
@@ -56,7 +44,7 @@ FixHeapManager::FixHeapManager(BufferManager *buffer_mgr, BlockColumnEntry *bloc
 }
 
 FixHeapManager::~FixHeapManager() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::DecrObjectCount("FixHeapManager");
 #endif
     // std::variant in `VectorHeapChunk` will call destructor automatically
@@ -67,8 +55,8 @@ VectorHeapChunk FixHeapManager::AllocateChunk() {
         return VectorHeapChunk(current_chunk_size_);
     } else {
         // allocate by buffer_mgr, and store returned buffer_obj in `block_column_entry_`
-        auto file_worker = MakeUnique<DataFileWorker>(MakeShared<String>(InfinityContext::instance().config()->DataDir()),
-                                                      MakeShared<String>(InfinityContext::instance().config()->TempDir()),
+        auto file_worker = MakeUnique<DataFileWorker>(MakeShared<String>(hybridsearchContext::instance().config()->DataDir()),
+                                                      MakeShared<String>(hybridsearchContext::instance().config()->TempDir()),
                                                       block_column_entry_->FileDir(),
                                                       block_column_entry_->OutlineFilename(current_chunk_idx_),
                                                       current_chunk_size_,
@@ -140,8 +128,8 @@ VectorHeapChunk &FixHeapManager::ReadChunk(ChunkId chunk_id) {
     auto *outline_buffer = block_column_entry_->GetOutlineBuffer(chunk_id);
     if (outline_buffer == nullptr) {
         auto filename = block_column_entry_->OutlineFilename(chunk_id);
-        auto file_worker = MakeUnique<DataFileWorker>(MakeShared<String>(InfinityContext::instance().config()->DataDir()),
-                                                      MakeShared<String>(InfinityContext::instance().config()->TempDir()),
+        auto file_worker = MakeUnique<DataFileWorker>(MakeShared<String>(hybridsearchContext::instance().config()->DataDir()),
+                                                      MakeShared<String>(hybridsearchContext::instance().config()->TempDir()),
                                                       block_column_entry_->FileDir(),
                                                       filename,
                                                       current_chunk_size_,
@@ -326,4 +314,4 @@ String FixHeapManager::Stats() const {
 
 // VarcharNextCharIterator FixHeapManager::GetNextCharIterator(const VarcharT &varchar) { return VarcharNextCharIterator(this, varchar); }
 
-} // namespace infinity
+} // namespace hybridsearch

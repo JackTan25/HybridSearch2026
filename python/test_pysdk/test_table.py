@@ -6,49 +6,49 @@ import os
 import pytest
 import polars as pl
 from common import common_values
-from infinity.common import ConflictType, InfinityException
-import infinity
-import infinity_embedded
-from infinity.errors import ErrorCode
+from hybridsearch.common import ConflictType, hybridsearchException
+import hybridsearch
+import hybridsearch_embedded
+from hybridsearch.errors import ErrorCode
 from common.utils import trace_expected_exceptions
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
-from infinity_http import infinity_http
+from hybridsearch_http import hybridsearch_http
 
 @pytest.fixture(scope="class")
-def local_infinity(request):
-    return request.config.getoption("--local-infinity")
+def local_hybridsearch(request):
+    return request.config.getoption("--local-hybridsearch")
 
 @pytest.fixture(scope="class")
 def http(request):
     return request.config.getoption("--http")
 
 @pytest.fixture(scope="class")
-def setup_class(request, local_infinity, http):
-    if local_infinity:
-        module = importlib.import_module("infinity_embedded.common")
+def setup_class(request, local_hybridsearch, http):
+    if local_hybridsearch:
+        module = importlib.import_module("hybridsearch_embedded.common")
         func = getattr(module, 'ConflictType')
         globals()['ConflictType'] = func
-        func = getattr(module, 'InfinityException')
-        globals()['InfinityException'] = func
+        func = getattr(module, 'hybridsearchException')
+        globals()['hybridsearchException'] = func
         uri = common_values.TEST_LOCAL_PATH
-        request.cls.infinity_obj = infinity_embedded.connect(uri)
+        request.cls.hybridsearch_obj = hybridsearch_embedded.connect(uri)
     elif http:
         uri = common_values.TEST_LOCAL_HOST
-        request.cls.infinity_obj = infinity_http()
+        request.cls.hybridsearch_obj = hybridsearch_http()
     else:
         uri = common_values.TEST_LOCAL_HOST
-        request.cls.infinity_obj = infinity.connect(uri)
+        request.cls.hybridsearch_obj = hybridsearch.connect(uri)
     request.cls.uri = uri
     yield
-    request.cls.infinity_obj.disconnect()
+    request.cls.hybridsearch_obj.disconnect()
 
 @pytest.mark.usefixtures("setup_class")
-@pytest.mark.usefixtures("local_infinity")
+@pytest.mark.usefixtures("local_hybridsearch")
 @pytest.mark.usefixtures("suffix")
-class TestInfinity:
+class Testhybridsearch:
     @pytest.mark.parametrize("column_name", common_values.invalid_name_array)
     def test_create_table_with_invalid_column_name_python(self, column_name, suffix):
         """
@@ -56,7 +56,7 @@ class TestInfinity:
         methods: create table with invalid column name
         expect: all operations throw exception on python side
         """
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_create_table_with_invalid_column_name_python"+suffix, ConflictType.Ignore)
 
         try:
@@ -85,14 +85,14 @@ class TestInfinity:
         methods: create table with various options
         expect: all operations successfully
         """
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_table_with_different_invalid_options"+suffix, ConflictType.Ignore)
 
-        with pytest.raises(InfinityException) as e:
+        with pytest.raises(hybridsearchException) as e:
             db_obj.create_table("test_table_with_different_invalid_options"+suffix, {"c1": {"type": "int"}},
                                 invalid_option_array)
 
-        assert e.type == InfinityException
+        assert e.type == hybridsearchException
         #assert e.value.args[0] == ErrorCode.INVALID_CONFLICT_TYPE
 
     @trace_expected_exceptions
@@ -103,7 +103,7 @@ class TestInfinity:
         expect: all operations successfully
         """
         # connect
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         table_name = "test_create_or_drop_same_table_in_different_thread"+suffix
         db_obj.drop_table(table_name, ConflictType.Ignore)
 
@@ -135,14 +135,14 @@ class TestInfinity:
         expect: all operations successfully
         """
         # connect
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         table_name = "test_create_empty_column_table"+suffix
         db_obj.drop_table(table_name, ConflictType.Ignore)
 
-        with pytest.raises(InfinityException) as e:
+        with pytest.raises(hybridsearchException) as e:
             db_obj.create_table(table_name, {}, ConflictType.Error)
 
-        assert e.type == InfinityException
+        assert e.type == hybridsearchException
         assert e.value.args[0] == ErrorCode.NO_COLUMN_DEFINED
 
 
@@ -155,7 +155,7 @@ class TestInfinity:
     ])
     def test_create_valid_option(self, types, suffix):
         # connect
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_valid_option"+suffix, ConflictType.Ignore)
 
         db_obj.create_table("test_valid_option"+suffix, {"c1": {"type": types}}, ConflictType.Error)
@@ -164,7 +164,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     #     # disconnect
-    #     res = self.infinity_obj.disconnect()
+    #     res = self.hybridsearch_obj.disconnect()
     #     assert res.error_code == ErrorCode.OK
 
     @pytest.mark.parametrize("types", [
@@ -177,7 +177,7 @@ class TestInfinity:
     @pytest.mark.parametrize("boolean", [True, False])
     def test_drop_option(self, types, boolean, suffix):
         # connect
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_drop_option"+suffix, ConflictType.Ignore)
 
         db_obj.create_table("test_drop_option"+suffix, {"c1": {"type": types}}, ConflictType.Error)
@@ -186,15 +186,15 @@ class TestInfinity:
 
     def test_create_same_name_table(self, suffix):
         # connect
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_create_same_name"+suffix, ConflictType.Ignore)
 
         # create
         db_obj.create_table("test_create_same_name"+suffix, {"c1": {"type": "int"}}, ConflictType.Error)
-        with pytest.raises(InfinityException) as e:
+        with pytest.raises(hybridsearchException) as e:
             db_obj.create_table("test_create_same_name"+suffix, {"c1": {"type": "int"}}, ConflictType.Error)
 
-        assert e.type == InfinityException
+        assert e.type == hybridsearchException
         assert e.value.args[0] == ErrorCode.DUPLICATE_TABLE_NAME
 
         res = db_obj.drop_table("test_create_same_name"+suffix, ConflictType.Error)
@@ -202,17 +202,17 @@ class TestInfinity:
 
     # todo fix: why return TABLE_NOT_EXIST error
     @pytest.mark.usefixtures("skip_if_http")
-    @pytest.mark.usefixtures("skip_if_local_infinity")
+    @pytest.mark.usefixtures("skip_if_local_hybridsearch")
     def test_drop_same_name_table(self, suffix):
         # connect
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_drop_same_name"+suffix, ConflictType.Ignore)
         # drop
         db_obj.drop_table("test_drop_same_name"+suffix)
 
     def test_same_column_name(self, suffix):
         # connect
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_same_column_name"+suffix, ConflictType.Ignore)
 
         db_obj.create_table("test_same_column_name"+suffix, {"c1": {"type": "int"},
@@ -232,7 +232,7 @@ class TestInfinity:
     ]])
     def test_column_numbers(self, types, column_number, suffix):
         # connect
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_column_numbers"+suffix, ConflictType.Ignore)
 
         values = {"c" + str(i): {"type": types} for i in column_number}
@@ -250,7 +250,7 @@ class TestInfinity:
         2,
     ])
     def test_create_valid_option(self, conflict_type, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_table_create_valid_option"+suffix, ConflictType.Ignore)
         db_obj.create_table("test_table_create_valid_option"+suffix, {"c1": {"type": "int"}}, conflict_type)
         res = db_obj.drop_table("test_table_create_valid_option"+suffix, ConflictType.Error)
@@ -264,12 +264,12 @@ class TestInfinity:
         pytest.param(()),
     ])
     def test_create_invalid_option(self, conflict_type, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_various_table_create_option"+suffix, ConflictType.Ignore)
-        with pytest.raises(InfinityException) as e:
+        with pytest.raises(hybridsearchException) as e:
             db_obj.create_table("test_various_table_create_option"+suffix, {"c1": {"type": "int"}}, conflict_type)
 
-        assert e.type == InfinityException
+        assert e.type == hybridsearchException
         #assert e.value.args[0] == ErrorCode.INVALID_CONFLICT_TYPE
 
     @pytest.mark.parametrize("conflict_type", [
@@ -279,7 +279,7 @@ class TestInfinity:
         1,
     ])
     def test_drop_valid_option(self, conflict_type, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.create_table("test_table_drop_valid_option"+suffix, {"c1": {"type": "int"}}, ConflictType.Ignore)
         db_obj.drop_table("test_table_drop_valid_option"+suffix, conflict_type)
 
@@ -293,19 +293,19 @@ class TestInfinity:
         pytest.param(()),
     ])
     def test_drop_invalid_option(self, conflict_type, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.create_table("test_various_table_drop_option"+suffix, {"c1": {"type": "int"}}, ConflictType.Ignore)
-        with pytest.raises(InfinityException) as e:
+        with pytest.raises(hybridsearchException) as e:
             db_obj.drop_table("test_various_table_drop_option"+suffix, conflict_type)
 
-        assert e.type == InfinityException
+        assert e.type == hybridsearchException
         #assert e.value.args[0] == ErrorCode.INVALID_CONFLICT_TYPE
 
         res = db_obj.drop_table("test_various_table_drop_option"+suffix, ConflictType.Error)
         assert res.error_code == ErrorCode.OK
 
     def test_create_duplicated_table_with_ignore_option(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_create_duplicated_table_with_ignore_option"+suffix, ConflictType.Ignore)
 
         for i in range(100):
@@ -316,37 +316,37 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     def test_create_duplicated_table_with_error_option(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_create_duplicated_table_with_error_option"+suffix, ConflictType.Ignore)
 
-        with pytest.raises(InfinityException) as e:
+        with pytest.raises(hybridsearchException) as e:
             for i in range(100):
                 db_obj.create_table("test_create_duplicated_table_with_error_option"+suffix, {"c1": {"type": "int"}},
                                     ConflictType.Error)
 
-        assert e.type == InfinityException
+        assert e.type == hybridsearchException
         assert e.value.args[0] == ErrorCode.DUPLICATE_TABLE_NAME
 
         res = db_obj.drop_table("test_create_duplicated_table_with_error_option"+suffix, ConflictType.Error)
         assert res.error_code == ErrorCode.OK
 
     def test_create_duplicated_table_with_replace_option(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_create_duplicated_table_with_replace_option"+suffix, ConflictType.Ignore)
 
-        with pytest.raises(InfinityException) as e:
+        with pytest.raises(hybridsearchException) as e:
             for i in range(100):
                 db_obj.create_table("test_create_duplicated_table_with_replace_option"+suffix, {"c" + str(i): {"type": "int"}},
                                     ConflictType.Replace)
 
-        assert e.type == InfinityException
+        assert e.type == hybridsearchException
         assert e.value.args[0] == ErrorCode.DUPLICATE_TABLE_NAME
 
         res = db_obj.drop_table("test_create_duplicated_table_with_replace_option"+suffix, ConflictType.Error)
         assert res.error_code == ErrorCode.OK
 
     def test_create_upper_table_name(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         table_lower_name = "test_table_my_table"+suffix.lower()
         db_obj.drop_table(table_lower_name, ConflictType.Ignore)
 
@@ -362,7 +362,7 @@ class TestInfinity:
         res = db_obj.get_table(table_upper_name)
 
     def test_create_table_with_upper_column_name(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         table_name = "test_table_my_table"+suffix
         db_obj.drop_table(table_name, ConflictType.Ignore)
         # create table
@@ -383,7 +383,7 @@ class TestInfinity:
 
     @pytest.mark.usefixtures("skip_if_http")
     def test_create_table_with_upper_param_name(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         table_name = "test_table_my_table"+suffix
         db_obj.drop_table(table_name, ConflictType.Ignore)
         # create table
@@ -401,7 +401,7 @@ class TestInfinity:
         db_obj.drop_table(table_name, ConflictType.Ignore)
 
     def test_create_table_with_upper_data_type_name(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         table_name = "test_table_my_table"+suffix
         db_obj.drop_table(table_name, ConflictType.Ignore)
         # create table
@@ -419,7 +419,7 @@ class TestInfinity:
         db_obj.drop_table(table_name, ConflictType.Ignore)
 
     def test_create_table_with_upper_constraint_name(self, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         table_name = "test_table_my_table"+suffix
         db_obj.drop_table(table_name, ConflictType.Ignore)
         # create table
@@ -466,11 +466,11 @@ class TestInfinity:
         4. list tables: empty
         expect: all operations successfully
         """
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         table_name = "test_table_my_table"+suffix
         db_obj.drop_table(table_name, ConflictType.Ignore)
 
-        # infinity
+        # hybridsearch
         tb = db_obj.create_table(
             table_name, {"c1": {"type": "int", "constraints": ["primary key"]}, "c2": {"type": "float"}},
             ConflictType.Error)
@@ -507,7 +507,7 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
     def _test_show_tables(self, suffix):
-        db = self.infinity_obj.get_database("default_db")
+        db = self.hybridsearch_obj.get_database("default_db")
 
         with pl.Config(fmt_str_lengths=1000):
             res = db.show_tables()
@@ -522,7 +522,7 @@ class TestInfinity:
         method: create table with varchar column
         expected: ok
         """
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         table_name = "test_create_varchar_table"+suffix
         db_obj.drop_table(table_name, ConflictType.Ignore)
         table_obj = db_obj.create_table(table_name,
@@ -539,7 +539,7 @@ class TestInfinity:
         method: create table with embedding column
         expected: ok
         """
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         table_name = "test_create_embedding_table"+suffix
         db_obj.drop_table(table_name, ConflictType.Ignore)
         table_obj = db_obj.create_table(table_name, {
@@ -555,7 +555,7 @@ class TestInfinity:
         method: create table with tensor column
         expected: ok
         """
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         table_name = "test_create_tensor_table"+suffix
         db_obj.drop_table(table_name, ConflictType.Ignore)
         table_obj = db_obj.create_table(table_name, {
@@ -571,7 +571,7 @@ class TestInfinity:
         method: create table with tensorarray column
         expected: ok
         """
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_create_tensorarray_table"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_create_tensorarray_table"+suffix, {
             "c1": {"type": "tensorarray,128,float"}}, ConflictType.Error)
@@ -582,7 +582,7 @@ class TestInfinity:
 
     def _test_create_table_with_invalid_column_name(self, suffix):
         with pytest.raises(Exception):
-            db_obj = self.infinity_obj.get_database("default_db")
+            db_obj = self.hybridsearch_obj.get_database("default_db")
             db_obj.drop_table("test_create_invalid_column_name"+suffix, ConflictType.Ignore)
             table_obj = db_obj.create_table("test_create_invalid_column_name"+suffix, {
                 "": {"type": "vector,128,float"}}, ConflictType.Error)
@@ -590,7 +590,7 @@ class TestInfinity:
             db_obj.drop_table("test_create_invalid_column_name"+suffix, ConflictType.Error)
 
         with pytest.raises(Exception):
-            db_obj = self.infinity_obj.get_database("default_db")
+            db_obj = self.hybridsearch_obj.get_database("default_db")
             db_obj.drop_table("test_create_invalid_column_name"+suffix, ConflictType.Ignore)
             table_obj = db_obj.create_table("test_create_invalid_column_name"+suffix, {
                 " ": {"type": "vector,128,float"}}, ConflictType.Error)
@@ -598,7 +598,7 @@ class TestInfinity:
             db_obj.drop_table("test_create_invalid_column_name"+suffix, ConflictType.Error)
 
         with pytest.raises(Exception):
-            db_obj = self.infinity_obj.get_database("default_db")
+            db_obj = self.hybridsearch_obj.get_database("default_db")
             db_obj.drop_table("test_create_invalid_column_name"+suffix, ConflictType.Ignore)
             table_obj = db_obj.create_table("test_create_invalid_column_name"+suffix, {
                 "12": {"type": "vector,128,float"}}, ConflictType.Error)
@@ -606,7 +606,7 @@ class TestInfinity:
             db_obj.drop_table("test_create_invalid_column_name"+suffix, ConflictType.Error)
 
         with pytest.raises(Exception):
-            db_obj = self.infinity_obj.get_database("default_db")
+            db_obj = self.hybridsearch_obj.get_database("default_db")
             db_obj.drop_table("test_create_invalid_column_name"+suffix, ConflictType.Ignore)
             table_obj = db_obj.create_table("test_create_invalid_column_name"+suffix, {
                 "[]": {"type": "vector,128,float"}}, ConflictType.Error)
@@ -614,7 +614,7 @@ class TestInfinity:
             db_obj.drop_table("test_create_invalid_column_name"+suffix, ConflictType.Error)
 
         with pytest.raises(Exception):
-            db_obj = self.infinity_obj.get_database("default_db")
+            db_obj = self.hybridsearch_obj.get_database("default_db")
             db_obj.drop_table("test_create_invalid_column_name"+suffix, ConflictType.Ignore)
             table_obj = db_obj.create_table("test_create_invalid_column_name"+suffix, {
                 "()": {"type": "vector,128,float"}}, ConflictType.Error)
@@ -622,7 +622,7 @@ class TestInfinity:
             db_obj.drop_table("test_create_invalid_column_name"+suffix, ConflictType.Error)
 
         with pytest.raises(Exception):
-            db_obj = self.infinity_obj.get_database("default_db")
+            db_obj = self.hybridsearch_obj.get_database("default_db")
             db_obj.drop_table("test_create_invalid_column_name"+suffix, ConflictType.Ignore)
             table_obj = db_obj.create_table("test_create_invalid_column_name"+suffix, {
                 "{}": {"type": "vector,128,float"}}, ConflictType.Error)
@@ -630,7 +630,7 @@ class TestInfinity:
             db_obj.drop_table("test_create_invalid_column_name"+suffix, ConflictType.Error)
 
         with pytest.raises(Exception):
-            db_obj = self.infinity_obj.get_database("default_db")
+            db_obj = self.hybridsearch_obj.get_database("default_db")
             db_obj.drop_table("test_create_invalid_column_name"+suffix, ConflictType.Ignore)
             table_obj = db_obj.create_table("test_create_invalid_column_name"+suffix, {
                 "1": {"type": "vector,128,float"}}, ConflictType.Error)
@@ -638,14 +638,14 @@ class TestInfinity:
             db_obj.drop_table("test_create_invalid_column_name"+suffix, ConflictType.Error)
 
         with pytest.raises(Exception):
-            db_obj = self.infinity_obj.get_database("default_db")
+            db_obj = self.hybridsearch_obj.get_database("default_db")
             db_obj.drop_table("test_create_invalid_column_name"+suffix, ConflictType.Ignore)
             table_obj = db_obj.create_table("test_create_invalid_column_name"+suffix, {
                 "1.1": {"type": "vector,128,float"}}, ConflictType.Error)
             assert table_obj
             db_obj.drop_table("test_create_invalid_column_name"+suffix, ConflictType.Error)
 
-    def _test_table_with_different_column_name(self, suffix, local_infinity):
+    def _test_table_with_different_column_name(self, suffix, local_hybridsearch):
         """
         target: test create/drop/show/get valid table name with different column names
         methods:
@@ -656,11 +656,11 @@ class TestInfinity:
         expect: all operations successfully
 
         """
-        if local_infinity:
-            infinity_obj = infinity_embedded.connect(self.uri)
+        if local_hybridsearch:
+            hybridsearch_obj = hybridsearch_embedded.connect(self.uri)
         else:
-            infinity_obj = infinity.connect(self.uri)
-        db_obj = infinity_obj.get_database("default_db")
+            hybridsearch_obj = hybridsearch.connect(self.uri)
+        db_obj = hybridsearch_obj.get_database("default_db")
         table_name = "test_table_with_different_column_name"+suffix
         db_obj.drop_table(table_name, ConflictType.Ignore)
 
@@ -691,15 +691,15 @@ class TestInfinity:
         # FIXME: res = db_obj.show_table("my_table")
 
         # disconnect
-        # res = infinity_obj.disconnect()
+        # res = hybridsearch_obj.disconnect()
         # assert res
 
         try:
-            res = infinity_obj.disconnect()
+            res = hybridsearch_obj.disconnect()
         except Exception as e:
             print(e)
 
-    def _test_table_with_different_column_types(self, suffix, local_infinity):
+    def _test_table_with_different_column_types(self, suffix, local_hybridsearch):
         """
         target: test create/drop/show/get valid table name with different column types
         methods:
@@ -738,14 +738,14 @@ class TestInfinity:
         expect: all operations successfully
 
         """
-        if local_infinity:
-            infinity_obj = infinity_embedded.connect(self.uri)
+        if local_hybridsearch:
+            hybridsearch_obj = hybridsearch_embedded.connect(self.uri)
         else:
-            infinity_obj = infinity.connect(self.uri)
-        db_obj = infinity_obj.get_database("default_db")
+            hybridsearch_obj = hybridsearch.connect(self.uri)
+        db_obj = hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_table_with_different_column_types"+suffix, ConflictType.Ignore)
 
-        # infinity
+        # hybridsearch
         tb = db_obj.create_table(
             "test_table_with_different_column_types"+suffix, {
                 "c1": {"type": "bool", "constraints": ["primary key"]},
@@ -780,21 +780,21 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
         # disconnect
-        res = infinity_obj.disconnect()
+        res = hybridsearch_obj.disconnect()
         assert res.error_code == ErrorCode.OK
 
-    def _test_table_with_various_column_types(self, suffix, local_infinity):
+    def _test_table_with_various_column_types(self, suffix, local_hybridsearch):
         """
         target: create/drop/show/get table with 10000 columns with various column types.
         methods: create table with various column types
         expect: all operations successfully
         """
         # connect
-        if local_infinity:
-            infinity_obj = infinity_embedded.connect(self.uri)
+        if local_hybridsearch:
+            hybridsearch_obj = hybridsearch_embedded.connect(self.uri)
         else:
-            infinity_obj = infinity.connect(self.uri)
-        db_obj = infinity_obj.get_database("default_db")
+            hybridsearch_obj = hybridsearch.connect(self.uri)
+        db_obj = hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_table_with_various_column_types"+suffix, ConflictType.Ignore)
         c_count = 10000
 
@@ -833,21 +833,21 @@ class TestInfinity:
         assert res.error_code == ErrorCode.OK
 
         # disconnect
-        res = infinity_obj.disconnect()
+        res = hybridsearch_obj.disconnect()
         assert res.error_code == ErrorCode.OK
 
-    def _test_table_with_invalid_options(self, suffix, local_infinity):
+    def _test_table_with_invalid_options(self, suffix, local_hybridsearch):
         """
         target: create/drop table with invalid options.
         methods: create table with various options
         expect: all operations successfully
         """
         # connect
-        if local_infinity:
-            infinity_obj = infinity_embedded.connect(self.uri)
+        if local_hybridsearch:
+            hybridsearch_obj = hybridsearch_embedded.connect(self.uri)
         else:
-            infinity_obj = infinity.connect(self.uri)
-        db_obj = infinity_obj.get_database("default_db")
+            hybridsearch_obj = hybridsearch.connect(self.uri)
+        db_obj = hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_table_with_invalid_options"+suffix, ConflictType.Ignore)
 
         for option_name in common_values.invalid_name_array:
@@ -859,22 +859,22 @@ class TestInfinity:
 
         db_obj.drop_table("test_table_with_invalid_options"+suffix, ConflictType.Error)
         # try:
-        #     res = self.infinity_obj.disconnect()
+        #     res = self.hybridsearch_obj.disconnect()
         # except Exception as e:
         #     print(e)
 
-    def _test_create_drop_table(self, suffix, local_infinity):
+    def _test_create_drop_table(self, suffix, local_hybridsearch):
         """
         target: create created table, drop dropped table
         methods: create table ,drop table
         expect: all operations successfully
         """
         # connect
-        if local_infinity:
-            infinity_obj = infinity_embedded.connect(self.uri)
+        if local_hybridsearch:
+            hybridsearch_obj = hybridsearch_embedded.connect(self.uri)
         else:
-            infinity_obj = infinity.connect(self.uri)
-        db_obj = infinity_obj.get_database("default_db")
+            hybridsearch_obj = hybridsearch.connect(self.uri)
+        db_obj = hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_create_drop_table"+suffix, ConflictType.Ignore)
 
         # create
@@ -896,8 +896,8 @@ class TestInfinity:
         except Exception as e:
             print(e)
 
-    def test_table(self, suffix, local_infinity):
-        # self.test_infinity_obj._test_version()
+    def test_table(self, suffix, local_hybridsearch):
+        # self.test_hybridsearch_obj._test_version()
         self._test_table(suffix)
         self._test_show_tables(suffix)
         self._test_create_varchar_table(suffix)
@@ -905,18 +905,18 @@ class TestInfinity:
         self._test_create_tensor_table(suffix)
         self._test_create_tensorarray_table(suffix)
         self._test_create_table_with_invalid_column_name(suffix)
-        self._test_table_with_different_column_name(suffix, local_infinity)
+        self._test_table_with_different_column_name(suffix, local_hybridsearch)
         # create/drop/show/get valid table name with different column types
-        self._test_table_with_different_column_types(suffix, local_infinity)
+        self._test_table_with_different_column_types(suffix, local_hybridsearch)
         # create/drop/show/get table with 10000 columns with various column types.
-        self._test_table_with_various_column_types(suffix, local_infinity)
-        self._test_table_with_invalid_options(suffix, local_infinity)
-        self._test_create_drop_table(suffix, local_infinity)
+        self._test_table_with_various_column_types(suffix, local_hybridsearch)
+        self._test_table_with_invalid_options(suffix, local_hybridsearch)
+        self._test_create_drop_table(suffix, local_hybridsearch)
 
     # todo fix
-    # local infinity disconnect = uninit, db obj cannot know weather disconnected
-    @pytest.mark.usefixtures("skip_if_local_infinity")
-    def test_after_disconnect_use_table(self, suffix, local_infinity):
+    # local hybridsearch disconnect = uninit, db obj cannot know weather disconnected
+    @pytest.mark.usefixtures("skip_if_local_hybridsearch")
+    def test_after_disconnect_use_table(self, suffix, local_hybridsearch):
         """
         target: after disconnection, create / drop / show / list / get table
         methods:
@@ -925,15 +925,15 @@ class TestInfinity:
         expect: all operations successfully
         """
         # connect
-        if local_infinity:
-            infinity_obj = infinity_embedded.connect(self.uri)
+        if local_hybridsearch:
+            hybridsearch_obj = hybridsearch_embedded.connect(self.uri)
         else:
-            infinity_obj = infinity.connect(self.uri)
-        db_obj = infinity_obj.get_database("default_db")
+            hybridsearch_obj = hybridsearch.connect(self.uri)
+        db_obj = hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_after_disconnect_use_table"+suffix, ConflictType.Ignore)
 
         # disconnect
-        res = infinity_obj.disconnect()
+        res = hybridsearch_obj.disconnect()
         assert res.error_code == ErrorCode.OK
 
         # create table
@@ -971,7 +971,7 @@ class TestInfinity:
         expect: all operations successfully
         """
         # connect
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         table_name = "test_create_10K_table"+suffix
         db_obj.drop_table(table_name, ConflictType.Ignore)
 
@@ -983,18 +983,18 @@ class TestInfinity:
         for i in range(tb_count):
             res = db_obj.drop_table(table_name + str(i), ConflictType.Error)
             assert res.error_code == ErrorCode.OK
-    def test_create_1K_table(self, suffix, local_infinity):
+    def test_create_1K_table(self, suffix, local_hybridsearch):
         """
         target: create/drop/list/get 1K table
         methods: show table
         expect: all operations successfully
         """
         # connect
-        if local_infinity:
-            infinity_obj = infinity_embedded.connect(self.uri)
+        if local_hybridsearch:
+            hybridsearch_obj = hybridsearch_embedded.connect(self.uri)
         else:
-            infinity_obj = infinity.connect(self.uri)
-        db_obj = infinity_obj.get_database("default_db")
+            hybridsearch_obj = hybridsearch.connect(self.uri)
+        db_obj = hybridsearch_obj.get_database("default_db")
         table_name = "test_create_1K_table"+suffix
         db_obj.drop_table(table_name, ConflictType.Ignore)
 
@@ -1026,5 +1026,5 @@ class TestInfinity:
                 print(e)
 
         # disconnect
-        res = infinity_obj.disconnect()
+        res = hybridsearch_obj.disconnect()
         assert res.error_code == ErrorCode.OK

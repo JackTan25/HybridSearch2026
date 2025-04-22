@@ -1,16 +1,4 @@
-# Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      https://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+
 import functools
 import threading
 import time
@@ -19,9 +7,9 @@ from datetime import datetime
 
 import pandas as pd
 
-import infinity
-from infinity import NetworkAddress
-from infinity.errors import ErrorCode
+import hybridsearch
+from hybridsearch import NetworkAddress
+from hybridsearch.errors import ErrorCode
 
 
 def trace_unhandled_exceptions(func):
@@ -37,14 +25,14 @@ def trace_unhandled_exceptions(func):
 
 
 def worker_thread(thread_id, num_iterations, some_function, ip='127.0.0.1', port=9090):
-    infinity_obj = infinity.connect(NetworkAddress(ip, port))
+    hybridsearch_obj = hybridsearch.connect(NetworkAddress(ip, port))
     try:
         for j in range(num_iterations):
-            some_function(infinity_obj, port, thread_id, j)
+            some_function(hybridsearch_obj, port, thread_id, j)
     except Exception as e:
         print(f"Exception: {e}")
     finally:
-        infinity_obj.disconnect()
+        hybridsearch_obj.disconnect()
 
 
 def worker_internal_connection(num_threads, num_iterations, some_function, ip=None, port=None):
@@ -103,42 +91,42 @@ class TestBenchmark:
 
     def test_measure_time(self):
         @trace_unhandled_exceptions
-        def create_database(infinity_obj, port, thread_id, num_iteration):
-            res = infinity_obj.create_database(
+        def create_database(hybridsearch_obj, port, thread_id, num_iteration):
+            res = hybridsearch_obj.create_database(
                 f"my_database_{port}_{thread_id}_{num_iteration}")
             if res.error_code != ErrorCode.OK:
                 raise Exception(f"create_database failed: {res.error_msg}")
 
         @trace_unhandled_exceptions
-        def get_database(infinity_obj, port, thread_id, num_iteration):
-            db_obj = infinity_obj.get_database(f"default_db")
+        def get_database(hybridsearch_obj, port, thread_id, num_iteration):
+            db_obj = hybridsearch_obj.get_database(f"default_db")
             if db_obj is None:
                 raise Exception(f"get_database failed")
 
         @trace_unhandled_exceptions
-        def list_databases(infinity_obj, port, thread_id, num_iteration):
-            res = infinity_obj.list_databases()
+        def list_databases(hybridsearch_obj, port, thread_id, num_iteration):
+            res = hybridsearch_obj.list_databases()
             if res.error_code != ErrorCode.OK:
                 raise Exception(f"list_databases failed: {res.error_msg}")
 
         @trace_unhandled_exceptions
-        def drop_database(infinity_obj, port, thread_id, num_iteration):
-            res = infinity_obj.drop_database(
+        def drop_database(hybridsearch_obj, port, thread_id, num_iteration):
+            res = hybridsearch_obj.drop_database(
                 f"my_database_{port}_{thread_id}_{num_iteration}")
             if res.error_code != ErrorCode.OK:
                 raise Exception(f"drop_database failed: {res.error_msg}")
 
         @trace_unhandled_exceptions
-        def create_table(infinity_obj, port, thread_id, num_iteration):
-            res = infinity_obj.get_database(f"default_db").create_table(
+        def create_table(hybridsearch_obj, port, thread_id, num_iteration):
+            res = hybridsearch_obj.get_database(f"default_db").create_table(
                 f"table_{port}_{thread_id}_{num_iteration}",
                 {"c1": {"type": "int", "constraints": ["primary key"]}, "c2": {"type": "float"}})
             if res.error_code != ErrorCode.OK:
                 raise Exception(f"create_table failed: {res.error_msg}")
 
         @trace_unhandled_exceptions
-        def insert_table(infinity_obj, port, thread_id, num_iteration):
-            res = (infinity_obj
+        def insert_table(hybridsearch_obj, port, thread_id, num_iteration):
+            res = (hybridsearch_obj
                    .get_database(f"default_db")
                    .get_table(f"table_{port}_{thread_id}_{num_iteration}")
                    .insert([{"c1": 1, "c2": 1.1}, {"c1": 2, "c2": 2.2}]))
@@ -146,14 +134,14 @@ class TestBenchmark:
                 raise Exception(f"insert_table failed: {res.error_msg}")
 
         @trace_unhandled_exceptions
-        def list_tables(infinity_obj, port, thread_id, num_iteration):
-            (infinity_obj
+        def list_tables(hybridsearch_obj, port, thread_id, num_iteration):
+            (hybridsearch_obj
              .get_database(f"default_db")
              .list_tables())
 
         @trace_unhandled_exceptions
-        def select_table(infinity_obj, port, thread_id, num_iteration):
-            res = (infinity_obj
+        def select_table(hybridsearch_obj, port, thread_id, num_iteration):
+            res = (hybridsearch_obj
                    .get_database(f"default_db")
                    .get_table(f"table_{port}_{thread_id}_{num_iteration}")
                    .query_builder()
@@ -163,16 +151,16 @@ class TestBenchmark:
                 raise Exception(f"select_table failed: {res}")
 
         @trace_unhandled_exceptions
-        def drop_table(infinity_obj, port, thread_id, num_iteration):
-            res = (infinity_obj
+        def drop_table(hybridsearch_obj, port, thread_id, num_iteration):
+            res = (hybridsearch_obj
                    .get_database(f"default_db")
                    .drop_table(f"table_{port}_{thread_id}_{num_iteration}"))
             if res.error_code != ErrorCode.OK:
                 raise Exception(f"drop_table failed: {res.error_msg}")
 
         @trace_unhandled_exceptions
-        def create_index(infinity_obj, port, thread_id, num_iteration):
-            res = (infinity_obj
+        def create_index(hybridsearch_obj, port, thread_id, num_iteration):
+            res = (hybridsearch_obj
                    .get_database(f"default_db")
                    .get_table(f"table_{port}_{thread_id}_{num_iteration}")
                    .create_index("my_index", ["c1"], "IVF_FLAT", None))
@@ -180,8 +168,8 @@ class TestBenchmark:
                 raise Exception(f"create_index failed: {res.error_msg}")
 
         @trace_unhandled_exceptions
-        def drop_index(infinity_obj, port, thread_id, num_iteration):
-            res = (infinity_obj
+        def drop_index(hybridsearch_obj, port, thread_id, num_iteration):
+            res = (hybridsearch_obj
                    .get_database(f"default_db")
                    .get_table(f"table_{port}_{thread_id}_{num_iteration}")
                    .drop_index("my_index"))

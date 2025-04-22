@@ -1,30 +1,18 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 #include "base_statement.h"
 #include "statement/show_statement.h"
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 import sql_parser;
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 import base_statement;
 import create_statement;
 import drop_statement;
@@ -45,11 +33,11 @@ import table_reference;
 import parser_result;
 import statement_common;
 
-using namespace infinity;
+using namespace hybridsearch;
 class StatementParsingTest : public BaseTest {};
 
 TEST_F(StatementParsingTest, good_test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
     SharedPtr<SQLParser> parser = MakeShared<SQLParser>();
     SharedPtr<ParserResult> result = MakeShared<ParserResult>();
 

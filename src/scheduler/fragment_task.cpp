@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -26,7 +14,7 @@ import logger;
 import physical_source;
 import physical_sink;
 import physical_operator;
-import infinity_exception;
+import hybridsearch_exception;
 import operator_state;
 import physical_operator_type;
 import query_context;
@@ -35,9 +23,9 @@ import defer_op;
 import fragment_context;
 import status;
 import parser_assert;
-import infinity_context;
+import hybridsearch_context;
 
-namespace infinity {
+namespace hybridsearch {
 
 void FragmentTask::Init() {
     //    FragmentContext *fragment_context = (FragmentContext *)fragment_context_;
@@ -47,7 +35,7 @@ void FragmentTask::Init() {
 
 void FragmentTask::OnExecute() {
     LOG_TRACE(fmt::format("Task: {} of Fragment: {} is running", task_id_, FragmentId()));
-    //    infinity::BaseProfiler prof;
+    //    hybridsearch::BaseProfiler prof;
     //    prof.Begin();
     FragmentContext *fragment_context = (FragmentContext *)fragment_context_;
     QueryContext *query_context = fragment_context->query_context();
@@ -72,7 +60,7 @@ void FragmentTask::OnExecute() {
         // No source error
         Vector<PhysicalOperator *> &operator_refs = fragment_context->GetOperators();
 
-        bool enable_profiler = InfinityContext::instance().storage()->catalog()->GetProfile();
+        bool enable_profiler = hybridsearchContext::instance().storage()->catalog()->GetProfile();
         TaskProfiler profiler(TaskBinding(), enable_profiler, operator_count_);
         HashMap<SizeT, SharedPtr<BaseTableRef>> table_refs;
         profiler.Begin();
@@ -189,4 +177,4 @@ String FragmentTask::PhysOpsToString() {
 
 FragmentContext *FragmentTask::fragment_context() const { return reinterpret_cast<FragmentContext *>(fragment_context_); }
 
-} // namespace infinity
+} // namespace hybridsearch

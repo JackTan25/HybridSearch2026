@@ -1,18 +1,18 @@
 import time
 
 import pytest
-from infinity_cluster import InfinityCluster
+from hybridsearch_cluster import hybridsearchCluster
 from numpy import dtype
 import pandas as pd
 import time
-from infinity.errors import ErrorCode
-from infinity.common import InfinityException
-from infinity.common import ConflictType
+from hybridsearch.errors import ErrorCode
+from hybridsearch.common import hybridsearchException
+from hybridsearch.common import ConflictType
 from database_operations import do_some_operations_cluster, instance_state, clear_instance
-from infinity_http import database_result
+from hybridsearch_http import database_result
 import logging
 
-def test_leader(cluster : InfinityCluster):
+def test_leader(cluster : hybridsearchCluster):
     '''
     node1 leader
     node2 follower
@@ -38,7 +38,7 @@ def test_leader(cluster : InfinityCluster):
         assert res == expected
 
         node1_client.remove_node("node2")
-        with pytest.raises(InfinityException) as e:
+        with pytest.raises(hybridsearchException) as e:
             node1_client.show_node("node2")
 
         leader_ip, leader_port = cluster.leader_addr()
@@ -52,7 +52,7 @@ def test_leader(cluster : InfinityCluster):
         expected = database_result(node_name="node2", node_role="follower", node_status="alive")
         assert res == expected
 
-def test_leader_failed(cluster : InfinityCluster):
+def test_leader_failed(cluster : hybridsearchCluster):
     '''
     leader can't do:
     remove itself from the cluster
@@ -63,13 +63,13 @@ def test_leader_failed(cluster : InfinityCluster):
         cluster.set_leader("node1")
         node1_client = cluster.client("node1")
 
-        with pytest.raises(InfinityException) as e:
+        with pytest.raises(hybridsearchException) as e:
             node1_client.remove_node("node1");
 
-        with pytest.raises(InfinityException) as e:
+        with pytest.raises(hybridsearchException) as e:
             cluster.set_follower("node1")
 
-def test_followerlearner(cluster : InfinityCluster):
+def test_followerlearner(cluster : hybridsearchCluster):
     '''
     a follower/learner can do:
     connect to a leader
@@ -87,7 +87,7 @@ def test_followerlearner(cluster : InfinityCluster):
         res2 = node2_client.show_nodes()
         assert res1 == res2
 
-def test_followerlearner_failed(cluster : InfinityCluster):
+def test_followerlearner_failed(cluster : hybridsearchCluster):
     '''
     a follower/learner can't do:
     try to switch to follower/learner connecting to a non-leader node
@@ -107,8 +107,8 @@ def test_followerlearner_failed(cluster : InfinityCluster):
         cluster.set_follower("node2")
         leader_state = instance_state(node1_client)
 
-        with pytest.raises(InfinityException) as e:
+        with pytest.raises(hybridsearchException) as e:
             node2_client.remove_node("node1")
 
-        with pytest.raises(InfinityException) as e:
+        with pytest.raises(hybridsearchException) as e:
             do_some_operations_cluster(node2_client, [node1_client], leader_state)

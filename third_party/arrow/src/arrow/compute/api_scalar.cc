@@ -144,9 +144,9 @@ template <>
 struct EnumTraits<compute::RoundMode>
     : BasicEnumTraits<compute::RoundMode, compute::RoundMode::DOWN,
                       compute::RoundMode::UP, compute::RoundMode::TOWARDS_ZERO,
-                      compute::RoundMode::TOWARDS_INFINITY, compute::RoundMode::HALF_DOWN,
+                      compute::RoundMode::TOWARDS_hybridsearch, compute::RoundMode::HALF_DOWN,
                       compute::RoundMode::HALF_UP, compute::RoundMode::HALF_TOWARDS_ZERO,
-                      compute::RoundMode::HALF_TOWARDS_INFINITY,
+                      compute::RoundMode::HALF_TOWARDS_hybridsearch,
                       compute::RoundMode::HALF_TO_EVEN, compute::RoundMode::HALF_TO_ODD> {
   static std::string name() { return "compute::RoundMode"; }
   static std::string value_name(compute::RoundMode value) {
@@ -157,16 +157,16 @@ struct EnumTraits<compute::RoundMode>
         return "UP";
       case compute::RoundMode::TOWARDS_ZERO:
         return "TOWARDS_ZERO";
-      case compute::RoundMode::TOWARDS_INFINITY:
-        return "TOWARDS_INFINITY";
+      case compute::RoundMode::TOWARDS_hybridsearch:
+        return "TOWARDS_hybridsearch";
       case compute::RoundMode::HALF_DOWN:
         return "HALF_DOWN";
       case compute::RoundMode::HALF_UP:
         return "HALF_UP";
       case compute::RoundMode::HALF_TOWARDS_ZERO:
         return "HALF_TOWARDS_ZERO";
-      case compute::RoundMode::HALF_TOWARDS_INFINITY:
-        return "HALF_TOWARDS_INFINITY";
+      case compute::RoundMode::HALF_TOWARDS_hybridsearch:
+        return "HALF_TOWARDS_hybridsearch";
       case compute::RoundMode::HALF_TO_EVEN:
         return "HALF_TO_EVEN";
       case compute::RoundMode::HALF_TO_ODD:
@@ -516,10 +516,10 @@ RoundOptions::RoundOptions(int64_t ndigits, RoundMode round_mode)
   static_assert(RoundMode::HALF_DOWN > RoundMode::DOWN &&
                     RoundMode::HALF_DOWN > RoundMode::UP &&
                     RoundMode::HALF_DOWN > RoundMode::TOWARDS_ZERO &&
-                    RoundMode::HALF_DOWN > RoundMode::TOWARDS_INFINITY &&
+                    RoundMode::HALF_DOWN > RoundMode::TOWARDS_hybridsearch &&
                     RoundMode::HALF_DOWN < RoundMode::HALF_UP &&
                     RoundMode::HALF_DOWN < RoundMode::HALF_TOWARDS_ZERO &&
-                    RoundMode::HALF_DOWN < RoundMode::HALF_TOWARDS_INFINITY &&
+                    RoundMode::HALF_DOWN < RoundMode::HALF_TOWARDS_hybridsearch &&
                     RoundMode::HALF_DOWN < RoundMode::HALF_TO_EVEN &&
                     RoundMode::HALF_DOWN < RoundMode::HALF_TO_ODD,
                 "Invalid order of round modes. Modes prefixed with HALF need to be "
@@ -532,10 +532,10 @@ RoundBinaryOptions::RoundBinaryOptions(RoundMode round_mode)
   static_assert(RoundMode::HALF_DOWN > RoundMode::DOWN &&
                     RoundMode::HALF_DOWN > RoundMode::UP &&
                     RoundMode::HALF_DOWN > RoundMode::TOWARDS_ZERO &&
-                    RoundMode::HALF_DOWN > RoundMode::TOWARDS_INFINITY &&
+                    RoundMode::HALF_DOWN > RoundMode::TOWARDS_hybridsearch &&
                     RoundMode::HALF_DOWN < RoundMode::HALF_UP &&
                     RoundMode::HALF_DOWN < RoundMode::HALF_TOWARDS_ZERO &&
-                    RoundMode::HALF_DOWN < RoundMode::HALF_TOWARDS_INFINITY &&
+                    RoundMode::HALF_DOWN < RoundMode::HALF_TOWARDS_hybridsearch &&
                     RoundMode::HALF_DOWN < RoundMode::HALF_TO_EVEN &&
                     RoundMode::HALF_DOWN < RoundMode::HALF_TO_ODD,
                 "Invalid order of round modes. Modes prefixed with HALF need to be "

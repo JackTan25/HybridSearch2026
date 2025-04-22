@@ -29,16 +29,16 @@ SELECT * FROM sqllogic_test_export_csv;
 3 [3000:3.000000]
 
 statement ok
-COPY sqllogic_test_export_jsonl TO '/var/infinity/test_data/tmp/test_export_sparse.jsonl' WITH (FORMAT JSONL);
+COPY sqllogic_test_export_jsonl TO '/var/hybridsearch/test_data/tmp/test_export_sparse.jsonl' WITH (FORMAT JSONL);
 
 statement ok
-COPY sqllogic_test_export_csv TO '/var/infinity/test_data/tmp/test_export_sparse.csv' WITH (FORMAT CSV);
+COPY sqllogic_test_export_csv TO '/var/hybridsearch/test_data/tmp/test_export_sparse.csv' WITH (FORMAT CSV);
 
 statement ok
-COPY sqllogic_test_export_jsonl FROM '/var/infinity/test_data/tmp/test_export_sparse.jsonl' WITH (FORMAT JSONL);
+COPY sqllogic_test_export_jsonl FROM '/var/hybridsearch/test_data/tmp/test_export_sparse.jsonl' WITH (FORMAT JSONL);
 
 statement ok
-COPY sqllogic_test_export_csv FROM '/var/infinity/test_data/tmp/test_export_sparse.csv' WITH (FORMAT CSV);
+COPY sqllogic_test_export_csv FROM '/var/hybridsearch/test_data/tmp/test_export_sparse.csv' WITH (FORMAT CSV);
 
 query III
 SELECT * FROM sqllogic_test_export_jsonl;

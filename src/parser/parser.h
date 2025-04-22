@@ -348,75 +348,75 @@ union SQLSTYPE
     double  double_value;
     int64_t long_value;
 
-    infinity::BaseStatement*   base_stmt;
-    infinity::SelectStatement* select_stmt;
-    infinity::CopyStatement*   copy_stmt;
-    infinity::InsertStatement* insert_stmt;
-    infinity::UpdateStatement* update_stmt;
-    infinity::DeleteStatement* delete_stmt;
-    infinity::CreateStatement* create_stmt;
-    infinity::DropStatement*   drop_stmt;
-    infinity::PrepareStatement* prepare_stmt;
-    infinity::ExecuteStatement* execute_stmt;
-    infinity::AlterStatement*   alter_stmt;
-    infinity::ShowStatement*    show_stmt;
-    infinity::ExplainStatement* explain_stmt;
-    infinity::FlushStatement*  flush_stmt;
-    infinity::OptimizeStatement*  optimize_stmt;
-    infinity::CommandStatement* command_stmt;
-    infinity::CompactStatement* compact_stmt;
-    infinity::AdminStatement* admin_stmt;
+    hybridsearch::BaseStatement*   base_stmt;
+    hybridsearch::SelectStatement* select_stmt;
+    hybridsearch::CopyStatement*   copy_stmt;
+    hybridsearch::InsertStatement* insert_stmt;
+    hybridsearch::UpdateStatement* update_stmt;
+    hybridsearch::DeleteStatement* delete_stmt;
+    hybridsearch::CreateStatement* create_stmt;
+    hybridsearch::DropStatement*   drop_stmt;
+    hybridsearch::PrepareStatement* prepare_stmt;
+    hybridsearch::ExecuteStatement* execute_stmt;
+    hybridsearch::AlterStatement*   alter_stmt;
+    hybridsearch::ShowStatement*    show_stmt;
+    hybridsearch::ExplainStatement* explain_stmt;
+    hybridsearch::FlushStatement*  flush_stmt;
+    hybridsearch::OptimizeStatement*  optimize_stmt;
+    hybridsearch::CommandStatement* command_stmt;
+    hybridsearch::CompactStatement* compact_stmt;
+    hybridsearch::AdminStatement* admin_stmt;
 
-    std::vector<infinity::BaseStatement*>* stmt_array;
+    std::vector<hybridsearch::BaseStatement*>* stmt_array;
 
-    std::vector<infinity::TableElement*>*  table_element_array_t;
-    std::vector<infinity::ColumnDef*>*     column_def_array_t;
-    infinity::TableElement*           table_element_t;
-    infinity::ColumnDef*              table_column_t;
-    infinity::ColumnType*              column_type_t;
-    std::vector<std::unique_ptr<infinity::ColumnType>>*     column_type_array_t;
-    infinity::ConstraintType          column_constraint_t;
-    std::set<infinity::ConstraintType>* column_constraints_t;
+    std::vector<hybridsearch::TableElement*>*  table_element_array_t;
+    std::vector<hybridsearch::ColumnDef*>*     column_def_array_t;
+    hybridsearch::TableElement*           table_element_t;
+    hybridsearch::ColumnDef*              table_column_t;
+    hybridsearch::ColumnType*              column_type_t;
+    std::vector<std::unique_ptr<hybridsearch::ColumnType>>*     column_type_array_t;
+    hybridsearch::ConstraintType          column_constraint_t;
+    std::set<hybridsearch::ConstraintType>* column_constraints_t;
     std::vector<std::string>*         identifier_array_t;
-    infinity::TableConstraint*        table_constraint_t;
+    hybridsearch::TableConstraint*        table_constraint_t;
 
-    infinity::BaseTableReference*     table_reference_t;
-    infinity::TableAlias *            table_alias_t;
-    infinity::JoinType                join_type_t;
+    hybridsearch::BaseTableReference*     table_reference_t;
+    hybridsearch::TableAlias *            table_alias_t;
+    hybridsearch::JoinType                join_type_t;
 
-    infinity::OrderByExpr*            order_by_expr_t;
-    std::vector<infinity::OrderByExpr*>*   order_by_expr_list_t;
-    infinity::OrderType               order_by_type_t;
+    hybridsearch::OrderByExpr*            order_by_expr_t;
+    std::vector<hybridsearch::OrderByExpr*>*   order_by_expr_list_t;
+    hybridsearch::OrderType               order_by_type_t;
 
-    infinity::WithExpr*               with_expr_t;
-    std::vector<infinity::WithExpr*>*      with_expr_list_t;
+    hybridsearch::WithExpr*               with_expr_t;
+    std::vector<hybridsearch::WithExpr*>*      with_expr_list_t;
 
-    infinity::SetOperatorType         set_operator_t;
+    hybridsearch::SetOperatorType         set_operator_t;
 
-    infinity::ExplainType             explain_type_t;
+    hybridsearch::ExplainType             explain_type_t;
 
-    infinity::ParsedExpr*             expr_t;
-    infinity::ConstantExpr*           const_expr_t;
-    std::vector<infinity::ParsedExpr*>*    expr_array_t;
-    std::vector<infinity::InsertRowExpr*>*    insert_row_list_t;
+    hybridsearch::ParsedExpr*             expr_t;
+    hybridsearch::ConstantExpr*           const_expr_t;
+    std::vector<hybridsearch::ParsedExpr*>*    expr_array_t;
+    std::vector<hybridsearch::InsertRowExpr*>*    insert_row_list_t;
 
-    std::vector<infinity::WhenThen*>*     case_check_array_t;
+    std::vector<hybridsearch::WhenThen*>*     case_check_array_t;
 
-    infinity::UpdateExpr*             update_expr_t;
-    std::vector<infinity::UpdateExpr*>*    update_expr_array_t;
+    hybridsearch::UpdateExpr*             update_expr_t;
+    std::vector<hybridsearch::UpdateExpr*>*    update_expr_array_t;
 
-    infinity::TableName* table_name_t;
-    infinity::CopyOption* copy_option_t;
-    std::vector<infinity::CopyOption*>* copy_option_array;
+    hybridsearch::TableName* table_name_t;
+    hybridsearch::CopyOption* copy_option_t;
+    std::vector<hybridsearch::CopyOption*>* copy_option_array;
 
-    infinity::InitParameter*        index_param_t;
-    std::vector<infinity::InitParameter*>* index_param_list_t;
-    std::vector<infinity::InitParameter*>* with_index_param_list_t;
+    hybridsearch::InitParameter*        index_param_t;
+    std::vector<hybridsearch::InitParameter*>* index_param_list_t;
+    std::vector<hybridsearch::InitParameter*>* with_index_param_list_t;
 
-    infinity::IndexInfo* index_info_t;
+    hybridsearch::IndexInfo* index_info_t;
 
-    // infinity::IfExistsInfo*        if_exists_info_t;
-    infinity::IfNotExistsInfo*     if_not_exists_info_t;
+    // hybridsearch::IfExistsInfo*        if_exists_info_t;
+    hybridsearch::IfNotExistsInfo*     if_not_exists_info_t;
 
     std::pair<int64_t, int64_t>*    int_sparse_ele_t;
     std::pair<int64_t, double>*     float_sparse_ele_t;
@@ -446,7 +446,7 @@ struct SQLLTYPE
 
 
 
-int sqlparse (void *scanner, infinity::ParserResult* result);
+int sqlparse (void *scanner, hybridsearch::ParserResult* result);
 
 
 #endif /* !YY_SQL_PARSER_H_INCLUDED  */

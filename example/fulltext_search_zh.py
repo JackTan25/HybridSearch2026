@@ -1,41 +1,29 @@
-# Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      https://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+
 
 """
-This example is to connect local infinity instance, create table, insert data, search the data which Chinese words
+This example is to connect local hybridsearch instance, create table, insert data, search the data which Chinese words
 """
 
 """
-Checkout https://github.com/infiniflow/resource.git under /var/infinity (defined by 'resource_dir' of config file). The jieba dict is
-/var/infinity/resource/jieba/dict/jieba.dict.utf8
+Checkout https://github.com/hybridsearchflow/resource.git under /var/hybridsearch (defined by 'resource_dir' of config file). The jieba dict is
+/var/hybridsearch/resource/jieba/dict/jieba.dict.utf8
 """
-# import infinity_embedded as infinity
-import infinity
+# import hybridsearch_embedded as hybridsearch
+import hybridsearch
 import sys
 
 try:
-    # Use infinity_embedded module to open a local directory
-    # infinity_instance = infinity.connect("/var/infinity")
+    # Use hybridsearch_embedded module to open a local directory
+    # hybridsearch_instance = hybridsearch.connect("/var/hybridsearch")
 
-    #  Use infinity module to connect a remote server
-    infinity_instance = infinity.connect(infinity.common.NetworkAddress("127.0.0.1", 23817))
+    #  Use hybridsearch module to connect a remote server
+    hybridsearch_instance = hybridsearch.connect(hybridsearch.common.NetworkAddress("127.0.0.1", 23817))
 
     # 'default_db' is the default database
-    db_instance = infinity_instance.get_database("default_db")
+    db_instance = hybridsearch_instance.get_database("default_db")
 
     # Drop my_table if it already exists
-    db_instance.drop_table("my_table", infinity.common.ConflictType.Ignore)
+    db_instance.drop_table("my_table", hybridsearch.common.ConflictType.Ignore)
 
     # Create a table named "my_table"
     table_instance = db_instance.create_table("my_table", {
@@ -93,7 +81,7 @@ try:
     # Create index on varchar column for full-text search and multiple way fusion.
     res = table_instance.create_index(
         "my_index",
-        infinity.index.IndexInfo("body", infinity.index.IndexType.FullText, {"ANALYZER": "chinese"}), infinity.common.ConflictType.Error)
+        hybridsearch.index.IndexInfo("body", hybridsearch.index.IndexType.FullText, {"ANALYZER": "chinese"}), hybridsearch.common.ConflictType.Error)
 
     questions = [
         r"芯片",  # single term
@@ -118,7 +106,7 @@ try:
         if extra_result is not None:
             print(extra_result)
 
-    infinity_instance.disconnect()
+    hybridsearch_instance.disconnect()
 
     print('test done')
     sys.exit(0)

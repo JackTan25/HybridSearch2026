@@ -5,7 +5,7 @@ import stl;
 import obj_stat_accessor;
 import obj_status;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class ObjectStatMapTest : public BaseTest {};
 

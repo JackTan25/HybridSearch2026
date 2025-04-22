@@ -21,7 +21,7 @@ def collect_log(executable_path, log_dir, output_dir, failure):
     log_files = []
     for root, dirs, files in os.walk(log_dir):
         for file in files:
-            if file == "infinity.log":
+            if file == "hybridsearch.log":
                 log_files.append(os.path.join(root, file))
     print(f"Found log files: {log_files}")
 
@@ -53,9 +53,9 @@ def collect_log(executable_path, log_dir, output_dir, failure):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Python cluster test for infinity")
+    parser = argparse.ArgumentParser(description="Python cluster test for hybridsearch")
     parser.add_argument(
-        "--executable_path", type=str, required=True, help="infinity executable path"
+        "--executable_path", type=str, required=True, help="hybridsearch executable path"
     )
     parser.add_argument(
         "--log_dir",

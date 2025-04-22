@@ -4,10 +4,10 @@ export module log;
 
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 
 class Catalog;
 
 export void RegisterLogFunction(const UniquePtr<Catalog> &catalog_ptr);
 
-} // namespace infinity
+} // namespace hybridsearch

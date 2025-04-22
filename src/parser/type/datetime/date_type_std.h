@@ -4,7 +4,7 @@
 #include <chrono>
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 struct DateTypeStd {
     friend struct DateTimeType;
@@ -65,4 +65,4 @@ public:
     static bool OuterDate2YMD(int32_t days, std::chrono::year_month_day &ymd);
 };
 
-} // namespace infinity
+} // namespace hybridsearch

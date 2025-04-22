@@ -1,16 +1,4 @@
-# Copyright(C) 2025 InfiniFlow, Inc. All rights reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      https://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+
 
 # create table 'tbl1'
 echo -e '-- create tbl1'
@@ -98,7 +86,7 @@ curl --request POST \
          },
          {
              "num": 5,
-             "body": "test@gmail.com",
+             "body": "",
              "vec": [4.0, 4.2, 4.3, 4.5],
              "sparse_column":  {"20":7.7, "80":7.8, "90": 97.9},
              "year": 2018,
@@ -238,8 +226,8 @@ curl --request GET \
         "filter": "substring(body, 0, 4) = '\'test\''"
      } '
 
-# show rows of 'tbl1' where upper chars of body is 'TEST@GMAIL.COM'
-echo -e '\n\n-- show rows of 'tbl1' where upper chars of body is 'TEST@GMAIL.COM''
+# show rows of 'tbl1' where upper chars of body is ''
+echo -e '\n\n-- show rows of 'tbl1' where upper chars of body is '''
 curl --request GET \
      --url http://localhost:23820/databases/default_db/tables/tbl1/docs \
      --header 'accept: application/json' \
@@ -250,11 +238,11 @@ curl --request GET \
          [
              "body"
          ],
-        "filter": "upper(body) = '\'TEST@GMAIL.COM\''"
+        "filter": "upper(body) = '\'\''"
      } '
 
-# show rows of 'tbl1' where chars of body is lower of 'TEST@GMAIL.COM'
-echo -e '\n\n-- show rows of 'tbl1' where chars of body is lower of 'TEST@GMAIL.COM''
+# show rows of 'tbl1' where chars of body is lower of ''
+echo -e '\n\n-- show rows of 'tbl1' where chars of body is lower of '''
 curl --request GET \
      --url http://localhost:23820/databases/default_db/tables/tbl1/docs \
      --header 'accept: application/json' \
@@ -265,7 +253,7 @@ curl --request GET \
          [
              "body"
          ],
-        "filter": "body = lower('\'TEST@GMAIL.COM\'')"
+        "filter": "body = lower('\'\'')"
      } '
 
 # show rows of 'tbl1' where ltrim(body) is "this is an example for trim "

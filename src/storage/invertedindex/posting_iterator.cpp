@@ -18,7 +18,7 @@ import internal_types;
 
 module posting_iterator;
 
-namespace infinity {
+namespace hybridsearch {
 
 PostingIterator::PostingIterator(optionflag_t flag) : posting_option_(flag) {
     tf_buffer_ = (tf_t *)malloc(sizeof(tf_t) * MAX_DOC_PER_RECORD);
@@ -166,4 +166,4 @@ void PostingIterator::Reset() {
     in_doc_pos_iter_inited_ = false;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

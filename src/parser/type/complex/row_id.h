@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 #pragma once
 
@@ -18,7 +6,7 @@
 #include <numeric>
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 constexpr uint32_t INVALID_SEGMENT = std::numeric_limits<uint32_t>::max();
 constexpr uint32_t INVALID_SEGMENT_OFFSET = std::numeric_limits<uint32_t>::max();
@@ -93,11 +81,11 @@ struct RowID {
     static inline RowID FromUint64(uint64_t row_id) { return RowID(row_id); }
 };
 
-} // namespace infinity
+} // namespace hybridsearch
 
 namespace std {
 template <>
-struct std::hash<infinity::RowID> {
-    std::size_t operator()(const infinity::RowID &row_id) const noexcept { return std::hash<uint64_t>{}(row_id.ToUint64()); }
+struct std::hash<hybridsearch::RowID> {
+    std::size_t operator()(const hybridsearch::RowID &row_id) const noexcept { return std::hash<uint64_t>{}(row_id.ToUint64()); }
 };
 } // namespace std

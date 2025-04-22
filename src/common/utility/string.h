@@ -5,7 +5,7 @@
 #include <cstring>
 #include <string>
 
-namespace infinity {
+namespace hybridsearch {
 
 /**
  * This class holds a reference to an external chunk of memory.
@@ -629,4 +629,4 @@ static inline string stringify(uint64_t number) {
     return retval;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

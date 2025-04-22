@@ -8,8 +8,8 @@ module;
 
 export module darts;
 
-namespace infinity {
+namespace hybridsearch {
 export template <typename A, typename B, typename T, typename C>
 using DoubleArrayImpl = Darts::DoubleArrayImpl<A, B, T, C>;
 export using DoubleArrayUnit = Darts::Details::DoubleArrayUnit;
-} // namespace infinity
+} // namespace hybridsearch

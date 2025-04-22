@@ -7,7 +7,7 @@ import vbyte_compress_encoder;
 
 module posting_field;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct EncoderProvider {
     UniquePtr<Int32Encoder> int32_encoder_ = MakeUnique<Int32Encoder>();
@@ -41,4 +41,4 @@ const Int32Encoder *GetSkipListEncoder() { return EncoderProvider::GetInstance()
 
 const Int32Encoder *GetPosListEncoder() { return EncoderProvider::GetInstance()->GetInt32Encoder(); }
 
-} // namespace infinity
+} // namespace hybridsearch

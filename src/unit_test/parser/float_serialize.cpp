@@ -7,17 +7,17 @@
 #include <string>
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import third_party;
 import stl;
 import data_type;
 
-using namespace infinity;
+using namespace hybridsearch;
 class FloatSerializeTest : public BaseTest {};
 
 TEST_F(FloatSerializeTest, test_precision) {
-    using namespace infinity;
+    using namespace hybridsearch;
     constexpr f32 f1 = 0x1.fffffcp+9;
     constexpr f32 f2 = 0x1.fffffep+9;
     //    // show << outputs
@@ -165,7 +165,7 @@ TEST_F(FloatSerializeTest, test_precision) {
 }
 
 TEST_F(FloatSerializeTest, test_json) {
-    using namespace infinity;
+    using namespace hybridsearch;
     constexpr f32 f1 = 0x1.fffffcp+9;
     constexpr f32 f2 = 0x1.fffffep+9;
     constexpr f64 f1_f64 = f1;
@@ -219,7 +219,7 @@ TEST_F(FloatSerializeTest, test_json) {
 }
 
 TEST_F(FloatSerializeTest, test_json_hex_float) {
-    using namespace infinity;
+    using namespace hybridsearch;
     constexpr f32 f1 = 0x1.fffffcp+9;
     constexpr f32 f2 = 0x1.fffffep+9;
     const char *hex_float_json_invalid = R"(

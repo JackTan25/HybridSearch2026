@@ -285,9 +285,9 @@ union EXPRESSIONSTYPE
     double  double_value;
     int64_t long_value;
 
-    infinity::ParsedExpr*             expr_t;
-    infinity::ConstantExpr*           const_expr_t;
-    std::vector<infinity::ParsedExpr*>*    expr_array_t;
+    hybridsearch::ParsedExpr*             expr_t;
+    hybridsearch::ConstantExpr*           const_expr_t;
+    std::vector<hybridsearch::ParsedExpr*>*    expr_array_t;
 
 #line 293 "expression_parser.h"
 
@@ -314,7 +314,7 @@ struct EXPRESSIONLTYPE
 
 
 
-int expressionparse (void *scanner, infinity::ExpressionParserResult* result);
+int expressionparse (void *scanner, hybridsearch::ExpressionParserResult* result);
 
 
 #endif /* !YY_EXPRESSION_EXPRESSION_PARSER_H_INCLUDED  */

@@ -10,4 +10,4 @@ df = df[['id', 'text']]
 df = df.rename(columns={'id': '_id', 'text': 'text'})
 
 # 4. 保存为新文件（不保留行索引）
-df.to_csv("/home/ubuntu/infinity/experiments/load_experiments/Multilingual_CC_News_zh/queries_with_id.csv", index=False, encoding="utf-8")
+df.to_csv("/home/ubuntu/hybridsearch/experiments/load_experiments/Multilingual_CC_News_zh/queries_with_id.csv", index=False, encoding="utf-8")

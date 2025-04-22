@@ -24,15 +24,15 @@ import posting_decoder;
 import column_index_merger;
 import internal_types;
 import logical_type;
-import infinity_exception;
+import hybridsearch_exception;
 import vector_with_lock;
 import logger;
-import infinity_context;
+import hybridsearch_context;
 import persistence_manager;
 import persist_result_handler;
 import local_file_handle;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class PostingMergerTest : public BaseTestParamStr {
 public:
@@ -86,7 +86,7 @@ void PostingMergerTest::CreateIndex() {
 }
 
 TEST_P(PostingMergerTest, Basic) {
-    // using namespace infinity;
+    // using namespace hybridsearch;
     CreateIndex();
 
     const String index_dir = GetFullDataDir();
@@ -144,7 +144,7 @@ TEST_P(PostingMergerTest, Basic) {
         // prepare column length info
         // the indexes to be merged should be from the same segment
         // otherwise the range of row_id will be very large ( >= 2^32)
-        PersistenceManager *pm = InfinityContext::instance().persistence_manager();
+        PersistenceManager *pm = hybridsearchContext::instance().persistence_manager();
         PersistResultHandler handler(pm);
         unsafe_column_length_array.clear();
         for (u32 i = 0; i < base_names.size(); ++i) {

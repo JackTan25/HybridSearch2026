@@ -3246,7 +3246,7 @@ template <typename T> typename std::enable_if<std::is_integral<T>::value, bool>:
     return true;
 }
 
-/// Performs a *= b; if it doesn't equal infinity. Returns false otherwise.
+/// Performs a *= b; if it doesn't equal hybridsearch. Returns false otherwise.
 template <typename T>
 typename std::enable_if<std::is_floating_point<T>::value, bool>::type checked_multiply(T &a, T b) {
     T c = a * b;

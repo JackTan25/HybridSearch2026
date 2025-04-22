@@ -1,24 +1,24 @@
 import time
 
 import pytest
-from infinity_cluster import InfinityCluster
-from mocked_infinity_cluster import MockInfinityCluster
+from hybridsearch_cluster import hybridsearchCluster
+from mocked_hybridsearch_cluster import MockhybridsearchCluster
 import time
 
 
-def test_admin(cluster: InfinityCluster):
+def test_admin(cluster: hybridsearchCluster):
     with cluster:
         cluster.add_node("test", "conf/leader.toml")
-        infinity1 = cluster.client("test")
-        assert infinity1 is not None
-        res = infinity1.show_current_node()
+        hybridsearch1 = cluster.client("test")
+        assert hybridsearch1 is not None
+        res = hybridsearch1.show_current_node()
         print(res.node_name)
         assert (res.node_role == "admin")
 
 
-def test_standalone(cluster: InfinityCluster):
+def test_standalone(cluster: hybridsearchCluster):
     with cluster:
-        cluster.add_node("test", "conf/pytest_parallel_infinity_conf.toml")
+        cluster.add_node("test", "conf/pytest_parallel_hybridsearch_conf.toml")
         cluster.set_standalone("test")
         test_client = cluster.client("test")
         assert test_client is not None
@@ -27,7 +27,7 @@ def test_standalone(cluster: InfinityCluster):
         test_client.drop_database("db1")
 
 
-def test_0(cluster: InfinityCluster):
+def test_0(cluster: hybridsearchCluster):
     with cluster:
         cluster.add_node("node1", "conf/leader.toml")
         cluster.add_node("node2", "conf/follower.toml")
@@ -41,7 +41,7 @@ def test_0(cluster: InfinityCluster):
         cluster.remove_node("node1")
 
 
-# def test_mock(mock_cluster: MockInfinityCluster):
+# def test_mock(mock_cluster: MockhybridsearchCluster):
 #     cluster = mock_cluster
 #     with cluster:
 #         cluster.add_node("node1", "conf/leader.toml")
@@ -67,7 +67,7 @@ def test_0(cluster: InfinityCluster):
 
 
 # @pytest.mark.docker
-# def test_docker(docker_cluster: DockerInfinityCluster):
+# def test_docker(docker_cluster: DockerhybridsearchCluster):
 #     cluster = docker_cluster
 
 #     cluster.add_node("node1", "conf/leader.toml")

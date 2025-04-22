@@ -14,7 +14,7 @@ import in_doc_pos_state;
 import posting_byte_slice;
 import byte_slice_reader;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class PositionListDecoderTest : public BaseTest {
 public:

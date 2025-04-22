@@ -16,7 +16,7 @@
 #include <string>
 #include <utility>
 
-namespace infinity {
+namespace hybridsearch {
 
 class SearchOptions;
 
@@ -36,4 +36,4 @@ public:
     std::unique_ptr<ParsedExpr> filter_expr_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

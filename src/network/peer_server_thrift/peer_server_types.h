@@ -19,7 +19,7 @@
 #include <memory>
 
 
-namespace infinity_peer_server {
+namespace hybridsearch_peer_server {
 
 struct NodeType {
   enum type {

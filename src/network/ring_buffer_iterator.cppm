@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -20,24 +8,24 @@ import global_resource_usage;
 
 export module ring_buffer_iterator;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class RingBufferIterator {
 public:
     explicit RingBufferIterator(Array<char, PG_MSG_BUFFER_SIZE> &data, SizeT position = 0) : data_(data), position_(position) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("RingBufferIterator");
 #endif
     }
 
     RingBufferIterator(const RingBufferIterator &other) : data_(other.data_), position_(other.position_) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("RingBufferIterator");
 #endif
     }
 
     ~RingBufferIterator() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("RingBufferIterator");
 #endif
     }
@@ -111,4 +99,4 @@ public:
     u32 position_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

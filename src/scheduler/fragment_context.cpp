@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -22,7 +10,7 @@ import stl;
 
 import fragment_task;
 
-import infinity_exception;
+import hybridsearch_exception;
 import operator_state;
 import physical_operator;
 import physical_operator_type;
@@ -73,7 +61,7 @@ import table_entry;
 import segment_entry;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 template <typename OperatorStateType>
 UniquePtr<OperatorState> MakeTaskStateTemplate(PhysicalOperator *physical_op) {
@@ -646,13 +634,13 @@ void FragmentContext::BuildTask(QueryContext *query_context, FragmentContext *pa
 FragmentContext::FragmentContext(PlanFragment *plan_fragment_ptr, QueryContext *query_context, Notifier *notifier)
     : notifier_(notifier), plan_fragment_ptr_(plan_fragment_ptr), query_context_(query_context), fragment_type_(plan_fragment_ptr->GetFragmentType()),
       unfinished_child_n_(plan_fragment_ptr->Children().size()) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::IncrObjectCount("FragmentContext");
 #endif
 }
 
 FragmentContext::~FragmentContext() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::DecrObjectCount("FragmentContext");
 #endif
 }
@@ -1636,4 +1624,4 @@ void FragmentContext::DumpFragmentCtx() {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

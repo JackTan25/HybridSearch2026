@@ -13,19 +13,19 @@
 
 ## start the sql test
 
-1. run `sudo rm -rf /var/infinity/*` to remove all previous data.
-2. run `infinity`, so the database is ready for test.
-3. run `python3 ./tools/sqllogictest.py` under **the root path of infinity project**.  
-   This python script will first call `generate_big.py`, `generate_fvecs.py` and so on to generate big test file under coresponding directory, then call sqllogictest cli tool to run the test cases. The cli tools will compare the actual result of infinity and result in slt file. Difference will be marked **RED**. Only when all slt test is passed, the test is passed.
+1. run `sudo rm -rf /var/hybridsearch/*` to remove all previous data.
+2. run `hybridsearch`, so the database is ready for test.
+3. run `python3 ./tools/sqllogictest.py` under **the root path of hybridsearch project**.  
+   This python script will first call `generate_big.py`, `generate_fvecs.py` and so on to generate big test file under coresponding directory, then call sqllogictest cli tool to run the test cases. The cli tools will compare the actual result of hybridsearch and result in slt file. Difference will be marked **RED**. Only when all slt test is passed, the test is passed.
    
 ## start Python SDK test
 
-### Run the embedded Infinity test
+### Run the embedded hybridsearch test
 
-1. Install infinity-embedded-sdk from PYPI or compiled from source code.
-2. run 'python3 ./tools/run_pysdk_local_infinity_test.py'
+1. Install hybridsearch-embedded-sdk from PYPI or compiled from source code.
+2. run 'python3 ./tools/run_pysdk_local_hybridsearch_test.py'
 
-### Run Infinity server test
+### Run hybridsearch server test
 
-1. Install infinity-sdk from PYPI or compiled from source code.
-2. run 'python3 ./tools/run_pysdk_remote_infinity_test.py'
+1. Install hybridsearch-sdk from PYPI or compiled from source code.
+2. run 'python3 ./tools/run_pysdk_remote_hybridsearch_test.py'

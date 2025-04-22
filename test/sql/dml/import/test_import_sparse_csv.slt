@@ -5,13 +5,13 @@ statement ok
 CREATE TABLE test_import_sparse (col1 INT, col2 SPARSE(DOUBLE, 30000));
 
 statement ok
-COPY test_import_sparse FROM '/var/infinity/test_data/sparse_float.csv' WITH (FORMAT CSV);
+COPY test_import_sparse FROM '/var/hybridsearch/test_data/sparse_float.csv' WITH (FORMAT CSV);
 
 statement error
-COPY test_import_sparse FROM '/var/infinity/test_data/invalid_sparse_float.csv' WITH (FORMAT CSV);
+COPY test_import_sparse FROM '/var/hybridsearch/test_data/invalid_sparse_float.csv' WITH (FORMAT CSV);
 
 statement error
-COPY test_import_sparse FROM '/var/infinity/test_data/invalid_sparse_float2.csv' WITH (FORMAT CSV);
+COPY test_import_sparse FROM '/var/hybridsearch/test_data/invalid_sparse_float2.csv' WITH (FORMAT CSV);
 
 query I
 SELECT * FROM test_import_sparse;
@@ -29,7 +29,7 @@ statement ok
 CREATE TABLE test_import_sparse (col1 INT, col2 SPARSE(FLOAT, 30000));
 
 statement ok
-COPY test_import_sparse FROM '/var/infinity/test_data/sparse_float.csv' WITH (FORMAT CSV);
+COPY test_import_sparse FROM '/var/hybridsearch/test_data/sparse_float.csv' WITH (FORMAT CSV);
 
 query I
 SELECT * FROM test_import_sparse;
@@ -47,7 +47,7 @@ statement ok
 CREATE TABLE test_import_sparse (col1 INT, col2 SPARSE(INT, 30000));
 
 statement ok
-COPY test_import_sparse FROM '/var/infinity/test_data/sparse_integer.csv' WITH (FORMAT CSV);
+COPY test_import_sparse FROM '/var/hybridsearch/test_data/sparse_integer.csv' WITH (FORMAT CSV);
 
 query I
 SELECT * FROM test_import_sparse;
@@ -65,13 +65,13 @@ statement ok
 CREATE TABLE test_import_sparse (col1 INT, col2 SPARSE(BIT, 30000));
 
 statement ok
-COPY test_import_sparse FROM '/var/infinity/test_data/sparse_bit.csv' WITH (FORMAT CSV);
+COPY test_import_sparse FROM '/var/hybridsearch/test_data/sparse_bit.csv' WITH (FORMAT CSV);
 
 statement error
-COPY test_import_sparse FROM '/var/infinity/test_data/invalid_sparse_bit.csv' WITH (FORMAT CSV);
+COPY test_import_sparse FROM '/var/hybridsearch/test_data/invalid_sparse_bit.csv' WITH (FORMAT CSV);
 
 statement error
-COPY test_import_sparse FROM '/var/infinity/test_data/invalid_sparse_bit2.csv' WITH (FORMAT CSV);
+COPY test_import_sparse FROM '/var/hybridsearch/test_data/invalid_sparse_bit2.csv' WITH (FORMAT CSV);
 
 query I
 SELECT * FROM test_import_sparse;

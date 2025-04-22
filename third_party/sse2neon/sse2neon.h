@@ -2730,7 +2730,7 @@ FORCE_INLINE __m128 _mm_sqrt_ps(__m128 in)
 #if SSE2NEON_PRECISE_SQRT
     float32x4_t recip = vrsqrteq_f32(vreinterpretq_f32_m128(in));
 
-    // Test for vrsqrteq_f32(0) -> positive infinity case.
+    // Test for vrsqrteq_f32(0) -> positive hybridsearch case.
     // Change to zero, so that s * 1/sqrt(s) result is zero too.
     const uint32x4_t pos_inf = vdupq_n_u32(0x7F800000);
     const uint32x4_t div_by_zero =

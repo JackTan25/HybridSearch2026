@@ -4,14 +4,14 @@ import byte_slice_reader;
 import byte_slice_writer;
 
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 import fastpfor;
 
 #include "new_pfordelta_compressor.h"
 
 export module int_encoder;
 
-namespace infinity {
+namespace hybridsearch {
 
 export using NewPForDeltaCompressor = indexlib::NewPForDeltaCompressor;
 
@@ -107,4 +107,4 @@ inline u32 IntEncoder<u32, FastPForWrapper<Codec>>::Decode(u32 *dest, u32 dest_l
     return destlen;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

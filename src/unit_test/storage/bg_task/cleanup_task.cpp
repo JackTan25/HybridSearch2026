@@ -1,23 +1,11 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 #include "gtest/gtest.h"
 import base_test;
 
 import stl;
 import logger;
-import infinity_context;
+import hybridsearch_context;
 import storage;
 import column_def;
 import logical_type;
@@ -39,12 +27,12 @@ import index_base;
 import third_party;
 import base_table_ref;
 import index_secondary;
-import infinity_exception;
+import hybridsearch_exception;
 import wal_manager;
 import compaction_process;
 import txn_state;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class CleanupTaskTest : public BaseTestParamStr {
 protected:
@@ -70,7 +58,7 @@ INSTANTIATE_TEST_SUITE_P(TestWithDifferentParams,
 
 TEST_P(CleanupTaskTest, test_delete_db_simple) {
     // close auto cleanup task
-    Storage *storage = InfinityContext::instance().storage();
+    Storage *storage = hybridsearchContext::instance().storage();
     EXPECT_NE(storage, nullptr);
 
     TxnManager *txn_mgr = storage->txn_manager();
@@ -99,7 +87,7 @@ TEST_P(CleanupTaskTest, test_delete_db_simple) {
 
 TEST_P(CleanupTaskTest, test_delete_db_complex) {
     // close auto cleanup task
-    Storage *storage = InfinityContext::instance().storage();
+    Storage *storage = hybridsearchContext::instance().storage();
     EXPECT_NE(storage, nullptr);
 
     TxnManager *txn_mgr = storage->txn_manager();
@@ -143,7 +131,7 @@ TEST_P(CleanupTaskTest, test_delete_db_complex) {
 
 TEST_P(CleanupTaskTest, test_delete_table_simple) {
     // close auto cleanup task
-    Storage *storage = InfinityContext::instance().storage();
+    Storage *storage = hybridsearchContext::instance().storage();
     EXPECT_NE(storage, nullptr);
 
     TxnManager *txn_mgr = storage->txn_manager();
@@ -186,7 +174,7 @@ TEST_P(CleanupTaskTest, test_delete_table_simple) {
 
 TEST_P(CleanupTaskTest, test_delete_table_complex) {
     // close auto cleanup task
-    Storage *storage = InfinityContext::instance().storage();
+    Storage *storage = hybridsearchContext::instance().storage();
     EXPECT_NE(storage, nullptr);
 
     TxnManager *txn_mgr = storage->txn_manager();
@@ -252,7 +240,7 @@ TEST_P(CleanupTaskTest, test_compact_and_cleanup) {
     constexpr int kImportSize = 100;
 
     // disable auto cleanup task
-    Storage *storage = InfinityContext::instance().storage();
+    Storage *storage = hybridsearchContext::instance().storage();
     EXPECT_NE(storage, nullptr);
 
     TxnManager *txn_mgr = storage->txn_manager();
@@ -327,7 +315,7 @@ TEST_P(CleanupTaskTest, test_with_index_compact_and_cleanup) {
     constexpr int kImportSize = 100;
 
     // close auto cleanup task
-    Storage *storage = InfinityContext::instance().storage();
+    Storage *storage = hybridsearchContext::instance().storage();
     EXPECT_NE(storage, nullptr);
 
     TxnManager *txn_mgr = storage->txn_manager();

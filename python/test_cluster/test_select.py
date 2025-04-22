@@ -3,15 +3,15 @@ import os
 from numpy import dtype
 import pandas as pd
 import pytest
-from infinity_cluster import InfinityCluster
-from infinity.common import ConflictType
-from infinity.common import InfinityException
-from infinity.errors import ErrorCode
+from hybridsearch_cluster import hybridsearchCluster
+from hybridsearch.common import ConflictType
+from hybridsearch.common import hybridsearchException
+from hybridsearch.errors import ErrorCode
 import common_values
 
 
 class TestSelect:
-    def test_select(self, cluster: InfinityCluster):
+    def test_select(self, cluster: hybridsearchCluster):
         with cluster:
             cluster.add_node("node1", "conf/leader.toml")
             cluster.add_node("node2", "conf/follower.toml")
@@ -21,10 +21,10 @@ class TestSelect:
             cluster.set_follower("node2")
             time.sleep(1)
 
-            infinity1 = cluster.client("node1")
-            infinity2 = cluster.client("node2")
+            hybridsearch1 = cluster.client("node1")
+            hybridsearch2 = cluster.client("node2")
 
-            db_obj = infinity1.get_database("default_db")
+            db_obj = hybridsearch1.get_database("default_db")
 
             db_obj.drop_table("test_select", ConflictType.Ignore)
             table_obj = db_obj.create_table(
@@ -60,7 +60,7 @@ class TestSelect:
                                           .astype({'(c1 + c2)': dtype('int32')}))
 
             time.sleep(1)
-            db_obj_2 = infinity2.get_database("default_db")
+            db_obj_2 = hybridsearch2.get_database("default_db")
             table_obj_2 = db_obj_2.get_table("test_select")
             res, extra_result = table_obj_2.output(["*"]).to_df()
             pd.testing.assert_frame_equal(res, pd.DataFrame({'c1': (-3, -2, -1, 0, 1, 2, 3, -8, -7, -6, 7, 8, 9),

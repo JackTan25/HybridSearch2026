@@ -9,7 +9,7 @@ import doc_list_format_option;
 import index_defines;
 import flush_info;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class PostingByteSliceTest : public BaseTest {
 public:
@@ -33,7 +33,7 @@ protected:
 };
 
 TEST_F(PostingByteSliceTest, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     posting_byte_slice_->PushBack(0, (uint32_t)1);
     posting_byte_slice_->PushBack(1, (uint16_t)2);
@@ -63,7 +63,7 @@ TEST_F(PostingByteSliceTest, test1) {
 }
 
 TEST_F(PostingByteSliceTest, test2) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     posting_byte_slice_->PushBack(0, (uint32_t)1);
     posting_byte_slice_->PushBack(1, (uint16_t)2);
@@ -79,7 +79,7 @@ TEST_F(PostingByteSliceTest, test2) {
 }
 
 TEST_F(PostingByteSliceTest, test3) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     const int32_t decode_len = 5;
     const int32_t count = 11;

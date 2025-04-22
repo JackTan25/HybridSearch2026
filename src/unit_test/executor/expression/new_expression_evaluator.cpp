@@ -1,28 +1,16 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import global_resource_usage;
 import third_party;
 
 import logger;
 import stl;
-import infinity_context;
+import hybridsearch_context;
 import catalog;
 import scalar_function;
 import add;
@@ -47,13 +35,13 @@ import internal_types;
 import column_def;
 import data_type;
 
-using namespace infinity;
+using namespace hybridsearch;
 class ExpressionEvaluatorTest : public BaseTestParamStr {};
 
 INSTANTIATE_TEST_SUITE_P(TestWithDifferentParams, ExpressionEvaluatorTest, ::testing::Values(BaseTestParamStr::NULL_CONFIG_PATH));
 
 TEST_P(ExpressionEvaluatorTest, add_bigint_constant_1) {
-    using namespace infinity;
+    using namespace hybridsearch;
     UniquePtr<Catalog> catalog_ptr = MakeUnique<Catalog>();
     RegisterAddFunction(catalog_ptr);
 
@@ -153,7 +141,7 @@ TEST_P(ExpressionEvaluatorTest, add_bigint_constant_1) {
 }
 
 TEST_P(ExpressionEvaluatorTest, subtract_constant_8192_bigint) {
-    using namespace infinity;
+    using namespace hybridsearch;
     UniquePtr<Catalog> catalog_ptr = MakeUnique<Catalog>();
     RegisterSubtractFunction(catalog_ptr);
 

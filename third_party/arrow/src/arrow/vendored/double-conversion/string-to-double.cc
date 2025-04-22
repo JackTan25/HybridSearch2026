@@ -475,9 +475,9 @@ double StringToDoubleConverter::StringToIeee(
     current = next_non_space;
   }
 
-  if (infinity_symbol_ != DOUBLE_CONVERSION_NULLPTR) {
-    if (ConsumeFirstCharacter(*current, infinity_symbol_, allow_case_insensitivity)) {
-      if (!ConsumeSubString(&current, end, infinity_symbol_, allow_case_insensitivity)) {
+  if (hybridsearch_symbol_ != DOUBLE_CONVERSION_NULLPTR) {
+    if (ConsumeFirstCharacter(*current, hybridsearch_symbol_, allow_case_insensitivity)) {
+      if (!ConsumeSubString(&current, end, hybridsearch_symbol_, allow_case_insensitivity)) {
         return junk_string_value_;
       }
 
@@ -489,7 +489,7 @@ double StringToDoubleConverter::StringToIeee(
       }
 
       *processed_characters_count = static_cast<int>(current - input);
-      return sign ? -Double::Infinity() : Double::Infinity();
+      return sign ? -Double::hybridsearch() : Double::hybridsearch();
     }
   }
 

@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -22,12 +10,12 @@ import stl;
 import data_type;
 import serialize;
 import internal_types;
-import infinity_exception;
+import hybridsearch_exception;
 import parsed_expr;
 import constant_expr;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 String TableDef::ToString() const {
     std::stringstream ss;
@@ -125,4 +113,4 @@ SharedPtr<TableDef> TableDef::ReadAdv(const char *&ptr, i32 maxbytes) {
     return TableDef::Make(MakeShared<String>(schema_name), MakeShared<String>(table_name), MakeShared<String>(table_comment), columns);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

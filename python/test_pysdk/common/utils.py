@@ -37,12 +37,12 @@ def read_fvecs_file(filename):
     return fvecs
 
 
-def start_infinity_service_in_subporcess():
-    shell = os.getcwd() + "/build/src/infinity"
+def start_hybridsearch_service_in_subporcess():
+    shell = os.getcwd() + "/build/src/hybridsearch"
     with open("./tmp.txt", "w") as f:
-        infinity = subprocess.Popen(shell, stdout=f)
+        hybridsearch = subprocess.Popen(shell, stdout=f)
     time.sleep(1)
-    return infinity
+    return hybridsearch
 
 
 def copy_data(file_name):

@@ -17,7 +17,7 @@ import inmem_position_list_decoder;
 import skiplist_reader;
 import short_list_optimize_util;
 
-namespace infinity {
+namespace hybridsearch {
 PositionListEncoder::PositionListEncoder(const PostingFormatOption &format_option, const PositionListFormat *pos_list_format)
     : pos_list_buffer_(), last_pos_in_cur_doc_(0), total_pos_count_(0), format_option_(format_option), is_own_format_(false),
       pos_list_format_(pos_list_format) {
@@ -136,4 +136,4 @@ InMemPositionListDecoder *PositionListEncoder::GetInMemPositionListDecoder() con
     return decoder;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

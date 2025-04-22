@@ -9,7 +9,7 @@ import inmem_doc_list_decoder;
 import doc_list_format_option;
 import doc_list_encoder;
 
-using namespace infinity;
+using namespace hybridsearch;
 constexpr u32 default_document_legnth = 10;
 
 class InMemDocListDecoderTest : public BaseTest {
@@ -186,7 +186,7 @@ protected:
 };
 
 TEST_F(InMemDocListDecoderTest, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     DocListFormatOption option(OPTION_FLAG_NONE);
     DocListFormat doc_list_format(option);
@@ -222,7 +222,7 @@ TEST_F(InMemDocListDecoderTest, test1) {
 }
 
 TEST_F(InMemDocListDecoderTest, test2) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     DocListFormatOption option(OPTION_FLAG_NONE);
     DocListFormat doc_list_format(option);
@@ -271,7 +271,7 @@ TEST_F(InMemDocListDecoderTest, test2) {
 }
 
 TEST_F(InMemDocListDecoderTest, test3) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     docid_t prev_last_doc_id = 0;
     docid_t first_doc_id = 0;
@@ -306,7 +306,7 @@ TEST_F(InMemDocListDecoderTest, test3) {
 }
 
 TEST_F(InMemDocListDecoderTest, test4) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     docid_t prev_last_doc_id = 0;
     docid_t first_doc_id = 0;
@@ -341,7 +341,7 @@ TEST_F(InMemDocListDecoderTest, test4) {
 }
 
 TEST_F(InMemDocListDecoderTest, test5) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     docid_t prev_last_doc_id = 0;
     docid_t first_doc_id = 0;
@@ -378,7 +378,7 @@ TEST_F(InMemDocListDecoderTest, test5) {
 }
 
 TEST_F(InMemDocListDecoderTest, test6) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     docid_t docids[] = {1, 10};
     tf_t tfs[] = {2, 4};
@@ -386,7 +386,7 @@ TEST_F(InMemDocListDecoderTest, test6) {
 }
 
 TEST_F(InMemDocListDecoderTest, test7) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     docid_t docids[] = {1, 10};
     docpayload_t docPayloads[] = {2, 4};
@@ -394,7 +394,7 @@ TEST_F(InMemDocListDecoderTest, test7) {
 }
 
 TEST_F(InMemDocListDecoderTest, test8) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     docid_t docids[] = {1, 10};
     tf_t tfs[] = {2, 4};
@@ -403,7 +403,7 @@ TEST_F(InMemDocListDecoderTest, test8) {
 }
 
 TEST_F(InMemDocListDecoderTest, test9) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     TestDecode(1);
     TestDecode(MAX_UNCOMPRESSED_DOC_LIST_SIZE + 1);
@@ -416,7 +416,7 @@ TEST_F(InMemDocListDecoderTest, test9) {
 }
 
 TEST_F(InMemDocListDecoderTest, test10) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     TestDecode(1, true);
     TestDecode(MAX_UNCOMPRESSED_DOC_LIST_SIZE + 1, true);
@@ -429,7 +429,7 @@ TEST_F(InMemDocListDecoderTest, test10) {
 }
 
 TEST_F(InMemDocListDecoderTest, test11) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     TestDecode(1, false, true);
     TestDecode(MAX_UNCOMPRESSED_DOC_LIST_SIZE + 1, false, true);
@@ -442,7 +442,7 @@ TEST_F(InMemDocListDecoderTest, test11) {
 }
 
 TEST_F(InMemDocListDecoderTest, test12) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     TestDecode(1, true, true);
     TestDecode(MAX_UNCOMPRESSED_DOC_LIST_SIZE + 1, true, true);

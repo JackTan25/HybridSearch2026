@@ -6,7 +6,7 @@ import stl;
 import buffer_obj;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <typename T>
 class SpecificConcurrentQueue {
@@ -27,4 +27,4 @@ export using FloatDistHeap = Heap<PFV, CMP>;
 export template class SpecificConcurrentQueue<FloatDistHeap>;
 export template class SpecificConcurrentQueue<BufferObj *>;
 export template class SpecificConcurrentQueue<Vector<bool>>;
-} // namespace infinity
+} // namespace hybridsearch

@@ -32,7 +32,7 @@ extern "C" {
 
 #define FALSE (0)
 #define TRUE (!(0))
-#define INFINITY_INT ((~0U) >> 1)
+#define hybridsearch_INT ((~0U) >> 1)
 
 #ifndef BIG_ENDIAN
 #define BIG_ENDIAN (0)

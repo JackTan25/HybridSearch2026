@@ -4,7 +4,7 @@ import base_test;
 import stl;
 import logical_type;
 import third_party;
-import infinity_context;
+import hybridsearch_context;
 import storage;
 import txn_manager;
 import table_def;
@@ -31,7 +31,7 @@ import index_defines;
 import logical_type;
 import status;
 import txn;
-import infinity_exception;
+import hybridsearch_exception;
 import match_expr;
 import internal_types;
 import search_options;
@@ -43,7 +43,7 @@ import column_index_reader;
 import parse_fulltext_options;
 import txn_state;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class QueryMatchTest : public BaseTestParamStr {
 protected:
@@ -70,7 +70,7 @@ protected:
     void InitData();
 
 public:
-    const String data_path_ = "/var/infinity";
+    const String data_path_ = "/var/hybridsearch";
     const String db_name_ = "default_db";
     const String table_name_ = "test_table";
     const String index_name_ = "test_fulltext_index";
@@ -176,7 +176,7 @@ void QueryMatchTest::CreateDBAndTable(const String &db_name, const String &table
         column_defs.push_back(col3_def);
     }
     auto table_def = TableDef::Make(MakeShared<String>(db_name), MakeShared<String>(table_name), MakeShared<String>(), std::move(column_defs));
-    Storage *storage = InfinityContext::instance().storage();
+    Storage *storage = hybridsearchContext::instance().storage();
     TxnManager *txn_mgr = storage->txn_manager();
     {
         auto *txn = txn_mgr->BeginTxn(MakeUnique<String>("drop table"), TransactionType::kNormal);
@@ -195,7 +195,7 @@ void QueryMatchTest::CreateDBAndTable(const String &db_name, const String &table
 }
 
 void QueryMatchTest::CreateIndex(const String &db_name, const String &table_name, const String &index_name, const String &analyzer) {
-    Storage *storage = InfinityContext::instance().storage();
+    Storage *storage = hybridsearchContext::instance().storage();
 
     TxnManager *txn_mgr = storage->txn_manager();
 
@@ -264,7 +264,7 @@ void QueryMatchTest::CreateIndex(const String &db_name, const String &table_name
 }
 
 void QueryMatchTest::InsertData(const String &db_name, const String &table_name) {
-    Storage *storage = InfinityContext::instance().storage();
+    Storage *storage = hybridsearchContext::instance().storage();
     TxnManager *txn_mgr = storage->txn_manager();
 
     auto *txn = txn_mgr->BeginTxn(MakeUnique<String>("import data"), TransactionType::kNormal);
@@ -306,7 +306,7 @@ void QueryMatchTest::QueryMatch(const String &db_name,
                                 const u32 &expected_doc_freq,
                                 const float &expected_matched_freq,
                                 const DocIteratorType &query_type) {
-    Storage *storage = InfinityContext::instance().storage();
+    Storage *storage = hybridsearchContext::instance().storage();
     TxnManager *txn_mgr = storage->txn_manager();
 
     auto *txn = txn_mgr->BeginTxn(MakeUnique<String>("query match"), TransactionType::kRead);

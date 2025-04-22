@@ -33,7 +33,7 @@
 
 /**
  ** \file search_parser.h
- ** Define the infinity::parser class.
+ ** Define the hybridsearch::parser class.
  */
 
 // C++ LALR(1) parser skeleton written by Akim Demaille.
@@ -52,7 +52,7 @@
     #include "query_node.h"
     #endif
 
-    namespace infinity {
+    namespace hybridsearch {
         class SearchDriver;
         class SearchScanner;
 
@@ -206,7 +206,7 @@
 #endif
 
 #line 10 "search_parser.y"
-namespace infinity {
+namespace hybridsearch {
 #line 211 "search_parser.h"
 
 
@@ -1432,7 +1432,7 @@ switch (yykind)
 
 
 #line 10 "search_parser.y"
-} // infinity
+} // hybridsearch
 #line 1437 "search_parser.h"
 
 

@@ -3,13 +3,13 @@ import base_test;
 import stl;
 import simd_init;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class SimdInitTest : public BaseTest {};
 
 TEST_F(SimdInitTest, GetSupportedSimdTypesList) {
     std::cout << "Supported SIMD types:";
-    for (const auto &simd_type : infinity::GetSupportedSimdTypesList()) {
+    for (const auto &simd_type : hybridsearch::GetSupportedSimdTypesList()) {
         std::cout << " " << simd_type;
     }
     std::cout << std::endl;

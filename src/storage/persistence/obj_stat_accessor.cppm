@@ -1,16 +1,4 @@
-// Copyright(C) 2024 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -20,7 +8,7 @@ import stl;
 import obj_status;
 import third_party;
 
-namespace infinity {
+namespace hybridsearch {
 
 struct LRUListEntry {
     LRUListEntry(String key, ObjStat obj_stat) : key_(std::move(key)), obj_stat_(std::move(obj_stat)) {}
@@ -167,4 +155,4 @@ private:
     SizeT disk_used_{};
 };
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -11,7 +11,7 @@ import lexeme;
 import lexeme_path;
 import ik_dict;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class AnalyzeContext {
 public:
@@ -81,4 +81,4 @@ public:
 
     void Compound(Lexeme *result);
 };
-} // namespace infinity
+} // namespace hybridsearch

@@ -7,7 +7,7 @@ import position_list_format_option;
 import index_defines;
 import internal_types;
 
-namespace infinity {
+namespace hybridsearch {
 
 class PositionListDecoder;
 export class InDocPositionState {
@@ -55,4 +55,4 @@ public:
     PositionListFormatOption option_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

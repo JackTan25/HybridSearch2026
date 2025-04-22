@@ -1,22 +1,10 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 #include "tensor_type.h"
 #include <iostream>
 #include <sstream>
 
-namespace infinity {
+namespace hybridsearch {
 
 std::string
 TensorType::Tensor2String(const char *tensor_p, const EmbeddingDataType type, const size_t embedding_dimension, const size_t embedding_num) {
@@ -36,4 +24,4 @@ TensorType::Tensor2String(const char *tensor_p, const EmbeddingDataType type, co
     return std::move(oss).str();
 }
 
-} // namespace infinity
+} // namespace hybridsearch

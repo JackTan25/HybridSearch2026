@@ -1,21 +1,9 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_exception;
+import hybridsearch_exception;
 
 import stl;
 import global_resource_usage;
@@ -27,7 +15,7 @@ import data_block;
 import default_values;
 import profiler;
 import value;
-import infinity_context;
+import hybridsearch_context;
 import internal_types;
 import logical_type;
 import decimal_info;
@@ -36,7 +24,7 @@ import array_info;
 import knn_expr;
 import data_type;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class DataBlockTest : public BaseTestParamStr {};
 
@@ -45,7 +33,7 @@ INSTANTIATE_TEST_SUITE_P(TestWithDifferentParams,
                          ::testing::Values(BaseTestParamStr::NULL_CONFIG_PATH, BaseTestParamStr::VFS_OFF_CONFIG_PATH));
 
 TEST_P(DataBlockTest, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     DataBlock data_block;
     Vector<SharedPtr<DataType>> column_types;
@@ -146,7 +134,7 @@ TEST_P(DataBlockTest, test1) {
 }
 
 TEST_P(DataBlockTest, test2) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     DataBlock data_block;
     Vector<SharedPtr<DataType>> column_types;
@@ -179,9 +167,9 @@ TEST_P(DataBlockTest, test2) {
 }
 
 TEST_P(DataBlockTest, test3) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
-    infinity::BaseProfiler profiler;
+    hybridsearch::BaseProfiler profiler;
 
     profiler.Begin();
 
@@ -222,7 +210,7 @@ TEST_P(DataBlockTest, test3) {
 }
 
 TEST_P(DataBlockTest, ReadWrite) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     DataBlock data_block;
     Vector<SharedPtr<DataType>> column_types;

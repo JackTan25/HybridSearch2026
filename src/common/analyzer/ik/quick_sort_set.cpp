@@ -4,7 +4,7 @@ import lexeme;
 
 module quick_sort_set;
 
-namespace infinity {
+namespace hybridsearch {
 
 QuickSortSet::QuickSortSet() {}
 
@@ -60,4 +60,4 @@ bool QuickSortSet::AddLexeme(Lexeme *lexeme) {
     }
     return false;
 }
-} // namespace infinity
+} // namespace hybridsearch

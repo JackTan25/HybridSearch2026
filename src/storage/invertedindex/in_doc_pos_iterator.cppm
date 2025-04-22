@@ -7,7 +7,7 @@ import in_doc_pos_state;
 import position_list_format_option;
 import index_defines;
 
-namespace infinity {
+namespace hybridsearch {
 export class InDocPositionIterator {
 public:
     InDocPositionIterator(const PositionListFormatOption &option);
@@ -31,4 +31,4 @@ private:
     InDocPositionState state_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

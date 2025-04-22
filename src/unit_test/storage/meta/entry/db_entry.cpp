@@ -4,8 +4,8 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_context;
-import infinity_exception;
+import hybridsearch_context;
+import hybridsearch_exception;
 
 import stl;
 import global_resource_usage;
@@ -35,7 +35,7 @@ import base_entry;
 import db_entry;
 import txn_state;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class DBEntryTest : public BaseTestParamStr {};
 
@@ -53,15 +53,15 @@ TEST_P(DBEntryTest, decode_index_test) {
 }
 
 TEST_P(DBEntryTest, to_string_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
-    Catalog *catalog = infinity::InfinityContext::instance().storage()->catalog();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
+    Catalog *catalog = hybridsearch::hybridsearchContext::instance().storage()->catalog();
     auto *txn1 = txn_mgr->BeginTxn(MakeUnique<String>("get database"), TransactionType::kRead);
 
     auto [db_entry, status] = catalog->GetDatabase("default_db", txn1->TxnID(), txn1->BeginTS());
     std::cout << *(db_entry->ToString()) << std::endl;
     EXPECT_TRUE(
         std::regex_match(*(db_entry->ToString()),
-                         std::regex("DBEntry,\\sdb_entry_dir:\\s/var/infinity/data/(.*)_db_default_db,\\stxn\\sid:\\s1,\\stable\\scount:\\s0")));
+                         std::regex("DBEntry,\\sdb_entry_dir:\\s/var/hybridsearch/data/(.*)_db_default_db,\\stxn\\sid:\\s1,\\stable\\scount:\\s0")));
 
     // create table, drop table
     {
@@ -83,7 +83,7 @@ TEST_P(DBEntryTest, to_string_test) {
         std::cout << *(db_entry->ToString()) << std::endl;
         EXPECT_TRUE(
             std::regex_match(*(db_entry->ToString()),
-                             std::regex("DBEntry,\\sdb_entry_dir:\\s/var/infinity/data/(.*)_db_default_db,\\stxn\\sid:\\s1,\\stable\\scount:\\s1")));
+                             std::regex("DBEntry,\\sdb_entry_dir:\\s/var/hybridsearch/data/(.*)_db_default_db,\\stxn\\sid:\\s1,\\stable\\scount:\\s1")));
 
         auto [table_entry1, status2] = catalog->DropTableByName("default_db", "tbl1", ConflictType::kError, txn1->TxnID(), txn1->BeginTS(), txn_mgr);
         EXPECT_TRUE(status2.ok());
@@ -93,8 +93,8 @@ TEST_P(DBEntryTest, to_string_test) {
 }
 
 TEST_P(DBEntryTest, get_all_table_metas_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
-    Catalog *catalog = infinity::InfinityContext::instance().storage()->catalog();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
+    Catalog *catalog = hybridsearch::hybridsearchContext::instance().storage()->catalog();
     auto *txn1 = txn_mgr->BeginTxn(MakeUnique<String>("get database"), TransactionType::kRead);
 
     // create table, drop table
@@ -126,8 +126,8 @@ TEST_P(DBEntryTest, get_all_table_metas_test) {
 }
 
 TEST_P(DBEntryTest, remove_table_entry_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
-    Catalog *catalog = infinity::InfinityContext::instance().storage()->catalog();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
+    Catalog *catalog = hybridsearch::hybridsearchContext::instance().storage()->catalog();
     auto *txn1 = txn_mgr->BeginTxn(MakeUnique<String>("get database"), TransactionType::kRead);
 
     // create table, remove table entry, drop table

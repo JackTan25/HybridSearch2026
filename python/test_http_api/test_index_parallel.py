@@ -6,10 +6,10 @@ import random
 from httpapibase import HttpTest
 from threading import Thread
 from common.common_values import *
-import infinity.index as index
+import hybridsearch.index as index
 import httputils
-from infinity.errors import ErrorCode
-from infinity.common import ConflictType
+from hybridsearch.errors import ErrorCode
+from hybridsearch.common import ConflictType
 
 
 class TestIndexParallel(HttpTest):

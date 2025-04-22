@@ -1,22 +1,10 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_context;
-import infinity_exception;
+import hybridsearch_context;
+import hybridsearch_exception;
 
 import stl;
 import global_resource_usage;
@@ -33,7 +21,7 @@ import status;
 import extra_ddl_info;
 import txn_state;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class DBTxnTest : public BaseTestParamStr {};
 
@@ -42,8 +30,8 @@ INSTANTIATE_TEST_SUITE_P(TestWithDifferentParams,
                          ::testing::Values(BaseTestParamStr::NULL_CONFIG_PATH, BaseTestParamStr::VFS_OFF_CONFIG_PATH));
 
 TEST_P(DBTxnTest, test1) {
-    using namespace infinity;
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    using namespace hybridsearch;
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
     // Txn1: Create
     Txn *new_txn = txn_mgr->BeginTxn(MakeUnique<String>("create db1"), TransactionType::kNormal);
@@ -88,8 +76,8 @@ TEST_P(DBTxnTest, test1) {
 }
 
 TEST_P(DBTxnTest, test20) {
-    using namespace infinity;
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    using namespace hybridsearch;
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
     // Txn1: Create, OK
     Txn *new_txn = txn_mgr->BeginTxn(MakeUnique<String>("create db1"), TransactionType::kNormal);
@@ -139,8 +127,8 @@ TEST_P(DBTxnTest, test20) {
 }
 
 TEST_P(DBTxnTest, test2) {
-    using namespace infinity;
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    using namespace hybridsearch;
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
     // Txn1: Create, OK
     Txn *new_txn = txn_mgr->BeginTxn(MakeUnique<String>("create db1"), TransactionType::kNormal);
@@ -203,8 +191,8 @@ TEST_P(DBTxnTest, test2) {
 //       TXN1 Begin       |      TXN1 Create db1              |                  TXN1 Commit     |
 //                    TXN2 Begin                    TXN2 Create db1(WW-Conflict)            TXN2 Commit
 TEST_P(DBTxnTest, test3) {
-    using namespace infinity;
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    using namespace hybridsearch;
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
     // Txn1: Create, OK
     Txn *new_txn1 = txn_mgr->BeginTxn(MakeUnique<String>("create db1"), TransactionType::kNormal);
@@ -232,8 +220,8 @@ TEST_P(DBTxnTest, test3) {
 //       TXN2 Begin       |      TXN2 Create db1              |                      |      TXN2 Commit
 //                    TXN1 Begin                    TXN1 Create db1(WW-Conflict)  TXN1 Commit
 TEST_P(DBTxnTest, test4) {
-    using namespace infinity;
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    using namespace hybridsearch;
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
     // Txn1: Create, OK
     Txn *new_txn1 = txn_mgr->BeginTxn(MakeUnique<String>("create db1"), TransactionType::kNormal);
@@ -256,8 +244,8 @@ TEST_P(DBTxnTest, test4) {
 }
 
 TEST_P(DBTxnTest, test5) {
-    using namespace infinity;
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    using namespace hybridsearch;
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
     // Txn1: Create, OK
     Txn *new_txn = txn_mgr->BeginTxn(MakeUnique<String>("create db1"), TransactionType::kNormal);
@@ -285,8 +273,8 @@ TEST_P(DBTxnTest, test5) {
 //       TXN1 Begin       |      TXN1 Create db1              |                  TXN1 Rollback   |                |
 //                    TXN2 Begin                    TXN2 Create db1(WW-Conflict)         TXN2 Create db1 OK  TXN2 Commit
 TEST_P(DBTxnTest, test6) {
-    using namespace infinity;
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    using namespace hybridsearch;
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
     // Txn1: Create, OK
     Txn *new_txn1 = txn_mgr->BeginTxn(MakeUnique<String>("create db1"), TransactionType::kNormal);
@@ -329,8 +317,8 @@ TEST_P(DBTxnTest, test6) {
 //       TXN1 Begin       |      TXN1 Create db1              |                  TXN1 Drop db1   |   TXN1 Commit   |
 //                    TXN2 Begin                    TXN2 Create db1(WW-Conflict)         TXN2 Create db1 OK  TXN2 Commit
 TEST_P(DBTxnTest, test7) {
-    using namespace infinity;
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    using namespace hybridsearch;
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
     // Txn1: Create, OK
     Txn *new_txn1 = txn_mgr->BeginTxn(MakeUnique<String>("create db1"), TransactionType::kNormal);

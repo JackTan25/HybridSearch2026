@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -21,7 +9,7 @@ import third_party;
 import create_index_info;
 import global_resource_usage;
 
-namespace infinity {
+namespace hybridsearch {
 
 // TODO shenyushi: use definition in knn_exprs.h
 export enum class MetricType {
@@ -44,14 +32,14 @@ protected:
                        Vector<String> column_names)
         : index_type_(index_type), index_name_(std::move(index_name)), index_comment_(std::move(index_comment)), file_name_(file_name),
           column_names_(std::move(column_names)) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("IndexBase");
 #endif
     }
 
 public:
     explicit IndexBase(SharedPtr<String> index_name) : index_name_(std::move(index_name)) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("IndexBase");
 #endif
     }
@@ -59,13 +47,13 @@ public:
     IndexBase(const IndexBase &other)
         : index_type_(other.index_type_), index_name_(other.index_name_), index_comment_(other.index_comment_), file_name_(other.file_name_),
           column_names_(other.column_names_) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("IndexBase");
 #endif
     }
 
     virtual ~IndexBase() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("IndexBase");
 #endif
     }
@@ -99,4 +87,4 @@ public:
     const String file_name_{};
     const Vector<String> column_names_{};
 };
-} // namespace infinity
+} // namespace hybridsearch

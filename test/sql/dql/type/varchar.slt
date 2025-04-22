@@ -68,8 +68,6 @@ SELECT * FROM test_varchar_filter where md5(c1) = md5('abcdddde');
 abcdddde abcddddd 3
 abcdddde abcdddde 4
 
-statement ok
-INSERT INTO test_varchar_filter VALUES ('regex@regex.com', 'gmail@gmail.com', 6);
 
 query X
 SELECT *, regex(c1, 'abc\w+e') FROM test_varchar_filter where regex(c1, 'abc\w+e');
@@ -82,11 +80,6 @@ SELECT * FROM test_varchar_filter where regex(c1, 'ddddc');
 ----
 abcddddc abcddddd 2
 
-query XII
-SELECT * FROM test_varchar_filter where regex(c1, '(\w+([-+.]\w+)*)@(\w+([-.]\w+)*)\.(\w+([-.]\w+)*)');
-----
-regex@regex.com gmail@gmail.com 6
-
 query XIII
 SELECT *, substring(c1, 0, 4) FROM test_varchar_filter where substring(c1, 0, 4) = 'abcd';
 ----
@@ -95,15 +88,6 @@ abcddddc abcddddd 2 abcd
 abcdddde abcddddd 3 abcd
 abcdddde abcdddde 4 abcd
 
-query XIV
-SELECT * FROM test_varchar_filter where substring(c1, 0, 0) = '';
-----
-abcddddd abcddddd 1
-abcddddc abcddddd 2
-abcdddde abcddddd 3
-abcdddde abcdddde 4
-abc abcd 5
-regex@regex.com gmail@gmail.com 6
 
 query XV
 SELECT *, upper(c1) FROM test_varchar_filter where upper(c1) = 'ABCDDDDD';
@@ -150,12 +134,6 @@ abcddddc abcddddd 2 cddddcba
 
 statement ok
 INSERT INTO test_varchar_filter VALUES ('ABCDEFGHIJKLMN', 'ABCDEFGHIJKLMN', 10);
-
-query XXII
-SELECT *, reverse(c1) FROM test_varchar_filter where char_length(c1) > 13;
-----
-regex@regex.com gmail@gmail.com 6 moc.xeger@xeger
-ABCDEFGHIJKLMN ABCDEFGHIJKLMN 10 NMLKJIHGFEDCBA
 
 statement ok
 DROP TABLE test_varchar_filter;

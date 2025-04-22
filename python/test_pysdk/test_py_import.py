@@ -4,48 +4,48 @@ import os
 import os
 import pytest
 from common import common_values
-import infinity
-import infinity_embedded
-from infinity.errors import ErrorCode
-from infinity.common import ConflictType, InfinityException
+import hybridsearch
+import hybridsearch_embedded
+from hybridsearch.errors import ErrorCode
+from hybridsearch.common import ConflictType, hybridsearchException
 
 from common.utils import generate_big_int_csv, copy_data, generate_big_rows_csv, generate_big_columns_csv, generate_fvecs, generate_commas_enwiki
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
-from infinity_http import infinity_http
+from hybridsearch_http import hybridsearch_http
 
 @pytest.fixture(scope="class")
-def local_infinity(request):
-    return request.config.getoption("--local-infinity")
+def local_hybridsearch(request):
+    return request.config.getoption("--local-hybridsearch")
 
 @pytest.fixture(scope="class")
 def http(request):
     return request.config.getoption("--http")
 @pytest.fixture(scope="class")
-def setup_class(request, local_infinity, http):
-    if local_infinity:
-        module = importlib.import_module("infinity_embedded.common")
+def setup_class(request, local_hybridsearch, http):
+    if local_hybridsearch:
+        module = importlib.import_module("hybridsearch_embedded.common")
         func = getattr(module, 'ConflictType')
         globals()['ConflictType'] = func
-        func = getattr(module, 'InfinityException')
-        globals()['InfinityException'] = func
+        func = getattr(module, 'hybridsearchException')
+        globals()['hybridsearchException'] = func
         uri = common_values.TEST_LOCAL_PATH
-        request.cls.infinity_obj = infinity_embedded.connect(uri)
+        request.cls.hybridsearch_obj = hybridsearch_embedded.connect(uri)
     elif http:
         uri = common_values.TEST_LOCAL_HOST
-        request.cls.infinity_obj = infinity_http()
+        request.cls.hybridsearch_obj = hybridsearch_http()
     else:
         uri = common_values.TEST_LOCAL_HOST
-        request.cls.infinity_obj = infinity.connect(uri)
+        request.cls.hybridsearch_obj = hybridsearch.connect(uri)
     request.cls.uri = uri
     yield
-    request.cls.infinity_obj.disconnect()
+    request.cls.hybridsearch_obj.disconnect()
 
 @pytest.mark.usefixtures("setup_class")
 @pytest.mark.usefixtures("suffix")
-class TestInfinity:
+class Testhybridsearch:
     @pytest.fixture
     def skip_setup_marker(self, request):
         request.node.skip_setup = True
@@ -61,9 +61,9 @@ class TestInfinity:
         method: connect server, create table, import data, search, drop table, disconnect
         expect: all operations successfully
         """
-        # infinity
+        # hybridsearch
 
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         assert db_obj
 
         # import
@@ -92,7 +92,7 @@ class TestInfinity:
                                              "jsonl",
                                              "fvecs"])
     def test_import_different_file_format_data(self, file_format, check_data, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
 
         db_obj.drop_table("test_import_different_file_format_data"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_import_different_file_format_data"+suffix,
@@ -122,7 +122,7 @@ class TestInfinity:
 
     @pytest.mark.parametrize("file_format", ["fvecs", "fvecs", "fvecs"])
     def test_import_empty_file_fvecs(self, file_format, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_import_empty_file_fvecs"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_import_empty_file_fvecs"+suffix,
                                         {"c1": {"type": "vector,128,float"}}, ConflictType.Error)
@@ -134,7 +134,7 @@ class TestInfinity:
 
     @pytest.mark.parametrize("file_format", ["csv", "csv", "csv"])
     def test_import_empty_file_csv(self, file_format, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_import_empty_file_csv"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_import_empty_file_csv"+suffix,
                                         {"c1": {"type": "int"}, "c2": {"type": "vector,3,int"}}, ConflictType.Error)
@@ -146,7 +146,7 @@ class TestInfinity:
 
     @pytest.mark.parametrize("file_format", ["jsonl", "jsonl", "jsonl"])
     def test_import_empty_file_jsonl(self, file_format, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_import_empty_file_jsonl"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_import_empty_file_jsonl"+suffix,
                                         {"c1": {"type": "int"}, "c2": {"type": "vector,3,int"}}, ConflictType.Error)
@@ -158,7 +158,7 @@ class TestInfinity:
 
     @pytest.mark.parametrize("file_format", [pytest.param("txt")])
     def test_import_format_unrecognized_data(self, file_format, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
 
         db_obj.drop_table("test_import_format_unrecognized_data"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_import_format_unrecognized_data"+suffix,
@@ -196,7 +196,7 @@ class TestInfinity:
     def test_csv_with_different_delimiter(self, check_data, delimiter, types, suffix):
         if not check_data:
             copy_data("pysdk_test_" + delimiter[0] + ".csv")
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_csv_with_different_delimiter"+suffix, ConflictType.Ignore)
         if not isinstance(types, tuple):
             table_obj = db_obj.create_table("test_csv_with_different_delimiter"+suffix,
@@ -212,13 +212,13 @@ class TestInfinity:
         else:
             table_obj = db_obj.create_table("test_csv_with_different_delimiter"+suffix, {
                 "c1": {"type": types[0]}, "c2": {"type": types[0]}}, ConflictType.Error)
-            with pytest.raises(InfinityException) as e:
+            with pytest.raises(hybridsearchException) as e:
                 table_obj.import_data(common_values.TEST_TMP_DIR + "/pysdk_test_" + delimiter[0] + ".csv",
                                       import_options={
                                           "delimiter": delimiter[1]
                                       })
 
-            assert e.type == InfinityException
+            assert e.type == hybridsearchException
             assert e.value.args[0] == types[1]
             db_obj.drop_table("test_csv_with_different_delimiter"+suffix, ConflictType.Error)
 
@@ -228,7 +228,7 @@ class TestInfinity:
     def test_csv_with_different_delimiter_more_than_one_character(self, check_data, delimiter, suffix):
         if not check_data:
             copy_data("pysdk_test_" + delimiter + ".csv")
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_csv_with_different_delimiter_more_than_one_character"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_csv_with_different_delimiter_more_than_one_character"+suffix,
                                         {"c1": {"type": "int"}, "c2": {"type": "int"}}, ConflictType.Error)
@@ -245,7 +245,7 @@ class TestInfinity:
     def test_import_csv_with_headers(self, check_data, has_header, suffix):
         if not check_data:
             copy_data("pysdk_test_commas.csv")
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_import_csv_with_headers"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_import_csv_with_headers"+suffix, {"c1": {"type": "int"}, "c2": {"type": "int"}},
                                         ConflictType.Error)
@@ -263,16 +263,16 @@ class TestInfinity:
             generate_fvecs(100, 128, file_name)
             copy_data(file_name)
 
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_import_fvecs_table_with_more_columns"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_import_fvecs_table_with_more_columns"+suffix,
                                         {"c1": {"type": "int"}, "c2": {"type": "vector,128,float"}})
 
-        with pytest.raises(InfinityException) as e:
+        with pytest.raises(hybridsearchException) as e:
             test_csv_dir = common_values.TEST_TMP_DIR + file_name
             table_obj.import_data(test_csv_dir, import_options={"file_type": "fvecs"})
 
-        assert e.type == InfinityException
+        assert e.type == hybridsearchException
         assert e.value.args[0] == ErrorCode.IMPORT_FILE_FORMAT_ERROR
 
         res, extra_result = table_obj.output(["*"]).to_df()
@@ -289,7 +289,7 @@ class TestInfinity:
     def test_import_embedding_with_not_match_definition(self, check_data, types, suffix):
         if not check_data:
             copy_data("embedding_int_dim3.csv")
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_import_embedding_with_not_match_definition"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_import_embedding_with_not_match_definition"+suffix,
                                         {"c1": {"type": "int"}, "c2": {"type": types}})
@@ -308,17 +308,17 @@ class TestInfinity:
     def test_import_embedding_with_dimension_unmatch(self, check_data, types, suffix):
         if not check_data:
             copy_data("embedding_int_dim3.csv")
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_import_embedding_with_not_match_definition"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_import_embedding_with_not_match_definition"+suffix,
                                         {"c1": {"type": "int"}, "c2": {"type": types}})
 
         test_csv_dir = common_values.TEST_TMP_DIR + "embedding_int_dim3.csv"
 
-        with pytest.raises(InfinityException) as e:
+        with pytest.raises(hybridsearchException) as e:
             table_obj.import_data(test_csv_dir, import_options={"file_type": "csv"})
 
-        assert e.type == InfinityException
+        assert e.type == hybridsearchException
         assert e.value.args[0] == ErrorCode.IMPORT_FILE_FORMAT_ERROR
 
         res, extra_result = table_obj.output(["*"]).to_df()
@@ -333,7 +333,7 @@ class TestInfinity:
     def test_import_embedding_with_unmatched_elem_type(self, check_data, types, suffix):
         if not check_data:
             copy_data("embedding_int_dim3.csv")
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_import_embedding_with_not_match_definition"+suffix, ConflictType.Ignore)
         with pytest.raises(Exception):
             table_obj = db_obj.create_table("test_import_embedding_with_not_match_definition"+suffix,
@@ -350,7 +350,7 @@ class TestInfinity:
     def test_import_varchar_with_not_match_definition(self, check_data, suffix):
         if not check_data:
             copy_data("pysdk_test_varchar.csv")
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_import_varchar_with_not_match_definition"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_import_varchar_with_not_match_definition"+suffix,
                                         {"c1": {"type": "int"}, "c2": {"type": "varchar"}})
@@ -371,7 +371,7 @@ class TestInfinity:
             generate_big_int_csv(10000, file_name)
             copy_data(file_name)
 
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_import_10000_columns"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_import_10000_columns"+suffix, {"c1": {"type": "int"}, "c2": {"type": "int"}})
 
@@ -392,15 +392,15 @@ class TestInfinity:
     def test_table_with_not_matched_columns(self, columns, check_data, suffix):
         if not check_data:
             copy_data("pysdk_test_commas.csv")
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_table_with_not_matched_columns"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_table_with_not_matched_columns"+suffix, columns)
 
         test_csv_dir = common_values.TEST_TMP_DIR + "pysdk_test_commas.csv"
-        with pytest.raises(InfinityException) as e:
+        with pytest.raises(hybridsearchException) as e:
             table_obj.import_data(test_csv_dir)
 
-        assert e.type == InfinityException
+        assert e.type == hybridsearchException
         assert e.value.args[0] == ErrorCode.COLUMN_COUNT_MISMATCH or e.value.args[0] == ErrorCode.IMPORT_FILE_FORMAT_ERROR
 
         res, extra_result = table_obj.output(["*"]).to_df()
@@ -414,7 +414,7 @@ class TestInfinity:
         generate_big_rows_csv(data_size, "pysdk_test_import_with_different_size.csv")
         copy_data("pysdk_test_import_with_different_size.csv")
 
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_import_with_different_size"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_import_with_different_size"+suffix,
                                         {"c1": {"type": "int"}, "c2": {"type": "varchar"}})
@@ -440,7 +440,7 @@ class TestInfinity:
             generate_big_rows_csv(1024 * 8192, "pysdk_test_big_varchar_rows.csv")
             copy_data("pysdk_test_big_varchar_rows.csv")
 
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_import_exceeding_rows"+suffix, ConflictType.Ignore)
         table_obj = db_obj.create_table("test_import_exceeding_rows"+suffix,
                                         {"c1": {"type": "int"}, "c2": {"type": "varchar"}})
@@ -460,7 +460,7 @@ class TestInfinity:
         if not check_data:
             copy_data("pysdk_test_big_columns.csv")
 
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_import_exceeding_columns"+suffix, ConflictType.Ignore)
         columns = {"c" + str(i): {"type": "int"} for i in range(1024)}
         table_obj = db_obj.create_table("test_import_exceeding_columns"+suffix, columns, ConflictType.Error)
@@ -476,7 +476,7 @@ class TestInfinity:
     @pytest.mark.parametrize("check_data", [{"file_name": "test_default.jsonl",
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     def test_import_jsonl_file_with_default(self, check_data, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_import_jsonl_file_with_default"+suffix, ConflictType.Ignore)
         if not check_data:
             copy_data("test_default.jsonl")
@@ -512,7 +512,7 @@ class TestInfinity:
     @pytest.mark.parametrize("check_data", [{"file_name": "pysdk_test_import_default.csv",
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     def test_import_csv_file_with_default(self, check_data, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_import_csv_file_with_default"+suffix, ConflictType.Ignore)
         if not check_data:
             copy_data("pysdk_test_import_default.csv")
@@ -544,7 +544,7 @@ class TestInfinity:
     @pytest.mark.parametrize("check_data", [{"file_name": "pysdk_test_default.json",
                                              "data_dir": common_values.TEST_TMP_DIR}], indirect=True)
     def test_import_json_file_with_default(self, check_data, suffix):
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_import_json_file_with_default"+suffix, ConflictType.Ignore)
         if not check_data:
             copy_data("pysdk_test_default.json")

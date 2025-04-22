@@ -28,28 +28,28 @@
      * We will address this in a future release of flex, or omit the C++ scanner
      * altogether.
      */
-    #define yyFlexLexer SearchScannerInfinitySyntaxFlexLexer
+    #define yyFlexLexer SearchScannerhybridsearchSyntaxFlexLexer
 /* %endif */
 
 /* %if-c-only */
 /* %endif */
 
 #ifdef yyalloc
-#define SearchScannerInfinitySyntaxalloc_ALREADY_DEFINED
+#define SearchScannerhybridsearchSyntaxalloc_ALREADY_DEFINED
 #else
-#define yyalloc SearchScannerInfinitySyntaxalloc
+#define yyalloc SearchScannerhybridsearchSyntaxalloc
 #endif
 
 #ifdef yyrealloc
-#define SearchScannerInfinitySyntaxrealloc_ALREADY_DEFINED
+#define SearchScannerhybridsearchSyntaxrealloc_ALREADY_DEFINED
 #else
-#define yyrealloc SearchScannerInfinitySyntaxrealloc
+#define yyrealloc SearchScannerhybridsearchSyntaxrealloc
 #endif
 
 #ifdef yyfree
-#define SearchScannerInfinitySyntaxfree_ALREADY_DEFINED
+#define SearchScannerhybridsearchSyntaxfree_ALREADY_DEFINED
 #else
-#define yyfree SearchScannerInfinitySyntaxfree
+#define yyfree SearchScannerhybridsearchSyntaxfree
 #endif
 
 /* %if-c-only */
@@ -392,7 +392,7 @@ int yyFlexLexer::yylex()
 	return 0;
 	}
 
-#define YY_DECL int infinity::SearchScannerInfinitySyntax::yylex()
+#define YY_DECL int hybridsearch::SearchScannerhybridsearchSyntax::yylex()
 
 /* %% [1.5] DFA */
 
@@ -552,14 +552,14 @@ static const flex_int16_t yy_rule_linenum[20] =
 #include <cstdlib>
 
 /* Implementation of yyFlexScanner */
-#define SearchScannerDerived SearchScannerInfinitySyntax
+#define SearchScannerDerived SearchScannerhybridsearchSyntax
 #include "search_scanner_derived.h"
 #undef SearchScannerDerived
 #undef  YY_DECL
-#define YY_DECL int infinity::SearchScannerInfinitySyntax::yylex(infinity::SearchParser::semantic_type * const lval, infinity::SearchParser::location_type *loc)
+#define YY_DECL int hybridsearch::SearchScannerhybridsearchSyntax::yylex(hybridsearch::SearchParser::semantic_type * const lval, hybridsearch::SearchParser::location_type *loc)
 
 /* typedef to make the returns for the tokens shorter */
-using token = infinity::SearchParser::token;
+using token = hybridsearch::SearchParser::token;
 
 /* define yyterminate as this instead of NULL */
 #define yyterminate() return( token::END )

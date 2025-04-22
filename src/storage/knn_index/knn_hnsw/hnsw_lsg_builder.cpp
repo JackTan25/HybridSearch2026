@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -27,7 +15,7 @@ import index_hnsw;
 import index_ivf;
 import statement_common;
 import defer_op;
-import infinity_exception;
+import hybridsearch_exception;
 import index_base;
 import ivf_index_data;
 import third_party;
@@ -44,10 +32,10 @@ import embedding_info;
 import hnsw_common;
 import status;
 import merge_knn;
-import infinity_context;
+import hybridsearch_context;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 namespace {
 
@@ -362,7 +350,7 @@ UniquePtr<float[]> HnswLSGBuilder::GetAvgBF(Iter iter, SizeT row_count) {
     if constexpr (SplitIter<Iter>) {
         Iter iter_copy = iter;
         auto iters = std::move(iter_copy).split();
-        auto &thread_pool = InfinityContext::instance().GetHnswBuildThreadPool();
+        auto &thread_pool = hybridsearchContext::instance().GetHnswBuildThreadPool();
         Vector<std::future<void>> futs;
         for (auto &splited_iter : iters) {
             futs.emplace_back(thread_pool.push([&](int id) {
@@ -419,4 +407,4 @@ template UniquePtr<HnswIndexInMem> HnswLSGBuilder::MakeImplIter<DenseVectorIter<
                                                                                                      const RowID &base_row_id,
                                                                                                      bool trace);
 
-} // namespace infinity
+} // namespace hybridsearch

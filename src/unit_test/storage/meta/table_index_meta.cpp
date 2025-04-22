@@ -2,8 +2,8 @@
 #include "gtest/gtest.h"
 import base_test;
 
-import infinity_context;
-import infinity_exception;
+import hybridsearch_context;
+import hybridsearch_exception;
 
 import stl;
 import global_resource_usage;
@@ -31,7 +31,7 @@ import txn_store;
 import txn_state;
 import base_entry;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class TableIndexMetaTest : public BaseTestParamStr {};
 
@@ -40,10 +40,10 @@ INSTANTIATE_TEST_SUITE_P(TestWithDifferentParams,
                          ::testing::Values(BaseTestParamStr::NULL_CONFIG_PATH, BaseTestParamStr::VFS_OFF_CONFIG_PATH));
 
 TEST_P(TableIndexMetaTest, get_all_entries_test) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
-    Catalog *catalog = infinity::InfinityContext::instance().storage()->catalog();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
+    Catalog *catalog = hybridsearch::hybridsearchContext::instance().storage()->catalog();
 
     // start txn1
     auto *txn1 = txn_mgr->BeginTxn(MakeUnique<String>("get db"), TransactionType::kRead);
@@ -113,10 +113,10 @@ TEST_P(TableIndexMetaTest, get_all_entries_test) {
 }
 
 TEST_P(TableIndexMetaTest, table_entry_test) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
-    Catalog *catalog = infinity::InfinityContext::instance().storage()->catalog();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
+    Catalog *catalog = hybridsearch::hybridsearchContext::instance().storage()->catalog();
 
     // start txn1
     auto *txn1 = txn_mgr->BeginTxn(MakeUnique<String>("get db"), TransactionType::kRead);

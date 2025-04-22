@@ -1,13 +1,13 @@
 import logging
 import time
 
-import infinity.index as index
+import hybridsearch.index as index
 import pytest
 import random
 from threading import Thread
-from infinity.common import ConflictType
-from infinity.connection_pool import ConnectionPool
-from infinity.remote_thrift.infinity import RemoteThriftInfinityConnection
+from hybridsearch.common import ConflictType
+from hybridsearch.connection_pool import ConnectionPool
+from hybridsearch.remote_thrift.hybridsearch import RemoteThrifthybridsearchConnection
 
 kRunningTime = 30
 kNumThread = 8
@@ -30,10 +30,10 @@ vector_index_option = [[index.InitParameter("centroids_count", "128"), index.Ini
 
 
 class TestDDLParallel:
-    def test_dll_parallel(self, get_infinity_connection_pool):
+    def test_dll_parallel(self, get_hybridsearch_connection_pool):
         self.logger = logging.getLogger("run_parallel_test")
 
-        connection_pool = get_infinity_connection_pool
+        connection_pool = get_hybridsearch_connection_pool
         threads = []
         end_time = time.time() + kRunningTime
         for i in range(kNumThread):
@@ -50,49 +50,49 @@ class TestDDLParallel:
         else:
             self.logger.info("test_ddl_parallel end")
 
-        infinity_obj = connection_pool.get_conn()
-        infinity_obj.get_database("default_db")
-        databases = infinity_obj.list_databases().db_names
+        hybridsearch_obj = connection_pool.get_conn()
+        hybridsearch_obj.get_database("default_db")
+        databases = hybridsearch_obj.list_databases().db_names
         print(databases)
         for db_name in databases:
             if db_name != "default_db" and db_name.startswith('dll_parallel'):
-                infinity_obj.drop_database(db_name, conflict_type=ConflictType.Ignore)
-        print(infinity_obj.list_databases().db_names)
+                hybridsearch_obj.drop_database(db_name, conflict_type=ConflictType.Ignore)
+        print(hybridsearch_obj.list_databases().db_names)
 
 
     def random_exec(self, connection_pool: ConnectionPool, end_time, thread_id):
-        infinity_obj = connection_pool.get_conn()
+        hybridsearch_obj = connection_pool.get_conn()
         while time.time() < end_time:
             rand_v = random.randint(0, 99)
             if 0 <= rand_v < 1:
-                self.create_database(infinity_obj)
+                self.create_database(hybridsearch_obj)
             elif 1 <= rand_v < 2:
-                self.drop_database(infinity_obj)
+                self.drop_database(hybridsearch_obj)
             elif 2 <= rand_v < 6:
-                self.create_table(infinity_obj)
+                self.create_table(hybridsearch_obj)
             elif 6 <= rand_v < 10:
-                self.drop_table(infinity_obj)
+                self.drop_table(hybridsearch_obj)
             elif 10 <= rand_v < 55:
-                self.create_index(infinity_obj)
+                self.create_index(hybridsearch_obj)
             else:
-                self.drop_index(infinity_obj)
+                self.drop_index(hybridsearch_obj)
             time.sleep(0.2)
-        connection_pool.release_conn(infinity_obj)
+        connection_pool.release_conn(hybridsearch_obj)
 
 
-    def create_database(self, infinity_obj: RemoteThriftInfinityConnection):
+    def create_database(self, hybridsearch_obj: RemoteThrifthybridsearchConnection):
         db_name = db_names[random.randint(0, len(db_names) - 1)]
         self.logger.info(f"create database {db_name}")
-        infinity_obj.create_database(db_name, conflict_type=ConflictType.Ignore)
-        res = infinity_obj.show_database()
+        hybridsearch_obj.create_database(db_name, conflict_type=ConflictType.Ignore)
+        res = hybridsearch_obj.show_database()
         print(res)
 
 
-    def drop_database(self, infinity_obj: RemoteThriftInfinityConnection):
+    def drop_database(self, hybridsearch_obj: RemoteThrifthybridsearchConnection):
         try:
             db_name = db_names[random.randint(0, len(db_names) - 1)]
-            infinity_obj.drop_database(db_name, conflict_type=ConflictType.Ignore)
-            # res = infinity_obj.show_database()
+            hybridsearch_obj.drop_database(db_name, conflict_type=ConflictType.Ignore)
+            # res = hybridsearch_obj.show_database()
             # print(res)
         except Exception as e:
             self.logger.info(f"drop database {db_name} failed")
@@ -100,10 +100,10 @@ class TestDDLParallel:
             self.logger.info(f"drop database {db_name}")
 
 
-    def create_table(self, infinity_obj: RemoteThriftInfinityConnection):
+    def create_table(self, hybridsearch_obj: RemoteThrifthybridsearchConnection):
         db_name = db_names[random.randint(0, len(db_names) - 1)]
         try:
-            db_obj = infinity_obj.get_database(db_name)
+            db_obj = hybridsearch_obj.get_database(db_name)
             table_name = table_names[random.randint(0, len(table_names) - 1)]
             if (table_name[0:3] == "vec"):
                 column = vec_columns[random.randint(0, len(vec_columns) - 1)]
@@ -118,10 +118,10 @@ class TestDDLParallel:
             self.logger.info(f"create table {table_name} in database {db_name}")
 
 
-    def drop_table(self, infinity_obj: RemoteThriftInfinityConnection):
+    def drop_table(self, hybridsearch_obj: RemoteThrifthybridsearchConnection):
         db_name = db_names[random.randint(0, len(db_names) - 1)]
         try:
-            db_obj = infinity_obj.get_database(db_name)
+            db_obj = hybridsearch_obj.get_database(db_name)
             exist_tables = db_obj.list_tables().table_names
         except Exception as e:
             self.logger.info(f"drop table in database {db_name} failed")
@@ -134,10 +134,10 @@ class TestDDLParallel:
             self.logger.info(f"drop table {table_name} in database {db_name}")
 
 
-    def create_index(self, infinity_obj: RemoteThriftInfinityConnection):
+    def create_index(self, hybridsearch_obj: RemoteThrifthybridsearchConnection):
         db_name = db_names[random.randint(0, len(db_names) - 1)]
         try:
-            db_obj = infinity_obj.get_database(db_name)
+            db_obj = hybridsearch_obj.get_database(db_name)
             exist_tables = db_obj.list_tables().table_names
         except Exception as e:
             self.logger.info(f"create index in database {db_name} failed")
@@ -165,10 +165,10 @@ class TestDDLParallel:
                 self.logger.info(f"create index {index_on} in table {table_name} database {db_name}")
 
 
-    def drop_index(self, infinity_obj: RemoteThriftInfinityConnection):
+    def drop_index(self, hybridsearch_obj: RemoteThrifthybridsearchConnection):
         db_name = db_names[random.randint(0, len(db_names) - 1)]
         try:
-            db_obj = infinity_obj.get_database(db_name)
+            db_obj = hybridsearch_obj.get_database(db_name)
             exist_tables = db_obj.list_tables().table_names
         except Exception as e:
             self.logger.info(f"drop index in database {db_name} failed")

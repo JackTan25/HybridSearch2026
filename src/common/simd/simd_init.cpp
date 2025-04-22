@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 #include "simd_common_intrin_include.h"
@@ -23,7 +11,7 @@ import emvb_simd_funcs;
 import search_top_1_sgemm;
 import batch_bm25_simd_funcs;
 
-namespace infinity {
+namespace hybridsearch {
 
 F32DistanceFuncType GetL2DistanceFuncPtr() {
 #ifdef __AVX2__
@@ -607,4 +595,4 @@ BatchBM25FuncType GetBatchBM25FuncPtr() {
     return &BatchBM25Simple;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -2,8 +2,8 @@
 
 #include "gtest/gtest.h"
 import base_test;
-import infinity_context;
-import infinity_exception;
+import hybridsearch_context;
+import hybridsearch_exception;
 
 import stl;
 import global_resource_usage;
@@ -44,7 +44,7 @@ import table_index_entry;
 import segment_entry;
 import block_entry;
 
-using namespace infinity;
+using namespace hybridsearch;
 
 class TableIndexEntryTest : public BaseTestParamStr {};
 
@@ -55,7 +55,7 @@ INSTANTIATE_TEST_SUITE_P(TestWithDifferentParams,
 void InsertData(const String &db_name, const String &table_name);
 
 void CreateTable() {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
     auto *txn1 = txn_mgr->BeginTxn(MakeUnique<String>("create table"), TransactionType::kNormal);
     Vector<SharedPtr<ColumnDef>> columns;
     {
@@ -78,7 +78,7 @@ void CreateTable() {
 }
 
 void CreateIndex() {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
     auto *txn1 = txn_mgr->BeginTxn(MakeUnique<String>("create index"), TransactionType::kNormal);
     Vector<String> columns1{"col1"};
     Vector<InitParameter *> parameters1;
@@ -102,7 +102,7 @@ void CreateIndex() {
 }
 
 void DropIndex() {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
     auto *txn1 = txn_mgr->BeginTxn(MakeUnique<String>("drop index"), TransactionType::kNormal);
     auto status = txn1->DropIndexByName("default_db", "tbl1", "fulltext_index", ConflictType::kError);
     EXPECT_TRUE(status.ok());
@@ -110,7 +110,7 @@ void DropIndex() {
 }
 
 void DropTable() {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
     auto *txn1 = txn_mgr->BeginTxn(MakeUnique<String>("drop table"), TransactionType::kNormal);
     auto status = txn1->DropTableCollectionByName("default_db", "tbl1", ConflictType::kError);
     EXPECT_TRUE(status.ok());
@@ -118,7 +118,7 @@ void DropTable() {
 }
 
 TEST_P(TableIndexEntryTest, decode_index_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
     CreateTable();
     CreateIndex();
@@ -146,8 +146,8 @@ TEST_P(TableIndexEntryTest, decode_index_test) {
 }
 
 TEST_P(TableIndexEntryTest, deserialize_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
-    BufferManager *buffer_mgr = infinity::InfinityContext::instance().storage()->buffer_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
+    BufferManager *buffer_mgr = hybridsearch::hybridsearchContext::instance().storage()->buffer_manager();
 
     CreateTable();
     CreateIndex();
@@ -174,7 +174,7 @@ TEST_P(TableIndexEntryTest, deserialize_test) {
 
 /// TODO: non nullptr case
 TEST_P(TableIndexEntryTest, get_mem_index_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
     CreateTable();
     CreateIndex();
     InsertData("default_db", "tbl1");
@@ -194,7 +194,7 @@ TEST_P(TableIndexEntryTest, get_mem_index_test) {
 }
 
 TEST_P(TableIndexEntryTest, opt_hnsw_index_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
     {
         auto *txn1 = txn_mgr->BeginTxn(MakeUnique<String>("create table"), TransactionType::kNormal);
@@ -273,7 +273,7 @@ TEST_P(TableIndexEntryTest, opt_hnsw_index_test) {
 }
 
 TEST_P(TableIndexEntryTest, opt_bmp_index_test) {
-    TxnManager *txn_mgr = infinity::InfinityContext::instance().storage()->txn_manager();
+    TxnManager *txn_mgr = hybridsearch::hybridsearchContext::instance().storage()->txn_manager();
 
     {
         auto *txn1 = txn_mgr->BeginTxn(MakeUnique<String>("create table"), TransactionType::kNormal);

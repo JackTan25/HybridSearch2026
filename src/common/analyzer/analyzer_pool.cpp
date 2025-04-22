@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -21,7 +9,7 @@ module analyzer_pool;
 import stl;
 import third_party;
 import config;
-import infinity_context;
+import hybridsearch_context;
 import analyzer;
 import tokenizer;
 import stemmer;
@@ -37,7 +25,7 @@ import ik_analyzer;
 import rank_features_analyzer;
 import logger;
 
-namespace infinity {
+namespace hybridsearch {
 
 constexpr u64 basis = 0xCBF29CE484222325ull;
 constexpr u64 prime = 0x100000001B3ull;
@@ -76,11 +64,11 @@ Tuple<UniquePtr<Analyzer>, Status> AnalyzerPool::GetAnalyzer(const std::string_v
             Analyzer *prototype = cache_[CHINESE].get();
             if (prototype == nullptr) {
                 String path;
-                Config *config = InfinityContext::instance().config();
+                Config *config = hybridsearchContext::instance().config();
                 if (config == nullptr) {
-                    // InfinityContext has not been initialized.
+                    // hybridsearchContext has not been initialized.
                     // For unit test only
-                    path = "/var/infinity/resource";
+                    path = "/var/hybridsearch/resource";
                 } else {
                     path = config->ResourcePath();
                 }
@@ -109,11 +97,11 @@ Tuple<UniquePtr<Analyzer>, Status> AnalyzerPool::GetAnalyzer(const std::string_v
             Analyzer *prototype = cache_[TRADITIONALCHINESE].get();
             if (prototype == nullptr) {
                 String path;
-                Config *config = InfinityContext::instance().config();
+                Config *config = hybridsearchContext::instance().config();
                 if (config == nullptr) {
-                    // InfinityContext has not been initialized.
+                    // hybridsearchContext has not been initialized.
                     // For unit test only
-                    path = "/var/infinity/resource";
+                    path = "/var/hybridsearch/resource";
                 } else {
                     path = config->ResourcePath();
                 }
@@ -143,11 +131,11 @@ Tuple<UniquePtr<Analyzer>, Status> AnalyzerPool::GetAnalyzer(const std::string_v
             Analyzer *prototype = cache_[RAG].get();
             if (prototype == nullptr) {
                 String path;
-                Config *config = InfinityContext::instance().config();
+                Config *config = hybridsearchContext::instance().config();
                 if (config == nullptr) {
-                    // InfinityContext has not been initialized.
+                    // hybridsearchContext has not been initialized.
                     // For unit test only
-                    path = "/var/infinity/resource";
+                    path = "/var/hybridsearch/resource";
                 } else {
                     path = config->ResourcePath();
                 }
@@ -176,11 +164,11 @@ Tuple<UniquePtr<Analyzer>, Status> AnalyzerPool::GetAnalyzer(const std::string_v
             Analyzer *prototype = cache_[IK].get();
             if (prototype == nullptr) {
                 String path;
-                Config *config = InfinityContext::instance().config();
+                Config *config = hybridsearchContext::instance().config();
                 if (config == nullptr) {
-                    // InfinityContext has not been initialized.
+                    // hybridsearchContext has not been initialized.
                     // For unit test only
-                    path = "/var/infinity/resource";
+                    path = "/var/hybridsearch/resource";
                 } else {
                     path = config->ResourcePath();
                 }
@@ -208,11 +196,11 @@ Tuple<UniquePtr<Analyzer>, Status> AnalyzerPool::GetAnalyzer(const std::string_v
             Analyzer *prototype = cache_[JAPANESE].get();
             if (prototype == nullptr) {
                 String path;
-                Config *config = InfinityContext::instance().config();
+                Config *config = hybridsearchContext::instance().config();
                 if (config == nullptr) {
-                    // InfinityContext has not been initialized.
+                    // hybridsearchContext has not been initialized.
                     // For unit test only
-                    path = "/var/infinity/resource";
+                    path = "/var/hybridsearch/resource";
                 } else {
                     path = config->ResourcePath();
                 }
@@ -230,11 +218,11 @@ Tuple<UniquePtr<Analyzer>, Status> AnalyzerPool::GetAnalyzer(const std::string_v
             Analyzer *prototype = cache_[KOREAN].get();
             if (prototype == nullptr) {
                 String path;
-                Config *config = InfinityContext::instance().config();
+                Config *config = hybridsearchContext::instance().config();
                 if (config == nullptr) {
-                    // InfinityContext has not been initialized.
+                    // hybridsearchContext has not been initialized.
                     // For unit test only
-                    path = "/var/infinity/resource";
+                    path = "/var/hybridsearch/resource";
                 } else {
                     path = config->ResourcePath();
                 }
@@ -343,4 +331,4 @@ Tuple<UniquePtr<Analyzer>, Status> AnalyzerPool::GetAnalyzer(const std::string_v
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch

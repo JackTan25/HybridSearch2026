@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -19,7 +7,7 @@ module;
 module block_version;
 
 import stl;
-import infinity_exception;
+import hybridsearch_exception;
 import logger;
 import third_party;
 import default_values;
@@ -28,7 +16,7 @@ import serialize;
 import local_file_handle;
 import status;
 
-namespace infinity {
+namespace hybridsearch {
 
 void CreateField::SaveToFile(LocalFileHandle *file_handle) const {
     Status status = file_handle->Append((char *)(&create_ts_), sizeof(create_ts_));
@@ -192,4 +180,4 @@ bool BlockVersion::CheckDelete(i32 offset, TxnTimeStamp check_ts) const {
     return deleted_[offset] != 0 && deleted_[offset] <= check_ts;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

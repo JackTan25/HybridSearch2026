@@ -2,11 +2,11 @@ import queue
 import random
 import time
 import pytest
-from infinity_runner import InfinityRunner, infinity_runner_decorator_factory
+from hybridsearch_runner import hybridsearchRunner, hybridsearch_runner_decorator_factory
 from common import common_values
-from infinity.common import ConflictType
-from infinity import index
-from infinity.errors import ErrorCode
+from hybridsearch.common import ConflictType
+from hybridsearch import index
+from hybridsearch.errors import ErrorCode
 from restart_util import *
 from util import RtnThread
 import pickle
@@ -22,7 +22,7 @@ class TestFullText:
             "test/data/config/restart_test/test_fulltext/3.toml",
         ],
     )
-    def test_fulltext(self, infinity_runner: InfinityRunner, config: str):
+    def test_fulltext(self, hybridsearch_runner: hybridsearchRunner, config: str):
         # should add symbolic link in advance
         enwiki_path = "test/data/benchmark/enwiki-10w.csv"
         enwiki_size = 100000
@@ -35,16 +35,16 @@ class TestFullText:
         shutdown = False
 
         uri = common_values.TEST_LOCAL_HOST
-        infinity_runner.clear()
+        hybridsearch_runner.clear()
 
-        decorator = infinity_runner_decorator_factory(config, uri, infinity_runner)
-        decorator2 = infinity_runner_decorator_factory(
-            config, uri, infinity_runner, shutdown_out=True
+        decorator = hybridsearch_runner_decorator_factory(config, uri, hybridsearch_runner)
+        decorator2 = hybridsearch_runner_decorator_factory(
+            config, uri, hybridsearch_runner, shutdown_out=True
         )
 
         @decorator
-        def part1(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part1(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             gt_table_obj = db_obj.create_table(
                 gt_table_name,
                 {
@@ -185,15 +185,15 @@ class TestFullText:
             time.sleep(shutdown_interval)
 
             shutdown = True
-            infinity_runner.uninit()
+            hybridsearch_runner.uninit()
             print(f"cur_insert_n: {cur_insert_n}")
-            print("shutdown infinity")
+            print("shutdown hybridsearch")
 
         @decorator2
-        def part2(infinity_obj):
+        def part2(hybridsearch_obj):
             nonlocal shutdown
 
-            db_obj = infinity_obj.get_database("default_db")
+            db_obj = hybridsearch_obj.get_database("default_db")
             table_obj = db_obj.get_table(table_name)
             gt_table_obj = db_obj.get_table(gt_table_name)
 
@@ -217,30 +217,30 @@ class TestFullText:
             part2()
 
         @decorator
-        def part3(infinity_obj):
-            db_obj = infinity_obj.get_database("default_db")
+        def part3(hybridsearch_obj):
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.drop_table(table_name, ConflictType.Error)
             db_obj.drop_table(gt_table_name, ConflictType.Error)
 
         part3()
 
-    def test_fulltext_realtime(self, infinity_runner: InfinityRunner):
+    def test_fulltext_realtime(self, hybridsearch_runner: hybridsearchRunner):
         enwiki_path = "test/data/csv/enwiki_9999.csv"
         enwiki_size = 10000
         config = "test/data/config/restart_test/test_fulltext/1.toml"
         uri = common_values.TEST_LOCAL_HOST
-        infinity_runner.clear()
+        hybridsearch_runner.clear()
 
-        decorator = infinity_runner_decorator_factory(config, uri, infinity_runner)
+        decorator = hybridsearch_runner_decorator_factory(config, uri, hybridsearch_runner)
 
         matching_text = "American"
         test_num = 100
 
         @decorator
-        def get_gt_list(infinity_obj):
+        def get_gt_list(hybridsearch_obj):
             gt_res_list = []
             gt_table_name = "test_fulltext_gt"
-            db_obj = infinity_obj.get_database("default_db")
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.drop_table(gt_table_name, ConflictType.Ignore)
 
             gt_table_obj = db_obj.create_table(
@@ -296,9 +296,9 @@ class TestFullText:
                 pickle.dump(gt_res_list, f)
 
         @decorator
-        def test(infinity_obj):
+        def test(hybridsearch_obj):
             table_name = "test_fulltext"
-            db_obj = infinity_obj.get_database("default_db")
+            db_obj = hybridsearch_obj.get_database("default_db")
             db_obj.drop_table(table_name, ConflictType.Ignore)
 
             table_obj = db_obj.create_table(

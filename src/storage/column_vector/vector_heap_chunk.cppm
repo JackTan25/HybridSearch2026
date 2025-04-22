@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -21,9 +9,9 @@ import global_resource_usage;
 import allocator;
 import buffer_obj;
 import buffer_handle;
-import infinity_exception;
+import hybridsearch_exception;
 
-namespace infinity {
+namespace hybridsearch {
 
 export using ChunkId = i64;
 export constexpr ChunkId INVALID_CHUNK_ID = -1;
@@ -31,13 +19,13 @@ export constexpr ChunkId INVALID_CHUNK_ID = -1;
 export struct VectorHeapChunk {
 public:
     explicit VectorHeapChunk(BufferObj *buffer_obj) : ptr_(buffer_obj->Load()) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("VectorHeapChunk");
 #endif
     }
 
     explicit VectorHeapChunk(u64 capacity) : ptr_(MakeUniqueForOverwrite<char[]>(capacity)) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("VectorHeapChunk");
 #endif
     }
@@ -45,7 +33,7 @@ public:
     VectorHeapChunk(const VectorHeapChunk &) = delete;
 
     VectorHeapChunk(VectorHeapChunk &&other) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::IncrObjectCount("VectorHeapChunk");
 #endif
         if (std::holds_alternative<UniquePtr<char[]>>(other.ptr_)) {
@@ -60,7 +48,7 @@ public:
     VectorHeapChunk &operator=(VectorHeapChunk &&) = delete;
 
     ~VectorHeapChunk() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
         GlobalResourceUsage::DecrObjectCount("VectorHeapChunk");
 #endif
     }
@@ -85,4 +73,4 @@ private:
     std::variant<UniquePtr<char[]>, BufferHandle> ptr_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

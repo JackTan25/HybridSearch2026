@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 #if 0
 
 #include "bin/compilation_config.h"
@@ -18,7 +6,7 @@
 #include "common/types/value.h"
 #include "executor/physical_planner.h"
 #include "legacy_sched/operator_pipeline.h"
-#include "main/infinity.h"
+#include "main/hybridsearch.h"
 #include "main/logger.h"
 #include "main/profiler/show_logical_plan.h"
 #include "main/session.h"
@@ -31,11 +19,11 @@
 import base_test;
 
 
-using namespace infinity;
+using namespace hybridsearch;
 class LogicalPlannerTpchTest : public BaseTest {};
 
 TEST_F(LogicalPlannerTpchTest, test1) {
-    using namespace infinity;
+    using namespace hybridsearch;
 
     // Create tables;
     {

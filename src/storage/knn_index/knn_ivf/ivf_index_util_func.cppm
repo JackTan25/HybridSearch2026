@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -20,7 +8,7 @@ import stl;
 import internal_types;
 import column_vector;
 
-namespace infinity {
+namespace hybridsearch {
 
 export template <IsAnyOf<u8, i8, f64, f32, Float16T, BFloat16T> ColumnEmbeddingElementT>
 Pair<const f32 *, UniquePtr<f32[]>> GetF32Ptr(const ColumnEmbeddingElementT *src_data_ptr, const u32 src_data_cnt) {
@@ -88,4 +76,4 @@ struct EmbeddingDataTypeToCppType<EmbeddingDataType::kElemBFloat16> {
 export template <EmbeddingDataType t>
 using EmbeddingDataTypeToCppTypeT = typename EmbeddingDataTypeToCppType<t>::type;
 
-} // namespace infinity
+} // namespace hybridsearch

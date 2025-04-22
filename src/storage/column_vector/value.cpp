@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -24,7 +12,7 @@ import stl;
 import global_resource_usage;
 import logger;
 
-import infinity_exception;
+import hybridsearch_exception;
 import third_party;
 import bound_cast_func;
 import cast_function;
@@ -34,7 +22,7 @@ import status;
 import type_info;
 import array_info;
 
-namespace infinity {
+namespace hybridsearch {
 
 namespace {
 template <typename T>
@@ -898,32 +886,32 @@ RowID Value::GetValue() const {
 }
 
 Value::~Value() {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::DecrObjectCount("Value");
 #endif
 }
 
 Value::Value(const DataType &data_type) : type_(data_type) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::IncrObjectCount("Value");
 #endif
 }
 
 Value::Value(LogicalType type, SharedPtr<TypeInfo> typeinfo_ptr) : type_(type, std::move(typeinfo_ptr)) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::IncrObjectCount("Value");
 #endif
 }
 
 Value::Value(const Value &other) : type_(other.type_) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::IncrObjectCount("Value");
 #endif
     CopyUnionValue(other);
 }
 
 Value::Value(Value &&other) noexcept : type_(other.type_) {
-#ifdef INFINITY_DEBUG
+#ifdef hybridsearch_DEBUG
     GlobalResourceUsage::IncrObjectCount("Value");
 #endif
     MoveUnionValue(std::forward<Value>(other));
@@ -1838,4 +1826,4 @@ SharedPtr<EmbeddingValueInfo> EmbeddingValueInfo::MakeMultiVectorValueInfo(const
     return MakeTensorValueInfo(ptr_bytes);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

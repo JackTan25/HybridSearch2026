@@ -57,8 +57,8 @@ constexpr uint64_t kUInt64PowersOfTen[kInt64DecimalDigits + 1] = {
     // clang-format on
 };
 
-// On the Windows R toolchain, INFINITY is double type instead of float
-constexpr float kFloatInf = std::numeric_limits<float>::infinity();
+// On the Windows R toolchain, hybridsearch is double type instead of float
+constexpr float kFloatInf = std::numeric_limits<float>::hybridsearch();
 
 // Attention: these pre-computed constants might not exactly represent their
 // decimal counterparts:

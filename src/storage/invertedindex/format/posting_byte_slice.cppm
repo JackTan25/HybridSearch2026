@@ -13,7 +13,7 @@ import posting_buffer;
 
 export module posting_byte_slice;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class PostingByteSlice {
 public:
@@ -73,4 +73,4 @@ inline void PostingByteSlice::PushBack(u8 row, T value) {
     buffer_.PushBack(row, value);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

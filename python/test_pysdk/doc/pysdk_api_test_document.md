@@ -1,16 +1,16 @@
 # Test Document
 
-## infinity object
-### infinity_obj.create_database
+## hybridsearch object
+### hybridsearch_obj.create_database
 #### invalid name
 - [X] database name 
   - `[],(),{},1,1.1`  
 
-### infinity_obj.drop_database
+### hybridsearch_obj.drop_database
   PASS
-### infinity_obj.list_databases
+### hybridsearch_obj.list_databases
   PASS
-### infinity_obj.get_database
+### hybridsearch_obj.get_database
   PASS
 
 ## database object

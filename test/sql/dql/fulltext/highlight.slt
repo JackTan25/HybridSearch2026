@@ -10,7 +10,7 @@ CREATE TABLE sqllogic_test_enwiki(doctitle varchar DEFAULT '', docdate varchar D
 
 # copy data from csv file
 query I
-COPY sqllogic_test_enwiki FROM '/var/infinity/test_data/enwiki_99.csv' WITH ( DELIMITER '\t', FORMAT CSV );
+COPY sqllogic_test_enwiki FROM '/var/hybridsearch/test_data/enwiki_99.csv' WITH ( DELIMITER '\t', FORMAT CSV );
 ----
 
 statement ok

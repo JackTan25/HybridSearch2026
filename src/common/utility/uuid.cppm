@@ -7,7 +7,7 @@ export module uuid;
 
 import stl;
 
-export namespace infinity {
+export namespace hybridsearch {
 
 struct UUID {
     union {
@@ -54,4 +54,4 @@ struct UUID {
     }
 };
 
-} // namespace infinity
+} // namespace hybridsearch

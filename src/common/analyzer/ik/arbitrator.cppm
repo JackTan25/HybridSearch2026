@@ -10,7 +10,7 @@ import lexeme;
 import lexeme_path;
 import quick_sort_set;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class IKArbitrator {
 public:
@@ -25,4 +25,4 @@ private:
 
     void BackPath(Lexeme *l, LexemePath *option);
 };
-} // namespace infinity
+} // namespace hybridsearch

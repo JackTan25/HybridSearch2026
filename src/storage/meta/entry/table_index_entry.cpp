@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 module;
 
@@ -25,7 +13,7 @@ import default_values;
 import index_base;
 import segment_iter;
 import hnsw_util;
-import infinity_exception;
+import hybridsearch_exception;
 import index_full_text;
 import catalog_delta_entry;
 import base_table_ref;
@@ -38,12 +26,12 @@ import embedding_info;
 import block_entry;
 import segment_entry;
 import table_entry;
-import infinity_context;
+import hybridsearch_context;
 
-namespace infinity {
+namespace hybridsearch {
 
 SharedPtr<String> TableIndexEntry::DetermineIndexDir(const String &parent_dir, const String &index_name) {
-    auto abs_parent_dir = Path(InfinityContext::instance().config()->DataDir()) / parent_dir;
+    auto abs_parent_dir = Path(hybridsearchContext::instance().config()->DataDir()) / parent_dir;
     SharedPtr<String> temp_dir = DetermineRandomString(abs_parent_dir, fmt::format("index_{}", index_name));
     return MakeShared<String>(Path(parent_dir) / *temp_dir);
 }
@@ -460,7 +448,7 @@ void TableIndexEntry::Cleanup(CleanupInfoTracer *info_tracer, bool dropped) {
     if (dropped) {
         LOG_DEBUG(fmt::format("Cleaning up dir: {}", *index_dir_));
 
-        String absolute_index_dir = fmt::format("{}/{}", InfinityContext::instance().config()->DataDir(), *index_dir_);
+        String absolute_index_dir = fmt::format("{}/{}", hybridsearchContext::instance().config()->DataDir(), *index_dir_);
         if (!VirtualStore::Exists(absolute_index_dir)) {
             return;
         }
@@ -611,4 +599,4 @@ SharedPtr<TableIndexInfo> TableIndexEntry::GetTableIndexInfo(Txn *txn_ptr) {
     return table_index_info;
 }
 
-} // namespace infinity
+} // namespace hybridsearch

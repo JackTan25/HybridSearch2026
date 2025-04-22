@@ -1,16 +1,4 @@
-// Copyright(C) 2023 InfiniFlow, Inc. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+
 
 #include "data_type.h"
 #include "info/bitmap_info.h"
@@ -29,7 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-namespace infinity {
+namespace hybridsearch {
 
 DataType::DataType(LogicalType logical_type, std::shared_ptr<TypeInfo> type_info_ptr) : type_(logical_type), type_info_(std::move(type_info_ptr)) {
     switch (logical_type) {
@@ -809,4 +797,4 @@ BFloat16T DataType::StringToValue<BFloat16T>(const std::string_view &str) {
     return static_cast<BFloat16T>(float_value);
 }
 
-} // namespace infinity
+} // namespace hybridsearch

@@ -11,7 +11,7 @@ import doc_list_format_option;
 
 export module index_decoder;
 
-namespace infinity {
+namespace hybridsearch {
 
 export class IndexDecoder {
 public:
@@ -113,4 +113,4 @@ private:
     const Int16Encoder *doc_payload_encoder_;
 };
 
-} // namespace infinity
+} // namespace hybridsearch

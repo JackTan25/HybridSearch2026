@@ -3,25 +3,25 @@ import sys
 import os
 import pytest
 from common import common_values
-import infinity
-import infinity_embedded
-import infinity.index as index
-from infinity.errors import ErrorCode
-from infinity.remote_thrift.client import ThriftInfinityClient
-from infinity.remote_thrift.db import RemoteDatabase
-from infinity.remote_thrift.query_builder import InfinityThriftQueryBuilder
-from infinity.remote_thrift.table import RemoteTable
-from infinity.common import ConflictType
+import hybridsearch
+import hybridsearch_embedded
+import hybridsearch.index as index
+from hybridsearch.errors import ErrorCode
+from hybridsearch.remote_thrift.client import ThrifthybridsearchClient
+from hybridsearch.remote_thrift.db import RemoteDatabase
+from hybridsearch.remote_thrift.query_builder import hybridsearchThriftQueryBuilder
+from hybridsearch.remote_thrift.table import RemoteTable
+from hybridsearch.common import ConflictType
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
-from infinity_http import infinity_http
+from hybridsearch_http import hybridsearch_http
 
 
 @pytest.fixture(scope="class")
-def local_infinity(request):
-    return request.config.getoption("--local-infinity")
+def local_hybridsearch(request):
+    return request.config.getoption("--local-hybridsearch")
 
 
 @pytest.fixture(scope="class")
@@ -30,29 +30,29 @@ def http(request):
 
 
 @pytest.fixture(scope="class")
-def setup_class(request, local_infinity, http):
-    if local_infinity:
-        module = importlib.import_module("infinity_embedded.index")
+def setup_class(request, local_hybridsearch, http):
+    if local_hybridsearch:
+        module = importlib.import_module("hybridsearch_embedded.index")
         globals()["index"] = module
         uri = common_values.TEST_LOCAL_PATH
-        request.cls.infinity_obj = infinity_embedded.connect(uri)
+        request.cls.hybridsearch_obj = hybridsearch_embedded.connect(uri)
     elif http:
         uri = common_values.TEST_LOCAL_HOST
-        request.cls.infinity_obj = infinity_http()
+        request.cls.hybridsearch_obj = hybridsearch_http()
     else:
         uri = common_values.TEST_LOCAL_HOST
-        request.cls.infinity_obj = infinity.connect(uri)
+        request.cls.hybridsearch_obj = hybridsearch.connect(uri)
     request.cls.uri = uri
     yield
-    request.cls.infinity_obj.disconnect()
+    request.cls.hybridsearch_obj.disconnect()
 
 
 @pytest.mark.usefixtures("setup_class")
-class TestInfinity:
-    @pytest.mark.usefixtures("skip_if_local_infinity")
+class Testhybridsearch:
+    @pytest.mark.usefixtures("skip_if_local_hybridsearch")
     @pytest.mark.usefixtures("skip_if_http")
     def test_query(self):
-        conn = ThriftInfinityClient(common_values.TEST_LOCAL_HOST)
+        conn = ThrifthybridsearchClient(common_values.TEST_LOCAL_HOST)
         db = RemoteDatabase(conn, "default_db")
         db.drop_table("my_table", conflict_type=ConflictType.Ignore)
         db.create_table(
@@ -80,7 +80,7 @@ class TestInfinity:
         # select_res = table.query_builder().output(["*"]).to_df()
         # print(select_res)
         # Create a query builder
-        query_builder = InfinityThriftQueryBuilder(table)
+        query_builder = hybridsearchThriftQueryBuilder(table)
         query_builder.output(["num", "body"])
         query_builder.match_dense('vec', [3.0] * 5, 'float', 'ip', 2)
         query_builder.match_text('body', 'harmful', 2, None)
@@ -99,7 +99,7 @@ class TestInfinity:
     @pytest.mark.usefixtures("skip_if_http")
     def test_query_builder(self):
         # connect
-        db_obj = self.infinity_obj.get_database("default_db")
+        db_obj = self.hybridsearch_obj.get_database("default_db")
         db_obj.drop_table("test_query_builder",
                           conflict_type=ConflictType.Ignore)
         table_obj = db_obj.create_table(

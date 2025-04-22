@@ -6,7 +6,7 @@ export module lexeme;
 
 import stl;
 
-namespace infinity {
+namespace hybridsearch {
 export class Lexeme {
 public:
     static constexpr int TYPE_UNKNOWN = 0;
@@ -124,4 +124,4 @@ public:
 
     std::string ToString() const;
 };
-} // namespace infinity
+} // namespace hybridsearch

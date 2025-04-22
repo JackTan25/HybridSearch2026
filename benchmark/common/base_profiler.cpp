@@ -6,7 +6,7 @@
 
 #include "base_profiler.h"
 
-namespace infinity {
+namespace hybridsearch {
 
 void BaseProfiler::Begin() {
     finished_ = false;
@@ -48,4 +48,4 @@ int BaseProfiler::ElapsedToMs() const {
     ss >> ret;
     return ret;
 }
-} // namespace infinity
+} // namespace hybridsearch

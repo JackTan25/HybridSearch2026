@@ -1,6 +1,6 @@
 import subprocess
 from common import common_values
-from infinity_runner import InfinityRunner, infinity_runner_decorator_factory
+from hybridsearch_runner import hybridsearchRunner, hybridsearch_runner_decorator_factory
 import pytest
 import os
 import threading
@@ -53,44 +53,44 @@ class TestShutDownPytest:
         "pytest_mark",
         ["not complex and not slow"],
     )
-    def test_shutdown_pytest(self, infinity_runner: InfinityRunner, pytest_mark: str):
+    def test_shutdown_pytest(self, hybridsearch_runner: hybridsearchRunner, pytest_mark: str):
         stop_interval = 10
         uri = common_values.TEST_LOCAL_HOST
-        infinity_runner.clear()
+        hybridsearch_runner.clear()
         test_name = "test_pysdk"
-        config = "conf/pytest_parallel_infinity_conf.toml"
+        config = "conf/pytest_parallel_hybridsearch_conf.toml"
 
         current_path = os.getcwd()
         test_dir = current_path + "/python/" + test_name
 
         gen = self.run_pytest_seperately(test_dir, pytest_mark=pytest_mark)
 
-        decorator = infinity_runner_decorator_factory(
-            config, uri, infinity_runner, shutdown_out=True
+        decorator = hybridsearch_runner_decorator_factory(
+            config, uri, hybridsearch_runner, shutdown_out=True
         )
 
         def shutdown_func():
             time.sleep(stop_interval)
             while True:
                 if self.finish_one:
-                    infinity_runner.uninit()
-                    print("shutdown infinity")
+                    hybridsearch_runner.uninit()
+                    print("shutdown hybridsearch")
                     return
                 time.sleep(1)
 
         @decorator
-        def part1(infinity_obj) -> bool:
+        def part1(hybridsearch_obj) -> bool:
             TRY_TIMES = 100
             for i in range(TRY_TIMES):
                 try:
-                    infinity_obj.get_database("default_db")
+                    hybridsearch_obj.get_database("default_db")
                     break
                 except Exception as e:
-                    infinity_runner.logger.debug(f"retry connect {i}")
+                    hybridsearch_runner.logger.debug(f"retry connect {i}")
                     time.sleep(0.5)
             else:
                 raise Exception(
-                    f"Cannot connect to infinity after {TRY_TIMES} retries."
+                    f"Cannot connect to hybridsearch after {TRY_TIMES} retries."
                 )
 
             t1 = threading.Thread(target=shutdown_func)

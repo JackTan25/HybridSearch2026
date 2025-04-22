@@ -4,13 +4,13 @@ import time
 from numpy import dtype
 import pandas as pd
 import pytest
-from infinity_cluster import InfinityCluster
-from infinity.common import ConflictType
+from hybridsearch_cluster import hybridsearchCluster
+from hybridsearch.common import ConflictType
 import common_values
 
 
 class TestImport:
-    def test1(self, cluster: InfinityCluster):
+    def test1(self, cluster: hybridsearchCluster):
         with cluster:
             cluster.add_node("node1", "conf/leader.toml")
             cluster.add_node("node2", "conf/follower.toml")
@@ -24,8 +24,8 @@ class TestImport:
             print("import in node1")
             table_name = "test_import1"
 
-            infinity1 = cluster.client("node1")
-            db_obj1 = infinity1.get_database("default_db")
+            hybridsearch1 = cluster.client("node1")
+            db_obj1 = hybridsearch1.get_database("default_db")
             db_obj1.drop_table(table_name, ConflictType.Ignore)
             table_obj1 = db_obj1.create_table(
                 table_name, {"c1": {"type": "int"}, "c2": {"type": "vector,3,int"}}
@@ -51,8 +51,8 @@ class TestImport:
             time.sleep(1)
             print("select in node2")
 
-            infinity2 = cluster.client("node2")
-            db_obj2 = infinity2.get_database("default_db")
+            hybridsearch2 = cluster.client("node2")
+            db_obj2 = hybridsearch2.get_database("default_db")
             table_obj2 = db_obj2.get_table(table_name)
             res, extra_result = table_obj2.output(["*"]).to_df()
             pd.testing.assert_frame_equal(res, res_gt)

@@ -6,7 +6,7 @@
 #include "expression_lexer.h"
 #include "parser_helper.h"
 
-void expressionerror(YYLTYPE * llocp, void* lexer, infinity::ExpressionParserResult* result, const char* msg);
+void expressionerror(YYLTYPE * llocp, void* lexer, hybridsearch::ExpressionParserResult* result, const char* msg);
 %}
 
 %code requires {
@@ -61,7 +61,7 @@ struct EXPRESSION_LTYPE {
 %define api.prefix {expression}
 
 %lex-param {void *scanner}
-%parse-param {void *scanner} {infinity::ExpressionParserResult* result}
+%parse-param {void *scanner} {hybridsearch::ExpressionParserResult* result}
 
 %locations
 %initial-action {
@@ -87,9 +87,9 @@ struct EXPRESSION_LTYPE {
     double  double_value;
     int64_t long_value;
 
-    infinity::ParsedExpr*             expr_t;
-    infinity::ConstantExpr*           const_expr_t;
-    std::vector<infinity::ParsedExpr*>*    expr_array_t;
+    hybridsearch::ParsedExpr*             expr_t;
+    hybridsearch::ConstantExpr*           const_expr_t;
+    std::vector<hybridsearch::ParsedExpr*>*    expr_array_t;
 }
 
 %destructor {
@@ -173,7 +173,7 @@ input_pattern : expr_array {
  */
 
 expr_array : expr_alias {
-    $$ = new std::vector<infinity::ParsedExpr*>();
+    $$ = new std::vector<hybridsearch::ParsedExpr*>();
     $$->emplace_back($1);
 }
 | expr_array ',' expr_alias {
@@ -209,7 +209,7 @@ operand: '(' expr ')' {
 | fusion_expr
 
 match_expr : MATCH '(' STRING ',' STRING ')' {
-    infinity::MatchExpr* match_expr = new infinity::MatchExpr();
+    hybridsearch::MatchExpr* match_expr = new hybridsearch::MatchExpr();
     match_expr->fields_ = std::string($3);
     match_expr->matching_text_ = std::string($5);
     free($3);
@@ -217,7 +217,7 @@ match_expr : MATCH '(' STRING ',' STRING ')' {
     $$ = match_expr;
 }
 | MATCH '(' STRING ',' STRING ',' STRING ')' {
-    infinity::MatchExpr* match_expr = new infinity::MatchExpr();
+    hybridsearch::MatchExpr* match_expr = new hybridsearch::MatchExpr();
     match_expr->fields_ = std::string($3);
     match_expr->matching_text_ = std::string($5);
     match_expr->options_text_ = std::string($7);
@@ -228,13 +228,13 @@ match_expr : MATCH '(' STRING ',' STRING ')' {
 }
 
 query_expr : QUERY '(' STRING ')' {
-    infinity::MatchExpr* match_expr = new infinity::MatchExpr();
+    hybridsearch::MatchExpr* match_expr = new hybridsearch::MatchExpr();
     match_expr->matching_text_ = std::string($3);
     free($3);
     $$ = match_expr;
 }
 | QUERY '(' STRING ',' STRING ')' {
-    infinity::MatchExpr* match_expr = new infinity::MatchExpr();
+    hybridsearch::MatchExpr* match_expr = new hybridsearch::MatchExpr();
     match_expr->matching_text_ = std::string($3);
     match_expr->options_text_ = std::string($5);
     free($3);
@@ -243,13 +243,13 @@ query_expr : QUERY '(' STRING ')' {
 }
 
 fusion_expr : FUSION '(' STRING ')' {
-    infinity::FusionExpr* fusion_expr = new infinity::FusionExpr();
+    hybridsearch::FusionExpr* fusion_expr = new hybridsearch::FusionExpr();
     fusion_expr->method_ = std::string($3);
     free($3);
     $$ = fusion_expr;
 }
 | FUSION '(' STRING ',' STRING ')' {
-    infinity::FusionExpr* fusion_expr = new infinity::FusionExpr();
+    hybridsearch::FusionExpr* fusion_expr = new hybridsearch::FusionExpr();
     fusion_expr->method_ = std::string($3);
     free($3);
     fusion_expr->SetOptions($5);
@@ -258,7 +258,7 @@ fusion_expr : FUSION '(' STRING ')' {
 }
 
 function_expr : IDENTIFIER '(' ')' {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     ParserHelper::ToLower($1);
     func_expr->func_name_ = $1;
     free($1);
@@ -266,7 +266,7 @@ function_expr : IDENTIFIER '(' ')' {
     $$ = func_expr;
 }
 | IDENTIFIER '(' expr_array ')' {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     ParserHelper::ToLower($1);
     func_expr->func_name_ = $1;
     free($1);
@@ -274,7 +274,7 @@ function_expr : IDENTIFIER '(' ')' {
     $$ = func_expr;
 }
 | IDENTIFIER '(' DISTINCT expr_array ')' {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     ParserHelper::ToLower($1);
     func_expr->func_name_ = $1;
     free($1);
@@ -283,157 +283,157 @@ function_expr : IDENTIFIER '(' ')' {
     $$ = func_expr;
 }
 | operand IS NOT NULLABLE {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "is_not_null";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     $$ = func_expr;
 }
 | operand IS NULLABLE {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "is_null";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     $$ = func_expr;
 }
 | NOT operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "not";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($2);
     $$ = func_expr;
 }
 | '-' operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "-";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($2);
     $$ = func_expr;
 }
 | '+' operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "+";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($2);
     $$ = func_expr;
 }
 | operand '-' operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "-";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | operand '+' operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "+";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | operand '*' operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "*";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | operand '/' operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "/";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | operand '%' operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "%";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | operand '=' operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "=";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | operand EQUAL operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "=";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | operand NOT_EQ operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "<>";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | operand '<' operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "<";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | operand '>' operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = ">";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | operand LESS_EQ operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "<=";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | operand GREATER_EQ operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = ">=";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | EXTRACT '(' STRING FROM operand ')' {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     ParserHelper::ToLower($3);
     if(strcmp($3, "year") == 0) {
         func_expr->func_name_ = "extract_year";
-        func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+        func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     } else if(strcmp($3, "month") == 0) {
         func_expr->func_name_ = "extract_month";
-        func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+        func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     } else if(strcmp($3, "day") == 0) {
         func_expr->func_name_ = "extract_day";
-        func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+        func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     } else if(strcmp($3, "hour") == 0) {
         func_expr->func_name_ = "extract_hour";
-        func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+        func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     } else if(strcmp($3, "minute") == 0) {
         func_expr->func_name_ = "extract_minute";
-        func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+        func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     } else if(strcmp($3, "second") == 0) {
         func_expr->func_name_ = "extract_second";
-        func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+        func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     } else {
         delete func_expr;
         expressionerror(&yyloc, scanner, result, "Invalid column expression format");
@@ -444,41 +444,41 @@ function_expr : IDENTIFIER '(' ')' {
     $$ = func_expr;
 }
 | operand LIKE operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "like";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | operand NOT LIKE operand {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "not_like";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($4);
     $$ = func_expr;
 };
 
 conjunction_expr: expr AND expr {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "and";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 }
 | expr OR expr {
-    infinity::FunctionExpr* func_expr = new infinity::FunctionExpr();
+    hybridsearch::FunctionExpr* func_expr = new hybridsearch::FunctionExpr();
     func_expr->func_name_ = "or";
-    func_expr->arguments_ = new std::vector<infinity::ParsedExpr*>();
+    func_expr->arguments_ = new std::vector<hybridsearch::ParsedExpr*>();
     func_expr->arguments_->emplace_back($1);
     func_expr->arguments_->emplace_back($3);
     $$ = func_expr;
 };
 
 between_expr: operand BETWEEN operand AND operand {
-    infinity::BetweenExpr* between_expr = new infinity::BetweenExpr();
+    hybridsearch::BetweenExpr* between_expr = new hybridsearch::BetweenExpr();
     between_expr->value_ = $1;
     between_expr->lower_bound_ = $3;
     between_expr->upper_bound_ = $5;
@@ -486,39 +486,39 @@ between_expr: operand BETWEEN operand AND operand {
 }
 
 in_expr: operand IN '(' expr_array ')' {
-    infinity::InExpr* in_expr = new infinity::InExpr(true);
+    hybridsearch::InExpr* in_expr = new hybridsearch::InExpr(true);
     in_expr->left_ = $1;
     in_expr->arguments_ = $4;
     $$ = in_expr;
 }
 | operand NOT IN '(' expr_array ')' {
-    infinity::InExpr* in_expr = new infinity::InExpr(false);
+    hybridsearch::InExpr* in_expr = new hybridsearch::InExpr(false);
     in_expr->left_ = $1;
     in_expr->arguments_ = $5;
     $$ = in_expr;
 };
 
 column_expr : IDENTIFIER {
-    infinity::ColumnExpr* column_expr = new infinity::ColumnExpr();
+    hybridsearch::ColumnExpr* column_expr = new hybridsearch::ColumnExpr();
     ParserHelper::ToLower($1);
     column_expr->names_.emplace_back($1);
     free($1);
     $$ = column_expr;
 }
 | column_expr '.' IDENTIFIER {
-    infinity::ColumnExpr* column_expr = (infinity::ColumnExpr*)$1;
+    hybridsearch::ColumnExpr* column_expr = (hybridsearch::ColumnExpr*)$1;
     ParserHelper::ToLower($3);
     column_expr->names_.emplace_back($3);
     free($3);
     $$ = column_expr;
 }
 | '*' {
-    infinity::ColumnExpr* column_expr = new infinity::ColumnExpr();
+    hybridsearch::ColumnExpr* column_expr = new hybridsearch::ColumnExpr();
     column_expr->star_ = true;
     $$ = column_expr;
 }
 | column_expr '.' '*' {
-    infinity::ColumnExpr* column_expr = (infinity::ColumnExpr*)$1;
+    hybridsearch::ColumnExpr* column_expr = (hybridsearch::ColumnExpr*)$1;
     if(column_expr->star_) {
         expressionerror(&yyloc, scanner, result, "Invalid column expression format");
         YYERROR;
@@ -528,47 +528,47 @@ column_expr : IDENTIFIER {
 };
 
 constant_expr: STRING {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kString);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kString);
     const_expr->str_value_ = $1;
     $$ = const_expr;
 }
 | TRUE {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kBoolean);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kBoolean);
     const_expr->bool_value_ = true;
     $$ = const_expr;
 }
 | FALSE {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kBoolean);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kBoolean);
     const_expr->bool_value_ = false;
     $$ = const_expr;
 }
 | DOUBLE_VALUE {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kDouble);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kDouble);
     const_expr->double_value_ = $1;
     $$ = const_expr;
 }
 | LONG_VALUE {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInteger);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInteger);
     const_expr->integer_value_ = $1;
     $$ = const_expr;
 }
 | DATE STRING {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kDate);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kDate);
     const_expr->date_value_ = $2;
     $$ = const_expr;
 }
 | TIME STRING {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kTime);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kTime);
     const_expr->date_value_ = $2;
     $$ = const_expr;
 }
 | DATETIME STRING {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kDateTime);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kDateTime);
     const_expr->date_value_ = $2;
     $$ = const_expr;
 }
 | TIMESTAMP STRING {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kTimestamp);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kTimestamp);
     const_expr->date_value_ = $2;
     $$ = const_expr;
 }
@@ -590,7 +590,7 @@ long_array_expr: unclosed_long_array_expr ']' {
 };
 
 unclosed_long_array_expr: '[' LONG_VALUE {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kIntegerArray);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kIntegerArray);
     const_expr->long_array_.emplace_back($2);
     $$ = const_expr;
 }
@@ -604,7 +604,7 @@ double_array_expr: unclosed_double_array_expr ']' {
 };
 
 unclosed_double_array_expr: '[' DOUBLE_VALUE {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kDoubleArray);
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kDoubleArray);
     const_expr->double_array_.emplace_back($2);
     $$ = const_expr;
 }
@@ -614,74 +614,74 @@ unclosed_double_array_expr: '[' DOUBLE_VALUE {
 }
 
 interval_expr: LONG_VALUE SECONDS {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kSecond;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kSecond;
     const_expr->integer_value_ = $1;
     $$ = const_expr;
 }
 | LONG_VALUE SECOND {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kSecond;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kSecond;
     const_expr->integer_value_ = $1;
     $$ = const_expr;
 }
 | LONG_VALUE MINUTES {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kMinute;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kMinute;
     const_expr->integer_value_ = $1;
     $$ = const_expr;
 }
 | LONG_VALUE MINUTE {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kMinute;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kMinute;
     const_expr->integer_value_ = $1;
     $$ = const_expr;
 }
 | LONG_VALUE HOURS {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kHour;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kHour;
     const_expr->integer_value_ = $1;
     $$ = const_expr;
 }
 | LONG_VALUE HOUR {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kHour;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kHour;
     const_expr->integer_value_ = $1;
     $$ = const_expr;
 }
 | LONG_VALUE DAYS {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kDay;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kDay;
     const_expr->integer_value_ = $1;
     $$ = const_expr;
 }
 | LONG_VALUE DAY {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kDay;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kDay;
     const_expr->integer_value_ = $1;
     $$ = const_expr;
 }
 | LONG_VALUE MONTHS {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kMonth;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kMonth;
     const_expr->integer_value_ = $1;
     $$ = const_expr;
 }
 | LONG_VALUE MONTH {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kMonth;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kMonth;
     const_expr->integer_value_ = $1;
     $$ = const_expr;
 }
 | LONG_VALUE YEARS {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kYear;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kYear;
     const_expr->integer_value_ = $1;
     $$ = const_expr;
 }
 | LONG_VALUE YEAR {
-    infinity::ConstantExpr* const_expr = new infinity::ConstantExpr(infinity::LiteralType::kInterval);
-    const_expr->interval_type_ = infinity::TimeUnit::kYear;
+    hybridsearch::ConstantExpr* const_expr = new hybridsearch::ConstantExpr(hybridsearch::LiteralType::kInterval);
+    const_expr->interval_type_ = hybridsearch::TimeUnit::kYear;
     const_expr->integer_value_ = $1;
     $$ = const_expr;
 };
@@ -689,7 +689,7 @@ interval_expr: LONG_VALUE SECONDS {
 %%
 
 void
-expressionerror(YYLTYPE * llocp, void* lexer, infinity::ExpressionParserResult* result, const char* msg) {
+expressionerror(YYLTYPE * llocp, void* lexer, hybridsearch::ExpressionParserResult* result, const char* msg) {
     if(result->IsError()) return ;
 
     result->error_message_ = std::string(msg) + ", " + std::to_string(llocp->first_column);

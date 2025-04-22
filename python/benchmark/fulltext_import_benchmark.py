@@ -3,11 +3,11 @@ import os
 import time
 import json
 
-import infinity
-from infinity import index
-from infinity.common import LOCAL_HOST
-from infinity.errors import ErrorCode
-from infinity.common import ConflictType
+import hybridsearch
+from hybridsearch import index
+from hybridsearch.common import LOCAL_HOST
+from hybridsearch.errors import ErrorCode
+from hybridsearch.common import ConflictType
 
 
 def import_data(path):
@@ -60,7 +60,7 @@ if __name__ == '__main__':
     parent_path = os.path.dirname(current_path)
     parent_path = os.path.dirname(parent_path)
     print(f"Current Path: {current_path}")
-    parser = argparse.ArgumentParser(description="Benchmark Infinity")
+    parser = argparse.ArgumentParser(description="Benchmark hybridsearch")
     parser.add_argument(
         "-d",
         "--data",
@@ -73,9 +73,9 @@ if __name__ == '__main__':
 
     data = import_data(path=data_dir)
 
-    infinity_obj = infinity.connect(LOCAL_HOST)
-    assert infinity_obj
-    db_obj = infinity_obj.get_database("default_db")
+    hybridsearch_obj = hybridsearch.connect(LOCAL_HOST)
+    assert hybridsearch_obj
+    db_obj = hybridsearch_obj.get_database("default_db")
     assert db_obj
 
     start_time = time.time()

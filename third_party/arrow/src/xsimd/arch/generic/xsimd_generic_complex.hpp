@@ -80,7 +80,7 @@ namespace xsimd
             using real_value_type = typename real_batch::value_type;
             auto cond = xsimd::isinf(real(self)) || xsimd::isinf(imag(self));
             return select(cond,
-                          batch_type(constants::infinity<real_batch>(),
+                          batch_type(constants::hybridsearch<real_batch>(),
                                      copysign(real_batch(real_value_type(0)), imag(self))),
                           batch_type(self));
         }

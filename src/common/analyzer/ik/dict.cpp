@@ -18,7 +18,7 @@ import third_party;
 
 namespace fs = std::filesystem;
 
-namespace infinity {
+namespace hybridsearch {
 
 const String PATH_DIC_MAIN = "main.dic";
 const String PATH_DIC_SURNAME = "surname.dic";
@@ -307,4 +307,4 @@ void Dictionary::ParseProperties(const String &content) {
     }
 }
 
-} // namespace infinity
+} // namespace hybridsearch
