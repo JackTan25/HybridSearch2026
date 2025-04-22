@@ -1,4 +1,16 @@
-
+# Copyright(C) 2023 HybridSearchFlow, Inc. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 """
 This example is to connect local hybridsearch instance, create table, insert data, search the data
@@ -201,8 +213,8 @@ def single_search(questions):
         sys.exit(-1)
 
 if __name__ == "__main__":
-    # 启动服务并在适当的时候杀死它
-    service_command = "/home/ubuntu/hybridsearch/cmake-build-release/src/hybridsearch -f /home/ubuntu/hybridsearch/conf/hybridsearch_conf.toml"  # 示例命令，启动一个简单的 HTTP 服务器
+    # 
+    service_command = "/home/ubuntu/hybridsearch/cmake-build-release/src/hybridsearch -f /home/ubuntu/hybridsearch/conf/hybridsearch_conf.toml"  #  HTTP 
     process = subprocess.Popen(service_command, shell=True)
     time.sleep(3)
     print(f" ID: {process.pid}")
@@ -219,7 +231,7 @@ if __name__ == "__main__":
     with open(current_dir + "/" + current_file_name_without_extension + ".time",'w') as tfile:
         tfile.write(f"{cost_time/len(questions)} ms")
         tfile.flush()
-    # 读取文件内容
+    # 
     file_path = '/home/ubuntu/hybridsearch/experiments/query_memory_file'
     content = read_file_content(file_path)
     with open(current_dir + "/" + current_file_name_without_extension + ".memory",'w') as mfile:

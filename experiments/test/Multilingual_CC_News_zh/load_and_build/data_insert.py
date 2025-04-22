@@ -1,15 +1,27 @@
-
+# Copyright(C) 2023 HybridSearchFlow, Inc. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 import re
 import subprocess
 import time
 import os
 from tqdm import tqdm
-from mldr_common_tools import load_corpus, fvecs_read_yield, read_mldr_sparse_embedding_yield, get_all_part_begin_ends
 import hybridsearch
 from hybridsearch.common import ConflictType, LOCAL_HOST, SparseVector
 import hybridsearch.index as index
 from hybridsearch.errors import ErrorCode
+from Multilingual_CC_News_zh.search_tensor_rank.three_roads.sparse_dense_fulltext_search import terminate_process_tree
 from vec_read import load_dense
 from vec_read import load_sparse
 from colbert_read import load_colbert_list
@@ -28,9 +40,9 @@ class hybridsearchClientForInsert:
         self.test_db_name = "default_db"
         self.test_table_name_prefix = "Multilingual_CC_News_zh_Table"
         self.test_table_schema = {"docid_col": {"type": "varchar"}, "fulltext_col": {"type": "varchar"},
-                                  "dense_col": {"type": "vector,1024,float16"},
-                                  "sparse_col": {"type": "sparse,250002,float16,int"},
-                                  "tensor_col": {"type": "tensor,96,float16"}}
+                                  "dense_col": {"type": "vector,1024,float"},
+                                  "sparse_col": {"type": "sparse,250002,float,int"},
+                                  "tensor_col": {"type": "tensor,64,float"}}
         self.hybridsearch_obj = hybridsearch.connect(LOCAL_HOST)
         self.hybridsearch_db = self.hybridsearch_obj.create_database(self.test_db_name, ConflictType.Ignore)
         self.hybridsearch_table = None
@@ -108,11 +120,9 @@ class hybridsearchClientForInsert:
                 sparse_idx += 1
                 tensor_idx += 1
                 buffer.append(insert_dict)
-            if doc_id_idx == 1000:
-                break
-            # print(len(buffer[0]['dense_col']))
-            self.hybridsearch_table.insert(buffer[0])
-            # break
+            while len(buffer) >= 500:
+                self.hybridsearch_table.insert(buffer[:500])
+                buffer = buffer[500:]
             if dense_idx >= len(dense_vectors):
                 dense_idx = 0
                 dense_file_idx += 1
@@ -140,5 +150,14 @@ class hybridsearchClientForInsert:
         del corpus_text_list
 
 if __name__ == "__main__":
+    time.sleep(3)
+    # 
+    service_command = "/home/ubuntu/hybridsearch/cmake-build-release/src/hybridsearch -f /home/ubuntu/hybridsearch/conf/hybridsearch_conf.toml"  #  HTTP 
+    process = subprocess.Popen(service_command, shell=True)
+    time.sleep(3)
+    print(f" ID: {process.pid}")
+    print(__file__)
     hybridsearch_client = hybridsearchClientForInsert()
     hybridsearch_client.main()
+    terminate_process_tree(process.pid)
+    print(f" {process.pid} ")

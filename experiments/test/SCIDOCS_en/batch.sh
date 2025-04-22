@@ -2,7 +2,7 @@
 # python3 /home/ubuntu/hybridsearch/experiments/load_experiments/SCIDOCS_en/build/data_insert.py
 
 ## index build
-# python3 /home/ubuntu/hybridsearch/experiments/load_experiments/SCIDOCS_en/build/bmp_index.py
+# python3 /home/ubuntu/hybridsearch/experiments/load_experiments/SCIDOCS_en/build/sparse_index.py
 # python3 /home/ubuntu/hybridsearch/experiments/load_experiments/SCIDOCS_en/build/full_text_index.py
 # python3 /home/ubuntu/hybridsearch/experiments/load_experiments/SCIDOCS_en/build/dense_index.py
 

@@ -9,5 +9,5 @@ df = df[['query_id', 'query']]
 # 3. _idtext
 df = df.rename(columns={'query_id': '_id', 'query': 'text'})
 
-# 4. 保存为新文件（不保留行索引）
+# 4. 
 df.to_csv("/home/ubuntu/hybridsearch/experiments/load_experiments/MLDR_en/queries_with_id.csv", index=False, encoding="utf-8")

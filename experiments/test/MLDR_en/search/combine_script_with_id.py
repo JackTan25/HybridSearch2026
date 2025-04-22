@@ -2,7 +2,7 @@ import datasets
 from datasets import Dataset 
 import pandas as pd
 
-# 读取 CSV 文件
+#  CSV 
 file_path = '/home/ubuntu/hybridsearch/experiments/load_experiments/MLDR_en/search/mldr_en_query.csv'
 df = pd.read_csv(file_path)
 

@@ -26,7 +26,7 @@ def load_colbert_list(multivec_save_file: str):
 
     return multivec_embeddings
 
-# # 示例用法
+# # 
 # multivec_save_file = '/home/ubuntu/hybridsearch/experiments/small_embedding/CQADupStack_en/tensor_embeddings/vectors/CQADupStack_en_bert1.fvecs'
 # multivec_embeddings = load_colbert_list(multivec_save_file)
 

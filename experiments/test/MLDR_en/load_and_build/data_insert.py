@@ -51,7 +51,7 @@ class hybridsearchClientForInsert:
         self.test_table_schema = {"docid_col": {"type": "varchar"}, "fulltext_col": {"type": "varchar"},
                                   "dense_col": {"type": "vector,1024,float"},
                                   "sparse_col": {"type": "sparse,250002,float,int"},
-                                }
+                                  "tensor_col": {"type": "tensor,96,float"}}
         self.hybridsearch_obj = hybridsearch.connect(LOCAL_HOST)
         self.hybridsearch_db = self.hybridsearch_obj.create_database(self.test_db_name, ConflictType.Ignore)
         self.hybridsearch_table = None
@@ -148,8 +148,7 @@ class hybridsearchClientForInsert:
             self.hybridsearch_table.insert(buffer)
         end_insert_time = time.time()
         print("insert time: ",(end_insert_time - begin_insert_time)*1000,'ms')
-        with open('/home/ubuntu/hybridsearch/experiments/load_experiments/MLDR_en/single_insert/sparse_insert_time.txt', 'w') as f:
-            f.write(f"insert time: {(end_insert_time - begin_insert_time)*1000} ms\n")
+
         print(f"Finish inserting data. tensor_nums: {tensor_nums+1}, sparse_nums: {sparse_nums+1}, dense_nums: {dense_nums+1}, text_nums: {doc_id_idx+1}")
         del dense_data
         del sparse_data
