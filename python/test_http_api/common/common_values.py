@@ -39,7 +39,7 @@ invalid_name_array = [
     '12',
     'name-12',
     '12name',
-    '数据库名',
+    '',
 ]
 
 types = [

@@ -1932,7 +1932,7 @@ Released 2017-DEC-27
 - [THRIFT-3850](https://issues.apache.org/jira/browse/THRIFT-3850) - All apache builds are failing when initiated from a github pull request
 - [THRIFT-3837](https://issues.apache.org/jira/browse/THRIFT-3837) - Thift 0.9.3 can't be build with QuickCheck 2.8.2 and unordered-containers 0.2.6
 - [THRIFT-3831](https://issues.apache.org/jira/browse/THRIFT-3831) - build of test/cpp/src/TestClient.cpp fails with newer gcc on platforms with unsigned char due to narrowing conversions
-- [THRIFT-3827](https://issues.apache.org/jira/browse/THRIFT-3827) - php CompactProtocol readI64 function has bug, when value has 32bit ~64bit, Example：value=1461563457000
+- [THRIFT-3827](https://issues.apache.org/jira/browse/THRIFT-3827) - php CompactProtocol readI64 function has bug, when value has 32bit ~64bit, Examplevalue=1461563457000
 - [THRIFT-3825](https://issues.apache.org/jira/browse/THRIFT-3825) - Javascript test dependency is no longer available
 - [THRIFT-3814](https://issues.apache.org/jira/browse/THRIFT-3814) - Fix contention in TNonblockingServerTest
 - [THRIFT-3793](https://issues.apache.org/jira/browse/THRIFT-3793) - Appveyor builds reference an ant version that is no longer there

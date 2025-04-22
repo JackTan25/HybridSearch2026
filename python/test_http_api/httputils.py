@@ -76,7 +76,7 @@ def generate_big_rows_csv(num, filename):
         get_project_path() + common_values.TEST_DATA_DIR + "csv/" + filename, "w"
     ) as f:
         for i in range(num):
-            f.write(str(i) + ",asdasdlk中fjio@!#!@asd #$%$23\n")
+            f.write(str(i) + ",asdasdlkfjio@!#!@asd #$%$23\n")
     f.close()
 
 
