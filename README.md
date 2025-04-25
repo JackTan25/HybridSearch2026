@@ -50,7 +50,7 @@ Navigate to the corresponding dataset directory ([Dataset_Directory](experiments
 
 ## Results
 
-The main text provides a comprehensive analysis of the experimental results. Additional results are available [here](experiments/results/README.md).
+The main text provides a comprehensive analysis of the experimental results. Additional results are available [here](experiments/results/DETAIL_RES.md).
 
 ## Citation and Contribution
 
