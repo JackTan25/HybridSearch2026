@@ -20,36 +20,47 @@ The code repository provides the implementation for the paper *"A Deep Dive into
 | SCID(en) | [Homepage](https://allenai.org/data/scidocs)                              | [Link](https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/scidocs.zip)          | Scientific       | Citation Prediction               | 25,657    | 1,000  | 176                 | 30MB      | 89MB   | 106MB  | 2.4GB  |
 | SCIF(en) | [Homepage](https://github.com/allenai/scifact)                            | [Link](https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/scifact.zip)          | Scientific       | Fact Checking                     | 5,183     | 809    | 214                 | 7.5MB     | 23MB   | 24MB   | 676MB  |
 
-Note: The last four columns denote the corpus size for each data type.
+Note: The final four columns indicate corpus sizes per data type.
 
 ## Usage
 
-**<u>Data Loading and Index Building</u>**: In the `build` directory, use the following files for corresponding operations:
+**<u>Data Loading and Index Construction</u>**
 
-- `data_insert.py`: Inserts data into the evaluation framework.
-- `sparse_index.py`: Builds the Block-Max Pruning (BMP) index for sparse vector search (SVS).
-- `dense_index.py`: Builds the dense vector index for dense vector search (DVS).
-- `tensor_index.py`: Builds the tensor index for tensor search (TenS).
-- `fulltext_index.py`: Builds the full - text index for full-text search (FTS).
+The `load_and_build` directory contains the following scripts for data loading and index construction:
 
-**<u>Retrieval Experiments</u>**: In the `search` directory, conduct experiments according to different retrieval path combinations:
+- `data_insert.py`: Inserts data into the hybrid search system.
+- `sparse_index.py`: Constructs the sparse vector index for SVS.
+- `dense_index.py`: Constructs the dense vector index for DVS.
+- `tensor_index.py`: Constructs the tensor index for TenS.
+- `fulltext_index.py`: Constructs the full-text index for FTS.
 
-- `single_road`: Single-path search, evaluating the performance of FTS, SVS, DVS, and TenS used independently.
-- `two_road`: Two-path search, such as performance tests of combinations like FTS + DVS, FTS + SVS.
-- `three_road`: Three-path search, e.g., experiments on combinations like FTS + DVS + SVS.
-- `four_road`: Four-path search, evaluating the performance of the FTS + DVS + SVS + TenS combination.
+**<u>Retrieval Experiments</u>**
 
-**<u>Running Experiment Commands</u>**: Enter the directory corresponding to the dataset ([Dataset_Directory](experiments/load_experiments)) and execute the command bash batch_search.sh to run the corresponding retrieval experiments. For detailed experimental settings and script functions, refer to the script files in each directory.
+The `search*` directories provide scripts for conducting experiments with various retrieval path combinations:
+
+- `single_road`: Evaluates the performance of individual retrieval paradigms (FTS, SVS, DVS, TenS).
+- `two_road`: Tests two-path retrieval combinations, such as FTS + DVS or FTS + SVS.
+- `three_road`: Assesses three-path retrieval combinations, such as FTS + DVS + SVS.
+- `four_road`: Evaluates the performance of the combined FTS + DVS + SVS + TenS approach.
+
+**<u>Running Experiment Commands</u>**
+
+Navigate to the corresponding dataset directory ([Dataset_Directory](experiments/test)) and execute the command `batch_search.sh` to perform the retrieval experiments. For detailed experimental settings and script functionalities, refer to the script files within each directory.
+
 
 ## Results
 
-For the experimental results and analyses, please refer to the main text. Additional supplementary results are provided in this section.
+The main text provides a comprehensive analysis of the experimental results. Additional results are available [here](experiments/results/README.md).
 
 ## Citation and Contribution
 
-**<u>Citation</u>**: If you use the code or experimental results from this repository, please cite the paper "A Deep Dive into Advanced Hybrid Search Architectures".
+**<u>Citation</u>**
 
-**<u>Contribution</u>**: We welcome researchers and developers interested in this project to contribute code, raise issues, or provide suggestions. Please follow the open-source community's norms, submit code changes by creating a Pull Request, and describe the changes and their purposes in detail when submitting.
+If you use the code or experimental results from this repository, please cite the paper "A Deep Dive into Advanced Hybrid Search Architectures".
+
+**<u>Contribution</u>**
+
+We welcome researchers and developers interested in this project to contribute code, raise issues, or provide suggestions. Please follow the open-source community's norms, submit code changes by creating a Pull Request, and describe the changes and their purposes in detail when submitting.
 
 ## License
 
